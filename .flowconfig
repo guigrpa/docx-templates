@@ -1,0 +1,6 @@
+[ignore]
+<PROJECT_ROOT>.*/__tests__/.*
+<PROJECT_ROOT>.*/__mocks__/.*
+<PROJECT_ROOT>/lib/.*
+<PROJECT_ROOT>/node_modules/fbjs
+<PROJECT_ROOT>/node_modules/jest/.*

@@ -1,0 +1,37 @@
+parser: babel-eslint
+extends: airbnb
+plugins:
+  - flowtype
+env:
+  browser: true
+rules:
+  eqeqeq: ['error', 'allow-null']
+  no-unused-expressions:
+    - error
+    - allowShortCircuit: true
+  no-use-before-define: off
+  no-multi-spaces: off
+  no-nested-ternary: off
+  no-cond-assign: ['error', 'except-parens']
+  no-underscore-dangle: off
+  no-plusplus:
+    - error
+    - allowForLoopAfterthoughts: true
+  no-continue: off
+  no-lonely-if: off
+  no-mixed-operators: off
+  no-duplicate-imports: off
+  key-spacing:
+    - warn
+    - beforeColon: false
+      afterColon: true
+      mode: 'minimum'
+  object-property-newline: off
+  class-methods-use-this: off
+  arrow-parens: ['error', 'always']
+  import/no-extraneous-dependencies:
+    - error
+    - devDependencies: true
+      peerDependencies: true
+      optionalDependencies: false
+  import/prefer-default-export: off
