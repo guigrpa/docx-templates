@@ -2,7 +2,7 @@
 
 *[M]: major change; [m]: minor change*
 
-## 1.0.1 (Dec. 15, 2016)
+## 1.0.1, 1.0.2 (Dec. 15, 2016)
 
 * Add docs.
 

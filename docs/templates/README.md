@@ -7,7 +7,6 @@ Template-based docx report creation.
 * **Write reports naturally using Word**, just adding commands where needed for dynamic contents
 * **Embed your queries in the template itself**, e.g. in GraphQL, following *the Relay way* (in [Relay](https://facebook.github.io/relay/), you declare your data needs alongside the React components that use them)
 * A small **custom language**, with commands such as `FOR` (+ `END-FOR`), `FOR-ROW` (+ `END-FOR-ROW`), `INS`, `SHORTHAND`, `QUERY`
-* Can embed a data query directly in the document, which will be passed to a callback provided by the user
 * **Nested** loops
 * Custom **variables** and **shorthand** commands (useful for writing table templates)
 

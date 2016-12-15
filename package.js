@@ -6,7 +6,7 @@
 // Basic config
 // ===============================================
 const NAME = 'docx-templates';
-const VERSION = '1.0.1';
+const VERSION = '1.0.2';
 const DESCRIPTION = 'Template-based docx report creation';
 const KEYWORDS = ['docx', 'office', 'word', 'ms-word', 'report', 'template'];
 
