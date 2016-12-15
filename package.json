@@ -40,7 +40,7 @@
     "testCovReport": "cp -r .nyc_tmp .nyc_output && nyc report --reporter=html --reporter=lcov --reporter=text"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "dependencies": {
     "archiver": "0.14.4",

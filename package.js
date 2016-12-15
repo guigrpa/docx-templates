@@ -104,7 +104,7 @@ const specs = {
   // Deps
   // -----------------------------------------------
   engines: {
-    node: '>=4',
+    node: '>=6',
   },
 
   dependencies: {
