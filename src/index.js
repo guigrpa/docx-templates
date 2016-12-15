@@ -1,274 +1,396 @@
-import { clone } from 'timm';
+// @flow
 
-const Promise = require('bluebird');
-const fs = require('fs-extra');
-const fstream = require('fstream');
-const unzip = require('unzip');
-const archiver = require('archiver');
-const moment = require('moment');
-const path = require('path');
-const sax = require('sax');
-const db = require('./db');
-const argv = require('./argv');
-const gqlSchema = require('./gqlSchema');
-const log = require('./log')('wordReports');
+/* eslint-disable no-param-reassign */
+
+import path from 'path';
+import os from 'os';
+import { set as timmSet } from 'timm';
+import Promise from 'bluebird';
+import fs from 'fs-extra';
+import archiver from 'archiver';
+import fstream from 'fstream';
+import unzip from 'unzip';
+import sax from 'sax';
+import uuid from 'uuid';
 
 const DEBUG = false;
+const DEFAULT_ESCAPE_SEQUENCE = '+++';
 
-const log = DEBUG ? require('storyboard/withConsoleListener').mainStory : null;
+const log: any = DEBUG ? require('./debug') : null;
 
 const fsPromises = {};
-['ensureDir', 'emptyDir', 'copy', 'readFile', 'writeFile', 'unlink', 'remove'].forEach((fn) => {
+['emptyDir', 'ensureDir', 'readFile', 'writeFile', 'remove'].forEach((fn) => {
   fsPromises[fn] = Promise.promisify(fs[fn]);
 });
 
-ESCAPE_SEQUENCE = '+++';
+// ==========================================
+// Main
+// ==========================================
+type ReportData = any;
+type Query = string;
+type QueryResolver = (query: ?Query, queryVars: any) => ReportData | Promise<ReportData>;
+type ReportOptions = {|
+  template: string,
+  data?: ReportData | QueryResolver,
+  queryVars?: any,
+  output?: string,
+  _probe?: boolean,
+|};
 
+const getDefaultOutput = (templatePath: string): string => {
+  const { dir, name, ext } = path.parse(templatePath);
+  return path.join(dir, `${name}_report${ext}`);
+};
 
-_processReport = function(data, template) {
-  var buffers, cmdName, ctx, curIdx, curLoop, fFound, fRemoveNode, forNode, idx, loopOver, newNode, nextItem, nodeIn, nodeOut, out, ref, ref1, ref2, ref3, ref4, ref5, tag, varName;
-  out = _cloneNodeWithoutChildren(template);
-  ctx = {
+const createReport = (options: ReportOptions): Promise<any> => {
+  DEBUG && log.debug('Report options:', { attach: options });
+  const { template, data, queryVars, _probe } = options;
+  const output = options.output || getDefaultOutput(template);
+  DEBUG && log.debug(`Output file: ${output}`);
+  const base = path.join(os.tmpdir(), uuid.v1());
+  const baseUnzipped = `${base}_unzipped`;
+  DEBUG && log.debug(`Temporary base: ${base}`);
+
+  let jsTemplate;
+  let queryResult = null;
+  const templatePath = `${base}_unzipped/word/document.xml`;
+  let tic;
+  let result;
+  return Promise.resolve()
+
+  // Unzip
+  .then(() => {
+    DEBUG && log.debug('Unzipping...');
+    return fsPromises.emptyDir(baseUnzipped)
+    .then(() => unzipFile(template, baseUnzipped));
+  })
+
+  // Read the 'document.xml' file (the template) and parse it
+  .then(() => {
+    DEBUG && log.debug('Reading template...');
+    return fsPromises.readFile(templatePath, 'utf8')
+    .then((templateXml) => {
+      DEBUG && log.debug(`Template file length: ${templateXml.length}`);
+      DEBUG && log.debug('Parsing XML...');
+      tic = new Date().getTime();
+      return parseXml(templateXml);
+    }).then((parseResult) => {
+      jsTemplate = parseResult;
+      const tac = new Date().getTime();
+      DEBUG && log.debug(`File parsed in ${tac - tic} ms`,
+        { attach: jsTemplate, attachLevel: 'trace' });
+    });
+  })
+
+  // Fetch the data that will fill in the template
+  .then(() => {
+    if (typeof data !== 'function') {
+      queryResult = data;
+      return null;
+    }
+    DEBUG && log.debug('Looking for the query in the template...');
+    const query = getQuery(jsTemplate);
+    DEBUG && log.debug(`Query: ${query || 'no query found'}`);
+    return Promise.resolve(data(query, queryVars)).then((o) => { queryResult = o; });
+  })
+
+  // Generate the report
+  .then(() => {
+    DEBUG && log.debug('Generating report...');
+    return _createReport(queryResult, jsTemplate);
+  })
+
+  // Build output XML and write it to disk
+  .then((report) => {
+    result = report;
+    if (_probe) return null;
+    DEBUG && log.debug('Converting report to XML...');
+    const reportXml = buildXml(report);
+    DEBUG && log.debug('Writing report...');
+    return fsPromises.writeFile(templatePath, reportXml);
+  })
+
+  // Zip the results
+  .then(() => {
+    if (_probe) {
+      return fsPromises.remove(baseUnzipped)
+      .then(() => result);
+    }
+    DEBUG && log.debug('Zipping...');
+    return fsPromises.ensureDir(path.dirname(output))
+    .then(() => zipFile(baseUnzipped, output))
+    .finally(() => fsPromises.remove(baseUnzipped));
+  })
+
+  .catch((err) => {
+    if (err instanceof TypeError || err instanceof ReferenceError || err instanceof SyntaxError) {
+      console.error(err);  // eslint-disable-line no-console
+    }
+    throw new Error('REPORT_ERROR');
+  });
+};
+
+// ==========================================
+// Report generation
+// ==========================================
+type BufferStatus = {
+  text: string,
+  cmds: string,
+  fInsertedText: boolean,
+};
+
+type VarValue = any;
+type LoopStatus = {
+  forNode: Node,
+  varName: string,
+  loopOver: Array<VarValue>,
+  idx: number,
+};
+
+type PendingCommand = Object;
+
+type Context = {
+  level: number,
+  fCmd: boolean,
+  cmd: string,
+  fSeekQuery: boolean,
+  query: ?Query,
+  buffers: {
+    'w:p': BufferStatus,
+    'w:tr': BufferStatus,
+  },
+  vars: { [name: string]: VarValue },
+  loops: Array<LoopStatus>,
+  pendingCmd: ?PendingCommand,
+  skipAtLevel: ?number,
+  shorthands: { [shorthand: string]: string },
+};
+
+const _createReport = (data: ?ReportData, template: Node): Node => {
+  const out: Node = cloneNodeWithoutChildren(template);
+  const ctx: Context = {
     level: 1,
     fCmd: false,
     cmd: '',
     fSeekQuery: false,
+    query: null,
     buffers: {
-      "w:p": {
-        text: '',
-        cmds: '',
-        fInsertedText: false
-      },
-      "w:tr": {
-        text: '',
-        cmds: '',
-        fInsertedText: false
-      }
+      'w:p': { text: '', cmds: '', fInsertedText: false },
+      'w:tr': { text: '', cmds: '', fInsertedText: false },
     },
     vars: {},
     loops: [],
     root: template,
     pendingCmd: null,
     skipAtLevel: null,
-    shorthands: {}
+    shorthands: {},
   };
-  nodeIn = template;
-  nodeOut = out;
-  while (true) {
+  let nodeIn: Node = template;
+  let nodeOut: Node = out;
+
+  // ---------------------------------------------
+  // Fetch a new node
+  // ---------------------------------------------
+  while (true) {  // eslint-disable-line no-constant-condition
+    // ---------------------------------------------
+    // Fetch a new node, case 1: go down...
+    // ---------------------------------------------
     if (nodeIn._children.length) {
       nodeIn = nodeIn._children[0];
-      ctx.level++;
+      ctx.level += 1;
+
+    // ---------------------------------------------
+    // Fetch a new node, case 2: go to the next sibling
+    // (at the same level or a higher one)
+    // ---------------------------------------------
     } else {
-      fFound = false;
+      let fFound = false;
       while (nodeIn._parent != null) {
-        if (_hasNextSibling(nodeIn)) {
+        const nodeInParent: Node = nodeIn._parent;
+        const nodeOutParent: ?Node = nodeOut._parent;
+        if (hasNextSibling(nodeIn)) {
           fFound = true;
-          nodeIn = _getNextSibling(nodeIn);
+          nodeIn = getNextSibling(nodeIn);
           break;
         }
-        nodeIn = nodeIn._parent;
-        nodeOut = nodeOut._parent;
-        ctx.level--;
-        tag = nodeIn._tag;
-        if ((tag === 'w:p' && ((ref = (ref1 = ctx.pendingCmd) != null ? ref1.name : void 0) === 'FOR' || ref === 'END-FOR')) || (tag === 'w:tr' && ((ref2 = (ref3 = ctx.pendingCmd) != null ? ref3.name : void 0) === 'FOR-ROW' || ref2 === 'END-FOR-ROW'))) {
-          cmdName = ctx.pendingCmd.name;
-          switch (cmdName) {
-            case 'FOR':
-            case 'FOR-ROW':
-              loopOver = ctx.pendingCmd.loopOver;
-              varName = ctx.pendingCmd.varName;
-              if (DEBUG) {
-                log.debug("Loop " + varName + " iterations: " + loopOver.length);
-              }
+        nodeIn = nodeInParent;
+        if (nodeOutParent == null) break;  // should never happen
+        nodeOut = nodeOutParent;
+        ctx.level -= 1;
+
+        // On the way up, process commands applicable at `w:p` (paragraph) and
+        // `w:tr` (table row) level
+        const tag = nodeIn._fTextNode ? null : nodeIn._tag;
+        const { pendingCmd } = ctx;
+        if (pendingCmd != null) {
+          const cmdName = pendingCmd.name;
+          if (
+            (tag === 'w:p' && (cmdName === 'FOR' || cmdName === 'END-FOR')) ||
+            (tag === 'w:tr' && (cmdName === 'FOR-ROW' || cmdName === 'END-FOR-ROW'))
+          ) {
+            if (cmdName === 'FOR' || cmdName === 'FOR-ROW') {
+              const { loopOver, varName } = pendingCmd;
+              DEBUG && log.debug(`Loop ${varName} iterations: ${loopOver.length}`);
               if (ctx.skipAtLevel == null) {
-                ref4 = _getNextItem(loopOver), nextItem = ref4.nextItem, curIdx = ref4.curIdx;
+                const { nextItem, curIdx } = getNextItem(loopOver);
                 if (nextItem) {
-                  ctx.loops.push({
-                    forNode: nodeIn,
-                    varName: varName,
-                    loopOver: loopOver,
-                    idx: curIdx
-                  });
-                  ctx.vars[varName] = _.clone(nextItem);
-                  ctx.vars[varName]._idx = curIdx + 1;
+                  ctx.loops.push({ forNode: nodeIn, varName, loopOver, idx: curIdx });
+                  ctx.vars[varName] = timmSet(nextItem, '_idx', curIdx + 1);
                 } else {
                   ctx.skipAtLevel = ctx.level;
                 }
               }
-              break;
-            case 'END-FOR':
-            case 'END-FOR-ROW':
+            } else if (cmdName === 'END-FOR' || cmdName === 'END-FOR-ROW') {
               if (ctx.level === ctx.skipAtLevel) {
                 ctx.skipAtLevel = null;
               } else if (ctx.skipAtLevel == null) {
-                curLoop = _.last(ctx.loops);
-                forNode = curLoop.forNode, varName = curLoop.varName, loopOver = curLoop.loopOver, idx = curLoop.idx;
-                ref5 = _getNextItem(loopOver, idx), nextItem = ref5.nextItem, curIdx = ref5.curIdx;
-                if (nextItem) {
-                  if (DEBUG) {
-                    log.debug("  - Iteration on " + varName + ": " + (idx + 1));
-                  }
+                const curLoop = ctx.loops[ctx.loops.length - 1];
+                const { forNode, varName, loopOver, idx } = curLoop;
+                const { nextItem, curIdx } = getNextItem(loopOver, idx);
+                if (nextItem) {  // repeat loop
+                  DEBUG && log.debug(`  - Iteration on ${varName}: ${idx + 1}`);
                   curLoop.idx = curIdx;
-                  ctx.vars[varName] = _.clone(nextItem);
-                  ctx.vars[varName]._idx = curIdx + 1;
+                  ctx.vars[varName] = timmSet(nextItem, '_idx', curIdx + 1);
                   nodeIn = forNode;
-                } else {
+                } else {  // loop finished
                   ctx.loops.pop();
                 }
               }
+            }
+            ctx.pendingCmd = null;
           }
-          ctx.pendingCmd = null;
         }
-        fRemoveNode = false;
-        if ((tag === 'w:p' || tag === 'w:tbl' || tag === 'w:tr') && (ctx.skipAtLevel != null) && (ctx.level >= ctx.skipAtLevel)) {
+
+        // On the way up, delete corresponding output node if the user inserted a paragraph
+        // (or table row) with just a command, or if we're skipping nodes due to an empty FOR loop
+        let fRemoveNode = false;
+        if (
+          (tag === 'w:p' || tag === 'w:tbl' || tag === 'w:tr') &&
+          ctx.skipAtLevel != null &&
+          ctx.level >= ctx.skipAtLevel
+        ) {
           fRemoveNode = true;
         } else if (tag === 'w:p' || tag === 'w:tr') {
-          buffers = ctx.buffers[tag];
-          fRemoveNode = _.isEmpty(buffers.text) && !_.isEmpty(buffers.cmds) && !buffers.fInsertedText;
+          const buffers = ctx.buffers[tag];
+          // console.log(`${tag} FULLTEXT: '${buffers.text}'`);
+          // console.log(`${tag} COMMANDS: '${buffers.cmds}'`);
+          fRemoveNode = buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
         }
-        if (fRemoveNode) {
-          nodeOut._parent._children.pop();
-        }
+        if (fRemoveNode && nodeOut._parent != null) nodeOut._parent._children.pop();
       }
-      if (!fFound) {
-        break;
-      }
-      nodeOut = nodeOut._parent;
+
+      // Reached the parent and still no luck? We're done generating the report!
+      if (!fFound) break;
+
+      // In the output tree, move up one level, to correct the attachment point
+      // for the new node
+      nodeOut = (nodeOut._parent: any);
     }
-    tag = nodeIn._tag;
+
+    // ---------------------------------------------
+    // Process node
+    // ---------------------------------------------
+    // Nodes are copied to the new tree, but that doesn't mean they will be kept there.
+    // In some cases, they will be removed later on; for example, when a paragraph only
+    // contained a command -- it will be deleted.
+    const tag = nodeIn._fTextNode ? null : nodeIn._tag;
     if (tag === 'w:p' || tag === 'w:tr') {
-      ctx.buffers[tag] = {
-        text: '',
-        cmds: '',
-        fInsertedText: false
-      };
+      ctx.buffers[tag] = { text: '', cmds: '', fInsertedText: false };
     }
-    newNode = _cloneNodeWithoutChildren(nodeIn);
+    const newNode: Node = cloneNodeWithoutChildren(nodeIn);
     newNode._parent = nodeOut;
-    if (nodeIn._fTextNode) {
-      newNode._text = _processText(data, nodeIn, ctx);
-    }
     nodeOut._children.push(newNode);
+    if (nodeIn._fTextNode) {
+      const newNodeAsTextNode: TextNode = (newNode: Object);
+      newNodeAsTextNode._text = processText(data, nodeIn, ctx);
+    }
     nodeOut = newNode;
   }
+
   return out;
 };
 
-_getQuery = function(template) {
-  var ctx, fFound, nodeIn;
-  ctx = {
+// Go through the document until the query string is found (normally at the beginning)
+const getQuery = (template: Node): ?string => {
+  const ctx: any = {
     fCmd: false,
     cmd: '',
-    fSeekQuery: true,
-    query: null
+    fSeekQuery: true,  // ensure no command will be processed, except QUERY
+    query: null,
   };
-  nodeIn = template;
-  while (true) {
-    if (nodeIn._children.length) {
-      nodeIn = nodeIn._children[0];
-    } else {
-      fFound = false;
+  let nodeIn = template;
+  while (true) {  // eslint-disable-line no-constant-condition
+    // Move down
+    if (nodeIn._children.length) nodeIn = nodeIn._children[0];
+
+    // Move sideways or up
+    else {
       while (nodeIn._parent != null) {
-        if (_hasNextSibling(nodeIn)) {
-          fFound = true;
-          nodeIn = _getNextSibling(nodeIn);
+        const parent = nodeIn._parent;
+        if (hasNextSibling(nodeIn)) {
+          nodeIn = getNextSibling(nodeIn);
           break;
         }
-        nodeIn = nodeIn._parent;
-      }
-      if (!fFound) {
-        break;
+        nodeIn = parent;
       }
     }
-    if (nodeIn._fTextNode) {
-      _processText(null, nodeIn, ctx);
-    }
-    if (ctx.query != null) {
-      break;
-    }
-  }
-  if (ctx.query == null) {
-    log.error("Query could not be found in the template");
-    throw new Error('Query could not be found in the template');
-  }
-  ctx.query = _addIsDeleted(ctx.query);
-  if (DEBUG) {
-    log.debug("After adding isDeleted: " + ctx.query);
+
+    if (!nodeIn) break;
+    if (nodeIn._fTextNode) processText(null, nodeIn, ctx);
+    if (ctx.query != null) break;
   }
   return ctx.query;
 };
 
-_addIsDeleted = function(query) {
-  var c, fQuoted, i, len, level, moreChars, out, parens;
-  out = "";
-  parens = 0;
-  level = 0;
-  fQuoted = false;
-  for (i = 0, len = query.length; i < len; i++) {
-    c = query[i];
-    moreChars = c;
-    switch (c) {
-      case '(':
-        parens++;
-        break;
-      case ')':
-        parens--;
-        break;
-      case '"':
-        fQuoted = !fQuoted;
-        break;
-      case '{':
-        level++;
-        if (level >= 2 && !parens && !fQuoted) {
-          moreChars = '{isDeleted, ';
-        }
-        break;
-      case '}':
-        level--;
-    }
-    out += moreChars;
-  }
-  return out;
-};
+// Include isDeleted field in all GraphQL nodes
+// const addIsDeleted = (query) => {
+//   let out = '';
+//   let parens = 0;
+//   let level = 0;
+//   let fQuoted = false;
+//   for (let i = 0; i < query.length; i++) {
+//     const c = query[i];
+//     let moreChars = c;
+//     if (c === '(') parens += 1;
+//     else if (c === ')') parens -= 1;
+//     else if (c === '"') fQuoted = !fQuoted;
+//     else if (c === '{') {
+//       level += 1;
+//       if (level >= 2 && !parens && !fQuoted) {
+//         moreChars = '{isDeleted, ';
+//       }
+//     } else if (c === '}') level -= 1;
+//     out += moreChars;
+//   }
+//   return out;
+// };
 
-_processText = function(data, node, ctx) {
-  var cmdResultText, fAppendText, i, idx, outText, ref, ref1, segment, segments, text;
-  text = node._text;
-  if (_.isEmpty(text)) {
-    return text;
-  }
-  segments = text.split(ESCAPE_SEQUENCE);
-  outText = "";
-  idx = 0;
-  fAppendText = ((ref = node._parent) != null ? ref._tag : void 0) === 'w:t';
-  for (idx = i = 0, ref1 = segments.length; 0 <= ref1 ? i < ref1 : i > ref1; idx = 0 <= ref1 ? ++i : --i) {
-    if (idx > 0 && fAppendText) {
-      _appendText(ESCAPE_SEQUENCE, ctx, {
-        fCmd: true
-      });
-    }
-    segment = segments[idx];
-    if (ctx.fCmd) {
-      ctx.cmd += segment;
-    } else {
-      outText += segment;
-    }
-    if (fAppendText) {
-      _appendText(segment, ctx, {
-        fCmd: ctx.fCmd
-      });
-    }
+const processText = (data: ?ReportData, node: TextNode, ctx: Context): string => {
+  const text = node._text;
+  if (text == null || text === '') return '';
+  const segments = text.split(DEFAULT_ESCAPE_SEQUENCE);
+  let outText = '';
+  const fAppendText = node._parent && !node._parent._fTextNode && node._parent._tag === 'w:t';
+  for (let idx = 0; idx < segments.length; idx++) {
+    // Include the separators in the `buffers` field (used for deleting paragraphs if appropriate)
+    if (idx > 0 && fAppendText) appendText(DEFAULT_ESCAPE_SEQUENCE, ctx, { fCmd: true });
+
+    // Append segment either to the `ctx.cmd` buffer (to be executed), if we are in "command mode",
+    // or to the output text
+    const segment = segments[idx];
+    // DEBUG && log.debug(`Token: '${segment}'' (${ctx.fCmd})`);
+    if (ctx.fCmd) ctx.cmd += segment;
+    else outText += segment;
+    if (fAppendText) appendText(segment, ctx, { fCmd: ctx.fCmd });
+
+    // If there are more segments, execute the command (if we are in "command mode"),
+    // and toggle "command mode"
     if (idx < segments.length - 1) {
       if (ctx.fCmd) {
-        cmdResultText = _processCmd(data, ctx);
+        const cmdResultText = processCmd(data, ctx);
         if (cmdResultText != null) {
           outText += cmdResultText;
-          if (fAppendText) {
-            _appendText(cmdResultText, ctx, {
-              fCmd: false,
-              fInsertedText: true
-            });
-          }
+          if (fAppendText) appendText(cmdResultText, ctx, { fCmd: false, fInsertedText: true });
         }
       }
       ctx.fCmd = !ctx.fCmd;
@@ -277,417 +399,262 @@ _processText = function(data, node, ctx) {
   return outText;
 };
 
-_processCmd = function(data, ctx) {
-  var cmd, cmdName, fullCmd, out, ref, shorthandName, tokens, varName, varPath, varValue;
-  cmd = _.trim(ctx.cmd);
+const processCmd = (data: ?ReportData, ctx: Context): ?string => {
+  let cmd = ctx.cmd.trim();
   ctx.cmd = '';
-  if (DEBUG) {
-    log.debug("Executing: " + cmd);
-  }
-  shorthandName = (ref = /^\[(.+)\]$/.exec(cmd)) != null ? ref[1] : void 0;
-  if (shorthandName != null) {
+  DEBUG && log.debug(`Executing: ${cmd}`);
+
+  // Expand shorthands
+  const shorthandMatch = /^\[(.+)\]$/.exec(cmd);
+  if (shorthandMatch != null) {
+    const shorthandName = shorthandMatch[1];
     cmd = ctx.shorthands[shorthandName];
-    if (DEBUG) {
-      log.debug("Shorthand for: " + cmd);
-    }
+    DEBUG && log.debug(`Shorthand for: ${cmd}`);
   }
+
+  // Sanitize, tokenize and extract command name
   cmd = cmd.replace(/\s+/g, ' ');
-  tokens = cmd.split(' ');
-  if (!tokens.length) {
-    log.error("Invalid command syntax: " + cmd);
-    throw new Error('Invalid command syntax');
-  }
-  cmdName = tokens[0].toUpperCase();
+  const tokens = cmd.split(' ');
+  if (!tokens.length) throw new Error('Invalid command syntax');
+  const cmdName = tokens[0].toUpperCase();
+
+  // Seeking query?
   if (ctx.fSeekQuery) {
-    if (cmdName === 'QUERY') {
-      ctx.query = tokens.slice(1).join(' ');
-    }
-    return;
+    if (cmdName === 'QUERY') ctx.query = tokens.slice(1).join(' ');
+    return null;
   }
-  out = void 0;
-  switch (cmdName) {
-    case 'QUERY':
-      if (DEBUG) {
-        log.debug("Ignoring QUERY command");
-      }
-      break;
-    case 'SHORTHAND':
-      shorthandName = tokens[1];
-      fullCmd = tokens.slice(2).join(' ');
-      ctx.shorthands[shorthandName] = fullCmd;
-      if (DEBUG) {
-        log.debug("Defined shorthand '" + shorthandName + "' as: " + fullCmd);
-      }
-      break;
-    case 'VAR':
-      varName = tokens[1];
-      varPath = tokens[2];
-      varValue = _extractFromData(data, varPath, ctx);
-      ctx.vars[varName] = varValue;
-      break;
-    case 'FOR':
-    case 'FOR-ROW':
-    case 'FOR-COL':
-      ctx.pendingCmd = {
-        name: cmdName,
-        varName: tokens[1],
-        loopOver: _extractFromData(data, tokens[3], ctx)
-      };
-      break;
-    case 'END-FOR':
-    case 'END-FOR-ROW':
-    case 'END-FOR-COL':
-      ctx.pendingCmd = {
-        name: cmdName
-      };
-      break;
-    case 'INS':
-      if (ctx.skipAtLevel == null) {
-        out = _extractFromData(data, tokens[1], ctx);
-      }
-      break;
-    default:
-      log.error("Invalid command syntax: " + cmd);
-      throw new Error('Invalid command syntax');
-  }
+
+  // Process command
+  let out;
+  if (cmdName === 'QUERY') {
+    DEBUG && log.debug('Ignoring QUERY command');
+  } else if (cmdName === 'SHORTHAND') {
+    const shorthandName = tokens[1];
+    const fullCmd = tokens.slice(2).join(' ');
+    ctx.shorthands[shorthandName] = fullCmd;
+    DEBUG && log.debug(`Defined shorthand '${shorthandName}' as: ${fullCmd}`);
+  } else if (cmdName === 'VAR') {  // VAR <varName> <dataPath>
+    const varName = tokens[1];
+    const varPath = tokens[2];
+    const varValue = extractFromData(data, varPath, ctx);
+    ctx.vars[varName] = varValue;
+    // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
+  } else if (cmdName === 'FOR' || cmdName === 'FOR-ROW') {
+      // FOR <varName> IN <collectionDataPath>
+    ctx.pendingCmd = {
+      name: cmdName,
+      varName: tokens[1],
+      loopOver: extractFromData(data, tokens[3], ctx),
+    };
+  } else if (cmdName === 'END-FOR' || cmdName === 'END-FOR-ROW') {
+      // END-FOR
+    ctx.pendingCmd = { name: cmdName };
+  } else if (cmdName === 'INS') {  // INS <scalarDataPath>
+    if (ctx.skipAtLevel == null) out = extractFromData(data, tokens[1], ctx);
+  } else throw new Error(`Invalid command syntax: '${cmd}'`);
   return out;
 };
 
-_appendText = function(text, ctx, options) {
-  var buf, fCmd, key, ref, results, type;
-  if (ctx.fSeekQuery) {
-    return;
-  }
-  fCmd = options.fCmd;
-  type = fCmd ? 'cmds' : 'text';
-  ref = ctx.buffers;
-  results = [];
-  for (key in ref) {
-    buf = ref[key];
-    ctx.buffers[key][type] += text;
-    if (options.fInsertedText) {
-      results.push(ctx.buffers[key].fInsertedText = true);
-    } else {
-      results.push(void 0);
-    }
-  }
-  return results;
+const appendText = (text: string, ctx: Context, options: {|
+  fCmd?: boolean,
+  fInsertedText?: boolean,
+|}) => {
+  if (ctx.fSeekQuery) return;
+  const { fCmd, fInsertedText } = options;
+  const type = fCmd ? 'cmds' : 'text';
+  Object.keys(ctx.buffers).forEach((key) => {
+    const buf = ctx.buffers[key];
+    buf[type] += text;
+    if (fInsertedText) buf.fInsertedText = true;
+  });
 };
 
-_extractFromData = function(data, dataPath, ctx) {
-  var i, len, out, part, parts, varName;
-  parts = dataPath.split('.');
+const extractFromData = (data: ?ReportData, dataPath: string, ctx: Context): VarValue => {
+  if (data == null) return '';
+  const parts = dataPath.split('.');
+  let out;
   if (parts[0][0] === '$') {
-    varName = parts[0].substring(1);
+    const varName = parts[0].substring(1);
     out = ctx.vars[varName];
     parts.shift();
   } else {
     out = data;
   }
-  if (out == null) {
-    return '';
-  }
-  for (i = 0, len = parts.length; i < len; i++) {
-    part = parts[i];
-    out = out[part];
-    if (out == null) {
-      return '';
-    }
+  if (out == null) return '';
+  for (let i = 0; i < parts.length; i++) {
+    out = out[parts[i]];
+    if (out == null) return '';
   }
   return out;
 };
 
-_getNextItem = function(items, curIdx) {
-  var nextItem;
-  if (curIdx == null) {
-    curIdx = -1;
-  }
-  nextItem = null;
+const getNextItem = (items, curIdx0) => {
+  let nextItem = null;
+  let curIdx = curIdx0 != null ? curIdx0 : -1;
   while (nextItem == null) {
-    curIdx++;
-    if (curIdx >= items.length) {
-      break;
-    }
-    if (items[curIdx].isDeleted) {
-      continue;
-    }
+    curIdx += 1;
+    if (curIdx >= items.length) break;
+    if (items[curIdx].isDeleted) continue;  // TODO: allow user skipping
     nextItem = items[curIdx];
   }
-  return {
-    nextItem: nextItem,
-    curIdx: curIdx
-  };
+  return { nextItem, curIdx };
 };
 
-_parseXml = function(templateXml) {
-  var curNode, numXmlElements, parser, promise, template;
-  parser = sax.parser(true, {
+// ==========================================
+// Utilities: XML <-> JSON conversion
+// ==========================================
+type BaseNode = {
+  _parent: ?Node,
+  _children: Array<Node>,
+  _idxChild?: ?number,
+};
+type TextNode = BaseNode & {
+  _fTextNode: true,
+  _text: string,
+};
+type NonTextNode = BaseNode & {
+  _fTextNode: false,
+  _tag: string,
+  _attrs: Object,
+};
+type Node = TextNode | NonTextNode;
+
+const parseXml = (templateXml): Promise<Node> => {
+  const parser = sax.parser(true, {  // true for XML-like (false for HTML-like)
     trim: false,
-    normalize: false
+    normalize: false,
   });
-  template = null;
-  curNode = null;
-  numXmlElements = 0;
-  promise = new Promise(function(resolve, reject) {
-    parser.onopentag = function(node) {
-      var newNode;
-      newNode = {
+  let template = null;
+  let curNode = null;
+  let numXmlElements = 0;
+  return new Promise((resolve, reject) => {
+    parser.onopentag = (node) => {
+      const newNode = {
         _parent: curNode,
         _children: [],
-        _idxChild: curNode != null ? curNode._children.length : void 0,
+        _idxChild: curNode != null ? curNode._children.length : undefined,
         _fTextNode: false,
         _tag: node.name,
-        _attrs: node.attributes
+        _attrs: node.attributes,
       };
-      if (curNode != null) {
-        curNode._children.push(newNode);
-      } else {
-        template = newNode;
-      }
+      if (curNode != null) curNode._children.push(newNode);
+      else template = newNode;
       curNode = newNode;
-      return numXmlElements++;
+      numXmlElements += 1;
     };
-    parser.onclosetag = function() {
-      return curNode = curNode._parent;
-    };
-    parser.ontext = function(text) {
-      if (curNode == null) {
-        return;
-      }
-      return curNode._children.push({
+    parser.onclosetag = () => { curNode = curNode != null ? curNode._parent : null; };
+    parser.ontext = (text) => {
+      if (curNode == null) return;
+      curNode._children.push({
         _parent: curNode,
         _children: [],
         _idxChild: curNode._children.length,
         _fTextNode: true,
-        _text: text
+        _text: text,
       });
     };
-    parser.onend = function() {
-      log.debug("Number of XML elements: " + numXmlElements);
-      return resolve(template);
+    parser.onend = () => {
+      DEBUG && log.debug(`Number of XML elements: ${numXmlElements}`);
+      resolve(template);
     };
-    parser.onerror = function(err) {
-      return reject(err);
-    };
+    parser.onerror = (err) => { reject(err); };
     parser.write(templateXml);
-    return parser.end();
+    parser.end();
   });
-  return promise;
 };
 
-_buildXml = function(node, prefix) {
-  var attrs, child, fHasChildren, fLastChildIsNode, i, key, len, prefix2, ref, ref1, suffix, val, xml;
-  if (prefix == null) {
-    prefix = '';
-  }
-  xml = prefix === '' ? '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' : '';
-  if (node._fTextNode) {
-    xml += "" + node._text;
-  } else {
-    attrs = "";
-    ref = node._attrs;
-    for (key in ref) {
-      val = ref[key];
-      attrs += " " + key + "=\"" + val + "\"";
-    }
-    fHasChildren = node._children.length > 0;
-    suffix = fHasChildren ? '' : '/';
-    xml += "\n" + prefix + "<" + node._tag + attrs + suffix + ">";
-    fLastChildIsNode = false;
-    ref1 = node._children;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      child = ref1[i];
-      xml += _buildXml(child, prefix + '  ');
+const buildXml = (node: Node, indent = '') => {
+  let xml = indent.length ? '' : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+  if (node._fTextNode) xml += sanitizeText(node._text);
+  else {
+    let attrs = '';
+    const nodeAttrs = node._attrs;
+    Object.keys(nodeAttrs).forEach((key) => {
+      attrs += ` ${key}="${nodeAttrs[key]}"`;
+    });
+    const fHasChildren = node._children.length > 0;
+    const suffix = fHasChildren ? '' : '/';
+    xml += `\n${indent}<${node._tag}${attrs}${suffix}>`;
+    let fLastChildIsNode = false;
+    node._children.forEach((child) => {
+      xml += buildXml(child, `${indent}  `);
       fLastChildIsNode = !child._fTextNode;
-    }
+    });
     if (fHasChildren) {
-      prefix2 = fLastChildIsNode ? "\n" + prefix : '';
-      xml += prefix2 + "</" + node._tag + suffix + ">";
+      const indent2 = fLastChildIsNode ? `\n${indent}` : '';
+      xml += `${indent2}</${node._tag}>`;
     }
   }
   return xml;
 };
 
-_cloneNodeWithoutChildren = function(node) {
-  var out;
-  out = _.extend(_.pick(node, ['_tag', '_attrs', '_fTextNode', '_text']), {
-    _parent: null,
-    _children: []
-  });
+const sanitizeText = (str: string) => {
+  let out = str;
+  out = out.replace(/&/g, '&amp;');  // must be the first one
+  out = out.replace(/</g, '&lt;');
+  out = out.replace(/>/g, '&gt;');
   return out;
 };
 
-_hasNextSibling = function(node) {
-  if (node._parent == null) {
-    return false;
-  }
-  return node._idxChild < node._parent._children.length - 1;
-};
-
-_getNextSibling = function(node) {
-  return node._parent._children[node._idxChild + 1];
-};
-
-_log = function(node, prefix) {
-  var child, i, len, ref, suffix;
-  if (prefix == null) {
-    prefix = '';
-  }
+// ==========================================
+// Utilities: miscellaneous
+// ==========================================
+const cloneNodeWithoutChildren = (node: Node): Node => {
   if (node._fTextNode) {
-    log.debug(prefix + "'" + node._text + "'");
-  } else {
-    suffix = node._children.length ? '' : '/';
-    log.debug(prefix + "<" + node._tag + suffix + ">");
-    ref = node._children;
-    for (i = 0, len = ref.length; i < len; i++) {
-      child = ref[i];
-      _log(child, prefix + '  ');
-    }
+    return {
+      _parent: null,
+      _children: [],
+      _fTextNode: true,
+      _text: node._text,
+    };
   }
-  return node;
+  return {
+    _parent: null,
+    _children: [],
+    _fTextNode: false,
+    _tag: node._tag,
+    _attrs: node._attrs,
+  };
 };
 
-_unzip = function(inputFile, outputFolder) {
-  var promise, readStream, writeStream;
-  readStream = fs.createReadStream(inputFile);
-  writeStream = fstream.Writer(outputFolder);
-  promise = new Promise(function(resolve, reject) {
-    return readStream.pipe(unzip.Parse()).pipe(writeStream).on('close', function() {
-      return resolve();
-    });
+const hasNextSibling = (node: Node): boolean => (
+  node._parent != null && node._idxChild != null
+    ? node._idxChild < node._parent._children.length - 1
+    : false
+);
+
+// Always call `hasNextSibling()` before calling `getNextSibling()`
+const getNextSibling = (node: Node): Node =>
+  // $FlowFixMe
+  (node._parent._children[node._idxChild + 1]: Node);
+
+// ==========================================
+// Utilities: zip/unzip
+// ==========================================
+const unzipFile = (inputFile, outputFolder) => {
+  const readStream = fs.createReadStream(inputFile);
+  const writeStream = fstream.Writer(outputFolder);  // eslint-disable-line new-cap
+  return new Promise((resolve) => {
+    readStream
+    .pipe(unzip.Parse())  // eslint-disable-line new-cap
+    .pipe(writeStream)
+    .on('close', resolve);
   });
-  return promise;
 };
 
-_zip = function(inputFolder, outputFile) {
-  var archive, output, promise;
-  output = fs.createWriteStream(outputFile);
-  archive = archiver('zip');
-  promise = new Promise(function(resolve, reject) {
-    output.on('close', function() {
-      return resolve();
-    });
-    archive.on('error', function(err) {
-      return reject(err);
-    });
+const zipFile = (inputFolder, outputFile) => {
+  const output = fs.createWriteStream(outputFile);
+  const archive = archiver('zip');
+  return new Promise((resolve, reject) => {
+    output.on('close', resolve);
+    archive.on('error', reject);
     archive.pipe(output);
-    archive.bulk([
-      {
-        expand: true,
-        dot: true,
-        cwd: inputFolder,
-        src: "**"
-      }
-    ]);
-    return archive.finalize();
+    archive.bulk([{ expand: true, dot: true, cwd: inputFolder, src: '**' }]);
+    archive.finalize();
   });
-  return promise;
 };
 
-module.exports = {
-  exportToWord: function(msg) {
-    var base, fDefaultTemplate, fileId, jsTemplate, queryResult, queryVars, ref, result, template, templatePath, tic, uploadFolder;
-    ref = msg.data, queryVars = ref.queryVars, template = ref.template;
-    fDefaultTemplate = _.isString(template);
-    if (fDefaultTemplate) {
-      log.debug("Default template: " + template);
-    } else {
-      log.debug("Received file with " + template.length + " bytes...");
-    }
-    uploadFolder = path.join(process.cwd(), argv.userFiles, 'upload');
-    fileId = moment().format('YYYYMMDD-HHmmSS-SSS');
-    base = path.join(uploadFolder, fileId);
-    result = {};
-    jsTemplate = null;
-    queryResult = null;
-    templatePath = base + "_unzipped/word/document.xml";
-    tic = null;
-    return Promise.resolve().then(function() {
-      return fsPromises.ensureDir(uploadFolder);
-    }).then(function() {
-      var destFile, promise, srcFile;
-      if (fDefaultTemplate) {
-        srcFile = path.join(process.cwd(), argv.main, 'wordTemplates', template);
-        destFile = base + "_in";
-        promise = fsPromises.copy(srcFile, destFile);
-      } else {
-        promise = fsPromises.writeFile(base + "_in", template);
-      }
-      return promise;
-    }).then(function() {
-      log.debug("Unzipping...");
-      return fsPromises.emptyDir(base + "_unzipped").then(function() {
-        return _unzip(base + "_in", base + "_unzipped");
-      })["finally"](function() {
-        return fsPromises.unlink(base + "_in");
-      });
-    }).then(function() {
-      var promise;
-      log.debug("Reading template...");
-      tic = null;
-      promise = fsPromises.readFile(templatePath, 'utf8').then(function(templateXml) {
-        log.debug("Template file length: " + templateXml.length);
-        log.debug("Parsing XML...");
-        tic = new Date().getTime();
-        return _parseXml(templateXml);
-      }).then(function(parseResult) {
-        var tac;
-        jsTemplate = parseResult;
-        tac = new Date().getTime();
-        log.debug("File parsed in " + (tac - tic) + " ms");
-        if (DEBUG) {
-          return _log(jsTemplate);
-        }
-      });
-      return promise;
-    }).then(function() {
-      var promise, query;
-      log.debug("Looking for the query in the template...");
-      query = _getQuery(jsTemplate);
-      log.debug("Running query...");
-      log.debug("- Query: " + query);
-      log.debug("- Query vars: " + (JSON.stringify(queryVars)));
-      promise = gqlSchema["do"](query, null, queryVars).then(function(res) {
-        var error, i, len, ref1;
-        if (DEBUG) {
-          log.debug(JSON.stringify(res));
-        }
-        if (res.errors != null) {
-          ref1 = res.errors;
-          for (i = 0, len = ref1.length; i < len; i++) {
-            error = ref1[i];
-            log.error(error);
-          }
-          throw new Error("GraphQL errors! (see log)");
-        }
-        return queryResult = res.data;
-      });
-      return promise;
-    }).then(function() {
-      var report;
-      log.debug("Generating report...");
-      report = _processReport(queryResult, jsTemplate);
-      return report;
-    }).then(function(report) {
-      var reportXml;
-      log.debug("Converting report to XML...");
-      reportXml = _buildXml(report);
-      log.debug("Writing report...");
-      return fsPromises.writeFile(templatePath, reportXml);
-    }).then(function() {
-      log.debug("Zipping...");
-      return _zip(base + "_unzipped", base + ".docx").then(function(data) {
-        result.responseData = "/upload/" + fileId + ".docx";
-        return result;
-      })["finally"](function() {
-        fsPromises.remove(base + "_unzipped");
-        return result;
-      });
-    })["catch"](function(err) {
-      if (err instanceof TypeError || err instanceof ReferenceError || err instanceof SyntaxError) {
-        log.error(err.stack);
-      }
-      throw new Error('REPORT_ERROR');
-    });
-  }
-};
+// ==========================================
+// Public API
+// ==========================================
+export default createReport;

@@ -111,15 +111,15 @@ const specs = {
     timm: '1.2.3',
     bluebird: '2.9.8',
     'fs-extra': '0.23.1',
-    moment: '2.8.3',
     archiver: '0.14.4',
     fstream: '1.0.7',
     unzip: '0.1.11',
     sax: '1.1.1',
+    uuid: '3.0.1',
   },
 
   devDependencies: {
-    storyboard: '^2.3.0',
+    storyboard: '^2.3.1',
     'xxl': '^0.1.1',
     'cross-env': '^1.0.8',
 
@@ -146,7 +146,7 @@ const specs = {
     // Testing
     'jest': '17.0.3',
     'babel-jest': '17.0.2',
-    'jest-html': '^1.3.2',
+    'jest-html': '^1.3.3',
 
     // Coverage testing
     'nyc': '8.4.0',

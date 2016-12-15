@@ -2928,9 +2928,9 @@ jest-haste-map@^17.0.3:
     sane "~1.4.1"
     worker-farm "^1.3.1"
 
-jest-html@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/jest-html/-/jest-html-1.3.2.tgz#36e26983a8b62bc716043528cd8a4c30383d4454"
+jest-html@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/jest-html/-/jest-html-1.3.3.tgz#e3102533b8123304c2818e83b32f0695b1b7f308"
   dependencies:
     babel-polyfill "6.16.0"
     body-parser "^1.15.2"
@@ -3510,10 +3510,6 @@ mkdirp@0.5, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp
   dependencies:
     minimist "0.0.8"
 
-moment@2.8.3:
-  version "2.8.3"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.8.3.tgz#a01427bf8910f014fc4baa1b8d96f17f7e3f29a2"
-
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -3961,11 +3957,7 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-pretty-format@^4.2.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-4.3.1.tgz#530be5c42b3c05b36414a7a2a4337aa80acd0e8d"
-
-pretty-format@~4.2.1:
+pretty-format@^4.2.1, pretty-format@~4.2.1:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-4.2.3.tgz#8894c2ac81419cf801629d8f66320a25380d8b05"
 
@@ -4683,13 +4675,13 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
-statuses@1, "statuses@>= 1.3.1 < 2", statuses@~1.3.0:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
-
-statuses@~1.2.1:
+statuses@1, statuses@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.2.1.tgz#dded45cc18256d51ed40aec142489d5c61026d28"
+
+"statuses@>= 1.3.1 < 2", statuses@~1.3.0:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
 
 storyboard@^1.0.0, storyboard@^1.1.0:
   version "1.4.0"
@@ -4705,9 +4697,28 @@ storyboard@^1.0.0, storyboard@^1.1.0:
     split "1.0.0"
     timm "0.6.1"
 
-storyboard@^2.0.0, storyboard@^2.3.0:
+storyboard@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/storyboard/-/storyboard-2.3.0.tgz#ae964cde278a5237dc8cd8c94d80a62b0a4b5530"
+  dependencies:
+    bluebird "3.4.6"
+    chalk "1.x"
+    clocksy "1.1.0"
+    commander "2.9.0"
+    express "4.14.0"
+    lodash "4.17.2"
+    ms "0.7.2"
+    node-uuid "1.4.7"
+    pg "6.0.2"
+    platform "1.3.1"
+    socket.io "1.6.0"
+    socket.io-client "1.6.0"
+    split "1.0.0"
+    timm "1.2.1"
+
+storyboard@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/storyboard/-/storyboard-2.3.1.tgz#4d2946f7388c3628203b21e9313a46716fc80329"
   dependencies:
     bluebird "3.4.6"
     chalk "1.x"
@@ -4995,7 +5006,7 @@ utils-merge@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
 
-uuid@^3.0.0:
+uuid@3.0.1, uuid@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
 
