@@ -4,13 +4,13 @@ Template-based docx report creation.
 
 ## Why?
 
-* **Write reports naturally using Word**, just adding commands where needed for dynamic contents
-* **Embed your queries in the template itself**, e.g. in GraphQL, following *the Relay way* (in [Relay](https://facebook.github.io/relay/), you declare your data needs alongside the React components that use them)
-* A small **custom language**, with commands such as `FOR` (+ `END-FOR`), `FOR-ROW` (+ `END-FOR-ROW`), `INS`, `SHORTHAND`, `QUERY`
+* **Write reports naturally using Word**, just adding some commands where needed for dynamic contents
+* **Express your data needs (queries) in the template itself**, in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way*: in [Relay](https://facebook.github.io/relay/), data needs are declared alongside the React components that use the data
+* A small **custom language**, with commands such as `FOR` (+ `END-FOR`), `FOR-ROW` (+ `END-FOR-ROW`), `INS`, `SHORTHAND`, `QUERY`, or `VAR`
 * **Nested** loops
 * Custom **variables** and **shorthand** commands (useful for writing table templates)
 
-Docx-templates will probably not support all use cases, so **use with caution**. If you need more extensibility, a more mature project, and more bells and whistles please also check out [docxtemplater](https://github.com/open-xml-templating/docxtemplater).
+Docx-templates is a small project and will probably not support all edge cases, so **use with caution**. If you need extensibility, a more mature project, and more bells and whistles please also check [docxtemplater](https://github.com/open-xml-templating/docxtemplater).
 
 ## Installation
 
@@ -43,12 +43,12 @@ createReport({
 });
 ```
 
-This will create a report at the specified location (*all paths are relative to `process.cwd()`*) using the injected data. Some notes:
+This will create a report at the specified location using the injected data. Some notes:
 
 * All paths are relative to `process.cwd()`
 * If the output location is omitted, a report will be generated in the same folder as the template
 
-You can also **provide a (sync or async) query resolver** instead of an object `data`. See this example:
+You can also **provide a sync or async callback function (query resolver)** instead of an object `data`:
 
 ```js
 createReport({
