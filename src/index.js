@@ -555,7 +555,7 @@ const parseXml = (templateXml): Promise<Node> => {
     trim: false,
     normalize: false,
   });
-  let template = null;
+  let template;
   let curNode = null;
   let numXmlElements = 0;
   return new Promise((resolve, reject) => {

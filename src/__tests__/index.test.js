@@ -9,16 +9,16 @@ import Promise from 'bluebird';
 // SWUT
 import createReport from '..';
 
-const fs = Promise.promisifyAll(fsExtra);
+const fs: any = Promise.promisifyAll(fsExtra);
 const outputDir = path.join(__dirname, 'out');
 
 describe('End-to-end', () => {
   beforeEach(async () => {
     try { await fs.remove(outputDir); } catch (err) { /* bad luck */ }
   });
-  // afterEach(async () => {
-  //   try { await fs.remove(outputDir); } catch (err) { /* bad luck */ }
-  // });
+  afterEach(async () => {
+    try { await fs.remove(outputDir); } catch (err) { /* bad luck */ }
+  });
 
   it('01 Copies (unchanged) a template without markup', async () => {
     const template = path.join(__dirname, 'templates', 'noQuery.docx');
@@ -42,6 +42,7 @@ describe('Template processing', () => {
     const defaultOutput = path.join(__dirname, 'templates', 'noQuery_report.docx');
     const result = await createReport({ template, _probe: 'JS' });
     expect(fs.existsSync(defaultOutput)).toBeFalsy();
+    // $FlowFixMe: Flow gets confused when unwrapping the Bluebird promise above
     expect(result._children.length).toBeTruthy();
   });
 
