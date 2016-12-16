@@ -40,7 +40,7 @@ describe('Template processing', () => {
   it('01 Probe should work', async () => {
     const template = path.join(__dirname, 'templates', 'noQuery.docx');
     const defaultOutput = path.join(__dirname, 'templates', 'noQuery_report.docx');
-    const result = await createReport({ template, _probe: true });
+    const result = await createReport({ template, _probe: 'JS' });
     expect(fs.existsSync(defaultOutput)).toBeFalsy();
     expect(result._children.length).toBeTruthy();
   });
@@ -53,7 +53,7 @@ describe('Template processing', () => {
       template,
       data: queryResolver,
       queryVars,
-      _probe: true,
+      _probe: 'JS',
     });
     expect(queryResolver.mock.calls.length).toEqual(1);
     expect(queryResolver.mock.calls[0][0]).toEqual('exampleQuery');
@@ -65,7 +65,7 @@ describe('Template processing', () => {
     const result = await createReport({
       template,
       data: () => ({ a: 'foo', b: 'bar' }),
-      _probe: true,
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
@@ -75,7 +75,7 @@ describe('Template processing', () => {
     const result = await createReport({
       template,
       data: { a: 'foo', b: 'bar' },
-      _probe: true,
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
@@ -89,7 +89,7 @@ describe('Template processing', () => {
         { name: 'SECOND' },
         { name: 'THIRD' },
       ] },
-      _probe: true,
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
@@ -114,7 +114,7 @@ describe('Template processing', () => {
           ],
         },
       ] },
-      _probe: true,
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
@@ -139,7 +139,7 @@ describe('Template processing', () => {
           ],
         },
       ] },
-      _probe: true,
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
@@ -153,7 +153,31 @@ describe('Template processing', () => {
         { name: 'SECOND' },
         { name: 'THIRD' },
       ] },
-      _probe: true,
+      _probe: 'JS',
+    });
+    expect(result).toMatchSnapshot();
+  });
+
+  it('09 Should allow scalar arrays in FOR loops', async () => {
+    const template = path.join(__dirname, 'templates', 'for1scalars.docx');
+    const result = await createReport({
+      template,
+      data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
+      _probe: 'JS',
+    });
+    expect(result).toMatchSnapshot();
+  });
+
+  it('10 Should allow access to the index in FOR loops', async () => {
+    const template = path.join(__dirname, 'templates', 'for1index.docx');
+    const result = await createReport({
+      template,
+      data: { companies: [
+        { name: 'FIRST' },
+        { name: 'SECOND' },
+        { name: 'THIRD' },
+      ] },
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
@@ -167,7 +191,7 @@ describe('Template processing', () => {
         { name: 'SECOND' },
         { name: 'THIRD' },
       ] },
-      _probe: true,
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
@@ -181,7 +205,7 @@ describe('Template processing', () => {
         { name: 'SECOND' },
         { name: 'THIRD' },
       ] },
-      _probe: true,
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
@@ -194,21 +218,36 @@ describe('Template processing', () => {
         { name: '¿Por qué?' },
         { name: 'Porque sí' },
       ] },
-      _probe: true,
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
 
   it('23 Should allow characters that conflict with XML', async () => {
     const template = path.join(__dirname, 'templates', 'for1.docx');
+    const xml = await createReport({
+      template,
+      data: { companies: [
+        { name: '3 < 4 << 400' },
+        { name: '5 > 2 >> -100' },
+        { name: 'a & b && c' },
+      ] },
+      _probe: 'XML',
+    });
+    expect(xml).toMatchSnapshot();
+  });
+
+  it('70 Should allow customisation of cmd delimiter', async () => {
+    const template = path.join(__dirname, 'templates', 'for1customDelimiter.docx');
     const result = await createReport({
       template,
       data: { companies: [
-        { name: '3 < 4' },
-        { name: '5 > 2' },
-        { name: 'a & b' },
+        { name: 'FIRST' },
+        { name: 'SECOND' },
+        { name: 'THIRD' },
       ] },
-      _probe: true,
+      cmdDelimiter: '***',
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });
@@ -236,7 +275,7 @@ describe('Template processing', () => {
           },
         ],
       } },
-      _probe: true,
+      _probe: 'JS',
     });
     expect(result).toMatchSnapshot();
   });

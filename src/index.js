@@ -4,7 +4,6 @@
 
 import path from 'path';
 import os from 'os';
-import { set as timmSet } from 'timm';
 import Promise from 'bluebird';
 import fs from 'fs-extra';
 import archiver from 'archiver';
@@ -14,7 +13,8 @@ import sax from 'sax';
 import uuid from 'uuid';
 
 const DEBUG = false;
-const DEFAULT_ESCAPE_SEQUENCE = '+++';
+const DEFAULT_CMD_DELIMITER = '+++';
+const LOOP_INDEX_IDENTIFIER = '_idx';
 
 const log: any = DEBUG ? require('./debug') : null;
 
@@ -34,7 +34,8 @@ type ReportOptions = {|
   data?: ReportData | QueryResolver,
   queryVars?: any,
   output?: string,
-  _probe?: boolean,
+  cmdDelimiter?: string,
+  _probe?: 'JS' | 'XML',
 |};
 
 const getDefaultOutput = (templatePath: string): string => {
@@ -50,6 +51,9 @@ const createReport = (options: ReportOptions): Promise<any> => {
   const base = path.join(os.tmpdir(), uuid.v1());
   const baseUnzipped = `${base}_unzipped`;
   DEBUG && log.debug(`Temporary base: ${base}`);
+  const createOptions = {
+    cmdDelimiter: options.cmdDelimiter || DEFAULT_CMD_DELIMITER,
+  };
 
   let jsTemplate;
   let queryResult = null;
@@ -89,7 +93,7 @@ const createReport = (options: ReportOptions): Promise<any> => {
       return null;
     }
     DEBUG && log.debug('Looking for the query in the template...');
-    const query = getQuery(jsTemplate);
+    const query = getQuery(jsTemplate, createOptions);
     DEBUG && log.debug(`Query: ${query || 'no query found'}`);
     return Promise.resolve(data(query, queryVars)).then((o) => { queryResult = o; });
   })
@@ -97,15 +101,22 @@ const createReport = (options: ReportOptions): Promise<any> => {
   // Generate the report
   .then(() => {
     DEBUG && log.debug('Generating report...');
-    return _createReport(queryResult, jsTemplate);
+    return _createReport(queryResult, jsTemplate, createOptions);
   })
 
   // Build output XML and write it to disk
   .then((report) => {
     result = report;
-    if (_probe) return null;
+    if (_probe === 'JS') {
+      result = report;
+      return null;
+    }
     DEBUG && log.debug('Converting report to XML...');
     const reportXml = buildXml(report);
+    if (_probe === 'XML') {
+      result = reportXml;
+      return null;
+    }
     DEBUG && log.debug('Writing report...');
     return fsPromises.writeFile(templatePath, reportXml);
   })
@@ -133,6 +144,24 @@ const createReport = (options: ReportOptions): Promise<any> => {
 // ==========================================
 // Report generation
 // ==========================================
+type Context = {
+  level: number,
+  fCmd: boolean,
+  cmd: string,
+  fSeekQuery: boolean,
+  query: ?Query,
+  buffers: {
+    'w:p': BufferStatus,
+    'w:tr': BufferStatus,
+  },
+  vars: { [name: string]: VarValue },
+  loops: Array<LoopStatus>,
+  pendingCmd: ?PendingCommand,
+  skipAtLevel: ?number,
+  shorthands: { [shorthand: string]: string },
+  options: CreateReportOptions,
+};
+
 type BufferStatus = {
   text: string,
   cmds: string,
@@ -149,24 +178,15 @@ type LoopStatus = {
 
 type PendingCommand = Object;
 
-type Context = {
-  level: number,
-  fCmd: boolean,
-  cmd: string,
-  fSeekQuery: boolean,
-  query: ?Query,
-  buffers: {
-    'w:p': BufferStatus,
-    'w:tr': BufferStatus,
-  },
-  vars: { [name: string]: VarValue },
-  loops: Array<LoopStatus>,
-  pendingCmd: ?PendingCommand,
-  skipAtLevel: ?number,
-  shorthands: { [shorthand: string]: string },
-};
+type CreateReportOptions = {|
+  cmdDelimiter: string,
+|};
 
-const _createReport = (data: ?ReportData, template: Node): Node => {
+const _createReport = (
+  data: ?ReportData,
+  template: Node,
+  options: CreateReportOptions,
+): Node => {
   const out: Node = cloneNodeWithoutChildren(template);
   const ctx: Context = {
     level: 1,
@@ -184,6 +204,7 @@ const _createReport = (data: ?ReportData, template: Node): Node => {
     pendingCmd: null,
     skipAtLevel: null,
     shorthands: {},
+    options,
   };
   let nodeIn: Node = template;
   let nodeOut: Node = out;
@@ -235,7 +256,7 @@ const _createReport = (data: ?ReportData, template: Node): Node => {
                 const { nextItem, curIdx } = getNextItem(loopOver);
                 if (nextItem) {
                   ctx.loops.push({ forNode: nodeIn, varName, loopOver, idx: curIdx });
-                  ctx.vars[varName] = timmSet(nextItem, '_idx', curIdx + 1);
+                  ctx.vars[varName] = nextItem;
                 } else {
                   ctx.skipAtLevel = ctx.level;
                 }
@@ -250,7 +271,7 @@ const _createReport = (data: ?ReportData, template: Node): Node => {
                 if (nextItem) {  // repeat loop
                   DEBUG && log.debug(`  - Iteration on ${varName}: ${idx + 1}`);
                   curLoop.idx = curIdx;
-                  ctx.vars[varName] = timmSet(nextItem, '_idx', curIdx + 1);
+                  ctx.vars[varName] = nextItem;
                   nodeIn = forNode;
                 } else {  // loop finished
                   ctx.loops.pop();
@@ -311,12 +332,13 @@ const _createReport = (data: ?ReportData, template: Node): Node => {
 };
 
 // Go through the document until the query string is found (normally at the beginning)
-const getQuery = (template: Node): ?string => {
+const getQuery = (template: Node, options: CreateReportOptions): ?string => {
   const ctx: any = {
     fCmd: false,
     cmd: '',
     fSeekQuery: true,  // ensure no command will be processed, except QUERY
     query: null,
+    options,
   };
   let nodeIn = template;
   while (true) {  // eslint-disable-line no-constant-condition
@@ -366,14 +388,15 @@ const getQuery = (template: Node): ?string => {
 // };
 
 const processText = (data: ?ReportData, node: TextNode, ctx: Context): string => {
+  const { cmdDelimiter } = ctx.options;
   const text = node._text;
   if (text == null || text === '') return '';
-  const segments = text.split(DEFAULT_ESCAPE_SEQUENCE);
+  const segments = text.split(cmdDelimiter);
   let outText = '';
   const fAppendText = node._parent && !node._parent._fTextNode && node._parent._tag === 'w:t';
   for (let idx = 0; idx < segments.length; idx++) {
     // Include the separators in the `buffers` field (used for deleting paragraphs if appropriate)
-    if (idx > 0 && fAppendText) appendText(DEFAULT_ESCAPE_SEQUENCE, ctx, { fCmd: true });
+    if (idx > 0 && fAppendText) appendText(cmdDelimiter, ctx, { fCmd: true });
 
     // Append segment either to the `ctx.cmd` buffer (to be executed), if we are in "command mode",
     // or to the output text
@@ -405,7 +428,7 @@ const processCmd = (data: ?ReportData, ctx: Context): ?string => {
   DEBUG && log.debug(`Executing: ${cmd}`);
 
   // Expand shorthands
-  const shorthandMatch = /^\[(.+)\]$/.exec(cmd);
+  const shorthandMatch = /^\[(.+)\]$/.exec(cmd);  // eslint-disable-line no-useless-escape
   if (shorthandMatch != null) {
     const shorthandName = shorthandMatch[1];
     cmd = ctx.shorthands[shorthandName];
@@ -477,6 +500,14 @@ const extractFromData = (data: ?ReportData, dataPath: string, ctx: Context): Var
     const varName = parts[0].substring(1);
     out = ctx.vars[varName];
     parts.shift();
+    if (
+      parts.length &&
+      parts[0] === LOOP_INDEX_IDENTIFIER &&
+      (typeof out !== 'object' || out[LOOP_INDEX_IDENTIFIER] == null)
+    ) {
+      const loop = ctx.loops.find((o) => o.varName === varName);
+      if (loop) return loop.idx + 1;
+    }
   } else {
     out = data;
   }

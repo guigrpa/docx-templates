@@ -301,7 +301,7 @@ Object {
         Object {
           "_attrs": Object {
             "w14:paraId": "05F38754",
-            "w14:textId": "1505CD23",
+            "w14:textId": "63D48645",
             "w:rsidP": "00837971",
             "w:rsidR": "00CD7172",
             "w:rsidRDefault": "00CD7172",
@@ -359,6 +359,107 @@ Object {
                       "_children": Array [],
                       "_fTextNode": true,
                       "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BA565B",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:val": "es-ES",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:lang",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:val": "es-ES",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:lang",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
                       "_text": "bar",
                     },
                   ],
@@ -410,25 +511,6 @@ Object {
               "_fTextNode": false,
               "_parent": [Circular],
               "_tag": "w:pPr",
-            },
-            Object {
-              "_attrs": Object {
-                "w:id": "0",
-                "w:name": "_GoBack",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkStart",
-            },
-            Object {
-              "_attrs": Object {
-                "w:id": "0",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkEnd",
             },
           ],
           "_fTextNode": false,
@@ -3871,6 +3953,1154 @@ Object {
 }
 `;
 
+exports[`Template processing 09 Should allow scalar arrays in FOR loops 1`] = `
+Object {
+  "_attrs": Object {
+    "mc:Ignorable": "w14 w15 wp14",
+    "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
+    "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "xmlns:v": "urn:schemas-microsoft-com:vml",
+    "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+    "xmlns:w10": "urn:schemas-microsoft-com:office:word",
+    "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
+    "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
+    "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+    "xmlns:wp14": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+    "xmlns:wpc": "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas",
+    "xmlns:wpg": "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup",
+    "xmlns:wpi": "http://schemas.microsoft.com/office/word/2010/wordprocessingInk",
+    "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
+  },
+  "_children": Array [
+    Object {
+      "_attrs": Object {},
+      "_children": Array [
+        Object {
+          "_attrs": Object {
+            "w:rsidP": "00BE3B8D",
+            "w:rsidR": "00BE3B8D",
+            "w:rsidRDefault": "00BE3B8D",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00444317",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "FIRST",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidP": "00BE3B8D",
+            "w:rsidR": "00BE3B8D",
+            "w:rsidRDefault": "00BE3B8D",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00444317",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "SECOND",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidP": "00BE3B8D",
+            "w:rsidR": "00BE3B8D",
+            "w:rsidRDefault": "00BE3B8D",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00444317",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "THIRD",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "00426180",
+            "w:rsidRDefault": "00426180",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "00426180",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:h": "15840",
+                "w:w": "12240",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgSz",
+            },
+            Object {
+              "_attrs": Object {
+                "w:bottom": "1417",
+                "w:footer": "708",
+                "w:gutter": "0",
+                "w:header": "708",
+                "w:left": "1701",
+                "w:right": "1701",
+                "w:top": "1417",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgMar",
+            },
+            Object {
+              "_attrs": Object {
+                "w:space": "708",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:cols",
+            },
+            Object {
+              "_attrs": Object {
+                "w:linePitch": "360",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:docGrid",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:sectPr",
+        },
+      ],
+      "_fTextNode": false,
+      "_parent": [Circular],
+      "_tag": "w:body",
+    },
+  ],
+  "_fTextNode": false,
+  "_parent": null,
+  "_tag": "w:document",
+}
+`;
+
+exports[`Template processing 10 Should allow access to the index in FOR loops 1`] = `
+Object {
+  "_attrs": Object {
+    "mc:Ignorable": "w14 w15 wp14",
+    "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
+    "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "xmlns:v": "urn:schemas-microsoft-com:vml",
+    "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+    "xmlns:w10": "urn:schemas-microsoft-com:office:word",
+    "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
+    "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
+    "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+    "xmlns:wp14": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+    "xmlns:wpc": "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas",
+    "xmlns:wpg": "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup",
+    "xmlns:wpi": "http://schemas.microsoft.com/office/word/2010/wordprocessingInk",
+    "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
+  },
+  "_children": Array [
+    Object {
+      "_attrs": Object {},
+      "_children": Array [
+        Object {
+          "_attrs": Object {
+            "w:rsidP": "00BE3B8D",
+            "w:rsidR": "00BE3B8D",
+            "w:rsidRDefault": "00282B0A",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "1",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": ": ",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BE3B8D",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00160A38",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BE3B8D",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "FIRST",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidP": "00BE3B8D",
+            "w:rsidR": "00BE3B8D",
+            "w:rsidRDefault": "00282B0A",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "2",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": ": ",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BE3B8D",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00160A38",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BE3B8D",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "SECOND",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidP": "00BE3B8D",
+            "w:rsidR": "00BE3B8D",
+            "w:rsidRDefault": "00282B0A",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "3",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": ": ",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BE3B8D",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00160A38",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BE3B8D",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "THIRD",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "00426180",
+            "w:rsidRDefault": "00426180",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "00426180",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:h": "15840",
+                "w:w": "12240",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgSz",
+            },
+            Object {
+              "_attrs": Object {
+                "w:bottom": "1417",
+                "w:footer": "708",
+                "w:gutter": "0",
+                "w:header": "708",
+                "w:left": "1701",
+                "w:right": "1701",
+                "w:top": "1417",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgMar",
+            },
+            Object {
+              "_attrs": Object {
+                "w:space": "708",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:cols",
+            },
+            Object {
+              "_attrs": Object {
+                "w:linePitch": "360",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:docGrid",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:sectPr",
+        },
+      ],
+      "_fTextNode": false,
+      "_parent": [Circular],
+      "_tag": "w:body",
+    },
+  ],
+  "_fTextNode": false,
+  "_parent": null,
+  "_tag": "w:document",
+}
+`;
+
 exports[`Template processing 20 Should process SHORTHAND commands 1`] = `
 Object {
   "_attrs": Object {
@@ -4904,6 +6134,60 @@ Object {
 `;
 
 exports[`Template processing 23 Should allow characters that conflict with XML 1`] = `
+"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
+<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+  <w:body>
+    <w:p w:rsidR=\"00BE3B8D\" w:rsidRDefault=\"00BE3B8D\" w:rsidP=\"00BE3B8D\">
+      <w:r>
+        <w:t></w:t>
+      </w:r>
+      <w:r w:rsidR=\"00160A38\">
+        <w:t></w:t>
+      </w:r>
+      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
+      <w:bookmarkEnd w:id=\"0\"/>
+      <w:r>
+        <w:t>3 &lt; 4 &lt;&lt; 400</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR=\"00BE3B8D\" w:rsidRDefault=\"00BE3B8D\" w:rsidP=\"00BE3B8D\">
+      <w:r>
+        <w:t></w:t>
+      </w:r>
+      <w:r w:rsidR=\"00160A38\">
+        <w:t></w:t>
+      </w:r>
+      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
+      <w:bookmarkEnd w:id=\"0\"/>
+      <w:r>
+        <w:t>5 &gt; 2 &gt;&gt; -100</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR=\"00BE3B8D\" w:rsidRDefault=\"00BE3B8D\" w:rsidP=\"00BE3B8D\">
+      <w:r>
+        <w:t></w:t>
+      </w:r>
+      <w:r w:rsidR=\"00160A38\">
+        <w:t></w:t>
+      </w:r>
+      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
+      <w:bookmarkEnd w:id=\"0\"/>
+      <w:r>
+        <w:t>a &amp; b &amp;&amp; c</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR=\"00426180\" w:rsidRDefault=\"00426180\"/>
+    <w:sectPr w:rsidR=\"00426180\">
+      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
+      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
+      <w:cols w:space=\"708\"/>
+      <w:docGrid w:linePitch=\"360\"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
+exports[`Template processing 70 Should allow customisation of cmd delimiter 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -4932,11 +6216,35 @@ Object {
           "_attrs": Object {
             "w:rsidP": "00BE3B8D",
             "w:rsidR": "00BE3B8D",
-            "w:rsidRDefault": "00BE3B8D",
+            "w:rsidRDefault": "00012506",
           },
           "_children": Array [
             Object {
               "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BE3B8D",
+              },
               "_children": Array [
                 Object {
                   "_attrs": Object {},
@@ -4982,25 +6290,6 @@ Object {
               "_tag": "w:r",
             },
             Object {
-              "_attrs": Object {
-                "w:id": "0",
-                "w:name": "_GoBack",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkStart",
-            },
-            Object {
-              "_attrs": Object {
-                "w:id": "0",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkEnd",
-            },
-            Object {
               "_attrs": Object {},
               "_children": Array [
                 Object {
@@ -5010,7 +6299,7 @@ Object {
                       "_children": Array [],
                       "_fTextNode": true,
                       "_parent": [Circular],
-                      "_text": "3 < 4",
+                      "_text": "FIRST",
                     },
                   ],
                   "_fTextNode": false,
@@ -5031,11 +6320,35 @@ Object {
           "_attrs": Object {
             "w:rsidP": "00BE3B8D",
             "w:rsidR": "00BE3B8D",
-            "w:rsidRDefault": "00BE3B8D",
+            "w:rsidRDefault": "00012506",
           },
           "_children": Array [
             Object {
               "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BE3B8D",
+              },
               "_children": Array [
                 Object {
                   "_attrs": Object {},
@@ -5081,25 +6394,6 @@ Object {
               "_tag": "w:r",
             },
             Object {
-              "_attrs": Object {
-                "w:id": "0",
-                "w:name": "_GoBack",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkStart",
-            },
-            Object {
-              "_attrs": Object {
-                "w:id": "0",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkEnd",
-            },
-            Object {
               "_attrs": Object {},
               "_children": Array [
                 Object {
@@ -5109,7 +6403,7 @@ Object {
                       "_children": Array [],
                       "_fTextNode": true,
                       "_parent": [Circular],
-                      "_text": "5 > 2",
+                      "_text": "SECOND",
                     },
                   ],
                   "_fTextNode": false,
@@ -5130,11 +6424,35 @@ Object {
           "_attrs": Object {
             "w:rsidP": "00BE3B8D",
             "w:rsidR": "00BE3B8D",
-            "w:rsidRDefault": "00BE3B8D",
+            "w:rsidRDefault": "00012506",
           },
           "_children": Array [
             Object {
               "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00BE3B8D",
+              },
               "_children": Array [
                 Object {
                   "_attrs": Object {},
@@ -5180,25 +6498,6 @@ Object {
               "_tag": "w:r",
             },
             Object {
-              "_attrs": Object {
-                "w:id": "0",
-                "w:name": "_GoBack",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkStart",
-            },
-            Object {
-              "_attrs": Object {
-                "w:id": "0",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkEnd",
-            },
-            Object {
               "_attrs": Object {},
               "_children": Array [
                 Object {
@@ -5208,7 +6507,7 @@ Object {
                       "_children": Array [],
                       "_fTextNode": true,
                       "_parent": [Circular],
-                      "_text": "a & b",
+                      "_text": "THIRD",
                     },
                   ],
                   "_fTextNode": false,
