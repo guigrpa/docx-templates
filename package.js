@@ -162,10 +162,6 @@ const specs = {
   // -----------------------------------------------
   jest: {
     testRegex: 'src/.*__tests__/.*\\.(test|spec)\\.(js|jsx)$',
-    moduleNameMapper: {
-      '^.+\\.(css|less|sass)$': '<rootDir>/test/emptyObject.js',
-      '^.+\\.(gif|ttf|eot|svg)$': '<rootDir>/test/emptyString.js',
-    },
     coverageDirectory: '.nyc_output',
     coverageReporters: ['json', 'text', 'html'],
     snapshotSerializers: ['<rootDir>/node_modules/jest-html'],
@@ -178,7 +174,6 @@ const specs = {
       '!**/__tests__/**',
       '!**/__mocks__/**',
     ],
-    setupTestFrameworkScriptFile: './test/setup.js',
   },
 };
 
