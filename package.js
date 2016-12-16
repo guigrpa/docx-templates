@@ -108,52 +108,52 @@ const specs = {
   },
 
   dependencies: {
-    timm: '1.2.3',
-    bluebird: '2.9.8',
-    'fs-extra': '0.23.1',
-    archiver: '0.14.4',
-    fstream: '1.0.7',
+    // timm: '1.2.3',
+    bluebird: '3.4.6',
+    'fs-extra': '1.0.0',
+    archiver: '1.3.0',
+    fstream: '1.0.10',
     unzip: '0.1.11',
-    sax: '1.1.1',
+    sax: '1.2.1',
     uuid: '3.0.1',
   },
 
   devDependencies: {
     storyboard: '^2.3.1',
     'xxl': '^0.1.1',
-    'cross-env': '^1.0.8',
+    'cross-env': '3.1.3',
 
     // Babel (except babel-eslint)
-    'babel-cli': '6.16.0',
-    'babel-core': '6.17.0',
-    'babel-polyfill': '6.16.0',
-    'babel-preset-es2015': '6.16.0',
+    'babel-cli': '6.18.0',
+    'babel-core': '6.20.0',
+    // 'babel-polyfill': '6.20.0',
+    'babel-preset-es2015': '6.18.0',
     'babel-preset-stage-0': '6.16.0',
     'babel-preset-react': '6.16.0',
 
     // Linting
-    'eslint': '3.8.1',
-    'eslint-config-airbnb': '12.0.0',
-    'eslint-plugin-flowtype': '2.20.0',
-    'eslint-plugin-import': '1.16.0',
+    'eslint': '3.12.2',
+    'eslint-config-airbnb': '13.0.0',
+    'eslint-plugin-flowtype': '2.29.1',
+    'eslint-plugin-import': '2.2.0',
     'eslint-plugin-jsx-a11y': '2.2.3',
-    'eslint-plugin-react': '6.4.1',
-    'babel-eslint': '7.0.0',
+    'eslint-plugin-react': '6.8.0',
+    'babel-eslint': '7.1.1',
 
     // Documentation
     'extract-docs': '^1.2.0',
 
     // Testing
-    'jest': '17.0.3',
-    'babel-jest': '17.0.2',
+    'jest': '18.0.0',
+    'babel-jest': '18.0.0',
     'jest-html': '^1.3.3',
 
     // Coverage testing
-    'nyc': '8.4.0',
+    'nyc': '10.0.0',
     coveralls: '2.11.15',
 
     // Other tools
-    'flow-bin': '0.36.0',
+    'flow-bin': '0.37.0',
     'flow-copy-source': '1.1.0',
   },
 
@@ -187,9 +187,7 @@ const specs = {
 // ===============================================
 const _sortDeps = (deps) => {
   const newDeps = {};
-  for (const key of Object.keys(deps).sort()) {
-    newDeps[key] = deps[key];
-  }
+  Object.keys(deps).sort().forEach((key) => { newDeps[key] = deps[key]; });
   return newDeps;
 };
 specs.dependencies = _sortDeps(specs.dependencies);
