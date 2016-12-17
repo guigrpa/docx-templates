@@ -131,13 +131,6 @@ const createReport = (options: ReportOptions): Promise<any> => {
     return fsPromises.ensureDir(path.dirname(output))
     .then(() => zipFile(baseUnzipped, output))
     .finally(() => fsPromises.remove(baseUnzipped));
-  })
-
-  .catch((err) => {
-    if (err instanceof TypeError || err instanceof ReferenceError || err instanceof SyntaxError) {
-      console.error(err);  // eslint-disable-line no-console
-    }
-    throw new Error('REPORT_ERROR');
   });
 };
 

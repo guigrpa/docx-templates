@@ -120,6 +120,7 @@ const specs = {
 
   devDependencies: {
     storyboard: '^2.3.1',
+    'isomorphic-fetch': '2.2.1',
     'xxl': '^0.1.1',
     'cross-env': '3.1.3',
 
