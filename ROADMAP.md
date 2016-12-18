@@ -1,5 +1,6 @@
 # Roadmap
 
+* Replace `DEBUG` by an envvar and automatically remove code on compile (babel-plugin-envify?)
 * Fix: +++ FOR ship IN $character.starshipConnection.starships+++ +++[shipName]+++ (+++[crew]+++ + +++[passengers]+++)
 +++END-FOR ship+++
 (all in the same line - exception)
