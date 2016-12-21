@@ -108,7 +108,7 @@ const specs = {
   },
 
   dependencies: {
-    // timm: '1.2.3',
+    timm: '1.2.3',
     bluebird: '3.4.6',
     'fs-extra': '1.0.0',
     archiver: '1.3.0',
@@ -168,9 +168,8 @@ const specs = {
     snapshotSerializers: ['<rootDir>/node_modules/jest-html'],
     collectCoverageFrom: [
       'src/**/*.js',
-      'src/vendor/**',
+      '!src/debug.js',
       '!test/**',
-      '!**/webpack*',
       '!**/node_modules/**',
       '!**/__tests__/**',
       '!**/__mocks__/**',

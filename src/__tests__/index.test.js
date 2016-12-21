@@ -16,20 +16,20 @@ describe('End-to-end', () => {
   beforeEach(async () => {
     try { await fs.remove(outputDir); } catch (err) { /* bad luck */ }
   });
-  afterEach(async () => {
-    try { await fs.remove(outputDir); } catch (err) { /* bad luck */ }
-  });
+  // afterEach(async () => {
+  //   try { await fs.remove(outputDir); } catch (err) { /* bad luck */ }
+  // });
 
   it('01 Copies (unchanged) a template without markup', async () => {
-    const template = path.join(__dirname, 'templates', 'noQuery.docx');
+    const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
     const output = path.join(outputDir, 'noQuery_report.docx');
     await createReport({ template, output });
     expect(fs.existsSync(output)).toBeTruthy();
   });
 
   it('02 A default output path can be used', async () => {
-    const template = path.join(__dirname, 'templates', 'noQuery.docx');
-    const defaultOutput = path.join(__dirname, 'templates', 'noQuery_report.docx');
+    const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
+    const defaultOutput = path.join(__dirname, 'fixtures', 'noQuery_report.docx');
     await createReport({ template });
     expect(fs.existsSync(defaultOutput)).toBeTruthy();
     await fs.unlink(defaultOutput);
@@ -38,16 +38,15 @@ describe('End-to-end', () => {
 
 describe('Template processing', () => {
   it('01 Probe should work', async () => {
-    const template = path.join(__dirname, 'templates', 'noQuery.docx');
-    const defaultOutput = path.join(__dirname, 'templates', 'noQuery_report.docx');
+    const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
+    const defaultOutput = path.join(__dirname, 'fixtures', 'noQuery_report.docx');
     const result = await createReport({ template, _probe: 'JS' });
     expect(fs.existsSync(defaultOutput)).toBeFalsy();
-    // $FlowFixMe: Flow gets confused when unwrapping the Bluebird promise above
     expect(result._children.length).toBeTruthy();
   });
 
   it('02 Should correctly extract a query and call the resolver', async () => {
-    const template = path.join(__dirname, 'templates', 'simpleQuery.docx');
+    const template = path.join(__dirname, 'fixtures', 'simpleQuery.docx');
     const queryResolver = jest.fn();
     const queryVars = { a: 'importantContext' };
     await createReport({
@@ -62,7 +61,7 @@ describe('Template processing', () => {
   });
 
   it('03 Should use the resolver\'s response to produce the report', async () => {
-    const template = path.join(__dirname, 'templates', 'simpleQuerySimpleInserts.docx');
+    const template = path.join(__dirname, 'fixtures', 'simpleQuerySimpleInserts.docx');
     const result = await createReport({
       template,
       data: () => ({ a: 'foo', b: 'bar' }),
@@ -72,7 +71,7 @@ describe('Template processing', () => {
   });
 
   it('04 Should allow replacing the resolver by a data object', async () => {
-    const template = path.join(__dirname, 'templates', 'noQuerySimpleInserts.docx');
+    const template = path.join(__dirname, 'fixtures', 'noQuerySimpleInserts.docx');
     const result = await createReport({
       template,
       data: { a: 'foo', b: 'bar' },
@@ -82,7 +81,7 @@ describe('Template processing', () => {
   });
 
   it('05 Should process 1-level FOR loops', async () => {
-    const template = path.join(__dirname, 'templates', 'for1.docx');
+    const template = path.join(__dirname, 'fixtures', 'for1.docx');
     const result = await createReport({
       template,
       data: { companies: [
@@ -96,7 +95,7 @@ describe('Template processing', () => {
   });
 
   it('06 Should process 2-level FOR loops', async () => {
-    const template = path.join(__dirname, 'templates', 'for2.docx');
+    const template = path.join(__dirname, 'fixtures', 'for2.docx');
     const result = await createReport({
       template,
       data: { companies: [
@@ -121,7 +120,7 @@ describe('Template processing', () => {
   });
 
   it('07 Should process 3-level FOR loops', async () => {
-    const template = path.join(__dirname, 'templates', 'for3.docx');
+    const template = path.join(__dirname, 'fixtures', 'for3.docx');
     const result = await createReport({
       template,
       data: { companies: [
@@ -139,6 +138,10 @@ describe('Template processing', () => {
             { firstName: 'Xavi', projects: [] },
           ],
         },
+        {
+          name: 'THIRD',
+          people: [],
+        },
       ] },
       _probe: 'JS',
     });
@@ -146,7 +149,7 @@ describe('Template processing', () => {
   });
 
   it('08 Should process 1-level FOR-ROW loops', async () => {
-    const template = path.join(__dirname, 'templates', 'for-row1.docx');
+    const template = path.join(__dirname, 'fixtures', 'for-row1.docx');
     const result = await createReport({
       template,
       data: { companies: [
@@ -159,8 +162,22 @@ describe('Template processing', () => {
     expect(result).toMatchSnapshot();
   });
 
+  // it('100 Should correctly process FOR loop inside a cell', async () => {
+  //   const template = path.join(__dirname, 'fixtures', 'forInCell.docx');
+  //   const result = await createReport({
+  //     template,
+  //     data: { companies: [
+  //       { name: 'FIRST' },
+  //       { name: 'SECOND' },
+  //       { name: 'THIRD' },
+  //     ] },
+  //     // _probe: 'JS',
+  //   });
+  //   // expect(result).toMatchSnapshot();
+  // });
+
   it('09 Should allow scalar arrays in FOR loops', async () => {
-    const template = path.join(__dirname, 'templates', 'for1scalars.docx');
+    const template = path.join(__dirname, 'fixtures', 'for1scalars.docx');
     const result = await createReport({
       template,
       data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
@@ -170,7 +187,7 @@ describe('Template processing', () => {
   });
 
   it('10 Should allow access to the index in FOR loops', async () => {
-    const template = path.join(__dirname, 'templates', 'for1index.docx');
+    const template = path.join(__dirname, 'fixtures', 'for1index.docx');
     const result = await createReport({
       template,
       data: { companies: [
@@ -184,7 +201,7 @@ describe('Template processing', () => {
   });
 
   it('20 Should process SHORTHAND commands', async () => {
-    const template = path.join(__dirname, 'templates', 'for1shorthand.docx');
+    const template = path.join(__dirname, 'fixtures', 'for1shorthand.docx');
     const result = await createReport({
       template,
       data: { companies: [
@@ -198,7 +215,7 @@ describe('Template processing', () => {
   });
 
   it('21 Should process VAR commands', async () => {
-    const template = path.join(__dirname, 'templates', 'for1var.docx');
+    const template = path.join(__dirname, 'fixtures', 'for1var.docx');
     const result = await createReport({
       template,
       data: { companies: [
@@ -212,9 +229,10 @@ describe('Template processing', () => {
   });
 
   it('22 Should allow accented characters and such', async () => {
-    const template = path.join(__dirname, 'templates', 'for1.docx');
+    const template = path.join(__dirname, 'fixtures', 'for1.docx');
     const result = await createReport({
       template,
+      output: path.join(__dirname, 'fixtures', 'for1accented_report.docx'),
       data: { companies: [
         { name: '¿Por qué?' },
         { name: 'Porque sí' },
@@ -225,9 +243,10 @@ describe('Template processing', () => {
   });
 
   it('23 Should allow characters that conflict with XML', async () => {
-    const template = path.join(__dirname, 'templates', 'for1.docx');
+    const template = path.join(__dirname, 'fixtures', 'for1.docx');
     const xml = await createReport({
       template,
+      output: path.join(__dirname, 'fixtures', 'for1specialChars_report.docx'),
       data: { companies: [
         { name: '3 < 4 << 400' },
         { name: '5 > 2 >> -100' },
@@ -238,8 +257,50 @@ describe('Template processing', () => {
     expect(xml).toMatchSnapshot();
   });
 
+  it('24 Should allow Word to split commands arbitrarily, incl. delimiters', async () => {
+    const template = path.join(__dirname, 'fixtures', 'splitDelimiters.docx');
+    const result = await createReport({
+      template,
+      data: { foo: 'bar' },
+      _probe: 'JS',
+    });
+    expect(result).toMatchSnapshot();
+  });
+
+  it('40 Should throw on invalid command', async () => {
+    const template = path.join(__dirname, 'fixtures', 'invalidCommand.docx');
+    try {
+      await createReport({
+        template,
+        data: { companies: [
+          { name: 'FIRST' },
+          { name: 'SECOND' },
+          { name: 'THIRD' },
+        ] },
+        _probe: 'JS',
+      });
+      expect(true).toBeFalsy(); // should have thrown
+    } catch (err) { /* this exception was expected */ }
+  });
+
+  it('41 Should throw on invalid for logic', async () => {
+    const template = path.join(__dirname, 'fixtures', 'invalidFor.docx');
+    try {
+      await createReport({
+        template,
+        data: { companies: [
+          { name: 'FIRST' },
+          { name: 'SECOND' },
+          { name: 'THIRD' },
+        ] },
+        _probe: 'JS',
+      });
+      expect(true).toBeFalsy(); // should have thrown
+    } catch (err) { /* this exception was expected */ }
+  });
+
   it('70 Should allow customisation of cmd delimiter', async () => {
-    const template = path.join(__dirname, 'templates', 'for1customDelimiter.docx');
+    const template = path.join(__dirname, 'fixtures', 'for1customDelimiter.docx');
     const result = await createReport({
       template,
       data: { companies: [
@@ -254,7 +315,7 @@ describe('Template processing', () => {
   });
 
   it('80 Should produce a more complex example: WBS', async () => {
-    const template = path.join(__dirname, 'templates', 'wbs.docx');
+    const template = path.join(__dirname, 'fixtures', 'wbs.docx');
     const result = await createReport({
       template,
       data: { project: {

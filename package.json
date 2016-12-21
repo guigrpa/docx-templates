@@ -48,6 +48,7 @@
     "fs-extra": "1.0.0",
     "fstream": "1.0.10",
     "sax": "1.2.1",
+    "timm": "1.2.3",
     "unzip": "0.1.11",
     "uuid": "3.0.1"
   },
@@ -90,9 +91,8 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.js",
-      "src/vendor/**",
+      "!src/debug.js",
       "!test/**",
-      "!**/webpack*",
       "!**/node_modules/**",
       "!**/__tests__/**",
       "!**/__mocks__/**"

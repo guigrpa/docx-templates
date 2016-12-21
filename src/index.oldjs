@@ -109,24 +109,19 @@ const createReport = (options: ReportOptions): Promise<any> => {
     DEBUG && log.debug('Before preprocessing...', {
       attach: jsTemplate,
       attachLevel: 'debug',
-      ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
+      ignoreKeys: ['_parent', '_idxChild', '_fTextNode', '_attrs'],
     });
     const finalTemplate = preprocessTemplate(jsTemplate, createOptions);
     DEBUG && log.debug('Generating report...', {
       attach: finalTemplate,
       attachLevel: 'debug',
-      ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
+      ignoreKeys: ['_parent', '_idxChild', '_fTextNode', '_attrs'],
     });
     return _createReport(queryResult, finalTemplate, createOptions);
   })
 
   // Build output XML and write it to disk
   .then((report) => {
-    // DEBUG && log.debug('Report', {
-    //   attach: report,
-    //   attachLevel: 'debug',
-    //   ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
-    // });
     result = report;
     if (_probe === 'JS') {
       result = report;
@@ -170,7 +165,7 @@ type Context = {
   },
   vars: { [name: string]: VarValue },
   loops: Array<LoopStatus>,
-  fJump: boolean,
+  goBack: boolean,
   shorthands: { [shorthand: string]: string },
   options: CreateReportOptions,
 };
@@ -219,7 +214,6 @@ const preprocessTemplate = (
           idxDelimiter += 1;
           if (idxDelimiter === delimiter.length) {
             fCmd = !fCmd;
-            // if (fCmd && openNode._text.length) openNode = insertTextSiblingAfter(openNode);
             openNode._text += delimiter;
             idxDelimiter = 0;
             if (!fCmd) openNode = node;  // may switch open node to the current one
@@ -230,7 +224,6 @@ const preprocessTemplate = (
           openNode._text += delimiter.slice(0, idxDelimiter);
           idxDelimiter = 0;
           if (!fCmd) openNode = node;
-          openNode._text += c;
 
         // General case
         } else {
@@ -283,116 +276,112 @@ const _createReport = (
     },
     vars: {},
     loops: [],
-    fJump: false,
+    goBack: false,
     shorthands: {},
     options,
   };
   let nodeIn: Node = template;
+  let prevNodeIn: Node;
   let nodeOut: Node = out;
   let move;
-  let deltaJump;
 
   while (true) {  // eslint-disable-line no-constant-condition
-    const curLoop = getCurLoop(ctx);
-
     // ---------------------------------------------
-    // Move node pointer
+    // Fetch a new node, case 1: go down...
     // ---------------------------------------------
-    if (ctx.fJump) {
-      const { refNode, refNodeLevel } = curLoop;
-      // DEBUG && log.debug(`Jumping to level ${refNodeLevel}...`,
-      //   { attach: cloneNodeForLogging(refNode) });
-      deltaJump = ctx.level - refNodeLevel;
-      nodeIn = refNode;
-      ctx.level = refNodeLevel;
-      ctx.fJump = false;
-      move = 'JUMP';
-
-    // Down (only if he haven't just moved up)
-    } else if (nodeIn._children.length && move !== 'UP') {
+    if (nodeIn._children.length) {
       nodeIn = nodeIn._children[0];
       ctx.level += 1;
-      move = 'DOWN';
 
-    // Sideways
-    } else if (hasNextSibling(nodeIn)) {
-      nodeIn = getNextSibling(nodeIn);
-      move = 'SIDE';
-
-    // Up
+    // ---------------------------------------------
+    // Fetch a new node, case 2: go to the next sibling
+    // (at the same level or a higher one)
+    // ---------------------------------------------
     } else {
-      if (nodeIn._parent == null) break;
-      nodeIn = nodeIn._parent;
-      ctx.level -= 1;
-      move = 'UP';
+      let fFound = false;
+      while (nodeIn._parent != null) {
+        const nodeInParent: Node = nodeIn._parent;
+        const nodeOutParent: ?Node = nodeOut._parent;
+        if (hasNextSibling(nodeIn)) {
+          fFound = true;
+          nodeIn = getNextSibling(nodeIn);
+          break;
+        }
+
+        // No sibling found at this level; go up one level (both nodeIn and nodeOut)
+        nodeIn = nodeInParent;
+        if (nodeOutParent == null) break;  // should never happen (avoids Flow error)
+        nodeOut = nodeOutParent;
+        ctx.level -= 1;
+
+        const tag = nodeIn._fTextNode ? null : nodeIn._tag;
+
+        // Update the reference node for the current loop
+        const curLoop = getCurLoop(ctx);
+        if (isLoopExploring(ctx) && nodeIn === curLoop.refNode._parent) {
+          curLoop.refNode = nodeIn;
+          curLoop.refNodeLevel -= 1;
+          // DEBUG && log.debug(`Updated loop '${curLoop.varName}' refNode:`,
+          //   { attach: cloneNodeWithoutParentChildren(nodeIn) });
+        }
+
+        // On the way up, delete corresponding output node if the user inserted a paragraph
+        // (or table row) with just a command, or if we're skipping nodes due to an empty FOR loop
+        let fRemoveNode = false;
+        if ((tag === 'w:p' || tag === 'w:tbl' || tag === 'w:tr') && isLoopExploring(ctx)) {
+          console.log(`Deleting ${tag} automatically since we are exploring (curLoop: ${curLoop.varName})`)
+          fRemoveNode = true;
+        } else if (tag === 'w:p' || tag === 'w:tr') {
+          const buffers = ctx.buffers[tag];
+          console.log(`Considering node ${tag} for removal...`)
+          console.log(`text = ${buffers.text}, cmds = ${buffers.cmds}, fInsertedText=${buffers.fInsertedText}`);
+          fRemoveNode = buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
+          console.log(`fRemoveNode = ${fRemoveNode}`);
+        }
+        if (fRemoveNode && nodeOut._parent != null) nodeOut._parent._children.pop();
+      }
+
+      // Reached the parent and still no luck? We're done generating the report!
+      if (!fFound) break;
+
+      // In the output tree, move up one level, to correct the attachment point
+      // for the new node
+      nodeOut = (nodeOut._parent: any);
     }
-    // DEBUG && log.debug(`Next node [${chalk.green.bold(move)}]`,
-    //   { attach: cloneNodeForLogging(nodeIn) });
 
     // ---------------------------------------------
-    // Process input node
+    // Process node
     // ---------------------------------------------
-    // Delete the last generated output node if the user inserted a paragraph
-    // (or table row) with just a command, or if we're skipping nodes due to an empty FOR loop
-    if (move !== 'DOWN') {
-      const tag = nodeOut._fTextNode ? null : nodeOut._tag;
-      let fRemoveNode = false;
-      if ((tag === 'w:p' || tag === 'w:tbl' || tag === 'w:tr') && isLoopExploring(ctx)) {
-        // console.log(`Deleting ${tag} automatically ` +
-        //   `since we are exploring (curLoop: ${curLoop.varName})`)
-        fRemoveNode = true;
-      } else if (tag === 'w:p' || tag === 'w:tr') {
-        const buffers = ctx.buffers[tag];
-        // console.log(`Considering node ${tag} for removal...`)
-        // console.log(`text = ${buffers.text}, cmds = ${buffers.cmds}, ` +
-        //   `fInsertedText=${buffers.fInsertedText}`);
-        fRemoveNode = buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
-        // console.log(`fRemoveNode = ${fRemoveNode}`);
-      }
-      // Execute removal, if suitable; will no longer be accessible from the parent
-      // (but the parent will be accessible from the child)
-      if (fRemoveNode && nodeOut._parent != null) {
-        nodeOut._parent._children.pop();
-      }
-    }
+    // DEBUG && log.debug(`Processing node at level ${ctx.level}`,
+    //   { attach: cloneNodeWithoutParentChildren(nodeIn) });
 
-    if (move === 'UP') {
-      // Loop exploring? Update the reference node for the current loop
-      if (isLoopExploring(ctx) && nodeIn === curLoop.refNode._parent) {
-        curLoop.refNode = nodeIn;
-        curLoop.refNodeLevel -= 1;
-        // DEBUG && log.debug(`Updated loop '${curLoop.varName}' refNode:`,
-        //   { attach: cloneNodeForLogging(nodeIn) });
-      }
-      nodeOut = nodeOut._parent;
-    }
-
-    // Node creation: DOWN | SIDE
-    // Note that nodes are copied to the new tree, but that doesn't mean they will be kept.
+    // Nodes are copied to the new tree, but that doesn't mean they will be kept there.
     // In some cases, they will be removed later on; for example, when a paragraph only
     // contained a command -- it will be deleted.
-    if (move === 'DOWN' || move === 'SIDE') {
-      if (move === 'SIDE') nodeOut = nodeOut._parent;
-      const tag = nodeIn._fTextNode ? null : nodeIn._tag;
-      if (tag === 'w:p' || tag === 'w:tr') {
-        ctx.buffers[tag] = { text: '', cmds: '', fInsertedText: false };
-      }
-      const newNode: Node = cloneNodeWithoutChildren(nodeIn);
-      newNode._parent = nodeOut;
-      nodeOut._children.push(newNode);
-      if (nodeIn._fTextNode && nodeIn._parent._tag === 'w:t') {
-        const newNodeAsTextNode: TextNode = (newNode: Object);
-        newNodeAsTextNode._text = processText(data, nodeIn, ctx);
-      }
-      nodeOut = newNode;
+    const tag2 = nodeIn._fTextNode ? null : nodeIn._tag;
+    if (tag2 === 'w:p' || tag2 === 'w:tr') {
+      ctx.buffers[tag2] = { text: '', cmds: '', fInsertedText: false };
     }
+    const newNode: Node = cloneNodeWithoutChildren(nodeIn);
+    newNode._parent = nodeOut;
+    nodeOut._children.push(newNode);
+    if (nodeIn._fTextNode && nodeIn._parent._tag === 'w:t') {
+      const newNodeAsTextNode: TextNode = (newNode: Object);
+      newNodeAsTextNode._text = processText(data, nodeIn, ctx);
+    }
+    nodeOut = newNode;
 
-    // Correct nodeOut when a jump in nodeIn has occurred
-    if (move === 'JUMP') {
-      while (deltaJump > 0) {
+    if (ctx.goBack) {
+      const curLoop = getCurLoop(ctx);
+      const { refNode, refNodeLevel } = curLoop;
+      // DEBUG && log.debug(`Going back to level ${refNodeLevel}...`,
+      //   { attach: cloneNodeWithoutParentChildren(refNode) });
+      nodeIn = refNode;
+      while (ctx.level > refNodeLevel) {
+        ctx.level -= 1;
         nodeOut = nodeOut._parent;
-        deltaJump -= 1;
       }
+      ctx.goBack = false;
     }
   }
 
@@ -448,7 +437,7 @@ const processText = (data: ?ReportData, node: TextNode, ctx: Context): string =>
     const segment = segments[idx];
     // DEBUG && log.debug(`Token: '${segment}' (${ctx.fCmd})`);
     if (ctx.fCmd) ctx.cmd += segment;
-    else if (!isLoopExploring(ctx)) outText += segment;
+    else outText += segment;
     appendTextToTagBuffers(segment, ctx, { fCmd: ctx.fCmd });
 
     // If there are more segments, execute the command (if we are in "command mode"),
@@ -537,7 +526,7 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
     const { nextItem, curIdx } = getNextItem(loopOver, idx);
     if (nextItem) {  // next iteration
       ctx.vars[varName] = nextItem;
-      ctx.fJump = true;
+      ctx.goBack = true;
       curLoop.idx = curIdx;
     } else {  // loop finished
       ctx.loops.pop();
@@ -626,30 +615,8 @@ const cloneNodeWithoutChildren = (node: Node): Node => {
   };
 };
 
-const insertTextSiblingAfter = (textNode: TextNode): TextNode => {
-  const tNode = textNode._parent;
-  if (!(tNode && tNode._tag === 'w:t')) {
-    throw new Error('Template syntax error: text node not within w:t');
-  }
-  const idx = tNode._parent._children.indexOf(tNode);
-  if (idx < 0) throw new Error('Template syntax error');
-  const newTNode = cloneNodeWithoutChildren(tNode);
-  newTNode._parent = tNode._parent;
-  const newTextNode = {
-    _parent: newTNode,
-    _children: [],
-    _fTextNode: true,
-    _text: '',
-  };
-  newTNode._children = [newTextNode];
-  tNode._parent._children.splice(idx + 1, 0, newTNode);
-  return newTextNode;
-};
-
-/* eslint-disable no-unused-vars */
-const cloneNodeForLogging = (node: Node): Object =>
+const cloneNodeWithoutParentChildren = (node: Node): Object =>
   omit(node, ['_parent', '_children']);
-/* eslint-enable no-unused-vars */
 
 const getCurLoop = (ctx: Context) => {
   if (!ctx.loops.length) return null;
@@ -659,27 +626,18 @@ const getCurLoop = (ctx: Context) => {
 const isLoopExploring = (ctx: Context) => {
   const curLoop = getCurLoop(ctx);
   return curLoop != null && curLoop.idx < 0;
-};
+}
 
-const hasNextSibling = (node: Node): boolean => {
-  const parent = node._parent;
-  if (parent == null) return false;
-  const siblings = parent._children;
-  const idx = siblings.indexOf(node);
-  return (idx >= 0 && idx < siblings.length - 1);
-};
+const hasNextSibling = (node: Node): boolean => (
+  node._parent != null && node._idxChild != null
+    ? node._idxChild < node._parent._children.length - 1
+    : false
+);
 
 // Always call `hasNextSibling()` before calling `getNextSibling()`
-const getNextSibling = (node: Node): ?Node => {
-  const parent = node._parent;
-  if (parent == null) return null;
-  const siblings = parent._children;
-  const idx = siblings.indexOf(node);
-  if (idx >= 0 && idx < siblings.length - 1) {
-    return siblings[idx + 1];
-  }
-  return null;
-};
+const getNextSibling = (node: Node): Node =>
+  // $FlowFixMe
+  (node._parent._children[node._idxChild + 1]: Node);
 
 const logLoop = (loops) => {
   if (!DEBUG) return;
