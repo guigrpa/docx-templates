@@ -183,9 +183,9 @@ describe('Template processing', () => {
         { name: 'IBERDROLA' },
         { name: 'Acerinox' },
       ] },
-      // _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    // if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('11 Should process inline FOR loops', async () => {
