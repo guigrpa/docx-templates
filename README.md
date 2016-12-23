@@ -5,12 +5,16 @@ Template-based docx report creation.
 ## Why?
 
 * **Write reports naturally using Word**, just adding some commands where needed for dynamic contents
-* **Express your data needs (queries) in the template itself**, in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way*: in [Relay](https://facebook.github.io/relay/), data needs are declared alongside the React components that use the data
-* A small **custom language**, with commands such as `FOR` (+ `END-FOR`), `FOR-ROW` (+ `END-FOR-ROW`), `INS`, `SHORTHAND`, `QUERY`, or `VAR`
+* **Express your data needs (queries) in the template itself**, in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way™*: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components using that data
+* Use a small **template language**: `FOR`/`END-FOR` (with support for table rows), `INS`, `SHORTHAND`, `QUERY`, `VAR`
+* **Transparent JavaScript support** (`FOR`, `INS` and `VAR`), running in a separate Node VM for security
 * **Nested** loops
 * Custom **variables** and **shorthand** commands (useful for writing table templates)
+* Inclusion of **literal XML**
 
-Docx-templates is a small project and will probably not support all edge cases, so **use with caution**. If you need extensibility, a more mature project, and more bells and whistles please also check [docxtemplater](https://github.com/open-xml-templating/docxtemplater).
+Docx-templates relies on the .docx format, which is really complex, so **use with caution**, at least for now. Feel free to submit issues or (even better!) PRs.
+
+If you need external plugins or other bells and whistles please also check out [docxtemplater](https://github.com/open-xml-templating/docxtemplater).
 
 ## Installation
 
@@ -28,7 +32,7 @@ $ yarn add docx-templates
 
 ### API
 
-Here is a contrived example, injecting data directly as an object:
+Here is a (contrived) example, with report data injected directly as an object:
 
 ```js
 import createReport from 'docx-templates';
@@ -43,12 +47,12 @@ createReport({
 });
 ```
 
-This will create a report at the specified location using the injected data. Some notes:
+This will create a report based on the input data at the specified path. Some notes:
 
 * All paths are relative to `process.cwd()`
 * If the output location is omitted, a report will be generated in the same folder as the template
 
-You can also **provide a sync or async callback function (query resolver)** instead of an object `data`:
+You can also **provide a sync or Promise-returning callback function (query resolver)** instead of an object `data`:
 
 ```js
 createReport({
@@ -60,13 +64,30 @@ createReport({
 
 Your resolver callback will receive the query embedded in the template (in a `QUERY` command) as an argument.
 
+Other options (with defaults):
+
+```js
+createReport({
+  // ...
+  cmdDelimiter: '+++',
+  literalXmlDelimiter: '||',
+  processLineBreaks: true,
+});
+```
+
 ### Writing templates
 
-You can find many examples under https://github.com/guigrpa/docx-templates/tree/master/src/__tests__/templates, many of which are used for tests. Here are a few examples and notes on command syntax:
+You can find several template examples in this repo:
+
+* [SWAPI](https://github.com/guigrpa/docx-templates/tree/master/examples/swapi), a good example of what you can achieve embedding a template (GraphQL in this case) in your report, including a simple script for report generation. Uses the freak-ish online [Star Wars GraphQL API](https://github.com/graphql/swapi-graphql)
+* [Several templates](https://github.com/guigrpa/docx-templates/tree/master/examples/sampleTemplates)
+* [More specific templates, used for tests]( https://github.com/guigrpa/docx-templates/tree/master/src/__tests__/fixtures)
+
+Here is the list of currently supported commands:
 
 #### QUERY
 
-You can use GraphQL, SQL, whatever you like. As explained above, the query will be passed to your `data` query resolver.
+You can use GraphQL, SQL, whatever you want: the query will be passed unchanged to your `data` query resolver.
 
 ```
 +++QUERY
@@ -80,7 +101,7 @@ query getData($projectId: Int!) {
 +++
 ```
 
-For the following sections, we assume that our dataset is something like this:
+For the following sections (except where noted), we assume the following dataset:
 
 ```js
 const data = {
@@ -88,8 +109,8 @@ const data = {
     name: 'docx-templates',
     details: { year: '2016' },
     people: [
-      { name: 'John', since: '2015' },
-      { name: 'Robert', since: '2010' },
+      { name: 'John', since: 2015 },
+      { name: 'Robert', since: 2010 },
     ]
   },
 };
@@ -97,24 +118,33 @@ const data = {
 
 #### VAR
 
-Declare a custom variable (or an *alias*) for a given datapath:
+Declare a custom variable (or an *alias*) for a given (JS) expression:
 
 ```
 +++VAR details project.details+++
++++VAR uppercaseName project.name.toUpperCase()+++
 ```
 
 #### INS
 
-Insert the value at a given datapath (the second example uses a previously declared variable):
+Insert the result of a given (JS) expression:
 
 ```
 +++INS project.name+++ (+++INS project.details.year+++)
++++VAR details project.details+++
 +++INS project.name+++ (+++INS $details.year+++)
++++INS `${project.name} (${$details.year})`+++
 ```
 
-#### FOR (FOR-ROW) and END-FOR (END-FOR-ROW)
+Use JS's ternary operator to implement an *if-else* structure:
 
-Loop over a group of elements:
+```
++++INS $details.year != null ? `(${$details.year})` : ''+++
+```
+
+#### FOR and END-FOR
+
+Loop over a group of elements (resulting from the evaluation of a JS expression):
 
 ```
 +++FOR person IN project.people+++
@@ -122,22 +152,29 @@ Loop over a group of elements:
 +++END-FOR person+++
 ```
 
-Similarly, for table rows:
+Since JS are supported, you can for example filter the loop domain:
+
+```
++++FOR person IN project.people.filter(person => person.since > 2013)+++
+...
+```
+
+It also works for table rows:
 
 ```
 ----------------------------------------------------------
 | Name                         | Since                   |
 ----------------------------------------------------------
-| +++FOR-ROW person IN         |                         |
+| +++FOR person IN             |                         |
 | project.people+++            |                         |
 ----------------------------------------------------------
 | +++INS $person.name+++       | +++INS $person.since+++ |
 ----------------------------------------------------------
-| +++END-FOR-ROW person+++     |                         |
+| +++END-FOR person+++         |                         |
 ----------------------------------------------------------
 ```
 
-You can nest loops (example uses a different data set):
+You can nest loops (this example assumes a different data set):
 
 ```
 +++FOR company IN companies+++
@@ -163,12 +200,12 @@ Define an alias for a complete command (especially useful for formatting tables)
 ----------------------------------------------------------
 | Name                         | Since                   |
 ----------------------------------------------------------
-| +++FOR-ROW person IN         |                         |
+| +++FOR person IN             |                         |
 | project.people+++            |                         |
 ----------------------------------------------------------
 | +++[name]+++                 | +++[since]+++           |
 ----------------------------------------------------------
-| +++END-FOR-ROW person+++     |                         |
+| +++END-FOR person+++         |                         |
 ----------------------------------------------------------
 ```
 
@@ -177,9 +214,9 @@ Define an alias for a complete command (especially useful for formatting tables)
 
 ## Similar projects
 
-* [docxtemplater](https://github.com/open-xml-templating/docxtemplater) (just discovered it after brushing up my old CS code for `docx-templates`, publishing it for the first time and bumping into this very similarly named project).
+* [docxtemplater](https://github.com/open-xml-templating/docxtemplater) (believe it or not, I just discovered this very similarly-named project after brushing up my old CS code for `docx-templates` and publishing it for the first time!). It provides lots of goodies, but doesn't allow (AFAIK) embedding queries or JS snippets.
 
-* [docx](https://github.com/dolanmiu/docx) and similar ones - generate docx files from scratch, programmatically.
+* [docx](https://github.com/dolanmiu/docx) and similar ones - generate docx files from scratch, programmatically. Drawbacks of this approach: they typically do not support all Word features, and producing a complex document can be challenging.
 
 ## License (MIT)
 
