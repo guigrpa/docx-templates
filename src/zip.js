@@ -26,7 +26,7 @@ const zipFile = (inputFolder: string, outputFile: string) => {
     output.on('close', resolve);
     archive.on('error', reject);
     archive.pipe(output);
-    archive.bulk([{ expand: true, dot: true, cwd: inputFolder, src: '**' }]);
+    archive.glob('**', { cwd: inputFolder, dot: true });
     archive.finalize();
   });
 };

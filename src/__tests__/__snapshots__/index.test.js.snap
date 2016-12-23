@@ -1,4 +1,4 @@
-exports[`Template processing 03 Should use the resolver's response to produce the report 1`] = `
+exports[`Template processing 03 Uses the resolver's response to produce the report 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -199,7 +199,7 @@ Object {
 }
 `;
 
-exports[`Template processing 04 Should allow replacing the resolver by a data object 1`] = `
+exports[`Template processing 04 Allows replacing the resolver by a data object 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -594,7 +594,7 @@ Object {
 }
 `;
 
-exports[`Template processing 05 Should process 1-level FOR loops 1`] = `
+exports[`Template processing 05 Processes 1-level FOR loops 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -1009,7 +1009,7 @@ Object {
 }
 `;
 
-exports[`Template processing 06 Should process 2-level FOR loops 1`] = `
+exports[`Template processing 06 Processes 2-level FOR loops 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -2151,7 +2151,7 @@ Object {
 }
 `;
 
-exports[`Template processing 07 Should process 3-level FOR loops 1`] = `
+exports[`Template processing 07 Processes 3-level FOR loops 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -3593,7 +3593,7 @@ Object {
 }
 `;
 
-exports[`Template processing 08 Should process 1-level FOR-ROW loops 1`] = `
+exports[`Template processing 08 Processes 1-level FOR-ROW loops 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -4290,7 +4290,7 @@ Object {
 }
 `;
 
-exports[`Template processing 09 Should allow scalar arrays in FOR loops 1`] = `
+exports[`Template processing 09 Allows scalar arrays in FOR loops 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -4705,7 +4705,7 @@ Object {
 }
 `;
 
-exports[`Template processing 10 Should process JS snippets to get the array elements 1`] = `
+exports[`Template processing 10 Processes JS snippets to get the array elements 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -5186,7 +5186,7 @@ Object {
 }
 `;
 
-exports[`Template processing 11 Should process inline FOR loops 1`] = `
+exports[`Template processing 11 Processes inline FOR loops 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -5621,7 +5621,7 @@ Object {
 }
 `;
 
-exports[`Template processing 12 Should process a more complex inline FOR loop with spaces 1`] = `
+exports[`Template processing 12 Processes a more complex inline FOR loop with spaces 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -6088,7 +6088,7 @@ Object {
 }
 `;
 
-exports[`Template processing 20 Should process SHORTHAND commands 1`] = `
+exports[`Template processing 20 Processes SHORTHAND commands 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -6509,7 +6509,7 @@ Object {
 }
 `;
 
-exports[`Template processing 21 Should process VAR commands 1`] = `
+exports[`Template processing 21 Processes VAR commands 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -6852,7 +6852,7 @@ Object {
 }
 `;
 
-exports[`Template processing 21b Should process VAR commands with JS 1`] = `
+exports[`Template processing 21b Processes VAR commands with JS 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -7148,7 +7148,7 @@ Object {
 }
 `;
 
-exports[`Template processing 22 Should allow accented characters and such 1`] = `
+exports[`Template processing 22 Allows accented characters and such 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -7458,7 +7458,7 @@ Object {
 }
 `;
 
-exports[`Template processing 23 Should allow characters that conflict with XML 1`] = `
+exports[`Template processing 23 Allows characters that conflict with XML 1`] = `
 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
 <w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
   <w:body>
@@ -7512,7 +7512,79 @@ exports[`Template processing 23 Should allow characters that conflict with XML 1
 </w:document>"
 `;
 
-exports[`Template processing 24 Should allow Word to split commands arbitrarily, incl. delimiters 1`] = `
+exports[`Template processing 23b Allows insertion of literal XML 1`] = `
+"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
+<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+  <w:body>
+    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+        <w:t xml:space=\"preserve\">foo<w:br/>bar</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
+      <w:bookmarkEnd w:id=\"0\"/>
+    </w:p>
+    <w:sectPr w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\">
+      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
+      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
+      <w:cols w:space=\"708\"/>
+      <w:docGrid w:linePitch=\"360\"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
+exports[`Template processing 23c Allows insertion of literal XML with custom delimiter 1`] = `
+"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
+<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+  <w:body>
+    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+        <w:t xml:space=\"preserve\">foo<w:br/>bar</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
+      <w:bookmarkEnd w:id=\"0\"/>
+    </w:p>
+    <w:sectPr w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\">
+      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
+      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
+      <w:cols w:space=\"708\"/>
+      <w:docGrid w:linePitch=\"360\"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
+exports[`Template processing 24 Allows Word to split commands arbitrarily, incl. delimiters 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -7987,7 +8059,119 @@ Object {
 }
 `;
 
-exports[`Template processing 30 Should process simple JS snippets in an INS 1`] = `
+exports[`Template processing 25 Adds line breaks by default 1`] = `
+"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
+<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+  <w:body>
+    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"009357C2\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+        <w:t xml:space=\"preserve\">A long text:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR=\"00426180\" w:rsidRDefault=\"009357C2\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+        <w:t xml:space=\"preserve\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.<w:br/>Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.<w:br/>Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"009357C2\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+        <w:t xml:space=\"preserve\">THE END</w:t>
+      </w:r>
+      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
+      <w:bookmarkEnd w:id=\"0\"/>
+    </w:p>
+    <w:sectPr w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\">
+      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
+      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
+      <w:cols w:space=\"708\"/>
+      <w:docGrid w:linePitch=\"360\"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
+exports[`Template processing 25b Allows disabling line break processing 1`] = `
+"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
+<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+  <w:body>
+    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"009357C2\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+        <w:t xml:space=\"preserve\">A long text:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR=\"00426180\" w:rsidRDefault=\"009357C2\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+        <w:t xml:space=\"preserve\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.
+Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.
+Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"009357C2\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\"es-ES\"/>
+        </w:rPr>
+        <w:t xml:space=\"preserve\">THE END</w:t>
+      </w:r>
+      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
+      <w:bookmarkEnd w:id=\"0\"/>
+    </w:p>
+    <w:sectPr w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\">
+      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
+      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
+      <w:cols w:space=\"708\"/>
+      <w:docGrid w:linePitch=\"360\"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
+exports[`Template processing 30 Processes simple JS snippets in an INS 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -8301,7 +8485,7 @@ Object {
 }
 `;
 
-exports[`Template processing 31 Should process more complex JS snippets in an INS 1`] = `
+exports[`Template processing 31 Processes more complex JS snippets in an INS 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -8898,7 +9082,7 @@ Object {
 }
 `;
 
-exports[`Template processing 32 Should provide access to vars and loop indices (JS) 1`] = `
+exports[`Template processing 32 Provides access to vars and loop indices (JS) 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -11077,7 +11261,7 @@ Object {
 }
 `;
 
-exports[`Template processing 70 Should allow customisation of cmd delimiter 1`] = `
+exports[`Template processing 70 Allows customisation of cmd delimiter 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
@@ -11513,7 +11697,7 @@ Object {
 }
 `;
 
-exports[`Template processing 80 Should produce a more complex example: WBS 1`] = `
+exports[`Template processing 80 Copes with a more complex example: WBS 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",

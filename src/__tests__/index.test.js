@@ -3,23 +3,25 @@
 /* eslint-env jest */
 
 import path from 'path';
-import fsExtra from 'fs-extra';
-import Promise from 'bluebird';
+import fs from 'fs-extra';
 
 // SWUT
 import createReport from '..';
 
-const fs: any = Promise.promisifyAll(fsExtra);
 const outputDir = path.join(__dirname, 'out');
 const WRITE_REPORTS_TO_FILE = false;
 
+const LONG_TEXT = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.
+Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.
+Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.`;
+
 describe('End-to-end', () => {
   beforeEach(async () => {
-    try { await fs.remove(outputDir); } catch (err) { /* bad luck */ }
+    await fs.remove(outputDir, () => {});
   });
-  // afterEach(async () => {
-  //   try { await fs.remove(outputDir); } catch (err) { /* bad luck */ }
-  // });
+  afterEach(async () => {
+    await fs.remove(outputDir, () => {});
+  });
 
   it('01 Copies (unchanged) a template without markup', async () => {
     const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
@@ -28,25 +30,26 @@ describe('End-to-end', () => {
     expect(fs.existsSync(output)).toBeTruthy();
   });
 
-  it('02 A default output path can be used', async () => {
+  it('02 Can produce a default output path', async () => {
     const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
     const defaultOutput = path.join(__dirname, 'fixtures', 'noQuery_report.docx');
     await createReport({ template });
     expect(fs.existsSync(defaultOutput)).toBeTruthy();
-    await fs.unlink(defaultOutput);
+    fs.unlinkSync(defaultOutput);
   });
 });
 
 describe('Template processing', () => {
-  it('01 Probe should work', async () => {
+  it('01 Probe works', async () => {
     const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
     const defaultOutput = path.join(__dirname, 'fixtures', 'noQuery_report.docx');
     const result = await createReport({ template, _probe: 'JS' });
     expect(fs.existsSync(defaultOutput)).toBeFalsy();
+    // $FlowFixMe
     expect(result._children.length).toBeTruthy();
   });
 
-  it('02 Should correctly extract a query and call the resolver', async () => {
+  it('02 Extracts a query and calls the resolver', async () => {
     const template = path.join(__dirname, 'fixtures', 'simpleQuery.docx');
     const queryResolver = jest.fn();
     const queryVars = { a: 'importantContext' };
@@ -61,7 +64,7 @@ describe('Template processing', () => {
     expect(queryResolver.mock.calls[0][1]).toEqual(queryVars);
   });
 
-  it('03 Should use the resolver\'s response to produce the report', async () => {
+  it('03 Uses the resolver\'s response to produce the report', async () => {
     const template = path.join(__dirname, 'fixtures', 'simpleQuerySimpleInserts.docx');
     const result = await createReport({
       template,
@@ -71,7 +74,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('04 Should allow replacing the resolver by a data object', async () => {
+  it('04 Allows replacing the resolver by a data object', async () => {
     const template = path.join(__dirname, 'fixtures', 'noQuerySimpleInserts.docx');
     const result = await createReport({
       template,
@@ -81,7 +84,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('05 Should process 1-level FOR loops', async () => {
+  it('05 Processes 1-level FOR loops', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1.docx');
     const result = await createReport({
       template,
@@ -95,7 +98,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('06 Should process 2-level FOR loops', async () => {
+  it('06 Processes 2-level FOR loops', async () => {
     const template = path.join(__dirname, 'fixtures', 'for2.docx');
     const result = await createReport({
       template,
@@ -120,7 +123,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('07 Should process 3-level FOR loops', async () => {
+  it('07 Processes 3-level FOR loops', async () => {
     const template = path.join(__dirname, 'fixtures', 'for3.docx');
     const result = await createReport({
       template,
@@ -149,7 +152,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('08 Should process 1-level FOR-ROW loops', async () => {
+  it('08 Processes 1-level FOR-ROW loops', async () => {
     const template = path.join(__dirname, 'fixtures', 'for-row1.docx');
     const result = await createReport({
       template,
@@ -163,7 +166,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('09 Should allow scalar arrays in FOR loops', async () => {
+  it('09 Allows scalar arrays in FOR loops', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1scalars.docx');
     const result = await createReport({
       template,
@@ -173,7 +176,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('10 Should process JS snippets to get the array elements', async () => {
+  it('10 Processes JS snippets to get the array elements', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1js.docx');
     const result = await createReport({
       template,
@@ -188,7 +191,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('11 Should process inline FOR loops', async () => {
+  it('11 Processes inline FOR loops', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1inline.docx');
     const result = await createReport({
       template,
@@ -202,7 +205,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('12 Should process a more complex inline FOR loop with spaces', async () => {
+  it('12 Processes a more complex inline FOR loop with spaces', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1inlineWithSpaces.docx');
     const result = await createReport({
       template,
@@ -216,7 +219,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('20 Should process SHORTHAND commands', async () => {
+  it('20 Processes SHORTHAND commands', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1shorthand.docx');
     const result = await createReport({
       template,
@@ -230,7 +233,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('21 Should process VAR commands', async () => {
+  it('21 Processes VAR commands', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1var.docx');
     const result = await createReport({
       template,
@@ -244,7 +247,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('21b Should process VAR commands with JS', async () => {
+  it('21b Processes VAR commands with JS', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1varJs.docx');
     const result = await createReport({
       template,
@@ -258,7 +261,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('22 Should allow accented characters and such', async () => {
+  it('22 Allows accented characters and such', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1.docx');
     const result = await createReport({
       template,
@@ -272,7 +275,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('23 Should allow characters that conflict with XML', async () => {
+  it('23 Allows characters that conflict with XML', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1.docx');
     const result = await createReport({
       template,
@@ -287,7 +290,29 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('24 Should allow Word to split commands arbitrarily, incl. delimiters', async () => {
+  it('23b Allows insertion of literal XML', async () => {
+    const template = path.join(__dirname, 'fixtures', 'literalXml.docx');
+    const result = await createReport({
+      template,
+      data: { text: 'foo||<w:br/>||bar' },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('23c Allows insertion of literal XML with custom delimiter', async () => {
+    const template = path.join(__dirname, 'fixtures', 'literalXml.docx');
+    const result = await createReport({
+      template,
+      output: path.join(__dirname, 'fixtures', 'literalXmlCustomDelimiter_report.docx'),
+      data: { text: 'foo____<w:br/>____bar' },
+      literalXmlDelimiter: '____',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('24 Allows Word to split commands arbitrarily, incl. delimiters', async () => {
     const template = path.join(__dirname, 'fixtures', 'splitDelimiters.docx');
     const result = await createReport({
       template,
@@ -297,7 +322,29 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('30 Should process simple JS snippets in an INS', async () => {
+  it('25 Adds line breaks by default', async () => {
+    const template = path.join(__dirname, 'fixtures', 'longText.docx');
+    const result = await createReport({
+      template,
+      data: { longText: LONG_TEXT },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('25b Allows disabling line break processing', async () => {
+    const template = path.join(__dirname, 'fixtures', 'longText.docx');
+    const result = await createReport({
+      template,
+      output: path.join(__dirname, 'fixtures', 'longText2_report.docx'),
+      data: { longText: LONG_TEXT },
+      processLineBreaks: false,
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('30 Processes simple JS snippets in an INS', async () => {
     const template = path.join(__dirname, 'fixtures', 'insJsSimple.docx');
     const result = await createReport({
       template,
@@ -306,7 +353,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('31 Should process more complex JS snippets in an INS', async () => {
+  it('31 Processes more complex JS snippets in an INS', async () => {
     const template = path.join(__dirname, 'fixtures', 'insJsComplex.docx');
     const result = await createReport({
       template,
@@ -316,7 +363,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('32 Should provide access to vars and loop indices (JS)', async () => {
+  it('32 Provides access to vars and loop indices (JS)', async () => {
     const template = path.join(__dirname, 'fixtures', 'insJsWithLoops.docx');
     const result = await createReport({
       template,
@@ -330,7 +377,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('40 Should throw on invalid command', async () => {
+  it('40 Throws on invalid command', async () => {
     const template = path.join(__dirname, 'fixtures', 'invalidCommand.docx');
     try {
       await createReport({
@@ -346,7 +393,7 @@ describe('Template processing', () => {
     } catch (err) { /* this exception was expected */ }
   });
 
-  it('41 Should throw on invalid for logic', async () => {
+  it('41 Throws on invalid for logic', async () => {
     const template = path.join(__dirname, 'fixtures', 'invalidFor.docx');
     try {
       await createReport({
@@ -362,7 +409,7 @@ describe('Template processing', () => {
     } catch (err) { /* this exception was expected */ }
   });
 
-  it('70 Should allow customisation of cmd delimiter', async () => {
+  it('70 Allows customisation of cmd delimiter', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1customDelimiter.docx');
     const result = await createReport({
       template,
@@ -377,7 +424,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('80 Should produce a more complex example: WBS', async () => {
+  it('80 Copes with a more complex example: WBS', async () => {
     const template = path.join(__dirname, 'fixtures', 'wbs.docx');
     const result = await createReport({
       template,

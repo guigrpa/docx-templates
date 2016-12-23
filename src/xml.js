@@ -49,9 +49,13 @@ const parseXml = (templateXml: string): Promise<Node> => {
   });
 };
 
-const buildXml = (node: Node, indent?: string = '') => {
+type XmlOptions = {|
+  literalXmlDelimiter: string,
+|};
+
+const buildXml = (node: Node, options: XmlOptions, indent?: string = '') => {
   let xml = indent.length ? '' : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
-  if (node._fTextNode) xml += sanitizeText(node._text);
+  if (node._fTextNode) xml += sanitizeText(node._text, options);
   else {
     let attrs = '';
     const nodeAttrs = node._attrs;
@@ -63,7 +67,7 @@ const buildXml = (node: Node, indent?: string = '') => {
     xml += `\n${indent}<${node._tag}${attrs}${suffix}>`;
     let fLastChildIsNode = false;
     node._children.forEach((child) => {
-      xml += buildXml(child, `${indent}  `);
+      xml += buildXml(child, options, `${indent}  `);
       fLastChildIsNode = !child._fTextNode;
     });
     if (fHasChildren) {
@@ -74,11 +78,20 @@ const buildXml = (node: Node, indent?: string = '') => {
   return xml;
 };
 
-const sanitizeText = (str: string) => {
-  let out = str;
-  out = out.replace(/&/g, '&amp;');  // must be the first one
-  out = out.replace(/</g, '&lt;');
-  out = out.replace(/>/g, '&gt;');
+const sanitizeText = (str: string, options: XmlOptions) => {
+  let out = '';
+  const segments = str.split(options.literalXmlDelimiter);
+  let fLiteral = false;
+  for (let i = 0; i < segments.length; i++) {
+    let processedSegment = segments[i];
+    if (!fLiteral) {
+      processedSegment = processedSegment.replace(/&/g, '&amp;');  // must be the first one
+      processedSegment = processedSegment.replace(/</g, '&lt;');
+      processedSegment = processedSegment.replace(/>/g, '&gt;');
+    }
+    out += processedSegment;
+    fLiteral = !fLiteral;
+  }
   return out;
 };
 

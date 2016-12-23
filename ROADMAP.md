@@ -1,6 +1,6 @@
 # Roadmap
 
-* Re-enable Flow
-* FOR-COL
+* ? Add FOR-COL (can be complex) 
+* Update docs
 * Images
 * FMPro adapter

@@ -6,10 +6,11 @@ Template-based docx report creation.
 
 * **Write reports naturally using Word**, just adding some commands where needed for dynamic contents
 * **Express your data needs (queries) in the template itself**, in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way™*: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components using that data
-* A small **template language**: `FOR`/`END-FOR` (with support for table rows), `INS`, `SHORTHAND`, `QUERY`, `VAR`
-* **Transparent JavaScript support** wherever it makes sense (`FOR`, `INS` and `VAR`), running in a separate Node VM for security
+* Use a small **template language**: `FOR`/`END-FOR` (with support for table rows), `INS`, `SHORTHAND`, `QUERY`, `VAR`
+* **Transparent JavaScript support** (`FOR`, `INS` and `VAR`), running in a separate Node VM for security
 * **Nested** loops
 * Custom **variables** and **shorthand** commands (useful for writing table templates)
+* Inclusion of **literal XML**
 
 Docx-templates relies on the .docx format, which is really complex, so **use with caution**, at least for now. Feel free to submit issues or (even better!) PRs.
 
@@ -69,6 +70,8 @@ Other options (with defaults):
 createReport({
   // ...
   cmdDelimiter: '+++',
+  literalXmlDelimiter: '||',
+  processLineBreaks: true,
 });
 ```
 
@@ -106,8 +109,8 @@ const data = {
     name: 'docx-templates',
     details: { year: '2016' },
     people: [
-      { name: 'John', since: '2015' },
-      { name: 'Robert', since: '2010' },
+      { name: 'John', since: 2015 },
+      { name: 'Robert', since: 2010 },
     ]
   },
 };
@@ -115,29 +118,45 @@ const data = {
 
 #### VAR
 
-Declare a custom variable (or an *alias*) for a given datapath:
+Declare a custom variable (or an *alias*) for a given (JS) expression:
 
 ```
 +++VAR details project.details+++
++++VAR uppercaseName project.name.toUpperCase()+++
 ```
 
 #### INS
 
-Insert the value at a given datapath (the second example uses a previously declared variable):
+Insert the result of a given (JS) expression:
 
 ```
 +++INS project.name+++ (+++INS project.details.year+++)
++++VAR details project.details+++
 +++INS project.name+++ (+++INS $details.year+++)
++++INS `${project.name} (${$details.year})`+++
+```
+
+Use JS's ternary operator to implement an *if-else* structure:
+
+```
++++INS $details.year != null ? `(${$details.year})` : ''+++
 ```
 
 #### FOR and END-FOR
 
-Loop over a group of elements:
+Loop over a group of elements (resulting from the evaluation of a JS expression):
 
 ```
 +++FOR person IN project.people+++
 +++INS $person.name+++ (since +++INS $person.since+++)
 +++END-FOR person+++
+```
+
+Since JS are supported, you can for example filter the loop domain:
+
+```
++++FOR person IN project.people.filter(person => person.since > 2013)+++
+...
 ```
 
 It also works for table rows:
@@ -195,7 +214,7 @@ Define an alias for a complete command (especially useful for formatting tables)
 
 ## Similar projects
 
-* [docxtemplater](https://github.com/open-xml-templating/docxtemplater) (believe it or not, I just discovered this very similarly-named project after brushing up my old CS code for `docx-templates` and publishing it for the first time!). Minor drawback: AFAIK, there is no way to embed the data query in the template.
+* [docxtemplater](https://github.com/open-xml-templating/docxtemplater) (believe it or not, I just discovered this very similarly-named project after brushing up my old CS code for `docx-templates` and publishing it for the first time!). It provides lots of goodies, but doesn't allow (AFAIK) embedding queries or JS snippets.
 
 * [docx](https://github.com/dolanmiu/docx) and similar ones - generate docx files from scratch, programmatically. Drawbacks of this approach: they typically do not support all Word features, and producing a complex document can be challenging.
 
