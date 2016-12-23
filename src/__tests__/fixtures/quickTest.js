@@ -2,7 +2,7 @@ const path = require('path');
 const createReport = require('../../../lib/').default;
 
 createReport({
-  template: path.join(__dirname, 'for1inline.docx'),
+  template: path.join(__dirname, 'evalSimple.docx'),
   // data: { a: 'foo', b: 'bar' },
   // data: { foo: 'bar' },
   data: { companies: [

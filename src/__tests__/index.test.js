@@ -11,6 +11,7 @@ import createReport from '..';
 
 const fs: any = Promise.promisifyAll(fsExtra);
 const outputDir = path.join(__dirname, 'out');
+const WRITE_REPORTS_TO_FILE = false;
 
 describe('End-to-end', () => {
   beforeEach(async () => {
@@ -53,7 +54,7 @@ describe('Template processing', () => {
       template,
       data: queryResolver,
       queryVars,
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     expect(queryResolver.mock.calls.length).toEqual(1);
     expect(queryResolver.mock.calls[0][0]).toEqual('exampleQuery');
@@ -65,9 +66,9 @@ describe('Template processing', () => {
     const result = await createReport({
       template,
       data: () => ({ a: 'foo', b: 'bar' }),
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('04 Should allow replacing the resolver by a data object', async () => {
@@ -75,9 +76,9 @@ describe('Template processing', () => {
     const result = await createReport({
       template,
       data: { a: 'foo', b: 'bar' },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('05 Should process 1-level FOR loops', async () => {
@@ -89,9 +90,9 @@ describe('Template processing', () => {
         { name: 'SECOND' },
         { name: 'THIRD' },
       ] },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('06 Should process 2-level FOR loops', async () => {
@@ -114,9 +115,9 @@ describe('Template processing', () => {
           ],
         },
       ] },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('07 Should process 3-level FOR loops', async () => {
@@ -143,9 +144,9 @@ describe('Template processing', () => {
           people: [],
         },
       ] },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('08 Should process 1-level FOR-ROW loops', async () => {
@@ -157,37 +158,38 @@ describe('Template processing', () => {
         { name: 'SECOND' },
         { name: 'THIRD' },
       ] },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
-
-  // it('100 Should correctly process FOR loop inside a cell', async () => {
-  //   const template = path.join(__dirname, 'fixtures', 'forInCell.docx');
-  //   const result = await createReport({
-  //     template,
-  //     data: { companies: [
-  //       { name: 'FIRST' },
-  //       { name: 'SECOND' },
-  //       { name: 'THIRD' },
-  //     ] },
-  //     // _probe: 'JS',
-  //   });
-  //   // expect(result).toMatchSnapshot();
-  // });
 
   it('09 Should allow scalar arrays in FOR loops', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1scalars.docx');
     const result = await createReport({
       template,
       data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('10 Should allow access to the index in FOR loops', async () => {
-    const template = path.join(__dirname, 'fixtures', 'for1index.docx');
+  it('10 Should process JS snippets to get the array elements', async () => {
+    const template = path.join(__dirname, 'fixtures', 'for1js.docx');
+    const result = await createReport({
+      template,
+      data: { companies: [
+        { name: 'abengoa' },
+        { name: 'Endesa' },
+        { name: 'IBERDROLA' },
+        { name: 'Acerinox' },
+      ] },
+      // _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    // if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('11 Should process inline FOR loops', async () => {
+    const template = path.join(__dirname, 'fixtures', 'for1inline.docx');
     const result = await createReport({
       template,
       data: { companies: [
@@ -195,9 +197,23 @@ describe('Template processing', () => {
         { name: 'SECOND' },
         { name: 'THIRD' },
       ] },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('12 Should process a more complex inline FOR loop with spaces', async () => {
+    const template = path.join(__dirname, 'fixtures', 'for1inlineWithSpaces.docx');
+    const result = await createReport({
+      template,
+      data: { companies: [
+        { name: 'FIRST' },
+        { name: 'SECOND' },
+        { name: 'THIRD' },
+      ] },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('20 Should process SHORTHAND commands', async () => {
@@ -209,9 +225,9 @@ describe('Template processing', () => {
         { name: 'SECOND' },
         { name: 'THIRD' },
       ] },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('21 Should process VAR commands', async () => {
@@ -223,9 +239,23 @@ describe('Template processing', () => {
         { name: 'SECOND' },
         { name: 'THIRD' },
       ] },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('21b Should process VAR commands with JS', async () => {
+    const template = path.join(__dirname, 'fixtures', 'for1varJs.docx');
+    const result = await createReport({
+      template,
+      data: { companies: [
+        { name: 'FIRST' },
+        { name: 'SECOND' },
+        { name: 'THIRD' },
+      ] },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('22 Should allow accented characters and such', async () => {
@@ -237,14 +267,14 @@ describe('Template processing', () => {
         { name: '¿Por qué?' },
         { name: 'Porque sí' },
       ] },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('23 Should allow characters that conflict with XML', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1.docx');
-    const xml = await createReport({
+    const result = await createReport({
       template,
       output: path.join(__dirname, 'fixtures', 'for1specialChars_report.docx'),
       data: { companies: [
@@ -252,9 +282,9 @@ describe('Template processing', () => {
         { name: '5 > 2 >> -100' },
         { name: 'a & b && c' },
       ] },
-      _probe: 'XML',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
     });
-    expect(xml).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('24 Should allow Word to split commands arbitrarily, incl. delimiters', async () => {
@@ -262,9 +292,42 @@ describe('Template processing', () => {
     const result = await createReport({
       template,
       data: { foo: 'bar' },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('30 Should process simple JS snippets in an INS', async () => {
+    const template = path.join(__dirname, 'fixtures', 'insJsSimple.docx');
+    const result = await createReport({
+      template,
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('31 Should process more complex JS snippets in an INS', async () => {
+    const template = path.join(__dirname, 'fixtures', 'insJsComplex.docx');
+    const result = await createReport({
+      template,
+      data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('32 Should provide access to vars and loop indices (JS)', async () => {
+    const template = path.join(__dirname, 'fixtures', 'insJsWithLoops.docx');
+    const result = await createReport({
+      template,
+      data: { companies: [
+        { name: 'FIRST' },
+        { name: 'SECOND' },
+        { name: 'THIRD' },
+      ] },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('40 Should throw on invalid command', async () => {
@@ -277,7 +340,7 @@ describe('Template processing', () => {
           { name: 'SECOND' },
           { name: 'THIRD' },
         ] },
-        _probe: 'JS',
+        _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
       });
       expect(true).toBeFalsy(); // should have thrown
     } catch (err) { /* this exception was expected */ }
@@ -293,7 +356,7 @@ describe('Template processing', () => {
           { name: 'SECOND' },
           { name: 'THIRD' },
         ] },
-        _probe: 'JS',
+        _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
       });
       expect(true).toBeFalsy(); // should have thrown
     } catch (err) { /* this exception was expected */ }
@@ -309,9 +372,9 @@ describe('Template processing', () => {
         { name: 'THIRD' },
       ] },
       cmdDelimiter: '***',
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('80 Should produce a more complex example: WBS', async () => {
@@ -337,8 +400,8 @@ describe('Template processing', () => {
           },
         ],
       } },
-      _probe: 'JS',
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
-    expect(result).toMatchSnapshot();
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 });

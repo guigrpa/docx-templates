@@ -4,7 +4,8 @@
 
 import path from 'path';
 import os from 'os';
-import { omit } from 'timm';
+import vm from 'vm';
+import { omit, merge } from 'timm';
 import Promise from 'bluebird';
 import fs from 'fs-extra';
 import uuid from 'uuid';
@@ -14,7 +15,6 @@ import type { Node, TextNode } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
-const LOOP_INDEX_IDENTIFIER = '_idx';
 
 let log: any;
 let chalk: any;
@@ -205,7 +205,12 @@ const preprocessTemplate = (
   let fCmd = false;
   let openNode = null;
   let idxDelimiter = 0;
+  const placeholderCmd = `${delimiter}CMD_NODE${delimiter}`;
+
   while (node != null) {
+    // Add `xml:space` attr `preserve` to `w:t` tags
+    if (node._tag === 'w:t') node._attrs['xml:space'] = 'preserve';
+
     // Process text nodes inside `w:t` tags
     if (node._fTextNode && node._parent._tag === 'w:t') {
       if (openNode == null) openNode = node;
@@ -214,13 +219,25 @@ const preprocessTemplate = (
       for (let i = 0; i < textIn.length; i++) {
         const c = textIn[i];
 
-        // Matches the delimiter
+        // Matches the expected delimiter character
         if (c === delimiter[idxDelimiter]) {
           idxDelimiter += 1;
+
+          // Finished matching delimiter? Then toggle `fCmd`,
+          // add a new `w:t` + text node (either before or after the delimiter),
+          // depending on the case
           if (idxDelimiter === delimiter.length) {
             fCmd = !fCmd;
-            // if (fCmd && openNode._text.length) openNode = insertTextSiblingAfter(openNode);
+            const fNodesMatch = node === openNode;
+            if (fCmd && openNode._text.length) {
+              openNode = insertTextSiblingAfter(openNode);
+              if (fNodesMatch) node = openNode;
+            }
             openNode._text += delimiter;
+            if (!fCmd && i < textIn.length - 1) {
+              openNode = insertTextSiblingAfter(openNode);
+              if (fNodesMatch) node = openNode;
+            }
             idxDelimiter = 0;
             if (!fCmd) openNode = node;  // may switch open node to the current one
           }
@@ -243,7 +260,7 @@ const preprocessTemplate = (
 
       // If text was present but not any more, add a placeholder, so that this node
       // will be purged during report generation
-      if (textIn.length && !node._text.length) node._text = `${delimiter}CMD_NODE${delimiter}`;
+      if (textIn.length && !node._text.length) node._text = placeholderCmd;
     }
 
     // Find next node to process
@@ -507,11 +524,13 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
 
   // VAR <varName> <dataPath>
   } else if (cmdName === 'VAR') {
-    const varName = tokens[1];
-    const varPath = tokens[2];
-    const varValue = extractFromData(data, varPath, ctx);
-    ctx.vars[varName] = varValue;
-    // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
+    if (!isLoopExploring(ctx)) {
+      const varName = tokens[1];
+      const code = tokens.slice(2).join(' ');
+      const varValue = runUserJsAndGetString(data, code, ctx);
+      ctx.vars[varName] = varValue;
+      // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
+    }
 
   // FOR <varName> IN <collectionDataPath>
   // } else if (cmdName === 'FOR' || cmdName === 'FOR-ROW') {
@@ -521,7 +540,10 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
     if (!(curLoop && curLoop.varName === varName)) {
       const parentLoopLevel = ctx.loops.length - 1;
       const fParentIsExploring = parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
-      const loopOver = fParentIsExploring ? [] : extractFromData(data, tokens[3], ctx);
+      const loopOver = fParentIsExploring
+        ? []
+        : runUserJsAndGetRaw(data, tokens.slice(3).join(' '), ctx);
+        // : extractFromData(data, tokens[3], ctx);
       ctx.loops.push({ refNode: node, refNodeLevel: ctx.level, varName, loopOver, idx: -1 });
     }
     logLoop(ctx.loops);
@@ -545,7 +567,10 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
 
   // INS <scalarDataPath>
   } else if (cmdName === 'INS') {
-    if (!isLoopExploring(ctx)) out = extractFromData(data, tokens[1], ctx);
+    if (!isLoopExploring(ctx)) {
+      const code = tokens.slice(1).join(' ');
+      out = runUserJsAndGetString(data, code, ctx);
+    }
 
   // Invalid command
   } else throw new Error(`Invalid command syntax: '${cmd}'`);
@@ -566,31 +591,29 @@ const appendTextToTagBuffers = (text: string, ctx: Context, options: {|
   });
 };
 
-const extractFromData = (data: ?ReportData, dataPath: string, ctx: Context): VarValue => {
-  if (data == null) return '';
-  const parts = dataPath.split('.');
-  let out;
-  if (parts[0][0] === '$') {
-    const varName = parts[0].substring(1);
-    out = ctx.vars[varName];
-    parts.shift();
-    if (
-      parts.length &&
-      parts[0] === LOOP_INDEX_IDENTIFIER &&
-      (typeof out !== 'object' || out[LOOP_INDEX_IDENTIFIER] == null)
-    ) {
-      const loop = ctx.loops.find((o) => o.varName === varName);
-      if (loop) return loop.idx + 1;
-    }
-  } else {
-    out = data;
-  }
-  if (out == null) return '';
-  for (let i = 0; i < parts.length; i++) {
-    out = out[parts[i]];
-    if (out == null) return '';
-  }
-  return out;
+const runUserJsAndGetString = (data: ?ReportData, code: string, ctx: Context): string => {
+  const result = runUserJsAndGetRaw(data, code, ctx);
+  return result != null ? String(result) : '';
+};
+
+const runUserJsAndGetRaw = (data: ?ReportData, code: string, ctx: Context): any => {
+  const sandbox = merge({
+    __code__: code,
+    __result__: undefined,
+  }, data);
+  const curLoop = getCurLoop(ctx);
+  if (curLoop) sandbox.$idx = curLoop.idx;
+  Object.keys(ctx.vars).forEach((varName) => {
+    sandbox[`$${varName}`] = ctx.vars[varName];
+  });
+  const script = new vm.Script(`
+    __result__ = eval(__code__);
+  `);
+  const context = new vm.createContext(sandbox);  // eslint-disable-line new-cap
+  script.runInContext(context);
+  const result = sandbox.__result__;
+  DEBUG && log.debug('JS result', { attach: result });
+  return result;
 };
 
 const getNextItem = (items, curIdx0) => {

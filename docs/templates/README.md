@@ -7,10 +7,11 @@ Template-based docx report creation.
 * **Write reports naturally using Word**, just adding some commands where needed for dynamic contents
 * **Express your data needs (queries) in the template itself**, in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way™*: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components using that data
 * A small **template language**: `FOR`/`END-FOR` (with support for table rows), `INS`, `SHORTHAND`, `QUERY`, `VAR`
+* **Transparent JavaScript support** wherever it makes sense (`FOR`, `INS` and `VAR`), running in a separate Node VM for security
 * **Nested** loops
 * Custom **variables** and **shorthand** commands (useful for writing table templates)
 
-Docx-templates is a small project and will probably not support all edge cases, so **use with caution**, at least for now. Feel free to submit issues or (even better!) PRs.
+Docx-templates relies on the .docx format, which is really complex, so **use with caution**, at least for now. Feel free to submit issues or (even better!) PRs.
 
 If you need external plugins or other bells and whistles please also check out [docxtemplater](https://github.com/open-xml-templating/docxtemplater).
 
