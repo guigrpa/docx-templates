@@ -5,8 +5,8 @@ Template-based docx report creation.
 ## Why?
 
 * **Write reports naturally using Word**, just adding some commands where needed for dynamic contents
-* **Express your data needs (queries) in the template itself**, in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way™*: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components using that data
-* Use a small **template language**: `FOR`/`END-FOR` (with support for table rows), `INS`, `SHORTHAND`, `QUERY`, `VAR`
+* **Express your data needs (queries) in the template itself**, in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way™*: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
+* Use a small **template language**: `FOR`/`END-FOR` (with support for table rows), `INS`, `SHORTHAND` (alias), `QUERY`, `VAR`
 * **Transparent JavaScript support** (`FOR`, `INS` and `VAR`), running in a separate Node VM for security
 * **Nested** loops
 * Custom **variables** and **shorthand** commands (useful for writing table templates)
@@ -118,7 +118,7 @@ const data = {
 
 #### VAR
 
-Declare a custom variable (or an *alias*) for a given (JS) expression:
+Declare a custom variable (or an *alias*) for a given (JavaScript) expression:
 
 ```
 +++VAR details project.details+++
@@ -127,7 +127,7 @@ Declare a custom variable (or an *alias*) for a given (JS) expression:
 
 #### INS
 
-Insert the result of a given (JS) expression:
+Insert the result of a given (JavaScript) expression:
 
 ```
 +++INS project.name+++ (+++INS project.details.year+++)
@@ -136,7 +136,7 @@ Insert the result of a given (JS) expression:
 +++INS `${project.name} (${$details.year})`+++
 ```
 
-Use JS's ternary operator to implement an *if-else* structure:
+Use JavaScript's ternary operator to implement an *if-else* structure:
 
 ```
 +++INS $details.year != null ? `(${$details.year})` : ''+++
@@ -144,7 +144,7 @@ Use JS's ternary operator to implement an *if-else* structure:
 
 #### FOR and END-FOR
 
-Loop over a group of elements (resulting from the evaluation of a JS expression):
+Loop over a group of elements (resulting from the evaluation of a JavaScript expression):
 
 ```
 +++FOR person IN project.people+++
@@ -152,14 +152,14 @@ Loop over a group of elements (resulting from the evaluation of a JS expression)
 +++END-FOR person+++
 ```
 
-Since JS are supported, you can for example filter the loop domain:
+Since JavaScript expressions are supported, you can for example filter the loop domain:
 
 ```
 +++FOR person IN project.people.filter(person => person.since > 2013)+++
 ...
 ```
 
-It also works for table rows:
+FOR loops also work over table rows:
 
 ```
 ----------------------------------------------------------
@@ -174,7 +174,7 @@ It also works for table rows:
 ----------------------------------------------------------
 ```
 
-You can nest loops (this example assumes a different data set):
+Finally, you can nest loops (this example assumes a different data set):
 
 ```
 +++FOR company IN companies+++
