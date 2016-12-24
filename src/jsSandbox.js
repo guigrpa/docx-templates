@@ -1,7 +1,9 @@
 // @flow
 
+/* eslint-disable no-param-reassign */
+
 import vm from 'vm';
-import { merge } from 'timm';
+import { merge, omit } from 'timm';
 import { getCurLoop } from './reportUtils';
 import type {
   ReportData, Context,
@@ -22,7 +24,7 @@ const runUserJsAndGetString = (data: ?ReportData, code: string, ctx: Context): s
 };
 
 const runUserJsAndGetRaw = (data: ?ReportData, code: string, ctx: Context): any => {
-  const sandbox = merge({
+  const sandbox = merge(ctx.jsSandbox || {}, {
     __code__: code,
     __result__: undefined,
   }, data);
@@ -37,6 +39,7 @@ const runUserJsAndGetRaw = (data: ?ReportData, code: string, ctx: Context): any 
   const context = new vm.createContext(sandbox);  // eslint-disable-line new-cap
   script.runInContext(context);
   const result = sandbox.__result__;
+  ctx.jsSandbox = omit(sandbox, ['__code__', '__result__']);
   DEBUG && log.debug('JS result', { attach: result });
   return result;
 };

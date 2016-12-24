@@ -376,6 +376,16 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
+  it('33 Processes EXEC commands (JS)', async () => {
+    const template = path.join(__dirname, 'fixtures', 'exec.docx');
+    const result = await createReport({
+      template,
+      data: {},
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
   it('40 Throws on invalid command', async () => {
     const template = path.join(__dirname, 'fixtures', 'invalidCommand.docx');
     try {

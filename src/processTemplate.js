@@ -334,6 +334,13 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
         out = runUserJsAndGetString(data, code, ctx);
       }
 
+    // INS <scalarDataPath>
+    } else if (cmdName === 'EXEC') {
+      if (!isLoopExploring(ctx)) {
+        const code = tokens.slice(1).join(' ');
+        runUserJsAndGetRaw(data, code, ctx);
+      }
+
     // Invalid command
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
     return out;

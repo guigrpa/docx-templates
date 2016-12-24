@@ -1,7 +1,6 @@
 # Roadmap
 
-* Run all JS in the same sandbox (so that the user can define his own JavaScript functions)
-* Add special shorthand for inserts, e.g. +++<xxx+++
+* Add special shorthand for inserts, e.g. +++!xxx+++ (no output) or +++=xxx+++ (with output)
 * Improve processing of commands: don't replace all whitespace by ' '
 * ? Add FOR-COL (can be complex)
 * Update docs
