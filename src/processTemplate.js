@@ -251,92 +251,95 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
   ctx.cmd = '';
   const curLoop = getCurLoop(ctx);
   DEBUG && log.debug(`Processing cmd: ${chalk.cyan.bold(cmd)}`);
+  try {
+    // Expand shorthands
+    const shorthandMatch = /^\[(.+)\]$/.exec(cmd);  // eslint-disable-line no-useless-escape
+    if (shorthandMatch != null) {
+      const shorthandName = shorthandMatch[1];
+      cmd = ctx.shorthands[shorthandName];
+      DEBUG && log.debug(`Shorthand for: ${cmd}`);
+    }
 
-  // Expand shorthands
-  const shorthandMatch = /^\[(.+)\]$/.exec(cmd);  // eslint-disable-line no-useless-escape
-  if (shorthandMatch != null) {
-    const shorthandName = shorthandMatch[1];
-    cmd = ctx.shorthands[shorthandName];
-    DEBUG && log.debug(`Shorthand for: ${cmd}`);
-  }
+    // Sanitize, tokenize and extract command name
+    cmd = cmd.replace(/\s+/g, ' ');
+    const tokens = cmd.split(' ');
+    if (!tokens.length) throw new Error('Invalid command syntax');
+    const cmdName = tokens[0].toUpperCase();
 
-  // Sanitize, tokenize and extract command name
-  cmd = cmd.replace(/\s+/g, ' ');
-  const tokens = cmd.split(' ');
-  if (!tokens.length) throw new Error('Invalid command syntax');
-  const cmdName = tokens[0].toUpperCase();
+    // Seeking query?
+    if (ctx.fSeekQuery) {
+      if (cmdName === 'QUERY') ctx.query = tokens.slice(1).join(' ');
+      return null;
+    }
 
-  // Seeking query?
-  if (ctx.fSeekQuery) {
-    if (cmdName === 'QUERY') ctx.query = tokens.slice(1).join(' ');
-    return null;
-  }
+    // Process command
+    let out;
+    if (cmdName === 'QUERY' || cmdName === 'CMD_NODE') {
+      // DEBUG && log.debug(`Ignoring ${cmdName} command`);
 
-  // Process command
-  let out;
-  if (cmdName === 'QUERY' || cmdName === 'CMD_NODE') {
-    // DEBUG && log.debug(`Ignoring ${cmdName} command`);
+    // SHORTHAND name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
+    } else if (cmdName === 'SHORTHAND') {
+      const shorthandName = tokens[1];
+      const fullCmd = tokens.slice(2).join(' ');
+      ctx.shorthands[shorthandName] = fullCmd;
+      DEBUG && log.debug(`Defined shorthand '${shorthandName}' as: ${fullCmd}`);
 
-  // SHORTHAND name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
-  } else if (cmdName === 'SHORTHAND') {
-    const shorthandName = tokens[1];
-    const fullCmd = tokens.slice(2).join(' ');
-    ctx.shorthands[shorthandName] = fullCmd;
-    DEBUG && log.debug(`Defined shorthand '${shorthandName}' as: ${fullCmd}`);
+    // VAR <varName> <dataPath>
+    } else if (cmdName === 'VAR') {
+      if (!isLoopExploring(ctx)) {
+        const varName = tokens[1];
+        const code = tokens.slice(2).join(' ');
+        const varValue = runUserJsAndGetString(data, code, ctx);
+        ctx.vars[varName] = varValue;
+        // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
+      }
 
-  // VAR <varName> <dataPath>
-  } else if (cmdName === 'VAR') {
-    if (!isLoopExploring(ctx)) {
+    // FOR <varName> IN <collectionDataPath>
+    // } else if (cmdName === 'FOR' || cmdName === 'FOR-ROW') {
+    } else if (cmdName === 'FOR') {
       const varName = tokens[1];
-      const code = tokens.slice(2).join(' ');
-      const varValue = runUserJsAndGetString(data, code, ctx);
-      ctx.vars[varName] = varValue;
-      // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
-    }
+      // New FOR? If not, discard
+      if (!(curLoop && curLoop.varName === varName)) {
+        const parentLoopLevel = ctx.loops.length - 1;
+        const fParentIsExploring = parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
+        const loopOver = fParentIsExploring
+          ? []
+          : runUserJsAndGetRaw(data, tokens.slice(3).join(' '), ctx);
+          // : extractFromData(data, tokens[3], ctx);
+        ctx.loops.push({ refNode: node, refNodeLevel: ctx.level, varName, loopOver, idx: -1 });
+      }
+      logLoop(ctx.loops);
 
-  // FOR <varName> IN <collectionDataPath>
-  // } else if (cmdName === 'FOR' || cmdName === 'FOR-ROW') {
-  } else if (cmdName === 'FOR') {
-    const varName = tokens[1];
-    // New FOR? If not, discard
-    if (!(curLoop && curLoop.varName === varName)) {
-      const parentLoopLevel = ctx.loops.length - 1;
-      const fParentIsExploring = parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
-      const loopOver = fParentIsExploring
-        ? []
-        : runUserJsAndGetRaw(data, tokens.slice(3).join(' '), ctx);
-        // : extractFromData(data, tokens[3], ctx);
-      ctx.loops.push({ refNode: node, refNodeLevel: ctx.level, varName, loopOver, idx: -1 });
-    }
-    logLoop(ctx.loops);
+    // END-FOR
+    // } else if (cmdName === 'END-FOR' || cmdName === 'END-FOR-ROW') {
+    } else if (cmdName === 'END-FOR') {
+      // ctx.pendingCmd = { name: cmdName };
+      const varName = tokens[1];
+      if (!(curLoop && curLoop.varName === varName)) throw new Error(`Invalid command: ${cmd}`);
 
-  // END-FOR
-  // } else if (cmdName === 'END-FOR' || cmdName === 'END-FOR-ROW') {
-  } else if (cmdName === 'END-FOR') {
-    // ctx.pendingCmd = { name: cmdName };
-    const varName = tokens[1];
-    if (!(curLoop && curLoop.varName === varName)) throw new Error(`Invalid command: ${cmd}`);
+      const { loopOver, idx } = curLoop;
+      const { nextItem, curIdx } = getNextItem(loopOver, idx);
+      if (nextItem) {  // next iteration
+        ctx.vars[varName] = nextItem;
+        ctx.fJump = true;
+        curLoop.idx = curIdx;
+      } else {  // loop finished
+        ctx.loops.pop();
+      }
 
-    const { loopOver, idx } = curLoop;
-    const { nextItem, curIdx } = getNextItem(loopOver, idx);
-    if (nextItem) {  // next iteration
-      ctx.vars[varName] = nextItem;
-      ctx.fJump = true;
-      curLoop.idx = curIdx;
-    } else {  // loop finished
-      ctx.loops.pop();
-    }
+    // INS <scalarDataPath>
+    } else if (cmdName === 'INS') {
+      if (!isLoopExploring(ctx)) {
+        const code = tokens.slice(1).join(' ');
+        out = runUserJsAndGetString(data, code, ctx);
+      }
 
-  // INS <scalarDataPath>
-  } else if (cmdName === 'INS') {
-    if (!isLoopExploring(ctx)) {
-      const code = tokens.slice(1).join(' ');
-      out = runUserJsAndGetString(data, code, ctx);
-    }
-
-  // Invalid command
-  } else throw new Error(`Invalid command syntax: '${cmd}'`);
-  return out;
+    // Invalid command
+    } else throw new Error(`Invalid command syntax: '${cmd}'`);
+    return out;
+  } catch (err) {
+    throw new Error(`Error executing command: ${cmd}\n${err.message}`);
+  }
 };
 
 const appendTextToTagBuffers = (text: string, ctx: Context, options: {|
