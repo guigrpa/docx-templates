@@ -45,7 +45,6 @@ describe('Template processing', () => {
     const defaultOutput = path.join(__dirname, 'fixtures', 'noQuery_report.docx');
     const result = await createReport({ template, _probe: 'JS' });
     expect(fs.existsSync(defaultOutput)).toBeFalsy();
-    // $FlowFixMe
     expect(result._children.length).toBeTruthy();
   });
 
@@ -219,8 +218,8 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('20 Processes SHORTHAND commands', async () => {
-    const template = path.join(__dirname, 'fixtures', 'for1shorthand.docx');
+  it('20 Processes ALIAS commands', async () => {
+    const template = path.join(__dirname, 'fixtures', 'for1alias.docx');
     const result = await createReport({
       template,
       data: { companies: [

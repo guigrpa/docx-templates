@@ -6088,12 +6088,14 @@ Object {
 }
 `;
 
-exports[`Template processing 20 Processes SHORTHAND commands 1`] = `
+exports[`Template processing 20 Processes ALIAS commands 1`] = `
 Object {
   "_attrs": Object {
     "mc:Ignorable": "w14 w15 wp14",
     "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
     "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:mo": "http://schemas.microsoft.com/office/mac/office/2008/main",
+    "xmlns:mv": "urn:schemas-microsoft-com:mac:vml",
     "xmlns:o": "urn:schemas-microsoft-com:office:office",
     "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
     "xmlns:v": "urn:schemas-microsoft-com:vml",
@@ -6115,6 +6117,8 @@ Object {
       "_children": Array [
         Object {
           "_attrs": Object {
+            "w14:paraId": "017DCBFA",
+            "w14:textId": "77777777",
             "w:rsidP": "00BE3B8D",
             "w:rsidR": "00BE3B8D",
             "w:rsidRDefault": "009312A9",
@@ -6146,25 +6150,6 @@ Object {
             },
             Object {
               "_attrs": Object {
-                "w:id": "0",
-                "w:name": "_GoBack",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkStart",
-            },
-            Object {
-              "_attrs": Object {
-                "w:id": "0",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkEnd",
-            },
-            Object {
-              "_attrs": Object {
                 "w:rsidR": "00241C27",
               },
               "_children": Array [
@@ -6222,6 +6207,8 @@ Object {
         },
         Object {
           "_attrs": Object {
+            "w14:paraId": "017DCBFA",
+            "w14:textId": "77777777",
             "w:rsidP": "00BE3B8D",
             "w:rsidR": "00BE3B8D",
             "w:rsidRDefault": "009312A9",
@@ -6253,25 +6240,6 @@ Object {
             },
             Object {
               "_attrs": Object {
-                "w:id": "0",
-                "w:name": "_GoBack",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkStart",
-            },
-            Object {
-              "_attrs": Object {
-                "w:id": "0",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkEnd",
-            },
-            Object {
-              "_attrs": Object {
                 "w:rsidR": "00241C27",
               },
               "_children": Array [
@@ -6329,6 +6297,8 @@ Object {
         },
         Object {
           "_attrs": Object {
+            "w14:paraId": "017DCBFA",
+            "w14:textId": "77777777",
             "w:rsidP": "00BE3B8D",
             "w:rsidR": "00BE3B8D",
             "w:rsidRDefault": "009312A9",
@@ -6360,25 +6330,6 @@ Object {
             },
             Object {
               "_attrs": Object {
-                "w:id": "0",
-                "w:name": "_GoBack",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkStart",
-            },
-            Object {
-              "_attrs": Object {
-                "w:id": "0",
-              },
-              "_children": Array [],
-              "_fTextNode": false,
-              "_parent": [Circular],
-              "_tag": "w:bookmarkEnd",
-            },
-            Object {
-              "_attrs": Object {
                 "w:rsidR": "00241C27",
               },
               "_children": Array [
@@ -6436,6 +6387,8 @@ Object {
         },
         Object {
           "_attrs": Object {
+            "w14:paraId": "704D41F7",
+            "w14:textId": "77777777",
             "w:rsidR": "00426180",
             "w:rsidRDefault": "00426180",
           },
@@ -11703,6 +11656,8 @@ Object {
     "mc:Ignorable": "w14 w15 wp14",
     "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
     "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:mo": "http://schemas.microsoft.com/office/mac/office/2008/main",
+    "xmlns:mv": "urn:schemas-microsoft-com:mac:vml",
     "xmlns:o": "urn:schemas-microsoft-com:office:office",
     "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
     "xmlns:v": "urn:schemas-microsoft-com:vml",
@@ -11737,7 +11692,7 @@ Object {
               "_children": Array [
                 Object {
                   "_attrs": Object {
-                    "w:val": "Puesto",
+                    "w:val": "Title",
                   },
                   "_children": Array [],
                   "_fTextNode": false,
@@ -11842,7 +11797,7 @@ Object {
               "_children": Array [
                 Object {
                   "_attrs": Object {
-                    "w:val": "Sombreadoclaro-nfasis3",
+                    "w:val": "LightShading-Accent3",
                   },
                   "_children": Array [],
                   "_fTextNode": false,

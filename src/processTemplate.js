@@ -277,8 +277,8 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
     if (cmdName === 'QUERY' || cmdName === 'CMD_NODE') {
       // DEBUG && log.debug(`Ignoring ${cmdName} command`);
 
-    // SHORTHAND name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
-    } else if (cmdName === 'SHORTHAND') {
+    // ALIAS name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
+    } else if (cmdName === 'ALIAS') {
       const shorthandName = tokens[1];
       const fullCmd = tokens.slice(2).join(' ');
       ctx.shorthands[shorthandName] = fullCmd;

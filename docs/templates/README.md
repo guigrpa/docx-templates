@@ -6,7 +6,7 @@ Template-based docx report creation.
 
 * **Write reports naturally using Word**, just adding some commands where needed for dynamic contents
 * **Express your data needs (queries) in the template itself**, in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way™*: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
-* Use a small **template language**: `FOR`/`END-FOR` (with support for table rows), `INS`, `SHORTHAND` (alias), `QUERY`, `VAR`
+* Use a small **template language**: `FOR`/`END-FOR` (with support for table rows), `INS`, `ALIAS` (alias), `QUERY`, `VAR`
 * **Transparent JavaScript support** (`FOR`, `INS` and `VAR`), running in a separate Node VM for security
 * **Nested** loops
 * Custom **variables** and **shorthand** commands (useful for writing table templates)
@@ -189,13 +189,13 @@ Finally, you can nest loops (this example assumes a different data set):
 +++END-FOR company+++
 ```
 
-#### SHORTHAND
+#### ALIAS
 
 Define an alias for a complete command (especially useful for formatting tables):
 
 ```
-+++SHORTHAND name INS $person.name+++
-+++SHORTHAND since INS $person.since+++
++++ALIAS name INS $person.name+++
++++ALIAS since INS $person.since+++
 
 ----------------------------------------------------------
 | Name                         | Since                   |
