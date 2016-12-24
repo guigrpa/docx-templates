@@ -1,5 +1,5 @@
 const path = require('path');
-const createReport = require('../lib').default;
+const createReport = require('../../lib');
 const fetch = require('isomorphic-fetch');
 
 createReport({
