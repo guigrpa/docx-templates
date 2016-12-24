@@ -24,6 +24,9 @@ const preprocessTemplate = (
     // Add `xml:space` attr `preserve` to `w:t` tags
     if (!node._fTextNode && node._tag === 'w:t') node._attrs['xml:space'] = 'preserve';
 
+    // Add a space if we reach a new `w:p` tag and there's an open node (hence, in a command)
+    if (!node._fTextNode && node._tag === 'w:p' && openNode) openNode._text += ' ';
+
     // Process text nodes inside `w:t` tags
     if (node._fTextNode &&
         node._parent && !node._parent._fTextNode &&  // Flow, don't complain
