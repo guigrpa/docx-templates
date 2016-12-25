@@ -232,34 +232,6 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('21 Processes VAR commands', async () => {
-    const template = path.join(__dirname, 'fixtures', 'for1var.docx');
-    const result = await createReport({
-      template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
-      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-    });
-    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
-  });
-
-  it('21b Processes VAR commands with JS', async () => {
-    const template = path.join(__dirname, 'fixtures', 'for1varJs.docx');
-    const result = await createReport({
-      template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
-      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-    });
-    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
-  });
-
   it('22 Allows accented characters and such', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1.docx');
     const result = await createReport({
@@ -362,7 +334,7 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('32 Provides access to vars and loop indices (JS)', async () => {
+  it('32 Provides access to loop indices (JS)', async () => {
     const template = path.join(__dirname, 'fixtures', 'insJsWithLoops.docx');
     const result = await createReport({
       template,
@@ -381,6 +353,30 @@ describe('Template processing', () => {
     const result = await createReport({
       template,
       data: {},
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('33b Processes EXEC with shorthand (!)', async () => {
+    const template = path.join(__dirname, 'fixtures', 'execShorthand.docx');
+    const result = await createReport({
+      template,
+      data: {},
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('34 Processes INS with shorthand (=)', async () => {
+    const template = path.join(__dirname, 'fixtures', 'insShorthand.docx');
+    const result = await createReport({
+      template,
+      data: { companies: [
+        { name: 'FIRST' },
+        { name: 'SECOND' },
+        { name: 'THIRD' },
+      ] },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();

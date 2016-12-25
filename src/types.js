@@ -56,7 +56,7 @@ export type Context = {
   fJump: boolean,
   shorthands: { [shorthand: string]: string },
   options: CreateReportOptions,
-  jsSandbox: ?Object,
+  jsSandbox?: ?Object,
 };
 
 export type BufferStatus = {

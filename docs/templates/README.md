@@ -4,17 +4,16 @@ Template-based docx report creation.
 
 ## Why?
 
-* **Write reports naturally using Word**, just adding some commands where needed for dynamic contents
-* **Express your data needs (queries) in the template itself**, in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way™*: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
-* Use a small **template language**: `FOR`/`END-FOR` (with support for table rows), `INS`, `ALIAS` (alias), `QUERY`, `VAR`
-* **Transparent JavaScript support** (`FOR`, `INS` and `VAR`), running in a separate Node VM for security
-* **Nested** loops
-* Custom **variables** and **shorthand** commands (useful for writing table templates)
-* Inclusion of **literal XML**
+* **Write documents naturally using Word**, just adding some commands where needed for dynamic contents
+* **Express your data needs (queries) in the template itself** (`QUERY` command), in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way™*: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
+* **Execute JavaScript snippets** (`EXEC`, or `!` for short)
+* **Insert the result of JavaScript snippets** in your document (`INS`, or `=` for short)
+* Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
+* Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
+* Run all JavaScript in a **separate Node VM for security**
+* Include **literal XML**
 
-Docx-templates relies on the .docx format, which is really complex, so **use with caution**, at least for now. Feel free to submit issues or (even better!) PRs.
-
-If you need external plugins or other bells and whistles please also check out [docxtemplater](https://github.com/open-xml-templating/docxtemplater).
+Contributions are welcome!
 
 ## Installation
 
@@ -85,7 +84,7 @@ You can find several template examples in this repo:
 
 Here is the list of currently supported commands:
 
-#### QUERY
+#### `QUERY`
 
 You can use GraphQL, SQL, whatever you want: the query will be passed unchanged to your `data` query resolver.
 
@@ -116,33 +115,40 @@ const data = {
 };
 ```
 
-#### VAR
+#### `INS` (`=`)
 
-Declare a custom variable (or an *alias*) for a given (JavaScript) expression:
-
-```
-+++VAR details project.details+++
-+++VAR uppercaseName project.name.toUpperCase()+++
-```
-
-#### INS
-
-Insert the result of a given (JavaScript) expression:
+Inserts the result of a given (JavaScript) snippet:
 
 ```
 +++INS project.name+++ (+++INS project.details.year+++)
-+++VAR details project.details+++
-+++INS project.name+++ (+++INS $details.year+++)
+or...
 +++INS `${project.name} (${$details.year})`+++
+```
+
+Note that the last evaluated expression is inserted into the document, so you can include more complex code if you wish:
+
+```
++++INS
+const a = Math.random();
+const b = Math.round((a - 0.5) * 20);
+`A number between -10 and 10: ${b}.`
++++
+```
+
+You can also use this shorthand notation:
+
+```
++++= project.name+++ (+++= project.details.year+++)
++++= `${project.name} (${$details.year})`+++
 ```
 
 Use JavaScript's ternary operator to implement an *if-else* structure:
 
 ```
-+++INS $details.year != null ? `(${$details.year})` : ''+++
++++= $details.year != null ? `(${$details.year})` : ''+++
 ```
 
-#### FOR and END-FOR
+#### `FOR` and `END-FOR`
 
 Loop over a group of elements (resulting from the evaluation of a JavaScript expression):
 
@@ -159,7 +165,7 @@ Since JavaScript expressions are supported, you can for example filter the loop 
 ...
 ```
 
-FOR loops also work over table rows:
+`FOR` loops also work over table rows:
 
 ```
 ----------------------------------------------------------
@@ -189,9 +195,9 @@ Finally, you can nest loops (this example assumes a different data set):
 +++END-FOR company+++
 ```
 
-#### ALIAS
+#### `ALIAS` (and alias resolution with `*`)
 
-Define an alias for a complete command (especially useful for formatting tables):
+Define a name for a complete command (especially useful for formatting tables):
 
 ```
 +++ALIAS name INS $person.name+++
@@ -203,7 +209,7 @@ Define an alias for a complete command (especially useful for formatting tables)
 | +++FOR person IN             |                         |
 | project.people+++            |                         |
 ----------------------------------------------------------
-| +++[name]+++                 | +++[since]+++           |
+| +++*name+++                  | +++*since+++            |
 ----------------------------------------------------------
 | +++END-FOR person+++         |                         |
 ----------------------------------------------------------

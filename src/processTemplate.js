@@ -246,29 +246,39 @@ const processText = (data: ?ReportData, node: TextNode, ctx: Context): string =>
   return outText;
 };
 
-const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
-  let cmd = ctx.cmd.trim();
+const getCommand = (ctx: Context): string => {
+  let { cmd } = ctx;
+  if (cmd[0] === '*') {
+    const aliasName = cmd.slice(1).trim();
+    if (!ctx.shorthands[aliasName]) throw new Error('Unknown alias');
+    cmd = ctx.shorthands[aliasName];
+    DEBUG && log.debug(`Alias for: ${cmd}`);
+  } else if (cmd[0] === '=') {
+    cmd = `INS ${cmd.slice(1).trim()}`;
+  } else if (cmd[0] === '!') {
+    cmd = `EXEC ${cmd.slice(1).trim()}`;
+  }
   ctx.cmd = '';
+  return cmd.trim();
+};
+
+const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
+  const cmd = getCommand(ctx);
   const curLoop = getCurLoop(ctx);
   DEBUG && log.debug(`Processing cmd: ${chalk.cyan.bold(cmd)}`);
   try {
-    // Expand shorthands
-    const shorthandMatch = /^\[(.+)\]$/.exec(cmd);  // eslint-disable-line no-useless-escape
-    if (shorthandMatch != null) {
-      const shorthandName = shorthandMatch[1];
-      cmd = ctx.shorthands[shorthandName];
-      DEBUG && log.debug(`Shorthand for: ${cmd}`);
+    // Extract command name
+    const cmdNameMatch = /^(\S+)\s*/.exec(cmd);
+    let cmdName;
+    let cmdRest = '';
+    if (cmdNameMatch != null) {
+      cmdName = cmdNameMatch[1].toUpperCase();
+      cmdRest = cmd.slice(cmdName.length).trim();
     }
-
-    // Sanitize, tokenize and extract command name
-    cmd = cmd.replace(/\s+/g, ' ');
-    const tokens = cmd.split(' ');
-    if (!tokens.length) throw new Error('Invalid command syntax');
-    const cmdName = tokens[0].toUpperCase();
 
     // Seeking query?
     if (ctx.fSeekQuery) {
-      if (cmdName === 'QUERY') ctx.query = tokens.slice(1).join(' ');
+      if (cmdName === 'QUERY') ctx.query = cmdRest;
       return null;
     }
 
@@ -279,42 +289,44 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
 
     // ALIAS name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
     } else if (cmdName === 'ALIAS') {
-      const shorthandName = tokens[1];
-      const fullCmd = tokens.slice(2).join(' ');
-      ctx.shorthands[shorthandName] = fullCmd;
-      DEBUG && log.debug(`Defined shorthand '${shorthandName}' as: ${fullCmd}`);
+      const aliasMatch = /^(\S+)\s+(.+)/.exec(cmdRest);
+      if (!aliasMatch) throw new Error(`Invalid ALIAS command: ${cmd}`);
+      const aliasName = aliasMatch[1];
+      const fullCmd = aliasMatch[2];
+      ctx.shorthands[aliasName] = fullCmd;
+      DEBUG && log.debug(`Defined alias '${aliasName}' for: ${fullCmd}`);
 
-    // VAR <varName> <dataPath>
-    } else if (cmdName === 'VAR') {
-      if (!isLoopExploring(ctx)) {
-        const varName = tokens[1];
-        const code = tokens.slice(2).join(' ');
-        const varValue = runUserJsAndGetString(data, code, ctx);
-        ctx.vars[varName] = varValue;
-        // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
-      }
+    // VAR <varName> <expression>
+    // } else if (cmdName === 'VAR') {
+    //   if (!isLoopExploring(ctx)) {
+    //     const varMatch = /^(\S+)\s+(.+)/.exec(cmdRest);
+    //     if (!varMatch) throw new Error(`Invalid VAR command: ${cmd}`);
+    //     const varName = varMatch[1];
+    //     const code = varMatch[2];
+    //     const varValue = runUserJsAndGetString(data, code, ctx);
+    //     ctx.vars[varName] = varValue;
+    //     // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
+    //   }
 
-    // FOR <varName> IN <collectionDataPath>
-    // } else if (cmdName === 'FOR' || cmdName === 'FOR-ROW') {
+    // FOR <varName> IN <expression>
     } else if (cmdName === 'FOR') {
-      const varName = tokens[1];
+      const forMatch = /^(\S+)\s+IN\s+(.+)/i.exec(cmdRest);
+      if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
+      const varName = forMatch[1];
       // New FOR? If not, discard
       if (!(curLoop && curLoop.varName === varName)) {
         const parentLoopLevel = ctx.loops.length - 1;
         const fParentIsExploring = parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
         const loopOver = fParentIsExploring
           ? []
-          : runUserJsAndGetRaw(data, tokens.slice(3).join(' '), ctx);
-          // : extractFromData(data, tokens[3], ctx);
+          : runUserJsAndGetRaw(data, forMatch[2], ctx);
         ctx.loops.push({ refNode: node, refNodeLevel: ctx.level, varName, loopOver, idx: -1 });
       }
       logLoop(ctx.loops);
 
     // END-FOR
-    // } else if (cmdName === 'END-FOR' || cmdName === 'END-FOR-ROW') {
     } else if (cmdName === 'END-FOR') {
-      // ctx.pendingCmd = { name: cmdName };
-      const varName = tokens[1];
+      const varName = cmdRest;
       if (!(curLoop && curLoop.varName === varName)) throw new Error(`Invalid command: ${cmd}`);
 
       const { loopOver, idx } = curLoop;
@@ -327,19 +339,13 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
         ctx.loops.pop();
       }
 
-    // INS <scalarDataPath>
+    // INS <expression>
     } else if (cmdName === 'INS') {
-      if (!isLoopExploring(ctx)) {
-        const code = tokens.slice(1).join(' ');
-        out = runUserJsAndGetString(data, code, ctx);
-      }
+      if (!isLoopExploring(ctx)) out = runUserJsAndGetString(data, cmdRest, ctx);
 
-    // INS <scalarDataPath>
+    // EXEC <code>
     } else if (cmdName === 'EXEC') {
-      if (!isLoopExploring(ctx)) {
-        const code = tokens.slice(1).join(' ');
-        runUserJsAndGetRaw(data, code, ctx);
-      }
+      if (!isLoopExploring(ctx)) runUserJsAndGetRaw(data, cmdRest, ctx);
 
     // Invalid command
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
