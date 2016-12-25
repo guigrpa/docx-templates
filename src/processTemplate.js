@@ -140,16 +140,10 @@ const produceJsReport = (
       const tag = nodeOut._fTextNode ? null : nodeOut._tag;
       let fRemoveNode = false;
       if ((tag === 'w:p' || tag === 'w:tbl' || tag === 'w:tr') && isLoopExploring(ctx)) {
-        // console.log(`Deleting ${tag} automatically ` +
-        //   `since we are exploring (curLoop: ${curLoop.varName})`)
         fRemoveNode = true;
       } else if (tag === 'w:p' || tag === 'w:tr') {
         const buffers = ctx.buffers[tag];
-        // console.log(`Considering node ${tag} for removal...`)
-        // console.log(`text = ${buffers.text}, cmds = ${buffers.cmds}, ` +
-        //   `fInsertedText=${buffers.fInsertedText}`);
         fRemoveNode = buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
-        // console.log(`fRemoveNode = ${fRemoveNode}`);
       }
       // Execute removal, if suitable; will no longer be accessible from the parent
       // (but the parent will be accessible from the child)
@@ -168,8 +162,23 @@ const produceJsReport = (
         // DEBUG && log.debug(`Updated loop '${curLoop.varName}' refNode:`,
         //   { attach: cloneNodeForLogging(nodeIn) });
       }
-      if (nodeOut._parent == null) throw new Error('INTERNAL_ERROR');  // Flow-prevention
-      nodeOut = nodeOut._parent;
+      const nodeOutParent = nodeOut._parent;
+      if (nodeOutParent == null) throw new Error('INTERNAL_ERROR');  // Flow-prevention
+
+      // `w:tc` nodes shouldn't be left with no `w:p` children
+      if (!nodeOutParent._fTextNode &&
+          nodeOutParent._tag === 'w:tc' &&
+          !nodeOutParent._children.filter((o) => !o._fTextNode && o._tag === 'w:p').length
+      ) {
+        nodeOutParent._children.push({
+          _parent: nodeOutParent,
+          _children: [],
+          _fTextNode: false,
+          _tag: 'w:p',
+          _attrs: {},
+        });
+      }
+      nodeOut = nodeOutParent;
     }
 
     // Node creation: DOWN | SIDE
