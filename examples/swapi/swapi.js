@@ -1,9 +1,8 @@
-const path = require('path');
 const createReport = require('../../lib');
-const fetch = require('isomorphic-fetch');
+require('isomorphic-fetch');
 
 createReport({
-  template: path.join(__dirname, 'swapi.docx'),
+  template: process.argv[2],
   data: (query) =>
     fetch('http://graphql-swapi.parseapp.com', {
       method: 'POST',
