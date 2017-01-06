@@ -1,6 +1,6 @@
 {
   "name": "docx-templates",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Template-based docx report creation",
   "main": "lib/index.js",
   "author": "Guillermo Grau Panea",

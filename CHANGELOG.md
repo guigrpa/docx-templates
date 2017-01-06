@@ -2,6 +2,8 @@
 
 *[M]: major change; [m]: minor change*
 
+## 2.0.0 (Jan. 6, 2017)
+
 * **Breaking changes:**
     * `SHORTHAND` has been renamed `ALIAS`
     * Alias resolution syntax has changed: `+++[name]+++` is no longer supported; use `+++*name+++` instead (for coherence with other commands)
