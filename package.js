@@ -116,6 +116,7 @@ const specs = {
     unzip: '0.1.11',
     sax: '1.2.1',
     uuid: '3.0.1',
+    globby: '6.1.0',
   },
 
   devDependencies: {

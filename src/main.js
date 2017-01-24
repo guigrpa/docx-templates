@@ -7,6 +7,7 @@ import os from 'os';
 import Promise from 'bluebird';
 import fs from 'fs-extra';
 import uuid from 'uuid';
+import globby from 'globby';
 import { zipFile, unzipFile } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
@@ -50,7 +51,7 @@ const createReport = (options: UserOptions): Promise<any> => {
 
   let jsTemplate;
   let queryResult = null;
-  const templatePath = `${base}_unzipped/word/document.xml`;
+  const templatePath = `${base}_unzipped/word`;
   let tic;
   let result;
   return Promise.resolve()
@@ -65,7 +66,7 @@ const createReport = (options: UserOptions): Promise<any> => {
   // Read the 'document.xml' file (the template) and parse it
   .then(() => {
     DEBUG && log.debug('Reading template...');
-    return fsPromises.readFile(templatePath, 'utf8')
+    return fsPromises.readFile(`${templatePath}/document.xml`, 'utf8')
     .then((templateXml) => {
       DEBUG && log.debug(`Template file length: ${templateXml.length}`);
       DEBUG && log.debug('Parsing XML...');
@@ -126,8 +127,26 @@ const createReport = (options: UserOptions): Promise<any> => {
       return null;
     }
     DEBUG && log.debug('Writing report...');
-    return fsPromises.writeFile(templatePath, reportXml);
+    return fsPromises.writeFile(`${templatePath}/document.xml`, reportXml);
   })
+
+  // Process all other XML files
+  .then(() =>
+    globby([`${templatePath}/*.xml`, `!${templatePath}/document.xml`])
+    .then((files) => Promise.all(files.map((filePath) => {
+      DEBUG && log.info(`Processing ${filePath}...`);
+      return fsPromises.readFile(filePath, 'utf8')
+      .then(parseXml)
+      .then((js0) => {
+        const js = preprocessTemplate(js0, createOptions);
+        return produceJsReport(queryResult, js, createOptions);
+      })
+      .then((js) => {
+        const xml = buildXml(js, xmlOptions);
+        return fsPromises.writeFile(filePath, xml);
+      });
+    })))  // eslint-disable-line
+  )
 
   // Zip the results
   .then(() => {
