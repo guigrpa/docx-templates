@@ -2,6 +2,10 @@
 
 *[M]: major change; [m]: minor change*
 
+# 2.1.0 (Jan. 24, 2017)
+
+* [M] Add support for commands in headers, footers and elsewhere
+
 ## 2.0.0 (Jan. 6, 2017)
 
 * **Breaking changes:**
