@@ -72,7 +72,7 @@ const specs = {
     // Static analysis
     lint:                       'eslint src',
     flow:                       'flow check || exit 0',
-    xxl:                        "xxl --src \"[\\\"src\\\"]\"",
+    xxl:                        "xxl --src src",
 
     // Testing - general
     jest:                       'jest --watch --coverage',
@@ -122,7 +122,7 @@ const specs = {
   devDependencies: {
     storyboard: '^2.3.1',
     'isomorphic-fetch': '2.2.1',
-    'xxl': '^0.1.1',
+    'xxl': '^1.0.0',
     'cross-env': '3.1.3',
 
     // Babel (except babel-eslint)
@@ -134,7 +134,7 @@ const specs = {
     'babel-preset-react': '6.16.0',
 
     // Linting
-    'eslint': '3.12.2',
+    'eslint': '3.14.0',
     'eslint-config-airbnb': '13.0.0',
     'eslint-plugin-flowtype': '2.29.1',
     'eslint-plugin-import': '2.2.0',
@@ -143,7 +143,7 @@ const specs = {
     'babel-eslint': '7.1.1',
 
     // Documentation
-    'extract-docs': '^1.2.0',
+    'extract-docs': '^1.4.0',
 
     // Testing
     'jest': '18.0.0',
@@ -155,7 +155,7 @@ const specs = {
     coveralls: '2.11.15',
 
     // Other tools
-    'flow-bin': '0.37.0',
+    'flow-bin': '0.38.0',
     'flow-copy-source': '1.1.0',
   },
 
