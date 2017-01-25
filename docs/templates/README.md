@@ -148,6 +148,19 @@ Use JavaScript's ternary operator to implement an *if-else* structure:
 +++= $details.year != null ? `(${$details.year})` : ''+++
 ```
 
+#### `EXEC` (`!`)
+
+Executes a given JavaScript snippet, just like `INS` or `=`, but doesn't insert anything in the document. You can use `EXEC`, for example, to define functions or constants before using them elsewhere in your template.
+
+```
++++EXEC
+const myFun = () => Math.random();
+const MY_CONSTANT = 3;
++++
+
++++! const ANOTHER_CONSTANT = 5; +++
+```
+
 #### `FOR` and `END-FOR`
 
 Loop over a group of elements (resulting from the evaluation of a JavaScript expression):
