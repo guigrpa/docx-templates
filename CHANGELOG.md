@@ -2,6 +2,10 @@
 
 *[M]: major change; [m]: minor change*
 
+## 2.1.1 (Jan. 25, 2017)
+
+* Fix a case in which the tool hangs indefinitely when a query is expected and not found.
+
 ## 2.1.0 (Jan. 24, 2017)
 
 * [M] Add support for commands in headers, footers and elsewhere

@@ -40,15 +40,18 @@ const extractQuery = (template: Node, options: CreateReportOptions): ?string => 
 
     // Move sideways or up
     else {
+      let fFound = false;
       while (nodeIn._parent != null) {
         const parent = nodeIn._parent;
         const nextSibling = getNextSibling(nodeIn);
         if (nextSibling) {
           nodeIn = nextSibling;
+          fFound = true;
           break;
         }
         nodeIn = parent;
       }
+      if (!fFound) break;
     }
 
     if (!nodeIn) break;
