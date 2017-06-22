@@ -13,6 +13,7 @@ import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
 import type { UserOptions } from './types';
+import { overWriteImage } from './img';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
@@ -128,6 +129,16 @@ const createReport = (options: UserOptions): Promise<any> => {
     }
     DEBUG && log.debug('Writing report...');
     return fsPromises.writeFile(`${templatePath}/document.xml`, reportXml);
+  })
+
+  // change images 
+  .then(() => {
+    if (!fs.existsSync(`${templatePath}/media/`)) {
+      // not found dir
+      return ; 
+    }
+    overWriteImage(`${templatePath}/media/`, options)
+    return ;
   })
 
   // Process all other XML files
