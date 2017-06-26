@@ -253,7 +253,7 @@ createReport({
     name: 'John',
     surname: 'Appleseed',
   },
-  imgs:[
+  images:[
     {id: 0, path: 'img/circle.png'}, //replace image1.png
     {id: 2, path: 'img/start.png'}, //replace image3.png
   ]
