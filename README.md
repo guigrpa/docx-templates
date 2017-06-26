@@ -227,8 +227,32 @@ Define a name for a complete command (especially useful for formatting tables):
 | +++END-FOR person+++         |                         |
 ----------------------------------------------------------
 ```
+#### `IMAGES` (replace images in template)
 
 
+```
+├─word
+| ├─media
+| | ├─image1.png ->position 0
+| | ├─image2.png ->position 1
+| | ├─image3.png ->position 2
+```
+```js
+import createReport from 'docx-templates';
+
+createReport({
+  template: 'templates/myTemplate.docx',
+  output: 'reports/myReport.docx',
+  data: {
+    name: 'John',
+    surname: 'Appleseed',
+  },
+  imgs:[
+    {id: 0, path: 'img/circle.png'}, //replace image1.png
+    {id: 2, path: 'img/start.png'}, //replace image3.png
+  ]
+});
+```
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
 
 ## Similar projects

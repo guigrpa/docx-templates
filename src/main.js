@@ -13,7 +13,7 @@ import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
 import type { UserOptions } from './types';
-import { overWriteImage } from './img';
+import { overWriteImage } from './images';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
@@ -22,7 +22,7 @@ const DEFAULT_LITERAL_XML_DELIMITER = '||';
 const log: any = DEBUG ? require('./debug').mainStory : null;
 
 const fsPromises = {};
-['emptyDir', 'ensureDir', 'readFile', 'writeFile', 'remove'].forEach((fn) => {
+['emptyDir', 'ensureDir', 'readFile', 'writeFile', 'remove', 'readdir'].forEach((fn) => {
   fsPromises[fn] = Promise.promisify(fs[fn]);
 });
 
@@ -133,12 +133,28 @@ const createReport = (options: UserOptions): Promise<any> => {
 
   // change images 
   .then(() => {
-    if (!fs.existsSync(`${templatePath}/media/`)) {
+    const dirMedia = `${templatePath}/media/`
+    if (!fs.existsSync(dirMedia)) {
       // not found dir
-      return ; 
+      return;
     }
-    overWriteImage(`${templatePath}/media/`, options)
-    return ;
+    return fsPromises.readdir(dirMedia) 
+      .then(function (images) {
+        const promises = Promise.map(images, function(file, index){
+          const newImg = options.images.find(img => img.id === index);
+          return overWriteImage(`${dirMedia}${file}`, newImg);
+        });
+        return Promise.all(promises)
+            .then(() => true)
+            // if we don't throw the catch continues on the .thenable chain
+            .catch(() => false);
+      })
+      .then(success => {
+          if(!success) {
+              throw new Error('Something went wrong');
+          }
+          return true;
+      });
   })
 
   // Process all other XML files
