@@ -254,8 +254,8 @@ createReport({
     surname: 'Appleseed',
   },
   images:[
-    {id: 0, path: 'img/circle.png'}, //replace image1.png
-    {id: 2, path: 'img/start.png'}, //replace image3.png
+    {id: 0, base64: <Base64>}, //replace image1.png
+    {id: 2, base64: <Base64>}, //replace image3.png
   ]
 });
 ```
