@@ -29,7 +29,7 @@ export type UserOptions = {|
   data?: ReportData | QueryResolver,
   queryVars?: any,
   output?: string,
-  images?: JSON,
+  images?: Array<CustomImg>,
   cmdDelimiter?: string,
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean,
@@ -73,4 +73,9 @@ export type LoopStatus = {
   varName: string,
   loopOver: Array<VarValue>,
   idx: number,
+};
+
+export type CustomImg = {
+  id: number,
+  strBase64: string,
 };
