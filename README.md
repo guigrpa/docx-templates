@@ -239,9 +239,9 @@ To add the images to the template, follow these steps:
 ```
 ├─word
 | ├─media
-| | ├─image1.png ->position 0
-| | ├─image2.png ->position 1
-| | ├─image3.png ->position 2
+| | ├─image1.png
+| | ├─image2.png
+| | ├─image3.png
 ```
 ```js
 import createReport from 'docx-templates';
@@ -253,10 +253,11 @@ createReport({
     name: 'John',
     surname: 'Appleseed',
   },
-  images:[
-    {id: 0, strBase64: <Base64>}, //replace image1.png
-    {id: 2, strBase64: <Base64>}, //replace image3.png
-  ]
+  base64 : false, // use base64 true
+  replaceImages: {
+    'image1.png': '/absolute/path/to/newImage1.png', // or buffer
+    'image3.png': '/absolute/path/to/newImage3.png',
+  }
 });
 ```
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)

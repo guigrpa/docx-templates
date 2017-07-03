@@ -12,8 +12,8 @@ import { zipFile, unzipFile } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
-import type { UserOptions, CustomImg } from './types';
-import { overWriteImage } from './images';
+import type { UserOptions } from './types';
+import { overWriteImageBase64, overWriteImagePath, findProp } from './images';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
@@ -54,7 +54,8 @@ const createReport = (options: UserOptions): Promise<any> => {
   const templatePath = `${base}_unzipped/word`;
   let tic;
   let result;
-  const images = options.images;
+  const replaceImages = options.replaceImages;
+  const base64OrPath = options.base64;
 
   return Promise.resolve()
 
@@ -141,22 +142,30 @@ const createReport = (options: UserOptions): Promise<any> => {
     }
     return fsPromises.readdir(dirMedia)
       .then((files) => {
-        const promises: any = Promise.map(files, (file, index) => {
-          let newImg: CustomImg | void;
-          if (images) {
-            newImg = images.find((img: CustomImg) => img.id === index);
-            return overWriteImage(`${dirMedia}${file}`, newImg);
+        const promises: any = Promise.map(files, (file) => {
+          const newImg: any = findProp(replaceImages, file);
+          switch (base64OrPath) {
+            case true:
+              if (newImg) {
+                return overWriteImageBase64(`${dirMedia}${file}`, newImg);
+              }
+              return undefined;
+            case false:
+              if (newImg) {
+                return fsPromises.readFile(newImg)
+                .then((resBuffer) => overWriteImagePath(`${dirMedia}${file}`, resBuffer));
+              }
+              return undefined;
+            default:
+              return undefined;
           }
-          return undefined;
         });
         return Promise.all(promises)
-            .then(() => true)
-            // if we don't throw the catch continues on the .thenable chain
-            .catch(() => false);
+          .then(() => true)
+          .catch(() => false);
       })
       .then((success) => {
         if (!success) {
-          // throw new Error('Something went wrong');
           return false;
         }
         return true;

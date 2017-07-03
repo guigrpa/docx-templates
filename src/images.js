@@ -3,19 +3,19 @@
 /* eslint-disable new-cap */
 
 import fs from 'fs-extra';
-import type { CustomImg } from './types';
 
-const overWriteImage = (oldImg: string, newImg: CustomImg | void) => {
-  if (newImg && newImg.id && newImg.strBase64) {
-    const decodedImage = new Buffer(newImg.strBase64, 'base64');
-    return fs.writeFile(oldImg, decodedImage);
-  }
-  return undefined;
-};
+const overWriteImageBase64 = (oldImg: string, newImg: string) => fs.writeFile(oldImg, new Buffer(newImg, 'base64'));
+
+const overWriteImagePath = (oldImg: string, buffer: string) => fs.writeFile(oldImg, buffer);
+
+const findProp = (obj: any, property: string) =>
+  obj[Object.keys(obj).find((key) => key === property)];
 
 // ==========================================
 // Public API
 // ==========================================
 export {
-  overWriteImage,
+  overWriteImageBase64,
+  overWriteImagePath,
+  findProp,
 };
