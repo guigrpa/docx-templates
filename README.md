@@ -227,8 +227,39 @@ Define a name for a complete command (especially useful for formatting tables):
 | +++END-FOR person+++         |                         |
 ----------------------------------------------------------
 ```
+#### `IMAGES` (replace images in template)
 
+To add the images to the template, follow these steps:
+1. Go where the template is located, right click, open with WinRar.
 
+2. Let's go to the address Word -> media and we'll see the images that the template has.
+
+3. We identify the images that we want to replace.
+
+```
+├─word
+| ├─media
+| | ├─image1.png
+| | ├─image2.png
+| | ├─image3.png
+```
+```js
+import createReport from 'docx-templates';
+
+createReport({
+  template: 'templates/myTemplate.docx',
+  output: 'reports/myReport.docx',
+  data: {
+    name: 'John',
+    surname: 'Appleseed',
+  },
+  base64 : false, // use base64 true
+  replaceImages: {
+    'image1.png': '/absolute/path/to/newImage1.png', // or buffer
+    'image3.png': '/absolute/path/to/newImage3.png',
+  }
+});
+```
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
 
 ## Similar projects

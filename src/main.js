@@ -13,6 +13,7 @@ import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
 import type { UserOptions } from './types';
+import { overWriteImageBase64, overWriteImagePath, findProp } from './images';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
@@ -21,7 +22,7 @@ const DEFAULT_LITERAL_XML_DELIMITER = '||';
 const log: any = DEBUG ? require('./debug').mainStory : null;
 
 const fsPromises = {};
-['emptyDir', 'ensureDir', 'readFile', 'writeFile', 'remove'].forEach((fn) => {
+['emptyDir', 'ensureDir', 'readFile', 'writeFile', 'remove', 'readdir'].forEach((fn) => {
   fsPromises[fn] = Promise.promisify(fs[fn]);
 });
 
@@ -48,12 +49,14 @@ const createReport = (options: UserOptions): Promise<any> => {
     processLineBreaks: options.processLineBreaks != null ? options.processLineBreaks : true,
   };
   const xmlOptions = { literalXmlDelimiter };
-
   let jsTemplate;
   let queryResult = null;
   const templatePath = `${base}_unzipped/word`;
   let tic;
   let result;
+  const replaceImages = options.replaceImages;
+  const base64OrPath = options.base64;
+
   return Promise.resolve()
 
   // Unzip
@@ -128,6 +131,45 @@ const createReport = (options: UserOptions): Promise<any> => {
     }
     DEBUG && log.debug('Writing report...');
     return fsPromises.writeFile(`${templatePath}/document.xml`, reportXml);
+  })
+
+  // change images
+  .then(() => {
+    const dirMedia = `${templatePath}/media/`;
+    if (!fs.existsSync(dirMedia)) {
+      // not found dir
+      return undefined;
+    }
+    return fsPromises.readdir(dirMedia)
+      .then((files) => {
+        const promises: any = Promise.map(files, (file) => {
+          const newImg: any = findProp(replaceImages, file);
+          switch (base64OrPath) {
+            case true:
+              if (newImg) {
+                return overWriteImageBase64(`${dirMedia}${file}`, newImg);
+              }
+              return undefined;
+            case false:
+              if (newImg) {
+                return fsPromises.readFile(newImg)
+                .then((resBuffer) => overWriteImagePath(`${dirMedia}${file}`, resBuffer));
+              }
+              return undefined;
+            default:
+              return undefined;
+          }
+        });
+        return Promise.all(promises)
+          .then(() => true)
+          .catch(() => false);
+      })
+      .then((success) => {
+        if (!success) {
+          return false;
+        }
+        return true;
+      });
   })
 
   // Process all other XML files

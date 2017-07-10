@@ -29,6 +29,8 @@ export type UserOptions = {|
   data?: ReportData | QueryResolver,
   queryVars?: any,
   output?: string,
+  base64?: boolean,
+  replaceImages?: any,
   cmdDelimiter?: string,
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean,
