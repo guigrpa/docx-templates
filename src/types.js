@@ -23,7 +23,10 @@ export type Node = TextNode | NonTextNode;
 // ==========================================
 export type ReportData = any;
 export type Query = string;
-export type QueryResolver = (query: ?Query, queryVars: any) => ReportData | Promise<ReportData>;
+export type QueryResolver = (
+  query: ?Query,
+  queryVars: any
+) => ReportData | Promise<ReportData>;
 export type UserOptions = {|
   template: string,
   data?: ReportData | QueryResolver,

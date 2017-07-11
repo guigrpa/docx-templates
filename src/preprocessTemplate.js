@@ -1,18 +1,12 @@
 // @flow
 
 import { insertTextSiblingAfter, getNextSibling } from './reportUtils';
-import type {
-  Node,
-  CreateReportOptions,
-} from './types';
+import type { Node, CreateReportOptions } from './types';
 
 // In-place
 // In case of split commands (or even split delimiters), joins all the pieces
 // at the starting node
-const preprocessTemplate = (
-  template: Node,
-  options: CreateReportOptions,
-) => {
+const preprocessTemplate = (template: Node, options: CreateReportOptions) => {
   const { cmdDelimiter: delimiter } = options;
   let node: ?Node = template;
   let fCmd = false;
@@ -22,15 +16,22 @@ const preprocessTemplate = (
 
   while (node != null) {
     // Add `xml:space` attr `preserve` to `w:t` tags
-    if (!node._fTextNode && node._tag === 'w:t') node._attrs['xml:space'] = 'preserve';
+    if (!node._fTextNode && node._tag === 'w:t') {
+      node._attrs['xml:space'] = 'preserve';
+    }
 
     // Add a space if we reach a new `w:p` tag and there's an open node (hence, in a command)
-    if (!node._fTextNode && node._tag === 'w:p' && openNode) openNode._text += ' ';
+    if (!node._fTextNode && node._tag === 'w:p' && openNode) {
+      openNode._text += ' ';
+    }
 
     // Process text nodes inside `w:t` tags
-    if (node._fTextNode &&
-        node._parent && !node._parent._fTextNode &&  // Flow, don't complain
-        node._parent._tag === 'w:t') {
+    if (
+      node._fTextNode &&
+      node._parent &&
+      !node._parent._fTextNode && // Flow, don't complain
+      node._parent._tag === 'w:t'
+    ) {
       if (openNode == null) openNode = node;
       const textIn = node._text;
       node._text = '';
@@ -57,17 +58,17 @@ const preprocessTemplate = (
               if (fNodesMatch) node = openNode;
             }
             idxDelimiter = 0;
-            if (!fCmd) openNode = node;  // may switch open node to the current one
+            if (!fCmd) openNode = node; // may switch open node to the current one
           }
 
-        // Doesn't match the delimiter, but we had some partial match
+          // Doesn't match the delimiter, but we had some partial match
         } else if (idxDelimiter) {
           openNode._text += delimiter.slice(0, idxDelimiter);
           idxDelimiter = 0;
           if (!fCmd) openNode = node;
           openNode._text += c;
 
-        // General case
+          // General case
         } else {
           openNode._text += c;
         }

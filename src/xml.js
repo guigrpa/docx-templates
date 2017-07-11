@@ -7,7 +7,8 @@ const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
 
 const parseXml = (templateXml: string): Promise<Node> => {
-  const parser = sax.parser(true, {  // true for XML-like (false for HTML-like)
+  const parser = sax.parser(true, {
+    // true for XML-like (false for HTML-like)
     trim: false,
     normalize: false,
   });
@@ -15,7 +16,7 @@ const parseXml = (templateXml: string): Promise<Node> => {
   let curNode = null;
   let numXmlElements = 0;
   return new Promise((resolve, reject) => {
-    parser.onopentag = (node) => {
+    parser.onopentag = node => {
       const newNode = {
         _parent: curNode,
         _children: [],
@@ -28,8 +29,10 @@ const parseXml = (templateXml: string): Promise<Node> => {
       curNode = newNode;
       numXmlElements += 1;
     };
-    parser.onclosetag = () => { curNode = curNode != null ? curNode._parent : null; };
-    parser.ontext = (text) => {
+    parser.onclosetag = () => {
+      curNode = curNode != null ? curNode._parent : null;
+    };
+    parser.ontext = text => {
       if (curNode == null) return;
       curNode._children.push({
         _parent: curNode,
@@ -42,7 +45,9 @@ const parseXml = (templateXml: string): Promise<Node> => {
       DEBUG && log.debug(`Number of XML elements: ${numXmlElements}`);
       resolve(template);
     };
-    parser.onerror = (err) => { reject(err); };
+    parser.onerror = err => {
+      reject(err);
+    };
     parser.write(templateXml);
     parser.end();
   });
@@ -53,19 +58,21 @@ type XmlOptions = {|
 |};
 
 const buildXml = (node: Node, options: XmlOptions, indent?: string = '') => {
-  let xml = indent.length ? '' : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+  let xml = indent.length
+    ? ''
+    : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
   if (node._fTextNode) xml += sanitizeText(node._text, options);
   else {
     let attrs = '';
     const nodeAttrs = node._attrs;
-    Object.keys(nodeAttrs).forEach((key) => {
+    Object.keys(nodeAttrs).forEach(key => {
       attrs += ` ${key}="${nodeAttrs[key]}"`;
     });
     const fHasChildren = node._children.length > 0;
     const suffix = fHasChildren ? '' : '/';
     xml += `\n${indent}<${node._tag}${attrs}${suffix}>`;
     let fLastChildIsNode = false;
-    node._children.forEach((child) => {
+    node._children.forEach(child => {
       xml += buildXml(child, options, `${indent}  `);
       fLastChildIsNode = !child._fTextNode;
     });
@@ -84,7 +91,7 @@ const sanitizeText = (str: string, options: XmlOptions) => {
   for (let i = 0; i < segments.length; i++) {
     let processedSegment = segments[i];
     if (!fLiteral) {
-      processedSegment = processedSegment.replace(/&/g, '&amp;');  // must be the first one
+      processedSegment = processedSegment.replace(/&/g, '&amp;'); // must be the first one
       processedSegment = processedSegment.replace(/</g, '&lt;');
       processedSegment = processedSegment.replace(/>/g, '&gt;');
     }
@@ -97,7 +104,4 @@ const sanitizeText = (str: string, options: XmlOptions) => {
 // ==========================================
 // Public API
 // ==========================================
-export {
-  parseXml,
-  buildXml,
-};
+export { parseXml, buildXml };

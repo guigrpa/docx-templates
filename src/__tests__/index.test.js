@@ -33,7 +33,11 @@ describe('End-to-end', () => {
 
   it('02 Can produce a default output path', async () => {
     const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
-    const defaultOutput = path.join(__dirname, 'fixtures', 'noQuery_report.docx');
+    const defaultOutput = path.join(
+      __dirname,
+      'fixtures',
+      'noQuery_report.docx'
+    );
     await createReport({ template });
     expect(fs.existsSync(defaultOutput)).toBeTruthy();
     fs.unlinkSync(defaultOutput);
@@ -43,7 +47,11 @@ describe('End-to-end', () => {
 describe('Template processing', () => {
   it('01 Probe works', async () => {
     const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
-    const defaultOutput = path.join(__dirname, 'fixtures', 'noQuery_report.docx');
+    const defaultOutput = path.join(
+      __dirname,
+      'fixtures',
+      'noQuery_report.docx'
+    );
     const result = await createReport({ template, _probe: 'JS' });
     expect(fs.existsSync(defaultOutput)).toBeFalsy();
     expect(result._children.length).toBeTruthy();
@@ -64,8 +72,12 @@ describe('Template processing', () => {
     expect(queryResolver.mock.calls[0][1]).toEqual(queryVars);
   });
 
-  it('03 Uses the resolver\'s response to produce the report', async () => {
-    const template = path.join(__dirname, 'fixtures', 'simpleQuerySimpleInserts.docx');
+  it("03 Uses the resolver's response to produce the report", async () => {
+    const template = path.join(
+      __dirname,
+      'fixtures',
+      'simpleQuerySimpleInserts.docx'
+    );
     const result = await createReport({
       template,
       data: () => ({ a: 'foo', b: 'bar' }),
@@ -75,7 +87,11 @@ describe('Template processing', () => {
   });
 
   it('04 Allows replacing the resolver by a data object', async () => {
-    const template = path.join(__dirname, 'fixtures', 'noQuerySimpleInserts.docx');
+    const template = path.join(
+      __dirname,
+      'fixtures',
+      'noQuerySimpleInserts.docx'
+    );
     const result = await createReport({
       template,
       data: { a: 'foo', b: 'bar' },
@@ -88,11 +104,9 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'for1.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -102,22 +116,18 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'for2.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        {
-          name: 'FIRST',
-          people: [
-            { firstName: 'Pep' },
-            { firstName: 'Fidel' },
-          ],
-        },
-        {
-          name: 'SECOND',
-          people: [
-            { firstName: 'Albert' },
-            { firstName: 'Xavi' },
-          ],
-        },
-      ] },
+      data: {
+        companies: [
+          {
+            name: 'FIRST',
+            people: [{ firstName: 'Pep' }, { firstName: 'Fidel' }],
+          },
+          {
+            name: 'SECOND',
+            people: [{ firstName: 'Albert' }, { firstName: 'Xavi' }],
+          },
+        ],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -127,26 +137,31 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'for3.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        {
-          name: 'FIRST',
-          people: [
-            { firstName: 'Pep', projects: [{ name: 'one' }, { name: 'two' }] },
-            { firstName: 'Fidel', projects: [{ name: 'three' }] },
-          ],
-        },
-        {
-          name: 'SECOND',
-          people: [
-            { firstName: 'Albert', projects: [] },
-            { firstName: 'Xavi', projects: [] },
-          ],
-        },
-        {
-          name: 'THIRD',
-          people: [],
-        },
-      ] },
+      data: {
+        companies: [
+          {
+            name: 'FIRST',
+            people: [
+              {
+                firstName: 'Pep',
+                projects: [{ name: 'one' }, { name: 'two' }],
+              },
+              { firstName: 'Fidel', projects: [{ name: 'three' }] },
+            ],
+          },
+          {
+            name: 'SECOND',
+            people: [
+              { firstName: 'Albert', projects: [] },
+              { firstName: 'Xavi', projects: [] },
+            ],
+          },
+          {
+            name: 'THIRD',
+            people: [],
+          },
+        ],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -156,11 +171,9 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'for-row1.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -180,12 +193,14 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'for1js.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'abengoa' },
-        { name: 'Endesa' },
-        { name: 'IBERDROLA' },
-        { name: 'Acerinox' },
-      ] },
+      data: {
+        companies: [
+          { name: 'abengoa' },
+          { name: 'Endesa' },
+          { name: 'IBERDROLA' },
+          { name: 'Acerinox' },
+        ],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -195,25 +210,25 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'for1inline.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
   it('12 Processes a more complex inline FOR loop with spaces', async () => {
-    const template = path.join(__dirname, 'fixtures', 'for1inlineWithSpaces.docx');
+    const template = path.join(
+      __dirname,
+      'fixtures',
+      'for1inlineWithSpaces.docx'
+    );
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -223,11 +238,9 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'for1alias.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -238,10 +251,9 @@ describe('Template processing', () => {
     const result = await createReport({
       template,
       output: path.join(__dirname, 'fixtures', 'for1accented_report.docx'),
-      data: { companies: [
-        { name: '¿Por qué?' },
-        { name: 'Porque sí' },
-      ] },
+      data: {
+        companies: [{ name: '¿Por qué?' }, { name: 'Porque sí' }],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -252,11 +264,13 @@ describe('Template processing', () => {
     const result = await createReport({
       template,
       output: path.join(__dirname, 'fixtures', 'for1specialChars_report.docx'),
-      data: { companies: [
-        { name: '3 < 4 << 400' },
-        { name: '5 > 2 >> -100' },
-        { name: 'a & b && c' },
-      ] },
+      data: {
+        companies: [
+          { name: '3 < 4 << 400' },
+          { name: '5 > 2 >> -100' },
+          { name: 'a & b && c' },
+        ],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -276,7 +290,11 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'literalXml.docx');
     const result = await createReport({
       template,
-      output: path.join(__dirname, 'fixtures', 'literalXmlCustomDelimiter_report.docx'),
+      output: path.join(
+        __dirname,
+        'fixtures',
+        'literalXmlCustomDelimiter_report.docx'
+      ),
       data: { text: 'foo____<w:br/>____bar' },
       literalXmlDelimiter: '____',
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
@@ -339,11 +357,9 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'insJsWithLoops.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -373,11 +389,9 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'insShorthand.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -387,11 +401,9 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'execAndIns.docx');
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -402,15 +414,15 @@ describe('Template processing', () => {
     try {
       await createReport({
         template,
-        data: { companies: [
-          { name: 'FIRST' },
-          { name: 'SECOND' },
-          { name: 'THIRD' },
-        ] },
+        data: {
+          companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+        },
         _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
       });
       expect(true).toBeFalsy(); // should have thrown
-    } catch (err) { /* this exception was expected */ }
+    } catch (err) {
+      /* this exception was expected */
+    }
   });
 
   it('41 Throws on invalid for logic', async () => {
@@ -418,26 +430,28 @@ describe('Template processing', () => {
     try {
       await createReport({
         template,
-        data: { companies: [
-          { name: 'FIRST' },
-          { name: 'SECOND' },
-          { name: 'THIRD' },
-        ] },
+        data: {
+          companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+        },
         _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
       });
       expect(true).toBeFalsy(); // should have thrown
-    } catch (err) { /* this exception was expected */ }
+    } catch (err) {
+      /* this exception was expected */
+    }
   });
 
   it('70 Allows customisation of cmd delimiter', async () => {
-    const template = path.join(__dirname, 'fixtures', 'for1customDelimiter.docx');
+    const template = path.join(
+      __dirname,
+      'fixtures',
+      'for1customDelimiter.docx'
+    );
     const result = await createReport({
       template,
-      data: { companies: [
-        { name: 'FIRST' },
-        { name: 'SECOND' },
-        { name: 'THIRD' },
-      ] },
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
       cmdDelimiter: '***',
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
@@ -448,25 +462,27 @@ describe('Template processing', () => {
     const template = path.join(__dirname, 'fixtures', 'wbs.docx');
     const result = await createReport({
       template,
-      data: { project: {
-        name: 'docx-templates',
-        workPackages: [
-          {
-            acronym: 'WP1',
-            title: 'Work Package 1',
-            startMilestone: { acronym: 'M1', plannedDelta: '0 m' },
-            endMilestone: { acronym: 'M2', plannedDelta: '2 m' },
-            leaderCompany: { acronym: 'me' },
-          },
-          {
-            acronym: 'WP2',
-            title: 'Work Package 2',
-            startMilestone: { acronym: 'M2', plannedDelta: '2 m' },
-            endMilestone: { acronym: 'M3', plannedDelta: '4 m' },
-            leaderCompany: {},
-          },
-        ],
-      } },
+      data: {
+        project: {
+          name: 'docx-templates',
+          workPackages: [
+            {
+              acronym: 'WP1',
+              title: 'Work Package 1',
+              startMilestone: { acronym: 'M1', plannedDelta: '0 m' },
+              endMilestone: { acronym: 'M2', plannedDelta: '2 m' },
+              leaderCompany: { acronym: 'me' },
+            },
+            {
+              acronym: 'WP2',
+              title: 'Work Package 2',
+              startMilestone: { acronym: 'M2', plannedDelta: '2 m' },
+              endMilestone: { acronym: 'M3', plannedDelta: '4 m' },
+              leaderCompany: {},
+            },
+          ],
+        },
+      },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();

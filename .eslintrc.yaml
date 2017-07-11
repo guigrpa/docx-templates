@@ -1,11 +1,14 @@
 parser: babel-eslint
-extends: airbnb
+extends:
+  - airbnb
+  - prettier
 plugins:
   - flowtype
 env:
   browser: true
 rules:
   eqeqeq: ['error', 'allow-null']
+  indent: off # prettier!
   no-unused-expressions:
     - error
     - allowShortCircuit: true
@@ -14,13 +17,18 @@ rules:
   no-nested-ternary: off
   no-cond-assign: ['error', 'except-parens']
   no-underscore-dangle: off
+  comma-dangle:
+    - error
+    - arrays: always-multiline
+      objects: always-multiline
+      imports: always-multiline
+      exports: always-multiline
+      functions: ignore
   no-plusplus:
     - error
     - allowForLoopAfterthoughts: true
   no-continue: off
-  no-lonely-if: off
-  no-mixed-operators: off
-  no-duplicate-imports: off
+  no-await-in-loop: off
   key-spacing:
     - warn
     - beforeColon: false
@@ -28,7 +36,7 @@ rules:
       mode: 'minimum'
   object-property-newline: off
   class-methods-use-this: off
-  arrow-parens: ['error', 'always']
+  arrow-parens: off
   import/no-extraneous-dependencies:
     - error
     - devDependencies: true

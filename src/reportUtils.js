@@ -1,10 +1,7 @@
 // @flow
 
 import { omit } from 'timm';
-import type {
-  Node, TextNode,
-  Context, LoopStatus,
-} from './types';
+import type { Node, TextNode, Context, LoopStatus } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
@@ -49,7 +46,8 @@ const insertTextSiblingAfter = (textNode: TextNode): TextNode => {
     throw new Error('Template syntax error: text node not within w:t');
   }
   const tNodeParent = tNode._parent;
-  if (tNodeParent == null) throw new Error('Template syntax error: w:t node has no parent');
+  if (tNodeParent == null)
+    throw new Error('Template syntax error: w:t node has no parent');
   const idx = tNodeParent._children.indexOf(tNode);
   if (idx < 0) throw new Error('Template syntax error');
   const newTNode = cloneNodeWithoutChildren(tNode);
@@ -84,8 +82,10 @@ const logLoop = (loops: Array<LoopStatus>) => {
   const level = loops.length - 1;
   const { varName, idx, loopOver } = loops[level];
   const idxStr = idx >= 0 ? idx + 1 : 'EXPLORATION';
-  log.debug(`Loop on ${chalk.magenta.bold(`${level}:${varName}`)}: ` +
-    `${chalk.magenta.bold(idxStr)}/${loopOver.length}`);
+  log.debug(
+    `Loop on ${chalk.magenta.bold(`${level}:${varName}`)}: ` +
+      `${chalk.magenta.bold(idxStr)}/${loopOver.length}`
+  );
 };
 
 // ==========================================
@@ -96,7 +96,7 @@ export {
   cloneNodeForLogging,
   getNextSibling,
   insertTextSiblingAfter,
-
-  getCurLoop, isLoopExploring,
+  getCurLoop,
+  isLoopExploring,
   logLoop,
 };

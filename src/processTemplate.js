@@ -1,22 +1,22 @@
 // @flow
 
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign, no-constant-condition */
 
 import {
   cloneNodeWithoutChildren,
   // cloneNodeForLogging,
   getNextSibling,
-  getCurLoop, isLoopExploring,
+  getCurLoop,
+  isLoopExploring,
   logLoop,
 } from './reportUtils';
-import {
-  runUserJsAndGetString,
-  runUserJsAndGetRaw,
-} from './jsSandbox';
+import { runUserJsAndGetString, runUserJsAndGetRaw } from './jsSandbox';
 import type {
-  Node, TextNode,
+  Node,
+  TextNode,
   ReportData,
-  Context, CreateReportOptions,
+  Context,
+  CreateReportOptions,
 } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
@@ -24,22 +24,24 @@ const log: any = DEBUG ? require('./debug').mainStory : null;
 const chalk: any = DEBUG ? require('./debug').chalk : null;
 
 // Go through the document until the query string is found (normally at the beginning)
-const extractQuery = (template: Node, options: CreateReportOptions): ?string => {
+const extractQuery = (
+  template: Node,
+  options: CreateReportOptions
+): ?string => {
   const ctx: any = {
     fCmd: false,
     cmd: '',
-    fSeekQuery: true,  // ensure no command will be processed, except QUERY
+    fSeekQuery: true, // ensure no command will be processed, except QUERY
     query: null,
     loops: [],
     options,
   };
   let nodeIn = template;
-  while (true) {  // eslint-disable-line no-constant-condition
+  while (true) {
     // Move down
     if (nodeIn._children.length) nodeIn = nodeIn._children[0];
-
-    // Move sideways or up
     else {
+      // Move sideways or up
       let fFound = false;
       while (nodeIn._parent != null) {
         const parent = nodeIn._parent;
@@ -56,9 +58,11 @@ const extractQuery = (template: Node, options: CreateReportOptions): ?string => 
 
     if (!nodeIn) break;
     const parent = nodeIn._parent;
-    if (nodeIn._fTextNode &&
-        parent && !parent._fTextNode &&  // Flow, don't complain
-        parent._tag === 'w:t'
+    if (
+      nodeIn._fTextNode &&
+      parent &&
+      !parent._fTextNode && // Flow, don't complain
+      parent._tag === 'w:t'
     ) {
       processText(null, nodeIn, ctx);
     }
@@ -70,7 +74,7 @@ const extractQuery = (template: Node, options: CreateReportOptions): ?string => 
 const produceJsReport = (
   data: ?ReportData,
   template: Node,
-  options: CreateReportOptions,
+  options: CreateReportOptions
 ): Node => {
   const out: Node = cloneNodeWithoutChildren(template);
   const ctx: Context = {
@@ -94,7 +98,8 @@ const produceJsReport = (
   let move;
   let deltaJump = 0;
 
-  while (true) {  // eslint-disable-line no-constant-condition
+  while (true) {
+    // eslint-disable-line no-constant-condition
     const curLoop = getCurLoop(ctx);
     let nextSibling;
 
@@ -112,18 +117,18 @@ const produceJsReport = (
       ctx.fJump = false;
       move = 'JUMP';
 
-    // Down (only if he haven't just moved up)
+      // Down (only if he haven't just moved up)
     } else if (nodeIn._children.length && move !== 'UP') {
       nodeIn = nodeIn._children[0];
       ctx.level += 1;
       move = 'DOWN';
 
-    // Sideways
+      // Sideways
     } else if ((nextSibling = getNextSibling(nodeIn))) {
       nodeIn = nextSibling;
       move = 'SIDE';
 
-    // Up
+      // Up
     } else {
       const parent = nodeIn._parent;
       if (parent == null) break;
@@ -142,11 +147,15 @@ const produceJsReport = (
     if (move !== 'DOWN') {
       const tag = nodeOut._fTextNode ? null : nodeOut._tag;
       let fRemoveNode = false;
-      if ((tag === 'w:p' || tag === 'w:tbl' || tag === 'w:tr') && isLoopExploring(ctx)) {
+      if (
+        (tag === 'w:p' || tag === 'w:tbl' || tag === 'w:tr') &&
+        isLoopExploring(ctx)
+      ) {
         fRemoveNode = true;
       } else if (tag === 'w:p' || tag === 'w:tr') {
         const buffers = ctx.buffers[tag];
-        fRemoveNode = buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
+        fRemoveNode =
+          buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
       }
       // Execute removal, if suitable; will no longer be accessible from the parent
       // (but the parent will be accessible from the child)
@@ -157,21 +166,25 @@ const produceJsReport = (
 
     if (move === 'UP') {
       // Loop exploring? Update the reference node for the current loop
-      if (isLoopExploring(ctx) &&
-          curLoop &&  // Flow, don't complain
-          nodeIn === curLoop.refNode._parent) {
+      if (
+        isLoopExploring(ctx) &&
+        curLoop && // Flow, don't complain
+        nodeIn === curLoop.refNode._parent
+      ) {
         curLoop.refNode = nodeIn;
         curLoop.refNodeLevel -= 1;
         // DEBUG && log.debug(`Updated loop '${curLoop.varName}' refNode:`,
         //   { attach: cloneNodeForLogging(nodeIn) });
       }
       const nodeOutParent = nodeOut._parent;
-      if (nodeOutParent == null) throw new Error('INTERNAL_ERROR');  // Flow-prevention
+      if (nodeOutParent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
 
       // `w:tc` nodes shouldn't be left with no `w:p` children
-      if (!nodeOutParent._fTextNode &&
-          nodeOutParent._tag === 'w:tc' &&
-          !nodeOutParent._children.filter((o) => !o._fTextNode && o._tag === 'w:p').length
+      if (
+        !nodeOutParent._fTextNode &&
+        nodeOutParent._tag === 'w:tc' &&
+        !nodeOutParent._children.filter(o => !o._fTextNode && o._tag === 'w:p')
+          .length
       ) {
         nodeOutParent._children.push({
           _parent: nodeOutParent,
@@ -190,7 +203,7 @@ const produceJsReport = (
     // contained a command -- it will be deleted.
     if (move === 'DOWN' || move === 'SIDE') {
       if (move === 'SIDE') {
-        if (nodeOut._parent == null) throw new Error('INTERNAL_ERROR');  // Flow-prevention
+        if (nodeOut._parent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
         nodeOut = nodeOut._parent;
       }
       const tag = nodeIn._fTextNode ? null : nodeIn._tag;
@@ -201,9 +214,11 @@ const produceJsReport = (
       newNode._parent = nodeOut;
       nodeOut._children.push(newNode);
       const parent = nodeIn._parent;
-      if (nodeIn._fTextNode &&
-          parent && !parent._fTextNode &&  // Flow, don't complain
-          parent._tag === 'w:t'
+      if (
+        nodeIn._fTextNode &&
+        parent &&
+        !parent._fTextNode && // Flow, don't complain
+        parent._tag === 'w:t'
       ) {
         const newNodeAsTextNode: TextNode = (newNode: Object);
         newNodeAsTextNode._text = processText(data, nodeIn, ctx);
@@ -214,7 +229,7 @@ const produceJsReport = (
     // Correct nodeOut when a jump in nodeIn has occurred
     if (move === 'JUMP') {
       while (deltaJump > 0) {
-        if (nodeOut._parent == null) throw new Error('INTERNAL_ERROR');  // Flow-prevention
+        if (nodeOut._parent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
         nodeOut = nodeOut._parent;
         deltaJump -= 1;
       }
@@ -224,7 +239,11 @@ const produceJsReport = (
   return out;
 };
 
-const processText = (data: ?ReportData, node: TextNode, ctx: Context): string => {
+const processText = (
+  data: ?ReportData,
+  node: TextNode,
+  ctx: Context
+): string => {
   const { cmdDelimiter } = ctx.options;
   const text = node._text;
   if (text == null || text === '') return '';
@@ -249,7 +268,10 @@ const processText = (data: ?ReportData, node: TextNode, ctx: Context): string =>
         const cmdResultText = processCmd(data, node, ctx);
         if (cmdResultText != null) {
           outText += cmdResultText;
-          appendTextToTagBuffers(cmdResultText, ctx, { fCmd: false, fInsertedText: true });
+          appendTextToTagBuffers(cmdResultText, ctx, {
+            fCmd: false,
+            fInsertedText: true,
+          });
         }
       }
       ctx.fCmd = !ctx.fCmd;
@@ -298,8 +320,7 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
     let out;
     if (cmdName === 'QUERY' || cmdName === 'CMD_NODE') {
       // DEBUG && log.debug(`Ignoring ${cmdName} command`);
-
-    // ALIAS name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
+      // ALIAS name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
     } else if (cmdName === 'ALIAS') {
       const aliasMatch = /^(\S+)\s+(.+)/.exec(cmdRest);
       if (!aliasMatch) throw new Error(`Invalid ALIAS command: ${cmd}`);
@@ -308,19 +329,19 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
       ctx.shorthands[aliasName] = fullCmd;
       DEBUG && log.debug(`Defined alias '${aliasName}' for: ${fullCmd}`);
 
-    // VAR <varName> <expression>
-    // } else if (cmdName === 'VAR') {
-    //   if (!isLoopExploring(ctx)) {
-    //     const varMatch = /^(\S+)\s+(.+)/.exec(cmdRest);
-    //     if (!varMatch) throw new Error(`Invalid VAR command: ${cmd}`);
-    //     const varName = varMatch[1];
-    //     const code = varMatch[2];
-    //     const varValue = runUserJsAndGetString(data, code, ctx);
-    //     ctx.vars[varName] = varValue;
-    //     // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
-    //   }
+      // VAR <varName> <expression>
+      // } else if (cmdName === 'VAR') {
+      //   if (!isLoopExploring(ctx)) {
+      //     const varMatch = /^(\S+)\s+(.+)/.exec(cmdRest);
+      //     if (!varMatch) throw new Error(`Invalid VAR command: ${cmd}`);
+      //     const varName = varMatch[1];
+      //     const code = varMatch[2];
+      //     const varValue = runUserJsAndGetString(data, code, ctx);
+      //     ctx.vars[varName] = varValue;
+      //     // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
+      //   }
 
-    // FOR <varName> IN <expression>
+      // FOR <varName> IN <expression>
     } else if (cmdName === 'FOR') {
       const forMatch = /^(\S+)\s+IN\s+(.+)/i.exec(cmdRest);
       if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
@@ -328,38 +349,49 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
       // New FOR? If not, discard
       if (!(curLoop && curLoop.varName === varName)) {
         const parentLoopLevel = ctx.loops.length - 1;
-        const fParentIsExploring = parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
+        const fParentIsExploring =
+          parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
         const loopOver = fParentIsExploring
           ? []
           : runUserJsAndGetRaw(data, forMatch[2], ctx);
-        ctx.loops.push({ refNode: node, refNodeLevel: ctx.level, varName, loopOver, idx: -1 });
+        ctx.loops.push({
+          refNode: node,
+          refNodeLevel: ctx.level,
+          varName,
+          loopOver,
+          idx: -1,
+        });
       }
       logLoop(ctx.loops);
 
-    // END-FOR
+      // END-FOR
     } else if (cmdName === 'END-FOR') {
       const varName = cmdRest;
-      if (!(curLoop && curLoop.varName === varName)) throw new Error(`Invalid command: ${cmd}`);
+      if (!(curLoop && curLoop.varName === varName))
+        throw new Error(`Invalid command: ${cmd}`);
 
       const { loopOver, idx } = curLoop;
       const { nextItem, curIdx } = getNextItem(loopOver, idx);
-      if (nextItem) {  // next iteration
+      if (nextItem) {
+        // next iteration
         ctx.vars[varName] = nextItem;
         ctx.fJump = true;
         curLoop.idx = curIdx;
-      } else {  // loop finished
+      } else {
+        // loop finished
         ctx.loops.pop();
       }
 
-    // INS <expression>
+      // INS <expression>
     } else if (cmdName === 'INS') {
-      if (!isLoopExploring(ctx)) out = runUserJsAndGetString(data, cmdRest, ctx);
+      if (!isLoopExploring(ctx))
+        out = runUserJsAndGetString(data, cmdRest, ctx);
 
-    // EXEC <code>
+      // EXEC <code>
     } else if (cmdName === 'EXEC') {
       if (!isLoopExploring(ctx)) runUserJsAndGetRaw(data, cmdRest, ctx);
 
-    // Invalid command
+      // Invalid command
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
     return out;
   } catch (err) {
@@ -367,14 +399,18 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
   }
 };
 
-const appendTextToTagBuffers = (text: string, ctx: Context, options: {|
-  fCmd?: boolean,
-  fInsertedText?: boolean,
-|}) => {
+const appendTextToTagBuffers = (
+  text: string,
+  ctx: Context,
+  options: {|
+    fCmd?: boolean,
+    fInsertedText?: boolean,
+  |}
+) => {
   if (ctx.fSeekQuery) return;
   const { fCmd, fInsertedText } = options;
   const type = fCmd ? 'cmds' : 'text';
-  Object.keys(ctx.buffers).forEach((key) => {
+  Object.keys(ctx.buffers).forEach(key => {
     const buf = ctx.buffers[key];
     buf[type] += text;
     if (fInsertedText) buf.fInsertedText = true;
@@ -396,7 +432,4 @@ const getNextItem = (items, curIdx0) => {
 // ==========================================
 // Public API
 // ==========================================
-export {
-  extractQuery,
-  produceJsReport,
-};
+export { extractQuery, produceJsReport };

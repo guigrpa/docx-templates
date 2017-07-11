@@ -14,7 +14,7 @@ import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
 import type { UserOptions } from './types';
 
-const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
+const DEBUG = true || process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
 const DEFAULT_LITERAL_XML_DELIMITER = '||';
 
@@ -37,11 +37,13 @@ const createReport = async (options: UserOptions) => {
   const baseUnzipped = `${base}_unzipped`;
   DEBUG && log.debug(`Temporary base: ${base}`);
   const templatePath = `${baseUnzipped}/word`;
-  const literalXmlDelimiter = options.literalXmlDelimiter || DEFAULT_LITERAL_XML_DELIMITER;
+  const literalXmlDelimiter =
+    options.literalXmlDelimiter || DEFAULT_LITERAL_XML_DELIMITER;
   const createOptions = {
     cmdDelimiter: options.cmdDelimiter || DEFAULT_CMD_DELIMITER,
     literalXmlDelimiter,
-    processLineBreaks: options.processLineBreaks != null ? options.processLineBreaks : true,
+    processLineBreaks:
+      options.processLineBreaks != null ? options.processLineBreaks : true,
   };
   const xmlOptions = { literalXmlDelimiter };
 
@@ -63,8 +65,11 @@ const createReport = async (options: UserOptions) => {
   const parseResult = await parseXml(templateXml);
   const jsTemplate = parseResult;
   const tac = new Date().getTime();
-  DEBUG && log.debug(`File parsed in ${tac - tic} ms`,
-    { attach: jsTemplate, attachLevel: 'trace' });
+  DEBUG &&
+    log.debug(`File parsed in ${tac - tic} ms`, {
+      attach: jsTemplate,
+      attachLevel: 'trace',
+    });
 
   // ---------------------------------------------------------
   // Fetch the data that will fill in the template
@@ -88,11 +93,12 @@ const createReport = async (options: UserOptions) => {
   //   ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
   // });
   const finalTemplate = preprocessTemplate(jsTemplate, createOptions);
-  DEBUG && log.debug('Generating report...', {
-    attach: finalTemplate,
-    attachLevel: 'debug',
-    ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
-  });
+  DEBUG &&
+    log.debug('Generating report...', {
+      attach: finalTemplate,
+      attachLevel: 'debug',
+      ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
+    });
   const report = produceJsReport(queryResult, finalTemplate, createOptions);
   if (_probe === 'JS') {
     await cleanUp(baseUnzipped);
@@ -127,7 +133,9 @@ const createReport = async (options: UserOptions) => {
       const imageName = imageNames[i];
       const imageDst = `${mediaPath}/${imageName}`;
       if (!fs.existsSync(`${imageDst}`)) {
-        console.warn(`Image ${imageName} cannot be replaced: destination does not exist`);
+        console.warn(
+          `Image ${imageName} cannot be replaced: destination does not exist`
+        );
         continue;
       }
       const imageSrc = replaceImages[imageName];
@@ -144,7 +152,10 @@ const createReport = async (options: UserOptions) => {
   // ---------------------------------------------------------
   // Process all other XML files
   // ---------------------------------------------------------
-  const files = await globby([`${templatePath}/*.xml`, `!${templatePath}/document.xml`]);
+  const files = await globby([
+    `${templatePath}/*.xml`,
+    `!${templatePath}/document.xml`,
+  ]);
   for (let i = 0; i < files.length; i++) {
     const filePath = files[i];
     DEBUG && log.info(`Processing ${filePath}...`);
@@ -172,8 +183,7 @@ const createReport = async (options: UserOptions) => {
 // ==========================================
 // Helpers
 // ==========================================
-const cleanUp = async (baseUnzipped) =>
-  fs.remove(baseUnzipped);
+const cleanUp = async baseUnzipped => fs.remove(baseUnzipped);
 
 // ==========================================
 // Public API

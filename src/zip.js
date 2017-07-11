@@ -10,11 +10,8 @@ import archiver from 'archiver';
 const unzipFile = (inputFile: string, outputFolder: string) => {
   const readStream = fs.createReadStream(inputFile);
   const writeStream = fstream.Writer(outputFolder);
-  return new Promise((resolve) => {
-    readStream
-    .pipe(unzip.Parse())
-    .pipe(writeStream)
-    .on('close', resolve);
+  return new Promise(resolve => {
+    readStream.pipe(unzip.Parse()).pipe(writeStream).on('close', resolve);
   });
 };
 
@@ -33,7 +30,4 @@ const zipFile = (inputFolder: string, outputFile: string) => {
 // ==========================================
 // Public API
 // ==========================================
-export {
-  unzipFile,
-  zipFile,
-};
+export { unzipFile, zipFile };
