@@ -1,3 +1,5 @@
+## 2.2.0 (Jul. 11, 2017)
+
 * Add `replaceImages` option (including base64 support via `replaceImagesBase64` option) [based on #5]
 
 ## 2.1.1 (Jan. 25, 2017)

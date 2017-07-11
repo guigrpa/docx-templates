@@ -1,5 +1,3 @@
-// @flow
-
 /* eslint-env jest */
 
 import 'babel-polyfill';
