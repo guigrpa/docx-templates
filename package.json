@@ -22,7 +22,11 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "scripts": {
-    "compile": "rm -rf ./lib && mkdir lib && babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src && flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
+    "compile": "yarn compile:prepare && yarn compile:copy && yarn compile:run",
+    "compileWatch": "yarn compile:prepare && yarn compile:copy && yarn compile:run -- --watch",
+    "compile:prepare": "rm -rf ./lib && mkdir lib",
+    "compile:copy": "flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
+    "compile:run": "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
     "docs": "extract-docs --template docs/templates/README.md --output README.md",
     "build": "node package && npm run lint && npm run flow && npm run test && npm run compile && npm run docs && npm run xxl",
     "travis": "npm run compile && npm run test",
@@ -44,8 +48,7 @@
   },
   "dependencies": {
     "archiver": "1.3.0",
-    "bluebird": "3.4.6",
-    "fs-extra": "1.0.0",
+    "fs-extra": "^3.0.1",
     "fstream": "1.0.10",
     "globby": "6.1.0",
     "sax": "1.2.1",
@@ -58,6 +61,7 @@
     "babel-core": "6.20.0",
     "babel-eslint": "7.1.1",
     "babel-jest": "18.0.0",
+    "babel-polyfill": "6.20.0",
     "babel-preset-es2015": "6.18.0",
     "babel-preset-react": "6.16.0",
     "babel-preset-stage-0": "6.16.0",

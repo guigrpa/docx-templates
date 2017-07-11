@@ -2,7 +2,6 @@
 
 /* eslint-disable new-cap */
 
-import Promise from 'bluebird';
 import fs from 'fs-extra';
 import fstream from 'fstream';
 import unzip from 'unzip';

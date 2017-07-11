@@ -2,6 +2,7 @@
 
 /* eslint-env jest */
 
+import 'babel-polyfill';
 import path from 'path';
 import fs from 'fs-extra';
 
@@ -17,10 +18,10 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
 
 describe('End-to-end', () => {
   beforeEach(async () => {
-    await fs.remove(outputDir, () => {});
+    await fs.remove(outputDir);
   });
   afterEach(async () => {
-    await fs.remove(outputDir, () => {});
+    await fs.remove(outputDir);
   });
 
   it('01 Copies (unchanged) a template without markup', async () => {

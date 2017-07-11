@@ -12,6 +12,7 @@ Template-based docx report creation.
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
 * Run all JavaScript in a **separate Node VM for security**
 * Include **literal XML**
+* Replace **template images**
 
 Contributions are welcome!
 
@@ -82,7 +83,7 @@ You can find several template examples in this repo:
 * [Several templates](https://github.com/guigrpa/docx-templates/tree/master/examples/sampleTemplates)
 * [More specific templates, used for tests]( https://github.com/guigrpa/docx-templates/tree/master/src/__tests__/fixtures)
 
-Here is the list of currently supported commands:
+Currently supported commands are defined below.
 
 #### `QUERY`
 
@@ -227,14 +228,35 @@ Define a name for a complete command (especially useful for formatting tables):
 | +++END-FOR person+++         |                         |
 ----------------------------------------------------------
 ```
-#### `IMAGES` (replace images in template)
 
-To add the images to the template, follow these steps:
-1. Go where the template is located, right click, open with WinRar.
+### Replacing template images
 
-2. Let's go to the address Word -> media and we'll see the images that the template has.
+You can replace images in your template by specifying the `replaceImages` option when you create your report:
 
-3. We identify the images that we want to replace.
+```js
+createReport({
+  // ...
+  replaceImages: {
+    'image1.png': '/absolute/path/to/newImage1.png',
+    'image3.png': '/absolute/path/to/newImage3.png',
+  }
+});
+```
+
+If you prefer, you can pass in a base64 string with the contents:
+
+```js
+createReport({
+  // ...
+  replaceImagesBase64: true,
+  replaceImages: {
+    'image1.png': '<base64 data>',
+    'image3.png': '<base64 data>',
+  }
+});
+```
+
+You can determine the original image file names by inspecting your template: unzip your .docx file (you may need to duplicate it and change its extension to .zip before), navigate to the `word/media` folder inside and find the image you want to replace:
 
 ```
 ├─word
@@ -242,24 +264,10 @@ To add the images to the template, follow these steps:
 | | ├─image1.png
 | | ├─image2.png
 | | ├─image3.png
+| | ├─...
 ```
-```js
-import createReport from 'docx-templates';
 
-createReport({
-  template: 'templates/myTemplate.docx',
-  output: 'reports/myReport.docx',
-  data: {
-    name: 'John',
-    surname: 'Appleseed',
-  },
-  base64 : false, // use base64 true
-  replaceImages: {
-    'image1.png': '/absolute/path/to/newImage1.png', // or buffer
-    'image3.png': '/absolute/path/to/newImage3.png',
-  }
-});
-```
+
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
 
 ## Similar projects

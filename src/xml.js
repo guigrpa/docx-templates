@@ -1,6 +1,5 @@
 // @flow
 
-import Promise from 'bluebird';
 import sax from 'sax';
 import type { Node } from './types';
 

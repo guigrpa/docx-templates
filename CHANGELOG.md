@@ -1,6 +1,4 @@
-# Changelog
-
-*[M]: major change; [m]: minor change*
+* Add `replaceImages` option (including base64 support via `replaceImagesBase64` option) [based on #5]
 
 ## 2.1.1 (Jan. 25, 2017)
 
@@ -29,7 +27,6 @@
     * [m] Allow customisation of the command delimiter
     * [M] Allow **loops in a single paragraph**
     * [m] Remove archive.bulk() deprecation warning
-    * [M] Internal: improve code structure
 
 ## 1.0.1, 1.0.2 (Dec. 15, 2016)
 
