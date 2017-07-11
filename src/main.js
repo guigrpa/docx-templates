@@ -14,7 +14,7 @@ import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
 import type { UserOptions } from './types';
 
-const DEBUG = true || process.env.DEBUG_DOCX_TEMPLATES;
+const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
 const DEFAULT_LITERAL_XML_DELIMITER = '||';
 
