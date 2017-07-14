@@ -1,18 +1,11 @@
 {
   "name": "docx-templates",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Template-based docx report creation",
   "main": "lib/index.js",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
-  "keywords": [
-    "docx",
-    "office",
-    "word",
-    "ms-word",
-    "report",
-    "template"
-  ],
+  "keywords": ["docx", "office", "word", "ms-word", "report", "template"],
   "homepage": "https://github.com/guigrpa/docx-templates#readme",
   "bugs": {
     "url": "https://github.com/guigrpa/docx-templates/issues"
@@ -88,14 +81,8 @@
   "jest": {
     "testRegex": "src/.*__tests__/.*\\.(test|spec)\\.(js|jsx)$",
     "coverageDirectory": ".nyc_output",
-    "coverageReporters": [
-      "json",
-      "text",
-      "html"
-    ],
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-html"
-    ],
+    "coverageReporters": ["json", "text", "html"],
+    "snapshotSerializers": ["<rootDir>/node_modules/jest-html"],
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/debug.js",

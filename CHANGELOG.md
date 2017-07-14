@@ -1,3 +1,5 @@
+## 2.2.2 (Jul. 14, 2017)
+
 * Bugfix: Remove `babel-polyfill` dependency, replace by the lightweight `babel-runtime` + `babel-plugin-transform-runtime` (#7)
 
 ## 2.2.0, 2.2.1 (Jul. 11, 2017)
