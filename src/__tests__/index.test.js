@@ -176,6 +176,15 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
+  it('08b Processes 1-level IF-ROW loops', async () => {
+    const template = path.join(__dirname, 'fixtures', 'if-row1.docx');
+    const result = await createReport({
+      template,
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
   it('09 Allows scalar arrays in FOR loops', async () => {
     const template = path.join(__dirname, 'fixtures', 'for1scalars.docx');
     const result = await createReport({
@@ -226,6 +235,33 @@ describe('Template processing', () => {
       data: {
         companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
       },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('13a Processes 1-level IF', async () => {
+    const template = path.join(__dirname, 'fixtures', 'if.docx');
+    const result = await createReport({
+      template,
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('13b Processes 2-level IF', async () => {
+    const template = path.join(__dirname, 'fixtures', 'if2.docx');
+    const result = await createReport({
+      template,
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('13j Processes inline IF', async () => {
+    const template = path.join(__dirname, 'fixtures', 'ifInline.docx');
+    const result = await createReport({
+      template,
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
@@ -424,6 +460,22 @@ describe('Template processing', () => {
 
   it('41 Throws on invalid for logic', async () => {
     const template = path.join(__dirname, 'fixtures', 'invalidFor.docx');
+    try {
+      await createReport({
+        template,
+        data: {
+          companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+        },
+        _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+      });
+      expect(true).toBeFalsy(); // should have thrown
+    } catch (err) {
+      /* this exception was expected */
+    }
+  });
+
+  it('41b Throws on invalid if logic (bad nesting)', async () => {
+    const template = path.join(__dirname, 'fixtures', 'invalidIf.docx');
     try {
       await createReport({
         template,

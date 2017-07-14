@@ -9,6 +9,7 @@ Template-based docx report creation.
 * **Execute JavaScript snippets** (`EXEC`, or `!` for short)
 * **Insert the result of JavaScript snippets** in your document (`INS`, or `=` for short)
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
+* Include contents **conditionally**, `IF` a certain JavaScript expression is truthy
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
 * Run all JavaScript in a **separate Node VM for security**
 * Include **literal XML**
@@ -208,6 +209,20 @@ Finally, you can nest loops (this example assumes a different data set):
 
 +++END-FOR company+++
 ```
+
+#### `IF` and `END-IF`
+
+Include contents conditionally (depending on the evaluation of a JavaScript expression):
+
+```
++++IF person.name === 'Guillermo'+++
++++= person.fullName +++
++++END-IF+++
+```
+
+Similarly to the `FOR` command, it also works over table rows. You can also nest `IF` commands
+and mix & match `IF` and `FOR` commands. In fact, for the technically inclined: the `IF` command
+is implemented as a `FOR` command with 1 or 0 iterations, depending on the expression value.
 
 #### `ALIAS` (and alias resolution with `*`)
 

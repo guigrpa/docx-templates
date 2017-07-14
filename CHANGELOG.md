@@ -1,3 +1,5 @@
+* Add `IF`/`END-IF`
+
 ## 2.2.2 (Jul. 14, 2017)
 
 * Bugfix: Remove `babel-polyfill` dependency, replace by the lightweight `babel-runtime` + `babel-plugin-transform-runtime` (#7)

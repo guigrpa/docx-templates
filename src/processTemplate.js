@@ -23,6 +23,8 @@ const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
 const chalk: any = DEBUG ? require('./debug').chalk : null;
 
+let gCntIf = 0;
+
 // Go through the document until the query string is found (normally at the beginning)
 const extractQuery = (
   template: Node,
@@ -342,34 +344,58 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
       //   }
 
       // FOR <varName> IN <expression>
-    } else if (cmdName === 'FOR') {
-      const forMatch = /^(\S+)\s+IN\s+(.+)/i.exec(cmdRest);
-      if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
-      const varName = forMatch[1];
+      // IF <expression>
+    } else if (cmdName === 'FOR' || cmdName === 'IF') {
+      const isIf = cmdName === 'IF';
+      // Identify FOR/IF loop
+      let forMatch;
+      let varName;
+      if (isIf) {
+        if (node.ifName == null) {
+          node.ifName = `__if_${gCntIf}`;
+          gCntIf += 1;
+        }
+        varName = node.ifName;
+      } else {
+        forMatch = /^(\S+)\s+IN\s+(.+)/i.exec(cmdRest);
+        if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
+        varName = forMatch[1];
+      }
       // New FOR? If not, discard
       if (!(curLoop && curLoop.varName === varName)) {
         const parentLoopLevel = ctx.loops.length - 1;
         const fParentIsExploring =
           parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
-        const loopOver = fParentIsExploring
-          ? []
-          : runUserJsAndGetRaw(data, forMatch[2], ctx);
+        let loopOver;
+        if (fParentIsExploring) {
+          loopOver = [];
+        } else if (isIf) {
+          const shouldRun = !!runUserJsAndGetRaw(data, cmdRest, ctx);
+          loopOver = shouldRun ? [1] : [];
+        } else {
+          loopOver = runUserJsAndGetRaw(data, forMatch[2], ctx);
+        }
         ctx.loops.push({
           refNode: node,
           refNodeLevel: ctx.level,
           varName,
           loopOver,
+          isIf,
+          // run through the loop once first, without outputting anything
+          // (if we don't do it like this, we could not run empty loops!)
           idx: -1,
         });
       }
       logLoop(ctx.loops);
 
       // END-FOR
-    } else if (cmdName === 'END-FOR') {
-      const varName = cmdRest;
-      if (!(curLoop && curLoop.varName === varName))
+      // END-IF
+    } else if (cmdName === 'END-FOR' || cmdName === 'END-IF') {
+      if (!curLoop) throw new Error(`Invalid command: ${cmd}`);
+      const isIf = cmdName === 'END-IF';
+      const varName = isIf ? curLoop.varName : cmdRest;
+      if (curLoop.varName !== varName)
         throw new Error(`Invalid command: ${cmd}`);
-
       const { loopOver, idx } = curLoop;
       const { nextItem, curIdx } = getNextItem(loopOver, idx);
       if (nextItem) {
@@ -423,8 +449,9 @@ const getNextItem = (items, curIdx0) => {
   while (nextItem == null) {
     curIdx += 1;
     if (curIdx >= items.length) break;
-    if (items[curIdx].isDeleted) continue;
-    nextItem = items[curIdx];
+    const tempItem = items[curIdx];
+    if (typeof tempItem === 'object' && tempItem.isDeleted) continue;
+    nextItem = tempItem;
   }
   return { nextItem, curIdx };
 };
