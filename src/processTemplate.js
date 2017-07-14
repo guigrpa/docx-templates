@@ -391,11 +391,11 @@ const processForIf = (
   let forMatch;
   let varName;
   if (isIf) {
-    if (node.ifName == null) {
-      node.ifName = `__if_${gCntIf}`;
+    if (node._ifName == null) {
+      node._ifName = `__if_${gCntIf}`;
       gCntIf += 1;
     }
-    varName = node.ifName;
+    varName = node._ifName;
   } else {
     forMatch = /^(\S+)\s+IN\s+(.+)/i.exec(cmdRest);
     if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
@@ -415,6 +415,7 @@ const processForIf = (
       const shouldRun = !!runUserJsAndGetRaw(data, cmdRest, ctx);
       loopOver = shouldRun ? [1] : [];
     } else {
+      if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
       loopOver = runUserJsAndGetRaw(data, forMatch[2], ctx);
     }
     ctx.loops.push({

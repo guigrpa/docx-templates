@@ -3,15 +3,18 @@
 // ==========================================
 // Docx nodes
 // ==========================================
-type BaseNode = {
+type BaseNode = {|
   _parent: ?Node,
   _children: Array<Node>,
-};
-export type TextNode = BaseNode & {
+  _ifName?: string,
+|};
+export type TextNode = {
+  ...BaseNode,
   _fTextNode: true,
   _text: string,
 };
-export type NonTextNode = BaseNode & {
+export type NonTextNode = {
+  ...BaseNode,
   _fTextNode: false,
   _tag: string,
   _attrs: Object,
@@ -77,4 +80,5 @@ export type LoopStatus = {
   varName: string,
   loopOver: Array<VarValue>,
   idx: number,
+  isIf?: boolean,
 };
