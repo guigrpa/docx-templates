@@ -282,22 +282,9 @@ const processText = (
   return outText;
 };
 
-const getCommand = (ctx: Context): string => {
-  let { cmd } = ctx;
-  if (cmd[0] === '*') {
-    const aliasName = cmd.slice(1).trim();
-    if (!ctx.shorthands[aliasName]) throw new Error('Unknown alias');
-    cmd = ctx.shorthands[aliasName];
-    DEBUG && log.debug(`Alias for: ${cmd}`);
-  } else if (cmd[0] === '=') {
-    cmd = `INS ${cmd.slice(1).trim()}`;
-  } else if (cmd[0] === '!') {
-    cmd = `EXEC ${cmd.slice(1).trim()}`;
-  }
-  ctx.cmd = '';
-  return cmd.trim();
-};
-
+// ==========================================
+// Command processor
+// ==========================================
 const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
   const cmd = getCommand(ctx);
   const curLoop = getCurLoop(ctx);
@@ -322,6 +309,7 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
     let out;
     if (cmdName === 'QUERY' || cmdName === 'CMD_NODE') {
       // DEBUG && log.debug(`Ignoring ${cmdName} command`);
+      // ...
       // ALIAS name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
     } else if (cmdName === 'ALIAS') {
       const aliasMatch = /^(\S+)\s+(.+)/.exec(cmdRest);
@@ -346,67 +334,12 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
       // FOR <varName> IN <expression>
       // IF <expression>
     } else if (cmdName === 'FOR' || cmdName === 'IF') {
-      const isIf = cmdName === 'IF';
-      // Identify FOR/IF loop
-      let forMatch;
-      let varName;
-      if (isIf) {
-        if (node.ifName == null) {
-          node.ifName = `__if_${gCntIf}`;
-          gCntIf += 1;
-        }
-        varName = node.ifName;
-      } else {
-        forMatch = /^(\S+)\s+IN\s+(.+)/i.exec(cmdRest);
-        if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
-        varName = forMatch[1];
-      }
-      // New FOR? If not, discard
-      if (!(curLoop && curLoop.varName === varName)) {
-        const parentLoopLevel = ctx.loops.length - 1;
-        const fParentIsExploring =
-          parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
-        let loopOver;
-        if (fParentIsExploring) {
-          loopOver = [];
-        } else if (isIf) {
-          const shouldRun = !!runUserJsAndGetRaw(data, cmdRest, ctx);
-          loopOver = shouldRun ? [1] : [];
-        } else {
-          loopOver = runUserJsAndGetRaw(data, forMatch[2], ctx);
-        }
-        ctx.loops.push({
-          refNode: node,
-          refNodeLevel: ctx.level,
-          varName,
-          loopOver,
-          isIf,
-          // run through the loop once first, without outputting anything
-          // (if we don't do it like this, we could not run empty loops!)
-          idx: -1,
-        });
-      }
-      logLoop(ctx.loops);
+      out = processForIf(data, node, ctx, cmd, cmdName, cmdRest);
 
       // END-FOR
       // END-IF
     } else if (cmdName === 'END-FOR' || cmdName === 'END-IF') {
-      if (!curLoop) throw new Error(`Invalid command: ${cmd}`);
-      const isIf = cmdName === 'END-IF';
-      const varName = isIf ? curLoop.varName : cmdRest;
-      if (curLoop.varName !== varName)
-        throw new Error(`Invalid command: ${cmd}`);
-      const { loopOver, idx } = curLoop;
-      const { nextItem, curIdx } = getNextItem(loopOver, idx);
-      if (nextItem) {
-        // next iteration
-        ctx.vars[varName] = nextItem;
-        ctx.fJump = true;
-        curLoop.idx = curIdx;
-      } else {
-        // loop finished
-        ctx.loops.pop();
-      }
+      out = processEndForIf(data, node, ctx, cmd, cmdName, cmdRest);
 
       // INS <expression>
     } else if (cmdName === 'INS') {
@@ -425,6 +358,112 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
   }
 };
 
+const getCommand = (ctx: Context): string => {
+  let { cmd } = ctx;
+  if (cmd[0] === '*') {
+    const aliasName = cmd.slice(1).trim();
+    if (!ctx.shorthands[aliasName]) throw new Error('Unknown alias');
+    cmd = ctx.shorthands[aliasName];
+    DEBUG && log.debug(`Alias for: ${cmd}`);
+  } else if (cmd[0] === '=') {
+    cmd = `INS ${cmd.slice(1).trim()}`;
+  } else if (cmd[0] === '!') {
+    cmd = `EXEC ${cmd.slice(1).trim()}`;
+  }
+  ctx.cmd = '';
+  return cmd.trim();
+};
+
+// ==========================================
+// Individual commands
+// ==========================================
+const processForIf = (
+  data: ?ReportData,
+  node: Node,
+  ctx: Context,
+  cmd: string,
+  cmdName: string,
+  cmdRest: string
+): ?string => {
+  const isIf = cmdName === 'IF';
+
+  // Identify FOR/IF loop
+  let forMatch;
+  let varName;
+  if (isIf) {
+    if (node.ifName == null) {
+      node.ifName = `__if_${gCntIf}`;
+      gCntIf += 1;
+    }
+    varName = node.ifName;
+  } else {
+    forMatch = /^(\S+)\s+IN\s+(.+)/i.exec(cmdRest);
+    if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
+    varName = forMatch[1];
+  }
+
+  // New FOR? If not, discard
+  const curLoop = getCurLoop(ctx);
+  if (!(curLoop && curLoop.varName === varName)) {
+    const parentLoopLevel = ctx.loops.length - 1;
+    const fParentIsExploring =
+      parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
+    let loopOver;
+    if (fParentIsExploring) {
+      loopOver = [];
+    } else if (isIf) {
+      const shouldRun = !!runUserJsAndGetRaw(data, cmdRest, ctx);
+      loopOver = shouldRun ? [1] : [];
+    } else {
+      loopOver = runUserJsAndGetRaw(data, forMatch[2], ctx);
+    }
+    ctx.loops.push({
+      refNode: node,
+      refNodeLevel: ctx.level,
+      varName,
+      loopOver,
+      isIf,
+      // run through the loop once first, without outputting anything
+      // (if we don't do it like this, we could not run empty loops!)
+      idx: -1,
+    });
+  }
+  logLoop(ctx.loops);
+
+  return null;
+};
+
+const processEndForIf = (
+  data: ?ReportData,
+  node: Node,
+  ctx: Context,
+  cmd: string,
+  cmdName: string,
+  cmdRest: string
+): ?string => {
+  const curLoop = getCurLoop(ctx);
+  if (!curLoop) throw new Error(`Invalid command: ${cmd}`);
+  const isIf = cmdName === 'END-IF';
+  const varName = isIf ? curLoop.varName : cmdRest;
+  if (curLoop.varName !== varName) throw new Error(`Invalid command: ${cmd}`);
+  const { loopOver, idx } = curLoop;
+  const { nextItem, curIdx } = getNextItem(loopOver, idx);
+  if (nextItem) {
+    // next iteration
+    ctx.vars[varName] = nextItem;
+    ctx.fJump = true;
+    curLoop.idx = curIdx;
+  } else {
+    // loop finished
+    ctx.loops.pop();
+  }
+
+  return null;
+};
+
+// ==========================================
+// Helpers
+// ==========================================
 const appendTextToTagBuffers = (
   text: string,
   ctx: Context,
