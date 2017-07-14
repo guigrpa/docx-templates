@@ -1,3 +1,5 @@
+* Bugfix: Remove `babel-polyfill` dependency, replace by the lightweight `babel-runtime` + `babel-plugin-transform-runtime` (#7)
+
 ## 2.2.0, 2.2.1 (Jul. 11, 2017)
 
 * Add `replaceImages` option (including base64 support via `replaceImagesBase64` option) [based on #5]

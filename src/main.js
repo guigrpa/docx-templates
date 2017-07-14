@@ -2,7 +2,6 @@
 
 /* eslint-disable no-param-reassign, no-console */
 
-import 'babel-polyfill';
 import path from 'path';
 import os from 'os';
 import fs from 'fs-extra';
