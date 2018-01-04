@@ -54,7 +54,7 @@ const runUserJsAndGetRaw = (
   );
   const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
   script.runInContext(context);
-  const result = sandbox.__result__;
+  const result = context.__result__;
   ctx.jsSandbox = omit(sandbox, ['__code__', '__result__']);
   DEBUG && log.debug('JS result', { attach: result });
   return result;
