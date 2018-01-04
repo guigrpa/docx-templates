@@ -3,8 +3,8 @@ const createReport = require('../../lib');
 
 createReport({
   template: process.argv[2],
-  data: (query) =>
-    fetch('http://graphql-swapi.parseapp.com', {
+  data: query =>
+    fetch('http://swapi.apis.guru', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -12,8 +12,8 @@ createReport({
       },
       body: JSON.stringify({ query }),
     })
-    .then((res) => res.json())
-    .then((res) => res.data),
+      .then(res => res.json())
+      .then(res => res.data),
 });
 
 /*
