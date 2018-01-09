@@ -12,8 +12,8 @@ createReport({
       },
       body: JSON.stringify({ query }),
     })
-      .then(res => res.json())
-      .then(res => res.data),
+    .then(res => res.json())
+    .then(res => res.data),
 });
 
 /*

@@ -3,8 +3,6 @@
 /* eslint-disable no-param-reassign, no-console */
 
 import path from 'path';
-import os from 'os';
-import uuid from 'uuid';
 import { unzipFile } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';

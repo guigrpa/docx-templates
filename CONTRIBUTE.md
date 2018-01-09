@@ -2,8 +2,7 @@
     - yarn
     - yarn compile
 - Run example from file:
-	- run "node examples/swapi/swapi.js examples/swapi/swapi-simple.docx" to generate a doc
+	- test in Node : run "node examples/swapi/swapi-node.js examples/swapi/swapi-simple.docx <output file path>"
+    - test in browser : run "node examples/swapi/swapi-browser.js" and open browser on "localhost:30000"
 
-    - browserify examples/swapi/www/demo.js -o examples/swapi/www/bundle.js
-    - run "node examples/swapi/swapi-browser.js"
-    - open browser on "localhost:30000"
+TODO : remove debug.js from browser build
