@@ -24,17 +24,39 @@ const getDefaultOutput = (templatePath: string): string => {
 };
 
 const createReport = async (options: UserOptions) => {
-  const { template, _probe } = options;
+  let newOptions = omit(options, ['template']);
+  const { template, replaceImages, _probe } = options;
   const output = options.output || getDefaultOutput(template);
   DEBUG && log.debug(`Output file: ${output}`);
+
+  // ---------------------------------------------------------
+  // Load template from filesystem
+  // ---------------------------------------------------------
   DEBUG && log.debug(`Reading template from disk at ${template}...`);
   const buffer = await fs.readFile(template);
+  newOptions.template = buffer;
+
+  // ---------------------------------------------------------
+  // Images provided as path are converted to base64
+  // ---------------------------------------------------------
+  if (replaceImages) {
+    if (!options.replaceImagesBase64) {
+      DEBUG && log.debug('Converting images to base64...');
+      let b64ReplaceImages = {};
+      for (let imageName of Object.keys(replaceImages)) {
+        const imageSrc = replaceImages[imageName];
+        DEBUG && log.debug(`Reading ${imageSrc} from disk...`);
+        const imgBuff = await fs.readFile(imageSrc);
+        b64ReplaceImages[imageName] = imgBuff.toString('base64');
+      }
+      newOptions.replaceImagesBase64 = true;
+      newOptions.replaceImages = b64ReplaceImages;
+    }
+  }
 
   // ---------------------------------------------------------
   // Parse and fill template (in-memory)
   // ---------------------------------------------------------
-  let newOptions = omit(options, ['template']);
-  newOptions.template = buffer;
   const report = await createReportBuff(newOptions);
 
   if (_probe === 'JS' || _probe === 'XML') {
