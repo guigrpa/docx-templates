@@ -22,16 +22,16 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "browser": {
-    "./lib/index.js": "./lib/docx-templates.js"
+    "./lib/index.js": "./lib/browser.js"
   },
   "scripts": {
-    "compile": "yarn compile:prepare && yarn compile:copy && yarn compile:run && yarn compile:browser && yarn compile:copyBrowser",
+    "compile": "yarn compile:prepare && yarn compile:copy && yarn compile:run",
     "compileWatch": "yarn compile:prepare && yarn compile:copy && yarn compile:run -- --watch",
     "compile:prepare": "rm -rf ./lib && mkdir lib",
     "compile:copy": "flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
     "compile:run": "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
-    "compile:browser": "browserify lib/index-browser.js --s docx-templates -u lib/debug.js | uglifyjs -c > lib/docx-templates.js",
-    "compile:copyBrowser": "cp lib/docx-templates.js examples/swapi/www/",
+    "browserExample": "yarn build:browser && node examples/swapi/swapi-browser.js",
+    "build:browser": "browserify lib/browser.js --s docx-templates -u lib/debug.js | uglifyjs -c > examples/swapi/www/docx-templates.js",
     "docs": "extract-docs --template docs/templates/README.md --output README.md",
     "build": "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl",
     "travis": "yarn compile && yarn test",
