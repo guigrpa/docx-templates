@@ -2,7 +2,6 @@
 
 /* eslint-disable no-param-reassign, no-console */
 
-import path from 'path';
 import { unzipFile } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
@@ -36,7 +35,7 @@ const createReport = async (options: UserOptions) => {
   // Unzip
   // ---------------------------------------------------------
   DEBUG && log.debug('Unzipping...');
-  let zip = await unzipFile(template);
+  const zip = await unzipFile(template);
 
   // ---------------------------------------------------------
   // Read the 'document.xml' file (the template) and parse it
@@ -127,8 +126,8 @@ const createReport = async (options: UserOptions) => {
         await zip.setBin(imageDst, imageSrc);
       }
     } else {
-      console.warn('Unsupported format (path): images can only be replaced in \
-        base64 mode'
+      console.warn(
+        'Unsupported format (path): images can only be replaced in base64 mode'
       );
     }
   }
@@ -138,7 +137,7 @@ const createReport = async (options: UserOptions) => {
   // ---------------------------------------------------------
   const files = [];
   zip.forEach(async filePath => {
-    let regex = new RegExp(`${templatePath}\/[^/]+\.xml`)
+    const regex = new RegExp(`${templatePath}\\/[^\\/]+\\.xml`);
     if (regex.test(filePath) && filePath !== `${templatePath}/document.xml`) {
       files.push(filePath);
     }
@@ -159,7 +158,7 @@ const createReport = async (options: UserOptions) => {
   // Zip the results
   // ---------------------------------------------------------
   DEBUG && log.debug('Zipping...');
-  let output = await zip.toFile();
+  const output = await zip.toFile();
   return output;
 };
 

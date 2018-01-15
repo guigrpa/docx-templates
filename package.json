@@ -36,6 +36,7 @@
     "build": "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl",
     "travis": "yarn compile && yarn test",
     "lint": "eslint src",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"src/*.js\"",
     "flow": "flow check || exit 0",
     "jest": "jest --watch --coverage",
     "jest-html": "jest-html --snapshot-patterns \"src/**/*.snap\"",

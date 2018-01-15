@@ -6,13 +6,10 @@ import path from 'path';
 import fs from 'fs-extra';
 import { omit } from 'timm';
 import type { UserOptions } from './types';
+
 const createReportBuff = require('./main-buff').default;
 
-
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const DEFAULT_CMD_DELIMITER = '+++';
-const DEFAULT_LITERAL_XML_DELIMITER = '||';
-
 const log: any = DEBUG ? require('./debug').mainStory : null;
 
 // ==========================================
@@ -24,7 +21,7 @@ const getDefaultOutput = (templatePath: string): string => {
 };
 
 const createReport = async (options: UserOptions) => {
-  let newOptions = omit(options, ['template']);
+  const newOptions = omit(options, ['template']);
   const { template, replaceImages, _probe } = options;
   const output = options.output || getDefaultOutput(template);
   DEBUG && log.debug(`Output file: ${output}`);
@@ -42,8 +39,10 @@ const createReport = async (options: UserOptions) => {
   if (replaceImages) {
     if (!options.replaceImagesBase64) {
       DEBUG && log.debug('Converting images to base64...');
-      let b64ReplaceImages = {};
-      for (let imageName of Object.keys(replaceImages)) {
+      const b64ReplaceImages = {};
+      const imageNames = Object.keys(replaceImages);
+      for (let i = 0; i < imageNames.length; i++) {
+        const imageName = imageNames[i];
         const imageSrc = replaceImages[imageName];
         DEBUG && log.debug(`Reading ${imageSrc} from disk...`);
         const imgBuff = await fs.readFile(imageSrc);
