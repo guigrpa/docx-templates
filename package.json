@@ -1,6 +1,6 @@
 {
   "name": "docx-templates",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "Template-based docx report creation",
   "main": "lib/index.js",
   "author": "Guillermo Grau Panea",
@@ -31,7 +31,7 @@
     "compile:copy": "flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
     "compile:run": "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
     "browserExample": "yarn build:browser && node examples/swapi/swapi-browser.js",
-    "build:browser": "browserify lib/browser.js --s docx-templates -u lib/debug.js | uglifyjs -c > examples/swapi/www/docx-templates.js",
+    "build:browser": "browserify lib/browser.js --s docx-templates -u lib/debug.js > examples/swapi/www/docx-templates.js",
     "docs": "extract-docs --template docs/templates/README.md --output README.md",
     "build": "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl",
     "travis": "yarn compile && yarn test",
@@ -87,7 +87,6 @@
     "prettier": "^1.5.2",
     "storyboard": "^3.1.1",
     "storyboard-listener-console": "^3.1.1",
-    "uglify-es": "^3.3.5",
     "xxl": "^1.2.0"
   },
   "jest": {

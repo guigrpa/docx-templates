@@ -442,6 +442,49 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
+  it('36 Processes all snippets without sandbox', async () => {
+    const template = path.join(__dirname, 'fixtures', 'execAndIns.docx');
+    const result = await createReport({
+      template,
+      noSandbox: true,
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('37a Replace a single image', async () => {
+    const template = path.join(__dirname, 'fixtures', 'replaceImages.docx');
+    const image = path.join(__dirname, 'fixtures', 'cube.png');
+    const result = await createReport({
+      template,
+      data: {},
+      replaceImagesBase64: false,
+      replaceImages: { 'image1.png': image },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('37b Replace multiple images', async () => {
+    const template = path.join(__dirname, 'fixtures', 'replaceImages.docx');
+    const image1 = path.join(__dirname, 'fixtures', 'cube.png');
+    const image2 = path.join(__dirname, 'fixtures', 'cron.png');
+    const result = await createReport({
+      template,
+      data: {},
+      replaceImagesBase64: false,
+      replaceImages: {
+          'image1.png': image1,
+          'image2.png': image2,
+      },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
   it('40 Throws on invalid command', async () => {
     const template = path.join(__dirname, 'fixtures', 'invalidCommand.docx');
     try {
@@ -535,5 +578,10 @@ describe('Template processing', () => {
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
+  it('90 Browser\'s entrypoint exists', async () => {
+    const browserEntry = require('../browser.js');
+    expect(browserEntry).toBeDefined();
   });
 });

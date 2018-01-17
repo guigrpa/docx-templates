@@ -1,6 +1,7 @@
 # Docx-templates [![Build Status](https://travis-ci.org/guigrpa/docx-templates.svg)](https://travis-ci.org/guigrpa/docx-templates) [![Coverage Status](https://coveralls.io/repos/github/guigrpa/docx-templates/badge.svg?branch=master)](https://coveralls.io/github/guigrpa/docx-templates?branch=master) [![npm version](https://img.shields.io/npm/v/docx-templates.svg)](https://www.npmjs.com/package/docx-templates)
 
 Template-based docx report creation ([blog post](http://guigrpa.github.io/2017/01/01/word-docs-the-relay-way/))
+For both Node and Browser.
 
 ## Why?
 
@@ -73,6 +74,62 @@ createReport({
   cmdDelimiter: '+++',
   literalXmlDelimiter: '||',
   processLineBreaks: true,
+});
+```
+
+### For Browser
+
+When using docx-templates in browser, you cannot provide template as a path: you have to provide it as a buffer.
+For example, get a File object with:
+
+```html
+<input type="file">
+```
+
+Then read this file in an ArrayBuffer, feed it to docx-templates, and download the result:
+
+```js
+const createReport = require('docx-templates');
+
+readFile(my_File)
+  .then(template => {
+    return createReport({
+      template,
+      data: {
+        name: 'John',
+        surname: 'Appleseed',
+      },
+    });
+  })
+  .then(report => {
+      download(report, 'report.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'); 
+  });
+
+// read given file into an ArrayBuffer
+function readFile(fd) {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = e => {
+      let buff = reader.result;
+      resolve(buff);
+    };
+    // read the file, and wait for 'onload' to be called
+    reader.readAsArrayBuffer(fd);
+ });
+}
+```
+
+
+####Fast and insecure mode
+*WARNING: this should be used only in browser, and with trusted templates, as it may lead to arbitrary code execution*
+As complex templates processing is very slow in browser, sandbox can be disabled in options:
+
+```js
+createReport({
+  // ...
+  noSandbox: true,  // WARNING: insecure mode. USE ONLY IN BROWSER, AND WITH TRUSTED TEMPLATES
+  //...
 });
 ```
 

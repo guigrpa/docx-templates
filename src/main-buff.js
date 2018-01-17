@@ -28,6 +28,7 @@ const createReport = async (options: UserOptions) => {
     literalXmlDelimiter,
     processLineBreaks:
       options.processLineBreaks != null ? options.processLineBreaks : true,
+    noSandbox: options.noSandbox || false,
   };
   const xmlOptions = { literalXmlDelimiter };
 

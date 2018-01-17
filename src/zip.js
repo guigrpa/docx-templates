@@ -10,9 +10,6 @@ JSZip.prototype.exists = function exists(filename: string) {
 JSZip.prototype.getText = function getText(filename: string) {
   return this.file(filename).async('text');
 };
-JSZip.prototype.getBin = function getBin(filename: string) {
-  return this.file(filename).async('base64');
-};
 JSZip.prototype.setText = function setText(filename: string, data: string) {
   this.file(filename, data);
 };
