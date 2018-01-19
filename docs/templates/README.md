@@ -1,12 +1,12 @@
 # Docx-templates [![Build Status](https://travis-ci.org/guigrpa/docx-templates.svg)](https://travis-ci.org/guigrpa/docx-templates) [![Coverage Status](https://coveralls.io/repos/github/guigrpa/docx-templates/badge.svg?branch=master)](https://coveralls.io/github/guigrpa/docx-templates?branch=master) [![npm version](https://img.shields.io/npm/v/docx-templates.svg)](https://www.npmjs.com/package/docx-templates)
 
 Template-based docx report creation ([blog post](http://guigrpa.github.io/2017/01/01/word-docs-the-relay-way/))
-For both Node and Browser.
+for both Node and the browser.
 
 ## Why?
 
 * **Write documents naturally using Word**, just adding some commands where needed for dynamic contents
-* **Express your data needs (queries) in the template itself** (`QUERY` command), in whatever query language you want (e.g. in GraphQL). This is similar to *the Relay way™*: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
+* **Express your data needs (queries) in the template itself** (`QUERY` command), in whatever query language you want (e.g. in GraphQL). This is similar to _the Relay way™_: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
 * **Execute JavaScript snippets** (`EXEC`, or `!` for short)
 * **Insert the result of JavaScript snippets** in your document (`INS`, or `=` for short)
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
@@ -30,9 +30,7 @@ $ npm install docx-templates
 $ yarn add docx-templates
 ```
 
-## Usage
-
-### API
+## Node usage
 
 Here is a (contrived) example, with report data injected directly as an object:
 
@@ -60,7 +58,7 @@ You can also **provide a sync or Promise-returning callback function (query reso
 createReport({
   template: 'templates/myTemplate.docx',
   output: 'reports/myReport.docx',
-  data: (query) => graphqlServer.execute(query),
+  data: query => graphqlServer.execute(query),
 });
 ```
 
@@ -77,10 +75,9 @@ createReport({
 });
 ```
 
-### For Browser
+## Browser usage
 
-When using docx-templates in browser, you cannot provide template as a path: you have to provide it as a buffer.
-For example, get a File object with:
+When using docx-templates in the browser, you cannot provide the template as a path: you have to provide the template contents as a buffer. For example, get a File object with:
 
 ```html
 <input type="file">
@@ -89,60 +86,57 @@ For example, get a File object with:
 Then read this file in an ArrayBuffer, feed it to docx-templates, and download the result:
 
 ```js
-const createReport = require('docx-templates');
+import createReport from 'docx-templates';
 
-readFile(my_File)
-  .then(template => {
-    return createReport({
+readFile(myFile)
+  .then(template =>
+    createReport({
       template,
-      data: {
-        name: 'John',
-        surname: 'Appleseed',
-      },
-    });
-  })
+      data: { name: 'John', surname: 'Appleseed' },
+    })
+  )
   .then(report => {
-      download(report, 'report.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    download(
+      report,
+      'report.docx',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    );
   });
 
-// read given file into an ArrayBuffer
-function readFile(fd) {
-  return new Promise((resolve, reject) => {
-    let reader = new FileReader();
+// Load the user-provided file into an ArrayBuffer
+const readFile = fd =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
     reader.onerror = reject;
-    reader.onload = e => {
-      let buff = reader.result;
-      resolve(buff);
+    reader.onload = () => {
+      const buf = reader.result;
+      resolve(buf);
     };
-    // read the file, and wait for 'onload' to be called
     reader.readAsArrayBuffer(fd);
- });
-}
+  });
 ```
 
-####Fast and insecure mode
-*WARNING: this should be used only in browser, and with trusted templates, as it may lead to arbitrary code execution*
-As complex templates processing is very slow in browser, sandbox can be disabled in options:
+With the default configuration, browser usage can become slow with complex templates due to the usage of JS sandboxes for security reasons. _If the templates you'll be using with docx-templates can be trusted 100%, you can disable the security sandboxes by configuring `noSandbox: true`_. **Beware of arbitrary code injection risks**:
 
 ```js
 createReport({
   // ...
-  noSandbox: true,  // WARNING: insecure mode. USE ONLY IN BROWSER, AND WITH TRUSTED TEMPLATES
-  //...
+  // USE ONLY IN THE BROWSER, AND WITH TRUSTED TEMPLATES
+  noSandbox: true, // WARNING: INSECURE
 });
 ```
 
-### Writing templates
+## Writing templates
 
 You can find several template examples in this repo:
 
 * [SWAPI](https://github.com/guigrpa/docx-templates/tree/master/examples/swapi), a good example of what you can achieve embedding a template (GraphQL in this case) in your report, including a simple script for report generation. Uses the freak-ish online [Star Wars GraphQL API](https://github.com/graphql/swapi-graphql)
 * [Several templates](https://github.com/guigrpa/docx-templates/tree/master/examples/sampleTemplates)
-* [More specific templates, used for tests]( https://github.com/guigrpa/docx-templates/tree/master/src/__tests__/fixtures)
+* [More specific templates, used for tests](https://github.com/guigrpa/docx-templates/tree/master/src/__tests__/fixtures)
 
 Currently supported commands are defined below.
 
-#### `QUERY`
+### `QUERY`
 
 You can use GraphQL, SQL, whatever you want: the query will be passed unchanged to your `data` query resolver.
 
@@ -165,15 +159,12 @@ const data = {
   project: {
     name: 'docx-templates',
     details: { year: '2016' },
-    people: [
-      { name: 'John', since: 2015 },
-      { name: 'Robert', since: 2010 },
-    ]
+    people: [{ name: 'John', since: 2015 }, { name: 'Robert', since: 2010 }],
   },
 };
 ```
 
-#### `INS` (`=`)
+### `INS` (`=`)
 
 Inserts the result of a given (JavaScript) snippet:
 
@@ -200,13 +191,13 @@ You can also use this shorthand notation:
 +++= `${project.name} (${$details.year})`+++
 ```
 
-Use JavaScript's ternary operator to implement an *if-else* structure:
+Use JavaScript's ternary operator to implement an _if-else_ structure:
 
 ```
 +++= $details.year != null ? `(${$details.year})` : ''+++
 ```
 
-#### `EXEC` (`!`)
+### `EXEC` (`!`)
 
 Executes a given JavaScript snippet, just like `INS` or `=`, but doesn't insert anything in the document. You can use `EXEC`, for example, to define functions or constants before using them elsewhere in your template.
 
@@ -219,7 +210,7 @@ const MY_CONSTANT = 3;
 +++! const ANOTHER_CONSTANT = 5; +++
 ```
 
-#### `FOR` and `END-FOR`
+### `FOR` and `END-FOR`
 
 Loop over a group of elements (resulting from the evaluation of a JavaScript expression):
 
@@ -266,7 +257,7 @@ Finally, you can nest loops (this example assumes a different data set):
 +++END-FOR company+++
 ```
 
-#### `IF` and `END-IF`
+### `IF` and `END-IF`
 
 Include contents conditionally (depending on the evaluation of a JavaScript expression):
 
@@ -280,7 +271,7 @@ Similarly to the `FOR` command, it also works over table rows. You can also nest
 and mix & match `IF` and `FOR` commands. In fact, for the technically inclined: the `IF` command
 is implemented as a `FOR` command with 1 or 0 iterations, depending on the expression value.
 
-#### `ALIAS` (and alias resolution with `*`)
+### `ALIAS` (and alias resolution with `*`)
 
 Define a name for a complete command (especially useful for formatting tables):
 
@@ -300,7 +291,7 @@ Define a name for a complete command (especially useful for formatting tables):
 ----------------------------------------------------------
 ```
 
-### Replacing template images
+## Replacing template images
 
 You can replace images in your template by specifying the `replaceImages` option when you create your report:
 
@@ -310,7 +301,7 @@ createReport({
   replaceImages: {
     'image1.png': '/absolute/path/to/newImage1.png',
     'image3.png': '/absolute/path/to/newImage3.png',
-  }
+  },
 });
 ```
 
@@ -323,7 +314,7 @@ createReport({
   replaceImages: {
     'image1.png': '<base64 data>',
     'image3.png': '<base64 data>',
-  }
+  },
 });
 ```
 
@@ -337,7 +328,6 @@ You can determine the original image file names by inspecting your template: unz
 | | ├─image3.png
 | | ├─...
 ```
-
 
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
 
