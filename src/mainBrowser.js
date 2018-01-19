@@ -6,7 +6,7 @@ import { unzipFile } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
-import type { UserOptions } from './types';
+import type { UserOptionsInternal } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
@@ -17,7 +17,7 @@ const log: any = DEBUG ? require('./debug').mainStory : null;
 // ==========================================
 // Main
 // ==========================================
-const createReport = async (options: UserOptions) => {
+const createReport = async (options: UserOptionsInternal) => {
   DEBUG && log.debug('Report options:', { attach: options });
   const { template, data, queryVars, replaceImages, _probe } = options;
   const templatePath = 'word';

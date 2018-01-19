@@ -40,13 +40,19 @@ export type UserOptions = {|
   cmdDelimiter?: string,
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean,
+  noSandbox?: boolean,
   _probe?: 'JS' | 'XML',
+|};
+export type UserOptionsInternal = {|
+  ...UserOptions,
+  template: ArrayBuffer,
 |};
 
 export type CreateReportOptions = {|
   cmdDelimiter: string,
   literalXmlDelimiter: string,
   processLineBreaks: boolean,
+  noSandbox: boolean,
 |};
 
 export type Context = {

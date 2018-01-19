@@ -4,8 +4,8 @@
 
 import path from 'path';
 import fs from 'fs-extra';
-import { omit } from 'timm';
-import type { UserOptions } from './types';
+import { set as timmSet } from 'timm';
+import type { UserOptions, UserOptionsInternal } from './types';
 
 const createReportBuff = require('./mainBrowser').default;
 
@@ -21,7 +21,6 @@ const getDefaultOutput = (templatePath: string): string => {
 };
 
 const createReport = async (options: UserOptions) => {
-  const newOptions = omit(options, ['template']);
   const { template, replaceImages, _probe } = options;
   const output = options.output || getDefaultOutput(template);
   DEBUG && log.debug(`Output file: ${output}`);
@@ -31,7 +30,11 @@ const createReport = async (options: UserOptions) => {
   // ---------------------------------------------------------
   DEBUG && log.debug(`Reading template from disk at ${template}...`);
   const buffer = await fs.readFile(template);
-  newOptions.template = buffer;
+  const newOptions: UserOptionsInternal = (timmSet(
+    options,
+    'template',
+    buffer
+  ): any);
 
   // ---------------------------------------------------------
   // Images provided as path are converted to base64
