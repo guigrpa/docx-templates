@@ -3,4 +3,4 @@
   * `yarn compile`
 * Run example from file:
   * test in Node: `node examples/swapi/swapi-node.js examples/swapi/swapi-simple.docx <output file path>``
-  * test in the browser: `yarn browserExample` point browser at `localhost:30000`
+  * test in the browser: `yarn startBrowser` point browser at `localhost:30000`

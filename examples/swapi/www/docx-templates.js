@@ -1,11 +1,11 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.docxTemplates = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var createReport = require('./main-buff').default;
+var createReport = require('./mainBrowser').default;
 
 module.exports = createReport;
 module.exports.default = createReport;
-},{"./main-buff":3}],2:[function(require,module,exports){
+},{"./mainBrowser":3}],2:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -60,7 +60,7 @@ var runUserJsAndGetRaw = function runUserJsAndGetRaw(data, code, ctx) {
   var result = null;
   if (ctx.options.noSandbox) {
     context = sandbox;
-    var wrapper = new Function("with(this) { return eval(__code__); }");
+    var wrapper = new Function('with(this) { return eval(__code__); }'); // eslint-disable-line no-new-func
     result = wrapper.call(context);
   } else {
     var script = new _vm2.default.Script('\n      __result__ = eval(__code__);\n      ', {});
@@ -783,7 +783,6 @@ var processText = function processText(data, node, ctx) {
 // ==========================================
 var processCmd = function processCmd(data, node, ctx) {
   var cmd = getCommand(ctx);
-  (0, _reportUtils.getCurLoop)(ctx);
   DEBUG && log.debug('Processing cmd: ' + chalk.cyan.bold(cmd));
   try {
     // Extract command name
@@ -1237,9 +1236,6 @@ _jszip2.default.prototype.exists = function exists(filename) {
 
 _jszip2.default.prototype.getText = function getText(filename) {
   return this.file(filename).async('text');
-};
-_jszip2.default.prototype.getBin = function getBin(filename) {
-  return this.file(filename).async('base64');
 };
 _jszip2.default.prototype.setText = function setText(filename, data) {
   this.file(filename, data);

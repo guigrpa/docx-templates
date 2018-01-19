@@ -7,7 +7,7 @@ import fs from 'fs-extra';
 import { omit } from 'timm';
 import type { UserOptions } from './types';
 
-const createReportBuff = require('./main-buff').default;
+const createReportBuff = require('./mainBrowser').default;
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;

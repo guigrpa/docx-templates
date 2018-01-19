@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs-extra';
 
 // SWUT
-import createReport from '..';
+import createReport from '../indexNode';
 
 const outputDir = path.join(__dirname, 'out');
 const WRITE_REPORTS_TO_FILE = false;
@@ -477,8 +477,8 @@ describe('Template processing', () => {
       data: {},
       replaceImagesBase64: false,
       replaceImages: {
-          'image1.png': image1,
-          'image2.png': image2,
+        'image1.png': image1,
+        'image2.png': image2,
       },
       _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
     });
@@ -580,8 +580,8 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
-  it('90 Browser\'s entrypoint exists', async () => {
-    const browserEntry = require('../browser.js');
+  it("90 Browser's entry point exists", async () => {
+    const browserEntry = require('../indexBrowser'); // eslint-disable-line
     expect(browserEntry).toBeDefined();
   });
 });

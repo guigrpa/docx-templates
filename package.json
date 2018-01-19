@@ -2,7 +2,8 @@
   "name": "docx-templates",
   "version": "2.2.2",
   "description": "Template-based docx report creation",
-  "main": "lib/index.js",
+  "main": "lib/indexNode.js",
+  "browser": "lib/indexBrowser.js",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
   "keywords": ["docx", "office", "word", "ms-word", "report", "template"],
@@ -14,9 +15,6 @@
     "type": "git",
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
-  "browser": {
-    "./lib/index.js": "./lib/browser.js"
-  },
   "scripts": {
     "compile": "yarn compile:prepare && yarn compile:copy && yarn compile:run",
     "compileWatch":
@@ -26,10 +24,11 @@
       "flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
     "compile:run":
       "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
-    "browserExample":
-      "yarn build:browser && node examples/swapi/swapi-browser.js",
     "build:browser":
-      "browserify lib/browser.js --s docx-templates -u lib/debug.js > examples/swapi/www/docx-templates.js",
+      "browserify lib/indexBrowser.js --s docx-templates -u lib/debug.js > examples/swapi/www/docx-templates.js",
+    "start": "cd examples/swapi && node swapi-node swapi-complex.docx",
+    "startBrowser":
+      "yarn build:browser && node examples/swapi/swapi-browser.js",
     "docs":
       "extract-docs --template docs/templates/README.md --output README.md",
     "build":
@@ -44,9 +43,9 @@
     "testCovPrepare":
       "rm -rf ./coverage .nyc_output .nyc_tmp && mkdir .nyc_tmp",
     "testDev":
-      "cross-env NODE_ENV=development jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-dev.json && rm -rf .nyc_output",
+      "NODE_ENV=development jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-dev.json && rm -rf .nyc_output",
     "testProd":
-      "cross-env NODE_ENV=production jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-prod.json && rm -rf .nyc_output",
+      "NODE_ENV=production jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-prod.json && rm -rf .nyc_output",
     "testCovReport":
       "cp -r .nyc_tmp .nyc_output && nyc report --reporter=html --reporter=lcov --reporter=text"
   },
@@ -69,9 +68,9 @@
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
+    "body-parser": "^1.18.2",
     "browserify": "^15.0.0",
     "coveralls": "2.13.1",
-    "cross-env": "3.1.3",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "14.1.0",
     "eslint-config-prettier": "2.3.0",

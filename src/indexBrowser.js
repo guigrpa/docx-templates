@@ -1,4 +1,4 @@
-const createReport = require('./main-buff').default;
+const createReport = require('./mainBrowser').default;
 
 module.exports = createReport;
 module.exports.default = createReport;

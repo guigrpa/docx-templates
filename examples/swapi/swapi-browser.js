@@ -1,33 +1,37 @@
+/* eslint-disable no-console */
+
 require('isomorphic-fetch');
-const path = require('path')
-const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
-const port = 30000
+const path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-app.use(bodyParser.json())
-app.use(express.static(path.join(__dirname, 'www')))
+const app = express();
+const port = 30000;
 
-app.get('/', (request, response) => {
-  response.sendFile('index.html')
-})
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'www')));
 
-app.post('/swapi', (request, response) => {
+app.get('/', (req, res) => {
+  res.sendFile('index.html');
+});
+
+app.post('/swapi', (req, res) => {
   fetch('http://swapi.apis.guru', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(request.body),
+    body: JSON.stringify(req.body),
   })
-  .then(res => res.json())
-  .then(res => response.send(res.data))
-})
+    .then(response => response.json())
+    .then(data => res.send(data.data));
+});
 
-app.listen(port, (err) => {
+app.listen(port, err => {
   if (err) {
-    return console.log('something bad happened', err)
+    console.error('something bad happened', err);
+    return;
   }
-  console.log(`server is listening on ${port}`)
-})
+  console.log(`server is listening on ${port}`);
+});

@@ -109,8 +109,7 @@ const readFile = fd =>
     const reader = new FileReader();
     reader.onerror = reject;
     reader.onload = () => {
-      const buf = reader.result;
-      resolve(buf);
+      resolve(reader.result);
     };
     reader.readAsArrayBuffer(fd);
   });
