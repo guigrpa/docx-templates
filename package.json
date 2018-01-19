@@ -1,18 +1,11 @@
 {
   "name": "docx-templates",
-  "version": "2.3.0",
+  "version": "2.2.2",
   "description": "Template-based docx report creation",
   "main": "lib/index.js",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
-  "keywords": [
-    "docx",
-    "office",
-    "word",
-    "ms-word",
-    "report",
-    "template"
-  ],
+  "keywords": ["docx", "office", "word", "ms-word", "report", "template"],
   "homepage": "https://github.com/guigrpa/docx-templates#readme",
   "bugs": {
     "url": "https://github.com/guigrpa/docx-templates/issues"
@@ -26,26 +19,36 @@
   },
   "scripts": {
     "compile": "yarn compile:prepare && yarn compile:copy && yarn compile:run",
-    "compileWatch": "yarn compile:prepare && yarn compile:copy && yarn compile:run -- --watch",
+    "compileWatch":
+      "yarn compile:prepare && yarn compile:copy && yarn compile:run -- --watch",
     "compile:prepare": "rm -rf ./lib && mkdir lib",
-    "compile:copy": "flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
-    "compile:run": "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
-    "browserExample": "yarn build:browser && node examples/swapi/swapi-browser.js",
-    "build:browser": "browserify lib/browser.js --s docx-templates -u lib/debug.js > examples/swapi/www/docx-templates.js",
-    "docs": "extract-docs --template docs/templates/README.md --output README.md",
-    "build": "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl",
+    "compile:copy":
+      "flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
+    "compile:run":
+      "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
+    "browserExample":
+      "yarn build:browser && node examples/swapi/swapi-browser.js",
+    "build:browser":
+      "browserify lib/browser.js --s docx-templates -u lib/debug.js > examples/swapi/www/docx-templates.js",
+    "docs":
+      "extract-docs --template docs/templates/README.md --output README.md",
+    "build":
+      "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl",
     "travis": "yarn compile && yarn test",
     "lint": "eslint src",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write \"src/*.js\"",
     "flow": "flow check || exit 0",
     "jest": "jest --watch --coverage",
     "jest-html": "jest-html --snapshot-patterns \"src/**/*.snap\"",
-    "test": "npm run testCovFull",
-    "testCovFull": "npm run testCovPrepare && npm run testDev && npm run testCovReport",
-    "testCovPrepare": "rm -rf ./coverage .nyc_output .nyc_tmp && mkdir .nyc_tmp",
-    "testDev": "cross-env NODE_ENV=development jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-dev.json && rm -rf .nyc_output",
-    "testProd": "cross-env NODE_ENV=production jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-prod.json && rm -rf .nyc_output",
-    "testCovReport": "cp -r .nyc_tmp .nyc_output && nyc report --reporter=html --reporter=lcov --reporter=text"
+    "test": "yarn testCovFull",
+    "testCovFull": "yarn testCovPrepare && yarn testDev && yarn testCovReport",
+    "testCovPrepare":
+      "rm -rf ./coverage .nyc_output .nyc_tmp && mkdir .nyc_tmp",
+    "testDev":
+      "cross-env NODE_ENV=development jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-dev.json && rm -rf .nyc_output",
+    "testProd":
+      "cross-env NODE_ENV=production jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-prod.json && rm -rf .nyc_output",
+    "testCovReport":
+      "cp -r .nyc_tmp .nyc_output && nyc report --reporter=html --reporter=lcov --reporter=text"
   },
   "engines": {
     "node": ">=6"
@@ -92,14 +95,8 @@
   "jest": {
     "testRegex": "src/.*__tests__/.*\\.(test|spec)\\.(js|jsx)$",
     "coverageDirectory": ".nyc_output",
-    "coverageReporters": [
-      "json",
-      "text",
-      "html"
-    ],
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-html"
-    ],
+    "coverageReporters": ["json", "text", "html"],
+    "snapshotSerializers": ["<rootDir>/node_modules/jest-html"],
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/debug.js",
