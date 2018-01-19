@@ -46,16 +46,24 @@ const runUserJsAndGetRaw = (
   Object.keys(ctx.vars).forEach(varName => {
     sandbox[`$${varName}`] = ctx.vars[varName];
   });
-  const script = new vm.Script(
-    `
-    __result__ = eval(__code__);
-  `,
-    {}
-  );
-  const context = new vm.createContext(sandbox); // eslint-disable-line new-cap
-  script.runInContext(context);
-  const result = sandbox.__result__;
-  ctx.jsSandbox = omit(sandbox, ['__code__', '__result__']);
+  let context = null;
+  let result = null;
+  if (ctx.options.noSandbox) {
+    context = sandbox;
+    const wrapper = new Function('with(this) { return eval(__code__); }'); // eslint-disable-line no-new-func
+    result = wrapper.call(context);
+  } else {
+    const script = new vm.Script(
+      `
+      __result__ = eval(__code__);
+      `,
+      {}
+    );
+    context = new vm.createContext(sandbox); // eslint-disable-line new-cap
+    script.runInContext(context);
+    result = context.__result__;
+  }
+  ctx.jsSandbox = omit(context, ['__code__', '__result__']);
   DEBUG && log.debug('JS result', { attach: result });
   return result;
 };

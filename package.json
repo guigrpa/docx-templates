@@ -1,11 +1,18 @@
 {
   "name": "docx-templates",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "Template-based docx report creation",
   "main": "lib/index.js",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
-  "keywords": ["docx", "office", "word", "ms-word", "report", "template"],
+  "keywords": [
+    "docx",
+    "office",
+    "word",
+    "ms-word",
+    "report",
+    "template"
+  ],
   "homepage": "https://github.com/guigrpa/docx-templates#readme",
   "bugs": {
     "url": "https://github.com/guigrpa/docx-templates/issues"
@@ -14,16 +21,22 @@
     "type": "git",
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
+  "browser": {
+    "./lib/index.js": "./lib/browser.js"
+  },
   "scripts": {
     "compile": "yarn compile:prepare && yarn compile:copy && yarn compile:run",
     "compileWatch": "yarn compile:prepare && yarn compile:copy && yarn compile:run -- --watch",
     "compile:prepare": "rm -rf ./lib && mkdir lib",
     "compile:copy": "flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
     "compile:run": "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
+    "browserExample": "yarn build:browser && node examples/swapi/swapi-browser.js",
+    "build:browser": "browserify lib/browser.js --s docx-templates -u lib/debug.js > examples/swapi/www/docx-templates.js",
     "docs": "extract-docs --template docs/templates/README.md --output README.md",
     "build": "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl",
     "travis": "yarn compile && yarn test",
     "lint": "eslint src",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"src/*.js\"",
     "flow": "flow check || exit 0",
     "jest": "jest --watch --coverage",
     "jest-html": "jest-html --snapshot-patterns \"src/**/*.snap\"",
@@ -38,15 +51,11 @@
     "node": ">=6"
   },
   "dependencies": {
-    "archiver": "1.3.0",
     "babel-runtime": "6.23.0",
     "fs-extra": "^3.0.1",
-    "fstream": "1.0.11",
-    "globby": "6.1.0",
+    "jszip": "^3.1.5",
     "sax": "1.2.4",
-    "timm": "1.2.5",
-    "unzip": "0.1.11",
-    "uuid": "3.1.0"
+    "timm": "1.2.5"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
@@ -57,6 +66,7 @@
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
+    "browserify": "^15.0.0",
     "coveralls": "2.13.1",
     "cross-env": "3.1.3",
     "eslint": "^3.19.0",
@@ -66,6 +76,7 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "express": "^4.16.2",
     "extract-docs": "^1.5.2",
     "flow-bin": "^0.49.1",
     "flow-copy-source": "1.2.0",
@@ -81,8 +92,14 @@
   "jest": {
     "testRegex": "src/.*__tests__/.*\\.(test|spec)\\.(js|jsx)$",
     "coverageDirectory": ".nyc_output",
-    "coverageReporters": ["json", "text", "html"],
-    "snapshotSerializers": ["<rootDir>/node_modules/jest-html"],
+    "coverageReporters": [
+      "json",
+      "text",
+      "html"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-html"
+    ],
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/debug.js",

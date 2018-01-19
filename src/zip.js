@@ -2,32 +2,29 @@
 
 /* eslint-disable new-cap */
 
-import fs from 'fs-extra';
-import fstream from 'fstream';
-import unzip from 'unzip';
-import archiver from 'archiver';
+import JSZip from 'jszip';
 
-const unzipFile = (inputFile: string, outputFolder: string) => {
-  const readStream = fs.createReadStream(inputFile);
-  const writeStream = fstream.Writer(outputFolder);
-  return new Promise(resolve => {
-    readStream.pipe(unzip.Parse()).pipe(writeStream).on('close', resolve);
-  });
+JSZip.prototype.exists = function exists(filename: string) {
+  return this.file(filename) != null;
+};
+JSZip.prototype.getText = function getText(filename: string) {
+  return this.file(filename).async('text');
+};
+JSZip.prototype.setText = function setText(filename: string, data: string) {
+  this.file(filename, data);
+};
+JSZip.prototype.setBin = function setBin(filename: string, data: string) {
+  this.file(filename, data, { base64: true });
+};
+JSZip.prototype.toFile = function toFile() {
+  return this.generateAsync({ type: 'uint8array' });
 };
 
-const zipFile = (inputFolder: string, outputFile: string) => {
-  const output = fs.createWriteStream(outputFile);
-  const archive = archiver('zip');
-  return new Promise((resolve, reject) => {
-    output.on('close', resolve);
-    archive.on('error', reject);
-    archive.pipe(output);
-    archive.glob('**', { cwd: inputFolder, dot: true });
-    archive.finalize();
-  });
+const unzipFile = function unzipFile(inputFile: ArrayBuffer) {
+  return JSZip.loadAsync(inputFile);
 };
 
 // ==========================================
 // Public API
 // ==========================================
-export { unzipFile, zipFile };
+export { unzipFile };

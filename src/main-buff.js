@@ -2,12 +2,7 @@
 
 /* eslint-disable no-param-reassign, no-console */
 
-import path from 'path';
-import os from 'os';
-import fs from 'fs-extra';
-import uuid from 'uuid';
-import globby from 'globby';
-import { zipFile, unzipFile } from './zip';
+import { unzipFile } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
@@ -22,20 +17,10 @@ const log: any = DEBUG ? require('./debug').mainStory : null;
 // ==========================================
 // Main
 // ==========================================
-const getDefaultOutput = (templatePath: string): string => {
-  const { dir, name, ext } = path.parse(templatePath);
-  return path.join(dir, `${name}_report${ext}`);
-};
-
 const createReport = async (options: UserOptions) => {
   DEBUG && log.debug('Report options:', { attach: options });
   const { template, data, queryVars, replaceImages, _probe } = options;
-  const output = options.output || getDefaultOutput(template);
-  DEBUG && log.debug(`Output file: ${output}`);
-  const base = path.join(os.tmpdir(), uuid.v1());
-  const baseUnzipped = `${base}_unzipped`;
-  DEBUG && log.debug(`Temporary base: ${base}`);
-  const templatePath = `${baseUnzipped}/word`;
+  const templatePath = 'word';
   const literalXmlDelimiter =
     options.literalXmlDelimiter || DEFAULT_LITERAL_XML_DELIMITER;
   const createOptions = {
@@ -43,6 +28,7 @@ const createReport = async (options: UserOptions) => {
     literalXmlDelimiter,
     processLineBreaks:
       options.processLineBreaks != null ? options.processLineBreaks : true,
+    noSandbox: options.noSandbox || false,
   };
   const xmlOptions = { literalXmlDelimiter };
 
@@ -50,14 +36,13 @@ const createReport = async (options: UserOptions) => {
   // Unzip
   // ---------------------------------------------------------
   DEBUG && log.debug('Unzipping...');
-  await fs.emptyDir(baseUnzipped);
-  await unzipFile(template, baseUnzipped);
+  const zip = await unzipFile(template);
 
   // ---------------------------------------------------------
   // Read the 'document.xml' file (the template) and parse it
   // ---------------------------------------------------------
   DEBUG && log.debug('Reading template...');
-  const templateXml = await fs.readFile(`${templatePath}/document.xml`, 'utf8');
+  const templateXml = await zip.getText(`${templatePath}/document.xml`);
   DEBUG && log.debug(`Template file length: ${templateXml.length}`);
   DEBUG && log.debug('Parsing XML...');
   const tic = new Date().getTime();
@@ -92,6 +77,7 @@ const createReport = async (options: UserOptions) => {
   //   ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
   // });
   const finalTemplate = preprocessTemplate(jsTemplate, createOptions);
+
   DEBUG &&
     log.debug('Generating report...', {
       attach: finalTemplate,
@@ -100,7 +86,6 @@ const createReport = async (options: UserOptions) => {
     });
   const report = produceJsReport(queryResult, finalTemplate, createOptions);
   if (_probe === 'JS') {
-    await cleanUp(baseUnzipped);
     return report;
   }
 
@@ -115,74 +100,68 @@ const createReport = async (options: UserOptions) => {
   DEBUG && log.debug('Converting report to XML...');
   const reportXml = buildXml(report, xmlOptions);
   if (_probe === 'XML') {
-    await cleanUp(baseUnzipped);
     return reportXml;
   }
   DEBUG && log.debug('Writing report...');
-  await fs.writeFile(`${templatePath}/document.xml`, reportXml);
+  zip.setText(`${templatePath}/document.xml`, reportXml);
 
   // ---------------------------------------------------------
   // Replace images
   // ---------------------------------------------------------
   if (replaceImages) {
     DEBUG && log.debug('Replacing images...');
-    const mediaPath = `${templatePath}/media`;
-    const imageNames = Object.keys(replaceImages);
-    for (let i = 0; i < imageNames.length; i++) {
-      const imageName = imageNames[i];
-      const imageDst = `${mediaPath}/${imageName}`;
-      if (!fs.existsSync(`${imageDst}`)) {
-        console.warn(
-          `Image ${imageName} cannot be replaced: destination does not exist`
-        );
-        continue;
-      }
-      const imageSrc = replaceImages[imageName];
-      if (options.replaceImagesBase64) {
+    if (options.replaceImagesBase64) {
+      const mediaPath = `${templatePath}/media`;
+      const imageNames = Object.keys(replaceImages);
+      for (let i = 0; i < imageNames.length; i++) {
+        const imageName = imageNames[i];
+        const imageDst = `${mediaPath}/${imageName}`;
+        if (!zip.exists(`${imageDst}`)) {
+          console.warn(
+            `Image ${imageName} cannot be replaced: destination does not exist`
+          );
+          continue;
+        }
+        const imageSrc = replaceImages[imageName];
         DEBUG && log.debug(`Replacing ${imageName} with <base64 buffer>...`);
-        await fs.writeFile(imageDst, new Buffer(imageSrc, 'base64'));
-      } else {
-        DEBUG && log.debug(`Replacing ${imageName} with ${imageSrc}...`);
-        await fs.copy(imageSrc, imageDst);
+        await zip.setBin(imageDst, imageSrc);
       }
+    } else {
+      console.warn(
+        'Unsupported format (path): images can only be replaced in base64 mode'
+      );
     }
   }
 
   // ---------------------------------------------------------
   // Process all other XML files
   // ---------------------------------------------------------
-  const files = await globby([
-    `${templatePath}/*.xml`,
-    `!${templatePath}/document.xml`,
-  ]);
+  const files = [];
+  zip.forEach(async filePath => {
+    const regex = new RegExp(`${templatePath}\\/[^\\/]+\\.xml`);
+    if (regex.test(filePath) && filePath !== `${templatePath}/document.xml`) {
+      files.push(filePath);
+    }
+  });
+
   for (let i = 0; i < files.length; i++) {
     const filePath = files[i];
     DEBUG && log.info(`Processing ${filePath}...`);
-    const raw = await fs.readFile(filePath, 'utf8');
+    const raw = await zip.getText(filePath);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
     const report2 = produceJsReport(queryResult, js, createOptions);
     const xml = buildXml(report2, xmlOptions);
-    await fs.writeFile(filePath, xml);
+    zip.setText(filePath, xml);
   }
 
   // ---------------------------------------------------------
   // Zip the results
   // ---------------------------------------------------------
   DEBUG && log.debug('Zipping...');
-  try {
-    await fs.ensureDir(path.dirname(output));
-    await zipFile(baseUnzipped, output);
-  } finally {
-    await fs.remove(baseUnzipped);
-  }
-  return null;
+  const output = await zip.toFile();
+  return output;
 };
-
-// ==========================================
-// Helpers
-// ==========================================
-const cleanUp = async baseUnzipped => fs.remove(baseUnzipped);
 
 // ==========================================
 // Public API

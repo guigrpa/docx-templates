@@ -10,10 +10,10 @@ createReport({
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query })
     })
-      .then(res => res.json())
-      .then(res => res.data),
+    .then(res => res.json())
+    .then(res => res.data),
 });
 
 /*

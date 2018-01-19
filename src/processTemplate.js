@@ -287,7 +287,7 @@ const processText = (
 // ==========================================
 const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
   const cmd = getCommand(ctx);
-  const curLoop = getCurLoop(ctx);
+  getCurLoop(ctx);
   DEBUG && log.debug(`Processing cmd: ${chalk.cyan.bold(cmd)}`);
   try {
     // Extract command name
