@@ -1,5 +1,3 @@
-## 2.3.0 (2018-1-19)
-
 * Add **browser support** (@vdechef, #10)
 * Add `IF`/`END-IF`
 
