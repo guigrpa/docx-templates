@@ -56,8 +56,8 @@ var runUserJsAndGetRaw = function runUserJsAndGetRaw(data, code, ctx) {
   (0, _keys2.default)(ctx.vars).forEach(function (varName) {
     sandbox['$' + varName] = ctx.vars[varName];
   });
-  var context = null;
-  var result = null;
+  var context = void 0;
+  var result = void 0;
   if (ctx.options.noSandbox) {
     context = sandbox;
     var wrapper = new Function('with(this) { return eval(__code__); }'); // eslint-disable-line no-new-func
@@ -66,6 +66,7 @@ var runUserJsAndGetRaw = function runUserJsAndGetRaw(data, code, ctx) {
     var script = new _vm2.default.Script('\n      __result__ = eval(__code__);\n      ', {});
     context = new _vm2.default.createContext(sandbox); // eslint-disable-line new-cap
     script.runInContext(context);
+    // $FlowFixMe: this attribute is set in the inside code, not known by Flow
     result = context.__result__;
   }
   ctx.jsSandbox = (0, _timm.omit)(context, ['__code__', '__result__']);
