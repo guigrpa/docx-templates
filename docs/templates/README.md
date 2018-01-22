@@ -105,7 +105,7 @@ readFile(myFile)
 
 // Load the user-provided file into an ArrayBuffer
 const readFile = fd =>
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = reject;
     reader.onload = () => {
