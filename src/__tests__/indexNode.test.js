@@ -2,9 +2,12 @@
 
 import path from 'path';
 import fs from 'fs-extra';
+import MockDate from 'mockdate';
+import md5 from 'md5';
 
 // SWUT
 import createReport from '../indexNode';
+import createReportBuff from '../indexBrowser';
 
 const outputDir = path.join(__dirname, 'out');
 const WRITE_REPORTS_TO_FILE = false;
@@ -584,4 +587,31 @@ describe('Template processing', () => {
     const browserEntry = require('../indexBrowser'); // eslint-disable-line
     expect(browserEntry).toBeDefined();
   });
+
+  it("91 Generates a valid zipped file", async () => {
+    // first, we set a global fixed Date, because date is saved into zip file
+    // when its content is updated,
+    // and we want this test to always output the exact same zip
+    MockDate.set('1/1/2000');
+
+    const filepath = path.join(__dirname, 'fixtures', 'zipGeneration.docx');
+    const template = fs.readFileSync(filepath);
+    const result = await createReportBuff({
+      template,
+      data: {
+        imageType: "4x4 hideous picture"
+      },
+      replaceImagesBase64: true,
+      replaceImages: {
+        'image1.png': "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAFUlEQVQ"+
+                      "I1wXBAQEAAACAkP6fFlUIaizhBvq890IMAAAAAElFTkSuQmCC"
+      }
+    });
+    // use md5 of output, otherwise snapshot would be to big
+    if (!WRITE_REPORTS_TO_FILE) expect(md5(result)).toMatchSnapshot();
+
+    // after test, reset global Date behaviour
+    MockDate.reset();
+  });
+
 });
