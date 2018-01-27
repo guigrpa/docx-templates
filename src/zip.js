@@ -17,7 +17,13 @@ JSZip.prototype.setBin = function setBin(filename: string, data: string) {
   this.file(filename, data, { base64: true });
 };
 JSZip.prototype.toFile = function toFile() {
-  return this.generateAsync({ type: 'uint8array' });
+  return this.generateAsync({
+    type: 'uint8array',
+    compression: "DEFLATE",
+    compressionOptions: {
+      level: 1
+    }
+  });
 };
 
 const unzipFile = function unzipFile(inputFile: ArrayBuffer) {
