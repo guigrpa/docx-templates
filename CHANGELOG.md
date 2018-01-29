@@ -1,3 +1,5 @@
+* Compress generated reports to reduce size (@vdechef, #13).
+
 ## 2.3.1 (2018-1-19)
 
 * Add **browser support** (@vdechef, #10)
