@@ -19,10 +19,8 @@ JSZip.prototype.setBin = function setBin(filename: string, data: string) {
 JSZip.prototype.toFile = function toFile() {
   return this.generateAsync({
     type: 'uint8array',
-    compression: "DEFLATE",
-    compressionOptions: {
-      level: 1
-    }
+    compression: 'DEFLATE',
+    compressionOptions: { level: 1 },
   });
 };
 

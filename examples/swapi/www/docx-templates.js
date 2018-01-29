@@ -1245,7 +1245,11 @@ _jszip2.default.prototype.setBin = function setBin(filename, data) {
   this.file(filename, data, { base64: true });
 };
 _jszip2.default.prototype.toFile = function toFile() {
-  return this.generateAsync({ type: 'uint8array' });
+  return this.generateAsync({
+    type: 'uint8array',
+    compression: 'DEFLATE',
+    compressionOptions: { level: 1 }
+  });
 };
 
 var unzipFile = function unzipFile(inputFile) {
