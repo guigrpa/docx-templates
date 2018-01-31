@@ -30,8 +30,9 @@ export type QueryResolver = (
   query: ?Query,
   queryVars: any
 ) => ReportData | Promise<ReportData>;
+
 export type UserOptions = {|
-  template: string,
+  template: string, // path
   data?: ReportData | QueryResolver,
   queryVars?: any,
   output?: string,
@@ -45,7 +46,7 @@ export type UserOptions = {|
 |};
 export type UserOptionsInternal = {|
   ...UserOptions,
-  template: ArrayBuffer,
+  template: ArrayBuffer, // template contents
 |};
 
 export type CreateReportOptions = {|

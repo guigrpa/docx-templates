@@ -459,7 +459,7 @@ describe('Template processing', () => {
   });
 
   it('37a Replace a single image', async () => {
-    const template = path.join(__dirname, 'fixtures', 'replaceImages.docx');
+    const template = path.join(__dirname, 'fixtures', 'replaceOneImage.docx');
     const image = path.join(__dirname, 'fixtures', 'cube.png');
     const result = await createReport({
       template,
@@ -472,7 +472,7 @@ describe('Template processing', () => {
   });
 
   it('37b Replace multiple images', async () => {
-    const template = path.join(__dirname, 'fixtures', 'replaceImages.docx');
+    const template = path.join(__dirname, 'fixtures', 'replaceTwoImages.docx');
     const image1 = path.join(__dirname, 'fixtures', 'cube.png');
     const image2 = path.join(__dirname, 'fixtures', 'cron.png');
     const result = await createReport({
