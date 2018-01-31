@@ -421,6 +421,16 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
+  it('33c Processes EXEC when a promise is returned', async () => {
+    const template = path.join(__dirname, 'fixtures', 'execPromise.docx');
+    const result = await createReport({
+      template,
+      data: {},
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
   it('34 Processes INS with shorthand (=)', async () => {
     const template = path.join(__dirname, 'fixtures', 'insShorthand.docx');
     const result = await createReport({
