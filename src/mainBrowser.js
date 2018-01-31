@@ -68,7 +68,7 @@ const createReport = async (options: UserOptionsInternal) => {
   let queryResult = null;
   if (typeof data === 'function') {
     DEBUG && log.debug('Looking for the query in the template...');
-    const query = extractQuery(jsTemplate, createOptions);
+    const query = await extractQuery(jsTemplate, createOptions);
     DEBUG && log.debug(`Query: ${query || 'no query found'}`);
     queryResult = await data(query, queryVars);
   } else {
@@ -91,7 +91,11 @@ const createReport = async (options: UserOptionsInternal) => {
       attachLevel: 'debug',
       ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
     });
-  const report = produceJsReport(queryResult, finalTemplate, createOptions);
+  const report = await produceJsReport(
+    queryResult,
+    finalTemplate,
+    createOptions
+  );
   if (_probe === 'JS') return report;
 
   // ---------------------------------------------------------
@@ -153,7 +157,7 @@ const createReport = async (options: UserOptionsInternal) => {
     const raw = await zipGetText(zip, filePath);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
-    const report2 = produceJsReport(queryResult, js, createOptions);
+    const report2 = await produceJsReport(queryResult, js, createOptions);
     const xml = buildXml(report2, xmlOptions);
     zipSetText(zip, filePath, xml);
   }

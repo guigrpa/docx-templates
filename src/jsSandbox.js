@@ -10,12 +10,14 @@ import type { ReportData, Context } from './types';
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
 
-const runUserJsAndGetString = (
+// Runs a user snippet in a sandbox, and returns the result
+// as a string. See more details in runUserJsAndGetRaw() below.
+const runUserJsAndGetString = async (
   data: ?ReportData,
   code: string,
   ctx: Context
 ): string => {
-  const result = runUserJsAndGetRaw(data, code, ctx);
+  const result = await runUserJsAndGetRaw(data, code, ctx);
   if (result == null) return '';
   let str = String(result);
   if (ctx.options.processLineBreaks) {
@@ -28,11 +30,19 @@ const runUserJsAndGetString = (
   return str;
 };
 
-const runUserJsAndGetRaw = (
+// Runs a user snippet in a sandbox, and returns the result.
+// The snippet can return a Promise, which is then awaited.
+// The sandbox is kept for the execution of snippets later on
+// in the template. Sandboxing can also be disabled via
+// ctx.options.noSandbox.
+const runUserJsAndGetRaw = async (
   data: ?ReportData,
   code: string,
   ctx: Context
 ): any => {
+  // Retrieve the current JS sandbox contents (if any) and add
+  // the code to be run, and a placeholder for the result,
+  // as well as all data defined by the user
   const sandbox = merge(
     ctx.jsSandbox || {},
     {
@@ -41,11 +51,16 @@ const runUserJsAndGetRaw = (
     },
     data
   );
+
+  // Add currently defined vars, including loop vars and the index
+  // of the innermost loop
   const curLoop = getCurLoop(ctx);
   if (curLoop) sandbox.$idx = curLoop.idx;
   Object.keys(ctx.vars).forEach(varName => {
     sandbox[`$${varName}`] = ctx.vars[varName];
   });
+
+  // Run the JS snippet and extract the result
   let context;
   let result;
   if (ctx.options.noSandbox) {
@@ -64,6 +79,11 @@ const runUserJsAndGetRaw = (
     // $FlowFixMe: this attribute is set in the inside code, not known by Flow
     result = context.__result__;
   }
+
+  // Wait for pormises to resolve
+  if (typeof result === 'object' && result.then) result = await result;
+
+  // Save the sandbox for later use
   ctx.jsSandbox = omit(context, ['__code__', '__result__']);
   DEBUG && log.debug('JS result', { attach: result });
   return result;

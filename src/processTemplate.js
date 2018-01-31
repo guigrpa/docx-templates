@@ -26,7 +26,7 @@ const chalk: any = DEBUG ? require('./debug').chalk : null;
 let gCntIf = 0;
 
 // Go through the document until the query string is found (normally at the beginning)
-const extractQuery = (
+const extractQuery = async (
   template: Node,
   options: CreateReportOptions
 ): ?string => {
@@ -66,14 +66,14 @@ const extractQuery = (
       !parent._fTextNode && // Flow, don't complain
       parent._tag === 'w:t'
     ) {
-      processText(null, nodeIn, ctx);
+      await processText(null, nodeIn, ctx);
     }
     if (ctx.query != null) break;
   }
   return ctx.query;
 };
 
-const produceJsReport = (
+const produceJsReport = async (
   data: ?ReportData,
   template: Node,
   options: CreateReportOptions
@@ -223,7 +223,7 @@ const produceJsReport = (
         parent._tag === 'w:t'
       ) {
         const newNodeAsTextNode: TextNode = (newNode: Object);
-        newNodeAsTextNode._text = processText(data, nodeIn, ctx);
+        newNodeAsTextNode._text = await processText(data, nodeIn, ctx);
       }
       nodeOut = newNode;
     }
@@ -241,7 +241,7 @@ const produceJsReport = (
   return out;
 };
 
-const processText = (
+const processText = async (
   data: ?ReportData,
   node: TextNode,
   ctx: Context
@@ -267,7 +267,7 @@ const processText = (
     // and toggle "command mode"
     if (idx < segments.length - 1) {
       if (ctx.fCmd) {
-        const cmdResultText = processCmd(data, node, ctx);
+        const cmdResultText = await processCmd(data, node, ctx);
         if (cmdResultText != null) {
           outText += cmdResultText;
           appendTextToTagBuffers(cmdResultText, ctx, {
@@ -285,7 +285,11 @@ const processText = (
 // ==========================================
 // Command processor
 // ==========================================
-const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
+const processCmd = async (
+  data: ?ReportData,
+  node: Node,
+  ctx: Context
+): ?string => {
   const cmd = getCommand(ctx);
   DEBUG && log.debug(`Processing cmd: ${chalk.cyan.bold(cmd)}`);
   try {
@@ -325,7 +329,7 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
       //     if (!varMatch) throw new Error(`Invalid VAR command: ${cmd}`);
       //     const varName = varMatch[1];
       //     const code = varMatch[2];
-      //     const varValue = runUserJsAndGetString(data, code, ctx);
+      //     const varValue = await runUserJsAndGetString(data, code, ctx);
       //     ctx.vars[varName] = varValue;
       //     // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
       //   }
@@ -333,7 +337,7 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
       // FOR <varName> IN <expression>
       // IF <expression>
     } else if (cmdName === 'FOR' || cmdName === 'IF') {
-      out = processForIf(data, node, ctx, cmd, cmdName, cmdRest);
+      out = await processForIf(data, node, ctx, cmd, cmdName, cmdRest);
 
       // END-FOR
       // END-IF
@@ -343,11 +347,11 @@ const processCmd = (data: ?ReportData, node: Node, ctx: Context): ?string => {
       // INS <expression>
     } else if (cmdName === 'INS') {
       if (!isLoopExploring(ctx))
-        out = runUserJsAndGetString(data, cmdRest, ctx);
+        out = await runUserJsAndGetString(data, cmdRest, ctx);
 
       // EXEC <code>
     } else if (cmdName === 'EXEC') {
-      if (!isLoopExploring(ctx)) runUserJsAndGetRaw(data, cmdRest, ctx);
+      if (!isLoopExploring(ctx)) await runUserJsAndGetRaw(data, cmdRest, ctx);
 
       // Invalid command
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
@@ -376,7 +380,7 @@ const getCommand = (ctx: Context): string => {
 // ==========================================
 // Individual commands
 // ==========================================
-const processForIf = (
+const processForIf = async (
   data: ?ReportData,
   node: Node,
   ctx: Context,
@@ -411,11 +415,11 @@ const processForIf = (
     if (fParentIsExploring) {
       loopOver = [];
     } else if (isIf) {
-      const shouldRun = !!runUserJsAndGetRaw(data, cmdRest, ctx);
+      const shouldRun = !!await runUserJsAndGetRaw(data, cmdRest, ctx);
       loopOver = shouldRun ? [1] : [];
     } else {
       if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
-      loopOver = runUserJsAndGetRaw(data, forMatch[2], ctx);
+      loopOver = await runUserJsAndGetRaw(data, forMatch[2], ctx);
     }
     ctx.loops.push({
       refNode: node,
