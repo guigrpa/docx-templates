@@ -137,7 +137,7 @@ const createReport = async (options: UserOptionsInternal) => {
   }
 
   // ---------------------------------------------------------
-  // Process all other XML files
+  // Process all other XML files (they may contain headers, etc.)
   // ---------------------------------------------------------
   const files = [];
   zip.forEach(async filePath => {

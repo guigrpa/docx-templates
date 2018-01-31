@@ -7,7 +7,7 @@ import md5 from 'md5';
 
 // SWUT
 import createReport from '../indexNode';
-import createReportBuff from '../indexBrowser';
+import createReportBrowser from '../indexBrowser';
 
 const outputDir = path.join(__dirname, 'out');
 const WRITE_REPORTS_TO_FILE = false;
@@ -596,7 +596,7 @@ describe('Template processing', () => {
 
     const filepath = path.join(__dirname, 'fixtures', 'zipGeneration.docx');
     const template = fs.readFileSync(filepath);
-    const result = await createReportBuff({
+    const result = await createReportBrowser({
       template,
       data: {
         imageType: '4x4 hideous picture',
@@ -609,7 +609,7 @@ describe('Template processing', () => {
       },
     });
     // use md5 of output, otherwise snapshot would be to big
-    if (!WRITE_REPORTS_TO_FILE) expect(md5(result)).toMatchSnapshot();
+    expect(md5(result)).toMatchSnapshot();
 
     // after test, reset global Date behaviour
     MockDate.reset();
