@@ -4,31 +4,22 @@
 
 import JSZip from 'jszip';
 
-JSZip.prototype.exists = function exists(filename: string) {
-  return this.file(filename) != null;
-};
-JSZip.prototype.getText = function getText(filename: string) {
-  return this.file(filename).async('text');
-};
-JSZip.prototype.setText = function setText(filename: string, data: string) {
-  this.file(filename, data);
-};
-JSZip.prototype.setBin = function setBin(filename: string, data: string) {
-  this.file(filename, data, { base64: true });
-};
-JSZip.prototype.toFile = function toFile() {
-  return this.generateAsync({
+const zipLoad = (inputFile: ArrayBuffer) => JSZip.loadAsync(inputFile);
+const zipExists = (zip: Object, filename: string) => zip.file(filename) != null;
+const zipGetText = (zip: Object, filename: string) =>
+  zip.file(filename).async('text');
+const zipSetText = (zip: Object, filename: string, data: string) =>
+  zip.file(filename, data);
+const zipSetBase64 = (zip: Object, filename: string, data: string) =>
+  zip.file(filename, data, { base64: true });
+const zipSave = (zip: Object) =>
+  zip.generateAsync({
     type: 'uint8array',
     compression: 'DEFLATE',
     compressionOptions: { level: 1 },
   });
-};
-
-const unzipFile = function unzipFile(inputFile: ArrayBuffer) {
-  return JSZip.loadAsync(inputFile);
-};
 
 // ==========================================
 // Public API
 // ==========================================
-export { unzipFile };
+export { zipLoad, zipExists, zipGetText, zipSetText, zipSetBase64, zipSave };

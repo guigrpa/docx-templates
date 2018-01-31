@@ -2,7 +2,14 @@
 
 /* eslint-disable no-param-reassign, no-console */
 
-import { unzipFile } from './zip';
+import {
+  zipLoad,
+  zipExists,
+  zipGetText,
+  zipSetText,
+  zipSetBase64,
+  zipSave,
+} from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
@@ -36,13 +43,13 @@ const createReport = async (options: UserOptionsInternal) => {
   // Unzip
   // ---------------------------------------------------------
   DEBUG && log.debug('Unzipping...');
-  const zip = await unzipFile(template);
+  const zip = await zipLoad(template);
 
   // ---------------------------------------------------------
   // Read the 'document.xml' file (the template) and parse it
   // ---------------------------------------------------------
   DEBUG && log.debug('Reading template...');
-  const templateXml = await zip.getText(`${templatePath}/document.xml`);
+  const templateXml = await zipGetText(zip, `${templatePath}/document.xml`);
   DEBUG && log.debug(`Template file length: ${templateXml.length}`);
   DEBUG && log.debug('Parsing XML...');
   const tic = new Date().getTime();
@@ -85,9 +92,7 @@ const createReport = async (options: UserOptionsInternal) => {
       ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
     });
   const report = produceJsReport(queryResult, finalTemplate, createOptions);
-  if (_probe === 'JS') {
-    return report;
-  }
+  if (_probe === 'JS') return report;
 
   // ---------------------------------------------------------
   // Build output XML and write it to disk
@@ -99,11 +104,9 @@ const createReport = async (options: UserOptionsInternal) => {
   // });
   DEBUG && log.debug('Converting report to XML...');
   const reportXml = buildXml(report, xmlOptions);
-  if (_probe === 'XML') {
-    return reportXml;
-  }
+  if (_probe === 'XML') return reportXml;
   DEBUG && log.debug('Writing report...');
-  zip.setText(`${templatePath}/document.xml`, reportXml);
+  zipSetText(zip, `${templatePath}/document.xml`, reportXml);
 
   // ---------------------------------------------------------
   // Replace images
@@ -112,19 +115,19 @@ const createReport = async (options: UserOptionsInternal) => {
     DEBUG && log.debug('Replacing images...');
     if (options.replaceImagesBase64) {
       const mediaPath = `${templatePath}/media`;
-      const imageNames = Object.keys(replaceImages);
-      for (let i = 0; i < imageNames.length; i++) {
-        const imageName = imageNames[i];
-        const imageDst = `${mediaPath}/${imageName}`;
-        if (!zip.exists(`${imageDst}`)) {
+      const imgNames = Object.keys(replaceImages);
+      for (let i = 0; i < imgNames.length; i++) {
+        const imgName = imgNames[i];
+        const imgPath = `${mediaPath}/${imgName}`;
+        if (!zipExists(zip, `${imgPath}`)) {
           console.warn(
-            `Image ${imageName} cannot be replaced: destination does not exist`
+            `Image ${imgName} cannot be replaced: destination does not exist`
           );
           continue;
         }
-        const imageSrc = replaceImages[imageName];
-        DEBUG && log.debug(`Replacing ${imageName} with <base64 buffer>...`);
-        await zip.setBin(imageDst, imageSrc);
+        const imgData = replaceImages[imgName];
+        DEBUG && log.debug(`Replacing ${imgName} with <base64 buffer>...`);
+        await zipSetBase64(zip, imgPath, imgData);
       }
     } else {
       console.warn(
@@ -147,19 +150,19 @@ const createReport = async (options: UserOptionsInternal) => {
   for (let i = 0; i < files.length; i++) {
     const filePath = files[i];
     DEBUG && log.info(`Processing ${filePath}...`);
-    const raw = await zip.getText(filePath);
+    const raw = await zipGetText(zip, filePath);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
     const report2 = produceJsReport(queryResult, js, createOptions);
     const xml = buildXml(report2, xmlOptions);
-    zip.setText(filePath, xml);
+    zipSetText(zip, filePath, xml);
   }
 
   // ---------------------------------------------------------
   // Zip the results
   // ---------------------------------------------------------
   DEBUG && log.debug('Zipping...');
-  const output = await zip.toFile();
+  const output = await zipSave(zip);
   return output;
 };
 

@@ -304,7 +304,7 @@ createReport({
 });
 ```
 
-If you prefer, you can pass in a base64 string with the contents:
+If you prefer, you can pass in a base64 string with the contents (if you're using docx-templates in the browser, this is the only supported way):
 
 ```js
 createReport({

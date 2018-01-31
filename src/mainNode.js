@@ -5,9 +5,8 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { set as timmSet } from 'timm';
+import createReportBrowser from './mainBrowser';
 import type { UserOptions, UserOptionsInternal } from './types';
-
-const createReportBuff = require('./mainBrowser').default;
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
@@ -39,31 +38,26 @@ const createReport = async (options: UserOptions) => {
   // ---------------------------------------------------------
   // Images provided as path are converted to base64
   // ---------------------------------------------------------
-  if (replaceImages) {
-    if (!options.replaceImagesBase64) {
-      DEBUG && log.debug('Converting images to base64...');
-      const b64ReplaceImages = {};
-      const imageNames = Object.keys(replaceImages);
-      for (let i = 0; i < imageNames.length; i++) {
-        const imageName = imageNames[i];
-        const imageSrc = replaceImages[imageName];
-        DEBUG && log.debug(`Reading ${imageSrc} from disk...`);
-        const imgBuff = await fs.readFile(imageSrc);
-        b64ReplaceImages[imageName] = imgBuff.toString('base64');
-      }
-      newOptions.replaceImagesBase64 = true;
-      newOptions.replaceImages = b64ReplaceImages;
+  if (replaceImages && !options.replaceImagesBase64) {
+    DEBUG && log.debug('Converting images to base64...');
+    const imgDataBase64 = {};
+    const imgNames = Object.keys(replaceImages);
+    for (let i = 0; i < imgNames.length; i++) {
+      const imgName = imgNames[i];
+      const imgPath = replaceImages[imgName];
+      DEBUG && log.debug(`Reading ${imgPath} from disk...`);
+      const imgBuf = await fs.readFile(imgPath);
+      imgDataBase64[imgName] = imgBuf.toString('base64');
     }
+    newOptions.replaceImagesBase64 = true;
+    newOptions.replaceImages = imgDataBase64;
   }
 
   // ---------------------------------------------------------
   // Parse and fill template (in-memory)
   // ---------------------------------------------------------
-  const report = await createReportBuff(newOptions);
-
-  if (_probe === 'JS' || _probe === 'XML') {
-    return report;
-  }
+  const report = await createReportBrowser(newOptions);
+  if (_probe != null) return report;
 
   // ---------------------------------------------------------
   // Write the result on filesystem
