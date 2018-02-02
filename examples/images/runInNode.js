@@ -1,4 +1,5 @@
 require('isomorphic-fetch');
+const qrcode = require('yaqrcode');
 const createReport = require('../../lib/indexNode');
 
 createReport({
@@ -13,6 +14,11 @@ createReport({
         ? await resp.arrayBuffer()
         : await resp.buffer();
       return { width: 3, height: 3, data: buffer, extension: '.png' };
+    },
+    qr: contents => {
+      const dataUrl = qrcode(contents, { size: 500 });
+      const data = dataUrl.slice('data:image/gif;base64,'.length);
+      return { width: 6, height: 6, data, extension: '.gif' };
     },
   },
 });

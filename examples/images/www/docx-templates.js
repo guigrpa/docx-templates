@@ -205,6 +205,7 @@ exports.runUserJsAndGetString = runUserJsAndGetString;
 exports.runUserJsAndGetRaw = runUserJsAndGetRaw;
 }).call(this,require('_process'))
 },{"./debug":1,"./reportUtils":7,"_process":410,"babel-runtime/core-js/object/keys":13,"babel-runtime/helpers/asyncToGenerator":17,"babel-runtime/helpers/typeof":18,"babel-runtime/regenerator":19,"timm":447,"vm":458}],4:[function(require,module,exports){
+(function (process){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -237,8 +238,7 @@ var _reportUtils = require('./reportUtils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DEBUG = true; // process.env.DEBUG_DOCX_TEMPLATES;
-
+var DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 
 /* eslint-disable no-param-reassign, no-console */
 
@@ -657,7 +657,8 @@ var createReport = function () {
 // Public API
 // ==========================================
 exports.default = createReport;
-},{"./debug":1,"./preprocessTemplate":5,"./processTemplate":6,"./reportUtils":7,"./xml":8,"./zip":9,"babel-runtime/core-js/object/keys":13,"babel-runtime/helpers/asyncToGenerator":17,"babel-runtime/regenerator":19}],5:[function(require,module,exports){
+}).call(this,require('_process'))
+},{"./debug":1,"./preprocessTemplate":5,"./processTemplate":6,"./reportUtils":7,"./xml":8,"./zip":9,"_process":410,"babel-runtime/core-js/object/keys":13,"babel-runtime/helpers/asyncToGenerator":17,"babel-runtime/regenerator":19}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2120,7 +2121,7 @@ exports.buildXml = buildXml;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.zipSave = exports.zipSetBase64 = exports.zipSetBinary = exports.zipSetText = exports.zipGetBase64 = exports.zipGetBinary = exports.zipGetText = exports.zipExists = exports.zipLoad = undefined;
+exports.zipSave = exports.zipSetBase64 = exports.zipSetBinary = exports.zipSetText = exports.zipGetText = exports.zipExists = exports.zipLoad = undefined;
 
 var _jszip = require('jszip');
 
@@ -2139,12 +2140,6 @@ var zipExists = function zipExists(zip, filename) {
 };
 var zipGetText = function zipGetText(zip, filename) {
   return zip.file(filename).async('text');
-};
-var zipGetBinary = function zipGetBinary(zip, filename) {
-  return zip.file(filename).async('nodebuffer');
-};
-var zipGetBase64 = function zipGetBase64(zip, filename) {
-  return zip.file(filename).async('base64');
 };
 var zipSetText = function zipSetText(zip, filename, data) {
   return zip.file(filename, data);
@@ -2169,8 +2164,6 @@ var zipSave = function zipSave(zip) {
 exports.zipLoad = zipLoad;
 exports.zipExists = zipExists;
 exports.zipGetText = zipGetText;
-exports.zipGetBinary = zipGetBinary;
-exports.zipGetBase64 = zipGetBase64;
 exports.zipSetText = zipSetText;
 exports.zipSetBinary = zipSetBinary;
 exports.zipSetBase64 = zipSetBase64;

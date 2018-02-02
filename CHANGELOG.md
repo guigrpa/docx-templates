@@ -1,3 +1,5 @@
+* Add `IMAGE` command (!!!)
+
 ## 2.3.2 (2018-1-29)
 
 * Compress generated reports to reduce size (@vdechef, #13).

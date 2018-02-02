@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 
+// const qrcode = require('yaqrcode');
+
 console.log('Starting images demo');
 
 const createReport = docxTemplates; // eslint-disable-line
@@ -34,6 +36,11 @@ async function onTemplateChosen() {
         }
         const data = canvas.toDataURL().slice('data:image/png;base64,'.length);
         return { width: 3, height: 3, data, extension: '.png' };
+      },
+      qr: contents => {
+        const dataUrl = qrcode(contents, { size: 500 });
+        const data = dataUrl.slice('data:image/gif;base64,'.length);
+        return { width: 3, height: 3, data, extension: '.gif' };
       },
     },
   });

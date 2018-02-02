@@ -6,7 +6,14 @@
   "browser": "lib/indexBrowser.js",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
-  "keywords": ["docx", "office", "word", "ms-word", "report", "template"],
+  "keywords": [
+    "docx",
+    "office",
+    "word",
+    "ms-word",
+    "report",
+    "template"
+  ],
   "homepage": "https://github.com/guigrpa/docx-templates#readme",
   "bugs": {
     "url": "https://github.com/guigrpa/docx-templates/issues"
@@ -17,26 +24,17 @@
   },
   "scripts": {
     "compile": "yarn compile:prepare && yarn compile:copy && yarn compile:run",
-    "compileWatch":
-      "yarn compile:prepare && yarn compile:copy && yarn compile:run --watch",
+    "compileWatch": "yarn compile:prepare && yarn compile:copy && yarn compile:run --watch",
     "compile:prepare": "rm -rf ./lib && mkdir lib",
-    "compile:copy":
-      "flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
-    "compile:run":
-      "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
+    "compile:copy": "flow-copy-source -i \"**/__mocks__/**\" -i \"**/__tests__/**\" src lib",
+    "compile:run": "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
     "start": "cd examples/swapi && node swapi-node swapi-complex.docx",
-    "startBrowser":
-      "yarn build:browser && node examples/swapi/swapi-browser.js",
-    "startBrowser2":
-      "yarn build:browser2 && node examples/images/runInBrowser.js",
-    "docs":
-      "extract-docs --template docs/templates/README.md --output README.md",
-    "build":
-      "yarn lint && yarn flow && yarn test && yarn compile && yarn build:browser && yarn build:browser2 &&yarn docs && yarn xxl",
-    "build:browser":
-      "browserify lib/indexBrowser.js --s docx-templates -u lib/debug.js > examples/swapi/www/docx-templates.js",
-    "build:browser2":
-      "browserify lib/indexBrowser.js --s docx-templates > examples/images/www/docx-templates.js",
+    "startBrowser": "yarn build:browser && node examples/swapi/swapi-browser.js",
+    "startBrowser2": "yarn build:browser2 && node examples/images/runInBrowser.js",
+    "docs": "extract-docs --template docs/templates/README.md --output README.md",
+    "build": "yarn lint && yarn flow && yarn test && yarn compile && yarn build:browser && yarn build:browser2 &&yarn docs && yarn xxl",
+    "build:browser": "browserify lib/indexBrowser.js --s docx-templates -u lib/debug.js > examples/swapi/www/docx-templates.js",
+    "build:browser2": "browserify lib/indexBrowser.js --s docx-templates > examples/images/www/docx-templates.js",
     "travis": "yarn compile && yarn test",
     "lint": "eslint src",
     "flow": "flow check || exit 0",
@@ -44,14 +42,10 @@
     "jest-html": "jest-html --snapshot-patterns \"src/**/*.snap\"",
     "test": "yarn testCovFull",
     "testCovFull": "yarn testCovPrepare && yarn testDev && yarn testCovReport",
-    "testCovPrepare":
-      "rm -rf ./coverage .nyc_output .nyc_tmp && mkdir .nyc_tmp",
-    "testDev":
-      "NODE_ENV=development jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-dev.json && rm -rf .nyc_output",
-    "testProd":
-      "NODE_ENV=production jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-prod.json && rm -rf .nyc_output",
-    "testCovReport":
-      "cp -r .nyc_tmp .nyc_output && nyc report --reporter=html --reporter=lcov --reporter=text"
+    "testCovPrepare": "rm -rf ./coverage .nyc_output .nyc_tmp && mkdir .nyc_tmp",
+    "testDev": "NODE_ENV=development jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-dev.json && rm -rf .nyc_output",
+    "testProd": "NODE_ENV=production jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-prod.json && rm -rf .nyc_output",
+    "testCovReport": "cp -r .nyc_tmp .nyc_output && nyc report --reporter=html --reporter=lcov --reporter=text"
   },
   "engines": {
     "node": ">=6"
@@ -96,13 +90,20 @@
     "prettier": "^1.10.2",
     "storyboard": "^3.1.1",
     "storyboard-listener-console": "^3.1.1",
-    "xxl": "^1.2.0"
+    "xxl": "^1.2.0",
+    "yaqrcode": "^0.2.1"
   },
   "jest": {
     "testRegex": "src/.*__tests__/.*\\.(test|spec)\\.(js|jsx)$",
     "coverageDirectory": ".nyc_output",
-    "coverageReporters": ["json", "text", "html"],
-    "snapshotSerializers": ["<rootDir>/node_modules/jest-html"],
+    "coverageReporters": [
+      "json",
+      "text",
+      "html"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-html"
+    ],
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/debug.js",
