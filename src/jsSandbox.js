@@ -11,7 +11,10 @@ const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
 
 // Runs a user snippet in a sandbox, and returns the result
-// as a string. See more details in runUserJsAndGetRaw() below.
+// as a string. If the `processLineBreaks` flag is set,
+// newlines are replaced with a `w:br` tag (protected by
+// the `literalXmlDelimiter` separators)
+// See more details in runUserJsAndGetRaw() below.
 const runUserJsAndGetString = async (
   data: ?ReportData,
   code: string,
