@@ -1,6 +1,7 @@
 # Roadmap
 
 * IMAGE command:
+    - [ ] Fix Flow
     - [ ] Add tests
     - [ ] Add docs
 * Move to monorepo, with multiple example folders (1 node, 1 with browserify, 1 with webpack at least)
