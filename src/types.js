@@ -40,7 +40,7 @@ export type UserOptions = {|
   replaceImages?: any,
   cmdDelimiter?: string,
   literalXmlDelimiter?: string,
-  processLineBreaks?: boolean,
+  processLineBreaks?: boolean, // true by default
   noSandbox?: boolean,
   additionalJsContext?: Object,
   _probe?: 'JS' | 'XML',
@@ -68,12 +68,21 @@ export type Context = {
     'w:p': BufferStatus,
     'w:tr': BufferStatus,
   },
+  pendingImageNode: ?NonTextNode,
+  imageId: number,
+  images: Images,
   vars: { [name: string]: VarValue },
   loops: Array<LoopStatus>,
   fJump: boolean,
   shorthands: { [shorthand: string]: string },
   options: CreateReportOptions,
   jsSandbox?: ?Object,
+};
+
+export type Images = { [id: string]: Image };
+export type Image = {
+  extension: string,
+  data: ArrayBuffer | string,
 };
 
 export type BufferStatus = {
@@ -90,4 +99,12 @@ export type LoopStatus = {
   loopOver: Array<VarValue>,
   idx: number,
   isIf?: boolean,
+};
+
+export type ImagePars = {
+  width: number, // cm
+  height: number, // cm
+  path?: string, // only supported in Node
+  data?: ArrayBuffer | string, // supported in Node and the browser
+  extension?: string,
 };

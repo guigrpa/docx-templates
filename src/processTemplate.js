@@ -2,10 +2,12 @@
 
 /* eslint-disable no-param-reassign, no-constant-condition */
 
+import path from 'path';
 import {
   cloneNodeWithoutChildren,
   // cloneNodeForLogging,
   getNextSibling,
+  newNonTextNode,
   getCurLoop,
   isLoopExploring,
   logLoop,
@@ -17,11 +19,21 @@ import type {
   ReportData,
   Context,
   CreateReportOptions,
+  ImagePars,
+  Images,
 } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
 const chalk: any = DEBUG ? require('./debug').chalk : null;
+
+// Load the fs module (will only succeed in node)
+let fs;
+try {
+  fs = require('fs-extra'); // eslint-disable-line
+} catch (err) {
+  /* ignore */
+}
 
 let gCntIf = 0;
 
@@ -73,11 +85,16 @@ const extractQuery = async (
   return ctx.query;
 };
 
+type ReportOutput = {
+  report: Node,
+  images: Images,
+};
+
 const produceJsReport = async (
   data: ?ReportData,
   template: Node,
   options: CreateReportOptions
-): Promise<Node> => {
+): Promise<ReportOutput> => {
   const out: Node = cloneNodeWithoutChildren(template);
   const ctx: Context = {
     level: 1,
@@ -89,6 +106,9 @@ const produceJsReport = async (
       'w:p': { text: '', cmds: '', fInsertedText: false },
       'w:tr': { text: '', cmds: '', fInsertedText: false },
     },
+    pendingImageNode: null,
+    imageId: 0,
+    images: {},
     vars: {},
     loops: [],
     fJump: false,
@@ -105,9 +125,9 @@ const produceJsReport = async (
     const curLoop = getCurLoop(ctx);
     let nextSibling;
 
-    // ---------------------------------------------
-    // Move node pointer
-    // ---------------------------------------------
+    // =============================================
+    // Move input node pointer
+    // =============================================
     if (ctx.fJump) {
       if (!curLoop) throw new Error('INTERNAL_ERROR');
       const { refNode, refNodeLevel } = curLoop;
@@ -141,31 +161,36 @@ const produceJsReport = async (
     // DEBUG && log.debug(`Next node [${chalk.green.bold(move)}]`,
     //   { attach: cloneNodeForLogging(nodeIn) });
 
-    // ---------------------------------------------
+    // =============================================
     // Process input node
-    // ---------------------------------------------
-    // Delete the last generated output node if the user inserted a paragraph
-    // (or table row) with just a command, or if we're skipping nodes due to an empty FOR loop
+    // =============================================
+    // Delete the last generated output node in several special cases
+    // --------------------------------------------------------------
     if (move !== 'DOWN') {
       const tag = nodeOut._fTextNode ? null : nodeOut._tag;
       let fRemoveNode = false;
+      // Delete last generated output node if we're skipping nodes due to an empty FOR loop
       if (
         (tag === 'w:p' || tag === 'w:tbl' || tag === 'w:tr') &&
         isLoopExploring(ctx)
       ) {
         fRemoveNode = true;
+        // Delete last generated output node if the user inserted a paragraph
+        // (or table row) with just a command
       } else if (tag === 'w:p' || tag === 'w:tr') {
         const buffers = ctx.buffers[tag];
         fRemoveNode =
           buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
       }
-      // Execute removal, if suitable; will no longer be accessible from the parent
-      // (but the parent will be accessible from the child)
+      // Execute removal, if needed. The node will no longer be part of the output, but
+      // the parent will be accessible from the child (so that we can still move up the tree)
       if (fRemoveNode && nodeOut._parent != null) {
         nodeOut._parent._children.pop();
       }
     }
 
+    // Handle an UP movement
+    // ---------------------
     if (move === 'UP') {
       // Loop exploring? Update the reference node for the current loop
       if (
@@ -181,54 +206,87 @@ const produceJsReport = async (
       const nodeOutParent = nodeOut._parent;
       if (nodeOutParent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
 
-      // `w:tc` nodes shouldn't be left with no `w:p` children
+      // Execute the move in the output tree
+      nodeOut = nodeOutParent;
+
+      // If an image was generated, replace the parent `w:t` node with
+      // the image node
       if (
-        !nodeOutParent._fTextNode &&
-        nodeOutParent._tag === 'w:tc' &&
-        !nodeOutParent._children.filter(o => !o._fTextNode && o._tag === 'w:p')
-          .length
+        ctx.pendingImageNode &&
+        !nodeOut._fTextNode && // Flow-prevention
+        nodeOut._tag === 'w:t'
       ) {
-        nodeOutParent._children.push({
-          _parent: nodeOutParent,
+        const imgNode = ctx.pendingImageNode;
+        const parent = nodeOut._parent;
+        if (parent) {
+          imgNode._parent = parent;
+          parent._children.pop();
+          parent._children.push(imgNode);
+          // Prevent containing paragraph or table row from being removed
+          ctx.buffers['w:p'].fInsertedText = true;
+          ctx.buffers['w:tr'].fInsertedText = true;
+        }
+        ctx.pendingImageNode = null;
+      }
+
+      // `w:tc` nodes shouldn't be left with no `w:p` children; if that's the
+      // case, add an empty `w:p` inside
+      if (
+        !nodeOut._fTextNode && // Flow-prevention
+        nodeOut._tag === 'w:tc' &&
+        !nodeOut._children.filter(o => !o._fTextNode && o._tag === 'w:p').length
+      ) {
+        nodeOut._children.push({
+          _parent: nodeOut,
           _children: [],
           _fTextNode: false,
           _tag: 'w:p',
           _attrs: {},
         });
       }
-      nodeOut = nodeOutParent;
     }
 
     // Node creation: DOWN | SIDE
+    // --------------------------
     // Note that nodes are copied to the new tree, but that doesn't mean they will be kept.
     // In some cases, they will be removed later on; for example, when a paragraph only
     // contained a command -- it will be deleted.
     if (move === 'DOWN' || move === 'SIDE') {
+      // Move nodeOut to point to the new node's parent
       if (move === 'SIDE') {
         if (nodeOut._parent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
         nodeOut = nodeOut._parent;
       }
+
+      // Reset node buffers as needed if a `w:p` or `w:tr` is encountered
       const tag = nodeIn._fTextNode ? null : nodeIn._tag;
       if (tag === 'w:p' || tag === 'w:tr') {
         ctx.buffers[tag] = { text: '', cmds: '', fInsertedText: false };
       }
+
+      // Clone input node and append to output tree
       const newNode: Node = cloneNodeWithoutChildren(nodeIn);
       newNode._parent = nodeOut;
       nodeOut._children.push(newNode);
       const parent = nodeIn._parent;
+
+      // If it's a text node inside a w:t, process it
       if (
         nodeIn._fTextNode &&
         parent &&
-        !parent._fTextNode && // Flow, don't complain
+        !parent._fTextNode && // Flow-prevention
         parent._tag === 'w:t'
       ) {
         const newNodeAsTextNode: TextNode = (newNode: Object);
         newNodeAsTextNode._text = await processText(data, nodeIn, ctx);
       }
+
+      // Execute the move in the output tree
       nodeOut = newNode;
     }
 
-    // Correct nodeOut when a jump in nodeIn has occurred
+    // Correct output tree level in case of a JUMP
+    // -------------------------------------------
     if (move === 'JUMP') {
       while (deltaJump > 0) {
         if (nodeOut._parent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
@@ -238,7 +296,7 @@ const produceJsReport = async (
     }
   }
 
-  return out;
+  return { report: out, images: ctx.images };
 };
 
 const processText = async (
@@ -353,6 +411,13 @@ const processCmd = async (
     } else if (cmdName === 'EXEC') {
       if (!isLoopExploring(ctx)) await runUserJsAndGetRaw(data, cmdRest, ctx);
 
+      // IMAGE <code>
+    } else if (cmdName === 'IMAGE') {
+      if (!isLoopExploring(ctx)) {
+        const img = (await runUserJsAndGetRaw(data, cmdRest, ctx): ?ImagePars);
+        if (img != null) await processImage(ctx, img);
+      }
+
       // Invalid command
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
     return out;
@@ -463,6 +528,94 @@ const processEndForIf = (
   }
 
   return null;
+};
+
+/* eslint-disable */
+const processImage = async (ctx: Context, imagePars: ImagePars) => {
+  const cx = (imagePars.width * 360e3).toFixed(0);
+  const cy = (imagePars.height * 360e3).toFixed(0);
+  ctx.imageId += 1;
+  const id = String(ctx.imageId);
+  const relId = `img${id}`;
+  ctx.images[relId] = await getImageData(imagePars);
+  const node = newNonTextNode;
+  const pic = node(
+    'pic:pic',
+    { 'xmlns:pic': 'http://schemas.openxmlformats.org/drawingml/2006/picture' },
+    [
+      node('pic:nvPicPr', {}, [
+        node('pic:cNvPr', { id: '0', name: `Picture ${id}`, descr: 'desc' }),
+        node('pic:cNvPicPr', {}, [
+          node('a:picLocks', { noChangeAspect: '1', noChangeArrowheads: '1' }),
+        ]),
+      ]),
+      node('pic:blipFill', {}, [
+        node('a:blip', { 'r:embed': relId, cstate: 'print' }, [
+          node('a:extLst', {}, [
+            node('a:ext', { uri: '{28A0092B-C50C-407E-A947-70E740481C1C}' }, [
+              node('a14:useLocalDpi', {
+                'xmlns:a14':
+                  'http://schemas.microsoft.com/office/drawing/2010/main',
+                val: '0',
+              }),
+            ]),
+          ]),
+        ]),
+        node('a:srcRect'),
+        node('a:stretch', {}, [node('a:fillRect')]),
+      ]),
+      node('pic:spPr', { bwMode: 'auto' }, [
+        node('a:xfrm', {}, [
+          node('a:off', { x: '0', y: '0' }),
+          node('a:ext', { cx, cy }),
+        ]),
+        node('a:prstGeom', { prst: 'rect' }, [node('a:avLst')]),
+        node('a:noFill'),
+        node('a:ln', {}, [node('a:noFill')]),
+      ]),
+    ]
+  );
+  const drawing = node('w:drawing', {}, [
+    node('wp:inline', { distT: '0', distB: '0', distL: '0', distR: '0' }, [
+      node('wp:extent', { cx, cy }),
+      node('wp:docPr', { id, name: `Picture ${id}`, descr: 'desc' }),
+      node('wp:cNvGraphicFramePr', {}, [
+        node('a:graphicFrameLocks', {
+          'xmlns:a': 'http://schemas.openxmlformats.org/drawingml/2006/main',
+          noChangeAspect: '1',
+        }),
+      ]),
+      node(
+        'a:graphic',
+        { 'xmlns:a': 'http://schemas.openxmlformats.org/drawingml/2006/main' },
+        [
+          node(
+            'a:graphicData',
+            { uri: 'http://schemas.openxmlformats.org/drawingml/2006/picture' },
+            [pic]
+          ),
+        ]
+      ),
+    ]),
+  ]);
+  ctx.pendingImageNode = drawing;
+};
+
+const getImageData = async (imagePars: ImagePars) => {
+  const { data, extension } = imagePars;
+  if (data) {
+    if (!extension) {
+      throw new Error(
+        'If you return image `data`, make sure you return an extension as well!'
+      );
+    }
+    return { extension, data };
+  }
+  const { path: imgPath } = imagePars;
+  if (!imgPath) throw new Error('Specify either image `path` or `data`');
+  if (!fs) throw new Error('Cannot read image from file in the browser');
+  const buffer = await fs.readFile(imgPath);
+  return { extension: path.extname(imgPath).toLowerCase(), data: buffer };
 };
 
 // ==========================================
