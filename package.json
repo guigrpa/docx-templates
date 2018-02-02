@@ -27,12 +27,16 @@
     "start": "cd examples/swapi && node swapi-node swapi-complex.docx",
     "startBrowser":
       "yarn build:browser && node examples/swapi/swapi-browser.js",
+    "startBrowser2":
+      "yarn build:browser2 && node examples/images/runInBrowser.js",
     "docs":
       "extract-docs --template docs/templates/README.md --output README.md",
     "build":
-      "yarn lint && yarn flow && yarn test && yarn compile && yarn build:browser && yarn docs && yarn xxl",
+      "yarn lint && yarn flow && yarn test && yarn compile && yarn build:browser && yarn build:browser2 &&yarn docs && yarn xxl",
     "build:browser":
       "browserify lib/indexBrowser.js --s docx-templates -u lib/debug.js > examples/swapi/www/docx-templates.js",
+    "build:browser2":
+      "browserify lib/indexBrowser.js --s docx-templates > examples/images/www/docx-templates.js",
     "travis": "yarn compile && yarn test",
     "lint": "eslint src",
     "flow": "flow check || exit 0",
