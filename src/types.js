@@ -42,6 +42,7 @@ export type UserOptions = {|
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean,
   noSandbox?: boolean,
+  additionalJsContext?: Object,
   _probe?: 'JS' | 'XML',
 |};
 export type UserOptionsInternal = {|
@@ -54,6 +55,7 @@ export type CreateReportOptions = {|
   literalXmlDelimiter: string,
   processLineBreaks: boolean,
   noSandbox: boolean,
+  additionalJsContext: Object,
 |};
 
 export type Context = {

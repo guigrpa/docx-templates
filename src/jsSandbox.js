@@ -49,7 +49,8 @@ const runUserJsAndGetRaw = async (
       __code__: code,
       __result__: undefined,
     },
-    data
+    data,
+    ctx.options.additionalJsContext
   );
 
   // Add currently defined vars, including loop vars and the index

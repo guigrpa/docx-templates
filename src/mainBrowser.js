@@ -36,6 +36,7 @@ const createReport = async (options: UserOptionsInternal) => {
     processLineBreaks:
       options.processLineBreaks != null ? options.processLineBreaks : true,
     noSandbox: options.noSandbox || false,
+    additionalJsContext: options.additionalJsContext || {},
   };
   const xmlOptions = { literalXmlDelimiter };
 
