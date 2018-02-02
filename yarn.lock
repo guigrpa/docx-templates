@@ -5841,6 +5841,10 @@ yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
 
+yaqrcode@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/yaqrcode/-/yaqrcode-0.2.1.tgz#ef1cb3320349f6b3bb31cb680a37a8b814bd8ad7"
+
 yargs-parser@^4.0.2, yargs-parser@^4.2.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-4.2.1.tgz#29cceac0dc4f03c6c87b4a9f217dd18c9f74871c"

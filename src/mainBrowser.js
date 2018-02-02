@@ -7,6 +7,7 @@ import {
   zipExists,
   zipGetText,
   zipSetText,
+  zipSetBinary,
   zipSetBase64,
   zipSave,
 } from './zip';
@@ -14,6 +15,7 @@ import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
 import type { UserOptionsInternal } from './types';
+import { addChild, newNonTextNode } from './reportUtils';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
@@ -36,6 +38,7 @@ const createReport = async (options: UserOptionsInternal) => {
     processLineBreaks:
       options.processLineBreaks != null ? options.processLineBreaks : true,
     noSandbox: options.noSandbox || false,
+    additionalJsContext: options.additionalJsContext || {},
   };
   const xmlOptions = { literalXmlDelimiter };
 
@@ -85,13 +88,13 @@ const createReport = async (options: UserOptionsInternal) => {
   // });
   const finalTemplate = preprocessTemplate(jsTemplate, createOptions);
 
-  DEBUG &&
-    log.debug('Generating report...', {
-      attach: finalTemplate,
-      attachLevel: 'debug',
-      ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
-    });
-  const report = await produceJsReport(
+  // DEBUG &&
+  //   log.debug('Generating report...', {
+  //     attach: finalTemplate,
+  //     attachLevel: 'debug',
+  //     ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
+  //   });
+  const { report, images } = await produceJsReport(
     queryResult,
     finalTemplate,
     createOptions
@@ -101,16 +104,81 @@ const createReport = async (options: UserOptionsInternal) => {
   // ---------------------------------------------------------
   // Build output XML and write it to disk
   // ---------------------------------------------------------
-  // DEBUG && log.debug('Report', {
-  //   attach: report,
-  //   attachLevel: 'debug',
-  //   ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
-  // });
+  // DEBUG &&
+  //   log.debug('Report', {
+  //     attach: report,
+  //     attachLevel: 'debug',
+  //     ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
+  //   });
   DEBUG && log.debug('Converting report to XML...');
   const reportXml = buildXml(report, xmlOptions);
   if (_probe === 'XML') return reportXml;
   DEBUG && log.debug('Writing report...');
   zipSetText(zip, `${templatePath}/document.xml`, reportXml);
+
+  // ---------------------------------------------------------
+  // Add images
+  // ---------------------------------------------------------
+  DEBUG && log.debug('Processing images...');
+  const imageIds = Object.keys(images);
+  if (imageIds.length) {
+    DEBUG && log.debug('Completing document.xml.rels...');
+    const relsPath = `${templatePath}/_rels/document.xml.rels`;
+    const relsXml = await zipGetText(zip, relsPath);
+    const rels = await parseXml(relsXml);
+    for (let i = 0; i < imageIds.length; i++) {
+      const imageId = imageIds[i];
+      const { extension, data: imgData } = images[imageId];
+      const imgName = `template_image${i + 1}${extension}`;
+      DEBUG && log.debug(`Writing image ${imageId} (${imgName})...`);
+      const imgPath = `${templatePath}/media/${imgName}`;
+      if (typeof imgData === 'string') {
+        await zipSetBase64(zip, imgPath, imgData);
+      } else {
+        await zipSetBinary(zip, imgPath, imgData);
+      }
+      addChild(
+        rels,
+        newNonTextNode('Relationship', {
+          Id: imageId,
+          Type:
+            'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
+          Target: `media/${imgName}`,
+        })
+      );
+    }
+    const finalRelsXml = buildXml(rels, xmlOptions);
+    zipSetText(zip, relsPath, finalRelsXml);
+
+    // Process [Content_Types].xml
+    DEBUG && log.debug('Completing [Content_Types].xml...');
+    const contentTypesPath = '[Content_Types].xml';
+    const contentTypesXml = await zipGetText(zip, contentTypesPath);
+    const contentTypes = await parseXml(contentTypesXml);
+    // DEBUG && log.debug('Content types', { attach: contentTypes });
+    const ensureContentType = (extension, contentType) => {
+      const children = contentTypes._children;
+      if (
+        children.filter(o => !o._fTextNode && o._attrs.Extension === extension)
+          .length
+      ) {
+        return;
+      }
+      addChild(
+        contentTypes,
+        newNonTextNode('Default', {
+          Extension: extension,
+          ContentType: contentType,
+        })
+      );
+    };
+    ensureContentType('png', 'image/png');
+    ensureContentType('jpg', 'image/jpeg');
+    ensureContentType('jpeg', 'image/jpeg');
+    ensureContentType('gif', 'image/gif');
+    const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
+    zipSetText(zip, contentTypesPath, finalContentTypesXml);
+  }
 
   // ---------------------------------------------------------
   // Replace images
@@ -157,7 +225,11 @@ const createReport = async (options: UserOptionsInternal) => {
     const raw = await zipGetText(zip, filePath);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
-    const report2 = await produceJsReport(queryResult, js, createOptions);
+    const { report: report2 } = await produceJsReport(
+      queryResult,
+      js,
+      createOptions
+    );
     const xml = buildXml(report2, xmlOptions);
     zipSetText(zip, filePath, xml);
   }

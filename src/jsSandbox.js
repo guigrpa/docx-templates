@@ -11,12 +11,15 @@ const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
 
 // Runs a user snippet in a sandbox, and returns the result
-// as a string. See more details in runUserJsAndGetRaw() below.
+// as a string. If the `processLineBreaks` flag is set,
+// newlines are replaced with a `w:br` tag (protected by
+// the `literalXmlDelimiter` separators)
+// See more details in runUserJsAndGetRaw() below.
 const runUserJsAndGetString = async (
   data: ?ReportData,
   code: string,
   ctx: Context
-): string => {
+): Promise<string> => {
   const result = await runUserJsAndGetRaw(data, code, ctx);
   if (result == null) return '';
   let str = String(result);
@@ -39,7 +42,7 @@ const runUserJsAndGetRaw = async (
   data: ?ReportData,
   code: string,
   ctx: Context
-): any => {
+): Promise<any> => {
   // Retrieve the current JS sandbox contents (if any) and add
   // the code to be run, and a placeholder for the result,
   // as well as all data defined by the user
@@ -49,7 +52,8 @@ const runUserJsAndGetRaw = async (
       __code__: code,
       __result__: undefined,
     },
-    data
+    data,
+    ctx.options.additionalJsContext
   );
 
   // Add currently defined vars, including loop vars and the index

@@ -10,6 +10,8 @@ const zipGetText = (zip: Object, filename: string) =>
   zip.file(filename).async('text');
 const zipSetText = (zip: Object, filename: string, data: string) =>
   zip.file(filename, data);
+const zipSetBinary = (zip: Object, filename: string, data: ArrayBuffer) =>
+  zip.file(filename, data, { binary: true });
 const zipSetBase64 = (zip: Object, filename: string, data: string) =>
   zip.file(filename, data, { base64: true });
 const zipSave = (zip: Object) =>
@@ -22,4 +24,12 @@ const zipSave = (zip: Object) =>
 // ==========================================
 // Public API
 // ==========================================
-export { zipLoad, zipExists, zipGetText, zipSetText, zipSetBase64, zipSave };
+export {
+  zipLoad,
+  zipExists,
+  zipGetText,
+  zipSetText,
+  zipSetBinary,
+  zipSetBase64,
+  zipSave,
+};

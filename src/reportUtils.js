@@ -1,14 +1,14 @@
 // @flow
 
 import { omit } from 'timm';
-import type { Node, TextNode, Context, LoopStatus } from './types';
+import type { Node, TextNode, NonTextNode, Context, LoopStatus } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
 const chalk: any = DEBUG ? require('./debug').chalk : null;
 
 // ==========================================
-// Nodes
+// Nodes and trees
 // ==========================================
 const cloneNodeWithoutChildren = (node: Node): Node => {
   if (node._fTextNode) {
@@ -63,6 +63,30 @@ const insertTextSiblingAfter = (textNode: TextNode): TextNode => {
   return newTextNode;
 };
 
+const newNonTextNode = (
+  tag: string,
+  attrs: Object = {},
+  children: Array<Node> = []
+): NonTextNode => {
+  const node = {
+    _parent: null,
+    _fTextNode: false,
+    _tag: tag,
+    _attrs: attrs,
+    _children: children,
+  };
+  node._children.forEach(child => {
+    child._parent = node; // eslint-disable-line
+  });
+  return node;
+};
+
+const addChild = (parent: Node, child: Node): Node => {
+  parent._children.push(child);
+  child._parent = parent; // eslint-disable-line
+  return child;
+};
+
 // ==========================================
 // Loops
 // ==========================================
@@ -97,6 +121,8 @@ export {
   cloneNodeForLogging,
   getNextSibling,
   insertTextSiblingAfter,
+  newNonTextNode,
+  addChild,
   getCurLoop,
   isLoopExploring,
   logLoop,

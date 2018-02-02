@@ -468,6 +468,21 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
+  it('36b Processes a snippet with additional context', async () => {
+    const template = path.join(__dirname, 'fixtures', 'execWithContext.docx');
+    const result = await createReport({
+      template,
+      data: {
+        companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+      },
+      additionalJsContext: {
+        toLowerCase: str => str.toLowerCase(),
+      },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    });
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+  });
+
   it('37a Replace a single image', async () => {
     const template = path.join(__dirname, 'fixtures', 'replaceOneImage.docx');
     const image = path.join(__dirname, 'fixtures', 'cube.png');
