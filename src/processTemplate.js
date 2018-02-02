@@ -29,7 +29,7 @@ let gCntIf = 0;
 const extractQuery = async (
   template: Node,
   options: CreateReportOptions
-): ?string => {
+): Promise<?string> => {
   const ctx: any = {
     fCmd: false,
     cmd: '',
@@ -77,7 +77,7 @@ const produceJsReport = async (
   data: ?ReportData,
   template: Node,
   options: CreateReportOptions
-): Node => {
+): Promise<Node> => {
   const out: Node = cloneNodeWithoutChildren(template);
   const ctx: Context = {
     level: 1,
@@ -245,7 +245,7 @@ const processText = async (
   data: ?ReportData,
   node: TextNode,
   ctx: Context
-): string => {
+): Promise<string> => {
   const { cmdDelimiter } = ctx.options;
   const text = node._text;
   if (text == null || text === '') return '';
@@ -289,7 +289,7 @@ const processCmd = async (
   data: ?ReportData,
   node: Node,
   ctx: Context
-): ?string => {
+): Promise<?string> => {
   const cmd = getCommand(ctx);
   DEBUG && log.debug(`Processing cmd: ${chalk.cyan.bold(cmd)}`);
   try {
@@ -387,7 +387,7 @@ const processForIf = async (
   cmd: string,
   cmdName: string,
   cmdRest: string
-): ?string => {
+): Promise<?string> => {
   const isIf = cmdName === 'IF';
 
   // Identify FOR/IF loop

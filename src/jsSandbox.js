@@ -16,7 +16,7 @@ const runUserJsAndGetString = async (
   data: ?ReportData,
   code: string,
   ctx: Context
-): string => {
+): Promise<string> => {
   const result = await runUserJsAndGetRaw(data, code, ctx);
   if (result == null) return '';
   let str = String(result);
@@ -39,7 +39,7 @@ const runUserJsAndGetRaw = async (
   data: ?ReportData,
   code: string,
   ctx: Context
-): any => {
+): Promise<any> => {
   // Retrieve the current JS sandbox contents (if any) and add
   // the code to be run, and a placeholder for the result,
   // as well as all data defined by the user
