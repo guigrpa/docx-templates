@@ -8,9 +8,9 @@ pids
 *.pid
 *.seed
 node_modules
-/coverage
-/.nyc_output
-/.nyc_tmp
+coverage
+.nyc_output
+.nyc_tmp
 *.sublime-project
 *.sublime-workspace
 
@@ -32,5 +32,4 @@ node_modules
 /ROADMAP.md
 
 # Project-specific
-/docs
 /src

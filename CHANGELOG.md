@@ -1,4 +1,5 @@
-* Add `IMAGE` command (!!!)
+* Add `IMAGE` command (!!!).
+* Made it a monorepo: main package + examples.
 
 ## 2.3.2 (2018-1-29)
 

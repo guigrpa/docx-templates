@@ -1,5 +1,5 @@
 require('isomorphic-fetch');
-const createReport = require('../../lib/indexNode');
+const createReport = require('docx-templates').default;
 
 createReport({
   template: process.argv[2],

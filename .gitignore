@@ -8,9 +8,9 @@ pids
 *.pid
 *.seed
 node_modules
-/coverage
-/.nyc_output
-/.nyc_tmp
+coverage
+.nyc_output
+.nyc_tmp
 *.sublime-project
 *.sublime-workspace
 
@@ -20,7 +20,7 @@ node_modules
 # GIT-specific
 # ------------
 # All projects
-/lib
+lib
 
 # Project-specific
-/src/__tests__/fixtures/*_report.docx
+**/__tests__/fixtures/*_report.docx
