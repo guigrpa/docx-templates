@@ -15,8 +15,7 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "scripts": {
-    "start:swapi": "cd swapi && node . swapi-simple.docx",
-    "start:images": "cd images && node . images-path.docx"
+    "start": "node . swapi-simple.docx"
   },
   "dependencies": {
     "docx-templates": "*",
