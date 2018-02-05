@@ -17,14 +17,14 @@ createReport({
       .then(res => res.json())
       .then(res => res.data),
   additionalJsContext: {
-    tile: async (z, x, y) => {
+    tile: async (z, x, y, size = 3) => {
       const resp = await fetch(
         `http://tile.stamen.com/toner/${z}/${x}/${y}.png`
       );
       const buffer = resp.arrayBuffer
         ? await resp.arrayBuffer()
         : await resp.buffer();
-      return { width: 3, height: 3, data: buffer, extension: '.png' };
+      return { width: size, height: size, data: buffer, extension: '.png' };
     },
     qr: contents => {
       const dataUrl = qrcode(contents, { size: 500 });
