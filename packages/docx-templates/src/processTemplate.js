@@ -517,7 +517,7 @@ const processEndForIf = (
   if (curLoop.varName !== varName) throw new Error(`Invalid command: ${cmd}`);
   const { loopOver, idx } = curLoop;
   const { nextItem, curIdx } = getNextItem(loopOver, idx);
-  if (nextItem) {
+  if (nextItem != null) {
     // next iteration
     ctx.vars[varName] = nextItem;
     ctx.fJump = true;
