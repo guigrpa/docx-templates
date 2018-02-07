@@ -1,2 +1,7 @@
 node_modules
 packages/*/lib
+coverage
+.nyc_output
+.nyc_tmp
+packages/example-browserify/public/docx-templates.js
+packages/example-webpack/public
