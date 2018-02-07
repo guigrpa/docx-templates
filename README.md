@@ -1,20 +1,20 @@
 # Docx-templates [![Build Status](https://travis-ci.org/guigrpa/docx-templates.svg)](https://travis-ci.org/guigrpa/docx-templates) [![Coverage Status](https://coveralls.io/repos/github/guigrpa/docx-templates/badge.svg?branch=master)](https://coveralls.io/github/guigrpa/docx-templates?branch=master) [![npm version](https://img.shields.io/npm/v/docx-templates.svg)](https://www.npmjs.com/package/docx-templates)
 
-Template-based docx report creation ([blog post](http://guigrpa.github.io/2017/01/01/word-docs-the-relay-way/))
-for both Node and the browser.
+Template-based docx report creation for both Node and the browser. ([See the blog post](http://guigrpa.github.io/2017/01/01/word-docs-the-relay-way/)).
 
 ## Why?
 
 * **Write documents naturally using Word**, just adding some commands where needed for dynamic contents
 * **Express your data needs (queries) in the template itself** (`QUERY` command), in whatever query language you want (e.g. in GraphQL). This is similar to _the Relay way™_: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
-* **Execute JavaScript snippets** (`EXEC`, or `!` for short)
+* **Execute JavaScript snippets** (`EXEC` command, or `!` for short)
 * **Insert the result of JavaScript snippets** in your document (`INS`, or `=` for short)
+* **Create images dynamically** (`IMAGE`) — great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
 * Include contents **conditionally**, `IF` a certain JavaScript expression is truthy
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
 * Run all JavaScript in a **separate Node VM for security**
 * Include **literal XML**
-* Replace **template images**
+* Plenty of **examples** in this repo (with Node, Webpack and Browserify)
 
 Contributions are welcome!
 
@@ -69,11 +69,20 @@ Other options (with defaults):
 ```js
 createReport({
   // ...
+  additionalJsContext: {
+    // all of these will be available to JS snippets in your template commands (see below)
+    foo: 'bar',
+    qrCode: async url => {
+      /* build QR and return image data */
+    },
+  },
   cmdDelimiter: '+++',
   literalXmlDelimiter: '||',
   processLineBreaks: true,
 });
 ```
+
+Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node).
 
 ## Browser usage
 
@@ -88,23 +97,21 @@ Then read this file in an ArrayBuffer, feed it to docx-templates, and download t
 ```js
 import createReport from 'docx-templates';
 
-readFile(myFile)
-  .then(template =>
-    createReport({
-      template,
-      data: { name: 'John', surname: 'Appleseed' },
-    })
-  )
-  .then(report => {
-    download(
-      report,
-      'report.docx',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    );
+const onTemplateChosen = async () => {
+  const template = await readFileIntoArrayBuffer(myFile);
+  const report = await createReport({
+    template,
+    data: { name: 'John', surname: 'Appleseed' },
   });
+  saveDataToFile(
+    report,
+    'report.docx',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  );
+};
 
 // Load the user-provided file into an ArrayBuffer
-const readFile = fd =>
+const readFileIntoArrayBuffer = fd =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = reject;
@@ -114,6 +121,8 @@ const readFile = fd =>
     reader.readAsArrayBuffer(fd);
   });
 ```
+
+You can find an example implementation of `saveDataToFile()` [in the Webpack example](https://github.com/guigrpa/docx-templates/blob/master/packages/example-webpack/client/index.js).
 
 With the default configuration, browser usage can become slow with complex templates due to the usage of JS sandboxes for security reasons. _If the templates you'll be using with docx-templates can be trusted 100%, you can disable the security sandboxes by configuring `noSandbox: true`_. **Beware of arbitrary code injection risks**:
 
@@ -125,13 +134,15 @@ createReport({
 });
 ```
 
+Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/packages/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/packages/example-browserify).
+
 ## Writing templates
 
 You can find several template examples in this repo:
 
-* [SWAPI](https://github.com/guigrpa/docx-templates/tree/master/examples/swapi), a good example of what you can achieve embedding a template (GraphQL in this case) in your report, including a simple script for report generation. Uses the freak-ish online [Star Wars GraphQL API](https://github.com/graphql/swapi-graphql)
-* [Several templates](https://github.com/guigrpa/docx-templates/tree/master/examples/sampleTemplates)
-* [More specific templates, used for tests](https://github.com/guigrpa/docx-templates/tree/master/src/__tests__/fixtures)
+* [SWAPI](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node), a good example of what you can achieve embedding a template (GraphQL in this case) in your report, including a simple script for report generation. Uses the freak-ish online [Star Wars GraphQL API](https://github.com/graphql/swapi-graphql).
+* [Dynamic images](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node): with examples of images that are dynamically downloaded or created. Check out the _images-many-tiles_ example for a taste of this powerful feature.
+* Browser-based examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/packages/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/packages/example-browserify).
 
 Currently supported commands are defined below.
 
@@ -165,7 +176,7 @@ const data = {
 
 ### `INS` (`=`)
 
-Inserts the result of a given (JavaScript) snippet:
+Inserts the result of a given JavaScript snippet:
 
 ```
 +++INS project.name+++ (+++INS project.details.year+++)
@@ -190,6 +201,8 @@ You can also use this shorthand notation:
 +++= `${project.name} (${$details.year})`+++
 ```
 
+You can also access functions in the `additionalJsContext` parameter to `createReport()`, which may even return a Promise. The resolved value of the Promise will be inserted in the document.
+
 Use JavaScript's ternary operator to implement an _if-else_ structure:
 
 ```
@@ -208,6 +221,36 @@ const MY_CONSTANT = 3;
 
 +++! const ANOTHER_CONSTANT = 5; +++
 ```
+
+### `IMAGE`
+
+Includes an image with the data resulting from evaluating a JavaScript snippet:
+
+```
++++IMAGE qrCode(project.url)+++
+```
+
+In this case, we use a function from `additionalJsContext` object passed to `createReport()` that looks like this:
+
+```js
+  additionalJsContext: {
+    qrCode: url => {
+      const dataUrl = createQrImage(url, { size: 500 });
+      const data = dataUrl.slice('data:image/gif;base64,'.length);
+      return { width: 6, height: 6, data, extension: '.gif' };
+    },
+  }
+```
+
+The JS snippet must return an _image object_ or a Promise of an _image object_, containing:
+
+* `width` in cm
+* `height` in cm
+* `path` _[optional]_ (in Node only): path to the image to be embedded (absolute or relative to the current working directory)
+* `data` _[optional]_: either an ArrayBuffer or a base64 string with the image data
+* `extension` _[optional]_: e.g. `.png`
+
+Either specify the `path` or `data` + `extension`.
 
 ### `FOR` and `END-FOR`
 
@@ -292,6 +335,8 @@ Define a name for a complete command (especially useful for formatting tables):
 
 ## Replacing template images
 
+**Note**: this feature is **deprecated** as of v2.4.0 and may be removed in future releases. Please use the `IMAGE` command instead.
+
 You can replace images in your template by specifying the `replaceImages` option when you create your report:
 
 ```js
@@ -338,7 +383,7 @@ You can determine the original image file names by inspecting your template: unz
 
 ## License (MIT)
 
-Copyright (c) [Guillermo Grau Panea](https://github.com/guigrpa) 2016
+Copyright (c) [Guillermo Grau Panea](https://github.com/guigrpa) 2016-now
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
