@@ -1,3 +1,5 @@
+## 2.4.0 (2018-2-7)
+
 * Add `IMAGE` command (!!!).
 * Made it a monorepo: main package + examples.
 

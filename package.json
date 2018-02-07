@@ -1,11 +1,18 @@
 {
   "name": "docx-templates",
   "private": true,
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "Template-based docx report creation",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
-  "keywords": ["docx", "office", "word", "ms-word", "report", "template"],
+  "keywords": [
+    "docx",
+    "office",
+    "word",
+    "ms-word",
+    "report",
+    "template"
+  ],
   "homepage": "https://github.com/guigrpa/docx-templates#readme",
   "bugs": {
     "url": "https://github.com/guigrpa/docx-templates/issues"
@@ -14,14 +21,14 @@
     "type": "git",
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "compile": "oao run-script compile",
     "compileWatch": "oao run-script compileWatch --parallel",
-    "build":
-      "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl",
-    "docs":
-      "extract-docs --template docs/templates/README.md --output README.md",
+    "build": "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl",
+    "docs": "extract-docs --template docs/templates/README.md --output README.md",
     "lint": "eslint packages",
     "flow": "flow check || exit 0",
     "xxl": "xxl --src packages --exclude node_modules,/lib/",
