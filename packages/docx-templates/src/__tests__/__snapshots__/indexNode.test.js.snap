@@ -17826,6 +17826,2397 @@ Object {
 }
 `;
 
+exports[`Template processing 38a Processes IMAGE commands with paths 1`] = `
+Object {
+  "_attrs": Object {
+    "mc:Ignorable": "w14 w15 wp14",
+    "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
+    "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:mo": "http://schemas.microsoft.com/office/mac/office/2008/main",
+    "xmlns:mv": "urn:schemas-microsoft-com:mac:vml",
+    "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "xmlns:v": "urn:schemas-microsoft-com:vml",
+    "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+    "xmlns:w10": "urn:schemas-microsoft-com:office:word",
+    "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
+    "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
+    "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+    "xmlns:wp14": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+    "xmlns:wpc": "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas",
+    "xmlns:wpg": "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup",
+    "xmlns:wpi": "http://schemas.microsoft.com/office/word/2010/wordprocessingInk",
+    "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
+  },
+  "_children": Array [
+    Object {
+      "_attrs": Object {},
+      "_children": Array [
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "308C509A",
+            "w14:textId": "55CAB45A",
+            "w:rsidR": "00FD129A",
+            "w:rsidRDefault": "004C35D4",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "There",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00FD129A",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": " should be ",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "008A4E56",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "four",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00FD129A",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": " image",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "s below",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00FD129A",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": ":",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "425B0F31",
+            "w14:textId": "21B05DFC",
+            "w:rsidR": "004E34BD",
+            "w:rsidRDefault": "00904BD3",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "distB": "0",
+                        "distL": "0",
+                        "distR": "0",
+                        "distT": "0",
+                      },
+                      "_children": Array [
+                        Object {
+                          "_attrs": Object {
+                            "cx": "1080000",
+                            "cy": "1080000",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:extent",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "descr": "desc",
+                            "id": "1",
+                            "name": "Picture 1",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:docPr",
+                        },
+                        Object {
+                          "_attrs": Object {},
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "noChangeAspect": "1",
+                                "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                              },
+                              "_children": Array [],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicFrameLocks",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:cNvGraphicFramePr",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                          },
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "uri": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                              },
+                              "_children": Array [
+                                Object {
+                                  "_attrs": Object {
+                                    "xmlns:pic": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                                  },
+                                  "_children": Array [
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "descr": "desc",
+                                            "id": "0",
+                                            "name": "Picture 1",
+                                          },
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPr",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "noChangeArrowheads": "1",
+                                                "noChangeAspect": "1",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:picLocks",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPicPr",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:nvPicPr",
+                                    },
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "cstate": "print",
+                                            "r:embed": "img1",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [
+                                                Object {
+                                                  "_attrs": Object {
+                                                    "uri": "{28A0092B-C50C-407E-A947-70E740481C1C}",
+                                                  },
+                                                  "_children": Array [
+                                                    Object {
+                                                      "_attrs": Object {
+                                                        "val": "0",
+                                                        "xmlns:a14": "http://schemas.microsoft.com/office/drawing/2010/main",
+                                                      },
+                                                      "_children": Array [],
+                                                      "_fTextNode": false,
+                                                      "_parent": [Circular],
+                                                      "_tag": "a14:useLocalDpi",
+                                                    },
+                                                  ],
+                                                  "_fTextNode": false,
+                                                  "_parent": [Circular],
+                                                  "_tag": "a:ext",
+                                                },
+                                              ],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:extLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:blip",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:srcRect",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:fillRect",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:stretch",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:blipFill",
+                                    },
+                                    Object {
+                                      "_attrs": Object {
+                                        "bwMode": "auto",
+                                      },
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "x": "0",
+                                                "y": "0",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:off",
+                                            },
+                                            Object {
+                                              "_attrs": Object {
+                                                "cx": "1080000",
+                                                "cy": "1080000",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:ext",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:xfrm",
+                                        },
+                                        Object {
+                                          "_attrs": Object {
+                                            "prst": "rect",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:avLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:prstGeom",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:noFill",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:noFill",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:ln",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:spPr",
+                                    },
+                                  ],
+                                  "_fTextNode": false,
+                                  "_parent": [Circular],
+                                  "_tag": "pic:pic",
+                                },
+                              ],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicData",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "a:graphic",
+                        },
+                      ],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "wp:inline",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:drawing",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00295C1E",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00DF48F9",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "000A5CF9",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "004C35D4",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00DF48F9",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00295C1E",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "7F1455EC",
+            "w14:textId": "031B99D4",
+            "w:rsidP": "004C35D4",
+            "w:rsidR": "004C35D4",
+            "w:rsidRDefault": "004C35D4",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "distB": "0",
+                        "distL": "0",
+                        "distR": "0",
+                        "distT": "0",
+                      },
+                      "_children": Array [
+                        Object {
+                          "_attrs": Object {
+                            "cx": "1080000",
+                            "cy": "1080000",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:extent",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "descr": "desc",
+                            "id": "2",
+                            "name": "Picture 2",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:docPr",
+                        },
+                        Object {
+                          "_attrs": Object {},
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "noChangeAspect": "1",
+                                "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                              },
+                              "_children": Array [],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicFrameLocks",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:cNvGraphicFramePr",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                          },
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "uri": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                              },
+                              "_children": Array [
+                                Object {
+                                  "_attrs": Object {
+                                    "xmlns:pic": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                                  },
+                                  "_children": Array [
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "descr": "desc",
+                                            "id": "0",
+                                            "name": "Picture 2",
+                                          },
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPr",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "noChangeArrowheads": "1",
+                                                "noChangeAspect": "1",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:picLocks",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPicPr",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:nvPicPr",
+                                    },
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "cstate": "print",
+                                            "r:embed": "img2",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [
+                                                Object {
+                                                  "_attrs": Object {
+                                                    "uri": "{28A0092B-C50C-407E-A947-70E740481C1C}",
+                                                  },
+                                                  "_children": Array [
+                                                    Object {
+                                                      "_attrs": Object {
+                                                        "val": "0",
+                                                        "xmlns:a14": "http://schemas.microsoft.com/office/drawing/2010/main",
+                                                      },
+                                                      "_children": Array [],
+                                                      "_fTextNode": false,
+                                                      "_parent": [Circular],
+                                                      "_tag": "a14:useLocalDpi",
+                                                    },
+                                                  ],
+                                                  "_fTextNode": false,
+                                                  "_parent": [Circular],
+                                                  "_tag": "a:ext",
+                                                },
+                                              ],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:extLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:blip",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:srcRect",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:fillRect",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:stretch",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:blipFill",
+                                    },
+                                    Object {
+                                      "_attrs": Object {
+                                        "bwMode": "auto",
+                                      },
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "x": "0",
+                                                "y": "0",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:off",
+                                            },
+                                            Object {
+                                              "_attrs": Object {
+                                                "cx": "1080000",
+                                                "cy": "1080000",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:ext",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:xfrm",
+                                        },
+                                        Object {
+                                          "_attrs": Object {
+                                            "prst": "rect",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:avLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:prstGeom",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:noFill",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:noFill",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:ln",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:spPr",
+                                    },
+                                  ],
+                                  "_fTextNode": false,
+                                  "_parent": [Circular],
+                                  "_tag": "pic:pic",
+                                },
+                              ],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicData",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "a:graphic",
+                        },
+                      ],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "wp:inline",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:drawing",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "000A5CF9",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00292508",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00634825",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "2BF4E645",
+            "w14:textId": "54E9138F",
+            "w:rsidP": "008A4E56",
+            "w:rsidR": "008A4E56",
+            "w:rsidRDefault": "008A4E56",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "distB": "0",
+                        "distL": "0",
+                        "distR": "0",
+                        "distT": "0",
+                      },
+                      "_children": Array [
+                        Object {
+                          "_attrs": Object {
+                            "cx": "1080000",
+                            "cy": "1080000",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:extent",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "descr": "desc",
+                            "id": "3",
+                            "name": "Picture 3",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:docPr",
+                        },
+                        Object {
+                          "_attrs": Object {},
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "noChangeAspect": "1",
+                                "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                              },
+                              "_children": Array [],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicFrameLocks",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:cNvGraphicFramePr",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                          },
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "uri": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                              },
+                              "_children": Array [
+                                Object {
+                                  "_attrs": Object {
+                                    "xmlns:pic": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                                  },
+                                  "_children": Array [
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "descr": "desc",
+                                            "id": "0",
+                                            "name": "Picture 3",
+                                          },
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPr",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "noChangeArrowheads": "1",
+                                                "noChangeAspect": "1",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:picLocks",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPicPr",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:nvPicPr",
+                                    },
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "cstate": "print",
+                                            "r:embed": "img3",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [
+                                                Object {
+                                                  "_attrs": Object {
+                                                    "uri": "{28A0092B-C50C-407E-A947-70E740481C1C}",
+                                                  },
+                                                  "_children": Array [
+                                                    Object {
+                                                      "_attrs": Object {
+                                                        "val": "0",
+                                                        "xmlns:a14": "http://schemas.microsoft.com/office/drawing/2010/main",
+                                                      },
+                                                      "_children": Array [],
+                                                      "_fTextNode": false,
+                                                      "_parent": [Circular],
+                                                      "_tag": "a14:useLocalDpi",
+                                                    },
+                                                  ],
+                                                  "_fTextNode": false,
+                                                  "_parent": [Circular],
+                                                  "_tag": "a:ext",
+                                                },
+                                              ],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:extLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:blip",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:srcRect",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:fillRect",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:stretch",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:blipFill",
+                                    },
+                                    Object {
+                                      "_attrs": Object {
+                                        "bwMode": "auto",
+                                      },
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "x": "0",
+                                                "y": "0",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:off",
+                                            },
+                                            Object {
+                                              "_attrs": Object {
+                                                "cx": "1080000",
+                                                "cy": "1080000",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:ext",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:xfrm",
+                                        },
+                                        Object {
+                                          "_attrs": Object {
+                                            "prst": "rect",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:avLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:prstGeom",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:noFill",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:noFill",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:ln",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:spPr",
+                                    },
+                                  ],
+                                  "_fTextNode": false,
+                                  "_parent": [Circular],
+                                  "_tag": "pic:pic",
+                                },
+                              ],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicData",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "a:graphic",
+                        },
+                      ],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "wp:inline",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:drawing",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "000A5CF9",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "4A31339F",
+            "w14:textId": "0CA041FA",
+            "w:rsidP": "004C35D4",
+            "w:rsidR": "004C35D4",
+            "w:rsidRDefault": "004C35D4",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "distB": "0",
+                        "distL": "0",
+                        "distR": "0",
+                        "distT": "0",
+                      },
+                      "_children": Array [
+                        Object {
+                          "_attrs": Object {
+                            "cx": "1080000",
+                            "cy": "1080000",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:extent",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "descr": "desc",
+                            "id": "4",
+                            "name": "Picture 4",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:docPr",
+                        },
+                        Object {
+                          "_attrs": Object {},
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "noChangeAspect": "1",
+                                "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                              },
+                              "_children": Array [],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicFrameLocks",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:cNvGraphicFramePr",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                          },
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "uri": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                              },
+                              "_children": Array [
+                                Object {
+                                  "_attrs": Object {
+                                    "xmlns:pic": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                                  },
+                                  "_children": Array [
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "descr": "desc",
+                                            "id": "0",
+                                            "name": "Picture 4",
+                                          },
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPr",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "noChangeArrowheads": "1",
+                                                "noChangeAspect": "1",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:picLocks",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPicPr",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:nvPicPr",
+                                    },
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "cstate": "print",
+                                            "r:embed": "img4",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [
+                                                Object {
+                                                  "_attrs": Object {
+                                                    "uri": "{28A0092B-C50C-407E-A947-70E740481C1C}",
+                                                  },
+                                                  "_children": Array [
+                                                    Object {
+                                                      "_attrs": Object {
+                                                        "val": "0",
+                                                        "xmlns:a14": "http://schemas.microsoft.com/office/drawing/2010/main",
+                                                      },
+                                                      "_children": Array [],
+                                                      "_fTextNode": false,
+                                                      "_parent": [Circular],
+                                                      "_tag": "a14:useLocalDpi",
+                                                    },
+                                                  ],
+                                                  "_fTextNode": false,
+                                                  "_parent": [Circular],
+                                                  "_tag": "a:ext",
+                                                },
+                                              ],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:extLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:blip",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:srcRect",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:fillRect",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:stretch",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:blipFill",
+                                    },
+                                    Object {
+                                      "_attrs": Object {
+                                        "bwMode": "auto",
+                                      },
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "x": "0",
+                                                "y": "0",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:off",
+                                            },
+                                            Object {
+                                              "_attrs": Object {
+                                                "cx": "1080000",
+                                                "cy": "1080000",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:ext",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:xfrm",
+                                        },
+                                        Object {
+                                          "_attrs": Object {
+                                            "prst": "rect",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:avLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:prstGeom",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:noFill",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:noFill",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:ln",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:spPr",
+                                    },
+                                  ],
+                                  "_fTextNode": false,
+                                  "_parent": [Circular],
+                                  "_tag": "pic:pic",
+                                },
+                              ],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicData",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "a:graphic",
+                        },
+                      ],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "wp:inline",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:drawing",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "000A5CF9",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "3A62A2B1",
+            "w14:textId": "77777777",
+            "w:rsidR": "00904BD3",
+            "w:rsidRDefault": "00904BD3",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "00904BD3",
+            "w:rsidSect": "00A0490B",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:h": "16840",
+                "w:w": "11900",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgSz",
+            },
+            Object {
+              "_attrs": Object {
+                "w:bottom": "1417",
+                "w:footer": "708",
+                "w:gutter": "0",
+                "w:header": "708",
+                "w:left": "1701",
+                "w:right": "1701",
+                "w:top": "1417",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgMar",
+            },
+            Object {
+              "_attrs": Object {
+                "w:space": "708",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:cols",
+            },
+            Object {
+              "_attrs": Object {
+                "w:linePitch": "360",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:docGrid",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:sectPr",
+        },
+      ],
+      "_fTextNode": false,
+      "_parent": [Circular],
+      "_tag": "w:body",
+    },
+  ],
+  "_fTextNode": false,
+  "_parent": null,
+  "_tag": "w:document",
+}
+`;
+
+exports[`Template processing 38a Processes IMAGE commands with paths 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
+
+exports[`Template processing 38b Processes IMAGE commands with base64 data 1`] = `
+Object {
+  "_attrs": Object {
+    "mc:Ignorable": "w14 w15 wp14",
+    "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
+    "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:mo": "http://schemas.microsoft.com/office/mac/office/2008/main",
+    "xmlns:mv": "urn:schemas-microsoft-com:mac:vml",
+    "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "xmlns:v": "urn:schemas-microsoft-com:vml",
+    "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+    "xmlns:w10": "urn:schemas-microsoft-com:office:word",
+    "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
+    "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
+    "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+    "xmlns:wp14": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+    "xmlns:wpc": "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas",
+    "xmlns:wpg": "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup",
+    "xmlns:wpi": "http://schemas.microsoft.com/office/word/2010/wordprocessingInk",
+    "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
+  },
+  "_children": Array [
+    Object {
+      "_attrs": Object {},
+      "_children": Array [
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "46C87FB6",
+            "w14:textId": "77777777",
+            "w:rsidP": "00EC4C65",
+            "w:rsidR": "00EC4C65",
+            "w:rsidRDefault": "00EC4C65",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:val": "es-ES",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:lang",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pPr",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:val": "es-ES",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:lang",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "distB": "0",
+                        "distL": "0",
+                        "distR": "0",
+                        "distT": "0",
+                      },
+                      "_children": Array [
+                        Object {
+                          "_attrs": Object {
+                            "cx": "2160000",
+                            "cy": "2160000",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:extent",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "descr": "desc",
+                            "id": "1",
+                            "name": "Picture 1",
+                          },
+                          "_children": Array [],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:docPr",
+                        },
+                        Object {
+                          "_attrs": Object {},
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "noChangeAspect": "1",
+                                "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                              },
+                              "_children": Array [],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicFrameLocks",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "wp:cNvGraphicFramePr",
+                        },
+                        Object {
+                          "_attrs": Object {
+                            "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+                          },
+                          "_children": Array [
+                            Object {
+                              "_attrs": Object {
+                                "uri": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                              },
+                              "_children": Array [
+                                Object {
+                                  "_attrs": Object {
+                                    "xmlns:pic": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+                                  },
+                                  "_children": Array [
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "descr": "desc",
+                                            "id": "0",
+                                            "name": "Picture 1",
+                                          },
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPr",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "noChangeArrowheads": "1",
+                                                "noChangeAspect": "1",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:picLocks",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "pic:cNvPicPr",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:nvPicPr",
+                                    },
+                                    Object {
+                                      "_attrs": Object {},
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {
+                                            "cstate": "print",
+                                            "r:embed": "img1",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [
+                                                Object {
+                                                  "_attrs": Object {
+                                                    "uri": "{28A0092B-C50C-407E-A947-70E740481C1C}",
+                                                  },
+                                                  "_children": Array [
+                                                    Object {
+                                                      "_attrs": Object {
+                                                        "val": "0",
+                                                        "xmlns:a14": "http://schemas.microsoft.com/office/drawing/2010/main",
+                                                      },
+                                                      "_children": Array [],
+                                                      "_fTextNode": false,
+                                                      "_parent": [Circular],
+                                                      "_tag": "a14:useLocalDpi",
+                                                    },
+                                                  ],
+                                                  "_fTextNode": false,
+                                                  "_parent": [Circular],
+                                                  "_tag": "a:ext",
+                                                },
+                                              ],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:extLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:blip",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:srcRect",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:fillRect",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:stretch",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:blipFill",
+                                    },
+                                    Object {
+                                      "_attrs": Object {
+                                        "bwMode": "auto",
+                                      },
+                                      "_children": Array [
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {
+                                                "x": "0",
+                                                "y": "0",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:off",
+                                            },
+                                            Object {
+                                              "_attrs": Object {
+                                                "cx": "2160000",
+                                                "cy": "2160000",
+                                              },
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:ext",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:xfrm",
+                                        },
+                                        Object {
+                                          "_attrs": Object {
+                                            "prst": "rect",
+                                          },
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:avLst",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:prstGeom",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:noFill",
+                                        },
+                                        Object {
+                                          "_attrs": Object {},
+                                          "_children": Array [
+                                            Object {
+                                              "_attrs": Object {},
+                                              "_children": Array [],
+                                              "_fTextNode": false,
+                                              "_parent": [Circular],
+                                              "_tag": "a:noFill",
+                                            },
+                                          ],
+                                          "_fTextNode": false,
+                                          "_parent": [Circular],
+                                          "_tag": "a:ln",
+                                        },
+                                      ],
+                                      "_fTextNode": false,
+                                      "_parent": [Circular],
+                                      "_tag": "pic:spPr",
+                                    },
+                                  ],
+                                  "_fTextNode": false,
+                                  "_parent": [Circular],
+                                  "_tag": "pic:pic",
+                                },
+                              ],
+                              "_fTextNode": false,
+                              "_parent": [Circular],
+                              "_tag": "a:graphicData",
+                            },
+                          ],
+                          "_fTextNode": false,
+                          "_parent": [Circular],
+                          "_tag": "a:graphic",
+                        },
+                      ],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "wp:inline",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:drawing",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "4AABECA9",
+            "w14:textId": "77777777",
+            "w:rsidP": "00EC4C65",
+            "w:rsidR": "0095275F",
+            "w:rsidRDefault": "0095275F",
+            "w:rsidRPr": "00EC4C65",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "0095275F",
+            "w:rsidRPr": "00EC4C65",
+            "w:rsidSect": "00A0490B",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:h": "16840",
+                "w:w": "11900",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgSz",
+            },
+            Object {
+              "_attrs": Object {
+                "w:bottom": "1417",
+                "w:footer": "708",
+                "w:gutter": "0",
+                "w:header": "708",
+                "w:left": "1701",
+                "w:right": "1701",
+                "w:top": "1417",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgMar",
+            },
+            Object {
+              "_attrs": Object {
+                "w:space": "708",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:cols",
+            },
+            Object {
+              "_attrs": Object {
+                "w:linePitch": "360",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:docGrid",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:sectPr",
+        },
+      ],
+      "_fTextNode": false,
+      "_parent": [Circular],
+      "_tag": "w:body",
+    },
+  ],
+  "_fTextNode": false,
+  "_parent": null,
+  "_tag": "w:document",
+}
+`;
+
+exports[`Template processing 38b Processes IMAGE commands with base64 data 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
+
 exports[`Template processing 70 Allows customisation of cmd delimiter 1`] = `
 Object {
   "_attrs": Object {

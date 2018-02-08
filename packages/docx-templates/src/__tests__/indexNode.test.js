@@ -4,6 +4,8 @@ import path from 'path';
 import fs from 'fs-extra';
 import MockDate from 'mockdate';
 import md5 from 'md5';
+import { set as timmSet } from 'timm';
+import qrcode from 'yaqrcode';
 
 // SWUT
 import createReport from '../indexNode';
@@ -45,6 +47,15 @@ describe('End-to-end', () => {
 });
 
 describe('Template processing', () => {
+  beforeEach(() => {
+    // Set a global fixed Date. Some tests check the zip contents,
+    // and the zip contains the date
+    MockDate.set('1/1/2000');
+  });
+  afterEach(() => {
+    MockDate.reset();
+  });
+
   it('01 Probe works', async () => {
     const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
     const defaultOutput = path.join(
@@ -513,6 +524,49 @@ describe('Template processing', () => {
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
   });
 
+  it('38a Processes IMAGE commands with paths', async () => {
+    MockDate.set('1/1/2000');
+    const template = path.join(__dirname, 'fixtures', 'imagePath.docx');
+    let options = {
+      template,
+      data: {},
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    };
+    const result = await createReport(options);
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+
+    // Also check
+    const templateData = fs.readFileSync(template);
+    options = timmSet(options, 'template', templateData);
+    const result2 = await createReportBrowser(options);
+    expect(md5(result2)).toMatchSnapshot();
+  });
+
+  it('38b Processes IMAGE commands with base64 data', async () => {
+    MockDate.set('1/1/2000');
+    const template = path.join(__dirname, 'fixtures', 'imageBase64.docx');
+    let options = {
+      template,
+      data: {},
+      additionalJsContext: {
+        qr: contents => {
+          const dataUrl = qrcode(contents, { size: 500 });
+          const data = dataUrl.slice('data:image/gif;base64,'.length);
+          return { width: 6, height: 6, data, extension: '.gif' };
+        },
+      },
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    };
+    const result = await createReport(options);
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+
+    // Also check
+    const templateData = fs.readFileSync(template);
+    options = timmSet(options, 'template', templateData);
+    const result2 = await createReportBrowser(options);
+    expect(md5(result2)).toMatchSnapshot();
+  });
+
   it('40 Throws on invalid command', async () => {
     const template = path.join(__dirname, 'fixtures', 'invalidCommand.docx');
     try {
@@ -614,11 +668,6 @@ describe('Template processing', () => {
   });
 
   it('91 Generates a valid zipped file', async () => {
-    // first, we set a global fixed Date, because date is saved into zip file
-    // when its content is updated,
-    // and we want this test to always output the exact same zip
-    MockDate.set('1/1/2000');
-
     const filepath = path.join(__dirname, 'fixtures', 'zipGeneration.docx');
     const template = fs.readFileSync(filepath);
     const result = await createReportBrowser({
@@ -635,8 +684,5 @@ describe('Template processing', () => {
     });
     // use md5 of output, otherwise snapshot would be to big
     expect(md5(result)).toMatchSnapshot();
-
-    // after test, reset global Date behaviour
-    MockDate.reset();
   });
 });
