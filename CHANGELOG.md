@@ -1,3 +1,5 @@
+## 2.4.1 (2018-5-5)
+
 * Support `IMAGE` command in headers, footers, etc. (#19).
 
 ## 2.4.0 (2018-2-7)
