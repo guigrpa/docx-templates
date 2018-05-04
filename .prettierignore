@@ -1,0 +1,7 @@
+node_modules
+.next
+packages/*/lib
+packages/*/out
+*.html
+*.json
+*.md
