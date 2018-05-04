@@ -1,3 +1,5 @@
+* Support `IMAGE` command in headers, footers, etc. (#19).
+
 ## 2.4.0 (2018-2-7)
 
 * Add `IMAGE` command (!!!).

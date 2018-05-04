@@ -2,6 +2,7 @@
 
 /* eslint-disable no-param-reassign, no-console */
 
+import { merge } from 'timm';
 import {
   zipLoad,
   zipExists,
@@ -79,7 +80,10 @@ const createReport = async (options: UserOptionsInternal) => {
   }
 
   // ---------------------------------------------------------
-  // Generate the report
+  // Process document.xml:
+  // - Generate the report
+  // - Build output XML and write it to disk
+  // - Images
   // ---------------------------------------------------------
   // DEBUG && log.debug('Before preprocessing...', {
   //   attach: jsTemplate,
@@ -94,16 +98,14 @@ const createReport = async (options: UserOptionsInternal) => {
   //     attachLevel: 'debug',
   //     ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
   //   });
-  const { report, images } = await produceJsReport(
+  const result = await produceJsReport(
     queryResult,
     finalTemplate,
     createOptions
   );
-  if (_probe === 'JS') return report;
+  const { report: report1, images: images1 } = result;
+  if (_probe === 'JS') return report1;
 
-  // ---------------------------------------------------------
-  // Build output XML and write it to disk
-  // ---------------------------------------------------------
   // DEBUG &&
   //   log.debug('Report', {
   //     attach: report,
@@ -111,46 +113,51 @@ const createReport = async (options: UserOptionsInternal) => {
   //     ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
   //   });
   DEBUG && log.debug('Converting report to XML...');
-  const reportXml = buildXml(report, xmlOptions);
+  const reportXml = buildXml(report1, xmlOptions);
   if (_probe === 'XML') return reportXml;
   DEBUG && log.debug('Writing report...');
   zipSetText(zip, `${templatePath}/document.xml`, reportXml);
 
-  // ---------------------------------------------------------
-  // Add images
-  // ---------------------------------------------------------
-  DEBUG && log.debug('Processing images...');
-  const imageIds = Object.keys(images);
-  if (imageIds.length) {
-    DEBUG && log.debug('Completing document.xml.rels...');
-    const relsPath = `${templatePath}/_rels/document.xml.rels`;
-    const relsXml = await zipGetText(zip, relsPath);
-    const rels = await parseXml(relsXml);
-    for (let i = 0; i < imageIds.length; i++) {
-      const imageId = imageIds[i];
-      const { extension, data: imgData } = images[imageId];
-      const imgName = `template_image${i + 1}${extension}`;
-      DEBUG && log.debug(`Writing image ${imageId} (${imgName})...`);
-      const imgPath = `${templatePath}/media/${imgName}`;
-      if (typeof imgData === 'string') {
-        await zipSetBase64(zip, imgPath, imgData);
-      } else {
-        await zipSetBinary(zip, imgPath, imgData);
-      }
-      addChild(
-        rels,
-        newNonTextNode('Relationship', {
-          Id: imageId,
-          Type:
-            'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
-          Target: `media/${imgName}`,
-        })
-      );
-    }
-    const finalRelsXml = buildXml(rels, xmlOptions);
-    zipSetText(zip, relsPath, finalRelsXml);
+  let numImages = Object.keys(images1).length;
+  processImages(images1, 'document.xml', zip, templatePath);
 
-    // Process [Content_Types].xml
+  // ---------------------------------------------------------
+  // Process all other XML files (they may contain headers, etc.)
+  // ---------------------------------------------------------
+  const files = [];
+  zip.forEach(async filePath => {
+    const regex = new RegExp(`${templatePath}\\/[^\\/]+\\.xml`);
+    if (regex.test(filePath) && filePath !== `${templatePath}/document.xml`) {
+      files.push(filePath);
+    }
+  });
+
+  let images = images1;
+  for (let i = 0; i < files.length; i++) {
+    const filePath = files[i];
+    DEBUG && log.info(`Processing ${filePath}...`);
+    const raw = await zipGetText(zip, filePath);
+    const js0 = await parseXml(raw);
+    const js = preprocessTemplate(js0, createOptions);
+    const { report: report2, images: images2 } = await produceJsReport(
+      queryResult,
+      js,
+      createOptions
+    );
+    images = merge(images, images2);
+    const xml = buildXml(report2, xmlOptions);
+    zipSetText(zip, filePath, xml);
+
+    numImages += Object.keys(images2).length;
+    const segments = filePath.split('/');
+    const documentComponent = segments[segments.length - 1];
+    processImages(images2, documentComponent, zip, templatePath);
+  }
+
+  // ---------------------------------------------------------
+  // Process [Content_Types].xml
+  // ---------------------------------------------------------
+  if (numImages) {
     DEBUG && log.debug('Completing [Content_Types].xml...');
     const contentTypesPath = '[Content_Types].xml';
     const contentTypesXml = await zipGetText(zip, contentTypesPath);
@@ -209,37 +216,57 @@ const createReport = async (options: UserOptionsInternal) => {
   }
 
   // ---------------------------------------------------------
-  // Process all other XML files (they may contain headers, etc.)
-  // ---------------------------------------------------------
-  const files = [];
-  zip.forEach(async filePath => {
-    const regex = new RegExp(`${templatePath}\\/[^\\/]+\\.xml`);
-    if (regex.test(filePath) && filePath !== `${templatePath}/document.xml`) {
-      files.push(filePath);
-    }
-  });
-
-  for (let i = 0; i < files.length; i++) {
-    const filePath = files[i];
-    DEBUG && log.info(`Processing ${filePath}...`);
-    const raw = await zipGetText(zip, filePath);
-    const js0 = await parseXml(raw);
-    const js = preprocessTemplate(js0, createOptions);
-    const { report: report2 } = await produceJsReport(
-      queryResult,
-      js,
-      createOptions
-    );
-    const xml = buildXml(report2, xmlOptions);
-    zipSetText(zip, filePath, xml);
-  }
-
-  // ---------------------------------------------------------
   // Zip the results
   // ---------------------------------------------------------
   DEBUG && log.debug('Zipping...');
   const output = await zipSave(zip);
   return output;
+};
+
+// ==========================================
+// Process images
+// ==========================================
+const processImages = async (images, documentComponent, zip, templatePath) => {
+  DEBUG && log.debug(`Processing images for ${documentComponent}...`);
+  const imageIds = Object.keys(images);
+  if (imageIds.length) {
+    DEBUG && log.debug('Completing document.xml.rels...');
+    const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
+    let relsXml;
+    try {
+      relsXml = await zipGetText(zip, relsPath);
+    } catch (err) {
+      relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+        </Relationships>`;
+    }
+    const rels = await parseXml(relsXml);
+    for (let i = 0; i < imageIds.length; i++) {
+      const imageId = imageIds[i];
+      const { extension, data: imgData } = images[imageId];
+      const imgName = `template_image${i + 1}${extension}`;
+      DEBUG && log.debug(`Writing image ${imageId} (${imgName})...`);
+      const imgPath = `${templatePath}/media/${imgName}`;
+      if (typeof imgData === 'string') {
+        await zipSetBase64(zip, imgPath, imgData);
+      } else {
+        await zipSetBinary(zip, imgPath, imgData);
+      }
+      addChild(
+        rels,
+        newNonTextNode('Relationship', {
+          Id: imageId,
+          Type:
+            'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
+          Target: `media/${imgName}`,
+        })
+      );
+    }
+    const finalRelsXml = buildXml(rels, {
+      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
+    });
+    zipSetText(zip, relsPath, finalRelsXml);
+  }
 };
 
 // ==========================================

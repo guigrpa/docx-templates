@@ -535,7 +535,25 @@ describe('Template processing', () => {
     const result = await createReport(options);
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
 
-    // Also check
+    // Also check the browser version
+    const templateData = fs.readFileSync(template);
+    options = timmSet(options, 'template', templateData);
+    const result2 = await createReportBrowser(options);
+    expect(md5(result2)).toMatchSnapshot();
+  });
+
+  it('38a-bis Processes IMAGE commands with paths in a header', async () => {
+    MockDate.set('1/1/2000');
+    const template = path.join(__dirname, 'fixtures', 'imageInHeader.docx');
+    let options = {
+      template,
+      data: {},
+      _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+    };
+    const result = await createReport(options);
+    if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+
+    // Also check the browser version
     const templateData = fs.readFileSync(template);
     options = timmSet(options, 'template', templateData);
     const result2 = await createReportBrowser(options);
@@ -560,7 +578,7 @@ describe('Template processing', () => {
     const result = await createReport(options);
     if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
 
-    // Also check
+    // Also check the browser version
     const templateData = fs.readFileSync(template);
     options = timmSet(options, 'template', templateData);
     const result2 = await createReportBrowser(options);
