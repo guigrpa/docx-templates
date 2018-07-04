@@ -5582,6 +5582,10 @@ vm-browserify@0.0.4, vm-browserify@~0.0.1:
   dependencies:
     indexof "0.0.1"
 
+vm2@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.6.1.tgz#09c20e0d4adc8630a7dbbfc0bf0bce587c06cbb4"
+
 walker@~1.0.5:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
