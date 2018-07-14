@@ -46,7 +46,8 @@
     "fs-extra": "^3.0.1",
     "jszip": "^3.1.5",
     "sax": "1.2.4",
-    "timm": "1.2.5"
+    "timm": "1.2.5",
+    "vm2": "^3.6.1"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",

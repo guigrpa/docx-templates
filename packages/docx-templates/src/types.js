@@ -42,6 +42,7 @@ export type UserOptions = {|
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean, // true by default
   noSandbox?: boolean,
+  vm2Sandbox?: boolean | Object,
   additionalJsContext?: Object,
   _probe?: 'JS' | 'XML',
 |};
