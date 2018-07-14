@@ -12,7 +12,7 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
 * Include contents **conditionally**, `IF` a certain JavaScript expression is truthy
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
-* Run all JavaScript in a **separate Node VM for security**
+* Run all JavaScript in a **separate Node VM (using the vm2 library) for security**
 * Include **literal XML**
 * Plenty of **examples** in this repo (with Node, Webpack and Browserify)
 
@@ -79,6 +79,8 @@ createReport({
   cmdDelimiter: '+++',
   literalXmlDelimiter: '||',
   processLineBreaks: true,
+  noSandbox: false,
+  vm2Sandbox: false, // note that vm2 sandbox is safer than Node's
 });
 ```
 
@@ -131,6 +133,14 @@ createReport({
   // ...
   // USE ONLY IN THE BROWSER, AND WITH TRUSTED TEMPLATES
   noSandbox: true, // WARNING: INSECURE
+});
+```
+
+If, on the other side, you prefer higher security:
+
+```js
+createReport({
+  vm2Sandbox: true, // or even an options object to pass through to vm2
 });
 ```
 
