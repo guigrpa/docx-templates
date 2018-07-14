@@ -1,3 +1,5 @@
+* Add `vm2Sandbox` option for higher security in JS execution (#26).
+
 ## 2.4.1 (2018-5-5)
 
 * Support `IMAGE` command in headers, footers, etc. (#19).
