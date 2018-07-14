@@ -1,3 +1,5 @@
+## 2.5.0 (2018-7-14)
+
 * Add `vm2Sandbox` option for higher security in JS execution (#26).
 
 ## 2.4.1 (2018-5-5)
