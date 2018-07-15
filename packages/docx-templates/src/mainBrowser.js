@@ -245,7 +245,7 @@ const processImages = async (images, documentComponent, zip, templatePath) => {
     for (let i = 0; i < imageIds.length; i++) {
       const imageId = imageIds[i];
       const { extension, data: imgData } = images[imageId];
-      const imgName = `template_image${i + 1}${extension}`;
+      const imgName = `template_${documentComponent}_image${i + 1}${extension}`;
       DEBUG && log.debug(`Writing image ${imageId} (${imgName})...`);
       const imgPath = `${templatePath}/media/${imgName}`;
       if (typeof imgData === 'string') {

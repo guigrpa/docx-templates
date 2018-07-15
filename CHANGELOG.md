@@ -1,3 +1,5 @@
+* Bugfix: avoid messing up of images inserted in the document body with those inserted in the header (#25).
+
 ## 2.5.0 (2018-7-14)
 
 * Add `vm2Sandbox` option for higher security in JS execution (#26).
