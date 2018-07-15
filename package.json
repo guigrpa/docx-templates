@@ -31,7 +31,7 @@
     "docs": "extract-docs --template docs/templates/README.md --output README.md",
     "lint": "eslint packages",
     "flow": "flow check || exit 0",
-    "xxl": "xxl --src packages --exclude node_modules,/lib/",
+    "xxl": "xxl --src packages/docx-templates/src --exclude __tests__",
     "test": "cd packages/docx-templates && yarn test",
     "travis": "cd packages/docx-templates && yarn travis"
   },
