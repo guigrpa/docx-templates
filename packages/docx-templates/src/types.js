@@ -56,6 +56,7 @@ export type CreateReportOptions = {|
   literalXmlDelimiter: string,
   processLineBreaks: boolean,
   noSandbox: boolean,
+  vm2Sandbox: boolean | Object,
   additionalJsContext: Object,
 |};
 
