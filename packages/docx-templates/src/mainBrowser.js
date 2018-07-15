@@ -69,12 +69,23 @@ const createReport = async (options: UserOptionsInternal) => {
     });
 
   // ---------------------------------------------------------
+  // Preprocess template
+  // ---------------------------------------------------------
+  DEBUG && log.debug('Preprocessing template...');
+  // DEBUG && log.debug('Preprocessing template...', {
+  //   attach: jsTemplate,
+  //   attachLevel: 'debug',
+  //   ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
+  // });
+  const finalTemplate = preprocessTemplate(jsTemplate, createOptions);
+
+  // ---------------------------------------------------------
   // Fetch the data that will fill in the template
   // ---------------------------------------------------------
   let queryResult = null;
   if (typeof data === 'function') {
     DEBUG && log.debug('Looking for the query in the template...');
-    const query = await extractQuery(jsTemplate, createOptions);
+    const query = await extractQuery(finalTemplate, createOptions);
     DEBUG && log.debug(`Query: ${query || 'no query found'}`);
     queryResult = await data(query, queryVars);
   } else {
@@ -87,13 +98,7 @@ const createReport = async (options: UserOptionsInternal) => {
   // - Build output XML and write it to disk
   // - Images
   // ---------------------------------------------------------
-  // DEBUG && log.debug('Before preprocessing...', {
-  //   attach: jsTemplate,
-  //   attachLevel: 'debug',
-  //   ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
-  // });
-  const finalTemplate = preprocessTemplate(jsTemplate, createOptions);
-
+  DEBUG && log.debug('Generating report...');
   // DEBUG &&
   //   log.debug('Generating report...', {
   //     attach: finalTemplate,

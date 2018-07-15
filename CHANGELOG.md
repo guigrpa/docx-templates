@@ -1,3 +1,4 @@
+* Bugfix: fix multiline query extraction (#21).
 * Bugfix: correctly escape output attributes to avoid issues like #24 (watermask).
 
 ## 2.5.1 (2018-7-15)
