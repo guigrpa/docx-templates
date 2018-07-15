@@ -66,7 +66,7 @@ const buildXml = (node: Node, options: XmlOptions, indent?: string = '') => {
     let attrs = '';
     const nodeAttrs = node._attrs;
     Object.keys(nodeAttrs).forEach(key => {
-      attrs += ` ${key}="${nodeAttrs[key]}"`;
+      attrs += ` ${key}="${sanitizeAttr(nodeAttrs[key])}"`;
     });
     const fHasChildren = node._children.length > 0;
     const suffix = fHasChildren ? '' : '/';
@@ -98,6 +98,16 @@ const sanitizeText = (str: string, options: XmlOptions) => {
     out += processedSegment;
     fLiteral = !fLiteral;
   }
+  return out;
+};
+
+const sanitizeAttr = (str: string) => {
+  let out = str;
+  out = out.replace(/&/g, '&amp;'); // must be the first one
+  out = out.replace(/</g, '&lt;');
+  out = out.replace(/>/g, '&gt;');
+  out = out.replace(/'/g, '&apos;');
+  out = out.replace(/"/g, '&quot;');
   return out;
 };
 

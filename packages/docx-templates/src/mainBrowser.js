@@ -23,6 +23,7 @@ const DEFAULT_CMD_DELIMITER = '+++';
 const DEFAULT_LITERAL_XML_DELIMITER = '||';
 
 const log: any = DEBUG ? require('./debug').mainStory : null;
+const chalk: any = DEBUG ? require('./debug').chalk : null;
 
 // ==========================================
 // Main
@@ -136,7 +137,7 @@ const createReport = async (options: UserOptionsInternal) => {
   let images = images1;
   for (let i = 0; i < files.length; i++) {
     const filePath = files[i];
-    DEBUG && log.info(`Processing ${filePath}...`);
+    DEBUG && log.info(`Processing ${chalk.bold(filePath)}...`);
     const raw = await zipGetText(zip, filePath);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
