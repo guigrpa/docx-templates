@@ -1,7 +1,7 @@
 {
   "name": "docx-templates",
   "private": true,
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "Template-based docx report creation",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
