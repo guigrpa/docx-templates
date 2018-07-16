@@ -81,6 +81,11 @@ const newNonTextNode = (
   return node;
 };
 
+const newTextNode = (text: string): TextNode => {
+  const node = { _parent: null, _children: [], _fTextNode: true, _text: text };
+  return node;
+};
+
 const addChild = (parent: Node, child: Node): Node => {
   parent._children.push(child);
   child._parent = parent; // eslint-disable-line
@@ -122,6 +127,7 @@ export {
   getNextSibling,
   insertTextSiblingAfter,
   newNonTextNode,
+  newTextNode,
   addChild,
   getCurLoop,
   isLoopExploring,
