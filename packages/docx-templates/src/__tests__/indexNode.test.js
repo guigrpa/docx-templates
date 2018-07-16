@@ -73,7 +73,11 @@ const reportConfigs = {
           'fixtures',
           'noQuery_report.docx'
         );
-        const result = await createReport({ ...reportConfig, template, _probe: 'JS' });
+        const result = await createReport({
+          ...reportConfig,
+          template,
+          _probe: 'JS',
+        });
         expect(fs.existsSync(defaultOutput)).toBeFalsy();
         expect(result._children.length).toBeTruthy();
       });
@@ -130,7 +134,11 @@ const reportConfigs = {
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -200,7 +208,11 @@ const reportConfigs = {
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -252,7 +264,11 @@ const reportConfigs = {
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -269,7 +285,11 @@ const reportConfigs = {
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -312,7 +332,11 @@ const reportConfigs = {
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -338,7 +362,11 @@ const reportConfigs = {
         const result = await createReport({
           ...reportConfig,
           template,
-          output: path.join(__dirname, 'fixtures', 'for1specialChars_report.docx'),
+          output: path.join(
+            __dirname,
+            'fixtures',
+            'for1specialChars_report.docx'
+          ),
           data: {
             companies: [
               { name: '3 < 4 << 400' },
@@ -380,7 +408,11 @@ const reportConfigs = {
       });
 
       it('24 Allows Word to split commands arbitrarily, incl. delimiters', async () => {
-        const template = path.join(__dirname, 'fixtures', 'splitDelimiters.docx');
+        const template = path.join(
+          __dirname,
+          'fixtures',
+          'splitDelimiters.docx'
+        );
         const result = await createReport({
           ...reportConfig,
           template,
@@ -436,12 +468,20 @@ const reportConfigs = {
       });
 
       it('32 Provides access to loop indices (JS)', async () => {
-        const template = path.join(__dirname, 'fixtures', 'insJsWithLoops.docx');
+        const template = path.join(
+          __dirname,
+          'fixtures',
+          'insJsWithLoops.docx'
+        );
         const result = await createReport({
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -487,7 +527,11 @@ const reportConfigs = {
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -500,7 +544,11 @@ const reportConfigs = {
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -514,7 +562,11 @@ const reportConfigs = {
           template,
           noSandbox: true,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -522,12 +574,20 @@ const reportConfigs = {
       });
 
       it('36b Processes a snippet with additional context', async () => {
-        const template = path.join(__dirname, 'fixtures', 'execWithContext.docx');
+        const template = path.join(
+          __dirname,
+          'fixtures',
+          'execWithContext.docx'
+        );
         const result = await createReport({
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           additionalJsContext: {
             toLowerCase: str => str.toLowerCase(),
@@ -538,7 +598,11 @@ const reportConfigs = {
       });
 
       it('37a Replace a single image', async () => {
-        const template = path.join(__dirname, 'fixtures', 'replaceOneImage.docx');
+        const template = path.join(
+          __dirname,
+          'fixtures',
+          'replaceOneImage.docx'
+        );
         const image = path.join(__dirname, 'fixtures', 'cube.png');
         const result = await createReport({
           ...reportConfig,
@@ -552,7 +616,11 @@ const reportConfigs = {
       });
 
       it('37b Replace multiple images', async () => {
-        const template = path.join(__dirname, 'fixtures', 'replaceTwoImages.docx');
+        const template = path.join(
+          __dirname,
+          'fixtures',
+          'replaceTwoImages.docx'
+        );
         const image1 = path.join(__dirname, 'fixtures', 'cube.png');
         const image2 = path.join(__dirname, 'fixtures', 'cron.png');
         const result = await createReport({
@@ -630,13 +698,32 @@ const reportConfigs = {
         expect(md5(result2)).toMatchSnapshot();
       });
 
+      it('39 Processes LINK commands', async () => {
+        const template = path.join(__dirname, 'fixtures', 'links.docx');
+        const result = await createReport({
+          ...reportConfig,
+          template,
+          data: {},
+          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+        });
+        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+      });
+
       it('40 Throws on invalid command', async () => {
-        const template = path.join(__dirname, 'fixtures', 'invalidCommand.docx');
+        const template = path.join(
+          __dirname,
+          'fixtures',
+          'invalidCommand.docx'
+        );
         try {
           await createReport({
             template,
             data: {
-              companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
             },
             _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
           });
@@ -652,7 +739,11 @@ const reportConfigs = {
           await createReport({
             template,
             data: {
-              companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
             },
             _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
           });
@@ -668,7 +759,11 @@ const reportConfigs = {
           await createReport({
             template,
             data: {
-              companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
             },
             _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
           });
@@ -688,7 +783,11 @@ const reportConfigs = {
           ...reportConfig,
           template,
           data: {
-            companies: [{ name: 'FIRST' }, { name: 'SECOND' }, { name: 'THIRD' }],
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
           },
           cmdDelimiter: '***',
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
