@@ -262,6 +262,16 @@ The JS snippet must return an _image object_ or a Promise of an _image object_, 
 
 Either specify the `path` or `data` + `extension`.
 
+### `LINK`
+
+Includes a hyperlink with the data resulting from evaluating a JavaScript snippet:
+
+```
++++LINK ({ url: project.url, label: project.name })+++
+```
+
+If the `label` is not specified, the URL is used as a label.
+
 ### `FOR` and `END-FOR`
 
 Loop over a group of elements (resulting from the evaluation of a JavaScript expression):

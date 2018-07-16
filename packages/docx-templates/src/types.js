@@ -73,6 +73,9 @@ export type Context = {
   pendingImageNode: ?NonTextNode,
   imageId: number,
   images: Images,
+  pendingLinkNode: ?NonTextNode,
+  linkId: number,
+  links: Links,
   vars: { [name: string]: VarValue },
   loops: Array<LoopStatus>,
   fJump: boolean,
@@ -86,6 +89,8 @@ export type Image = {
   extension: string,
   data: ArrayBuffer | string,
 };
+export type Links = { [id: string]: Link };
+export type Link = { url: string };
 
 export type BufferStatus = {
   text: string,
@@ -109,4 +114,9 @@ export type ImagePars = {
   path?: string, // only supported in Node
   data?: ArrayBuffer | string, // supported in Node and the browser
   extension?: string,
+};
+
+export type LinkPars = {
+  url: string,
+  label?: string,
 };

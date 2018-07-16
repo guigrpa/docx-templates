@@ -110,7 +110,7 @@ const createReport = async (options: UserOptionsInternal) => {
     finalTemplate,
     createOptions
   );
-  const { report: report1, images: images1 } = result;
+  const { report: report1, images: images1, links: links1 } = result;
   if (_probe === 'JS') return report1;
 
   // DEBUG &&
@@ -127,6 +127,7 @@ const createReport = async (options: UserOptionsInternal) => {
 
   let numImages = Object.keys(images1).length;
   processImages(images1, 'document.xml', zip, templatePath);
+  processLinks(links1, 'document.xml', zip, templatePath);
 
   // ---------------------------------------------------------
   // Process all other XML files (they may contain headers, etc.)
@@ -140,18 +141,20 @@ const createReport = async (options: UserOptionsInternal) => {
   });
 
   let images = images1;
+  let links = links1;
   for (let i = 0; i < files.length; i++) {
     const filePath = files[i];
     DEBUG && log.info(`Processing ${chalk.bold(filePath)}...`);
     const raw = await zipGetText(zip, filePath);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
-    const { report: report2, images: images2 } = await produceJsReport(
-      queryResult,
-      js,
-      createOptions
-    );
+    const {
+      report: report2,
+      images: images2,
+      links: links2,
+    } = await produceJsReport(queryResult, js, createOptions);
     images = merge(images, images2);
+    links = merge(links, links2);
     const xml = buildXml(report2, xmlOptions);
     zipSetText(zip, filePath, xml);
 
@@ -159,6 +162,7 @@ const createReport = async (options: UserOptionsInternal) => {
     const segments = filePath.split('/');
     const documentComponent = segments[segments.length - 1];
     processImages(images2, documentComponent, zip, templatePath);
+    processLinks(links2, 'document.xml', zip, templatePath);
   }
 
   // ---------------------------------------------------------
@@ -266,6 +270,45 @@ const processImages = async (images, documentComponent, zip, templatePath) => {
           Type:
             'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
           Target: `media/${imgName}`,
+        })
+      );
+    }
+    const finalRelsXml = buildXml(rels, {
+      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
+    });
+    zipSetText(zip, relsPath, finalRelsXml);
+  }
+};
+
+// ==========================================
+// Process links
+// ==========================================
+const processLinks = async (links, documentComponent, zip, templatePath) => {
+  DEBUG && log.debug(`Processing links for ${documentComponent}...`);
+  const linkIds = Object.keys(links);
+  if (linkIds.length) {
+    DEBUG && log.debug('Completing document.xml.rels...');
+    const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
+    let relsXml;
+    try {
+      relsXml = await zipGetText(zip, relsPath);
+    } catch (err) {
+      relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+        </Relationships>`;
+    }
+    const rels = await parseXml(relsXml);
+    for (let i = 0; i < linkIds.length; i++) {
+      const linkId = linkIds[i];
+      const { url } = links[linkId];
+      addChild(
+        rels,
+        newNonTextNode('Relationship', {
+          Id: linkId,
+          Type:
+            'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
+          Target: url,
+          TargetMode: 'External',
         })
       );
     }

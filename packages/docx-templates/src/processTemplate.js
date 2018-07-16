@@ -8,6 +8,7 @@ import {
   // cloneNodeForLogging,
   getNextSibling,
   newNonTextNode,
+  newTextNode,
   getCurLoop,
   isLoopExploring,
   logLoop,
@@ -21,6 +22,8 @@ import type {
   CreateReportOptions,
   ImagePars,
   Images,
+  LinkPars,
+  Links,
 } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
@@ -88,6 +91,7 @@ const extractQuery = async (
 type ReportOutput = {
   report: Node,
   images: Images,
+  links: Links,
 };
 
 const produceJsReport = async (
@@ -109,6 +113,9 @@ const produceJsReport = async (
     pendingImageNode: null,
     imageId: 0,
     images: {},
+    pendingLinkNode: null,
+    linkId: 0,
+    links: {},
     vars: {},
     loops: [],
     fJump: false,
@@ -229,6 +236,26 @@ const produceJsReport = async (
         ctx.pendingImageNode = null;
       }
 
+      // If a link was generated, replace the parent `w:r` node with
+      // the link node
+      if (
+        ctx.pendingLinkNode &&
+        !nodeOut._fTextNode && // Flow-prevention
+        nodeOut._tag === 'w:r'
+      ) {
+        const linkNode = ctx.pendingLinkNode;
+        const parent = nodeOut._parent;
+        if (parent) {
+          linkNode._parent = parent;
+          parent._children.pop();
+          parent._children.push(linkNode);
+          // Prevent containing paragraph or table row from being removed
+          ctx.buffers['w:p'].fInsertedText = true;
+          ctx.buffers['w:tr'].fInsertedText = true;
+        }
+        ctx.pendingLinkNode = null;
+      }
+
       // `w:tc` nodes shouldn't be left with no `w:p` children; if that's the
       // case, add an empty `w:p` inside
       if (
@@ -296,7 +323,7 @@ const produceJsReport = async (
     }
   }
 
-  return { report: out, images: ctx.images };
+  return { report: out, images: ctx.images, links: ctx.links };
 };
 
 const processText = async (
@@ -416,6 +443,13 @@ const processCmd = async (
       if (!isLoopExploring(ctx)) {
         const img = (await runUserJsAndGetRaw(data, cmdRest, ctx): ?ImagePars);
         if (img != null) await processImage(ctx, img);
+      }
+
+      // LINK <code>
+    } else if (cmdName === 'LINK') {
+      if (!isLoopExploring(ctx)) {
+        const pars = (await runUserJsAndGetRaw(data, cmdRest, ctx): ?LinkPars);
+        if (pars != null) await processLink(ctx, pars);
       }
 
       // Invalid command
@@ -616,6 +650,23 @@ const getImageData = async (imagePars: ImagePars) => {
   if (!fs) throw new Error('Cannot read image from file in the browser');
   const buffer = await fs.readFile(imgPath);
   return { extension: path.extname(imgPath).toLowerCase(), data: buffer };
+};
+
+const processLink = async (ctx: Context, linkPars: LinkPars) => {
+  const { url } = linkPars;
+  const { label = url } = linkPars;
+  ctx.linkId += 1;
+  const id = String(ctx.linkId);
+  const relId = `link${id}`;
+  ctx.links[relId] = { url };
+  const node = newNonTextNode;
+  const link = node('w:hyperlink', { 'r:id': relId, 'w:history': '1' }, [
+    node('w:r', {}, [
+      node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
+      node('w:t', {}, [newTextNode(label)]),
+    ]),
+  ]);
+  ctx.pendingLinkNode = link;
 };
 
 // ==========================================

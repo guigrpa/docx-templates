@@ -1,3 +1,5 @@
+* Add `LINK` command (!!!) (#20).
+
 ## 2.5.2 (2018-7-15)
 
 * Bugfix: fix multiline query extraction (#21).
