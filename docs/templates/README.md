@@ -8,7 +8,7 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 * **Express your data needs (queries) in the template itself** (`QUERY` command), in whatever query language you want (e.g. in GraphQL). This is similar to _the Relay way™_: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
 * **Execute JavaScript snippets** (`EXEC` command, or `!` for short)
 * **Insert the result of JavaScript snippets** in your document (`INS`, or `=` for short)
-* **Create images dynamically** (`IMAGE`) — great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
+* **Create images and hyperlinks dynamically** (`IMAGE`, `LINK`) — great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
 * Include contents **conditionally**, `IF` a certain JavaScript expression is truthy
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
