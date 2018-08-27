@@ -76,6 +76,9 @@ export type Context = {
   pendingLinkNode: ?NonTextNode,
   linkId: number,
   links: Links,
+  pendingHtmlNode: ?TextNode,
+  htmlId: number,
+  htmls: Htmls,
   vars: { [name: string]: VarValue },
   loops: Array<LoopStatus>,
   fJump: boolean,
@@ -91,6 +94,7 @@ export type Image = {
 };
 export type Links = { [id: string]: Link };
 export type Link = { url: string };
+export type Htmls = { [id: string]: String };
 
 export type BufferStatus = {
   text: string,
