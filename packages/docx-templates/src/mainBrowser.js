@@ -10,7 +10,7 @@ import {
   zipSetText,
   zipSetBinary,
   zipSetBase64,
-  zipSave,
+  zipSave
 } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
@@ -41,7 +41,7 @@ const createReport = async (options: UserOptionsInternal) => {
       options.processLineBreaks != null ? options.processLineBreaks : true,
     noSandbox: options.noSandbox || false,
     vm2Sandbox: options.vm2Sandbox || false,
-    additionalJsContext: options.additionalJsContext || {},
+    additionalJsContext: options.additionalJsContext || {}
   };
   const xmlOptions = { literalXmlDelimiter };
 
@@ -65,7 +65,7 @@ const createReport = async (options: UserOptionsInternal) => {
   DEBUG &&
     log.debug(`File parsed in ${tac - tic} ms`, {
       attach: jsTemplate,
-      attachLevel: 'trace',
+      attachLevel: 'trace'
     });
 
   // ---------------------------------------------------------
@@ -110,7 +110,12 @@ const createReport = async (options: UserOptionsInternal) => {
     finalTemplate,
     createOptions
   );
-  const { report: report1, images: images1, links: links1, htmls: htmls1 } = result;
+  const {
+    report: report1,
+    images: images1,
+    links: links1,
+    htmls: htmls1
+  } = result;
   if (_probe === 'JS') return report1;
 
   // DEBUG &&
@@ -193,7 +198,7 @@ const createReport = async (options: UserOptionsInternal) => {
         contentTypes,
         newNonTextNode('Default', {
           Extension: extension,
-          ContentType: contentType,
+          ContentType: contentType
         })
       );
     };
@@ -268,12 +273,12 @@ const processImages = async (images, documentComponent, zip, templatePath) => {
           Id: imageId,
           Type:
             'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
-          Target: `media/${imgName}`,
+          Target: `media/${imgName}`
         })
       );
     }
     const finalRelsXml = buildXml(rels, {
-      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
+      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER
     });
     zipSetText(zip, relsPath, finalRelsXml);
   }
@@ -299,28 +304,34 @@ const processLinks = async (links, documentComponent, zip, templatePath) => {
           Type:
             'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
           Target: url,
-          TargetMode: 'External',
+          TargetMode: 'External'
         })
       );
     }
     const finalRelsXml = buildXml(rels, {
-      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
+      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER
     });
     zipSetText(zip, relsPath, finalRelsXml);
   }
 };
 
-const processHtmls = async (htmls, documentComponent, zip, templatePath, xmlOptions) => {
+const processHtmls = async (
+  htmls,
+  documentComponent,
+  zip,
+  templatePath,
+  xmlOptions
+) => {
   DEBUG && log.debug(`Processing htmls for ${documentComponent}...`);
-  const htmlsIds = Object.keys(htmls);
-  if (htmlsIds.length) {
+  const htmlIds = Object.keys(htmls);
+  if (htmlIds.length) {
     // Process rels
     DEBUG && log.debug(`Completing document.xml.rels...`);
     let htmlFiles = [];
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
-    for (let i = 0; i < htmlsIds.length; i++) {
-      const htmlId = htmlsIds[i];
+    for (let i = 0; i < htmlIds.length; i++) {
+      const htmlId = htmlIds[i];
       const htmlData = htmls[htmlId];
       const htmlName = `template_${documentComponent}_${htmlId}.html`;
       DEBUG && log.debug(`Writing html ${htmlId} (${htmlName})...`);
@@ -331,13 +342,14 @@ const processHtmls = async (htmls, documentComponent, zip, templatePath, xmlOpti
         rels,
         newNonTextNode('Relationship', {
           Id: htmlId,
-          Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/aFChunk',
-          Target: `${htmlName}`,
+          Type:
+            'http://schemas.openxmlformats.org/officeDocument/2006/relationships/aFChunk',
+          Target: `${htmlName}`
         })
       );
     }
     const finalRelsXml = buildXml(rels, {
-      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
+      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER
     });
     zipSetText(zip, relsPath, finalRelsXml);
 
@@ -359,12 +371,12 @@ const processHtmls = async (htmls, documentComponent, zip, templatePath, xmlOpti
         contentTypes,
         newNonTextNode('Override', {
           PartName: partName,
-          ContentType: contentType,
+          ContentType: contentType
         })
       );
     };
     for (let htmlFile of htmlFiles) {
-        ensureContentType(htmlFile, 'text/html');
+      ensureContentType(htmlFile, 'text/html');
     }
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
     zipSetText(zip, contentTypesPath, finalContentTypesXml);
@@ -372,15 +384,15 @@ const processHtmls = async (htmls, documentComponent, zip, templatePath, xmlOpti
 };
 
 const getRelsFromZip = async (zip, relsPath) => {
-    let relsXml;
-    try {
-      relsXml = await zipGetText(zip, relsPath);
-    } catch (err) {
-      relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  let relsXml;
+  try {
+    relsXml = await zipGetText(zip, relsPath);
+  } catch (err) {
+    relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
         </Relationships>`;
-    }
-    return await parseXml(relsXml);
+  }
+  return await parseXml(relsXml);
 };
 
 // ==========================================

@@ -51,7 +51,7 @@ const runUserJsAndGetRaw = async (
     ctx.jsSandbox || {},
     {
       __code__: code,
-      __result__: undefined,
+      __result__: undefined
     },
     data,
     ctx.options.additionalJsContext
@@ -82,7 +82,7 @@ const runUserJsAndGetRaw = async (
       ...(typeof ctx.options.vm2Sandbox === 'object'
         ? ctx.options.vm2Sandbox
         : {}),
-      sandbox,
+      sandbox
     });
     vm2.run(script);
     context = omit(vm2._context, ['VMError', 'Buffer']);
