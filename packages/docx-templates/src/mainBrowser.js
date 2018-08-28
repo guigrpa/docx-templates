@@ -129,7 +129,7 @@ const createReport = async (options: UserOptionsInternal) => {
   let numHtmls = Object.keys(htmls1).length;
   processImages(images1, 'document.xml', zip, templatePath);
   processLinks(links1, 'document.xml', zip, templatePath);
-  processHtmls(htmls1, 'document.xml', zip, templatePath);
+  processHtmls(htmls1, 'document.xml', zip, templatePath, xmlOptions);
 
   // ---------------------------------------------------------
   // Process all other XML files (they may contain headers, etc.)
@@ -164,13 +164,12 @@ const createReport = async (options: UserOptionsInternal) => {
     zipSetText(zip, filePath, xml);
 
     numImages += Object.keys(images2).length;
-    numHtmls += Object.keys(htmls2).length;
 
     const segments = filePath.split('/');
     const documentComponent = segments[segments.length - 1];
     processImages(images2, documentComponent, zip, templatePath);
     processLinks(links2, 'document.xml', zip, templatePath);
-    processHtmls(htmls2, 'document.xml', zip, templatePath);
+    processHtmls(htmls2, 'document.xml', zip, templatePath, xmlOptions);
   }
 
   // ---------------------------------------------------------
@@ -202,36 +201,6 @@ const createReport = async (options: UserOptionsInternal) => {
     ensureContentType('jpg', 'image/jpeg');
     ensureContentType('jpeg', 'image/jpeg');
     ensureContentType('gif', 'image/gif');
-    const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
-    zipSetText(zip, contentTypesPath, finalContentTypesXml);
-  }
-
-  if (numHtmls) {
-    DEBUG && log.debug('Completing [Content_Types].xml for HTML...');
-    const contentTypesPath = '[Content_Types].xml';
-    const contentTypesXml = await zipGetText(zip, contentTypesPath);
-    const contentTypes = await parseXml(contentTypesXml);
-    // DEBUG && log.debug('Content types', { attach: contentTypes });
-    const ensureContentType = (partName, contentType) => {
-      const children = contentTypes._children;
-      if (
-        children.filter(o => !o._fTextNode && o._attrs.PartName === partName)
-          .length
-      ) {
-        return;
-      }
-      addChild(
-        contentTypes,
-        newNonTextNode('Override', {
-          PartName: partName,
-          ContentType: contentType,
-        })
-      );
-    };
-    const htmlNames = Object.keys(htmls);
-    for (let i = 0; i < htmlNames.length; i++) {
-        ensureContentType(`/${templatePath}/template_document.xml_${htmlNames[i]}.html`, 'text/html');
-    }
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
     zipSetText(zip, contentTypesPath, finalContentTypesXml);
   }
@@ -281,15 +250,7 @@ const processImages = async (images, documentComponent, zip, templatePath) => {
   if (imageIds.length) {
     DEBUG && log.debug('Completing document.xml.rels...');
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
-    let relsXml;
-    try {
-      relsXml = await zipGetText(zip, relsPath);
-    } catch (err) {
-      relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-        </Relationships>`;
-    }
-    const rels = await parseXml(relsXml);
+    const rels = await getRelsFromZip(zip, relsPath);
     for (let i = 0; i < imageIds.length; i++) {
       const imageId = imageIds[i];
       const { extension, data: imgData } = images[imageId];
@@ -327,15 +288,7 @@ const processLinks = async (links, documentComponent, zip, templatePath) => {
   if (linkIds.length) {
     DEBUG && log.debug('Completing document.xml.rels...');
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
-    let relsXml;
-    try {
-      relsXml = await zipGetText(zip, relsPath);
-    } catch (err) {
-      relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-        </Relationships>`;
-    }
-    const rels = await parseXml(relsXml);
+    const rels = await getRelsFromZip(zip, relsPath);
     for (let i = 0; i < linkIds.length; i++) {
       const linkId = linkIds[i];
       const { url } = links[linkId];
@@ -357,27 +310,22 @@ const processLinks = async (links, documentComponent, zip, templatePath) => {
   }
 };
 
-const processHtmls = async (htmls, documentComponent, zip, templatePath) => {
+const processHtmls = async (htmls, documentComponent, zip, templatePath, xmlOptions) => {
   DEBUG && log.debug(`Processing htmls for ${documentComponent}...`);
   const htmlsIds = Object.keys(htmls);
   if (htmlsIds.length) {
+    // Process rels
     DEBUG && log.debug(`Completing document.xml.rels...`);
+    let htmlFiles = [];
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
-    let relsXml;
-    try {
-      relsXml = await zipGetText(zip, relsPath);
-    } catch (err) {
-      relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-        </Relationships>`;
-    }
-    const rels = await parseXml(relsXml);
+    const rels = await getRelsFromZip(zip, relsPath);
     for (let i = 0; i < htmlsIds.length; i++) {
       const htmlId = htmlsIds[i];
       const htmlData = htmls[htmlId];
       const htmlName = `template_${documentComponent}_${htmlId}.html`;
       DEBUG && log.debug(`Writing html ${htmlId} (${htmlName})...`);
       const htmlPath = `${templatePath}/${htmlName}`;
+      htmlFiles.push(`/${htmlPath}`);
       await zipSetText(zip, htmlPath, htmlData);
       addChild(
         rels,
@@ -392,7 +340,47 @@ const processHtmls = async (htmls, documentComponent, zip, templatePath) => {
       literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
     });
     zipSetText(zip, relsPath, finalRelsXml);
+
+    // Process Content Types
+    DEBUG && log.debug('Completing [Content_Types].xml for HTML...');
+    const contentTypesPath = '[Content_Types].xml';
+    const contentTypesXml = await zipGetText(zip, contentTypesPath);
+    const contentTypes = await parseXml(contentTypesXml);
+    // DEBUG && log.debug('Content types', { attach: contentTypes });
+    const ensureContentType = (partName, contentType) => {
+      const children = contentTypes._children;
+      if (
+        children.filter(o => !o._fTextNode && o._attrs.PartName === partName)
+          .length
+      ) {
+        return;
+      }
+      addChild(
+        contentTypes,
+        newNonTextNode('Override', {
+          PartName: partName,
+          ContentType: contentType,
+        })
+      );
+    };
+    for (let htmlFile of htmlFiles) {
+        ensureContentType(htmlFile, 'text/html');
+    }
+    const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
+    zipSetText(zip, contentTypesPath, finalContentTypesXml);
   }
+};
+
+const getRelsFromZip = async (zip, relsPath) => {
+    let relsXml;
+    try {
+      relsXml = await zipGetText(zip, relsPath);
+    } catch (err) {
+      relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+        </Relationships>`;
+    }
+    return await parseXml(relsXml);
 };
 
 // ==========================================
