@@ -3,8 +3,6 @@
   "private": true,
   "version": "2.6.0",
   "description": "Template-based docx report creation",
-  "main": "lib/indexNode.js",
-  "browser": "lib/indexBrowser.js",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
   "keywords": [
