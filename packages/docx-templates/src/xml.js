@@ -10,7 +10,7 @@ const parseXml = (templateXml: string): Promise<Node> => {
   const parser = sax.parser(true, {
     // true for XML-like (false for HTML-like)
     trim: false,
-    normalize: false,
+    normalize: false
   });
   let template;
   let curNode = null;
@@ -22,7 +22,7 @@ const parseXml = (templateXml: string): Promise<Node> => {
         _children: [],
         _fTextNode: false,
         _tag: node.name,
-        _attrs: node.attributes,
+        _attrs: node.attributes
       };
       if (curNode != null) curNode._children.push(newNode);
       else template = newNode;
@@ -38,7 +38,7 @@ const parseXml = (templateXml: string): Promise<Node> => {
         _parent: curNode,
         _children: [],
         _fTextNode: true,
-        _text: text,
+        _text: text
       });
     };
     parser.onend = () => {
@@ -54,7 +54,7 @@ const parseXml = (templateXml: string): Promise<Node> => {
 };
 
 type XmlOptions = {|
-  literalXmlDelimiter: string,
+  literalXmlDelimiter: string
 |};
 
 const buildXml = (node: Node, options: XmlOptions, indent?: string = '') => {
