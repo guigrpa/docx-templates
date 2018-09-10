@@ -226,9 +226,20 @@ const produceJsReport = async (
         const imgNode = ctx.pendingImageNode;
         const parent = nodeOut._parent;
         if (parent) {
+          let img, noproof
+          if (imgNode.length > 1) {
+            img = imgNode[0]
+            noproof = imgNode[1]
+          }
           imgNode._parent = parent;
           parent._children.pop();
-          parent._children.push(imgNode);
+          if (imgNode.length > 1) {
+            parent._children.push(img);
+            parent._children.push(noproof);
+          }
+          else {
+            parent._children.push(imgNode);
+          }
           // Prevent containing paragraph or table row from being removed
           ctx.buffers['w:p'].fInsertedText = true;
           ctx.buffers['w:tr'].fInsertedText = true;
@@ -568,11 +579,18 @@ const processEndForIf = (
 const processImage = async (ctx: Context, imagePars: ImagePars) => {
   const cx = (imagePars.width * 360e3).toFixed(0);
   const cy = (imagePars.height * 360e3).toFixed(0);
+  const prevRelId = 'img' + String(ctx.imageId)
   ctx.imageId += 1;
   const id = String(ctx.imageId);
   const relId = `img${id}`;
   ctx.images[relId] = await getImageData(imagePars);
   const node = newNonTextNode;
+  let extensions = []
+  extensions.push(node('a:ext', { uri: '{28A0092B-C50C-407E-A947-70E740481C1C}' }, [node('a14:useLocalDpi', { 'xmlns:a14': 'http://schemas.microsoft.com/office/drawing/2010/main', val: '0'})]))
+  // SVG support
+  if (imagePars.extension === '.svg') {
+    extensions.push(node('a:ext', { uri: '{96DAC541-7B7A-43D3-8B79-37D633B846F1}' }, [node('asvg:svgBlip', { 'xmlns:asvg': 'http://schemas.microsoft.com/office/drawing/2016/SVG/main', 'r:embed': relId})]))
+  }
   const pic = node(
     'pic:pic',
     { 'xmlns:pic': 'http://schemas.openxmlformats.org/drawingml/2006/picture' },
@@ -584,16 +602,8 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
         ]),
       ]),
       node('pic:blipFill', {}, [
-        node('a:blip', { 'r:embed': relId, cstate: 'print' }, [
-          node('a:extLst', {}, [
-            node('a:ext', { uri: '{28A0092B-C50C-407E-A947-70E740481C1C}' }, [
-              node('a14:useLocalDpi', {
-                'xmlns:a14':
-                  'http://schemas.microsoft.com/office/drawing/2010/main',
-                val: '0',
-              }),
-            ]),
-          ]),
+        node('a:blip', { 'r:embed': imagePars.extension === '.svg' ? prevRelId : relId, cstate: 'print' }, [ // SVG support
+          node('a:extLst', {}, extensions)
         ]),
         node('a:srcRect'),
         node('a:stretch', {}, [node('a:fillRect')]),
@@ -609,9 +619,13 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
       ]),
     ]
   );
+  const noProof = node('w:rPr', {}, [
+    node('w:noProof', {})
+  ])
   const drawing = node('w:drawing', {}, [
     node('wp:inline', { distT: '0', distB: '0', distL: '0', distR: '0' }, [
       node('wp:extent', { cx, cy }),
+      node('wp:effectExtent', { l:'0', t:'0', r:'0', b:'0' }),
       node('wp:docPr', { id, name: `Picture ${id}`, descr: 'desc' }),
       node('wp:cNvGraphicFramePr', {}, [
         node('a:graphicFrameLocks', {
@@ -632,7 +646,7 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
       ),
     ]),
   ]);
-  ctx.pendingImageNode = drawing;
+  ctx.pendingImageNode = [drawing, noProof];
 };
 
 const getImageData = async (imagePars: ImagePars) => {
