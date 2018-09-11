@@ -1,6 +1,6 @@
 require('isomorphic-fetch');
 const qrcode = require('yaqrcode');
-const createReport = require('docx-templates').default;
+const createReport = require('../../lib/indexNode.js').default;
 
 createReport({
   template: process.argv[2],
