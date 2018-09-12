@@ -47,7 +47,7 @@
     "extract-docs": "^1.5.2",
     "flow-bin": "^0.49.1",
     "flow-copy-source": "1.2.0",
-    "oao": "^1.2.1",
+    "oao": "^1.5.1",
     "prettier": "^1.10.2",
     "xxl": "^1.2.0"
   }

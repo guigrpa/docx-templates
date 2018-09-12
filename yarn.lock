@@ -4159,9 +4159,9 @@ nyc@10.0.0:
     yargs "^6.4.0"
     yargs-parser "^4.0.2"
 
-oao@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/oao/-/oao-1.2.1.tgz#49aa7041f60fb9c6f63bd9c867761b0f2f86577f"
+oao@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/oao/-/oao-1.5.1.tgz#ead609ee2b36bf56699f06a38be16340ce6be099"
   dependencies:
     babel-polyfill "6.26.0"
     commander "2.11.0"
@@ -4169,6 +4169,7 @@ oao@^1.2.1:
     globby "6.1.0"
     inquirer "3.2.1"
     kebab-case "1.0.0"
+    minimatch "^3.0.4"
     rimraf "2.6.1"
     semver "5.4.1"
     shelljs "0.7.8"
