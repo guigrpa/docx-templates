@@ -9,6 +9,7 @@ env:
 rules:
   eqeqeq: ['error', 'allow-null']
   indent: off # prettier!
+  prefer-destructuring: off
   no-unused-expressions:
     - error
     - allowShortCircuit: true

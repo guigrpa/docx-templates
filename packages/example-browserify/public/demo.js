@@ -10,19 +10,15 @@ async function onTemplateChosen(event) {
   // read the file in an ArrayBuffer
   const content = await readFile(this.files[0]);
   // select the right data source, depending on selected input
-  let data = null
+  let data = null;
   if (event.target.id === 'inputSwapi') {
-      data = query => postQuery('/swapi', query) // query to swapi webservice
-  }
-  else if (event.target.id === 'inputQuill') {
-      data = {html: `<body>${quill.root.innerHTML}</body>`}
+    data = query => postQuery('/swapi', query); // query to swapi webservice
+  } else if (event.target.id === 'inputQuill') {
+    data = { html: `<body>${window.quill.root.innerHTML}</body>` };
   }
   // fill the template
   console.log('Creating report (can take some time) ...');
-  const doc = await createReport({
-    template: content,
-    data: data
-  });
+  const doc = await createReport({ template: content, data });
   // generate output file for download
   downloadBlob(
     doc,
@@ -30,8 +26,6 @@ async function onTemplateChosen(event) {
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   );
 }
-
-//data:
 
 // ==============================================
 //                 Helpers

@@ -28,10 +28,10 @@
     "start": "yarn build && node server"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.18.3",
     "browserify": "^15.0.0",
     "docx-templates": "*",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "isomorphic-fetch": "2.2.1",
     "prettier": "^1.14.2",
     "yaqrcode": "^0.2.1"

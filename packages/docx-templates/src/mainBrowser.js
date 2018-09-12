@@ -131,7 +131,6 @@ const createReport = async (options: UserOptionsInternal) => {
   zipSetText(zip, `${templatePath}/document.xml`, reportXml);
 
   let numImages = Object.keys(images1).length;
-  let numHtmls = Object.keys(htmls1).length;
   processImages(images1, 'document.xml', zip, templatePath);
   processLinks(links1, 'document.xml', zip, templatePath);
   processHtmls(htmls1, 'document.xml', zip, templatePath, xmlOptions);
@@ -327,7 +326,7 @@ const processHtmls = async (
   if (htmlIds.length) {
     // Process rels
     DEBUG && log.debug(`Completing document.xml.rels...`);
-    let htmlFiles = [];
+    const htmlFiles = [];
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
     for (let i = 0; i < htmlIds.length; i++) {
@@ -375,9 +374,9 @@ const processHtmls = async (
         })
       );
     };
-    for (let htmlFile of htmlFiles) {
+    htmlFiles.forEach(htmlFile => {
       ensureContentType(htmlFile, 'text/html');
-    }
+    });
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
     zipSetText(zip, contentTypesPath, finalContentTypesXml);
   }
@@ -392,7 +391,7 @@ const getRelsFromZip = async (zip, relsPath) => {
         <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
         </Relationships>`;
   }
-  return await parseXml(relsXml);
+  return parseXml(relsXml);
 };
 
 // ==========================================
