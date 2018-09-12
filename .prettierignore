@@ -2,6 +2,7 @@ node_modules
 .next
 packages/*/lib
 packages/*/out
+packages/*/public
 *.html
 *.json
 *.md

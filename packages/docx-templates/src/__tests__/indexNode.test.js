@@ -720,7 +720,6 @@ const reportConfigs = {
         if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
       });
 
-
       it('40 Throws on invalid command', async () => {
         const template = path.join(
           __dirname,

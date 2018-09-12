@@ -10,7 +10,7 @@ import {
   zipSetText,
   zipSetBinary,
   zipSetBase64,
-  zipSave
+  zipSave,
 } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
@@ -41,7 +41,7 @@ const createReport = async (options: UserOptionsInternal) => {
       options.processLineBreaks != null ? options.processLineBreaks : true,
     noSandbox: options.noSandbox || false,
     vm2Sandbox: options.vm2Sandbox || false,
-    additionalJsContext: options.additionalJsContext || {}
+    additionalJsContext: options.additionalJsContext || {},
   };
   const xmlOptions = { literalXmlDelimiter };
 
@@ -65,7 +65,7 @@ const createReport = async (options: UserOptionsInternal) => {
   DEBUG &&
     log.debug(`File parsed in ${tac - tic} ms`, {
       attach: jsTemplate,
-      attachLevel: 'trace'
+      attachLevel: 'trace',
     });
 
   // ---------------------------------------------------------
@@ -114,7 +114,7 @@ const createReport = async (options: UserOptionsInternal) => {
     report: report1,
     images: images1,
     links: links1,
-    htmls: htmls1
+    htmls: htmls1,
   } = result;
   if (_probe === 'JS') return report1;
 
@@ -160,7 +160,7 @@ const createReport = async (options: UserOptionsInternal) => {
       report: report2,
       images: images2,
       links: links2,
-      htmls: htmls2
+      htmls: htmls2,
     } = await produceJsReport(queryResult, js, createOptions);
     images = merge(images, images2);
     links = merge(links, links2);
@@ -198,7 +198,7 @@ const createReport = async (options: UserOptionsInternal) => {
         contentTypes,
         newNonTextNode('Default', {
           Extension: extension,
-          ContentType: contentType
+          ContentType: contentType,
         })
       );
     };
@@ -273,12 +273,12 @@ const processImages = async (images, documentComponent, zip, templatePath) => {
           Id: imageId,
           Type:
             'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
-          Target: `media/${imgName}`
+          Target: `media/${imgName}`,
         })
       );
     }
     const finalRelsXml = buildXml(rels, {
-      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER
+      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
     });
     zipSetText(zip, relsPath, finalRelsXml);
   }
@@ -304,12 +304,12 @@ const processLinks = async (links, documentComponent, zip, templatePath) => {
           Type:
             'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
           Target: url,
-          TargetMode: 'External'
+          TargetMode: 'External',
         })
       );
     }
     const finalRelsXml = buildXml(rels, {
-      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER
+      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
     });
     zipSetText(zip, relsPath, finalRelsXml);
   }
@@ -344,12 +344,12 @@ const processHtmls = async (
           Id: htmlId,
           Type:
             'http://schemas.openxmlformats.org/officeDocument/2006/relationships/aFChunk',
-          Target: `${htmlName}`
+          Target: `${htmlName}`,
         })
       );
     }
     const finalRelsXml = buildXml(rels, {
-      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER
+      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
     });
     zipSetText(zip, relsPath, finalRelsXml);
 
@@ -371,7 +371,7 @@ const processHtmls = async (
         contentTypes,
         newNonTextNode('Override', {
           PartName: partName,
-          ContentType: contentType
+          ContentType: contentType,
         })
       );
     };
