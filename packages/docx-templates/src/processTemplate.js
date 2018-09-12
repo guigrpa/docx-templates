@@ -11,7 +11,7 @@ import {
   newTextNode,
   getCurLoop,
   isLoopExploring,
-  logLoop,
+  logLoop
 } from './reportUtils';
 import { runUserJsAndGetString, runUserJsAndGetRaw } from './jsSandbox';
 import type {
@@ -24,6 +24,7 @@ import type {
   Images,
   LinkPars,
   Links,
+  Htmls
 } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
@@ -51,7 +52,7 @@ const extractQuery = async (
     fSeekQuery: true, // ensure no command will be processed, except QUERY
     query: null,
     loops: [],
-    options,
+    options
   };
   let nodeIn = template;
   while (true) {
@@ -92,6 +93,7 @@ type ReportOutput = {
   report: Node,
   images: Images,
   links: Links,
+  htmls: Htmls
 };
 
 const produceJsReport = async (
@@ -108,7 +110,7 @@ const produceJsReport = async (
     query: null,
     buffers: {
       'w:p': { text: '', cmds: '', fInsertedText: false },
-      'w:tr': { text: '', cmds: '', fInsertedText: false },
+      'w:tr': { text: '', cmds: '', fInsertedText: false }
     },
     pendingImageNode: null,
     imageId: 0,
@@ -116,11 +118,14 @@ const produceJsReport = async (
     pendingLinkNode: null,
     linkId: 0,
     links: {},
+    pendingHtmlNode: null,
+    htmlId: 0,
+    htmls: {},
     vars: {},
     loops: [],
     fJump: false,
     shorthands: {},
-    options,
+    options
   };
   let nodeIn: Node = template;
   let nodeOut: Node = out;
@@ -256,6 +261,26 @@ const produceJsReport = async (
         ctx.pendingLinkNode = null;
       }
 
+      // If a html page was generated, replace the parent `w:p` node with
+      // the html node
+      if (
+        ctx.pendingHtmlNode &&
+        !nodeOut._fTextNode && // Flow-prevention
+        nodeOut._tag === 'w:p'
+      ) {
+        const htmlNode = ctx.pendingHtmlNode;
+        const parent = nodeOut._parent;
+        if (parent) {
+          htmlNode._parent = parent;
+          parent._children.pop();
+          parent._children.push(htmlNode);
+          // Prevent containing paragraph or table row from being removed
+          ctx.buffers['w:p'].fInsertedText = true;
+          ctx.buffers['w:tr'].fInsertedText = true;
+        }
+        ctx.pendingHtmlNode = null;
+      }
+
       // `w:tc` nodes shouldn't be left with no `w:p` children; if that's the
       // case, add an empty `w:p` inside
       if (
@@ -268,7 +293,7 @@ const produceJsReport = async (
           _children: [],
           _fTextNode: false,
           _tag: 'w:p',
-          _attrs: {},
+          _attrs: {}
         });
       }
     }
@@ -323,7 +348,12 @@ const produceJsReport = async (
     }
   }
 
-  return { report: out, images: ctx.images, links: ctx.links };
+  return {
+    report: out,
+    images: ctx.images,
+    links: ctx.links,
+    htmls: ctx.htmls
+  };
 };
 
 const processText = async (
@@ -357,7 +387,7 @@ const processText = async (
           outText += cmdResultText;
           appendTextToTagBuffers(cmdResultText, ctx, {
             fCmd: false,
-            fInsertedText: true,
+            fInsertedText: true
           });
         }
       }
@@ -452,6 +482,13 @@ const processCmd = async (
         if (pars != null) await processLink(ctx, pars);
       }
 
+      // HTML <code>
+    } else if (cmdName === 'HTML') {
+      if (!isLoopExploring(ctx)) {
+        const html = (await runUserJsAndGetRaw(data, cmdRest, ctx): ?string);
+        if (html != null) await processHtml(ctx, html);
+      }
+
       // Invalid command
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
     return out;
@@ -528,7 +565,7 @@ const processForIf = async (
       isIf,
       // run through the loop once first, without outputting anything
       // (if we don't do it like this, we could not run empty loops!)
-      idx: -1,
+      idx: -1
     });
   }
   logLoop(ctx.loops);
@@ -580,8 +617,8 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
       node('pic:nvPicPr', {}, [
         node('pic:cNvPr', { id: '0', name: `Picture ${id}`, descr: 'desc' }),
         node('pic:cNvPicPr', {}, [
-          node('a:picLocks', { noChangeAspect: '1', noChangeArrowheads: '1' }),
-        ]),
+          node('a:picLocks', { noChangeAspect: '1', noChangeArrowheads: '1' })
+        ])
       ]),
       node('pic:blipFill', {}, [
         node('a:blip', { 'r:embed': relId, cstate: 'print' }, [
@@ -590,23 +627,23 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
               node('a14:useLocalDpi', {
                 'xmlns:a14':
                   'http://schemas.microsoft.com/office/drawing/2010/main',
-                val: '0',
-              }),
-            ]),
-          ]),
+                val: '0'
+              })
+            ])
+          ])
         ]),
         node('a:srcRect'),
-        node('a:stretch', {}, [node('a:fillRect')]),
+        node('a:stretch', {}, [node('a:fillRect')])
       ]),
       node('pic:spPr', { bwMode: 'auto' }, [
         node('a:xfrm', {}, [
           node('a:off', { x: '0', y: '0' }),
-          node('a:ext', { cx, cy }),
+          node('a:ext', { cx, cy })
         ]),
         node('a:prstGeom', { prst: 'rect' }, [node('a:avLst')]),
         node('a:noFill'),
-        node('a:ln', {}, [node('a:noFill')]),
-      ]),
+        node('a:ln', {}, [node('a:noFill')])
+      ])
     ]
   );
   const drawing = node('w:drawing', {}, [
@@ -616,8 +653,8 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
       node('wp:cNvGraphicFramePr', {}, [
         node('a:graphicFrameLocks', {
           'xmlns:a': 'http://schemas.openxmlformats.org/drawingml/2006/main',
-          noChangeAspect: '1',
-        }),
+          noChangeAspect: '1'
+        })
       ]),
       node(
         'a:graphic',
@@ -627,10 +664,10 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
             'a:graphicData',
             { uri: 'http://schemas.openxmlformats.org/drawingml/2006/picture' },
             [pic]
-          ),
+          )
         ]
-      ),
-    ]),
+      )
+    ])
   ]);
   ctx.pendingImageNode = drawing;
 };
@@ -663,10 +700,20 @@ const processLink = async (ctx: Context, linkPars: LinkPars) => {
   const link = node('w:hyperlink', { 'r:id': relId, 'w:history': '1' }, [
     node('w:r', {}, [
       node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
-      node('w:t', {}, [newTextNode(label)]),
-    ]),
+      node('w:t', {}, [newTextNode(label)])
+    ])
   ]);
   ctx.pendingLinkNode = link;
+};
+
+const processHtml = async (ctx: Context, data: string) => {
+  ctx.htmlId += 1;
+  const id = String(ctx.htmlId);
+  const relId = `html${id}`;
+  ctx.htmls[relId] = data;
+  const node = newNonTextNode;
+  const html = node('w:altChunk', { 'r:id': relId });
+  ctx.pendingHtmlNode = html;
 };
 
 // ==========================================
@@ -677,7 +724,7 @@ const appendTextToTagBuffers = (
   ctx: Context,
   options: {|
     fCmd?: boolean,
-    fInsertedText?: boolean,
+    fInsertedText?: boolean
   |}
 ) => {
   if (ctx.fSeekQuery) return;

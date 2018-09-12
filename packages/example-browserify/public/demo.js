@@ -5,15 +5,23 @@ console.log('Starting swapi demo');
 const createReport = docxTemplates; // eslint-disable-line
 
 // callback when a template has been selected
-async function onTemplateChosen() {
+async function onTemplateChosen(event) {
   console.log('Template chosen');
   // read the file in an ArrayBuffer
   const content = await readFile(this.files[0]);
+  // select the right data source, depending on selected input
+  let data = null
+  if (event.target.id === 'inputSwapi') {
+      data = query => postQuery('/swapi', query) // query to swapi webservice
+  }
+  else if (event.target.id === 'inputQuill') {
+      data = {html: `<body>${quill.root.innerHTML}</body>`}
+  }
   // fill the template
   console.log('Creating report (can take some time) ...');
   const doc = await createReport({
     template: content,
-    data: query => postQuery('/swapi', query), // query to swapi webservice
+    data: data
   });
   // generate output file for download
   downloadBlob(
@@ -23,6 +31,8 @@ async function onTemplateChosen() {
   );
 }
 
+//data:
+
 // ==============================================
 //                 Helpers
 // ==============================================
@@ -30,7 +40,9 @@ async function onTemplateChosen() {
 // add an event listener on file-input change
 // (need to wait for DOM to be loaded otherwise input will be undefined)
 document.addEventListener('DOMContentLoaded', () => {
-  const inputElement = document.getElementById('input');
+  let inputElement = document.getElementById('inputSwapi');
+  inputElement.addEventListener('change', onTemplateChosen, false);
+  inputElement = document.getElementById('inputQuill');
   inputElement.addEventListener('change', onTemplateChosen, false);
 });
 

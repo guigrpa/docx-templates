@@ -709,6 +709,18 @@ const reportConfigs = {
         if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
       });
 
+      it('3A Processes HTML commands', async () => {
+        const template = path.join(__dirname, 'fixtures', 'htmls.docx');
+        const result = await createReport({
+          ...reportConfig,
+          template,
+          data: {},
+          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+        });
+        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+      });
+
+
       it('40 Throws on invalid command', async () => {
         const template = path.join(
           __dirname,

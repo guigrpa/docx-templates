@@ -1,0 +1,17 @@
+html, body, table, tr {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+td {
+  width: 50%;
+  height: 100vh;
+  padding: 20px;
+  vertical-align: top;
+}
+
+
+.col1 {
+    border-right: 1px black solid;
+
+}

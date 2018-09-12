@@ -18,7 +18,7 @@ const zipSave = (zip: Object) =>
   zip.generateAsync({
     type: 'uint8array',
     compression: 'DEFLATE',
-    compressionOptions: { level: 1 },
+    compressionOptions: { level: 1 }
   });
 
 // ==========================================
@@ -31,5 +31,5 @@ export {
   zipSetText,
   zipSetBinary,
   zipSetBase64,
-  zipSave,
+  zipSave
 };

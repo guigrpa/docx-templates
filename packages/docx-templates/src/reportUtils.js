@@ -16,7 +16,7 @@ const cloneNodeWithoutChildren = (node: Node): Node => {
       _parent: null,
       _children: [],
       _fTextNode: true,
-      _text: node._text,
+      _text: node._text
     };
   }
   return {
@@ -24,7 +24,7 @@ const cloneNodeWithoutChildren = (node: Node): Node => {
     _children: [],
     _fTextNode: false,
     _tag: node._tag,
-    _attrs: node._attrs,
+    _attrs: node._attrs
   };
 };
 
@@ -56,7 +56,7 @@ const insertTextSiblingAfter = (textNode: TextNode): TextNode => {
     _parent: newTNode,
     _children: [],
     _fTextNode: true,
-    _text: '',
+    _text: ''
   };
   newTNode._children = [newTextNode];
   tNodeParent._children.splice(idx + 1, 0, newTNode);
@@ -73,7 +73,7 @@ const newNonTextNode = (
     _fTextNode: false,
     _tag: tag,
     _attrs: attrs,
-    _children: children,
+    _children: children
   };
   node._children.forEach(child => {
     child._parent = node; // eslint-disable-line
@@ -131,5 +131,5 @@ export {
   addChild,
   getCurLoop,
   isLoopExploring,
-  logLoop,
+  logLoop
 };

@@ -6,18 +6,18 @@
 type BaseNode = {|
   _parent: ?Node,
   _children: Array<Node>,
-  _ifName?: string,
+  _ifName?: string
 |};
 export type TextNode = {
   ...BaseNode,
   _fTextNode: true,
-  _text: string,
+  _text: string
 };
 export type NonTextNode = {
   ...BaseNode,
   _fTextNode: false,
   _tag: string,
-  _attrs: Object,
+  _attrs: Object
 };
 export type Node = TextNode | NonTextNode;
 
@@ -44,11 +44,11 @@ export type UserOptions = {|
   noSandbox?: boolean,
   vm2Sandbox?: boolean | Object,
   additionalJsContext?: Object,
-  _probe?: 'JS' | 'XML',
+  _probe?: 'JS' | 'XML'
 |};
 export type UserOptionsInternal = {|
   ...UserOptions,
-  template: ArrayBuffer, // template contents
+  template: ArrayBuffer // template contents
 |};
 
 export type CreateReportOptions = {|
@@ -57,7 +57,7 @@ export type CreateReportOptions = {|
   processLineBreaks: boolean,
   noSandbox: boolean,
   vm2Sandbox: boolean | Object,
-  additionalJsContext: Object,
+  additionalJsContext: Object
 |};
 
 export type Context = {
@@ -68,7 +68,7 @@ export type Context = {
   query: ?Query,
   buffers: {
     'w:p': BufferStatus,
-    'w:tr': BufferStatus,
+    'w:tr': BufferStatus
   },
   pendingImageNode: ?NonTextNode,
   imageId: number,
@@ -76,26 +76,30 @@ export type Context = {
   pendingLinkNode: ?NonTextNode,
   linkId: number,
   links: Links,
+  pendingHtmlNode: ?TextNode,
+  htmlId: number,
+  htmls: Htmls,
   vars: { [name: string]: VarValue },
   loops: Array<LoopStatus>,
   fJump: boolean,
   shorthands: { [shorthand: string]: string },
   options: CreateReportOptions,
-  jsSandbox?: ?Object,
+  jsSandbox?: ?Object
 };
 
 export type Images = { [id: string]: Image };
 export type Image = {
   extension: string,
-  data: ArrayBuffer | string,
+  data: ArrayBuffer | string
 };
 export type Links = { [id: string]: Link };
 export type Link = { url: string };
+export type Htmls = { [id: string]: string };
 
 export type BufferStatus = {
   text: string,
   cmds: string,
-  fInsertedText: boolean,
+  fInsertedText: boolean
 };
 
 export type VarValue = any;
@@ -105,7 +109,7 @@ export type LoopStatus = {
   varName: string,
   loopOver: Array<VarValue>,
   idx: number,
-  isIf?: boolean,
+  isIf?: boolean
 };
 
 export type ImagePars = {
@@ -113,10 +117,10 @@ export type ImagePars = {
   height: number, // cm
   path?: string, // only supported in Node
   data?: ArrayBuffer | string, // supported in Node and the browser
-  extension?: string,
+  extension?: string
 };
 
 export type LinkPars = {
   url: string,
-  label?: string,
+  label?: string
 };

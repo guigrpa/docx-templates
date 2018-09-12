@@ -3,9 +3,47 @@
     <title>SWAPI demo</title>
     <script type="text/javascript" src="docx-templates.js"></script>
     <script type="text/javascript" src="demo.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
   </head>
   <body>
-    Testing docx-templates from browser ...
-    <input type="file" id="input">
+    <table>
+      <tr>
+        <td class="col1">
+          <div>
+              Choose a template to use with SWAPI data <br>
+              <input type="file" id="inputSwapi">
+          </div>
+        </td>
+        <td class="col2">
+          <div>
+              Choose a template to use with Quill text <br>
+              <input type="file" id="inputQuill">
+              <br><br>
+              <!-- Create the editor container -->
+              <div id="editor">
+                <!-- this is the default text injected in the quill editor -->
+                <p><em>This text </em></p><p><strong>And all its formatting,</strong></p><p><a href="https://github.com/guigrpa/docx-templates" target="_blank">As well as links</a></p><p>And images <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAaCAYAAADFTB7LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAAWJLR0QCZgt8ZAAAAAd0SU1FB+EICgE0Lig/XS0AAAAldEVYdGRhdGU6Y3JlYXRlADIwMTctMDgtMTBUMDE6NTI6NDYrMDA6MDDeCSlzAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE3LTA4LTEwVDAxOjUyOjQ2KzAwOjAwr1SRzwAAAGZJREFUWEftzqENgEAUBNHlOoAGEDSCxxIaoCbqwFDBCbrBYEgwYH4BR8Yg9plNVk2lbnn0xXFpW0cNfRtHmTvvOqdZqanjKZNif8uBlAMpB1IOpBxIOZByIOVAyoGUAykHUg5kpBeJjQqC+0VvAQAAAABJRU5ErkJggg=="></p><p><span style="color: rgb(230, 0, 0);">Should </span>be <span style="color: rgb(102, 185, 102);">exported</span> in</p><p><span style="background-color: rgb(194, 133, 255);">the selected template.</span></p><p><br></p>
+              </div>
+          </div>
+        </td>
+      </tr>
+    </table>
   </body>
+
+  <!-- Initialize Quill editor -->
+  <script>
+    var quill = new Quill('#editor', {
+        modules: {
+          toolbar: [
+            [{ header: [1, 2, false] }],
+            ['bold', 'italic', 'underline'],
+            ['image', 'code-block', 'link'],
+            [{ 'color': [] }, { 'background': [] }]
+          ]
+      },
+      theme: 'snow'
+    });
+  </script>
 </html>
