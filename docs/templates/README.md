@@ -92,7 +92,7 @@ Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/t
 
 ## Browser usage
 
-You can use docx-templates in the browser (yay!). Make sure, however, to shim the vm package (due to [this](https://github.com/patriksimek/vm2/issues/68)) in your Browserify config ([example](./packages/example-webpack/webpackConfig.js)) or webpack config ([example](./packages/example-browserify/package.json)).
+You can use docx-templates in the browser (yay!). Make sure, however, to shim the vm2 package (due to [this](https://github.com/patriksimek/vm2/issues/68)) in your Browserify config ([example](./packages/example-webpack/webpackConfig.js)) or webpack config ([example](./packages/example-browserify/package.json)).
 
 Instead of providing docx-templates with the template's path, pass the template contents as a buffer. For example, get a File object with:
 
@@ -139,14 +139,6 @@ createReport({
   // ...
   // USE ONLY IN THE BROWSER, AND WITH TRUSTED TEMPLATES
   noSandbox: true, // WARNING: INSECURE
-});
-```
-
-If, on the other side, you prefer higher security:
-
-```js
-createReport({
-  vm2Sandbox: true, // or even an options object to pass through to vm2
 });
 ```
 
