@@ -26,7 +26,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        exclude: path.resolve(process.cwd(), 'node_modules'),
+        exclude: [/node_modules/],
       },
     ],
   },

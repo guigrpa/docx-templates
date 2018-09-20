@@ -22,8 +22,8 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "scripts": {
-    "buildWatch": "yarn webpack -w",
-    "build": "yarn webpack --p",
+    "buildWatch": "yarn webpack --mode development -w",
+    "build": "yarn webpack --mode production",
     "webpack": "webpack --config ./webpackConfig.js --color --progress --display-chunks",
     "start": "yarn build && node server"
   },
@@ -39,7 +39,8 @@
     "express": "^4.16.3",
     "isomorphic-fetch": "2.2.1",
     "prettier": "^1.14.2",
-    "webpack": "^3.10.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^2.0.12",
     "yaqrcode": "^0.2.1"
   }
 }
