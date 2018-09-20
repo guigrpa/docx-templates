@@ -206,6 +206,7 @@ const createReport = async (options: UserOptionsInternal) => {
     ensureContentType('jpeg', 'image/jpeg');
     ensureContentType('gif', 'image/gif');
     ensureContentType('bmp', 'image/bmp');
+    ensureContentType('svg', 'image/svg+xml');
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
     zipSetText(zip, contentTypesPath, finalContentTypesXml);
   }
