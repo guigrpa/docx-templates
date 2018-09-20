@@ -88,7 +88,9 @@ Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/t
 
 ## Browser usage
 
-When using docx-templates in the browser, you cannot provide the template as a path: you have to provide the template contents as a buffer. For example, get a File object with:
+You can use docx-templates in the browser (yay!). Make sure, however, to shim the vm package (due to *this*) in your Browserify config ([example](./packages/example-webpack/webpackConfig.js)) or webpack config ([example](./packages/example-browserify/package.json)).
+
+Instead of providing the template as a path, pass its contents to docx-templates as a buffer. For example, get a File object with:
 
 ```html
 <input type="file">
@@ -124,7 +126,7 @@ const readFileIntoArrayBuffer = fd =>
   });
 ```
 
-You can find an example implementation of `saveDataToFile()` [in the Webpack example](https://github.com/guigrpa/docx-templates/blob/master/packages/example-webpack/client/index.js).
+You can find an example implementation of `saveDataToFile()` [in the Webpack example](./packages/example-webpack/client/index.js).
 
 With the default configuration, browser usage can become slow with complex templates due to the usage of JS sandboxes for security reasons. _If the templates you'll be using with docx-templates can be trusted 100%, you can disable the security sandboxes by configuring `noSandbox: true`_. **Beware of arbitrary code injection risks**:
 
