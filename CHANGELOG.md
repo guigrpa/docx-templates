@@ -1,3 +1,5 @@
+* `IMAGE`: add BMP support (#34).
+
 ## 2.7.0 (2018-9-20)
 
 * Add `HTML` command (!!!) (@vdechef, #32).
