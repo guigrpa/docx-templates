@@ -2,6 +2,7 @@
 
 Template-based docx report creation for both Node and the browser. ([See the blog post](http://guigrpa.github.io/2017/01/01/word-docs-the-relay-way/)).
 
+
 ## Why?
 
 * **Write documents naturally using Word**, just adding some commands where needed for dynamic contents
@@ -18,6 +19,7 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 
 Contributions are welcome!
 
+
 ## Installation
 
 ```
@@ -29,6 +31,7 @@ $ npm install docx-templates
 ```
 $ yarn add docx-templates
 ```
+
 
 ## Node usage
 
@@ -86,11 +89,12 @@ createReport({
 
 Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node).
 
+
 ## Browser usage
 
 You can use docx-templates in the browser (yay!). Make sure, however, to shim the vm package (due to *this*) in your Browserify config ([example](./packages/example-webpack/webpackConfig.js)) or webpack config ([example](./packages/example-browserify/package.json)).
 
-Instead of providing the template as a path, pass its contents to docx-templates as a buffer. For example, get a File object with:
+Instead of providing docx-templates with the template's path, pass the template contents as a buffer. For example, get a File object with:
 
 ```html
 <input type="file">
@@ -147,6 +151,7 @@ createReport({
 ```
 
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/packages/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/packages/example-browserify).
+
 
 ## Writing templates
 
@@ -371,6 +376,7 @@ Define a name for a complete command (especially useful for formatting tables):
 ----------------------------------------------------------
 ```
 
+
 ## Replacing template images
 
 **Note**: this feature is **deprecated** as of v2.4.0 and may be removed in future releases. Please use the `IMAGE` command instead.
@@ -411,13 +417,16 @@ You can determine the original image file names by inspecting your template: unz
 | | ├─...
 ```
 
+
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
+
 
 ## Similar projects
 
 * [docxtemplater](https://github.com/open-xml-templating/docxtemplater) (believe it or not, I just discovered this very similarly-named project after brushing up my old CS code for `docx-templates` and publishing it for the first time!). It provides lots of goodies, but doesn't allow (AFAIK) embedding queries or JS snippets.
 
 * [docx](https://github.com/dolanmiu/docx) and similar ones - generate docx files from scratch, programmatically. Drawbacks of this approach: they typically do not support all Word features, and producing a complex document can be challenging.
+
 
 ## License (MIT)
 
