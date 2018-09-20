@@ -1,3 +1,5 @@
+## 2.7.0 (2018-9-20)
+
 * Add `HTML` command (!!!) (@vdechef, #32).
 * Fix browser examples by shimming `vm2` (@vdechef, #35).
 
