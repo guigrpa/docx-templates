@@ -8,11 +8,11 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 * **Express your data needs (queries) in the template itself** (`QUERY` command), in whatever query language you want (e.g. in GraphQL). This is similar to _the Relay way™_: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
 * **Execute JavaScript snippets** (`EXEC` command, or `!` for short)
 * **Insert the result of JavaScript snippets** in your document (`INS`, or `=` for short)
-* **Create images and hyperlinks dynamically** (`IMAGE`, `LINK`) — great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
+* **Embed images, hyperlinks and even HTML dynamically** (`IMAGE`, `LINK`, `HTML`). Dynamic images can be great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
 * Include contents **conditionally**, `IF` a certain JavaScript expression is truthy
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
-* Run all JavaScript in a **separate Node VM (using the vm2 library) for security**
+* Run all JavaScript in a **separate Node VM for security**
 * Include **literal XML**
 * Plenty of **examples** in this repo (with Node, Webpack and Browserify)
 
@@ -271,6 +271,22 @@ Includes a hyperlink with the data resulting from evaluating a JavaScript snippe
 ```
 
 If the `label` is not specified, the URL is used as a label.
+
+### `HTML`
+
+Takes the HTML resulting from evaluating a JavaScript snippet and converts it to Word contents (using [altchunk](https://blogs.msdn.microsoft.com/ericwhite/2008/10/26/how-to-use-altchunk-for-document-assembly/)):
+
+```
++++HTML `
+<body>
+  <h1>${$film.title}</h1>
+  <h3>${$film.releaseDate.slice(0, 4)}</h3>
+  <p>
+    <strong style="color: red;">This paragraph should be red and strong</strong>
+  </p>
+</body>
+`+++
+```
 
 ### `FOR` and `END-FOR`
 
