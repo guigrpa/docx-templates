@@ -2,21 +2,23 @@
 
 Template-based docx report creation for both Node and the browser. ([See the blog post](http://guigrpa.github.io/2017/01/01/word-docs-the-relay-way/)).
 
+
 ## Why?
 
 * **Write documents naturally using Word**, just adding some commands where needed for dynamic contents
 * **Express your data needs (queries) in the template itself** (`QUERY` command), in whatever query language you want (e.g. in GraphQL). This is similar to _the Relay way™_: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
 * **Execute JavaScript snippets** (`EXEC` command, or `!` for short)
 * **Insert the result of JavaScript snippets** in your document (`INS`, or `=` for short)
-* **Create images and hyperlinks dynamically** (`IMAGE`, `LINK`) — great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
+* **Embed images, hyperlinks and even HTML dynamically** (`IMAGE`, `LINK`, `HTML`). Dynamic images can be great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
 * Include contents **conditionally**, `IF` a certain JavaScript expression is truthy
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
-* Run all JavaScript in a **separate Node VM (using the vm2 library) for security**
+* Run all JavaScript in a **separate Node VM for security**
 * Include **literal XML**
 * Plenty of **examples** in this repo (with Node, Webpack and Browserify)
 
 Contributions are welcome!
+
 
 ## Installation
 
@@ -29,6 +31,7 @@ $ npm install docx-templates
 ```
 $ yarn add docx-templates
 ```
+
 
 ## Node usage
 
@@ -86,9 +89,12 @@ createReport({
 
 Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node).
 
+
 ## Browser usage
 
-When using docx-templates in the browser, you cannot provide the template as a path: you have to provide the template contents as a buffer. For example, get a File object with:
+You can use docx-templates in the browser (yay!). Make sure, however, to shim the vm2 package (due to [this](https://github.com/patriksimek/vm2/issues/68)) in your Browserify config ([example](./packages/example-webpack/webpackConfig.js)) or webpack config ([example](./packages/example-browserify/package.json)).
+
+Instead of providing docx-templates with the template's path, pass the template contents as a buffer. For example, get a File object with:
 
 ```html
 <input type="file">
@@ -124,7 +130,7 @@ const readFileIntoArrayBuffer = fd =>
   });
 ```
 
-You can find an example implementation of `saveDataToFile()` [in the Webpack example](https://github.com/guigrpa/docx-templates/blob/master/packages/example-webpack/client/index.js).
+You can find an example implementation of `saveDataToFile()` [in the Webpack example](./packages/example-webpack/client/index.js).
 
 With the default configuration, browser usage can become slow with complex templates due to the usage of JS sandboxes for security reasons. _If the templates you'll be using with docx-templates can be trusted 100%, you can disable the security sandboxes by configuring `noSandbox: true`_. **Beware of arbitrary code injection risks**:
 
@@ -136,15 +142,8 @@ createReport({
 });
 ```
 
-If, on the other side, you prefer higher security:
-
-```js
-createReport({
-  vm2Sandbox: true, // or even an options object to pass through to vm2
-});
-```
-
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/packages/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/packages/example-browserify).
+
 
 ## Writing templates
 
@@ -272,6 +271,22 @@ Includes a hyperlink with the data resulting from evaluating a JavaScript snippe
 
 If the `label` is not specified, the URL is used as a label.
 
+### `HTML`
+
+Takes the HTML resulting from evaluating a JavaScript snippet and converts it to Word contents (using [altchunk](https://blogs.msdn.microsoft.com/ericwhite/2008/10/26/how-to-use-altchunk-for-document-assembly/)):
+
+```
++++HTML `
+<body>
+  <h1>${$film.title}</h1>
+  <h3>${$film.releaseDate.slice(0, 4)}</h3>
+  <p>
+    <strong style="color: red;">This paragraph should be red and strong</strong>
+  </p>
+</body>
+`+++
+```
+
 ### `FOR` and `END-FOR`
 
 Loop over a group of elements (resulting from the evaluation of a JavaScript expression):
@@ -353,6 +368,7 @@ Define a name for a complete command (especially useful for formatting tables):
 ----------------------------------------------------------
 ```
 
+
 ## Replacing template images
 
 **Note**: this feature is **deprecated** as of v2.4.0 and may be removed in future releases. Please use the `IMAGE` command instead.
@@ -393,13 +409,16 @@ You can determine the original image file names by inspecting your template: unz
 | | ├─...
 ```
 
+
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
+
 
 ## Similar projects
 
 * [docxtemplater](https://github.com/open-xml-templating/docxtemplater) (believe it or not, I just discovered this very similarly-named project after brushing up my old CS code for `docx-templates` and publishing it for the first time!). It provides lots of goodies, but doesn't allow (AFAIK) embedding queries or JS snippets.
 
 * [docx](https://github.com/dolanmiu/docx) and similar ones - generate docx files from scratch, programmatically. Drawbacks of this approach: they typically do not support all Word features, and producing a complex document can be challenging.
+
 
 ## License (MIT)
 

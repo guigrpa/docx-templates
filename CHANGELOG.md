@@ -1,3 +1,12 @@
+## 2.7.1 (2018-9-20)
+
+* `IMAGE`: add BMP support (#34).
+
+## 2.7.0 (2018-9-20)
+
+* Add `HTML` command (!!!) (@vdechef, #32).
+* Fix browser examples by shimming `vm2` (@vdechef, #35).
+
 ## 2.6.0 (2018-7-16)
 
 * Add `LINK` command (!!!) (#20).
@@ -13,7 +22,7 @@
 
 ## 2.5.0 (2018-7-14)
 
-* Add `vm2Sandbox` option for higher security in JS execution (#26).
+* Add `vm2Sandbox` option for higher security in JS execution (@nheisterkamp, #26).
 
 ## 2.4.1 (2018-5-5)
 
@@ -23,6 +32,7 @@
 
 * Add `IMAGE` command (!!!).
 * Made it a monorepo: main package + examples.
+* **Deprecates** `replaceImages` and `replaceImagesBase64` options (please use the `IMAGE` command).
 
 ## 2.3.2 (2018-1-29)
 
