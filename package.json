@@ -27,7 +27,7 @@
   "scripts": {
     "compile": "oao run-script compile",
     "compileWatch": "oao run-script compileWatch --parallel",
-    "build": "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl",
+    "build": "yarn lint && yarn flow && yarn test && yarn compile && yarn docs && yarn xxl && oao prepublish",
     "docs": "extract-docs --template docs/templates/README.md --output README.md",
     "lint": "eslint packages",
     "flow": "flow check || exit 0",
