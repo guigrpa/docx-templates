@@ -1,10 +1,8 @@
 {
   "name": "example-browserify",
   "private": true,
-  "version": "2.4.0",
+  "version": "2.7.0",
   "description": "Template-based docx report creation",
-  "main": "lib/indexNode.js",
-  "browser": "lib/indexBrowser.js",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
   "keywords": [
@@ -24,16 +22,16 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "scripts": {
-    "build": "browserify ../docx-templates/lib/indexBrowser.js --s docx-templates -u ../docx-templates/lib/debug.js > public/docx-templates.js",
+    "build": "browserify ../docx-templates/lib/indexBrowser.js --s docx-templates -i vm2 -u ../docx-templates/lib/debug.js > public/docx-templates.js",
     "start": "yarn build && node server"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.18.3",
     "browserify": "^15.0.0",
     "docx-templates": "*",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "isomorphic-fetch": "2.2.1",
-    "prettier": "^1.10.2",
+    "prettier": "^1.14.2",
     "yaqrcode": "^0.2.1"
   }
 }

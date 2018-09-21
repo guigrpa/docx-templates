@@ -15,6 +15,10 @@ module.exports = {
       /fs/,
       path.resolve(process.cwd(), 'client/emptyModule.js')
     ),
+    new webpack.NormalModuleReplacementPlugin(
+      /vm2/,
+      path.resolve(process.cwd(), 'client/emptyModule.js')
+    ),
   ],
 
   module: {
@@ -22,7 +26,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        exclude: path.resolve(process.cwd(), 'node_modules'),
+        exclude: [/node_modules/],
       },
     ],
   },

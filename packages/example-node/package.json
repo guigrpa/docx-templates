@@ -1,10 +1,8 @@
 {
   "name": "example-node",
   "private": true,
-  "version": "2.6.0",
+  "version": "2.7.1",
   "description": "Template-based docx report creation",
-  "main": "lib/indexNode.js",
-  "browser": "lib/indexBrowser.js",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
   "keywords": [
@@ -29,7 +27,7 @@
   "dependencies": {
     "docx-templates": "*",
     "isomorphic-fetch": "2.2.1",
-    "prettier": "^1.10.2",
+    "prettier": "^1.14.2",
     "yaqrcode": "^0.2.1"
   }
 }

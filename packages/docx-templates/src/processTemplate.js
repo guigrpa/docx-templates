@@ -24,6 +24,7 @@ import type {
   Images,
   LinkPars,
   Links,
+  Htmls,
 } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
@@ -92,6 +93,7 @@ type ReportOutput = {
   report: Node,
   images: Images,
   links: Links,
+  htmls: Htmls,
 };
 
 const produceJsReport = async (
@@ -116,6 +118,9 @@ const produceJsReport = async (
     pendingLinkNode: null,
     linkId: 0,
     links: {},
+    pendingHtmlNode: null,
+    htmlId: 0,
+    htmls: {},
     vars: {},
     loops: [],
     fJump: false,
@@ -256,6 +261,26 @@ const produceJsReport = async (
         ctx.pendingLinkNode = null;
       }
 
+      // If a html page was generated, replace the parent `w:p` node with
+      // the html node
+      if (
+        ctx.pendingHtmlNode &&
+        !nodeOut._fTextNode && // Flow-prevention
+        nodeOut._tag === 'w:p'
+      ) {
+        const htmlNode = ctx.pendingHtmlNode;
+        const parent = nodeOut._parent;
+        if (parent) {
+          htmlNode._parent = parent;
+          parent._children.pop();
+          parent._children.push(htmlNode);
+          // Prevent containing paragraph or table row from being removed
+          ctx.buffers['w:p'].fInsertedText = true;
+          ctx.buffers['w:tr'].fInsertedText = true;
+        }
+        ctx.pendingHtmlNode = null;
+      }
+
       // `w:tc` nodes shouldn't be left with no `w:p` children; if that's the
       // case, add an empty `w:p` inside
       if (
@@ -323,7 +348,12 @@ const produceJsReport = async (
     }
   }
 
-  return { report: out, images: ctx.images, links: ctx.links };
+  return {
+    report: out,
+    images: ctx.images,
+    links: ctx.links,
+    htmls: ctx.htmls,
+  };
 };
 
 const processText = async (
@@ -452,6 +482,13 @@ const processCmd = async (
         if (pars != null) await processLink(ctx, pars);
       }
 
+      // HTML <code>
+    } else if (cmdName === 'HTML') {
+      if (!isLoopExploring(ctx)) {
+        const html = (await runUserJsAndGetRaw(data, cmdRest, ctx): ?string);
+        if (html != null) await processHtml(ctx, html);
+      }
+
       // Invalid command
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
     return out;
@@ -514,7 +551,7 @@ const processForIf = async (
     if (fParentIsExploring) {
       loopOver = [];
     } else if (isIf) {
-      const shouldRun = !!await runUserJsAndGetRaw(data, cmdRest, ctx);
+      const shouldRun = !!(await runUserJsAndGetRaw(data, cmdRest, ctx));
       loopOver = shouldRun ? [1] : [];
     } else {
       if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
@@ -667,6 +704,16 @@ const processLink = async (ctx: Context, linkPars: LinkPars) => {
     ]),
   ]);
   ctx.pendingLinkNode = link;
+};
+
+const processHtml = async (ctx: Context, data: string) => {
+  ctx.htmlId += 1;
+  const id = String(ctx.htmlId);
+  const relId = `html${id}`;
+  ctx.htmls[relId] = data;
+  const node = newNonTextNode;
+  const html = node('w:altChunk', { 'r:id': relId });
+  ctx.pendingHtmlNode = html;
 };
 
 // ==========================================
