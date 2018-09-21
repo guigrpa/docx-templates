@@ -253,6 +253,7 @@ const createReport = async (options: UserOptionsInternal) => {
 const processImages = async (images, documentComponent, zip, templatePath) => {
   DEBUG && log.debug(`Processing images for ${documentComponent}...`);
   const imageIds = Object.keys(images);
+  let svgThumbnail = false
   if (imageIds.length) {
     DEBUG && log.debug('Completing document.xml.rels...');
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
@@ -263,6 +264,23 @@ const processImages = async (images, documentComponent, zip, templatePath) => {
       const imgName = `template_${documentComponent}_image${i + 1}${extension}`;
       DEBUG && log.debug(`Writing image ${imageId} (${imgName})...`);
       const imgPath = `${templatePath}/media/${imgName}`;
+      /* SVG SUPPORT */
+      if (extension === '.svg' && !svgThumbnail) { // If the image is an SVG add some previous media as thumbnail (because words needs it)
+        let thumbnail = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY3growIAAycBLhVrvukAAAAASUVORK5CYII='; // base 64 1px red png
+        let thumbname = `template_${documentComponent}_image${i + 1}_thumbnail.png`;
+        let thumbpath = `${templatePath}/media/${thumbname}`;
+        await zipSetBase64(zip, thumbpath, thumbnail);
+        addChild(
+          rels,
+          newNonTextNode('Relationship', {
+            Id: 'img0',
+            Type:
+              'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
+            Target: `media/${thumbname}`,
+          })
+        );
+        svgThumbnail = true; // only add one
+      }
       if (typeof imgData === 'string') {
         await zipSetBase64(zip, imgPath, imgData);
       } else {

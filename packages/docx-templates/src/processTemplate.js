@@ -671,7 +671,6 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
 const processSvg = async (ctx: Context, imagePars: ImagePars) => {
   const cx = (imagePars.width * 360e3).toFixed(0);
   const cy = (imagePars.height * 360e3).toFixed(0);
-  const prevRelId = 'img' + String(ctx.imageId)
   ctx.imageId += 1;
   const id = String(ctx.imageId);
   const relId = `img${id}`;
@@ -681,7 +680,7 @@ const processSvg = async (ctx: Context, imagePars: ImagePars) => {
   const pic = node('pic:pic', {'xmlns:pic': "http://schemas.openxmlformats.org/drawingml/2006/picture"}, [
     node('pic:nvPicPr', {}, [ node('pic:cNvPr', {id: "1", name: `Picture ${id}`}), node('pic:cNvPicPr')]),
     node('pic:blipFill', {}, [
-      node('a:blip', { 'r:embed': prevRelId, 'cstate':"print"}, [
+      node('a:blip', { 'r:embed': 'img0', 'cstate':"print"}, [ // Thumbnail image preloaded
         node('a:extLst', {}, [
           node('a:ext', {uri:"{96DAC541-7B7A-43D3-8B79-37D633B846F1}"}, [
             node('asvg:svgBlip', {'xmlns:asvg': "http://schemas.microsoft.com/office/drawing/2016/SVG/main", 'r:embed': relId})
