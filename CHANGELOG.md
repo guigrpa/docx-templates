@@ -1,3 +1,5 @@
+## 2.7.3 (2018-10-19)
+
 * Support `null` as output from a JS snippet in Word (#39).
 
 ## 2.7.2 (2018-9-21)
