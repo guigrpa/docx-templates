@@ -54,6 +54,39 @@ const reportConfigs = {
         expect(fs.existsSync(defaultOutput)).toBeTruthy();
         fs.unlinkSync(defaultOutput);
       });
+
+      it('03 Can output buffer', async () => {
+        const output = path.join(outputDir, 'noQuery_report.docx');
+
+        const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
+        const buffer = await createReport({ ...reportConfig, template, output: 'buffer' });
+        expect(buffer instanceof Buffer).toBeTruthy();
+
+        await fs.ensureDir(path.dirname(output));
+        await fs.writeFile(output, buffer);
+        expect(fs.existsSync(output)).toBeTruthy();
+      });
+
+      it('03 Can input buffer', async () => {
+        const output = path.join(outputDir, 'noQuery_report.docx');
+        const templatePath = path.join(__dirname, 'fixtures', 'noQuery.docx');
+        const template = await fs.readFile(templatePath);
+        await createReport({ ...reportConfig, template, output });
+        expect(fs.existsSync(output)).toBeTruthy();
+      });
+
+      it('04 Can input and output buffer', async () => {
+        const output = path.join(outputDir, 'noQuery_report.docx');
+        const templatePath = path.join(__dirname, 'fixtures', 'noQuery.docx');
+        const template = await fs.readFile(templatePath);
+        const buffer = await createReport({ ...reportConfig, template, output: 'buffer' });
+        
+        expect(buffer instanceof Buffer).toBeTruthy();
+
+        await fs.ensureDir(path.dirname(output));
+        await fs.writeFile(output, buffer);
+        expect(fs.existsSync(output)).toBeTruthy();
+      });
     });
 
     describe('Template processing', () => {
