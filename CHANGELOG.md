@@ -1,3 +1,5 @@
+* Fix race condition in which a file was generated and was later used by another section of the processor (added cache in zip module) (should solve #44).
+
 ## 2.8.0 (2018-11-19)
 
 * Accept Buffer in `template` and `'buffer'` in `output`.
