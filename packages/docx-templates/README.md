@@ -55,7 +55,7 @@ This will create a report based on the input data at the specified path. Some no
 * All paths are relative to `process.cwd()`
 * If the output location is omitted, a report will be generated in the same folder as the template
 
-You can also **provide a sync or Promise-returning callback function (query resolver)** instead of an object `data`:
+You can also **provide a sync or Promise-returning callback function (query resolver)** instead of a `data` object:
 
 ```js
 createReport({
@@ -66,6 +66,27 @@ createReport({
 ```
 
 Your resolver callback will receive the query embedded in the template (in a `QUERY` command) as an argument.
+
+You can also **output to a buffer**:
+
+```js
+const buffer = createReport({
+  output: 'buffer',
+  template: 'templates/myTemplate.docx',
+  data: { ... },
+});
+```
+
+...and **pass a buffer as an input `template`**:
+
+```js
+const template = // read from db, http etc as Buffer
+const buffer = createReport({
+  output: 'buffer',
+  template,
+  data: { ... },
+});
+```
 
 Other options (with defaults):
 
