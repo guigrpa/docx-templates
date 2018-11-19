@@ -55,7 +55,7 @@ This will create a report based on the input data at the specified path. Some no
 * All paths are relative to `process.cwd()`
 * If the output location is omitted, a report will be generated in the same folder as the template
 
-You can also **provide a sync or Promise-returning callback function (query resolver)** instead of an object `data`:
+You can also **provide a sync or Promise-returning callback function (query resolver)** instead of a `data` object:
 
 ```js
 createReport({
@@ -67,7 +67,7 @@ createReport({
 
 Your resolver callback will receive the query embedded in the template (in a `QUERY` command) as an argument.
 
-You can also **omit output a buffer** :
+You can also **output to a buffer**:
 
 ```js
 const buffer = createReport({
@@ -76,7 +76,8 @@ const buffer = createReport({
   data: { ... },
 });
 ```
-You can also **pass a buffer to template** :
+
+...and **pass a buffer as an input `template`**:
 
 ```js
 const template = // read from db, http etc as Buffer
@@ -86,6 +87,7 @@ const buffer = createReport({
   data: { ... },
 });
 ```
+
 Other options (with defaults):
 
 ```js
@@ -111,7 +113,7 @@ Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/t
 
 ## Browser usage
 
-You can use docx-templates in the browser (yay!). Make sure, however, to shim the vm2 package (due to [this](https://github.com/patriksimek/vm2/issues/68)) in your Browserify config ([example](./packages/example-browserify/package.json)) or webpack config ([example](./packages/example-webpack/webpackConfig.js)).
+You can use docx-templates in the browser (yay!). Make sure, however, to shim the vm2 package (due to [this](https://github.com/patriksimek/vm2/issues/68)) in your Browserify config ([example](./packages/example-webpack/webpackConfig.js)) or webpack config ([example](./packages/example-browserify/package.json)).
 
 Instead of providing docx-templates with the template's path, pass the template contents as a buffer. For example, get a File object with:
 
