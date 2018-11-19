@@ -1,3 +1,5 @@
+## 2.8.0 (2018-11-19)
+
 * Accept Buffer in `template` and `'buffer'` in `output`.
 
 ## 2.7.3 (2018-10-19)

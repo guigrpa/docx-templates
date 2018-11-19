@@ -1,6 +1,6 @@
 {
   "name": "docx-templates",
-  "version": "2.7.3",
+  "version": "2.8.0",
   "description": "Template-based docx report creation",
   "main": "lib/indexNode.js",
   "browser": "lib/indexBrowser.js",
