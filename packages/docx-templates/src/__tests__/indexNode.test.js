@@ -59,7 +59,11 @@ const reportConfigs = {
         const output = path.join(outputDir, 'noQuery_report.docx');
 
         const template = path.join(__dirname, 'fixtures', 'noQuery.docx');
-        const buffer = await createReport({ ...reportConfig, template, output: 'buffer' });
+        const buffer = await createReport({
+          ...reportConfig,
+          template,
+          output: 'buffer',
+        });
         expect(buffer instanceof Buffer).toBeTruthy();
 
         await fs.ensureDir(path.dirname(output));
@@ -79,8 +83,12 @@ const reportConfigs = {
         const output = path.join(outputDir, 'noQuery_report.docx');
         const templatePath = path.join(__dirname, 'fixtures', 'noQuery.docx');
         const template = await fs.readFile(templatePath);
-        const buffer = await createReport({ ...reportConfig, template, output: 'buffer' });
-        
+        const buffer = await createReport({
+          ...reportConfig,
+          template,
+          output: 'buffer',
+        });
+
         expect(buffer instanceof Buffer).toBeTruthy();
 
         await fs.ensureDir(path.dirname(output));

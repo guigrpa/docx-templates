@@ -1,5 +1,7 @@
 node_modules
 .next
+coverage
+.nyc_output
 packages/*/lib
 packages/*/out
 packages/*/public

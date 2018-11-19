@@ -101,7 +101,8 @@ const runUserJsAndGetRaw = async (
   }
 
   // Wait for promises to resolve
-  if (typeof result === 'object' && result && result.then) result = await result;
+  if (typeof result === 'object' && result && result.then)
+    result = await result;
 
   // Save the sandbox for later use
   ctx.jsSandbox = omit(context, ['__code__', '__result__']);
