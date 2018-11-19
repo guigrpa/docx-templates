@@ -131,6 +131,7 @@ const createReport = async (options: UserOptionsInternal) => {
   zipSetText(zip, `${templatePath}/document.xml`, reportXml);
 
   let numImages = Object.keys(images1).length;
+  let numHtmls = Object.keys(htmls1).length;
   await processImages(images1, 'document.xml', zip, templatePath);
   await processLinks(links1, 'document.xml', zip, templatePath);
   await processHtmls(htmls1, 'document.xml', zip, templatePath, xmlOptions);
@@ -172,6 +173,7 @@ const createReport = async (options: UserOptionsInternal) => {
     zipSetText(zip, filePath, xml);
 
     numImages += Object.keys(images2).length;
+    numHtmls += Object.keys(htmls2).length;
 
     const segments = filePath.split('/');
     const documentComponent = segments[segments.length - 1];
@@ -183,8 +185,8 @@ const createReport = async (options: UserOptionsInternal) => {
   // ---------------------------------------------------------
   // Process [Content_Types].xml
   // ---------------------------------------------------------
-  if (numImages) {
-    DEBUG && log.debug('Completing [Content_Types].xml for IMAGES...');
+  if (numImages || numHtmls) {
+    DEBUG && log.debug('Completing [Content_Types].xml...');
     const contentTypesPath = '[Content_Types].xml';
     const contentTypesXml = await zipGetText(zip, contentTypesPath);
     const contentTypes = await parseXml(contentTypesXml);
@@ -205,12 +207,19 @@ const createReport = async (options: UserOptionsInternal) => {
         })
       );
     };
-    ensureContentType('png', 'image/png');
-    ensureContentType('jpg', 'image/jpeg');
-    ensureContentType('jpeg', 'image/jpeg');
-    ensureContentType('gif', 'image/gif');
-    ensureContentType('bmp', 'image/bmp');
-    ensureContentType('svg', 'image/svg+xml');
+    if (numImages) {
+        DEBUG && log.debug('Completing [Content_Types].xml for IMAGES...');
+        ensureContentType('png', 'image/png');
+        ensureContentType('jpg', 'image/jpeg');
+        ensureContentType('jpeg', 'image/jpeg');
+        ensureContentType('gif', 'image/gif');
+        ensureContentType('bmp', 'image/bmp');
+        ensureContentType('svg', 'image/svg+xml');
+    }
+    if (numHtmls) {
+        DEBUG && log.debug('Completing [Content_Types].xml for HTML...');
+        ensureContentType('html', 'text/html');
+    }
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
     zipSetText(zip, contentTypesPath, finalContentTypesXml);
   }
@@ -357,34 +366,6 @@ const processHtmls = async (
       literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
     });
     zipSetText(zip, relsPath, finalRelsXml);
-
-    // Process Content Types
-    DEBUG && log.debug('Completing [Content_Types].xml for HTML...');
-    const contentTypesPath = '[Content_Types].xml';
-    const contentTypesXml = await zipGetText(zip, contentTypesPath);
-    const contentTypes = await parseXml(contentTypesXml);
-    // DEBUG && log.debug('Content types', { attach: contentTypes });
-    const ensureContentType = (partName, contentType) => {
-      const children = contentTypes._children;
-      if (
-        children.filter(o => !o._fTextNode && o._attrs.PartName === partName)
-          .length
-      ) {
-        return;
-      }
-      addChild(
-        contentTypes,
-        newNonTextNode('Override', {
-          PartName: partName,
-          ContentType: contentType,
-        })
-      );
-    };
-    htmlFiles.forEach(htmlFile => {
-      ensureContentType(htmlFile, 'text/html');
-    });
-    const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
-    zipSetText(zip, contentTypesPath, finalContentTypesXml);
   }
 };
 
