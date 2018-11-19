@@ -131,9 +131,9 @@ const createReport = async (options: UserOptionsInternal) => {
   zipSetText(zip, `${templatePath}/document.xml`, reportXml);
 
   let numImages = Object.keys(images1).length;
-  processImages(images1, 'document.xml', zip, templatePath);
-  processLinks(links1, 'document.xml', zip, templatePath);
-  processHtmls(htmls1, 'document.xml', zip, templatePath, xmlOptions);
+  await processImages(images1, 'document.xml', zip, templatePath);
+  await processLinks(links1, 'document.xml', zip, templatePath);
+  await processHtmls(htmls1, 'document.xml', zip, templatePath, xmlOptions);
 
   // ---------------------------------------------------------
   // Process all other XML files (they may contain headers, etc.)
@@ -141,7 +141,11 @@ const createReport = async (options: UserOptionsInternal) => {
   const files = [];
   zip.forEach(async filePath => {
     const regex = new RegExp(`${templatePath}\\/[^\\/]+\\.xml`);
-    if (regex.test(filePath) && filePath !== `${templatePath}/document.xml`) {
+    if (
+      regex.test(filePath) &&
+      filePath !== `${templatePath}/document.xml` &&
+      filePath.indexOf(`${templatePath}/template`) !== 0
+    ) {
       files.push(filePath);
     }
   });
@@ -171,9 +175,9 @@ const createReport = async (options: UserOptionsInternal) => {
 
     const segments = filePath.split('/');
     const documentComponent = segments[segments.length - 1];
-    processImages(images2, documentComponent, zip, templatePath);
-    processLinks(links2, 'document.xml', zip, templatePath);
-    processHtmls(htmls2, 'document.xml', zip, templatePath, xmlOptions);
+    await processImages(images2, documentComponent, zip, templatePath);
+    await processLinks(links2, 'document.xml', zip, templatePath);
+    await processHtmls(htmls2, 'document.xml', zip, templatePath, xmlOptions);
   }
 
   // ---------------------------------------------------------
@@ -338,7 +342,7 @@ const processHtmls = async (
       DEBUG && log.debug(`Writing html ${htmlId} (${htmlName})...`);
       const htmlPath = `${templatePath}/${htmlName}`;
       htmlFiles.push(`/${htmlPath}`);
-      await zipSetText(zip, htmlPath, htmlData);
+      zipSetText(zip, htmlPath, htmlData);
       addChild(
         rels,
         newNonTextNode('Relationship', {
