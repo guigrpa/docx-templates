@@ -10,25 +10,27 @@ import type { UserOptions, UserOptionsInternal } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
-
+const BUFFER_VALUE = 'buffer';
 // ==========================================
 // Main
 // ==========================================
 const getDefaultOutput = (templatePath: string): string => {
+
   const { dir, name, ext } = path.parse(templatePath);
   return path.join(dir, `${name}_report${ext}`);
 };
 
 const createReport = async (options: UserOptions) => {
   const { template, replaceImages, _probe } = options;
-  const output = options.output || getDefaultOutput(template);
+  const templateIsBuffer = template instanceof Buffer;
+  const output = options.output || (templateIsBuffer ? BUFFER_VALUE : getDefaultOutput(template.toString()));
   DEBUG && log.debug(`Output file: ${output}`);
 
   // ---------------------------------------------------------
   // Load template from filesystem
   // ---------------------------------------------------------
-  DEBUG && log.debug(`Reading template from disk at ${template}...`);
-  const buffer = await fs.readFile(template);
+  DEBUG && log.debug(templateIsBuffer ? `Reading template from buffer...` : `Reading template from disk at ${template.toString()}...`);
+  const buffer = templateIsBuffer ? template : await fs.readFile(template);
   const newOptions: UserOptionsInternal = (timmSet(
     options,
     'template',
@@ -62,7 +64,11 @@ const createReport = async (options: UserOptions) => {
   // ---------------------------------------------------------
   // Write the result on filesystem
   // ---------------------------------------------------------
-  DEBUG && log.debug('Writing report to disk...');
+  const shouldOutputBuffer = output === BUFFER_VALUE
+  DEBUG && log.debug(shouldOutputBuffer ? 'Returning buffer' : 'Writing report to disk...');
+  if(shouldOutputBuffer) {
+    return new Buffer(report);
+  }
   await fs.ensureDir(path.dirname(output));
   await fs.writeFile(output, report);
   return null;

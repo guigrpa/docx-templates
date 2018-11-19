@@ -32,7 +32,7 @@ export type QueryResolver = (
 ) => ReportData | Promise<ReportData>;
 
 export type UserOptions = {|
-  template: string, // path
+  template: string | ArrayBuffer, // path
   data?: ReportData | QueryResolver,
   queryVars?: any,
   output?: string,
