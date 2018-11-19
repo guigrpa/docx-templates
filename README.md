@@ -70,7 +70,7 @@ Your resolver callback will receive the query embedded in the template (in a `QU
 You can also **output to a buffer**:
 
 ```js
-const buffer = createReport({
+const buffer = await createReport({
   output: 'buffer',
   template: 'templates/myTemplate.docx',
   data: { ... },
@@ -80,8 +80,8 @@ const buffer = createReport({
 ...and **pass a buffer as an input `template`**:
 
 ```js
-const template = // read from db, http etc as Buffer
-const buffer = createReport({
+const template = // read from database, HTTP, etc. as a Buffer
+const buffer = await createReport({
   output: 'buffer',
   template,
   data: { ... },
