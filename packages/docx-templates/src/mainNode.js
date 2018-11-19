@@ -10,6 +10,7 @@ import type { UserOptions, UserOptionsInternal } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log: any = DEBUG ? require('./debug').mainStory : null;
+
 const BUFFER_VALUE = 'buffer';
 // ==========================================
 // Main
@@ -76,7 +77,7 @@ const createReport = async (options: UserOptions) => {
       shouldOutputBuffer ? 'Returning buffer' : 'Writing report to disk...'
     );
   if (shouldOutputBuffer) {
-    return new Buffer(report);
+    return Buffer.from(report);
   }
   await fs.ensureDir(path.dirname(output));
   await fs.writeFile(output, report);
