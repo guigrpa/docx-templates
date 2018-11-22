@@ -331,13 +331,7 @@ const processLinks = async (links, documentComponent, zip, templatePath) => {
   }
 };
 
-const processHtmls = async (
-  htmls,
-  documentComponent,
-  zip,
-  templatePath,
-  xmlOptions
-) => {
+const processHtmls = async (htmls, documentComponent, zip, templatePath) => {
   DEBUG && log.debug(`Processing htmls for ${documentComponent}...`);
   const htmlIds = Object.keys(htmls);
   if (htmlIds.length) {
