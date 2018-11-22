@@ -4,6 +4,9 @@
 
 import JSZip from 'jszip';
 
+const zipInit = () => {
+  initCache();
+};
 const zipLoad = (inputFile: ArrayBuffer) => JSZip.loadAsync(inputFile);
 const zipExists = (zip: Object, filename: string) => zip.file(filename) != null;
 const zipGetText = (zip: Object, filename: string) =>
@@ -43,7 +46,7 @@ const setFile = (zip, filename, data, options) => {
   return zip.file(filename, data, options);
 };
 
-const _resetCache = () => {
+const initCache = () => {
   cache = {};
 };
 
@@ -51,6 +54,7 @@ const _resetCache = () => {
 // Public API
 // ==========================================
 export {
+  zipInit,
   zipLoad,
   zipExists,
   zipGetText,
@@ -58,6 +62,4 @@ export {
   zipSetBinary,
   zipSetBase64,
   zipSave,
-  // unit tests
-  _resetCache,
 };

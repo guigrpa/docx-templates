@@ -4,6 +4,7 @@
 
 import { merge } from 'timm';
 import {
+  zipInit,
   zipLoad,
   zipExists,
   zipGetText,
@@ -49,6 +50,7 @@ const createReport = async (options: UserOptionsInternal) => {
   // Unzip
   // ---------------------------------------------------------
   DEBUG && log.debug('Unzipping...');
+  zipInit();
   const zip = await zipLoad(template);
 
   // ---------------------------------------------------------
@@ -208,17 +210,17 @@ const createReport = async (options: UserOptionsInternal) => {
       );
     };
     if (numImages) {
-        DEBUG && log.debug('Completing [Content_Types].xml for IMAGES...');
-        ensureContentType('png', 'image/png');
-        ensureContentType('jpg', 'image/jpeg');
-        ensureContentType('jpeg', 'image/jpeg');
-        ensureContentType('gif', 'image/gif');
-        ensureContentType('bmp', 'image/bmp');
-        ensureContentType('svg', 'image/svg+xml');
+      DEBUG && log.debug('Completing [Content_Types].xml for IMAGES...');
+      ensureContentType('png', 'image/png');
+      ensureContentType('jpg', 'image/jpeg');
+      ensureContentType('jpeg', 'image/jpeg');
+      ensureContentType('gif', 'image/gif');
+      ensureContentType('bmp', 'image/bmp');
+      ensureContentType('svg', 'image/svg+xml');
     }
     if (numHtmls) {
-        DEBUG && log.debug('Completing [Content_Types].xml for HTML...');
-        ensureContentType('html', 'text/html');
+      DEBUG && log.debug('Completing [Content_Types].xml for HTML...');
+      ensureContentType('html', 'text/html');
     }
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
     zipSetText(zip, contentTypesPath, finalContentTypesXml);

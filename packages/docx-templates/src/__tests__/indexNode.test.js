@@ -10,7 +10,6 @@ import qrcode from 'yaqrcode';
 // SWUT
 import createReport from '../indexNode';
 import createReportBrowser from '../indexBrowser';
-import { _resetCache as resetCache } from '../zip';
 
 const outputDir = path.join(__dirname, 'out');
 const WRITE_REPORTS_TO_FILE = false;
@@ -35,7 +34,6 @@ const reportConfigs = {
       });
       afterEach(async () => {
         await fs.remove(outputDir);
-        resetCache();
       });
 
       it('01 Copies (unchanged) a template without markup', async () => {
@@ -107,7 +105,6 @@ const reportConfigs = {
       });
       afterEach(() => {
         MockDate.reset();
-        resetCache();
       });
 
       it('01 Probe works', async () => {
