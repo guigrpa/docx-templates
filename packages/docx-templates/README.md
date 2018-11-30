@@ -245,11 +245,19 @@ Executes a given JavaScript snippet, just like `INS` or `=`, but doesn't insert 
 
 ```
 +++EXEC
-const myFun = () => Math.random();
-const MY_CONSTANT = 3;
+myFun = () => Math.random();
+MY_CONSTANT = 3;
 +++
 
-+++! const ANOTHER_CONSTANT = 5; +++
++++! ANOTHER_CONSTANT = 5; +++
+```
+
+Usage elsewhere will then look like
+
+```
++++= MY_CONSTANT +++
++++= ANOTHER_CONSTANT +++
++++= myFun() +++
 ```
 
 ### `IMAGE`
