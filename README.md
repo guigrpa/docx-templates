@@ -255,6 +255,7 @@ MY_CONSTANT = 3;
 Usage elsewhere will then look like
 
 ```
++++= MY_CONSTANT +++
 +++= ANOTHER_CONSTANT +++
 +++= myFun() +++
 ```
