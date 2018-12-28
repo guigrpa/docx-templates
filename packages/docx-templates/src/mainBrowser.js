@@ -366,10 +366,8 @@ const processHtmls = async (htmls, documentComponent, zip, templatePath) => {
 };
 
 const getRelsFromZip = async (zip, relsPath) => {
-  let relsXml;
-  try {
-    relsXml = await zipGetText(zip, relsPath);
-  } catch (err) {
+  let relsXml = await zipGetText(zip, relsPath);
+  if (!relsXml) {
     relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
         </Relationships>`;
