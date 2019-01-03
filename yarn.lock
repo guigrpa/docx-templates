@@ -2772,18 +2772,6 @@ doctrine@^2.1.0:
   dependencies:
     esutils "^2.0.2"
 
-docx-templates@*:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/docx-templates/-/docx-templates-2.8.0.tgz#cb1648d09fd64b30b1e7da19e85af7cb0462d297"
-  integrity sha512-oNK0QUumItroV7rI9FSKSy+CudRpKPUgkA1V6Mm9EYMiURqJS9WvTqECWmNczxDqTtY1hnstsPRAhpf1toe50w==
-  dependencies:
-    babel-runtime "^6.26.0"
-    fs-extra "^3.0.1"
-    jszip "^3.1.5"
-    sax "1.2.4"
-    timm "^1.6.1"
-    vm2 "^3.6.3"
-
 domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
