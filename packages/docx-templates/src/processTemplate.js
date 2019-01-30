@@ -609,13 +609,14 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
   const id = String(ctx.imageId);
   const relId = `img${id}`;
   ctx.images[relId] = await getImageData(imagePars);
+  const alt = imagePars.alt || 'desc';
   const node = newNonTextNode;
   const pic = node(
     'pic:pic',
     { 'xmlns:pic': 'http://schemas.openxmlformats.org/drawingml/2006/picture' },
     [
       node('pic:nvPicPr', {}, [
-        node('pic:cNvPr', { id: '0', name: `Picture ${id}`, descr: 'desc' }),
+        node('pic:cNvPr', { id: '0', name: `Picture ${id}`, descr: alt }),
         node('pic:cNvPicPr', {}, [
           node('a:picLocks', { noChangeAspect: '1', noChangeArrowheads: '1' }),
         ]),
@@ -649,7 +650,7 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
   const drawing = node('w:drawing', {}, [
     node('wp:inline', { distT: '0', distB: '0', distL: '0', distR: '0' }, [
       node('wp:extent', { cx, cy }),
-      node('wp:docPr', { id, name: `Picture ${id}`, descr: 'desc' }),
+      node('wp:docPr', { id, name: `Picture ${id}`, descr: alt }),
       node('wp:cNvGraphicFramePr', {}, [
         node('a:graphicFrameLocks', {
           'xmlns:a': 'http://schemas.openxmlformats.org/drawingml/2006/main',

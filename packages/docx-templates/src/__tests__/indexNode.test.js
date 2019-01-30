@@ -739,6 +739,37 @@ const reportConfigs = {
         expect(md5(result2)).toMatchSnapshot();
       });
 
+      it('38c Processes IMAGE commands with alt text', async () => {
+        MockDate.set('1/1/2000');
+        const template = path.join(__dirname, 'fixtures', 'imageBase64.docx');
+        let options = {
+          template,
+          data: {},
+          additionalJsContext: {
+            qr: contents => {
+              const dataUrl = qrcode(contents, { size: 500 });
+              const data = dataUrl.slice('data:image/gif;base64,'.length);
+              return {
+                width: 6,
+                height: 6,
+                data,
+                extension: '.gif',
+                alt: `qr code for ${contents}`,
+              };
+            },
+          },
+          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+        };
+        const result = await createReport(options);
+        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+
+        // Also check the browser version
+        const templateData = fs.readFileSync(template);
+        options = timmSet(options, 'template', templateData);
+        const result2 = await createReportBrowser(options);
+        expect(md5(result2)).toMatchSnapshot();
+      });
+
       it('39 Processes LINK commands', async () => {
         const template = path.join(__dirname, 'fixtures', 'links.docx');
         const result = await createReport({
