@@ -118,6 +118,7 @@ export type ImagePars = {
   path?: string, // only supported in Node
   data?: ArrayBuffer | string, // supported in Node and the browser
   extension?: string,
+  alt?: string, // optional alt text
 };
 
 export type LinkPars = {
