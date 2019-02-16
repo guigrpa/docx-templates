@@ -1,3 +1,5 @@
+* Let alternate text be specified for images (@emilong, #57).
+
 ## 2.9.1 (2019-1-3)
 
 ## 2.9.0 (2018-11-30)
