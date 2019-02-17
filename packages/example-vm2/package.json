@@ -1,0 +1,34 @@
+{
+  "name": "example-vm2",
+  "private": true,
+  "version": "2.9.0-rc.0",
+  "description": "Template-based docx report creation",
+  "author": "Guillermo Grau Panea",
+  "license": "MIT",
+  "keywords": [
+    "docx",
+    "office",
+    "word",
+    "ms-word",
+    "report",
+    "template"
+  ],
+  "homepage": "https://github.com/guigrpa/docx-templates#readme",
+  "bugs": {
+    "url": "https://github.com/guigrpa/docx-templates/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guigrpa/docx-templates.git"
+  },
+  "scripts": {
+    "start": "node . swapi-simple.docx"
+  },
+  "dependencies": {
+    "docx-templates": "*",
+    "isomorphic-fetch": "2.2.1",
+    "prettier": "^1.14.2",
+    "vm2": "^3.6.10",
+    "yaqrcode": "^0.2.1"
+  }
+}

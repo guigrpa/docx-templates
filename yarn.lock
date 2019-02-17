@@ -8562,10 +8562,10 @@ vm-browserify@0.0.4, vm-browserify@~0.0.1:
   dependencies:
     indexof "0.0.1"
 
-vm2@^3.6.3:
-  version "3.6.3"
-  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.6.3.tgz#6dd426bb67a387d03055c5d276720f3f23203b72"
-  integrity sha512-9sGC9T+R/afjDSVyG15ATUPzm5ZHzvIJvwkVmQ+4H2Cy55uDp0dXneXV4gXC7RMd2crWcL/awfdHjCsNSm+ufg==
+vm2@^3.6.10:
+  version "3.6.10"
+  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.6.10.tgz#a9066c3849ad8a3ea35b9c0cf79a6589ce6e3cbe"
+  integrity sha512-p4LBl7theIhmKaWPdCn25kEIG0bfDDEDx1lexXH7gcCu9pHIT+PKFgofwLHVHUGhe39lKExeaYVEZtdbQhdl2g==
 
 walker@~1.0.5:
   version "1.0.7"

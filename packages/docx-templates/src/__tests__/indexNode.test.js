@@ -21,10 +21,9 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
 const reportConfigs = {
   noSandbox: { noSandbox: true },
   sandbox: { noSandbox: false },
-  vm2Sandbox: { vm2Sandbox: true },
 };
 
-['noSandbox', 'sandbox', 'vm2Sandbox'].forEach(type => {
+['noSandbox', 'sandbox'].forEach(type => {
   const reportConfig = reportConfigs[type];
 
   describe(type, () => {

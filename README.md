@@ -104,7 +104,6 @@ createReport({
   literalXmlDelimiter: '||',
   processLineBreaks: true,
   noSandbox: false,
-  vm2Sandbox: false, // note that vm2 sandbox is safer than Node's
 });
 ```
 
@@ -113,9 +112,7 @@ Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/t
 
 ## Browser usage
 
-You can use docx-templates in the browser (yay!). Make sure, however, to shim the vm2 package (due to [this](https://github.com/patriksimek/vm2/issues/68)) in your Browserify config ([example](./packages/example-webpack/webpackConfig.js)) or webpack config ([example](./packages/example-browserify/package.json)).
-
-Instead of providing docx-templates with the template's path, pass the template contents as a buffer. For example, get a File object with:
+You can use docx-templates in the browser (yay!). Instead of providing docx-templates with the template's path, pass the template contents as a buffer. For example, get a File object with:
 
 ```html
 <input type="file">

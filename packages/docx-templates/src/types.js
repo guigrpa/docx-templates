@@ -42,7 +42,10 @@ export type UserOptions = {|
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean, // true by default
   noSandbox?: boolean,
-  vm2Sandbox?: boolean | Object,
+  runJs?: ({ sandbox: Object, ctx: Object }) => {
+    modifiedSandbox: Object,
+    result: any,
+  },
   additionalJsContext?: Object,
   _probe?: 'JS' | 'XML',
 |};
@@ -56,7 +59,6 @@ export type CreateReportOptions = {|
   literalXmlDelimiter: string,
   processLineBreaks: boolean,
   noSandbox: boolean,
-  vm2Sandbox: boolean | Object,
   additionalJsContext: Object,
 |};
 

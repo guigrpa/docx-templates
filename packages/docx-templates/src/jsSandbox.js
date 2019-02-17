@@ -3,7 +3,6 @@
 /* eslint-disable no-param-reassign */
 
 import vm from 'vm';
-import { VM, VMScript } from 'vm2';
 import { merge, omit } from 'timm';
 import { getCurLoop } from './reportUtils';
 import type { ReportData, Context } from './types';
@@ -68,25 +67,14 @@ const runUserJsAndGetRaw = async (
   // Run the JS snippet and extract the result
   let context;
   let result;
-  if (ctx.options.noSandbox) {
+  if (ctx.options.runJs) {
+    const temp = ctx.options.runJs({ sandbox, ctx });
+    context = temp.modifiedSandbox;
+    result = temp.result;
+  } else if (ctx.options.noSandbox) {
     context = sandbox;
     const wrapper = new Function('with(this) { return eval(__code__); }'); // eslint-disable-line no-new-func
     result = wrapper.call(context);
-  } else if (ctx.options.vm2Sandbox) {
-    const script = new VMScript(
-      `
-      __result__ = eval(__code__);
-      `
-    ).compile();
-    const vm2 = new VM({
-      ...(typeof ctx.options.vm2Sandbox === 'object'
-        ? ctx.options.vm2Sandbox
-        : {}),
-      sandbox,
-    });
-    vm2.run(script);
-    context = omit(vm2._context, ['VMError', 'Buffer']);
-    result = context.__result__;
   } else {
     const script = new vm.Script(
       `
