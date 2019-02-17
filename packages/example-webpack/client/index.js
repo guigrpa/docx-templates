@@ -23,7 +23,7 @@ async function onTemplateChosen() {
   const report = await createReport({
     template,
     data: async query => {
-      const finalQuery = query || '{ viewer { login }}}';
+      const finalQuery = query || '{ viewer { login }}';
       const resp = await fetch('/github', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },

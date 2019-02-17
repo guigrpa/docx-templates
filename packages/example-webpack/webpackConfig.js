@@ -15,10 +15,6 @@ module.exports = {
       /fs/,
       path.resolve(process.cwd(), 'client/emptyModule.js')
     ),
-    new webpack.NormalModuleReplacementPlugin(
-      /vm2/,
-      path.resolve(process.cwd(), 'client/emptyModule.js')
-    ),
   ],
 
   module: {
