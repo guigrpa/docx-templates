@@ -637,46 +637,6 @@ const reportConfigs = {
         if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
       });
 
-      it('37a Replace a single image', async () => {
-        const template = path.join(
-          __dirname,
-          'fixtures',
-          'replaceOneImage.docx'
-        );
-        const image = path.join(__dirname, 'fixtures', 'cube.png');
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {},
-          replaceImagesBase64: false,
-          replaceImages: { 'image1.png': image },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
-      });
-
-      it('37b Replace multiple images', async () => {
-        const template = path.join(
-          __dirname,
-          'fixtures',
-          'replaceTwoImages.docx'
-        );
-        const image1 = path.join(__dirname, 'fixtures', 'cube.png');
-        const image2 = path.join(__dirname, 'fixtures', 'cron.png');
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {},
-          replaceImagesBase64: false,
-          replaceImages: {
-            'image1.png': image1,
-            'image2.png': image2,
-          },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
-      });
-
       it('38a Processes IMAGE commands with paths', async () => {
         MockDate.set('1/1/2000');
         const template = path.join(__dirname, 'fixtures', 'imagePath.docx');
@@ -911,25 +871,6 @@ const reportConfigs = {
       it("90 Browser's entry point exists", async () => {
         const browserEntry = require('../indexBrowser'); // eslint-disable-line
         expect(browserEntry).toBeDefined();
-      });
-
-      it('91 Generates a valid zipped file', async () => {
-        const filepath = path.join(__dirname, 'fixtures', 'zipGeneration.docx');
-        const template = fs.readFileSync(filepath);
-        const result = await createReportBrowser({
-          template,
-          data: {
-            imageType: '4x4 hideous picture',
-          },
-          replaceImagesBase64: true,
-          replaceImages: {
-            'image1.png':
-              'iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAFUlEQVQ' +
-              'I1wXBAQEAAACAkP6fFlUIaizhBvq890IMAAAAAElFTkSuQmCC',
-          },
-        });
-        // use md5 of output, otherwise snapshot would be to big
-        expect(md5(result)).toMatchSnapshot();
       });
     });
   });

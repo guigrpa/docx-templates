@@ -395,47 +395,6 @@ Define a name for a complete command (especially useful for formatting tables):
 ```
 
 
-## Replacing template images
-
-**Note**: this feature is **deprecated** as of v2.4.0 and may be removed in future releases. Please use the `IMAGE` command instead.
-
-You can replace images in your template by specifying the `replaceImages` option when you create your report:
-
-```js
-createReport({
-  // ...
-  replaceImages: {
-    'image1.png': '/absolute/path/to/newImage1.png',
-    'image3.png': '/absolute/path/to/newImage3.png',
-  },
-});
-```
-
-If you prefer, you can pass in a base64 string with the contents (if you're using docx-templates in the browser, this is the only supported way):
-
-```js
-createReport({
-  // ...
-  replaceImagesBase64: true,
-  replaceImages: {
-    'image1.png': '<base64 data>',
-    'image3.png': '<base64 data>',
-  },
-});
-```
-
-You can determine the original image file names by inspecting your template: unzip your .docx file (you may need to duplicate it and change its extension to .zip before), navigate to the `word/media` folder inside and find the image you want to replace:
-
-```
-├─word
-| ├─media
-| | ├─image1.png
-| | ├─image2.png
-| | ├─image3.png
-| | ├─...
-```
-
-
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
 
 

@@ -6,7 +6,6 @@ import { merge } from 'timm';
 import {
   zipInit,
   zipLoad,
-  zipExists,
   zipGetText,
   zipSetText,
   zipSetBinary,
@@ -31,7 +30,7 @@ const chalk: any = DEBUG ? require('./debug').chalk : null;
 // ==========================================
 const createReport = async (options: UserOptionsInternal) => {
   DEBUG && log.debug('Report options:', { attach: options });
-  const { template, data, queryVars, replaceImages, _probe } = options;
+  const { template, data, queryVars, _probe } = options;
   const templatePath = 'word';
   const literalXmlDelimiter =
     options.literalXmlDelimiter || DEFAULT_LITERAL_XML_DELIMITER;
@@ -224,34 +223,6 @@ const createReport = async (options: UserOptionsInternal) => {
     }
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
     zipSetText(zip, contentTypesPath, finalContentTypesXml);
-  }
-
-  // ---------------------------------------------------------
-  // Replace images
-  // ---------------------------------------------------------
-  if (replaceImages) {
-    DEBUG && log.debug('Replacing images...');
-    if (options.replaceImagesBase64) {
-      const mediaPath = `${templatePath}/media`;
-      const imgNames = Object.keys(replaceImages);
-      for (let i = 0; i < imgNames.length; i++) {
-        const imgName = imgNames[i];
-        const imgPath = `${mediaPath}/${imgName}`;
-        if (!zipExists(zip, `${imgPath}`)) {
-          console.warn(
-            `Image ${imgName} cannot be replaced: destination does not exist`
-          );
-          continue;
-        }
-        const imgData = replaceImages[imgName];
-        DEBUG && log.debug(`Replacing ${imgName} with <base64 buffer>...`);
-        await zipSetBase64(zip, imgPath, imgData);
-      }
-    } else {
-      console.warn(
-        'Unsupported format (path): images can only be replaced in base64 mode'
-      );
-    }
   }
 
   // ---------------------------------------------------------

@@ -1,3 +1,4 @@
+* **Breaking change**: removed `replaceImages`, `replaceImagesBase64` options (deprecated since v2.4.0). Please use the `IMAGE` command instead.
 * **Breaking change for users of the `vm2` sandbox**: replaced `vm2Sandbox` option (which caused headaches for users in the browser) with `runJs`, a custom hook for JS snippet execution. If you want to use vm2:
 
 ```js

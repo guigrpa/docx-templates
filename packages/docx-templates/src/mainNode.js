@@ -21,7 +21,7 @@ const getDefaultOutput = (templatePath: string): string => {
 };
 
 const createReport = async (options: UserOptions) => {
-  const { template, replaceImages, _probe } = options;
+  const { template, _probe } = options;
   const templateIsBuffer = template instanceof Buffer;
   const output =
     options.output ||
@@ -43,24 +43,6 @@ const createReport = async (options: UserOptions) => {
     'template',
     buffer
   ): any);
-
-  // ---------------------------------------------------------
-  // Images provided as path are converted to base64
-  // ---------------------------------------------------------
-  if (replaceImages && !options.replaceImagesBase64) {
-    DEBUG && log.debug('Converting images to base64...');
-    const imgDataBase64 = {};
-    const imgNames = Object.keys(replaceImages);
-    for (let i = 0; i < imgNames.length; i++) {
-      const imgName = imgNames[i];
-      const imgPath = replaceImages[imgName];
-      DEBUG && log.debug(`Reading ${imgPath} from disk...`);
-      const imgBuf = await fs.readFile(imgPath);
-      imgDataBase64[imgName] = imgBuf.toString('base64');
-    }
-    newOptions.replaceImagesBase64 = true;
-    newOptions.replaceImages = imgDataBase64;
-  }
 
   // ---------------------------------------------------------
   // Parse and fill template (in-memory)
