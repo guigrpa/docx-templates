@@ -116,6 +116,7 @@ export type ImagePars = {
   width: number, // cm
   height: number, // cm
   path?: string, // only supported in Node
+  thumbnail?: string, // required if path is an svg
   data?: ArrayBuffer | string, // supported in Node and the browser
   extension?: string,
   alt?: string, // optional alt text

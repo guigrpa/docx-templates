@@ -601,16 +601,50 @@ const processEndForIf = (
   return null;
 };
 
+const imageToContext = (ctx: Context, img) => {
+  ctx.imageId += 1;
+  const id = String(ctx.imageId);
+  const relId = `img${id}`;
+  ctx.images[relId] = img;
+  return relId;
+}
+
 /* eslint-disable */
 const processImage = async (ctx: Context, imagePars: ImagePars) => {
   const cx = (imagePars.width * 360e3).toFixed(0);
   const cy = (imagePars.height * 360e3).toFixed(0);
-  ctx.imageId += 1;
+
+  let imgRelId = imageToContext(ctx, await getImageData(imagePars));
   const id = String(ctx.imageId);
-  const relId = `img${id}`;
-  ctx.images[relId] = await getImageData(imagePars);
   const alt = imagePars.alt || 'desc';
   const node = newNonTextNode;
+
+  const extNodes = [];
+  extNodes.push(node('a:ext', { uri: '{28A0092B-C50C-407E-A947-70E740481C1C}' }, [
+    node('a14:useLocalDpi', {
+      'xmlns:a14': 'http://schemas.microsoft.com/office/drawing/2010/main',
+      val: '0',
+    }),
+  ]));
+
+  if (ctx.images[imgRelId].extension === '.svg') {
+
+    // create image
+    if (!imagePars.thumbnail) throw new Error('When specifying svg, make sure you specify a thumbnail as well!');
+    
+    const thumbRelId = imageToContext(ctx, await getImageDataByPath(imagePars.thumbnail));
+    extNodes.push(node('a:ext', { uri: '{96DAC541-7B7A-43D3-8B79-37D633B846F1}' }, [
+      node('asvg:svgBlip', {
+        'xmlns:asvg':
+          'http://schemas.microsoft.com/office/drawing/2016/SVG/main',
+        'r:embed': imgRelId,
+      }),
+    ]));
+
+    // For SVG the thumb is placed where the image normally goes.
+    imgRelId = thumbRelId;
+  }
+
   const pic = node(
     'pic:pic',
     { 'xmlns:pic': 'http://schemas.openxmlformats.org/drawingml/2006/picture' },
@@ -622,16 +656,8 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
         ]),
       ]),
       node('pic:blipFill', {}, [
-        node('a:blip', { 'r:embed': relId, cstate: 'print' }, [
-          node('a:extLst', {}, [
-            node('a:ext', { uri: '{28A0092B-C50C-407E-A947-70E740481C1C}' }, [
-              node('a14:useLocalDpi', {
-                'xmlns:a14':
-                  'http://schemas.microsoft.com/office/drawing/2010/main',
-                val: '0',
-              }),
-            ]),
-          ]),
+        node('a:blip', { 'r:embed': imgRelId, cstate: 'print' }, [
+          node('a:extLst', {}, extNodes),
         ]),
         node('a:srcRect'),
         node('a:stretch', {}, [node('a:fillRect')]),
@@ -686,6 +712,10 @@ const getImageData = async (imagePars: ImagePars) => {
   const { path: imgPath } = imagePars;
   if (!imgPath) throw new Error('Specify either image `path` or `data`');
   if (!fs) throw new Error('Cannot read image from file in the browser');
+  return await getImageDataByPath(imgPath);
+};
+
+const getImageDataByPath = async (imgPath: string) => {
   const buffer = await fs.readFile(imgPath);
   return { extension: path.extname(imgPath).toLowerCase(), data: buffer };
 };

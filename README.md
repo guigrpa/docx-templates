@@ -282,10 +282,37 @@ The JS snippet must return an _image object_ or a Promise of an _image object_, 
 * `width` in cm
 * `height` in cm
 * `path` _[optional]_ (in Node only): path to the image to be embedded (absolute or relative to the current working directory)
+* `thumbnail` _[optional]_: path to png to use when svg is not supported or shown in preview (svg only) 
 * `data` _[optional]_: either an ArrayBuffer or a base64 string with the image data
 * `extension` _[optional]_: e.g. `.png`
 
 Either specify the `path` or `data` + `extension`.
+
+Images can also be SVG. These needs a thumbnail (fallback) to be specified along with the image data.
+
+The SVG can be injected from a js context as shown below
+
+
+```
++++IMAGE injectSvg()+++
+```
+
+```js
+additionalJsContext: {
+  injectSvg: () => {
+      const data = Buffer.from(`<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <rect x="10" y="10" height="100" width="100" style="stroke:#ff0000; fill: #0000ff"/>
+                                </svg>`, 'utf-8');
+      return { width: 6, height: 6, data, extension: '.svg', thumbnail: './thumbnail.png' };                    
+    }
+  }
+```
+
+Or the svg can be given directly as a path:
+
+```
++++IMAGE ({ width: 3, height: 3, path: './sample.svg', thumbnail: './thumb.png' })+++
+```
 
 ### `LINK`
 

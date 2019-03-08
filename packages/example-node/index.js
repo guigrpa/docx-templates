@@ -1,6 +1,8 @@
 require('isomorphic-fetch');
 const qrcode = require('yaqrcode');
+fs = require('fs-extra'); 
 const createReport = require('docx-templates').default;
+
 
 createReport({
   template: process.argv[2],
@@ -31,7 +33,18 @@ createReport({
       const data = dataUrl.slice('data:image/gif;base64,'.length);
       return { width: 6, height: 6, data, extension: '.gif' };
     },
-  },
+    svgImgFile: async () => {
+      const data = await fs.readFile('./sample.svg');
+      return { width: 6, height: 6, data, extension: '.svg', thumbnail: './sample.png' };
+    },
+    svgImgStr: () => {
+      const data = Buffer.from(`<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect x="10" y="10" height="100" width="100" style="stroke:#ff0000; fill: #0000ff"/>
+                    </svg>`, 'utf-8');
+      return { width: 6, height: 6, data, extension: '.svg', thumbnail: './sample.png' };                    
+      
+    }
+   },
 });
 
 /*
