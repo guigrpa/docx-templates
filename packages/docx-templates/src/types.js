@@ -53,7 +53,7 @@ export type UserOptionsInternal = {|
 |};
 
 export type CreateReportOptions = {|
-  cmdDelimiter: string,
+  cmdDelimiter: string|Object,
   literalXmlDelimiter: string,
   processLineBreaks: boolean,
   noSandbox: boolean,

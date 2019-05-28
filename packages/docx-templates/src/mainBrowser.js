@@ -28,6 +28,15 @@ const chalk: any = DEBUG ? require('./debug').chalk : null;
 // ==========================================
 // Main
 // ==========================================
+const getCmdDelimiter = (delimiter) => {
+  if (!delimiter) {
+    return [DEFAULT_CMD_DELIMITER, DEFAULT_CMD_DELIMITER];
+  } else if (typeof delimiter == 'string') {
+    return [delimiter, delimiter];
+  } else {
+    return delimiter
+  }
+}
 const createReport = async (options: UserOptionsInternal) => {
   DEBUG && log.debug('Report options:', { attach: options });
   const { template, data, queryVars, _probe } = options;
@@ -35,7 +44,7 @@ const createReport = async (options: UserOptionsInternal) => {
   const literalXmlDelimiter =
     options.literalXmlDelimiter || DEFAULT_LITERAL_XML_DELIMITER;
   const createOptions = {
-    cmdDelimiter: options.cmdDelimiter || DEFAULT_CMD_DELIMITER,
+    cmdDelimiter: getCmdDelimiter(options.cmdDelimiter),
     literalXmlDelimiter,
     processLineBreaks:
       options.processLineBreaks != null ? options.processLineBreaks : true,

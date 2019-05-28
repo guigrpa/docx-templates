@@ -361,14 +361,15 @@ const processText = async (
   node: TextNode,
   ctx: Context
 ): Promise<string> => {
-  const { cmdDelimiter } = ctx.options;
+    const { cmdDelimiter } = ctx.options;
   const text = node._text;
   if (text == null || text === '') return '';
-  const segments = text.split(cmdDelimiter);
+  const segments = text.split(cmdDelimiter[0]).map(s=>s.split(cmdDelimiter[1]))
+    .reduce((x, y)=>x.concat(y));
   let outText = '';
   for (let idx = 0; idx < segments.length; idx++) {
     // Include the separators in the `buffers` field (used for deleting paragraphs if appropriate)
-    if (idx > 0) appendTextToTagBuffers(cmdDelimiter, ctx, { fCmd: true });
+    if (idx > 0) appendTextToTagBuffers(cmdDelimiter[0], ctx, { fCmd: true });
 
     // Append segment either to the `ctx.cmd` buffer (to be executed), if we are in "command mode",
     // or to the output text
@@ -496,7 +497,12 @@ const processCmd = async (
     throw new Error(`Error executing command: ${cmd}\n${err.message}`);
   }
 };
-
+const builtInCommands = ['HTML','LINK','IMAGE','EXEC','INS','END-FOR','END-IF',
+  'FOR','IF','ALIAS','QUERY','CMD_NODE'];
+const notBuiltIns = (cmd) => {
+  return !builtInCommands.some(word=>new RegExp(`^${word}\\s`)
+    .test(cmd.toUpperCase()));
+};
 const getCommand = (ctx: Context): string => {
   let { cmd } = ctx;
   if (cmd[0] === '*') {
@@ -508,6 +514,8 @@ const getCommand = (ctx: Context): string => {
     cmd = `INS ${cmd.slice(1).trim()}`;
   } else if (cmd[0] === '!') {
     cmd = `EXEC ${cmd.slice(1).trim()}`;
+  } else if (notBuiltIns(cmd) && /^[a-zA-Z$`'"]/.test(cmd)) {
+    cmd = `INS ${cmd.trim()}`;
   }
   ctx.cmd = '';
   return cmd.trim();
