@@ -500,7 +500,7 @@ const processCmd = async (
 const builtInCommands = ['HTML','LINK','IMAGE','EXEC','INS','END-FOR','END-IF',
   'FOR','IF','ALIAS','QUERY','CMD_NODE'];
 const notBuiltIns = (cmd) => {
-  return !builtInCommands.some(word=>new RegExp(`^${word}\\s`)
+  return !builtInCommands.some(word=>new RegExp(`^${word}`)
     .test(cmd.toUpperCase()));
 };
 const getCommand = (ctx: Context): string => {
