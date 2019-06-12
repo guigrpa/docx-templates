@@ -1,7 +1,7 @@
 {
-  "name": "docx-templates",
-  "version": "3.0.0",
-  "description": "Template-based docx report creation",
+  "name": "docxt",
+  "version": "3.0.5",
+  "description": "Template-based docx report creation (a fork)",
   "main": "lib/indexNode.js",
   "browser": "lib/indexBrowser.js",
   "author": "Guillermo Grau Panea",
@@ -14,13 +14,13 @@
     "report",
     "template"
   ],
-  "homepage": "https://github.com/guigrpa/docx-templates#readme",
+  "homepage": "https://github.com/xiangnanscu/docx-templates#readme",
   "bugs": {
-    "url": "https://github.com/guigrpa/docx-templates/issues"
+    "url": "https://github.com/xiangnanscu/docx-templates/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guigrpa/docx-templates.git"
+    "url": "git+https://github.com/xiangnanscu/docx-templates.git"
   },
   "scripts": {
     "compile": "yarn compile:prepare && yarn compile:copy && yarn compile:run",
