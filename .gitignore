@@ -21,6 +21,7 @@ coverage
 # ------------
 # All projects
 lib
+dist
 
 # Project-specific
 **/__tests__/fixtures/*_report.docx

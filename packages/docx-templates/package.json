@@ -1,6 +1,6 @@
 {
   "name": "docxt",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Template-based docx report creation (a fork)",
   "main": "lib/indexNode.js",
   "browser": "lib/indexBrowser.js",
@@ -30,6 +30,8 @@
     "compile:run": "babel --out-dir lib --ignore \"**/__mocks__/**\",\"**/__tests__/**\" src",
     "start": "cd examples/swapi && node swapi-node swapi-complex.docx",
     "travis": "yarn compile && yarn test",
+    "dist": "browserify lib/indexNode.js | babel -f .babelrc | uglifyjs > dist/docxt.min.js",
+    "release": "yarn compile && rm -f lib/*.flow && yarn dist",
     "jest": "jest --watch --coverage",
     "test": "yarn testCovFull",
     "testCovFull": "yarn testCovPrepare && yarn testDev && yarn testCovReport",
