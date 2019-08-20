@@ -32,6 +32,7 @@
     "lint": "eslint packages",
     "flow": "flow check || exit 0",
     "xxl": "xxl --src packages/docx-templates/src --exclude __tests__",
+    "jest": "cd packages/docx-templates && yarn jest",
     "test": "cd packages/docx-templates && yarn test",
     "travis": "cd packages/docx-templates && yarn travis",
     "prettier": "prettier --single-quote --trailing-comma es5 --write \"packages/**/*.js\""
