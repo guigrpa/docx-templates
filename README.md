@@ -8,7 +8,7 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 * **Write documents naturally using Word**, just adding some commands where needed for dynamic contents
 * **Express your data needs (queries) in the template itself** (`QUERY` command), in whatever query language you want (e.g. in GraphQL). This is similar to _the Relay way™_: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
 * **Execute JavaScript snippets** (`EXEC` command, or `!` for short)
-* **Insert the result of JavaScript snippets** in your document (`INS`, or `=` for short)
+* **Insert the result of JavaScript snippets** in your document (`INS`, `=` or just *nothing*)
 * **Embed images, hyperlinks and even HTML dynamically** (`IMAGE`, `LINK`, `HTML`). Dynamic images can be great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
 * Include contents **conditionally**, `IF` a certain JavaScript expression is truthy
@@ -101,11 +101,25 @@ createReport({
     },
   },
   cmdDelimiter: '+++',
+    /* default for backwards compatibility; but even better: ['{', '}'] */
   literalXmlDelimiter: '||',
   processLineBreaks: true,
   noSandbox: false,
 });
 ```
+
+You can use different **left/right command delimiters** by passing an array to `cmdDelimiter`:
+
+```js
+createReport({
+  // ...
+  cmdDelimiter: ['{', '}'],
+})
+```
+
+This allows much cleaner-looking templates!
+
+Then you can add commands and JS snippets in your template like this: `{foo}`, `{project.name}` `{QUERY ...}`, `{FOR ...}`.
 
 Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node).
 
@@ -201,7 +215,7 @@ const data = {
 };
 ```
 
-### `INS` (`=`)
+### `INS` (`=`, or nothing at all)
 
 Inserts the result of a given JavaScript snippet:
 
@@ -226,6 +240,12 @@ You can also use this shorthand notation:
 ```
 +++= project.name+++ (+++= project.details.year+++)
 +++= `${project.name} (${$details.year})`+++
+```
+
+Even shorter (and with custom `cmdDelimiter: ['{', '}']`):
+
+```
+{project.name} ({project.details.year})
 ```
 
 You can also access functions in the `additionalJsContext` parameter to `createReport()`, which may even return a Promise. The resolved value of the Promise will be inserted in the document.
