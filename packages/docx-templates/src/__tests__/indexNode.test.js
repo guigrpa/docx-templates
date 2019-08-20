@@ -578,6 +578,23 @@ const reportConfigs = {
         if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
       });
 
+      it('34b Processes INS omitting the command name', async () => {
+        const template = path.join(__dirname, 'fixtures', 'insOmitted.docx');
+        const result = await createReport({
+          ...reportConfig,
+          template,
+          data: {
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
+          },
+          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+        });
+        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+      });
+
       it('35 Processes all snippets in the same sandbox', async () => {
         const template = path.join(__dirname, 'fixtures', 'execAndIns.docx');
         const result = await createReport({
