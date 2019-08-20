@@ -1,4 +1,5 @@
 * Allow different left/right command delimiters, e.g. `cmdDelimiter: ['{', '}']` (#66, #70).
+* Allow omission of the `INS` (or `=`) command (#70).
 
 ## 3.0.0 (2019-2-17)
 
