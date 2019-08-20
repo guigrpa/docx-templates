@@ -44,7 +44,7 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "fs-extra": "^3.0.1",
-    "jszip": "^3.1.5",
+    "jszip": "^3.2.2",
     "sax": "1.2.4",
     "timm": "^1.6.2"
   },
@@ -59,7 +59,7 @@
     "coveralls": "2.13.1",
     "jest": "18.0.0",
     "md5": "^2.2.1",
-    "mockdate": "^2.0.2",
+    "mockdate": "^2.0.5",
     "nyc": "10.0.0",
     "prettier": "^1.18.2",
     "storyboard": "^3.1.4",
