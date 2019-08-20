@@ -168,6 +168,22 @@ const reportConfigs = {
         if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
       });
 
+      it('04b Allows custom left-right delimiters', async () => {
+        const template = path.join(
+          __dirname,
+          'fixtures',
+          'noQueryBrackets.docx'
+        );
+        const result = await createReport({
+          ...reportConfig,
+          template,
+          data: { a: 'foo', b: 'bar' },
+          cmdDelimiter: ['{', '}'],
+          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
+        });
+        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+      });
+
       it('05 Processes 1-level FOR loops', async () => {
         const template = path.join(__dirname, 'fixtures', 'for1.docx');
         const result = await createReport({
