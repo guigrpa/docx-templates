@@ -85,6 +85,7 @@ export type Context = {
   shorthands: { [shorthand: string]: string },
   options: CreateReportOptions,
   jsSandbox?: ?Object,
+  textRunPropsNode?: ?NonTextNode,
 };
 
 export type Images = { [id: string]: Image };

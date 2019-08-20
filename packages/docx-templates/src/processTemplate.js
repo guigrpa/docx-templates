@@ -303,6 +303,14 @@ const produceJsReport = async (
           _attrs: {},
         });
       }
+
+      // Save latest `w:rPr` node that was visited (for LINK properties)
+      if (!nodeIn._fTextNode && nodeIn._tag === 'w:rPr') {
+        ctx.textRunPropsNode = nodeIn;
+      }
+      if (!nodeIn._fTextNode && nodeIn._tag === 'w:r') {
+        ctx.textRunPropsNode = null;
+      }
     }
 
     // Node creation: DOWN | SIDE
@@ -739,16 +747,17 @@ const getImageData = async (imagePars: ImagePars) => {
 };
 
 const processLink = async (ctx: Context, linkPars: LinkPars) => {
-  const { url } = linkPars;
-  const { label = url } = linkPars;
+  const { url, label = url } = linkPars;
   ctx.linkId += 1;
   const id = String(ctx.linkId);
   const relId = `link${id}`;
   ctx.links[relId] = { url };
   const node = newNonTextNode;
+  const { textRunPropsNode } = ctx;
   const link = node('w:hyperlink', { 'r:id': relId, 'w:history': '1' }, [
     node('w:r', {}, [
-      node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
+      textRunPropsNode ||
+        node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
       node('w:t', {}, [newTextNode(label)]),
     ]),
   ]);
