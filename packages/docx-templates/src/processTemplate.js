@@ -143,8 +143,10 @@ const produceJsReport = async (
     if (ctx.fJump) {
       if (!curLoop) throw new Error('INTERNAL_ERROR');
       const { refNode, refNodeLevel } = curLoop;
-      // DEBUG && log.debug(`Jumping to level ${refNodeLevel}...`,
-      //   { attach: cloneNodeForLogging(refNode) });
+      // DEBUG &&
+      //   log.debug(`Jumping to level ${refNodeLevel}...`, {
+      //     attach: cloneNodeForLogging(refNode),
+      //   });
       deltaJump = ctx.level - refNodeLevel;
       nodeIn = refNode;
       ctx.level = refNodeLevel;
@@ -170,8 +172,11 @@ const produceJsReport = async (
       ctx.level -= 1;
       move = 'UP';
     }
-    // DEBUG && log.debug(`Next node [${chalk.green.bold(move)}]`,
-    //   { attach: cloneNodeForLogging(nodeIn) });
+    // DEBUG &&
+    //   log.debug(
+    //     `Next node [${chalk.green.bold(move)}, level ${chalk.dim(ctx.level)}]`,
+    //     { attach: cloneNodeForLogging(nodeIn) }
+    //   );
 
     // =============================================
     // Process input node
@@ -212,8 +217,10 @@ const produceJsReport = async (
       ) {
         curLoop.refNode = nodeIn;
         curLoop.refNodeLevel -= 1;
-        // DEBUG && log.debug(`Updated loop '${curLoop.varName}' refNode:`,
-        //   { attach: cloneNodeForLogging(nodeIn) });
+        // DEBUG &&
+        //   log.debug(`Updated loop '${curLoop.varName}' refNode:`, {
+        //     attach: cloneNodeForLogging(nodeIn),
+        //   });
       }
       const nodeOutParent = nodeOut._parent;
       if (nodeOutParent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
@@ -552,7 +559,7 @@ const processForIf = async (
   let forMatch;
   let varName;
   if (isIf) {
-    if (node._ifName == null) {
+    if (!node._ifName) {
       node._ifName = `__if_${gCntIf}`;
       gCntIf += 1;
     }
@@ -606,8 +613,27 @@ const processEndForIf = (
   const curLoop = getCurLoop(ctx);
   if (!curLoop) throw new Error(`Invalid command: ${cmd}`);
   const isIf = cmdName === 'END-IF';
-  const varName = isIf ? curLoop.varName : cmdRest;
-  if (curLoop.varName !== varName) throw new Error(`Invalid command: ${cmd}`);
+
+  // First time we visit an END-IF node, we assign it the arbitrary name
+  // generated when the IF was processed
+  if (isIf && !node._ifName) node._ifName = curLoop.varName;
+
+  // Check if this is the expected END-IF/END-FOR. If not:
+  // - If it's one of the nested varNames, throw
+  // - If it's not one of the nested varNames, ignore it; we find
+  //   cases in which an END-IF/FOR is found that belongs to a previous
+  //   part of the paragraph of the current loop.
+  const varName = isIf ? node._ifName : cmdRest;
+  if (curLoop.varName !== varName) {
+    if (ctx.loops.find(o => o.varName === varName) == null) {
+      DEBUG &&
+        log.debug(
+          `Ignoring ${cmd} (${varName}, but we're expecting ${curLoop.varName})`
+        );
+      return null;
+    }
+    throw new Error(`Invalid command: ${cmd}`);
+  }
   const { loopOver, idx } = curLoop;
   const { nextItem, curIdx } = getNextItem(loopOver, idx);
   if (nextItem != null) {
