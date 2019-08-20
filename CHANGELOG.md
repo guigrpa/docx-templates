@@ -1,3 +1,5 @@
+* Allow different left/right command delimiters, e.g. `cmdDelimiter: ['{', '}']` (#66, #70).
+
 ## 3.0.0 (2019-2-17)
 
 * **Breaking change**: removed `replaceImages`, `replaceImagesBase64` options (deprecated since v2.4.0). Please use the `IMAGE` command instead.
