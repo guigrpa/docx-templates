@@ -1,4 +1,5 @@
 * Avoid issue when a single paragraph contains `END-IF/FOR` for a previous loop and `IF/FOR` for a new one (#72).
+* Fix hyperlink styles (#64).
 
 ## 3.1.0 (2019-8-20)
 
