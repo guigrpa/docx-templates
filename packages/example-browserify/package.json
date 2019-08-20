@@ -26,12 +26,12 @@
     "start": "yarn build && node server"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "browserify": "^15.0.0",
     "docx-templates": "*",
-    "express": "^4.16.3",
+    "express": "^4.17.1",
     "isomorphic-fetch": "2.2.1",
-    "prettier": "^1.14.2",
+    "prettier": "^1.18.2",
     "yaqrcode": "^0.2.1"
   }
 }

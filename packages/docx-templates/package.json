@@ -46,7 +46,7 @@
     "fs-extra": "^3.0.1",
     "jszip": "^3.1.5",
     "sax": "1.2.4",
-    "timm": "^1.6.1"
+    "timm": "^1.6.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -61,7 +61,7 @@
     "md5": "^2.2.1",
     "mockdate": "^2.0.2",
     "nyc": "10.0.0",
-    "prettier": "^1.14.2",
+    "prettier": "^1.18.2",
     "storyboard": "^3.1.4",
     "storyboard-listener-console": "^3.1.4",
     "yaqrcode": "^0.2.1"
