@@ -364,11 +364,14 @@ const processText = async (
   const { cmdDelimiter } = ctx.options;
   const text = node._text;
   if (text == null || text === '') return '';
-  const segments = text.split(cmdDelimiter);
+  const segments = text
+    .split(cmdDelimiter[0])
+    .map(s => s.split(cmdDelimiter[1]))
+    .reduce((x, y) => x.concat(y));
   let outText = '';
   for (let idx = 0; idx < segments.length; idx++) {
     // Include the separators in the `buffers` field (used for deleting paragraphs if appropriate)
-    if (idx > 0) appendTextToTagBuffers(cmdDelimiter, ctx, { fCmd: true });
+    if (idx > 0) appendTextToTagBuffers(cmdDelimiter[0], ctx, { fCmd: true });
 
     // Append segment either to the `ctx.cmd` buffer (to be executed), if we are in "command mode",
     // or to the output text

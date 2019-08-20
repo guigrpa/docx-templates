@@ -12,7 +12,7 @@ const preprocessTemplate = (template: Node, options: CreateReportOptions) => {
   let fCmd = false;
   let openNode = null;
   let idxDelimiter = 0;
-  const placeholderCmd = `${delimiter}CMD_NODE${delimiter}`;
+  const placeholderCmd = `${delimiter[0]}CMD_NODE${delimiter[1]}`;
 
   while (node != null) {
     // Add `xml:space` attr `preserve` to `w:t` tags
@@ -38,21 +38,24 @@ const preprocessTemplate = (template: Node, options: CreateReportOptions) => {
       for (let i = 0; i < textIn.length; i++) {
         const c = textIn[i];
 
+        // What's the current expected delimiter
+        const currentDelimiter = fCmd ? delimiter[1] : delimiter[0];
+
         // Matches the expected delimiter character
-        if (c === delimiter[idxDelimiter]) {
+        if (c === currentDelimiter[idxDelimiter]) {
           idxDelimiter += 1;
 
           // Finished matching delimiter? Then toggle `fCmd`,
           // add a new `w:t` + text node (either before or after the delimiter),
           // depending on the case
-          if (idxDelimiter === delimiter.length) {
+          if (idxDelimiter === currentDelimiter.length) {
             fCmd = !fCmd;
             const fNodesMatch = node === openNode;
             if (fCmd && openNode._text.length) {
               openNode = insertTextSiblingAfter(openNode);
               if (fNodesMatch) node = openNode;
             }
-            openNode._text += delimiter;
+            openNode._text += currentDelimiter;
             if (!fCmd && i < textIn.length - 1) {
               openNode = insertTextSiblingAfter(openNode);
               if (fNodesMatch) node = openNode;
@@ -63,7 +66,7 @@ const preprocessTemplate = (template: Node, options: CreateReportOptions) => {
 
           // Doesn't match the delimiter, but we had some partial match
         } else if (idxDelimiter) {
-          openNode._text += delimiter.slice(0, idxDelimiter);
+          openNode._text += currentDelimiter.slice(0, idxDelimiter);
           idxDelimiter = 0;
           if (!fCmd) openNode = node;
           openNode._text += c;

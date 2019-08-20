@@ -35,7 +35,7 @@ const createReport = async (options: UserOptionsInternal) => {
   const literalXmlDelimiter =
     options.literalXmlDelimiter || DEFAULT_LITERAL_XML_DELIMITER;
   const createOptions = {
-    cmdDelimiter: options.cmdDelimiter || DEFAULT_CMD_DELIMITER,
+    cmdDelimiter: getCmdDelimiter(options.cmdDelimiter),
     literalXmlDelimiter,
     processLineBreaks:
       options.processLineBreaks != null ? options.processLineBreaks : true,
@@ -344,6 +344,15 @@ const getRelsFromZip = async (zip, relsPath) => {
         </Relationships>`;
   }
   return parseXml(relsXml);
+};
+
+// ==========================================
+// Miscellaneous
+// ==========================================
+const getCmdDelimiter = delimiter => {
+  if (!delimiter) return [DEFAULT_CMD_DELIMITER, DEFAULT_CMD_DELIMITER];
+  if (typeof delimiter === 'string') return [delimiter, delimiter];
+  return delimiter;
 };
 
 // ==========================================

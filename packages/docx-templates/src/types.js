@@ -36,7 +36,7 @@ export type UserOptions = {|
   data?: ReportData | QueryResolver,
   queryVars?: any,
   output?: string,
-  cmdDelimiter?: string,
+  cmdDelimiter?: string | [string, string],
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean, // true by default
   noSandbox?: boolean,
