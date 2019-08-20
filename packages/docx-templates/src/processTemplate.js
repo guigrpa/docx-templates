@@ -500,6 +500,23 @@ const processCmd = async (
   }
 };
 
+const builtInCommands = [
+  'QUERY',
+  'CMD_NODE',
+  'ALIAS',
+  'FOR',
+  'END-FOR',
+  'IF',
+  'END-IF',
+  'INS',
+  'EXEC',
+  'IMAGE',
+  'LINK',
+  'HTML',
+];
+const notBuiltIns = cmd =>
+  !builtInCommands.some(word => new RegExp(`^${word}`).test(cmd.toUpperCase()));
+
 const getCommand = (ctx: Context): string => {
   let { cmd } = ctx;
   if (cmd[0] === '*') {
@@ -511,6 +528,8 @@ const getCommand = (ctx: Context): string => {
     cmd = `INS ${cmd.slice(1).trim()}`;
   } else if (cmd[0] === '!') {
     cmd = `EXEC ${cmd.slice(1).trim()}`;
+  } else if (notBuiltIns(cmd) && /^[a-zA-Z$`'"]/.test(cmd)) {
+    cmd = `INS ${cmd.trim()}`;
   }
   ctx.cmd = '';
   return cmd.trim();
