@@ -1,8 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { set as timmSet } from 'timm';
 import createReportBrowser from './mainBrowser';
-import type { UserOptions, UserOptionsInternal } from './types';
+import type { UserOptions, UserOptionsInternal, Node } from './types';
 import log from './debug'
 
 // TODO: remove / refactor
@@ -17,8 +16,11 @@ const getDefaultOutput = (templatePath: string): string => {
   return path.join(dir, `${name}_report${ext}`);
 };
 
-async function createReport (options: UserOptions<string> | UserOptions<Buffer>){
-  const { template, _probe } = options;
+async function createReport(options: UserOptions): Promise<Uint8Array>;
+async function createReport(options: UserOptions, _probe: 'JS'): Promise<Node>;
+async function createReport(options: UserOptions, _probe: 'XML'): Promise<string>;
+async function createReport(options: UserOptions, _probe?: 'JS' | 'XML'): Promise<Node | string | Uint8Array> {
+  const { template } = options;
   const templateIsBuffer = template instanceof Buffer;
   const output =
     options.output ||
@@ -35,32 +37,15 @@ async function createReport (options: UserOptions<string> | UserOptions<Buffer>)
         : `Reading template from disk at ${template.toString()}...`
     );
   const buffer = template instanceof Buffer ? template : await fs.readFile(template);
-  const newOptions: UserOptionsInternal = timmSet(
-    options,
-    'template',
-    buffer
-  );
+  const newOptions: UserOptionsInternal = { ...options, template: buffer };
 
   // ---------------------------------------------------------
   // Parse and fill template (in-memory)
   // ---------------------------------------------------------
-  const report = await createReportBrowser(newOptions);
-  if (_probe != null) return report;
-
-  // ---------------------------------------------------------
-  // Write the result on filesystem
-  // ---------------------------------------------------------
-  const shouldOutputBuffer = output === BUFFER_VALUE;
-  DEBUG &&
-    log.debug(
-      shouldOutputBuffer ? 'Returning buffer' : 'Writing report to disk...'
-    );
-  if (shouldOutputBuffer) {
-    return Buffer.from(report);
-  }
-  await fs.ensureDir(path.dirname(output));
-  await fs.writeFile(output, report);
-  return null;
+  // A fugly verbose hack to please the typechecker until it smartens up and recognizes overloads properly in this context
+  if (_probe === 'XML') return createReportBrowser(newOptions, 'XML');
+  if (_probe === 'JS') return createReportBrowser(newOptions, 'JS');
+  return createReportBrowser(newOptions);
 };
 
 // ==========================================

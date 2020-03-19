@@ -10,6 +10,7 @@ import QR from 'qrcode'
 // SWUT
 import createReport from '../indexNode';
 import createReportBrowser from '../indexBrowser';
+import { UserOptions } from '../types';
 
 const outputDir = path.join(__dirname, 'out');
 const WRITE_REPORTS_TO_FILE = false;
@@ -19,7 +20,7 @@ Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam
 Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.`;
 
 ['noSandbox', 'sandbox'].forEach(type => {
-  const reportConfig = type === 'sandbox' ? { noSandbox: false }: { noSandbox: true };
+  const reportConfig = type === 'sandbox' ? { noSandbox: false } : { noSandbox: true };
 
   describe(type, () => {
     describe('End-to-end', () => {
@@ -658,7 +659,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
             ],
           },
           additionalJsContext: {
-            toLowerCase: (str:string) => str.toLowerCase(),
+            toLowerCase: (str: string) => str.toLowerCase(),
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -668,7 +669,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
       it('38a Processes IMAGE commands with paths', async () => {
         MockDate.set('1/1/2000');
         const template = path.join(__dirname, 'fixtures', 'imagePath.docx');
-        let options = {
+        let options: UserOptions = {
           template,
           data: {},
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
@@ -686,7 +687,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
       it('38a-bis Processes IMAGE commands with paths in a header', async () => {
         MockDate.set('1/1/2000');
         const template = path.join(__dirname, 'fixtures', 'imageInHeader.docx');
-        let options = {
+        let options: UserOptions = {
           template,
           data: {},
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
@@ -696,19 +697,18 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
 
         // Also check the browser version
         const templateData = fs.readFileSync(template);
-        options = timmSet(options, 'template', templateData);
-        const result2 = await createReportBrowser(options);
+        const result2 = await createReportBrowser({ ...options, template: templateData });
         expect(md5(result2)).toMatchSnapshot();
       });
 
       it('38b Processes IMAGE commands with base64 data', async () => {
         MockDate.set('1/1/2000');
         const template = path.join(__dirname, 'fixtures', 'imageBase64.docx');
-        let options = {
+        let options: UserOptions = {
           template,
           data: {},
           additionalJsContext: {
-            qr: async (contents:string) => {
+            qr: async (contents: string) => {
               const dataUrl = await QR.toDataURL(contents, { width: 500 });
               const data = dataUrl.slice('data:image/gif;base64,'.length);
               return { width: 6, height: 6, data, extension: '.gif' };
