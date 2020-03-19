@@ -17,7 +17,7 @@ const getDefaultOutput = (templatePath: string): string => {
   return path.join(dir, `${name}_report${ext}`);
 };
 
-const createReport = async (options: UserOptions) => {
+async function createReport (options: UserOptions<string> | UserOptions<Buffer>){
   const { template, _probe } = options;
   const templateIsBuffer = template instanceof Buffer;
   const output =
@@ -34,7 +34,7 @@ const createReport = async (options: UserOptions) => {
         ? `Reading template from buffer...`
         : `Reading template from disk at ${template.toString()}...`
     );
-  const buffer = templateIsBuffer ? template : await fs.readFile(template);
+  const buffer = template instanceof Buffer ? template : await fs.readFile(template);
   const newOptions: UserOptionsInternal = timmSet(
     options,
     'template',
