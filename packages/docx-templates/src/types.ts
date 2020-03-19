@@ -27,6 +27,11 @@ export type QueryResolver = (
   queryVars: any
 ) => ReportData | Promise<ReportData>;
 
+type RunJSFunc = (o: { sandbox: Object, ctx: Object }) => {
+  modifiedSandbox: Object,
+  result: any,
+};
+
 export type UserOptions = {
   template: string | ArrayBuffer, // path
   data?: ReportData | QueryResolver,
@@ -36,10 +41,7 @@ export type UserOptions = {
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean, // true by default
   noSandbox?: boolean,
-  runJs?: (o: { sandbox: Object, ctx: Object }) => {
-    modifiedSandbox: Object,
-    result: any,
-  },
+  runJs?: RunJSFunc,
   additionalJsContext?: Object,
   _probe?: 'JS' | 'XML',
 };
@@ -48,10 +50,11 @@ export type UserOptionsInternal = UserOptions & {
 };
 
 export type CreateReportOptions = {
-  cmdDelimiter: string,
+  cmdDelimiter: [string, string],
   literalXmlDelimiter: string,
   processLineBreaks: boolean,
   noSandbox: boolean,
+  runJs?: RunJSFunc,
   additionalJsContext: Object,
 };
 
