@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`noSandbox Template processing 03 Uses the resolver's response to produce the report 1`] = `
 Object {
   "_attrs": Object {
