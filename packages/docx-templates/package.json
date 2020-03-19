@@ -59,8 +59,6 @@
     "nyc": "10.0.0",
     "prettier": "^1.18.2",
     "qrcode": "^1.4.4",
-    "storyboard": "^3.1.4",
-    "storyboard-listener-console": "^3.1.4",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   },
