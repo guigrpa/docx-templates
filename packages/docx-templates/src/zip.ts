@@ -1,7 +1,3 @@
-// @flow
-
-/* eslint-disable new-cap */
-
 import JSZip from 'jszip';
 
 const zipInit = () => {

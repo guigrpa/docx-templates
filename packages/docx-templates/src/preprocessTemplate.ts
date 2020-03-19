@@ -1,5 +1,3 @@
-// @flow
-
 import { insertTextSiblingAfter, getNextSibling } from './reportUtils';
 import type { Node, CreateReportOptions } from './types';
 

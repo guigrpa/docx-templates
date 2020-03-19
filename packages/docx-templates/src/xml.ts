@@ -1,5 +1,3 @@
-// @flow
-
 import sax from 'sax';
 import type { Node } from './types';
 

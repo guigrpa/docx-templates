@@ -1,7 +1,3 @@
-// @flow
-
-/* eslint-disable no-param-reassign, no-console */
-
 import path from 'path';
 import fs from 'fs-extra';
 import { set as timmSet } from 'timm';
@@ -38,11 +34,11 @@ const createReport = async (options: UserOptions) => {
         : `Reading template from disk at ${template.toString()}...`
     );
   const buffer = templateIsBuffer ? template : await fs.readFile(template);
-  const newOptions: UserOptionsInternal = (timmSet(
+  const newOptions: UserOptionsInternal = timmSet(
     options,
     'template',
     buffer
-  ): any);
+  );
 
   // ---------------------------------------------------------
   // Parse and fill template (in-memory)

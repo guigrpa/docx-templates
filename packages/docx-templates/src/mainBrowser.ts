@@ -1,7 +1,3 @@
-// @flow
-
-/* eslint-disable no-param-reassign, no-console */
-
 import { merge } from 'timm';
 import {
   zipInit,
@@ -135,12 +131,12 @@ const createReport = async (options: UserOptionsInternal) => {
   let numHtmls = Object.keys(htmls1).length;
   await processImages(images1, 'document.xml', zip, templatePath);
   await processLinks(links1, 'document.xml', zip, templatePath);
-  await processHtmls(htmls1, 'document.xml', zip, templatePath, xmlOptions);
+  await processHtmls(htmls1, 'document.xml', zip, templatePath);
 
   // ---------------------------------------------------------
   // Process all other XML files (they may contain headers, etc.)
   // ---------------------------------------------------------
-  const files = [];
+  const files: string[] = [];
   zip.forEach(async filePath => {
     const regex = new RegExp(`${templatePath}\\/[^\\/]+\\.xml`);
     if (
@@ -180,7 +176,7 @@ const createReport = async (options: UserOptionsInternal) => {
     const documentComponent = segments[segments.length - 1];
     await processImages(images2, documentComponent, zip, templatePath);
     await processLinks(links2, 'document.xml', zip, templatePath);
-    await processHtmls(htmls2, 'document.xml', zip, templatePath, xmlOptions);
+    await processHtmls(htmls2, 'document.xml', zip, templatePath);
   }
 
   // ---------------------------------------------------------
