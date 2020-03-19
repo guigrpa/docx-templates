@@ -1,5 +1,8 @@
 // ==========================================
 // Docx nodes
+
+import { QualifiedAttribute } from "sax";
+
 // ==========================================
 export type Node = TextNode | NonTextNode;
 type BaseNode = {
@@ -14,7 +17,9 @@ export type TextNode = BaseNode & {
 export type NonTextNode = BaseNode & {
   _fTextNode: false,
   _tag: string,
-  _attrs: Object,
+
+  // Simplified; only need this property
+  _attrs: { [key: string]: QualifiedAttribute | string; } & { Extension?: string },
 };
 
 // ==========================================
@@ -75,7 +80,7 @@ export type Context = {
   pendingLinkNode?: NonTextNode,
   linkId: number,
   links: Links,
-  pendingHtmlNode?: TextNode,
+  pendingHtmlNode?: TextNode | NonTextNode,
   htmlId: number,
   htmls: Htmls,
   vars: { [name: string]: VarValue },

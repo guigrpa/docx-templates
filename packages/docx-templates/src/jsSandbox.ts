@@ -4,7 +4,7 @@ import { getCurLoop } from './reportUtils';
 import type { ReportData, Context } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const log: any = DEBUG ? require('./debug').mainStory : null;
+const log = DEBUG ? require('./debug').mainStory : null;
 
 // Runs a user snippet in a sandbox, and returns the result
 // as a string. If the `processLineBreaks` flag is set,
@@ -12,7 +12,7 @@ const log: any = DEBUG ? require('./debug').mainStory : null;
 // the `literalXmlDelimiter` separators)
 // See more details in runUserJsAndGetRaw() below.
 const runUserJsAndGetString = async (
-  data: ?ReportData,
+  data: ReportData | undefined,
   code: string,
   ctx: Context
 ): Promise<string> => {
@@ -35,14 +35,14 @@ const runUserJsAndGetString = async (
 // in the template. Sandboxing can also be disabled via
 // ctx.options.noSandbox.
 const runUserJsAndGetRaw = async (
-  data: ?ReportData,
+  data: ReportData | undefined,
   code: string,
   ctx: Context
 ): Promise<any> => {
   // Retrieve the current JS sandbox contents (if any) and add
   // the code to be run, and a placeholder for the result,
   // as well as all data defined by the user
-  const sandbox = merge(
+  const sandbox: { [ind: string]: any } = merge(
     ctx.jsSandbox || {},
     {
       __code__: code,
@@ -78,7 +78,7 @@ const runUserJsAndGetRaw = async (
       `,
       {}
     );
-    context = new vm.createContext(sandbox); // eslint-disable-line new-cap
+    context = vm.createContext(sandbox); // eslint-disable-line new-cap
     script.runInContext(context);
     // $FlowFixMe: this attribute is set in the inside code, not known by Flow
     result = context.__result__;

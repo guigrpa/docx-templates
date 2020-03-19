@@ -1,8 +1,8 @@
-import sax from 'sax';
+import sax, { QualifiedAttribute } from 'sax';
 import type { Node } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const log: any = DEBUG ? require('./debug').mainStory : null;
+const log = DEBUG ? require('./debug').mainStory : null;
 
 const parseXml = (templateXml: string): Promise<Node> => {
   const parser = sax.parser(true, {
@@ -10,13 +10,13 @@ const parseXml = (templateXml: string): Promise<Node> => {
     trim: false,
     normalize: false,
   });
-  let template;
-  let curNode = null;
+  let template: Node;
+  let curNode: Node | null | undefined = null;
   let numXmlElements = 0;
   return new Promise((resolve, reject) => {
     parser.onopentag = node => {
-      const newNode = {
-        _parent: curNode,
+      const newNode: Node = {
+        _parent: curNode || undefined,
         _children: [],
         _fTextNode: false,
         _tag: node.name,
@@ -51,11 +51,11 @@ const parseXml = (templateXml: string): Promise<Node> => {
   });
 };
 
-type XmlOptions = {|
+type XmlOptions = {
   literalXmlDelimiter: string,
-|};
+};
 
-const buildXml = (node: Node, options: XmlOptions, indent?: string = '') => {
+const buildXml = (node: Node, options: XmlOptions, indent: string = '') => {
   let xml = indent.length
     ? ''
     : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
@@ -99,8 +99,8 @@ const sanitizeText = (str: string, options: XmlOptions) => {
   return out;
 };
 
-const sanitizeAttr = (str: string) => {
-  let out = str;
+const sanitizeAttr = (attr: string | QualifiedAttribute) => {
+  let out = typeof attr === 'string' ? attr : attr.value;
   out = out.replace(/&/g, '&amp;'); // must be the first one
   out = out.replace(/</g, '&lt;');
   out = out.replace(/>/g, '&gt;');

@@ -1,7 +1,6 @@
 import path from 'path';
 import {
   cloneNodeWithoutChildren,
-  // cloneNodeForLogging,
   getNextSibling,
   newNonTextNode,
   newTextNode,
@@ -24,11 +23,10 @@ import type {
 } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const log: any = DEBUG ? require('./debug').mainStory : null;
-const chalk: any = DEBUG ? require('./debug').chalk : null;
+const log = DEBUG ? require('./debug').mainStory : null;
 
 // Load the fs module (will only succeed in node)
-let fs;
+let fs: any;
 try {
   fs = require('fs-extra'); // eslint-disable-line
 } catch (err) {
@@ -41,7 +39,7 @@ let gCntIf = 0;
 const extractQuery = async (
   template: Node,
   options: CreateReportOptions
-): Promise<?string> => {
+): Promise<string | undefined> => {
   const ctx: any = {
     fCmd: false,
     cmd: '',
@@ -93,7 +91,7 @@ type ReportOutput = {
 };
 
 const produceJsReport = async (
-  data: ?ReportData,
+  data: ReportData | undefined,
   template: Node,
   options: CreateReportOptions
 ): Promise<ReportOutput> => {
@@ -103,18 +101,14 @@ const produceJsReport = async (
     fCmd: false,
     cmd: '',
     fSeekQuery: false,
-    query: null,
     buffers: {
       'w:p': { text: '', cmds: '', fInsertedText: false },
       'w:tr': { text: '', cmds: '', fInsertedText: false },
     },
-    pendingImageNode: null,
     imageId: 0,
     images: {},
-    pendingLinkNode: null,
     linkId: 0,
     links: {},
-    pendingHtmlNode: null,
     htmlId: 0,
     htmls: {},
     vars: {},
@@ -241,7 +235,7 @@ const produceJsReport = async (
           ctx.buffers['w:p'].fInsertedText = true;
           ctx.buffers['w:tr'].fInsertedText = true;
         }
-        ctx.pendingImageNode = null;
+        delete ctx.pendingImageNode;
       }
 
       // If a link was generated, replace the parent `w:r` node with
@@ -261,7 +255,7 @@ const produceJsReport = async (
           ctx.buffers['w:p'].fInsertedText = true;
           ctx.buffers['w:tr'].fInsertedText = true;
         }
-        ctx.pendingLinkNode = null;
+        delete ctx.pendingLinkNode;
       }
 
       // If a html page was generated, replace the parent `w:p` node with
@@ -281,7 +275,7 @@ const produceJsReport = async (
           ctx.buffers['w:p'].fInsertedText = true;
           ctx.buffers['w:tr'].fInsertedText = true;
         }
-        ctx.pendingHtmlNode = null;
+        delete ctx.pendingHtmlNode;
       }
 
       // `w:tc` nodes shouldn't be left with no `w:p` children; if that's the
@@ -305,7 +299,7 @@ const produceJsReport = async (
         ctx.textRunPropsNode = nodeIn;
       }
       if (!nodeIn._fTextNode && nodeIn._tag === 'w:r') {
-        ctx.textRunPropsNode = null;
+        delete ctx.textRunPropsNode;
       }
     }
 
@@ -340,8 +334,7 @@ const produceJsReport = async (
         !parent._fTextNode && // Flow-prevention
         parent._tag === 'w:t'
       ) {
-        const newNodeAsTextNode: TextNode = (newNode: Object);
-        newNodeAsTextNode._text = await processText(data, nodeIn, ctx);
+        await processText(data, nodeIn, ctx);
       }
 
       // Execute the move in the output tree
@@ -368,7 +361,7 @@ const produceJsReport = async (
 };
 
 const processText = async (
-  data: ?ReportData,
+  data: ReportData | undefined,
   node: TextNode,
   ctx: Context
 ): Promise<string> => {
@@ -415,10 +408,10 @@ const processText = async (
 // Command processor
 // ==========================================
 const processCmd = async (
-  data: ?ReportData,
+  data: ReportData | undefined,
   node: Node,
   ctx: Context
-): Promise<?string> => {
+): Promise<null | undefined | string> => {
   const cmd = getCommand(ctx);
   DEBUG && log.debug(`Processing cmd: ${cmd}`);
   try {
@@ -485,21 +478,21 @@ const processCmd = async (
       // IMAGE <code>
     } else if (cmdName === 'IMAGE') {
       if (!isLoopExploring(ctx)) {
-        const img = (await runUserJsAndGetRaw(data, cmdRest, ctx): ?ImagePars);
+        const img = (await runUserJsAndGetRaw(data, cmdRest, ctx));
         if (img != null) await processImage(ctx, img);
       }
 
       // LINK <code>
     } else if (cmdName === 'LINK') {
       if (!isLoopExploring(ctx)) {
-        const pars = (await runUserJsAndGetRaw(data, cmdRest, ctx): ?LinkPars);
+        const pars = (await runUserJsAndGetRaw(data, cmdRest, ctx));
         if (pars != null) await processLink(ctx, pars);
       }
 
       // HTML <code>
     } else if (cmdName === 'HTML') {
       if (!isLoopExploring(ctx)) {
-        const html = (await runUserJsAndGetRaw(data, cmdRest, ctx): ?string);
+        const html = (await runUserJsAndGetRaw(data, cmdRest, ctx));
         if (html != null) await processHtml(ctx, html);
       }
 
@@ -525,7 +518,7 @@ const builtInCommands = [
   'LINK',
   'HTML',
 ];
-const notBuiltIns = cmd =>
+const notBuiltIns = (cmd: string) =>
   !builtInCommands.some(word => new RegExp(`^${word}`).test(cmd.toUpperCase()));
 
 const getCommand = (ctx: Context): string => {
@@ -550,13 +543,13 @@ const getCommand = (ctx: Context): string => {
 // Individual commands
 // ==========================================
 const processForIf = async (
-  data: ?ReportData,
+  data: ReportData | undefined,
   node: Node,
   ctx: Context,
   cmd: string,
   cmdName: string,
   cmdRest: string
-): Promise<?string> => {
+): Promise<null | string> => {
   const isIf = cmdName === 'IF';
 
   // Identify FOR/IF loop
@@ -607,13 +600,13 @@ const processForIf = async (
 };
 
 const processEndForIf = (
-  data: ?ReportData,
+  data: any,
   node: Node,
   ctx: Context,
   cmd: string,
   cmdName: string,
   cmdRest: string
-): ?string => {
+): null | string => {
   const curLoop = getCurLoop(ctx);
   if (!curLoop) throw new Error(`Invalid command: ${cmd}`);
   const isIf = cmdName === 'END-IF';
@@ -753,7 +746,7 @@ const processLink = async (ctx: Context, linkPars: LinkPars) => {
   const link = node('w:hyperlink', { 'r:id': relId, 'w:history': '1' }, [
     node('w:r', {}, [
       textRunPropsNode ||
-        node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
+      node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
       node('w:t', {}, [newTextNode(label)]),
     ]),
   ]);
@@ -773,25 +766,26 @@ const processHtml = async (ctx: Context, data: string) => {
 // ==========================================
 // Helpers
 // ==========================================
+const BufferKeys = ['w:p', 'w:tr'] as const
 const appendTextToTagBuffers = (
   text: string,
   ctx: Context,
-  options: {|
+  options: {
     fCmd?: boolean,
     fInsertedText?: boolean,
-  |}
+  }
 ) => {
   if (ctx.fSeekQuery) return;
   const { fCmd, fInsertedText } = options;
   const type = fCmd ? 'cmds' : 'text';
-  Object.keys(ctx.buffers).forEach(key => {
+  BufferKeys.forEach((key) => {
     const buf = ctx.buffers[key];
     buf[type] += text;
     if (fInsertedText) buf.fInsertedText = true;
   });
 };
 
-const getNextItem = (items, curIdx0) => {
+const getNextItem = (items: any[], curIdx0: number) => {
   let nextItem = null;
   let curIdx = curIdx0 != null ? curIdx0 : -1;
   while (nextItem == null) {

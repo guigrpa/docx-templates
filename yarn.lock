@@ -9324,7 +9324,7 @@ storyboard-listener-console-parallel@3.1.4:
     terminal-kit "^0.26.1"
     timm "^1.6.1"
 
-storyboard-listener-console@3.1.4, storyboard-listener-console@^3.1.1, storyboard-listener-console@^3.1.4:
+storyboard-listener-console@3.1.4, storyboard-listener-console@^3.1.1:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/storyboard-listener-console/-/storyboard-listener-console-3.1.4.tgz#165c23629721a0327b181d4b926bc2d9787eb661"
   integrity sha512-zP2x0XKXHXGYrz4/RS4kxMp/4JqEvREV3rdkfbb6uqGld9gPKNqAdRDLQPN7cJRycTipTt+qew7RFGDTIVSIVA==
@@ -9338,7 +9338,7 @@ storyboard-preset-console@^3.1.1:
   dependencies:
     storyboard-listener-console "^3.1.1"
 
-storyboard@3.1.4, storyboard@^3.1.1, storyboard@^3.1.4:
+storyboard@3.1.4, storyboard@^3.1.1:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/storyboard/-/storyboard-3.1.4.tgz#f39a908f168541ffae2af6ed8a06f27e0eed12e2"
   integrity sha512-YkWhyz6IxvL/+kN9iMtcw3XVppqY/J8wBRDMpKxnkMniD/QKsKnHPMsxloob2B2+ONwASQPbzZkNXeyY2/kXwg==

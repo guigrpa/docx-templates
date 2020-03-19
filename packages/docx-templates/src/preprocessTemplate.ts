@@ -6,7 +6,7 @@ import type { Node, CreateReportOptions } from './types';
 // at the starting node
 const preprocessTemplate = (template: Node, options: CreateReportOptions) => {
   const { cmdDelimiter: delimiter } = options;
-  let node: ?Node = template;
+  let node: Node | null = template;
   let fCmd = false;
   let openNode = null;
   let idxDelimiter = 0;

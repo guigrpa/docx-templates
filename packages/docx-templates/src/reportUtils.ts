@@ -2,8 +2,7 @@ import { omit } from 'timm';
 import type { Node, TextNode, NonTextNode, Context, LoopStatus } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const log: any = DEBUG ? require('./debug').mainStory : null;
-const chalk: any = DEBUG ? require('./debug').chalk : null;
+const log = DEBUG ? require('./debug').mainStory : null;
 
 // ==========================================
 // Nodes and trees
@@ -11,14 +10,12 @@ const chalk: any = DEBUG ? require('./debug').chalk : null;
 const cloneNodeWithoutChildren = (node: Node): Node => {
   if (node._fTextNode) {
     return {
-      _parent: null,
       _children: [],
       _fTextNode: true,
       _text: node._text,
     };
   }
   return {
-    _parent: null,
     _children: [],
     _fTextNode: false,
     _tag: node._tag,
@@ -29,7 +26,7 @@ const cloneNodeWithoutChildren = (node: Node): Node => {
 const cloneNodeForLogging = (node: Node): Object =>
   omit(node, ['_parent', '_children']);
 
-const getNextSibling = (node: Node): ?Node => {
+const getNextSibling = (node: Node): Node | null => {
   const parent = node._parent;
   if (parent == null) return null;
   const siblings = parent._children;
@@ -50,7 +47,7 @@ const insertTextSiblingAfter = (textNode: TextNode): TextNode => {
   if (idx < 0) throw new Error('Template syntax error');
   const newTNode = cloneNodeWithoutChildren(tNode);
   newTNode._parent = tNodeParent;
-  const newTextNode = {
+  const newTextNode: Node = {
     _parent: newTNode,
     _children: [],
     _fTextNode: true,
@@ -63,11 +60,10 @@ const insertTextSiblingAfter = (textNode: TextNode): TextNode => {
 
 const newNonTextNode = (
   tag: string,
-  attrs: Object = {},
+  attrs = {},
   children: Array<Node> = []
 ): NonTextNode => {
-  const node = {
-    _parent: null,
+  const node: NonTextNode = {
     _fTextNode: false,
     _tag: tag,
     _attrs: attrs,
@@ -80,7 +76,7 @@ const newNonTextNode = (
 };
 
 const newTextNode = (text: string): TextNode => {
-  const node = { _parent: null, _children: [], _fTextNode: true, _text: text };
+  const node: TextNode = { _children: [], _fTextNode: true, _text: text };
   return node;
 };
 
@@ -111,8 +107,8 @@ const logLoop = (loops: Array<LoopStatus>) => {
   const idxStr = idx >= 0 ? idx + 1 : 'EXPLORATION';
   log.debug(
     `${isIf ? 'IF' : 'FOR'} loop ` +
-      `on ${level}:${varName}` +
-      `${idxStr}/${loopOver.length}`
+    `on ${level}:${varName}` +
+    `${idxStr}/${loopOver.length}`
   );
 };
 
