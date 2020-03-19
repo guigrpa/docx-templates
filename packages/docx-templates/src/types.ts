@@ -1,23 +1,21 @@
 // ==========================================
 // Docx nodes
 // ==========================================
-type BaseNode = {|
-  _parent: ?Node,
+export type Node = TextNode | NonTextNode;
+type BaseNode = {
+  _parent?: Node,
   _children: Array<Node>,
   _ifName?: string,
-|};
-export type TextNode = {
-  ...BaseNode,
+};
+export type TextNode = BaseNode & {
   _fTextNode: true,
   _text: string,
 };
-export type NonTextNode = {
-  ...BaseNode,
+export type NonTextNode = BaseNode & {
   _fTextNode: false,
   _tag: string,
   _attrs: Object,
 };
-export type Node = TextNode | NonTextNode;
 
 // ==========================================
 // Report creator
@@ -25,11 +23,11 @@ export type Node = TextNode | NonTextNode;
 export type ReportData = any;
 export type Query = string;
 export type QueryResolver = (
-  query: ?Query,
+  query: Query | undefined,
   queryVars: any
 ) => ReportData | Promise<ReportData>;
 
-export type UserOptions = {|
+export type UserOptions = {
   template: string | ArrayBuffer, // path
   data?: ReportData | QueryResolver,
   queryVars?: any,
@@ -38,43 +36,42 @@ export type UserOptions = {|
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean, // true by default
   noSandbox?: boolean,
-  runJs?: ({ sandbox: Object, ctx: Object }) => {
+  runJs?: (o: { sandbox: Object, ctx: Object }) => {
     modifiedSandbox: Object,
     result: any,
   },
   additionalJsContext?: Object,
   _probe?: 'JS' | 'XML',
-|};
-export type UserOptionsInternal = {|
-  ...UserOptions,
+};
+export type UserOptionsInternal = UserOptions & {
   template: ArrayBuffer, // template contents
-|};
+};
 
-export type CreateReportOptions = {|
+export type CreateReportOptions = {
   cmdDelimiter: string,
   literalXmlDelimiter: string,
   processLineBreaks: boolean,
   noSandbox: boolean,
   additionalJsContext: Object,
-|};
+};
 
 export type Context = {
   level: number,
   fCmd: boolean,
   cmd: string,
   fSeekQuery: boolean,
-  query: ?Query,
+  query?: Query,
   buffers: {
     'w:p': BufferStatus,
     'w:tr': BufferStatus,
   },
-  pendingImageNode: ?NonTextNode,
+  pendingImageNode?: NonTextNode,
   imageId: number,
   images: Images,
-  pendingLinkNode: ?NonTextNode,
+  pendingLinkNode?: NonTextNode,
   linkId: number,
   links: Links,
-  pendingHtmlNode: ?TextNode,
+  pendingHtmlNode?: TextNode,
   htmlId: number,
   htmls: Htmls,
   vars: { [name: string]: VarValue },
@@ -82,8 +79,8 @@ export type Context = {
   fJump: boolean,
   shorthands: { [shorthand: string]: string },
   options: CreateReportOptions,
-  jsSandbox?: ?Object,
-  textRunPropsNode?: ?NonTextNode,
+  jsSandbox?: Object,
+  textRunPropsNode?: NonTextNode,
 };
 
 export type Images = { [id: string]: Image };
