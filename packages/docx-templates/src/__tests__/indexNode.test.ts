@@ -3,8 +3,6 @@
 import path from 'path';
 import fs from 'fs-extra';
 import MockDate from 'mockdate';
-import md5 from 'md5';
-import { set as timmSet } from 'timm';
 import QR from 'qrcode'
 
 // SWUT
@@ -112,8 +110,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const result = await createReport({
           ...reportConfig,
           template,
-          _probe: 'JS',
-        });
+        }, 'JS');
         expect(fs.existsSync(defaultOutput)).toBeFalsy();
         expect(result._children.length).toBeTruthy();
       });
@@ -127,8 +124,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           template,
           data: queryResolver,
           queryVars,
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
+        }, 'JS');
         expect(queryResolver.mock.calls.length).toEqual(1);
         expect(queryResolver.mock.calls[0][0]).toEqual('exampleQuery');
         expect(queryResolver.mock.calls[0][1]).toEqual(queryVars);
@@ -144,9 +140,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: () => ({ a: 'foo', b: 'bar' }),
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('04 Allows replacing the resolver by a data object', async () => {
@@ -159,9 +154,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: { a: 'foo', b: 'bar' },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('04b Allows custom left-right delimiters', async () => {
@@ -175,9 +169,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           template,
           data: { a: 'foo', b: 'bar' },
           cmdDelimiter: ['{', '}'],
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('05 Processes 1-level FOR loops', async () => {
@@ -192,9 +185,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('06 Processes 2-level FOR loops', async () => {
@@ -214,9 +206,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('07 Processes 3-level FOR loops', async () => {
@@ -249,9 +240,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('08 Processes 1-level FOR-ROW loops', async () => {
@@ -266,9 +256,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('08b Processes 1-level IF-ROW loops', async () => {
@@ -276,9 +265,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const result = await createReport({
           ...reportConfig,
           template,
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('09 Allows scalar arrays in FOR loops', async () => {
@@ -287,9 +275,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('10 Processes JS snippets to get the array elements', async () => {
@@ -305,9 +292,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'Acerinox' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('11 Processes inline FOR loops', async () => {
@@ -322,9 +308,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('12 Processes a more complex inline FOR loop with spaces', async () => {
@@ -343,9 +328,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('13a Processes 1-level IF', async () => {
@@ -353,9 +337,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const result = await createReport({
           ...reportConfig,
           template,
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('13b Processes 2-level IF', async () => {
@@ -363,9 +346,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const result = await createReport({
           ...reportConfig,
           template,
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('13j Processes inline IF', async () => {
@@ -373,9 +355,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const result = await createReport({
           ...reportConfig,
           template,
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('20 Processes ALIAS commands', async () => {
@@ -390,9 +371,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('22 Allows accented characters and such', async () => {
@@ -404,9 +384,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           data: {
             companies: [{ name: '¿Por qué?' }, { name: 'Porque sí' }],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('23 Allows characters that conflict with XML', async () => {
@@ -426,9 +405,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'a & b && c' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'XML');
+        expect(result).toMatchSnapshot();
       });
 
       it('23b Allows insertion of literal XML', async () => {
@@ -437,9 +415,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: { text: 'foo||<w:br/>||bar' },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'XML');
+        expect(result).toMatchSnapshot();
       });
 
       it('23c Allows insertion of literal XML with custom delimiter', async () => {
@@ -454,9 +431,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ),
           data: { text: 'foo____<w:br/>____bar' },
           literalXmlDelimiter: '____',
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'XML');
+        expect(result).toMatchSnapshot();
       });
 
       it('24 Allows Word to split commands arbitrarily, incl. delimiters', async () => {
@@ -469,9 +445,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: { foo: 'bar' },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('25 Adds line breaks by default', async () => {
@@ -480,9 +455,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: { longText: LONG_TEXT },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'XML');
+        expect(result).toMatchSnapshot();
       });
 
       it('25b Allows disabling line break processing', async () => {
@@ -493,9 +467,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           output: path.join(__dirname, 'fixtures', 'longText2_report.docx'),
           data: { longText: LONG_TEXT },
           processLineBreaks: false,
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'XML',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'XML');
+        expect(result).toMatchSnapshot();
       });
 
       it('30 Processes simple JS snippets in an INS', async () => {
@@ -503,9 +476,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const result = await createReport({
           ...reportConfig,
           template,
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('31 Processes more complex JS snippets in an INS', async () => {
@@ -514,9 +486,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('32 Provides access to loop indices (JS)', async () => {
@@ -535,9 +506,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('33 Processes EXEC commands (JS)', async () => {
@@ -546,9 +516,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: {},
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('33b Processes EXEC with shorthand (!)', async () => {
@@ -557,9 +526,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: {},
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('33c Processes EXEC when a promise is returned', async () => {
@@ -568,9 +536,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: {},
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('34 Processes INS with shorthand (=)', async () => {
@@ -585,9 +552,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('34b Processes INS omitting the command name', async () => {
@@ -602,9 +568,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('35 Processes all snippets in the same sandbox', async () => {
@@ -619,9 +584,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('36 Processes all snippets without sandbox', async () => {
@@ -637,9 +601,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'THIRD' },
             ],
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('36b Processes a snippet with additional context', async () => {
@@ -661,9 +624,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           additionalJsContext: {
             toLowerCase: (str: string) => str.toLowerCase(),
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('38a Processes IMAGE commands with paths', async () => {
@@ -672,16 +634,14 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         let options: UserOptions = {
           template,
           data: {},
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         };
-        const result = await createReport(options);
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        const result = await createReport(options, 'JS');
+        expect(result).toMatchSnapshot();
 
         // Also check the browser version
         const templateData = fs.readFileSync(template);
-        options = timmSet(options, 'template', templateData);
-        const result2 = await createReportBrowser(options);
-        expect(md5(result2)).toMatchSnapshot();
+        const result2 = await createReportBrowser({ ...options, template: templateData }, 'JS');
+        expect(result2).toMatchSnapshot();
       });
 
       it('38a-bis Processes IMAGE commands with paths in a header', async () => {
@@ -690,15 +650,14 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         let options: UserOptions = {
           template,
           data: {},
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         };
-        const result = await createReport(options);
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        const result = await createReport(options, 'JS');
+        expect(result).toMatchSnapshot();
 
         // Also check the browser version
         const templateData = fs.readFileSync(template);
         const result2 = await createReportBrowser({ ...options, template: templateData });
-        expect(md5(result2)).toMatchSnapshot();
+        expect(result2).toMatchSnapshot();
       });
 
       it('38b Processes IMAGE commands with base64 data', async () => {
@@ -714,16 +673,14 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               return { width: 6, height: 6, data, extension: '.gif' };
             },
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         };
-        const result = await createReport(options);
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        const result = await createReport(options, 'JS');
+        expect(result).toMatchSnapshot();
 
         // Also check the browser version
         const templateData = fs.readFileSync(template);
-        options = timmSet(options, 'template', templateData);
-        const result2 = await createReportBrowser(options);
-        expect(md5(result2)).toMatchSnapshot();
+        const result2 = await createReportBrowser({ ...options, template: templateData });
+        expect(result2).toMatchSnapshot();
       });
 
       it('38c Processes IMAGE commands with alt text', async () => {
@@ -745,16 +702,14 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               };
             },
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         };
-        const result = await createReport(options);
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        const result = await createReport(options, 'JS');
+        expect(result).toMatchSnapshot();
 
         // Also check the browser version
         const templateData = fs.readFileSync(template);
-        options = timmSet(options, 'template', templateData);
-        const result2 = await createReportBrowser(options);
-        expect(md5(result2)).toMatchSnapshot();
+        const result2 = await createReportBrowser({ ...options, template: templateData });
+        expect(result2).toMatchSnapshot();
       });
 
       it('39 Processes LINK commands', async () => {
@@ -763,9 +718,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: {},
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('3A Processes HTML commands', async () => {
@@ -774,9 +728,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           ...reportConfig,
           template,
           data: {},
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('40 Throws on invalid command', async () => {
@@ -794,9 +747,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
                 { name: 'SECOND' },
                 { name: 'THIRD' },
               ],
-            },
-            _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-          });
+            }
+          }, 'JS');
           expect(true).toBeFalsy(); // should have thrown
         } catch (err) {
           /* this exception was expected */
@@ -815,8 +767,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
                 { name: 'THIRD' },
               ],
             },
-            _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-          });
+          }, 'JS');
           expect(true).toBeFalsy(); // should have thrown
         } catch (err) {
           /* this exception was expected */
@@ -835,8 +786,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
                 { name: 'THIRD' },
               ],
             },
-            _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-          });
+          }, 'JS');
           expect(true).toBeFalsy(); // should have thrown
         } catch (err) {
           /* this exception was expected */
@@ -860,9 +810,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
             ],
           },
           cmdDelimiter: '***',
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it('80 Copes with a more complex example: WBS', async () => {
@@ -891,9 +840,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               ],
             },
           },
-          _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
-        });
-        if (!WRITE_REPORTS_TO_FILE) expect(result).toMatchSnapshot();
+        }, 'JS');
+        expect(result).toMatchSnapshot();
       });
 
       it("90 Browser's entry point exists", async () => {
