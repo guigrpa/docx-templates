@@ -4,16 +4,15 @@ const zipInit = () => {
   initCache();
 };
 const zipLoad = (inputFile: ArrayBuffer) => JSZip.loadAsync(inputFile);
-const zipExists = (zip: Object, filename: string) => zip.file(filename) != null;
-const zipGetText = (zip: Object, filename: string) =>
-  getFile(zip, filename, 'text');
-const zipSetText = (zip: Object, filename: string, data: string) =>
+const zipGetText = (zip: JSZip, filename: string) =>
+  getFile(zip, filename);
+const zipSetText = (zip: JSZip, filename: string, data: string) =>
   setFile(zip, filename, data);
-const zipSetBinary = (zip: Object, filename: string, data: ArrayBuffer) =>
-  setFile(zip, filename, data, { binary: true });
-const zipSetBase64 = (zip: Object, filename: string, data: string) =>
-  setFile(zip, filename, data, { base64: true });
-const zipSave = (zip: Object) =>
+const zipSetBinary = (zip: JSZip, filename: string, data: ArrayBuffer) =>
+  zip.file(filename, data, { binary: true });
+const zipSetBase64 = (zip: JSZip, filename: string, data: string) =>
+  zip.file(filename, data, { base64: true });
+const zipSave = (zip: JSZip) =>
   zip.generateAsync({
     type: 'uint8array',
     compression: 'DEFLATE',
@@ -23,13 +22,13 @@ const zipSave = (zip: Object) =>
 // ==========================================
 // Cache outputs (so that they can be requested again)
 // ==========================================
-let cache = {};
+let cache: { [k: string]: string | null } = {};
 
-const getFile = async (zip, filename, format) => {
+const getFile = async (zip: JSZip, filename: string): Promise<string | null> => {
   if (cache[filename] !== undefined) return cache[filename];
-  let out;
+  let out: string | null;
   try {
-    out = await zip.file(filename).async(format);
+    out = await zip.file(filename).async('text');
   } catch (err) {
     out = null;
   }
@@ -37,9 +36,9 @@ const getFile = async (zip, filename, format) => {
   return out;
 };
 
-const setFile = (zip, filename, data, options) => {
+const setFile = (zip: JSZip, filename: string, data: string) => {
   cache[filename] = data;
-  return zip.file(filename, data, options);
+  return
 };
 
 const initCache = () => {
@@ -52,7 +51,6 @@ const initCache = () => {
 export {
   zipInit,
   zipLoad,
-  zipExists,
   zipGetText,
   zipSetText,
   zipSetBinary,

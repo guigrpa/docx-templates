@@ -11,9 +11,10 @@ import {
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
-import type { UserOptionsInternal, Htmls, CreateReportOptions } from './types';
+import type { UserOptionsInternal, Htmls, CreateReportOptions, Images, Links } from './types';
 import { addChild, newNonTextNode } from './reportUtils';
 import log from './debug'
+import JSZip from 'jszip';
 
 const DEFAULT_CMD_DELIMITER = '+++';
 const DEFAULT_LITERAL_XML_DELIMITER = '||';
@@ -53,6 +54,7 @@ const createReport = async (options: UserOptionsInternal) => {
   // ---------------------------------------------------------
   DEBUG && log.debug('Reading template...');
   const templateXml = await zipGetText(zip, `${templatePath}/document.xml`);
+  if (templateXml == null) throw new Error('document.xml could not be found');
   DEBUG && log.debug(`Template file length: ${templateXml.length}`);
   DEBUG && log.debug('Parsing XML...');
   const tic = new Date().getTime();
@@ -155,6 +157,7 @@ const createReport = async (options: UserOptionsInternal) => {
     const filePath = files[i];
     DEBUG && log.info(`Processing ${filePath}...`);
     const raw = await zipGetText(zip, filePath);
+    if (raw == null) throw new Error(`${filePath} could not be read`)
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
     const {
@@ -163,9 +166,9 @@ const createReport = async (options: UserOptionsInternal) => {
       links: links2,
       htmls: htmls2,
     } = await produceJsReport(queryResult, js, createOptions);
-    images = merge(images, images2);
-    links = merge(links, links2);
-    htmls = merge(htmls, htmls2);
+    images = merge(images, images2) as Images;
+    links = merge(links, links2) as Links;
+    htmls = merge(htmls, htmls2) as Htmls;
     const xml = buildXml(report2, xmlOptions);
     zipSetText(zip, filePath, xml);
 
@@ -186,9 +189,10 @@ const createReport = async (options: UserOptionsInternal) => {
     DEBUG && log.debug('Completing [Content_Types].xml...');
     const contentTypesPath = '[Content_Types].xml';
     const contentTypesXml = await zipGetText(zip, contentTypesPath);
+    if (contentTypesXml == null) throw new Error(`${contentTypesPath} could not be read`)
     const contentTypes = await parseXml(contentTypesXml);
     // DEBUG && log.debug('Content types', { attach: contentTypes });
-    const ensureContentType = (extension, contentType) => {
+    const ensureContentType = (extension: string, contentType: string) => {
       const children = contentTypes._children;
       if (
         children.filter(o => !o._fTextNode && o._attrs.Extension === extension)
@@ -232,7 +236,7 @@ const createReport = async (options: UserOptionsInternal) => {
 // ==========================================
 // Process images
 // ==========================================
-const processImages = async (images, documentComponent, zip, templatePath) => {
+const processImages = async (images: Images, documentComponent: string, zip: JSZip, templatePath: string) => {
   DEBUG && log.debug(`Processing images for ${documentComponent}...`);
   const imageIds = Object.keys(images);
   if (imageIds.length) {
@@ -270,7 +274,7 @@ const processImages = async (images, documentComponent, zip, templatePath) => {
 // ==========================================
 // Process links
 // ==========================================
-const processLinks = async (links, documentComponent, zip, templatePath) => {
+const processLinks = async (links: Links, documentComponent: string, zip: JSZip, templatePath: string) => {
   DEBUG && log.debug(`Processing links for ${documentComponent}...`);
   const linkIds = Object.keys(links);
   if (linkIds.length) {
@@ -298,7 +302,7 @@ const processLinks = async (links, documentComponent, zip, templatePath) => {
   }
 };
 
-const processHtmls = async (htmls, documentComponent, zip, templatePath) => {
+const processHtmls = async (htmls: Htmls, documentComponent: string, zip: JSZip, templatePath: string) => {
   DEBUG && log.debug(`Processing htmls for ${documentComponent}...`);
   const htmlIds = Object.keys(htmls);
   if (htmlIds.length) {
@@ -332,7 +336,7 @@ const processHtmls = async (htmls, documentComponent, zip, templatePath) => {
   }
 };
 
-const getRelsFromZip = async (zip, relsPath) => {
+const getRelsFromZip = async (zip: JSZip, relsPath: string) => {
   let relsXml = await zipGetText(zip, relsPath);
   if (!relsXml) {
     relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
