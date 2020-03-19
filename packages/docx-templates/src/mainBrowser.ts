@@ -11,7 +11,7 @@ import {
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
-import type { UserOptionsInternal } from './types';
+import type { UserOptionsInternal, Htmls, CreateReportOptions } from './types';
 import { addChild, newNonTextNode } from './reportUtils';
 import log from './debug'
 
@@ -30,7 +30,7 @@ const createReport = async (options: UserOptionsInternal) => {
   const templatePath = 'word';
   const literalXmlDelimiter =
     options.literalXmlDelimiter || DEFAULT_LITERAL_XML_DELIMITER;
-  const createOptions = {
+  const createOptions: CreateReportOptions = {
     cmdDelimiter: getCmdDelimiter(options.cmdDelimiter),
     literalXmlDelimiter,
     processLineBreaks:
@@ -345,7 +345,7 @@ const getRelsFromZip = async (zip, relsPath) => {
 // ==========================================
 // Miscellaneous
 // ==========================================
-const getCmdDelimiter = delimiter => {
+const getCmdDelimiter = (delimiter?: string | [string, string]): [string, string] => {
   if (!delimiter) return [DEFAULT_CMD_DELIMITER, DEFAULT_CMD_DELIMITER];
   if (typeof delimiter === 'string') return [delimiter, delimiter];
   return delimiter;
