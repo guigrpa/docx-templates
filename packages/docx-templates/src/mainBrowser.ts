@@ -13,13 +13,13 @@ import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
 import type { UserOptionsInternal } from './types';
 import { addChild, newNonTextNode } from './reportUtils';
+import log from './debug'
 
-const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const DEFAULT_CMD_DELIMITER = '+++';
 const DEFAULT_LITERAL_XML_DELIMITER = '||';
 
-const log: any = DEBUG ? require('./debug').mainStory : null;
-const chalk: any = DEBUG ? require('./debug').chalk : null;
+// TODO: remove
+const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 
 // ==========================================
 // Main
@@ -153,7 +153,7 @@ const createReport = async (options: UserOptionsInternal) => {
   let htmls = htmls1;
   for (let i = 0; i < files.length; i++) {
     const filePath = files[i];
-    DEBUG && log.info(`Processing ${chalk.bold(filePath)}...`);
+    DEBUG && log.info(`Processing ${filePath}...`);
     const raw = await zipGetText(zip, filePath);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);

@@ -420,7 +420,7 @@ const processCmd = async (
   ctx: Context
 ): Promise<?string> => {
   const cmd = getCommand(ctx);
-  DEBUG && log.debug(`Processing cmd: ${chalk.cyan.bold(cmd)}`);
+  DEBUG && log.debug(`Processing cmd: ${cmd}`);
   try {
     // Extract command name
     const cmdNameMatch = /^(\S+)\s*/.exec(cmd);

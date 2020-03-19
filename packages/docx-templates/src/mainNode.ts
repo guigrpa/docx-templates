@@ -3,9 +3,10 @@ import fs from 'fs-extra';
 import { set as timmSet } from 'timm';
 import createReportBrowser from './mainBrowser';
 import type { UserOptions, UserOptionsInternal } from './types';
+import log from './debug'
 
+// TODO: remove / refactor
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const log: any = DEBUG ? require('./debug').mainStory : null;
 
 const BUFFER_VALUE = 'buffer';
 // ==========================================
