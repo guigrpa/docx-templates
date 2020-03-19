@@ -1,4 +1,3 @@
-const createReport = require('./mainNode').default;
-
-module.exports = createReport;
-module.exports.default = createReport;
+import createReport from './mainNode'
+export { createReport };
+export default createReport;

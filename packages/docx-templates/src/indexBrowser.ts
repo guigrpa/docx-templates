@@ -1,4 +1,3 @@
-const createReport = require('./mainBrowser').default;
-
-module.exports = createReport;
-module.exports.default = createReport;
+import createReport from './mainBrowser'
+export { createReport };
+export default createReport;
