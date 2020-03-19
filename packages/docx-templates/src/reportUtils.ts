@@ -1,5 +1,3 @@
-// @flow
-
 import { omit } from 'timm';
 import type { Node, TextNode, NonTextNode, Context, LoopStatus } from './types';
 

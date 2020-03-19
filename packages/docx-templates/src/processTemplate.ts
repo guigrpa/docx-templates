@@ -1,7 +1,3 @@
-// @flow
-
-/* eslint-disable no-param-reassign, no-constant-condition */
-
 import path from 'path';
 import {
   cloneNodeWithoutChildren,

@@ -1,7 +1,3 @@
-// @flow
-
-/* eslint-disable no-param-reassign */
-
 import vm from 'vm';
 import { merge, omit } from 'timm';
 import { getCurLoop } from './reportUtils';
