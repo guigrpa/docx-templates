@@ -23,7 +23,6 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "scripts": {
-    "start": "cd examples/swapi && node swapi-node swapi-complex.docx",
     "travis": "yarn compile && yarn test",
     "jest": "jest --watch --coverage",
     "test": "yarn testCovFull",
