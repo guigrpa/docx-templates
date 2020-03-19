@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 import MockDate from 'mockdate';
 import md5 from 'md5';
 import { set as timmSet } from 'timm';
-import qrcode from 'yaqrcode';
+import QR from 'qrcode'
 
 // SWUT
 import createReport from '../indexNode';
@@ -18,13 +18,8 @@ const LONG_TEXT = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed 
 Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.
 Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.`;
 
-const reportConfigs = {
-  noSandbox: { noSandbox: true },
-  sandbox: { noSandbox: false },
-};
-
 ['noSandbox', 'sandbox'].forEach(type => {
-  const reportConfig = reportConfigs[type];
+  const reportConfig = type === 'sandbox' ? { noSandbox: false }: { noSandbox: true };
 
   describe(type, () => {
     describe('End-to-end', () => {
@@ -663,7 +658,7 @@ const reportConfigs = {
             ],
           },
           additionalJsContext: {
-            toLowerCase: str => str.toLowerCase(),
+            toLowerCase: (str:string) => str.toLowerCase(),
           },
           _probe: WRITE_REPORTS_TO_FILE ? undefined : 'JS',
         });
@@ -713,8 +708,8 @@ const reportConfigs = {
           template,
           data: {},
           additionalJsContext: {
-            qr: contents => {
-              const dataUrl = qrcode(contents, { size: 500 });
+            qr: async (contents:string) => {
+              const dataUrl = await QR.toDataURL(contents, { width: 500 });
               const data = dataUrl.slice('data:image/gif;base64,'.length);
               return { width: 6, height: 6, data, extension: '.gif' };
             },
@@ -738,8 +733,8 @@ const reportConfigs = {
           template,
           data: {},
           additionalJsContext: {
-            qr: contents => {
-              const dataUrl = qrcode(contents, { size: 500 });
+            qr: async (contents: string) => {
+              const dataUrl = await QR.toDataURL(contents, { width: 500 });
               const data = dataUrl.slice('data:image/gif;base64,'.length);
               return {
                 width: 6,
