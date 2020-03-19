@@ -11,7 +11,7 @@ import {
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
-import type { UserOptionsInternal, Htmls, CreateReportOptions, Images, Links } from './types';
+import type { UserOptionsInternal, Htmls, CreateReportOptions, Images, Links, Node } from './types';
 import { addChild, newNonTextNode } from './reportUtils';
 import log from './debug'
 import JSZip from 'jszip';
@@ -25,9 +25,12 @@ const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 // ==========================================
 // Main
 // ==========================================
-const createReport = async (options: UserOptionsInternal) => {
+async function createReport(options: UserOptionsInternal): Promise<Uint8Array>;
+async function createReport(options: UserOptionsInternal, _probe: 'JS'): Promise<Node>;
+async function createReport(options: UserOptionsInternal, _probe: 'XML'): Promise<string>;
+async function createReport(options: UserOptionsInternal, _probe?: 'JS' | 'XML'): Promise<Node | string | Uint8Array> {
   DEBUG && log.debug('Report options:', { attach: options });
-  const { template, data, queryVars, _probe } = options;
+  const { template, data, queryVars } = options;
   const templatePath = 'word';
   const literalXmlDelimiter =
     options.literalXmlDelimiter || DEFAULT_LITERAL_XML_DELIMITER;

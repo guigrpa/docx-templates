@@ -37,8 +37,8 @@ type RunJSFunc = (o: { sandbox: Object, ctx: Object }) => {
   result: any,
 };
 
-export type UserOptions<TemplateType extends string | Buffer> = {
-  template: TemplateType,
+export type UserOptions = {
+  template: string | Buffer,
   data?: ReportData | QueryResolver,
   queryVars?: any,
   output?: string,
@@ -47,11 +47,10 @@ export type UserOptions<TemplateType extends string | Buffer> = {
   processLineBreaks?: boolean, // true by default
   noSandbox?: boolean,
   runJs?: RunJSFunc,
-  additionalJsContext?: Object,
-  _probe?: 'JS' | 'XML',
+  additionalJsContext?: Object
 };
 
-export type UserOptionsInternal = UserOptions<Buffer | string> & {
+export type UserOptionsInternal = UserOptions & {
   template: Buffer, // template contents
 };
 
