@@ -80,7 +80,6 @@ const runUserJsAndGetRaw = async (
     );
     context = vm.createContext(sandbox); // eslint-disable-line new-cap
     script.runInContext(context);
-    // $FlowFixMe: this attribute is set in the inside code, not known by Flow
     result = context.__result__;
   }
 
