@@ -43,7 +43,6 @@
     "typescript": "^3.8.3"
   },
   "devDependencies": {
-    "@types/fs-extra": "^8.1.0",
     "@types/jest": "^25.1.4",
     "@types/jszip": "^3.1.7",
     "@types/node": "^13.9.2",
