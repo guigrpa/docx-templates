@@ -253,9 +253,9 @@ const processImages = async (images: Images, documentComponent: string, zip: JSZ
       DEBUG && log.debug(`Writing image ${imageId} (${imgName})...`);
       const imgPath = `${templatePath}/media/${imgName}`;
       if (typeof imgData === 'string') {
-        await zipSetBase64(zip, imgPath, imgData);
+        zipSetBase64(zip, imgPath, imgData);
       } else {
-        await zipSetBinary(zip, imgPath, imgData);
+        zipSetBinary(zip, imgPath, imgData);
       }
       addChild(
         rels,
