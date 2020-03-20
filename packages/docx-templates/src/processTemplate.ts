@@ -459,7 +459,7 @@ const processCmd = async (
       // END-FOR
       // END-IF
     } else if (cmdName === 'END-FOR' || cmdName === 'END-IF') {
-      out = processEndForIf(data, node, ctx, cmd, cmdName, cmdRest);
+      out = processEndForIf(node, ctx, cmd, cmdName, cmdRest);
 
       // INS <expression>
     } else if (cmdName === 'INS') {
@@ -595,7 +595,6 @@ const processForIf = async (
 };
 
 const processEndForIf = (
-  data: any,
   node: Node,
   ctx: Context,
   cmd: string,
