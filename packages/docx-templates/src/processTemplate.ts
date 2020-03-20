@@ -20,18 +20,11 @@ import type {
   LinkPars,
   Links,
   Htmls,
+  Image,
 } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log = DEBUG ? require('./debug').mainStory : null;
-
-// Load the fs module (will only succeed in node)
-let fs: any;
-try {
-  fs = require('fs-extra'); // eslint-disable-line
-} catch (err) {
-  /* ignore */
-}
 
 let gCntIf = 0;
 
@@ -720,21 +713,14 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
   ctx.pendingImageNode = drawing;
 };
 
-const getImageData = async (imagePars: ImagePars) => {
+function getImageData(imagePars: ImagePars): Image {
   const { data, extension } = imagePars;
-  if (data) {
-    if (!extension) {
-      throw new Error(
-        'If you return image `data`, make sure you return an extension as well!'
-      );
-    }
-    return { extension, data };
+  if (!extension) {
+    throw new Error(
+      'If you return image `data`, make sure you return an extension as well!'
+    );
   }
-  const { path: imgPath } = imagePars;
-  if (!imgPath) throw new Error('Specify either image `path` or `data`');
-  if (!fs) throw new Error('Cannot read image from file in the browser');
-  const buffer = await fs.readFile(imgPath);
-  return { extension: path.extname(imgPath).toLowerCase(), data: buffer };
+  return { extension, data };
 };
 
 const processLink = async (ctx: Context, linkPars: LinkPars) => {

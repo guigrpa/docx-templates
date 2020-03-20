@@ -36,7 +36,6 @@
     "node": ">=6"
   },
   "dependencies": {
-    "fs-extra": "^3.0.1",
     "jszip": "^3.2.2",
     "sax": "1.2.4",
     "timm": "^1.6.2",
