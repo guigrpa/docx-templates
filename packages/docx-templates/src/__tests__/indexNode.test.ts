@@ -613,7 +613,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
             ],
           }
         }, 'JS')
-        ).rejects.toBeInstanceOf(Error)
+        ).rejects.toMatchSnapshot()
       });
 
       it('41 Throws on invalid for logic', async () => {
@@ -631,7 +631,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
             ]
           },
         }, 'JS')
-        ).rejects.toEqual(new Error("Error executing command: END-FOR company Invalid command: END-FOR company"))
+        ).rejects.toMatchSnapshot()
       });
 
       it('41b Throws on invalid if logic (bad nesting)', async () => {
@@ -646,7 +646,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
             ],
           },
         }, 'JS')
-        ).rejects.toBeInstanceOf(Error)
+        ).rejects.toMatchSnapshot()
       });
 
       it('70 Allows customisation of cmd delimiter', async () => {
