@@ -58,7 +58,10 @@
     "typescript": "^3.8.3"
   },
   "jest": {
-    "testRegex": "src/.*__tests__/.*\\.(test|spec)\\.(js|jsx)$",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "src/.*__tests__/.*\\.(test|spec)\\.(ts|tsx)$",
     "coverageDirectory": ".nyc_output",
     "coverageReporters": [
       "json",
@@ -66,8 +69,8 @@
       "html"
     ],
     "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/debug.js",
+      "src/**/*.ts",
+      "!src/debug.ts",
       "!test/**",
       "!**/node_modules/**",
       "!**/__tests__/**",
