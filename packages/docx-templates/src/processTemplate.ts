@@ -334,7 +334,9 @@ const produceJsReport = async (
         !parent._fTextNode && // Flow-prevention
         parent._tag === 'w:t'
       ) {
-        await processText(data, nodeIn, ctx);
+        // TODO: use a discriminated union here instead of a type assertion to distinguish TextNodes from NonTextNodes.
+        const newNodeAsTextNode: TextNode = newNode as TextNode
+        newNodeAsTextNode._text = await processText(data, nodeIn, ctx);
       }
 
       // Execute the move in the output tree
