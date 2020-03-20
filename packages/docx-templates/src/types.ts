@@ -38,20 +38,15 @@ type RunJSFunc = (o: { sandbox: Object, ctx: Object }) => {
 };
 
 export type UserOptions = {
-  template: string | Buffer,
+  template: Buffer,
   data?: ReportData | QueryResolver,
   queryVars?: any,
-  output?: string,
   cmdDelimiter?: string | [string, string],
   literalXmlDelimiter?: string,
   processLineBreaks?: boolean, // true by default
   noSandbox?: boolean,
   runJs?: RunJSFunc,
   additionalJsContext?: Object
-};
-
-export type UserOptionsInternal = UserOptions & {
-  template: Buffer, // template contents
 };
 
 export type CreateReportOptions = {
@@ -119,8 +114,7 @@ export type LoopStatus = {
 export type ImagePars = {
   width: number, // cm
   height: number, // cm
-  path?: string, // only supported in Node
-  data?: ArrayBuffer | string, // supported in Node and the browser
+  data: ArrayBuffer | string,
   extension?: string,
   alt?: string, // optional alt text
 };
