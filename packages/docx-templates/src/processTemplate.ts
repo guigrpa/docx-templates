@@ -478,21 +478,21 @@ const processCmd = async (
       // IMAGE <code>
     } else if (cmdName === 'IMAGE') {
       if (!isLoopExploring(ctx)) {
-        const img = (await runUserJsAndGetRaw(data, cmdRest, ctx));
+        const img: ImagePars | undefined = (await runUserJsAndGetRaw(data, cmdRest, ctx));
         if (img != null) await processImage(ctx, img);
       }
 
       // LINK <code>
     } else if (cmdName === 'LINK') {
       if (!isLoopExploring(ctx)) {
-        const pars = (await runUserJsAndGetRaw(data, cmdRest, ctx));
+        const pars: LinkPars | undefined = (await runUserJsAndGetRaw(data, cmdRest, ctx));
         if (pars != null) await processLink(ctx, pars);
       }
 
       // HTML <code>
     } else if (cmdName === 'HTML') {
       if (!isLoopExploring(ctx)) {
-        const html = (await runUserJsAndGetRaw(data, cmdRest, ctx));
+        const html: string | undefined = (await runUserJsAndGetRaw(data, cmdRest, ctx));
         if (html != null) await processHtml(ctx, html);
       }
 
