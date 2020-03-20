@@ -11,7 +11,6 @@ import createReportBrowser from '../indexBrowser';
 import { UserOptions } from '../types';
 
 const outputDir = path.join(__dirname, 'out');
-const WRITE_REPORTS_TO_FILE = false;
 
 const LONG_TEXT = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.
 Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.
@@ -738,59 +737,47 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           'fixtures',
           'invalidCommand.docx'
         );
-        try {
-          await createReport({
-            template,
-            data: {
-              companies: [
-                { name: 'FIRST' },
-                { name: 'SECOND' },
-                { name: 'THIRD' },
-              ],
-            }
-          }, 'JS');
-          expect(true).toBeFalsy(); // should have thrown
-        } catch (err) {
-          /* this exception was expected */
-        }
+        return expect(createReport({
+          template,
+          data: {
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
+          }
+        }, 'JS')
+        ).rejects.toBeInstanceOf(Error)
       });
 
       it('41 Throws on invalid for logic', async () => {
         const template = path.join(__dirname, 'fixtures', 'invalidFor.docx');
-        try {
-          await createReport({
-            template,
-            data: {
-              companies: [
-                { name: 'FIRST' },
-                { name: 'SECOND' },
-                { name: 'THIRD' },
-              ],
-            },
-          }, 'JS');
-          expect(true).toBeFalsy(); // should have thrown
-        } catch (err) {
-          /* this exception was expected */
-        }
+        return expect(createReport({
+          template,
+          data: {
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
+          },
+        }, 'JS')
+        ).rejects.toBeInstanceOf(Error)
       });
 
       it('41b Throws on invalid if logic (bad nesting)', async () => {
         const template = path.join(__dirname, 'fixtures', 'invalidIf.docx');
-        try {
-          await createReport({
-            template,
-            data: {
-              companies: [
-                { name: 'FIRST' },
-                { name: 'SECOND' },
-                { name: 'THIRD' },
-              ],
-            },
-          }, 'JS');
-          expect(true).toBeFalsy(); // should have thrown
-        } catch (err) {
-          /* this exception was expected */
-        }
+        return expect(createReport({
+          template,
+          data: {
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
+          },
+        }, 'JS')
+        ).rejects.toBeInstanceOf(Error)
       });
 
       it('70 Allows customisation of cmd delimiter', async () => {
