@@ -824,7 +824,8 @@ const reportConfigs = {
           });
           expect(true).toBeFalsy(); // should have thrown
         } catch (err) {
-          /* this exception was expected */
+          expect(err).toBeInstanceOf(Error)
+          expect(err).toMatchSnapshot()
         }
       });
 
@@ -844,7 +845,8 @@ const reportConfigs = {
           });
           expect(true).toBeFalsy(); // should have thrown
         } catch (err) {
-          /* this exception was expected */
+          expect(err).toBeInstanceOf(Error)
+          expect(err).toMatchSnapshot()
         }
       });
 
