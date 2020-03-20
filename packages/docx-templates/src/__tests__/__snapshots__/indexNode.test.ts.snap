@@ -9867,126 +9867,126 @@ Object {
 `;
 
 exports[`noSandbox Template processing 23 Allows characters that conflict with XML 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"00BE3B8D\" w:rsidRDefault=\"00BE3B8D\" w:rsidP=\"00BE3B8D\">
+    <w:p w:rsidR=\\"00BE3B8D\\" w:rsidRDefault=\\"00BE3B8D\\" w:rsidP=\\"00BE3B8D\\">
       <w:r>
-        <w:t xml:space=\"preserve\">3 &lt; 4 &lt;&lt; 400</w:t>
+        <w:t xml:space=\\"preserve\\">3 &lt; 4 &lt;&lt; 400</w:t>
       </w:r>
-      <w:r w:rsidR=\"00160A38\">
-        <w:t xml:space=\"preserve\"></w:t>
+      <w:r w:rsidR=\\"00160A38\\">
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
       <w:r>
-        <w:t xml:space=\"preserve\"></w:t>
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00BE3B8D\" w:rsidRDefault=\"00BE3B8D\" w:rsidP=\"00BE3B8D\">
+    <w:p w:rsidR=\\"00BE3B8D\\" w:rsidRDefault=\\"00BE3B8D\\" w:rsidP=\\"00BE3B8D\\">
       <w:r>
-        <w:t xml:space=\"preserve\">5 &gt; 2 &gt;&gt; -100</w:t>
+        <w:t xml:space=\\"preserve\\">5 &gt; 2 &gt;&gt; -100</w:t>
       </w:r>
-      <w:r w:rsidR=\"00160A38\">
-        <w:t xml:space=\"preserve\"></w:t>
+      <w:r w:rsidR=\\"00160A38\\">
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
       <w:r>
-        <w:t xml:space=\"preserve\"></w:t>
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00BE3B8D\" w:rsidRDefault=\"00BE3B8D\" w:rsidP=\"00BE3B8D\">
+    <w:p w:rsidR=\\"00BE3B8D\\" w:rsidRDefault=\\"00BE3B8D\\" w:rsidP=\\"00BE3B8D\\">
       <w:r>
-        <w:t xml:space=\"preserve\">a &amp; b &amp;&amp; c</w:t>
+        <w:t xml:space=\\"preserve\\">a &amp; b &amp;&amp; c</w:t>
       </w:r>
-      <w:r w:rsidR=\"00160A38\">
-        <w:t xml:space=\"preserve\"></w:t>
+      <w:r w:rsidR=\\"00160A38\\">
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
       <w:r>
-        <w:t xml:space=\"preserve\"></w:t>
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00426180\" w:rsidRDefault=\"00426180\"/>
-    <w:sectPr w:rsidR=\"00426180\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:p w:rsidR=\\"00426180\\" w:rsidRDefault=\\"00426180\\"/>
+    <w:sectPr w:rsidR=\\"00426180\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
 `;
 
 exports[`noSandbox Template processing 23b Allows insertion of literal XML 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRDefault=\\"00ED2A26\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">foo<w:br/>bar</w:t>
+        <w:t xml:space=\\"preserve\\">foo<w:br/>bar</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+    <w:p w:rsidR=\\"00ED2A26\\" w:rsidRPr=\\"009357C2\\" w:rsidRDefault=\\"00ED2A26\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
     </w:p>
-    <w:sectPr w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:sectPr w:rsidR=\\"00ED2A26\\" w:rsidRPr=\\"009357C2\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
 `;
 
 exports[`noSandbox Template processing 23c Allows insertion of literal XML with custom delimiter 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRDefault=\\"00ED2A26\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">foo<w:br/>bar</w:t>
+        <w:t xml:space=\\"preserve\\">foo<w:br/>bar</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+    <w:p w:rsidR=\\"00ED2A26\\" w:rsidRPr=\\"009357C2\\" w:rsidRDefault=\\"00ED2A26\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
     </w:p>
-    <w:sectPr w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:sectPr w:rsidR=\\"00ED2A26\\" w:rsidRPr=\\"009357C2\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
@@ -10467,112 +10467,112 @@ Object {
 `;
 
 exports[`noSandbox Template processing 25 Adds line breaks by default 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">A long text:</w:t>
+        <w:t xml:space=\\"preserve\\">A long text:</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00426180\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"00426180\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.<w:br/>Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.<w:br/>Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.</w:t>
+        <w:t xml:space=\\"preserve\\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.<w:br/>Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.<w:br/>Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRPr=\\"009357C2\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">THE END</w:t>
+        <w:t xml:space=\\"preserve\\">THE END</w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
     </w:p>
-    <w:sectPr w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:sectPr w:rsidR=\\"009357C2\\" w:rsidRPr=\\"009357C2\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
 `;
 
 exports[`noSandbox Template processing 25b Allows disabling line break processing 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">A long text:</w:t>
+        <w:t xml:space=\\"preserve\\">A long text:</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00426180\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"00426180\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.
+        <w:t xml:space=\\"preserve\\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.
 Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.
 Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRPr=\\"009357C2\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">THE END</w:t>
+        <w:t xml:space=\\"preserve\\">THE END</w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
     </w:p>
-    <w:sectPr w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:sectPr w:rsidR=\\"009357C2\\" w:rsidRPr=\\"009357C2\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
@@ -35632,126 +35632,126 @@ Object {
 `;
 
 exports[`sandbox Template processing 23 Allows characters that conflict with XML 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"00BE3B8D\" w:rsidRDefault=\"00BE3B8D\" w:rsidP=\"00BE3B8D\">
+    <w:p w:rsidR=\\"00BE3B8D\\" w:rsidRDefault=\\"00BE3B8D\\" w:rsidP=\\"00BE3B8D\\">
       <w:r>
-        <w:t xml:space=\"preserve\">3 &lt; 4 &lt;&lt; 400</w:t>
+        <w:t xml:space=\\"preserve\\">3 &lt; 4 &lt;&lt; 400</w:t>
       </w:r>
-      <w:r w:rsidR=\"00160A38\">
-        <w:t xml:space=\"preserve\"></w:t>
+      <w:r w:rsidR=\\"00160A38\\">
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
       <w:r>
-        <w:t xml:space=\"preserve\"></w:t>
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00BE3B8D\" w:rsidRDefault=\"00BE3B8D\" w:rsidP=\"00BE3B8D\">
+    <w:p w:rsidR=\\"00BE3B8D\\" w:rsidRDefault=\\"00BE3B8D\\" w:rsidP=\\"00BE3B8D\\">
       <w:r>
-        <w:t xml:space=\"preserve\">5 &gt; 2 &gt;&gt; -100</w:t>
+        <w:t xml:space=\\"preserve\\">5 &gt; 2 &gt;&gt; -100</w:t>
       </w:r>
-      <w:r w:rsidR=\"00160A38\">
-        <w:t xml:space=\"preserve\"></w:t>
+      <w:r w:rsidR=\\"00160A38\\">
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
       <w:r>
-        <w:t xml:space=\"preserve\"></w:t>
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00BE3B8D\" w:rsidRDefault=\"00BE3B8D\" w:rsidP=\"00BE3B8D\">
+    <w:p w:rsidR=\\"00BE3B8D\\" w:rsidRDefault=\\"00BE3B8D\\" w:rsidP=\\"00BE3B8D\\">
       <w:r>
-        <w:t xml:space=\"preserve\">a &amp; b &amp;&amp; c</w:t>
+        <w:t xml:space=\\"preserve\\">a &amp; b &amp;&amp; c</w:t>
       </w:r>
-      <w:r w:rsidR=\"00160A38\">
-        <w:t xml:space=\"preserve\"></w:t>
+      <w:r w:rsidR=\\"00160A38\\">
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
       <w:r>
-        <w:t xml:space=\"preserve\"></w:t>
+        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00426180\" w:rsidRDefault=\"00426180\"/>
-    <w:sectPr w:rsidR=\"00426180\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:p w:rsidR=\\"00426180\\" w:rsidRDefault=\\"00426180\\"/>
+    <w:sectPr w:rsidR=\\"00426180\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
 `;
 
 exports[`sandbox Template processing 23b Allows insertion of literal XML 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRDefault=\\"00ED2A26\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">foo<w:br/>bar</w:t>
+        <w:t xml:space=\\"preserve\\">foo<w:br/>bar</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+    <w:p w:rsidR=\\"00ED2A26\\" w:rsidRPr=\\"009357C2\\" w:rsidRDefault=\\"00ED2A26\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
     </w:p>
-    <w:sectPr w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:sectPr w:rsidR=\\"00ED2A26\\" w:rsidRPr=\\"009357C2\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
 `;
 
 exports[`sandbox Template processing 23c Allows insertion of literal XML with custom delimiter 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRDefault=\\"00ED2A26\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">foo<w:br/>bar</w:t>
+        <w:t xml:space=\\"preserve\\">foo<w:br/>bar</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"00ED2A26\">
+    <w:p w:rsidR=\\"00ED2A26\\" w:rsidRPr=\\"009357C2\\" w:rsidRDefault=\\"00ED2A26\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
     </w:p>
-    <w:sectPr w:rsidR=\"00ED2A26\" w:rsidRPr=\"009357C2\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:sectPr w:rsidR=\\"00ED2A26\\" w:rsidRPr=\\"009357C2\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
@@ -36232,112 +36232,112 @@ Object {
 `;
 
 exports[`sandbox Template processing 25 Adds line breaks by default 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">A long text:</w:t>
+        <w:t xml:space=\\"preserve\\">A long text:</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00426180\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"00426180\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.<w:br/>Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.<w:br/>Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.</w:t>
+        <w:t xml:space=\\"preserve\\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.<w:br/>Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.<w:br/>Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRPr=\\"009357C2\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">THE END</w:t>
+        <w:t xml:space=\\"preserve\\">THE END</w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
     </w:p>
-    <w:sectPr w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:sectPr w:rsidR=\\"009357C2\\" w:rsidRPr=\\"009357C2\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
 `;
 
 exports[`sandbox Template processing 25b Allows disabling line break processing 1`] = `
-"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
-<w:document xmlns:wpc=\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:wp14=\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\" xmlns:wp=\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\" xmlns:w10=\"urn:schemas-microsoft-com:office:word\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:w14=\"http://schemas.microsoft.com/office/word/2010/wordml\" xmlns:w15=\"http://schemas.microsoft.com/office/word/2012/wordml\" xmlns:wpg=\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\" xmlns:wpi=\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\" xmlns:wne=\"http://schemas.microsoft.com/office/word/2006/wordml\" xmlns:wps=\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\" mc:Ignorable=\"w14 w15 wp14\">
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 wp14\\">
   <w:body>
-    <w:p w:rsidR=\"009357C2\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">A long text:</w:t>
+        <w:t xml:space=\\"preserve\\">A long text:</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"00426180\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"00426180\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.
+        <w:t xml:space=\\"preserve\\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.
 Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.
 Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.</w:t>
       </w:r>
     </w:p>
-    <w:p w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\" w:rsidRDefault=\"009357C2\">
+    <w:p w:rsidR=\\"009357C2\\" w:rsidRPr=\\"009357C2\\" w:rsidRDefault=\\"009357C2\\">
       <w:pPr>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
       </w:pPr>
       <w:r>
         <w:rPr>
-          <w:lang w:val=\"es-ES\"/>
+          <w:lang w:val=\\"es-ES\\"/>
         </w:rPr>
-        <w:t xml:space=\"preserve\">THE END</w:t>
+        <w:t xml:space=\\"preserve\\">THE END</w:t>
       </w:r>
-      <w:bookmarkStart w:id=\"0\" w:name=\"_GoBack\"/>
-      <w:bookmarkEnd w:id=\"0\"/>
+      <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
+      <w:bookmarkEnd w:id=\\"0\\"/>
     </w:p>
-    <w:sectPr w:rsidR=\"009357C2\" w:rsidRPr=\"009357C2\">
-      <w:pgSz w:w=\"12240\" w:h=\"15840\"/>
-      <w:pgMar w:top=\"1417\" w:right=\"1701\" w:bottom=\"1417\" w:left=\"1701\" w:header=\"708\" w:footer=\"708\" w:gutter=\"0\"/>
-      <w:cols w:space=\"708\"/>
-      <w:docGrid w:linePitch=\"360\"/>
+    <w:sectPr w:rsidR=\\"009357C2\\" w:rsidRPr=\\"009357C2\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
     </w:sectPr>
   </w:body>
 </w:document>"
