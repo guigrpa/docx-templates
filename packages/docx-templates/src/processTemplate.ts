@@ -495,7 +495,7 @@ const processCmd = async (
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
     return out;
   } catch (err) {
-    throw new Error(`Error executing command: ${cmd}\n${err.message}`);
+    throw new Error(`Error executing command: ${cmd} ${err.message}`);
   }
 };
 

@@ -626,9 +626,12 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               { name: 'SECOND' },
               { name: 'THIRD' },
             ],
+            persons: [
+              { name: 'johnny' }
+            ]
           },
         }, 'JS')
-        ).rejects.toBeInstanceOf(Error)
+        ).rejects.toEqual(new Error("Error executing command: END-FOR company Invalid command: END-FOR company"))
       });
 
       it('41b Throws on invalid if logic (bad nesting)', async () => {
