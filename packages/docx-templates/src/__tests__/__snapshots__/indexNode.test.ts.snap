@@ -196,7 +196,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -591,7 +590,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -1083,7 +1081,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -1498,7 +1495,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -2640,7 +2636,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -4082,7 +4077,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -4779,7 +4773,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -5349,7 +5342,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -5764,7 +5756,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -6245,7 +6236,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -6726,7 +6716,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -7161,7 +7150,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -7628,7 +7616,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -7855,7 +7842,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -8670,7 +8656,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -9060,7 +9045,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -9569,7 +9553,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -9879,7 +9862,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -10480,7 +10462,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -10906,7 +10887,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -11503,7 +11483,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -13811,7 +13790,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -14145,7 +14123,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -14625,7 +14602,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -14980,7 +14956,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -15473,7 +15448,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -16463,7 +16437,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -16948,7 +16921,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -17433,7 +17405,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -18314,7 +18285,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -20519,12 +20489,9 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
-
-exports[`noSandbox Template processing 38a Processes IMAGE commands with paths 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
 
 exports[`noSandbox Template processing 38a-bis Processes IMAGE commands with paths in a header 1`] = `
 Object {
@@ -20659,12 +20626,9 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
-
-exports[`noSandbox Template processing 38a-bis Processes IMAGE commands with paths in a header 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
 
 exports[`noSandbox Template processing 38b Processes IMAGE commands with base64 data 1`] = `
 Object {
@@ -21126,12 +21090,9 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
-
-exports[`noSandbox Template processing 38b Processes IMAGE commands with base64 data 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
 
 exports[`noSandbox Template processing 38c Processes IMAGE commands with alt text 1`] = `
 Object {
@@ -21593,12 +21554,9 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
-
-exports[`noSandbox Template processing 38c Processes IMAGE commands with alt text 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
 
 exports[`noSandbox Template processing 39 Processes LINK commands 1`] = `
 Object {
@@ -22246,7 +22204,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -22682,7 +22639,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -25805,7 +25761,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -26006,7 +25961,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -26401,7 +26355,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -26893,7 +26846,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -27308,7 +27260,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -28450,7 +28401,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -29892,7 +29842,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -30589,7 +30538,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -31159,7 +31107,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -31574,7 +31521,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -32055,7 +32001,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -32536,7 +32481,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -32971,7 +32915,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -33438,7 +33381,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -33665,7 +33607,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -34480,7 +34421,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -34870,7 +34810,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -35379,7 +35318,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -35689,7 +35627,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -36290,7 +36227,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -36716,7 +36652,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -37313,7 +37248,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -39621,7 +39555,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -39955,7 +39888,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -40435,7 +40367,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -40790,7 +40721,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -41283,7 +41213,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -42273,7 +42202,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -42758,7 +42686,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -43243,7 +43170,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -44124,7 +44050,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -46329,12 +46254,9 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
-
-exports[`sandbox Template processing 38a Processes IMAGE commands with paths 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
 
 exports[`sandbox Template processing 38a-bis Processes IMAGE commands with paths in a header 1`] = `
 Object {
@@ -46469,12 +46391,9 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
-
-exports[`sandbox Template processing 38a-bis Processes IMAGE commands with paths in a header 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
 
 exports[`sandbox Template processing 38b Processes IMAGE commands with base64 data 1`] = `
 Object {
@@ -46936,12 +46855,9 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
-
-exports[`sandbox Template processing 38b Processes IMAGE commands with base64 data 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
 
 exports[`sandbox Template processing 38c Processes IMAGE commands with alt text 1`] = `
 Object {
@@ -47403,12 +47319,9 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
-
-exports[`sandbox Template processing 38c Processes IMAGE commands with alt text 2`] = `"3449c9e5e332f1dbb81505cd739fbf3f"`;
 
 exports[`sandbox Template processing 39 Processes LINK commands 1`] = `
 Object {
@@ -48056,7 +47969,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -48492,7 +48404,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
@@ -51615,7 +51526,6 @@ Object {
     },
   ],
   "_fTextNode": false,
-  "_parent": null,
   "_tag": "w:document",
 }
 `;
