@@ -1,25 +1,19 @@
 {
     "compilerOptions": {
-        "target": "ES2019",
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
-        "allowJs": true,
-        "skipLibCheck": true,
+        "target": "es5",
+        "module": "commonjs",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "forceConsistentCasingInFileNames": true,
-        "module": "ESNext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
         "noEmit": false,
-        "outDir": "./lib/"
+        "outDir": "./lib/",
+        "declaration": true
     },
     "include": [
         "src"
+    ],
+    "exclude": [
+        "src/__tests__/**/*"
     ]
 }
