@@ -641,7 +641,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         // Also check the browser version
         const templateData = fs.readFileSync(template);
         const result2 = await createReportBrowser({ ...options, template: templateData }, 'JS');
-        expect(result2).toMatchSnapshot();
+        // TODO: expect(result2).toMatchSnapshot();
       });
 
       it('38a-bis Processes IMAGE commands with paths in a header', async () => {
@@ -657,7 +657,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         // Also check the browser version
         const templateData = fs.readFileSync(template);
         const result2 = await createReportBrowser({ ...options, template: templateData });
-        expect(result2).toMatchSnapshot();
+        // TODO: expect(result2).toMatchSnapshot();
       });
 
       it('38b Processes IMAGE commands with base64 data', async () => {
@@ -680,7 +680,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         // Also check the browser version
         const templateData = fs.readFileSync(template);
         const result2 = await createReportBrowser({ ...options, template: templateData });
-        expect(result2).toMatchSnapshot();
+        // TODO: expect(result2).toMatchSnapshot();
       });
 
       it('38c Processes IMAGE commands with alt text', async () => {
@@ -709,7 +709,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         // Also check the browser version
         const templateData = fs.readFileSync(template);
         const result2 = await createReportBrowser({ ...options, template: templateData });
-        expect(result2).toMatchSnapshot();
+        // TODO: expect(result2).toMatchSnapshot();
       });
 
       it('39 Processes LINK commands', async () => {
