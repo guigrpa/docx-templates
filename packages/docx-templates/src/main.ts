@@ -1,6 +1,5 @@
 import { merge } from 'timm';
 import {
-  zipInit,
   zipLoad,
   zipGetText,
   zipSetText,
@@ -49,7 +48,6 @@ async function createReport(options: UserOptions, _probe?: 'JS' | 'XML'): Promis
   // Unzip
   // ---------------------------------------------------------
   DEBUG && log.debug('Unzipping...');
-  zipInit();
   const zip = await zipLoad(template);
 
   // ---------------------------------------------------------
