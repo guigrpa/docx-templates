@@ -828,6 +828,27 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         ).rejects.toMatchSnapshot();
       });
 
+      it('42 Lists all errors in the document', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'invalidMultipleErrors.docx')
+        );
+        return expect(
+          createReport(
+            {
+              template,
+              data: {
+                companies: [
+                  { name: 'FIRST' },
+                  { name: 'SECOND' },
+                  { name: 'THIRD' },
+                ],
+              },
+            },
+            'JS'
+          )
+        ).rejects.toMatchSnapshot();
+      });
+
       it('70 Allows customisation of cmd delimiter', async () => {
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'for1customDelimiter.docx')
