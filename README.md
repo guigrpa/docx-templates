@@ -15,6 +15,7 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
 * Run all JavaScript in a **separate Node VM for security**
 * Include **literal XML**
+* Written in TypeScript, so ships with type definitions.
 * Plenty of **examples** in this repo (with Node, Webpack and Browserify)
 
 Contributions are welcome!
@@ -35,13 +36,16 @@ $ yarn add docx-templates
 
 ## Node usage
 
-Here is a (contrived) example, with report data injected directly as an object:
+Here is a simple example, with report data injected directly as an object:
 
 ```js
 import createReport from 'docx-templates';
+import fs from 'fs';
+
+const template = fs.readFileSync('myTemplate.docx');
 
 createReport({
-  template: 'templates/myTemplate.docx',
+  template,
   output: 'reports/myReport.docx',
   data: {
     name: 'John',
@@ -50,16 +54,11 @@ createReport({
 });
 ```
 
-This will create a report based on the input data at the specified path. Some notes:
-
-* All paths are relative to `process.cwd()`
-* If the output location is omitted, a report will be generated in the same folder as the template
-
 You can also **provide a sync or Promise-returning callback function (query resolver)** instead of a `data` object:
 
 ```js
 createReport({
-  template: 'templates/myTemplate.docx',
+  template,
   output: 'reports/myReport.docx',
   data: query => graphqlServer.execute(query),
 });
@@ -70,17 +69,6 @@ Your resolver callback will receive the query embedded in the template (in a `QU
 You can also **output to a buffer**:
 
 ```js
-const buffer = await createReport({
-  output: 'buffer',
-  template: 'templates/myTemplate.docx',
-  data: { ... },
-});
-```
-
-...and **pass a buffer as an input `template`**:
-
-```js
-const template = // read from database, HTTP, etc. as a Buffer
 const buffer = await createReport({
   output: 'buffer',
   template,
@@ -126,7 +114,7 @@ Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/t
 
 ## Browser usage
 
-You can use docx-templates in the browser (yay!). Instead of providing docx-templates with the template's path, pass the template contents as a buffer. For example, get a File object with:
+You can use docx-templates in the browser (yay!). Just as when using docx-templates in Node, you need to provide the template contents as a buffer-like object. For example, you can get a `File` object with:
 
 ```html
 <input type="file">
@@ -301,11 +289,8 @@ The JS snippet must return an _image object_ or a Promise of an _image object_, 
 
 * `width` in cm
 * `height` in cm
-* `path` _[optional]_ (in Node only): path to the image to be embedded (absolute or relative to the current working directory)
-* `data` _[optional]_: either an ArrayBuffer or a base64 string with the image data
+* `data`: either an ArrayBuffer or a base64 string with the image data
 * `extension` _[optional]_: e.g. `.png`
-
-Either specify the `path` or `data` + `extension`.
 
 ### `LINK`
 
