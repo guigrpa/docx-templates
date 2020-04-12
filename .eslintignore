@@ -1,0 +1,7 @@
+node_modules
+lib
+coverage
+.nyc_output
+.nyc_tmp
+examples/example-browserify/public/docx-templates.js
+examples/example-webpack/public

@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import MockDate from 'mockdate';
 import QR from 'qrcode';
-import createReport from '../index';
+import { createReport } from '../index';
 import { UserOptions } from '../types';
 
 const LONG_TEXT = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.
