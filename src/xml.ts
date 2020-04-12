@@ -1,5 +1,5 @@
 import sax, { QualifiedAttribute } from 'sax';
-import type { Node } from './types';
+import { Node } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log = DEBUG ? require('./debug').mainStory : null;

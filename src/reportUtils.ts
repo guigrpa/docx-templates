@@ -1,5 +1,5 @@
 import { omit } from 'timm';
-import type { Node, TextNode, NonTextNode, Context, LoopStatus } from './types';
+import { Node, TextNode, NonTextNode, Context, LoopStatus } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log = DEBUG ? require('./debug').mainStory : null;

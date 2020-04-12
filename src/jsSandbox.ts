@@ -1,7 +1,7 @@
 import vm from 'vm';
 import { merge, omit } from 'timm';
 import { getCurLoop } from './reportUtils';
-import type { ReportData, Context } from './types';
+import { ReportData, Context } from './types';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log = DEBUG ? require('./debug').mainStory : null;
