@@ -26,11 +26,13 @@
     "compile": "tsc",
     "travis": "yarn compile && yarn test",
     "jest": "jest --watch --coverage",
-    "test": "yarn testCovFull",
+    "test": "yarn prettier-check && yarn testCovFull",
     "testCovFull": "yarn testCovPrepare && yarn testDev && yarn testCovReport",
     "testCovPrepare": "rm -rf ./coverage .nyc_output .nyc_tmp && mkdir .nyc_tmp",
     "testDev": "NODE_ENV=development jest --coverage && mv .nyc_output/coverage-final.json .nyc_tmp/coverage-dev.json && rm -rf .nyc_output",
-    "testCovReport": "cp -r .nyc_tmp .nyc_output && nyc report --reporter=html --reporter=lcov --reporter=text"
+    "testCovReport": "cp -r .nyc_tmp .nyc_output && nyc report --reporter=html --reporter=lcov --reporter=text",
+    "prettier": "prettier --write \"src/**/*.ts\"",
+    "prettier-check": "prettier --check \"src/**/*.ts\""
   },
   "engines": {
     "node": ">=6"

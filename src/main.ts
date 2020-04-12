@@ -10,7 +10,7 @@ import {
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
-import type { UserOptions, Htmls, CreateReportOptions, Images, Links, Node } from './types';
+import { UserOptions, Htmls, CreateReportOptions, Images, Links, Node } from './types';
 import { addChild, newNonTextNode } from './reportUtils';
 import log from './debug'
 import JSZip from 'jszip';

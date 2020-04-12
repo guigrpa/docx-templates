@@ -8,7 +8,7 @@ import {
   logLoop,
 } from './reportUtils';
 import { runUserJsAndGetString, runUserJsAndGetRaw } from './jsSandbox';
-import type {
+import {
   Node,
   TextNode,
   ReportData,
