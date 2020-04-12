@@ -2,10 +2,11 @@ require('isomorphic-fetch');
 const qrcode = require('yaqrcode');
 const createReport = require('docx-templates').default;
 const { VM, VMScript } = require('vm2');
+const fs = require('fs')
+const template = fs.readFileSync(process.argv[2])
 
 createReport({
-  template: process.argv[2],
-  output: process.argv.length > 3 ? process.argv[3] : null,
+  template,
   data: query =>
     fetch('http://swapi.apis.guru', {
       method: 'POST',
@@ -45,7 +46,12 @@ createReport({
     const result = modifiedSandbox.__result__;
     return { modifiedSandbox, result };
   },
-});
+}).then(
+  rendered => fs.writeFileSync(
+    process.argv.length > 3 ? process.argv[3] : null,
+    rendered
+  ))
+  .catch(console.log);
 
 /*
 {
