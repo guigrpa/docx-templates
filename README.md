@@ -44,14 +44,15 @@ import fs from 'fs';
 
 const template = fs.readFileSync('myTemplate.docx');
 
-createReport({
+const buffer = createReport({
   template,
-  output: 'reports/myReport.docx',
   data: {
     name: 'John',
     surname: 'Appleseed',
   },
 });
+
+fs.writeFileSync('report.docx', buffer)
 ```
 
 You can also **provide a sync or Promise-returning callback function (query resolver)** instead of a `data` object:
@@ -59,22 +60,11 @@ You can also **provide a sync or Promise-returning callback function (query reso
 ```js
 createReport({
   template,
-  output: 'reports/myReport.docx',
   data: query => graphqlServer.execute(query),
 });
 ```
 
 Your resolver callback will receive the query embedded in the template (in a `QUERY` command) as an argument.
-
-You can also **output to a buffer**:
-
-```js
-const buffer = await createReport({
-  output: 'buffer',
-  template,
-  data: { ... },
-});
-```
 
 Other options (with defaults):
 
