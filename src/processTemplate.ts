@@ -76,10 +76,10 @@ const extractQuery = async (
 };
 
 type ReportOutput = {
-  report: Node,
-  images: Images,
-  links: Links,
-  htmls: Htmls,
+  report: Node;
+  images: Images;
+  links: Links;
+  htmls: Htmls;
 };
 
 const produceJsReport = async (
@@ -327,7 +327,7 @@ const produceJsReport = async (
         parent._tag === 'w:t'
       ) {
         // TODO: use a discriminated union here instead of a type assertion to distinguish TextNodes from NonTextNodes.
-        const newNodeAsTextNode: TextNode = newNode as TextNode
+        const newNodeAsTextNode: TextNode = newNode as TextNode;
         newNodeAsTextNode._text = await processText(data, nodeIn, ctx);
       }
 
@@ -472,21 +472,33 @@ const processCmd = async (
       // IMAGE <code>
     } else if (cmdName === 'IMAGE') {
       if (!isLoopExploring(ctx)) {
-        const img: ImagePars | undefined = (await runUserJsAndGetRaw(data, cmdRest, ctx));
+        const img: ImagePars | undefined = await runUserJsAndGetRaw(
+          data,
+          cmdRest,
+          ctx
+        );
         if (img != null) await processImage(ctx, img);
       }
 
       // LINK <code>
     } else if (cmdName === 'LINK') {
       if (!isLoopExploring(ctx)) {
-        const pars: LinkPars | undefined = (await runUserJsAndGetRaw(data, cmdRest, ctx));
+        const pars: LinkPars | undefined = await runUserJsAndGetRaw(
+          data,
+          cmdRest,
+          ctx
+        );
         if (pars != null) await processLink(ctx, pars);
       }
 
       // HTML <code>
     } else if (cmdName === 'HTML') {
       if (!isLoopExploring(ctx)) {
-        const html: string | undefined = (await runUserJsAndGetRaw(data, cmdRest, ctx));
+        const html: string | undefined = await runUserJsAndGetRaw(
+          data,
+          cmdRest,
+          ctx
+        );
         if (html != null) await processHtml(ctx, html);
       }
 
@@ -719,7 +731,7 @@ function getImageData(imagePars: ImagePars): Image {
     );
   }
   return { extension, data };
-};
+}
 
 const processLink = async (ctx: Context, linkPars: LinkPars) => {
   const { url, label = url } = linkPars;
@@ -732,7 +744,7 @@ const processLink = async (ctx: Context, linkPars: LinkPars) => {
   const link = node('w:hyperlink', { 'r:id': relId, 'w:history': '1' }, [
     node('w:r', {}, [
       textRunPropsNode ||
-      node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
+        node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
       node('w:t', {}, [newTextNode(label)]),
     ]),
   ]);
@@ -752,19 +764,19 @@ const processHtml = async (ctx: Context, data: string) => {
 // ==========================================
 // Helpers
 // ==========================================
-const BufferKeys = ['w:p', 'w:tr'] as const
+const BufferKeys = ['w:p', 'w:tr'] as const;
 const appendTextToTagBuffers = (
   text: string,
   ctx: Context,
   options: {
-    fCmd?: boolean,
-    fInsertedText?: boolean,
+    fCmd?: boolean;
+    fInsertedText?: boolean;
   }
 ) => {
   if (ctx.fSeekQuery) return;
   const { fCmd, fInsertedText } = options;
   const type = fCmd ? 'cmds' : 'text';
-  BufferKeys.forEach((key) => {
+  BufferKeys.forEach(key => {
     const buf = ctx.buffers[key];
     buf[type] += text;
     if (fInsertedText) buf.fInsertedText = true;

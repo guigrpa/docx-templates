@@ -3,7 +3,7 @@
 import path from 'path';
 import fs from 'fs';
 import MockDate from 'mockdate';
-import QR from 'qrcode'
+import QR from 'qrcode';
 import createReport from '../index';
 import { UserOptions } from '../types';
 
@@ -12,7 +12,8 @@ Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam
 Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.`;
 
 ['noSandbox', 'sandbox'].forEach(type => {
-  const reportConfig = type === 'sandbox' ? { noSandbox: false } : { noSandbox: true };
+  const reportConfig =
+    type === 'sandbox' ? { noSandbox: false } : { noSandbox: true };
 
   describe(type, () => {
     describe('Template processing', () => {
@@ -26,518 +27,672 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
       });
 
       it('01 Probe works', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'noQuery.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'noQuery.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+          },
+          'JS'
+        );
         expect(result._children.length).toBeTruthy();
       });
 
       it('02 Extracts a query and calls the resolver', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'simpleQuery.docx'));
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'simpleQuery.docx')
+        );
         const queryResolver = jest.fn();
         const queryVars = { a: 'importantContext' };
-        await createReport({
-          ...reportConfig,
-          template,
-          data: queryResolver,
-          queryVars,
-        }, 'JS');
+        await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: queryResolver,
+            queryVars,
+          },
+          'JS'
+        );
         expect(queryResolver.mock.calls.length).toEqual(1);
         expect(queryResolver.mock.calls[0][0]).toEqual('exampleQuery');
         expect(queryResolver.mock.calls[0][1]).toEqual(queryVars);
       });
 
       it("03 Uses the resolver's response to produce the report", async () => {
-        const template = await fs.promises.readFile(path.join(
-          __dirname,
-          'fixtures',
-          'simpleQuerySimpleInserts.docx'
-        ));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: () => ({ a: 'foo', b: 'bar' }),
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'simpleQuerySimpleInserts.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: () => ({ a: 'foo', b: 'bar' }),
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('04 Allows replacing the resolver by a data object', async () => {
-        const template = await fs.promises.readFile(path.join(
-          __dirname,
-          'fixtures',
-          'noQuerySimpleInserts.docx'
-        ));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: { a: 'foo', b: 'bar' },
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'noQuerySimpleInserts.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: { a: 'foo', b: 'bar' },
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('04b Allows custom left-right delimiters', async () => {
-        const template = await fs.promises.readFile(path.join(
-          __dirname,
-          'fixtures',
-          'noQueryBrackets.docx'
-        ));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: { a: 'foo', b: 'bar' },
-          cmdDelimiter: ['{', '}'],
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'noQueryBrackets.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: { a: 'foo', b: 'bar' },
+            cmdDelimiter: ['{', '}'],
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('05 Processes 1-level FOR loops', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for1.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('06 Processes 2-level FOR loops', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for2.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              {
-                name: 'FIRST',
-                people: [{ firstName: 'Pep' }, { firstName: 'Fidel' }],
-              },
-              {
-                name: 'SECOND',
-                people: [{ firstName: 'Albert' }, { firstName: 'Xavi' }],
-              },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for2.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                {
+                  name: 'FIRST',
+                  people: [{ firstName: 'Pep' }, { firstName: 'Fidel' }],
+                },
+                {
+                  name: 'SECOND',
+                  people: [{ firstName: 'Albert' }, { firstName: 'Xavi' }],
+                },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('07 Processes 3-level FOR loops', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for3.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              {
-                name: 'FIRST',
-                people: [
-                  {
-                    firstName: 'Pep',
-                    projects: [{ name: 'one' }, { name: 'two' }],
-                  },
-                  { firstName: 'Fidel', projects: [{ name: 'three' }] },
-                ],
-              },
-              {
-                name: 'SECOND',
-                people: [
-                  { firstName: 'Albert', projects: [] },
-                  { firstName: 'Xavi', projects: [] },
-                ],
-              },
-              {
-                name: 'THIRD',
-                people: [],
-              },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for3.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                {
+                  name: 'FIRST',
+                  people: [
+                    {
+                      firstName: 'Pep',
+                      projects: [{ name: 'one' }, { name: 'two' }],
+                    },
+                    { firstName: 'Fidel', projects: [{ name: 'three' }] },
+                  ],
+                },
+                {
+                  name: 'SECOND',
+                  people: [
+                    { firstName: 'Albert', projects: [] },
+                    { firstName: 'Xavi', projects: [] },
+                  ],
+                },
+                {
+                  name: 'THIRD',
+                  people: [],
+                },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('08 Processes 1-level FOR-ROW loops', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for-row1.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for-row1.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('08b Processes 1-level IF-ROW loops', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'if-row1.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'if-row1.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('09 Allows scalar arrays in FOR loops', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for1scalars.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1scalars.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('10 Processes JS snippets to get the array elements', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for1js.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'abengoa' },
-              { name: 'Endesa' },
-              { name: 'IBERDROLA' },
-              { name: 'Acerinox' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1js.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'abengoa' },
+                { name: 'Endesa' },
+                { name: 'IBERDROLA' },
+                { name: 'Acerinox' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('11 Processes inline FOR loops', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for1inline.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1inline.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('12 Processes a more complex inline FOR loop with spaces', async () => {
-        const template = await fs.promises.readFile(path.join(
-          __dirname,
-          'fixtures',
-          'for1inlineWithSpaces.docx'
-        ));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1inlineWithSpaces.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('13a Processes 1-level IF', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'if.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'if.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('13b Processes 2-level IF', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'if2.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'if2.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('13j Processes inline IF', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'ifInline.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'ifInline.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('20 Processes ALIAS commands', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for1alias.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1alias.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('22 Allows accented characters and such', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for1.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [{ name: '¿Por qué?' }, { name: 'Porque sí' }],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [{ name: '¿Por qué?' }, { name: 'Porque sí' }],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('23 Allows characters that conflict with XML', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'for1.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: '3 < 4 << 400' },
-              { name: '5 > 2 >> -100' },
-              { name: 'a & b && c' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: '3 < 4 << 400' },
+                { name: '5 > 2 >> -100' },
+                { name: 'a & b && c' },
+              ],
+            },
           },
-        }, 'XML');
+          'XML'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('23b Allows insertion of literal XML', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'literalXml.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: { text: 'foo||<w:br/>||bar' },
-        }, 'XML');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'literalXml.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: { text: 'foo||<w:br/>||bar' },
+          },
+          'XML'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('23c Allows insertion of literal XML with custom delimiter', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'literalXml.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: { text: 'foo____<w:br/>____bar' },
-          literalXmlDelimiter: '____',
-        }, 'XML');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'literalXml.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: { text: 'foo____<w:br/>____bar' },
+            literalXmlDelimiter: '____',
+          },
+          'XML'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('24 Allows Word to split commands arbitrarily, incl. delimiters', async () => {
-        const template = await fs.promises.readFile(path.join(
-          __dirname,
-          'fixtures',
-          'splitDelimiters.docx'
-        ));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: { foo: 'bar' },
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'splitDelimiters.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: { foo: 'bar' },
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('25 Adds line breaks by default', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'longText.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: { longText: LONG_TEXT },
-        }, 'XML');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'longText.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: { longText: LONG_TEXT },
+          },
+          'XML'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('25b Allows disabling line break processing', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'longText.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: { longText: LONG_TEXT },
-          processLineBreaks: false,
-        }, 'XML');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'longText.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: { longText: LONG_TEXT },
+            processLineBreaks: false,
+          },
+          'XML'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('30 Processes simple JS snippets in an INS', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'insJsSimple.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'insJsSimple.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('31 Processes more complex JS snippets in an INS', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'insJsComplex.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'insJsComplex.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('32 Provides access to loop indices (JS)', async () => {
-        const template = await fs.promises.readFile(path.join(
-          __dirname,
-          'fixtures',
-          'insJsWithLoops.docx'
-        ));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'insJsWithLoops.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('33 Processes EXEC commands (JS)', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'exec.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {},
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'exec.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {},
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('33b Processes EXEC with shorthand (!)', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'execShorthand.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {},
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'execShorthand.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {},
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('33c Processes EXEC when a promise is returned', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'execPromise.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {},
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'execPromise.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {},
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('34 Processes INS with shorthand (=)', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'insShorthand.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'insShorthand.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('34b Processes INS omitting the command name', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'insOmitted.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'insOmitted.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('35 Processes all snippets in the same sandbox', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'execAndIns.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'execAndIns.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('36 Processes all snippets without sandbox', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'execAndIns.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          noSandbox: true,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'execAndIns.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            noSandbox: true,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('36b Processes a snippet with additional context', async () => {
-        const template = await fs.promises.readFile(path.join(
-          __dirname,
-          'fixtures',
-          'execWithContext.docx'
-        ));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'execWithContext.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
+            additionalJsContext: {
+              toLowerCase: (str: string) => str.toLowerCase(),
+            },
           },
-          additionalJsContext: {
-            toLowerCase: (str: string) => str.toLowerCase(),
-          },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('38b Processes IMAGE commands with base64 data', async () => {
         MockDate.set('1/1/2000');
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'imageBase64.docx'));
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'imageBase64.docx')
+        );
         let options: UserOptions = {
           template,
           data: {},
@@ -555,7 +710,9 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
 
       it('38c Processes IMAGE commands with alt text', async () => {
         MockDate.set('1/1/2000');
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'imageBase64.docx'));
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'imageBase64.docx')
+        );
         let options = {
           template,
           data: {},
@@ -578,125 +735,153 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
       });
 
       it('39 Processes LINK commands', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'links.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {},
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'links.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {},
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('3A Processes HTML commands', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'htmls.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {},
-        }, 'JS');
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'htmls.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {},
+          },
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('40 Throws on invalid command', async () => {
-        const template = await fs.promises.readFile(path.join(
-          __dirname,
-          'fixtures',
-          'invalidCommand.docx'
-        ));
-        return expect(createReport({
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
-          }
-        }, 'JS')
-        ).rejects.toMatchSnapshot()
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'invalidCommand.docx')
+        );
+        return expect(
+          createReport(
+            {
+              template,
+              data: {
+                companies: [
+                  { name: 'FIRST' },
+                  { name: 'SECOND' },
+                  { name: 'THIRD' },
+                ],
+              },
+            },
+            'JS'
+          )
+        ).rejects.toMatchSnapshot();
       });
 
       it('41 Throws on invalid for logic', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'invalidFor.docx'));
-        return expect(createReport({
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
-            persons: [
-              { name: 'johnny' }
-            ]
-          },
-        }, 'JS')
-        ).rejects.toMatchSnapshot()
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'invalidFor.docx')
+        );
+        return expect(
+          createReport(
+            {
+              template,
+              data: {
+                companies: [
+                  { name: 'FIRST' },
+                  { name: 'SECOND' },
+                  { name: 'THIRD' },
+                ],
+                persons: [{ name: 'johnny' }],
+              },
+            },
+            'JS'
+          )
+        ).rejects.toMatchSnapshot();
       });
 
       it('41b Throws on invalid if logic (bad nesting)', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'invalidIf.docx'));
-        return expect(createReport({
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
-          },
-        }, 'JS')
-        ).rejects.toMatchSnapshot()
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'invalidIf.docx')
+        );
+        return expect(
+          createReport(
+            {
+              template,
+              data: {
+                companies: [
+                  { name: 'FIRST' },
+                  { name: 'SECOND' },
+                  { name: 'THIRD' },
+                ],
+              },
+            },
+            'JS'
+          )
+        ).rejects.toMatchSnapshot();
       });
 
       it('70 Allows customisation of cmd delimiter', async () => {
-        const template = await fs.promises.readFile(path.join(
-          __dirname,
-          'fixtures',
-          'for1customDelimiter.docx'
-        ));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            companies: [
-              { name: 'FIRST' },
-              { name: 'SECOND' },
-              { name: 'THIRD' },
-            ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1customDelimiter.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              companies: [
+                { name: 'FIRST' },
+                { name: 'SECOND' },
+                { name: 'THIRD' },
+              ],
+            },
+            cmdDelimiter: '***',
           },
-          cmdDelimiter: '***',
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
 
       it('80 Copes with a more complex example: WBS', async () => {
-        const template = await fs.promises.readFile(path.join(__dirname, 'fixtures', 'wbs.docx'));
-        const result = await createReport({
-          ...reportConfig,
-          template,
-          data: {
-            project: {
-              name: 'docx-templates',
-              workPackages: [
-                {
-                  acronym: 'WP1',
-                  title: 'Work Package 1',
-                  startMilestone: { acronym: 'M1', plannedDelta: '0 m' },
-                  endMilestone: { acronym: 'M2', plannedDelta: '2 m' },
-                  leaderCompany: { acronym: 'me' },
-                },
-                {
-                  acronym: 'WP2',
-                  title: 'Work Package 2',
-                  startMilestone: { acronym: 'M2', plannedDelta: '2 m' },
-                  endMilestone: { acronym: 'M3', plannedDelta: '4 m' },
-                  leaderCompany: {},
-                },
-              ],
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'wbs.docx')
+        );
+        const result = await createReport(
+          {
+            ...reportConfig,
+            template,
+            data: {
+              project: {
+                name: 'docx-templates',
+                workPackages: [
+                  {
+                    acronym: 'WP1',
+                    title: 'Work Package 1',
+                    startMilestone: { acronym: 'M1', plannedDelta: '0 m' },
+                    endMilestone: { acronym: 'M2', plannedDelta: '2 m' },
+                    leaderCompany: { acronym: 'me' },
+                  },
+                  {
+                    acronym: 'WP2',
+                    title: 'Work Package 2',
+                    startMilestone: { acronym: 'M2', plannedDelta: '2 m' },
+                    endMilestone: { acronym: 'M3', plannedDelta: '4 m' },
+                    leaderCompany: {},
+                  },
+                ],
+              },
             },
           },
-        }, 'JS');
+          'JS'
+        );
         expect(result).toMatchSnapshot();
       });
     });
