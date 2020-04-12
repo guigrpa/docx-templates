@@ -10,9 +10,16 @@ import {
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import { extractQuery, produceJsReport } from './processTemplate';
-import { UserOptions, Htmls, CreateReportOptions, Images, Links, Node } from './types';
+import {
+  UserOptions,
+  Htmls,
+  CreateReportOptions,
+  Images,
+  Links,
+  Node,
+} from './types';
 import { addChild, newNonTextNode } from './reportUtils';
-import log from './debug'
+import log from './debug';
 import JSZip from 'jszip';
 
 const DEFAULT_CMD_DELIMITER = '+++';
@@ -26,8 +33,14 @@ const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 // ==========================================
 async function createReport(options: UserOptions): Promise<Uint8Array>;
 async function createReport(options: UserOptions, _probe: 'JS'): Promise<Node>;
-async function createReport(options: UserOptions, _probe: 'XML'): Promise<string>;
-async function createReport(options: UserOptions, _probe?: 'JS' | 'XML'): Promise<Node | string | Uint8Array> {
+async function createReport(
+  options: UserOptions,
+  _probe: 'XML'
+): Promise<string>;
+async function createReport(
+  options: UserOptions,
+  _probe?: 'JS' | 'XML'
+): Promise<Node | string | Uint8Array> {
   DEBUG && log.debug('Report options:', { attach: options });
   const { template, data, queryVars } = options;
   const templatePath = 'word';
@@ -158,7 +171,7 @@ async function createReport(options: UserOptions, _probe?: 'JS' | 'XML'): Promis
     const filePath = files[i];
     DEBUG && log.info(`Processing ${filePath}...`);
     const raw = await zipGetText(zip, filePath);
-    if (raw == null) throw new Error(`${filePath} could not be read`)
+    if (raw == null) throw new Error(`${filePath} could not be read`);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
     const {
@@ -190,7 +203,8 @@ async function createReport(options: UserOptions, _probe?: 'JS' | 'XML'): Promis
     DEBUG && log.debug('Completing [Content_Types].xml...');
     const contentTypesPath = '[Content_Types].xml';
     const contentTypesXml = await zipGetText(zip, contentTypesPath);
-    if (contentTypesXml == null) throw new Error(`${contentTypesPath} could not be read`)
+    if (contentTypesXml == null)
+      throw new Error(`${contentTypesPath} could not be read`);
     const contentTypes = await parseXml(contentTypesXml);
     // DEBUG && log.debug('Content types', { attach: contentTypes });
     const ensureContentType = (extension: string, contentType: string) => {
@@ -232,12 +246,17 @@ async function createReport(options: UserOptions, _probe?: 'JS' | 'XML'): Promis
   DEBUG && log.debug('Zipping...');
   const output = await zipSave(zip);
   return output;
-};
+}
 
 // ==========================================
 // Process images
 // ==========================================
-const processImages = async (images: Images, documentComponent: string, zip: JSZip, templatePath: string) => {
+const processImages = async (
+  images: Images,
+  documentComponent: string,
+  zip: JSZip,
+  templatePath: string
+) => {
   DEBUG && log.debug(`Processing images for ${documentComponent}...`);
   const imageIds = Object.keys(images);
   if (imageIds.length) {
@@ -275,7 +294,12 @@ const processImages = async (images: Images, documentComponent: string, zip: JSZ
 // ==========================================
 // Process links
 // ==========================================
-const processLinks = async (links: Links, documentComponent: string, zip: JSZip, templatePath: string) => {
+const processLinks = async (
+  links: Links,
+  documentComponent: string,
+  zip: JSZip,
+  templatePath: string
+) => {
   DEBUG && log.debug(`Processing links for ${documentComponent}...`);
   const linkIds = Object.keys(links);
   if (linkIds.length) {
@@ -303,7 +327,12 @@ const processLinks = async (links: Links, documentComponent: string, zip: JSZip,
   }
 };
 
-const processHtmls = async (htmls: Htmls, documentComponent: string, zip: JSZip, templatePath: string) => {
+const processHtmls = async (
+  htmls: Htmls,
+  documentComponent: string,
+  zip: JSZip,
+  templatePath: string
+) => {
   DEBUG && log.debug(`Processing htmls for ${documentComponent}...`);
   const htmlIds = Object.keys(htmls);
   if (htmlIds.length) {
@@ -350,7 +379,9 @@ const getRelsFromZip = async (zip: JSZip, relsPath: string) => {
 // ==========================================
 // Miscellaneous
 // ==========================================
-const getCmdDelimiter = (delimiter?: string | [string, string]): [string, string] => {
+const getCmdDelimiter = (
+  delimiter?: string | [string, string]
+): [string, string] => {
   if (!delimiter) return [DEFAULT_CMD_DELIMITER, DEFAULT_CMD_DELIMITER];
   if (typeof delimiter === 'string') return [delimiter, delimiter];
   return delimiter;

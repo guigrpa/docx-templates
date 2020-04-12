@@ -52,7 +52,7 @@ const parseXml = (templateXml: string): Promise<Node> => {
 };
 
 type XmlOptions = {
-  literalXmlDelimiter: string,
+  literalXmlDelimiter: string;
 };
 
 const buildXml = (node: Node, options: XmlOptions, indent: string = '') => {

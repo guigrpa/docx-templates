@@ -107,8 +107,8 @@ const logLoop = (loops: Array<LoopStatus>) => {
   const idxStr = idx >= 0 ? idx + 1 : 'EXPLORATION';
   log.debug(
     `${isIf ? 'IF' : 'FOR'} loop ` +
-    `on ${level}:${varName}` +
-    `${idxStr}/${loopOver.length}`
+      `on ${level}:${varName}` +
+      `${idxStr}/${loopOver.length}`
   );
 };
 
