@@ -1,9 +1,19 @@
-parser: babel-eslint
+parser: "@typescript-eslint/parser"
+parserOptions:
+  project: tsconfig.json
+  sourceType: module
 extends:
-  - airbnb
+  - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:import/errors
+  - plugin:import/warnings
+  - plugin:import/typescript
+  - plugin:jest/recommended
   - prettier
+  - prettier/@typescript-eslint
 plugins:
-  - flowtype
+  - "@typescript-eslint"
+  - jest
 env:
   browser: true
 rules:
