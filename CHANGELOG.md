@@ -1,3 +1,18 @@
+## 4.0.0 (2020-04-13)
+
+* Removed Flow and switched entire codebase over to TypeScript. In the process a few minor soundness issues were fixed.
+
+* **Breaking change** Removed dependency on Node filesystem APIs so the library no longer needs a separate node and browser entrypoint, simplifying maintenance and development. This has the following implications for the public API, justifying the version bump to 4.0.0:
+  *  You can no longer provide image data as a path, and need to provide an `ArrayBuffer` or base64-encoded string instead.
+
+  *  You can no longer provide a template as a filesystem path, and you'll need to read it into a Buffer first.
+
+  * Removed `output: 'buffer'` argument. The output of `createReport` is now always a `Uint8Array`, unless the debug argument `_probe` is specified.
+  
+
+The README and examples have also been updated to reflect the above changes.
+
+
 ## 3.1.1 (2019-8-20)
 
 * Avoid issue when a single paragraph contains `END-IF/FOR` for a previous loop and `IF/FOR` for a new one (#72).
