@@ -33,3 +33,4 @@ coverage
 
 # Project-specific
 /src
+/examples
