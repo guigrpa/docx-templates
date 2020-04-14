@@ -884,6 +884,30 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         expect(result).toMatchSnapshot();
       });
+
+      it('83 LINK inside FOR loop: regression test for issue #83', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'link-regression-issue-83.docx')
+        );
+
+        const opts = {
+          ...reportConfig,
+          template,
+          data: {
+            companies: [
+              {
+                name: 'FIRST',
+              },
+              {
+                name: 'SECOND',
+              },
+            ],
+          },
+        };
+
+        // Render to an object and compare with snapshot.
+        expect(await createReport(opts, 'JS')).toMatchSnapshot();
+      });
     });
   });
 });
