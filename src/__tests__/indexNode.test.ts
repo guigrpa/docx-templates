@@ -885,7 +885,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         expect(result).toMatchSnapshot();
       });
 
-      it('81 LINK inside FOR loop: regression test for issue #83', async () => {
+      it('83 LINK inside FOR loop: regression test for issue #83', async () => {
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'link-regression-issue-83.docx')
         );
@@ -904,9 +904,6 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
             ],
           },
         };
-
-        // TODO: REMOVEME. Use just the snapshot test when issue is resolved.
-        await fs.promises.writeFile('test.docx', await createReport(opts));
 
         // Render to an object and compare with snapshot.
         expect(await createReport(opts, 'JS')).toMatchSnapshot();
