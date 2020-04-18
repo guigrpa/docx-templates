@@ -52,6 +52,7 @@ export type UserOptions = {
   noSandbox?: boolean;
   runJs?: RunJSFunc;
   additionalJsContext?: Object;
+  failFast?: boolean;
 };
 
 export type CreateReportOptions = {
@@ -61,6 +62,7 @@ export type CreateReportOptions = {
   noSandbox: boolean;
   runJs?: RunJSFunc;
   additionalJsContext: Object;
+  failFast: boolean;
 };
 
 export type Context = {

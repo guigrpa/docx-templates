@@ -54,6 +54,7 @@ async function createReport(
     noSandbox: options.noSandbox || false,
     runJs: options.runJs,
     additionalJsContext: options.additionalJsContext || {},
+    failFast: options.failFast == null ? true : options.failFast,
   };
   const xmlOptions = { literalXmlDelimiter };
 
@@ -123,6 +124,9 @@ async function createReport(
     finalTemplate,
     createOptions
   );
+  if (result.status === 'errors') {
+    throw result.errors;
+  }
   const {
     report: report1,
     images: images1,
@@ -174,12 +178,16 @@ async function createReport(
     if (raw == null) throw new Error(`${filePath} could not be read`);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
+    const result = await produceJsReport(queryResult, js, createOptions);
+    if (result.status === 'errors') {
+      throw result.errors;
+    }
     const {
       report: report2,
       images: images2,
       links: links2,
       htmls: htmls2,
-    } = await produceJsReport(queryResult, js, createOptions);
+    } = result;
     images = merge(images, images2) as Images;
     links = merge(links, links2) as Links;
     htmls = merge(htmls, htmls2) as Htmls;

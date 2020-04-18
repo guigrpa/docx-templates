@@ -911,6 +911,52 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         // Render to an object and compare with snapshot.
         expect(await createReport(opts, 'JS')).toMatchSnapshot();
       });
+
+      it('112a failFast: false lists all errors in the document before failing.', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'invalidMultipleErrors.docx')
+        );
+        return expect(
+          createReport(
+            {
+              noSandbox,
+              template,
+              data: {
+                companies: [
+                  { name: 'FIRST' },
+                  { name: 'SECOND' },
+                  { name: 'THIRD' },
+                ],
+              },
+              failFast: false,
+            },
+            'JS'
+          )
+        ).rejects.toMatchSnapshot();
+      });
+
+      it('112b failFast: true has the same behaviour as when failFast is undefined', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'invalidMultipleErrors.docx')
+        );
+        return expect(
+          createReport(
+            {
+              noSandbox,
+              template,
+              data: {
+                companies: [
+                  { name: 'FIRST' },
+                  { name: 'SECOND' },
+                  { name: 'THIRD' },
+                ],
+              },
+              failFast: true,
+            },
+            'JS'
+          )
+        ).rejects.toMatchSnapshot();
+      });
     });
   });
 });

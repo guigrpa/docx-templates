@@ -389,6 +389,31 @@ Define a name for a complete command (especially useful for formatting tables):
 ----------------------------------------------------------
 ```
 
+## Error handling
+
+By default, `createReport` will throw an error the moment it encounters a problem with the template, such as a bad command (i.e. it 'fails fast'). In some cases, however, you may want to collect all errors that may exist in the template before failing. For example, this is useful when you are letting your users create templates interactively. You can disable fast-failing by providing the `failFast: false` parameter as shown below. This will make `createReport` throw an array of errors instead of a single error so you can get a more complete picture of what is wrong with the template.
+
+```typescript
+try {
+  createReport({
+    template,
+    data: {
+      name: 'John',
+      surname: 'Appleseed',
+    },
+    failFast: false,
+  });
+} catch (errors) {
+  if (Array.isArray(errors)) {
+    // An array of errors likely caused by bad commands in the template.
+    console.log(errors);
+  } else {
+    // Not an array of template errors, indicating something more serious.
+    throw errors;
+  }
+}
+```
+
 
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
 

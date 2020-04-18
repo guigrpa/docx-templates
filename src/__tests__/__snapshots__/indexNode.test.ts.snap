@@ -23938,6 +23938,16 @@ Object {
 }
 `;
 
+exports[`noSandbox Template processing 112a failFast: false lists all errors in the document before failing. 1`] = `
+Array [
+  [Error: Error executing command: INS notavailable notavailable is not defined],
+  [Error: Error executing command: INS something something is not defined],
+  [Error: Error executing command: END-FOR company Invalid command: END-FOR company],
+]
+`;
+
+exports[`noSandbox Template processing 112b failFast: true has the same behaviour as when failFast is undefined 1`] = `[Error: Error executing command: INS notavailable notavailable is not defined]`;
+
 exports[`sandbox Template processing 03 Uses the resolver's response to produce the report 1`] = `
 Object {
   "_attrs": Object {
@@ -47875,3 +47885,13 @@ Object {
   "_tag": "w:document",
 }
 `;
+
+exports[`sandbox Template processing 112a failFast: false lists all errors in the document before failing. 1`] = `
+Array [
+  [Error: Error executing command: INS notavailable notavailable is not defined],
+  [Error: Error executing command: INS something something is not defined],
+  [Error: Error executing command: END-FOR company Invalid command: END-FOR company],
+]
+`;
+
+exports[`sandbox Template processing 112b failFast: true has the same behaviour as when failFast is undefined 1`] = `[Error: Error executing command: INS notavailable notavailable is not defined]`;

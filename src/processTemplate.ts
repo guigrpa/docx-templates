@@ -68,19 +68,25 @@ const extractQuery = async (
       !parent._fTextNode && // Flow, don't complain
       parent._tag === 'w:t'
     ) {
-      await processText(null, nodeIn, ctx);
+      await processText(null, nodeIn, ctx, options.failFast);
     }
     if (ctx.query != null) break;
   }
   return ctx.query;
 };
 
-type ReportOutput = {
-  report: Node;
-  images: Images;
-  links: Links;
-  htmls: Htmls;
-};
+type ReportOutput =
+  | {
+      status: 'success';
+      report: Node;
+      images: Images;
+      links: Links;
+      htmls: Htmls;
+    }
+  | {
+      status: 'errors';
+      errors: Error[];
+    };
 
 const produceJsReport = async (
   data: ReportData | undefined,
@@ -113,6 +119,7 @@ const produceJsReport = async (
   let nodeOut: Node = out;
   let move;
   let deltaJump = 0;
+  const errors: Error[] = [];
 
   while (true) {
     const curLoop = getCurLoop(ctx);
@@ -325,9 +332,14 @@ const produceJsReport = async (
         !parent._fTextNode && // Flow-prevention
         parent._tag === 'w:t'
       ) {
-        // TODO: use a discriminated union here instead of a type assertion to distinguish TextNodes from NonTextNodes.
-        const newNodeAsTextNode: TextNode = newNode as TextNode;
-        newNodeAsTextNode._text = await processText(data, nodeIn, ctx);
+        const result = await processText(data, nodeIn, ctx, options.failFast);
+        if (typeof result === 'string') {
+          // TODO: use a discriminated union here instead of a type assertion to distinguish TextNodes from NonTextNodes.
+          const newNodeAsTextNode: TextNode = newNode as TextNode;
+          newNodeAsTextNode._text = result;
+        } else {
+          errors.push(...result);
+        }
       }
 
       // Execute the move in the output tree
@@ -345,7 +357,14 @@ const produceJsReport = async (
     }
   }
 
+  if (errors.length > 0)
+    return {
+      status: 'errors',
+      errors,
+    };
+
   return {
+    status: 'success',
     report: out,
     images: ctx.images,
     links: ctx.links,
@@ -356,8 +375,9 @@ const produceJsReport = async (
 const processText = async (
   data: ReportData | undefined,
   node: TextNode,
-  ctx: Context
-): Promise<string> => {
+  ctx: Context,
+  failFast: boolean
+): Promise<string | Error[]> => {
   const { cmdDelimiter } = ctx.options;
   const text = node._text;
   if (text == null || text === '') return '';
@@ -366,6 +386,7 @@ const processText = async (
     .map(s => s.split(cmdDelimiter[1]))
     .reduce((x, y) => x.concat(y));
   let outText = '';
+  const errors: Error[] = [];
   for (let idx = 0; idx < segments.length; idx++) {
     // Include the separators in the `buffers` field (used for deleting paragraphs if appropriate)
     if (idx > 0) appendTextToTagBuffers(cmdDelimiter[0], ctx, { fCmd: true });
@@ -384,16 +405,22 @@ const processText = async (
       if (ctx.fCmd) {
         const cmdResultText = await processCmd(data, node, ctx);
         if (cmdResultText != null) {
-          outText += cmdResultText;
-          appendTextToTagBuffers(cmdResultText, ctx, {
-            fCmd: false,
-            fInsertedText: true,
-          });
+          if (cmdResultText instanceof Error) {
+            if (failFast) throw cmdResultText;
+            errors.push(cmdResultText);
+          } else {
+            outText += cmdResultText;
+            appendTextToTagBuffers(cmdResultText, ctx, {
+              fCmd: false,
+              fInsertedText: true,
+            });
+          }
         }
       }
       ctx.fCmd = !ctx.fCmd;
     }
   }
+  if (errors.length > 0) return errors;
   return outText;
 };
 
@@ -404,7 +431,7 @@ const processCmd = async (
   data: ReportData | undefined,
   node: Node,
   ctx: Context
-): Promise<null | undefined | string> => {
+): Promise<null | undefined | string | Error> => {
   const cmd = getCommand(ctx);
   DEBUG && log.debug(`Processing cmd: ${cmd}`);
   try {
@@ -505,7 +532,7 @@ const processCmd = async (
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
     return out;
   } catch (err) {
-    throw new Error(`Error executing command: ${cmd} ${err.message}`);
+    return new Error(`Error executing command: ${cmd} ${err.message}`);
   }
 };
 
