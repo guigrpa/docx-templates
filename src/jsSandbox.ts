@@ -69,7 +69,7 @@ const runUserJsAndGetRaw = async (
     result = temp.result;
   } else if (ctx.options.noSandbox) {
     context = sandbox;
-    const wrapper = new Function('with(this) { return eval(__code__); }'); // eslint-disable-line no-new-func
+    const wrapper = new Function('with(this) { return eval(__code__); }');
     result = wrapper.call(context);
   } else {
     const script = new vm.Script(
@@ -78,7 +78,7 @@ const runUserJsAndGetRaw = async (
       `,
       {}
     );
-    context = vm.createContext(sandbox); // eslint-disable-line new-cap
+    context = vm.createContext(sandbox);
     script.runInContext(context);
     result = context.__result__;
   }

@@ -115,7 +115,6 @@ const produceJsReport = async (
   let deltaJump = 0;
 
   while (true) {
-    // eslint-disable-line no-constant-condition
     const curLoop = getCurLoop(ctx);
     let nextSibling;
 
@@ -651,7 +650,6 @@ const processEndForIf = (
   return null;
 };
 
-/* eslint-disable */
 const processImage = async (ctx: Context, imagePars: ImagePars) => {
   const cx = (imagePars.width * 360e3).toFixed(0);
   const cy = (imagePars.height * 360e3).toFixed(0);

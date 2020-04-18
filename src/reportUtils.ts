@@ -70,7 +70,7 @@ const newNonTextNode = (
     _children: children,
   };
   node._children.forEach(child => {
-    child._parent = node; // eslint-disable-line
+    child._parent = node;
   });
   return node;
 };
@@ -82,7 +82,7 @@ const newTextNode = (text: string): TextNode => {
 
 const addChild = (parent: Node, child: Node): Node => {
   parent._children.push(child);
-  child._parent = parent; // eslint-disable-line
+  child._parent = parent;
   return child;
 };
 
