@@ -29,3 +29,14 @@ rules:
       peerDependencies: true
       optionalDependencies: false
   import/prefer-default-export: off
+  radix: error
+  prefer-promise-reject-errors: error
+  no-throw-literal: error
+  guard-for-in: warn
+  jest/valid-expect: error
+  dot-notation: error
+  no-loop-func: error
+  no-extra-bind: error
+  linebreak-style:
+    - error
+    - unix
