@@ -280,7 +280,7 @@ The JS snippet must return an _image object_ or a Promise of an _image object_, 
 * `width` in cm
 * `height` in cm
 * `data`: either an ArrayBuffer or a base64 string with the image data
-* `extension` _[optional]_: e.g. `.png`
+* `extension`: e.g. `.png`
 
 ### `LINK`
 
