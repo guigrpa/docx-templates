@@ -677,15 +677,61 @@ const processEndForIf = (
   return null;
 };
 
-const processImage = async (ctx: Context, imagePars: ImagePars) => {
-  const cx = (imagePars.width * 360e3).toFixed(0);
-  const cy = (imagePars.height * 360e3).toFixed(0);
+const imageToContext = (ctx: Context, img: Image) => {
+  if (!(typeof img.extension === 'string')) {
+    throw new Error(
+      'An extension (e.g. `.png`) needs to be provided when providing an image or a thumbnail.'
+    );
+  }
   ctx.imageId += 1;
   const id = String(ctx.imageId);
   const relId = `img${id}`;
-  ctx.images[relId] = await getImageData(imagePars);
+  ctx.images[relId] = img;
+  return relId;
+};
+
+const processImage = async (ctx: Context, imagePars: ImagePars) => {
+  const cx = (imagePars.width * 360e3).toFixed(0);
+  const cy = (imagePars.height * 360e3).toFixed(0);
+
+  let imgRelId = imageToContext(ctx, getImageData(imagePars));
+  const id = String(ctx.imageId);
   const alt = imagePars.alt || 'desc';
   const node = newNonTextNode;
+
+  const extNodes = [];
+  extNodes.push(
+    node('a:ext', { uri: '{28A0092B-C50C-407E-A947-70E740481C1C}' }, [
+      node('a14:useLocalDpi', {
+        'xmlns:a14': 'http://schemas.microsoft.com/office/drawing/2010/main',
+        val: '0',
+      }),
+    ])
+  );
+
+  if (ctx.images[imgRelId].extension === '.svg') {
+    // Default to an empty thumbnail, as it is not critical and just part of the docx standard's scaffolding.
+    // Without a thumbnail, the svg won't render (even in newer versions of Word that don't need the thumbnail).
+    const thumbnail: Image = imagePars.thumbnail ?? {
+      data: 'bm90aGluZwo=',
+      extension: '.png',
+    };
+
+    const thumbRelId = imageToContext(ctx, thumbnail);
+    extNodes.push(
+      node('a:ext', { uri: '{96DAC541-7B7A-43D3-8B79-37D633B846F1}' }, [
+        node('asvg:svgBlip', {
+          'xmlns:asvg':
+            'http://schemas.microsoft.com/office/drawing/2016/SVG/main',
+          'r:embed': imgRelId,
+        }),
+      ])
+    );
+
+    // For SVG the thumb is placed where the image normally goes.
+    imgRelId = thumbRelId;
+  }
+
   const pic = node(
     'pic:pic',
     { 'xmlns:pic': 'http://schemas.openxmlformats.org/drawingml/2006/picture' },
@@ -697,16 +743,8 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
         ]),
       ]),
       node('pic:blipFill', {}, [
-        node('a:blip', { 'r:embed': relId, cstate: 'print' }, [
-          node('a:extLst', {}, [
-            node('a:ext', { uri: '{28A0092B-C50C-407E-A947-70E740481C1C}' }, [
-              node('a14:useLocalDpi', {
-                'xmlns:a14':
-                  'http://schemas.microsoft.com/office/drawing/2010/main',
-                val: '0',
-              }),
-            ]),
-          ]),
+        node('a:blip', { 'r:embed': imgRelId, cstate: 'print' }, [
+          node('a:extLst', {}, extNodes),
         ]),
         node('a:srcRect'),
         node('a:stretch', {}, [node('a:fillRect')]),

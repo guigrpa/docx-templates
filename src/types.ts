@@ -122,6 +122,7 @@ export type ImagePars = {
   width: number; // cm
   height: number; // cm
   data: ArrayBuffer | string;
+  thumbnail?: Image; // only useful if image is an SVG
   extension?: string;
   alt?: string; // optional alt text
 };

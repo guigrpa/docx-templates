@@ -281,6 +281,30 @@ The JS snippet must return an _image object_ or a Promise of an _image object_, 
 * `height` in cm
 * `data`: either an ArrayBuffer or a base64 string with the image data
 * `extension`: e.g. `.png`
+* `thumbnail` _[optional]_: when injecting an SVG image, a fallback non-SVG (png/jpg/gif, etc.) image can be provided. This thumbnail is used when SVG images are not supported (e.g. older versions of Word) or when the document is previewed by e.g. Windows Explorer. See usage example below.
+
+In the .docx template:
+```
++++IMAGE injectSvg()+++
+```
+
+In the `createReport` call:
+```js
+additionalJsContext: {
+  injectSvg: () => {
+      const svg_data = Buffer.from(`<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <rect x="10" y="10" height="100" width="100" style="stroke:#ff0000; fill: #0000ff"/>
+                                </svg>`, 'utf-8');
+
+      // Providing a thumbnail is technically optional, as newer versions of Word will just ignore it.
+      const thumbnail = {
+        data: fs.readFileSync('sample.png'),
+        extension: '.png',
+      };
+      return { width: 6, height: 6, data: svg_data, extension: '.svg', thumbnail };                    
+    }
+  }
+```
 
 ### `LINK`
 
