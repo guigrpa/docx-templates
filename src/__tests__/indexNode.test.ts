@@ -11,11 +11,10 @@ const LONG_TEXT = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed 
 Nullam hendrerit quam sit amet nunc tincidunt dictum. Praesent hendrerit at quam ac fermentum. Donec rutrum enim lacus, mollis imperdiet ex posuere ac. Sed vel ullamcorper massa. Duis non posuere mauris. Etiam purus turpis, fermentum a rhoncus et, rutrum in nisl. Aliquam pharetra sit amet lectus sed bibendum. Sed sem ipsum, placerat a nisl vitae, pharetra mattis libero. Nunc finibus purus id consectetur sagittis. Pellentesque ornare egestas lacus, in blandit diam facilisis eget. Morbi nec ligula id ligula tincidunt tincidunt vulputate id erat. Quisque ut eros et sem pharetra placerat a vel leo. Praesent accumsan neque imperdiet, facilisis ipsum interdum, aliquam mi. Sed posuere purus eu sagittis aliquam.
 Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed justo mollis, fringilla ipsum tempor, laoreet elit. Nullam iaculis finibus nulla a commodo. Curabitur nec suscipit velit, vitae lobortis mauris. Integer ac bibendum quam, eget pretium justo. Ut finibus, sem sed pharetra dictum, metus mauris tristique justo, sed congue erat mi a leo. Aliquam dui arcu, gravida quis magna ac, volutpat blandit felis. Morbi quis lobortis tortor. Cras pulvinar feugiat metus nec commodo. Sed sollicitudin risus vel risus finibus, sit amet pretium sapien fermentum. Nulla accumsan ullamcorper felis, quis tempor dolor. Praesent blandit ullamcorper pretium. Ut viverra molestie dui.`;
 
-['noSandbox', 'sandbox'].forEach(type => {
-  const reportConfig =
-    type === 'sandbox' ? { noSandbox: false } : { noSandbox: true };
+['noSandbox', 'sandbox'].forEach(sbStatus => {
+  const noSandbox = sbStatus === 'sandbox' ? false : true;
 
-  describe(type, () => {
+  describe(sbStatus, () => {
     describe('Template processing', () => {
       beforeEach(() => {
         // Set a global fixed Date. Some tests check the zip contents,
@@ -32,7 +31,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
           },
           'JS'
@@ -48,7 +47,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const queryVars = { a: 'importantContext' };
         await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: queryResolver,
             queryVars,
@@ -66,7 +65,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: () => ({ a: 'foo', b: 'bar' }),
           },
@@ -81,7 +80,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: { a: 'foo', b: 'bar' },
           },
@@ -96,7 +95,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: { a: 'foo', b: 'bar' },
             cmdDelimiter: ['{', '}'],
@@ -112,7 +111,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -133,7 +132,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -159,7 +158,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -198,7 +197,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -219,7 +218,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
           },
           'JS'
@@ -233,7 +232,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
           },
@@ -248,7 +247,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -270,7 +269,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -291,7 +290,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -312,7 +311,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
           },
           'JS'
@@ -326,7 +325,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
           },
           'JS'
@@ -340,7 +339,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
           },
           'JS'
@@ -354,7 +353,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -375,7 +374,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [{ name: '¿Por qué?' }, { name: 'Porque sí' }],
@@ -392,7 +391,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -413,7 +412,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: { text: 'foo||<w:br/>||bar' },
           },
@@ -428,7 +427,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: { text: 'foo____<w:br/>____bar' },
             literalXmlDelimiter: '____',
@@ -444,7 +443,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: { foo: 'bar' },
           },
@@ -459,7 +458,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: { longText: LONG_TEXT },
           },
@@ -474,7 +473,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: { longText: LONG_TEXT },
             processLineBreaks: false,
@@ -490,7 +489,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
           },
           'JS'
@@ -504,7 +503,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: { companies: ['FIRST', 'SECOND', 'THIRD'] },
           },
@@ -519,7 +518,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -540,7 +539,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {},
           },
@@ -555,7 +554,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {},
           },
@@ -570,7 +569,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {},
           },
@@ -585,7 +584,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -606,7 +605,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -627,7 +626,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -648,7 +647,6 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
             template,
             noSandbox: true,
             data: {
@@ -670,7 +668,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -694,6 +692,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           path.join(__dirname, 'fixtures', 'imageBase64.docx')
         );
         let options: UserOptions = {
+          noSandbox,
           template,
           data: {},
           additionalJsContext: {
@@ -714,6 +713,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           path.join(__dirname, 'fixtures', 'imageBase64.docx')
         );
         let options = {
+          noSandbox,
           template,
           data: {},
           additionalJsContext: {
@@ -740,7 +740,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {},
           },
@@ -755,7 +755,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {},
           },
@@ -771,6 +771,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         return expect(
           createReport(
             {
+              noSandbox,
               template,
               data: {
                 companies: [
@@ -792,6 +793,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         return expect(
           createReport(
             {
+              noSandbox,
               template,
               data: {
                 companies: [
@@ -814,6 +816,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         return expect(
           createReport(
             {
+              noSandbox,
               template,
               data: {
                 companies: [
@@ -834,7 +837,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               companies: [
@@ -856,7 +859,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         const result = await createReport(
           {
-            ...reportConfig,
+            noSandbox,
             template,
             data: {
               project: {
@@ -891,7 +894,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
 
         const opts = {
-          ...reportConfig,
+          noSandbox,
           template,
           data: {
             companies: [
