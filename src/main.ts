@@ -75,7 +75,7 @@ async function createReport(options: UserOptions): Promise<Uint8Array>;
  *   literalXmlDelimiter: '||',
  *   processLineBreaks: true,
  *   noSandbox: false,
- * });
+ * }, 'JS');
  * ```
  *
  * @param options Options for Report
@@ -101,7 +101,7 @@ async function createReport(options: UserOptions, _probe: 'JS'): Promise<Node>;
  *   literalXmlDelimiter: '||',
  *   processLineBreaks: true,
  *   noSandbox: false,
- * });
+ * }, 'XML');
  * ```
  *
  * @param options Options for Report
