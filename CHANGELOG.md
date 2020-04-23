@@ -1,3 +1,11 @@
+## 4.1.0 (2020-04-23)
+
+* #112 Failing on the first error that is encountered while rendering a template is now optional behaviour (but still the default). Use `failFast: false` to collect all errors in a template before failing. This allows for less cumbersome interactive correction of typos or other mistakes in template commands.
+* #33 SVGs can now be inserted into the templates directly, based on excellent work by @lwallent.
+* #113 fixed a regression caused by relying on incomplete jsZip type definitions.
+* #83 fixed a bug that occurred when links were used in FOR loops.
+* Added docstrings (thanks @mathe42 !)
+
 ## 4.0.0 (2020-04-13)
 
 * Removed Flow and switched entire codebase over to TypeScript. In the process a few minor soundness issues were fixed.
