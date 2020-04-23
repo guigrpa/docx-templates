@@ -31,6 +31,30 @@ const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 // ==========================================
 // Main
 // ==========================================
+/**
+ * Create Report from docx template
+ * 
+ * example: 
+ * ```js
+ * createReport({
+ *   template,
+ *   data: query => graphqlServer.execute(query),
+ *   additionalJsContext: {
+ *     // all of these will be available to JS snippets in your template commands
+ *     foo: 'bar',
+ *     qrCode: async url => {
+ *       // do stuff
+ *     },
+ *   },
+ *   cmdDelimiter: '+++',
+ *   literalXmlDelimiter: '||',
+ *   processLineBreaks: true,
+ *   noSandbox: false,
+ * });
+ * ```
+ * 
+ * @param options Options for Report
+ */
 async function createReport(options: UserOptions): Promise<Uint8Array>;
 async function createReport(options: UserOptions, _probe: 'JS'): Promise<Node>;
 async function createReport(
