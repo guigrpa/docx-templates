@@ -4,151 +4,143 @@ import path from 'path';
 import fs from 'fs';
 import { createReport } from '../index';
 import { Image } from '../types';
+import QR from 'qrcode';
 
-['noSandbox', 'sandbox'].forEach(sbStatus => {
-  const noSandbox = sbStatus === 'sandbox' ? false : true;
+it('001: Issue #61 Correctly renders an SVG image', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imagesSVG.docx')
+  );
 
-  describe(sbStatus, () => {
-    it('001: Issue #61 Correctly renders an SVG image', async () => {
-      const template = await fs.promises.readFile(
-        path.join(__dirname, 'fixtures', 'imagesSVG.docx')
-      );
+  // Use a random png file as a thumbnail
+  const thumbnail: Image = {
+    data: await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'sample.png')
+    ),
+    extension: '.png',
+  };
 
-      // Use a random png file as a thumbnail
-      const thumbnail: Image = {
-        data: await fs.promises.readFile(
-          path.join(__dirname, 'fixtures', 'sample.png')
-        ),
-        extension: '.png',
-      };
-
-      const opts = {
-        noSandbox,
-        template,
-        data: {},
-        additionalJsContext: {
-          svgImgFile: async () => {
-            const data = await fs.promises.readFile(
-              path.join(__dirname, 'fixtures', 'sample.svg')
-            );
-            return {
-              width: 6,
-              height: 6,
-              data,
-              extension: '.svg',
-              thumbnail,
-            };
-          },
-          svgImgStr: () => {
-            const data = Buffer.from(
-              `<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  const opts = {
+    template,
+    data: {},
+    additionalJsContext: {
+      svgImgFile: async () => {
+        const data = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'sample.svg')
+        );
+        return {
+          width: 6,
+          height: 6,
+          data,
+          extension: '.svg',
+          thumbnail,
+        };
+      },
+      svgImgStr: () => {
+        const data = Buffer.from(
+          `<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                   <rect x="10" y="10" height="100" width="100" style="stroke:#ff0000; fill: #0000ff"/>
                               </svg>`,
-              'utf-8'
-            );
-            return {
-              width: 6,
-              height: 6,
-              data,
-              extension: '.svg',
-              thumbnail,
-            };
-          },
-        },
-      };
+          'utf-8'
+        );
+        return {
+          width: 6,
+          height: 6,
+          data,
+          extension: '.svg',
+          thumbnail,
+        };
+      },
+    },
+  };
 
-      const result = await createReport(opts, 'JS');
-      expect(result).toMatchSnapshot();
-    });
+  const result = await createReport(opts, 'JS');
+  expect(result).toMatchSnapshot();
+});
 
-    it('002: throws when thumbnail is incorrectly provided when inserting an SVG', async () => {
-      const template = await fs.promises.readFile(
-        path.join(__dirname, 'fixtures', 'imagesSVG.docx')
-      );
-      const thumbnail = {
-        data: await fs.promises.readFile(
-          path.join(__dirname, 'fixtures', 'sample.png')
-        ),
-        // extension: '.png', extension is not given
-      };
+it('002: throws when thumbnail is incorrectly provided when inserting an SVG', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imagesSVG.docx')
+  );
+  const thumbnail = {
+    data: await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'sample.png')
+    ),
+    // extension: '.png', extension is not given
+  };
 
-      const opts = {
-        noSandbox,
-        template,
-        data: {},
-        additionalJsContext: {
-          svgImgFile: async () => {
-            const data = await fs.promises.readFile(
-              path.join(__dirname, 'fixtures', 'sample.svg')
-            );
-            return {
-              width: 6,
-              height: 6,
-              data,
-              extension: '.svg',
-              thumbnail,
-            };
-          },
-          svgImgStr: () => {
-            const data = Buffer.from(
-              `<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  const opts = {
+    template,
+    data: {},
+    additionalJsContext: {
+      svgImgFile: async () => {
+        const data = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'sample.svg')
+        );
+        return {
+          width: 6,
+          height: 6,
+          data,
+          extension: '.svg',
+          thumbnail,
+        };
+      },
+      svgImgStr: () => {
+        const data = Buffer.from(
+          `<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                   <rect x="10" y="10" height="100" width="100" style="stroke:#ff0000; fill: #0000ff"/>
                               </svg>`,
-              'utf-8'
-            );
-            return {
-              width: 6,
-              height: 6,
-              data,
-              extension: '.svg',
-              thumbnail,
-            };
-          },
-        },
-      };
+          'utf-8'
+        );
+        return {
+          width: 6,
+          height: 6,
+          data,
+          extension: '.svg',
+          thumbnail,
+        };
+      },
+    },
+  };
 
-      return expect(createReport(opts)).rejects.toMatchSnapshot();
-    });
+  return expect(createReport(opts)).rejects.toMatchSnapshot();
+});
 
-    it('003: can inject an svg without a thumbnail', async () => {
-      const template = await fs.promises.readFile(
-        path.join(__dirname, 'fixtures', 'imagesSVG.docx')
-      );
+it('003: can inject an svg without a thumbnail', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imagesSVG.docx')
+  );
 
-      const opts = {
-        noSandbox,
-        template,
-        data: {},
-        additionalJsContext: {
-          svgImgFile: async () => {
-            const data = await fs.promises.readFile(
-              path.join(__dirname, 'fixtures', 'sample.svg')
-            );
-            return {
-              width: 6,
-              height: 6,
-              data,
-              extension: '.svg',
-            };
-          },
-          svgImgStr: () => {
-            const data = Buffer.from(
-              `<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  const opts = {
+    template,
+    data: {},
+    additionalJsContext: {
+      svgImgFile: async () => {
+        const data = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'sample.svg')
+        );
+        return {
+          width: 6,
+          height: 6,
+          data,
+          extension: '.svg',
+        };
+      },
+      svgImgStr: () => {
+        const data = Buffer.from(
+          `<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                   <rect x="10" y="10" height="100" width="100" style="stroke:#ff0000; fill: #0000ff"/>
                               </svg>`,
-              'utf-8'
-            );
-            return {
-              width: 6,
-              height: 6,
-              data,
-              extension: '.svg',
-            };
-          },
-        },
-      };
-      const result = await createReport(opts, 'JS');
-      expect(result).toMatchSnapshot();
-    });
-  });
+          'utf-8'
+        );
+        return {
+          width: 6,
+          height: 6,
+          data,
+          extension: '.svg',
+        };
+      },
+    },
+  };
+  const result = await createReport(opts, 'JS');
+  expect(result).toMatchSnapshot();
 });
