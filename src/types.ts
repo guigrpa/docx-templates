@@ -44,11 +44,11 @@ type RunJSFunc = (o: {
 
 export type UserOptions = {
   /**
-   * template as a NodeJS Buffer or Buffer like Object
+   * template as a NodeJS Buffer or Buffer-like object in Browsers
    */
   template: Buffer;
   /**
-   * Object of Data to be injected or a (async) Function that resolves to the Data. The function gets as a Argument the contens of the QUERY Command
+   * Object of data to be injected or a (async) function that resolves to the data. The function gets as a argument the contens of the QUERY command as a string.
    */
   data?: ReportData | QueryResolver;
   /**
@@ -56,7 +56,7 @@ export type UserOptions = {
    */
   queryVars?: any;
   /**
-   * Define a custom Command delimeter this can be a String e.g. '+++' or a Array of Strings with length 2: ['{', '}'] with first element as the start delimeter and the scond as the end delimeter
+   * Define a custom command delimeter this can be a String e.g. '+++' or a Array of Strings with length 2: ['{', '}'] with first element as the start delimeter and the second as the end delimeter
    */
   cmdDelimiter?: string | [string, string];
   /**
@@ -68,15 +68,16 @@ export type UserOptions = {
    */
   processLineBreaks?: boolean; // true by default
   /**
-   * Template and data is SAVE and TRUSTED. Set this option to true to disable running all Commands in a new JS vm.
+   * Template and data is SAVE and TRUSTED. Set this option to true to disable running all commands in a new JS-VM.
    */
   noSandbox?: boolean;
   /**
-   * Custom Sandbox Options see Documentation for mor details
+   * Custom sandbox see documentation for mor details
    */
   runJs?: RunJSFunc;
   /**
-   * Add Function or other static Data to this option to have access to it in your commands
+   * Add functions or other static data to this option to have access to it in your commands
+   *
    * ```js
    * additionalJsContext: {
    *   qrCode: url => {
