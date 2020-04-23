@@ -43,14 +43,50 @@ type RunJSFunc = (o: {
 };
 
 export type UserOptions = {
+  /**
+   * template as a NodeJS Buffer or Buffer like Object
+   */
   template: Buffer;
+  /**
+   * Object of Data to be injected or a (async) Function that resolves to the Data. The function gets as a Argument the contens of the QUERY Command
+   */
   data?: ReportData | QueryResolver;
+  /**
+   * TODO: dont know what this option is for
+   */
   queryVars?: any;
+  /**
+   * Define a custom Command delimeter this can be a String e.g. '+++' or a Array of Strings with length 2: ['{', '}'] with first element as the start delimeter and the scond as the end delimeter
+   */
   cmdDelimiter?: string | [string, string];
+  /**
+   * TODO: dont know what this option is for
+   */
   literalXmlDelimiter?: string;
+  /**
+   * TODO: dont know what this option is for
+   */
   processLineBreaks?: boolean; // true by default
+  /**
+   * Template and data is SAVE and TRUSTED. Set this option to true to disable running all Commands in a new JS vm.
+   */
   noSandbox?: boolean;
+  /**
+   * Custom Sandbox Options see Documentation for mor details
+   */
   runJs?: RunJSFunc;
+  /**
+   * Add Function or other static Data to this option to have access to it in your commands
+   * ```js
+   * additionalJsContext: {
+   *   qrCode: url => {
+   *     const dataUrl = createQrImage(url, { size: 500 });
+   *     const data = dataUrl.slice('data:image/gif;base64,'.length);
+   *     return { width: 6, height: 6, data, extension: '.gif' };
+   *   },
+   * }
+   * ```
+   */
   additionalJsContext?: Object;
 };
 
