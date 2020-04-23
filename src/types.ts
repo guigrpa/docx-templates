@@ -52,7 +52,7 @@ export type UserOptions = {
    */
   data?: ReportData | QueryResolver;
   /**
-   * TODO: dont know what this option is for
+   * Gets injected into data function as second argument.
    */
   queryVars?: any;
   /**
