@@ -4,7 +4,6 @@ import path from 'path';
 import fs from 'fs';
 import { createReport } from '../index';
 import { Image } from '../types';
-import QR from 'qrcode';
 
 it('001: Issue #61 Correctly renders an SVG image', async () => {
   const template = await fs.promises.readFile(
@@ -143,4 +142,34 @@ it('003: can inject an svg without a thumbnail', async () => {
   };
   const result = await createReport(opts, 'JS');
   expect(result).toMatchSnapshot();
+});
+
+it('004: can inject an image in the document header (regression test for #113)', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imageHeader.docx')
+  );
+
+  const opts = {
+    template,
+    data: {},
+    additionalJsContext: {
+      image: async () => {
+        const data = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'sample.png')
+        );
+        return {
+          width: 6,
+          height: 6,
+          data,
+          extension: '.png',
+        };
+      },
+    },
+  };
+
+  // NOTE: bug does not happen when using debug probe arguments ('JS' or 'XML'),
+  // as these exit before the headers are parsed.
+  // TODO: build a snapshot test once _probe === 'XML' properly includes all document XMLs, not just
+  // the main document
+  return expect(createReport(opts)).resolves.toBeInstanceOf(Uint8Array);
 });
