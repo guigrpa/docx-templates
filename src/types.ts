@@ -60,11 +60,11 @@ export type UserOptions = {
    */
   cmdDelimiter?: string | [string, string];
   /**
-   * TODO: dont know what this option is for
+   * Can be used to change the delimiter in generated XML. Use this only when the result of your commands contains ||.
    */
   literalXmlDelimiter?: string;
   /**
-   * TODO: dont know what this option is for
+   * Handle linebreaks in result of commands as actual linebreaks (Default: true)
    */
   processLineBreaks?: boolean; // true by default
   /**
