@@ -44,11 +44,11 @@ type RunJSFunc = (o: {
 
 export type UserOptions = {
   /**
-   * template as a NodeJS Buffer or Buffer-like object in Browsers
+   * Docx file template as a NodeJS Buffer or Buffer-like object in Browsers.
    */
   template: Buffer;
   /**
-   * Object of data to be injected or a (async) function that resolves to the data. The function gets as a argument the contens of the QUERY command as a string.
+   * Object of data to be injected or a (async) function that resolves to the data. The function gets as an argument the contents of the QUERY command as a string.
    */
   data?: ReportData | QueryResolver;
   /**
@@ -56,11 +56,11 @@ export type UserOptions = {
    */
   queryVars?: any;
   /**
-   * Define a custom command delimeter this can be a String e.g. '+++' or a Array of Strings with length 2: ['{', '}'] with first element as the start delimeter and the second as the end delimeter
+   * Defines a custom command delimiter. This can be a String e.g. '+++' or an Array of Strings with length 2: ['{', '}'] in which the first element serves as the start delimiter and the second as the end delimiter.
    */
   cmdDelimiter?: string | [string, string];
   /**
-   * Can be used to change the delimiter in generated XML. Use this only when the result of your commands contains ||.
+   * Can be used to change the delimiter in generated XML.
    */
   literalXmlDelimiter?: string;
   /**
@@ -68,15 +68,15 @@ export type UserOptions = {
    */
   processLineBreaks?: boolean; // true by default
   /**
-   * Template and data is SAVE and TRUSTED. Set this option to true to disable running all commands in a new JS-VM.
+   * INSECURE: Set this option to true to disable running all commands in a new JS-VM. USE ONLY WITH TRUSTED TEMPLATES. Beware of arbitrary code injection risks. Can slightly improve performance on complex templates.
    */
   noSandbox?: boolean;
   /**
-   * Custom sandbox see documentation for mor details
+   * Custom sandbox. See documentation for details.
    */
   runJs?: RunJSFunc;
   /**
-   * Add functions or other static data to this option to have access to it in your commands
+   * Add functions or other static data to this option to have access to it in your commands.
    *
    * ```js
    * additionalJsContext: {
@@ -89,6 +89,9 @@ export type UserOptions = {
    * ```
    */
   additionalJsContext?: Object;
+  /**
+   * Whether to fail on the first error encountered in the template. Defaults to true. Can be used to collect all errors in a template (e.g. misspelled commands) before failing.
+   */
   failFast?: boolean;
 };
 

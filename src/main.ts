@@ -57,12 +57,12 @@ const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
  */
 async function createReport(options: UserOptions): Promise<Uint8Array>;
 /**
- * For development and testing dont use _probe if you don't know what you are doing
+ * For development and testing purposes. Don't use _probe if you don't know what you are doing
  */
 async function createReport(options: UserOptions, _probe: 'JS'): Promise<Node>;
 
 /**
- * For development and testing dont use _probe if you don't know what you are doing
+ * For development and testing purposes. Don't use _probe if you don't know what you are doing
  */
 async function createReport(
   options: UserOptions,
