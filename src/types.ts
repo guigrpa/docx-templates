@@ -43,14 +43,51 @@ type RunJSFunc = (o: {
 };
 
 export type UserOptions = {
+  /**
+   * template as a NodeJS Buffer or Buffer-like object in Browsers
+   */
   template: Buffer;
+  /**
+   * Object of data to be injected or a (async) function that resolves to the data. The function gets as a argument the contens of the QUERY command as a string.
+   */
   data?: ReportData | QueryResolver;
+  /**
+   * Gets injected into data function as second argument.
+   */
   queryVars?: any;
+  /**
+   * Define a custom command delimeter this can be a String e.g. '+++' or a Array of Strings with length 2: ['{', '}'] with first element as the start delimeter and the second as the end delimeter
+   */
   cmdDelimiter?: string | [string, string];
+  /**
+   * Can be used to change the delimiter in generated XML. Use this only when the result of your commands contains ||.
+   */
   literalXmlDelimiter?: string;
+  /**
+   * Handle linebreaks in result of commands as actual linebreaks (Default: true)
+   */
   processLineBreaks?: boolean; // true by default
+  /**
+   * Template and data is SAVE and TRUSTED. Set this option to true to disable running all commands in a new JS-VM.
+   */
   noSandbox?: boolean;
+  /**
+   * Custom sandbox see documentation for mor details
+   */
   runJs?: RunJSFunc;
+  /**
+   * Add functions or other static data to this option to have access to it in your commands
+   *
+   * ```js
+   * additionalJsContext: {
+   *   qrCode: url => {
+   *     const dataUrl = createQrImage(url, { size: 500 });
+   *     const data = dataUrl.slice('data:image/gif;base64,'.length);
+   *     return { width: 6, height: 6, data, extension: '.gif' };
+   *   },
+   * }
+   * ```
+   */
   additionalJsContext?: Object;
   failFast?: boolean;
 };
