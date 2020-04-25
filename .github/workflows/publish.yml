@@ -1,0 +1,34 @@
+name: publish
+
+# Only run when a release is published
+on:
+  release:
+    types:
+      - published
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    runs-on: ubuntu-16.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+
+  publish:
+    # ensure publish is not run if test fails
+    needs: test
+    runs-on: ubuntu-16.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: yarn install --frozen-lockfile
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
