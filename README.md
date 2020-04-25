@@ -86,19 +86,6 @@ createReport({
 });
 ```
 
-You can use different **left/right command delimiters** by passing an array to `cmdDelimiter`:
-
-```js
-createReport({
-  // ...
-  cmdDelimiter: ['{', '}'],
-})
-```
-
-This allows much cleaner-looking templates!
-
-Then you can add commands and JS snippets in your template like this: `{foo}`, `{project.name}` `{QUERY ...}`, `{FOR ...}`.
-
 Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node).
 
 
@@ -154,6 +141,21 @@ createReport({
 
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/packages/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/packages/example-browserify).
 
+## Custom command delimiters
+You can use different **left/right command delimiters** by passing an array to `cmdDelimiter`:
+
+```js
+createReport({
+  // ...
+  cmdDelimiter: ['{', '}'],
+})
+```
+
+This allows much cleaner-looking templates!
+
+Then you can add commands and JS snippets in your template like this: `{foo}`, `{project.name}` `{QUERY ...}`, `{FOR ...}`.
+
+When choosing a delimiter, take care not to introduce conflicts with JS syntax, especially if you are planning to use larger JS code snippets in your templates. For example, with `['{', '}']` you may run into conflicts as the brackets in your JS code may be mistaken for command delimiters. As an alternative, consider using multi-character delimiters, like `{#` and `#}` (see issue [#102](https://github.com/guigrpa/docx-templates/issues/102)).
 
 ## Writing templates
 
