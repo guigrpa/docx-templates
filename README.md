@@ -141,6 +141,9 @@ createReport({
 
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/packages/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/packages/example-browserify).
 
+### Browser compatibility caveat
+Note that the JavaScript code in your docx template will be run as-is by the browser. Transpilers like Babel can't see this code, and won't be able to polyfill it. This means that the JS code in your template needs to be compatible with the browsers you are targeting. In other words: don't use fancy modern syntax and functions in your template if you want older browsers, like IE11, to be able to render it.
+
 ## Custom command delimiters
 You can use different **left/right command delimiters** by passing an array to `cmdDelimiter`:
 
