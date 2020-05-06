@@ -549,11 +549,12 @@ const builtInCommands = [
   'IMAGE',
   'LINK',
   'HTML',
-];
+] as const;
+
+const builtInRegexes = builtInCommands.map(word => new RegExp(`^${word}\\b`));
+
 const notBuiltIns = (cmd: string) =>
-  !builtInCommands.some(word =>
-    new RegExp(`^${word}\\b`).test(cmd.toUpperCase())
-  );
+  !builtInRegexes.some(r => r.test(cmd.toUpperCase()));
 
 const getCommand = (ctx: Context): string => {
   let { cmd } = ctx;
