@@ -551,7 +551,9 @@ const builtInCommands = [
   'HTML',
 ];
 const notBuiltIns = (cmd: string) =>
-  !builtInCommands.some(word => new RegExp(`^${word}`).test(cmd.toUpperCase()));
+  !builtInCommands.some(word =>
+    new RegExp(`^${word}\\b`).test(cmd.toUpperCase())
+  );
 
 const getCommand = (ctx: Context): string => {
   let { cmd } = ctx;
