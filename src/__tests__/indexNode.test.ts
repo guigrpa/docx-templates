@@ -957,6 +957,29 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           )
         ).rejects.toMatchSnapshot();
       });
+
+      it('avoids confusion between variable name and built-in command', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'confusingCommandNames.docx')
+        );
+        const opts = {
+          noSandbox,
+          template,
+          data: {
+            something: 'should show up 1',
+            INSertable: 'should show up 2',
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
+          },
+          additionalJsContext: { formatNumber: (n: number) => n.toFixed() },
+        };
+
+        // Render to an object and compare with snapshot.
+        expect(await createReport(opts, 'JS')).toMatchSnapshot();
+      });
     });
   });
 });
