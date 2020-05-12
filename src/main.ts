@@ -36,7 +36,7 @@ const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
  *
  * example:
  * ```js
- * createReport({
+ * const report = await createReport({
  *   template,
  *   data: query => graphqlServer.execute(query),
  *   additionalJsContext: {

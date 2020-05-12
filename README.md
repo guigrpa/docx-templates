@@ -44,7 +44,7 @@ import fs from 'fs';
 
 const template = fs.readFileSync('myTemplate.docx');
 
-const buffer = createReport({
+const buffer = await createReport({
   template,
   data: {
     name: 'John',
@@ -58,7 +58,7 @@ fs.writeFileSync('report.docx', buffer)
 You can also **provide a sync or Promise-returning callback function (query resolver)** instead of a `data` object:
 
 ```js
-createReport({
+const report = await createReport({
   template,
   data: query => graphqlServer.execute(query),
 });
@@ -69,7 +69,7 @@ Your resolver callback will receive the query embedded in the template (in a `QU
 Other options (with defaults):
 
 ```js
-createReport({
+const report = await createReport({
   // ...
   additionalJsContext: {
     // all of these will be available to JS snippets in your template commands (see below)
@@ -132,7 +132,7 @@ You can find an example implementation of `saveDataToFile()` [in the Webpack exa
 With the default configuration, browser usage can become slow with complex templates due to the usage of JS sandboxes for security reasons. _If the templates you'll be using with docx-templates can be trusted 100%, you can disable the security sandboxes by configuring `noSandbox: true`_. **Beware of arbitrary code injection risks**:
 
 ```js
-createReport({
+const report = await createReport({
   // ...
   // USE ONLY IN THE BROWSER, AND WITH TRUSTED TEMPLATES
   noSandbox: true, // WARNING: INSECURE
@@ -148,7 +148,7 @@ Note that the JavaScript code in your docx template will be run as-is by the bro
 You can use different **left/right command delimiters** by passing an array to `cmdDelimiter`:
 
 ```js
-createReport({
+const report = await createReport({
   // ...
   cmdDelimiter: ['{', '}'],
 })
@@ -420,11 +420,11 @@ Define a name for a complete command (especially useful for formatting tables):
 
 ## Error handling
 
-By default, `createReport` will throw an error the moment it encounters a problem with the template, such as a bad command (i.e. it 'fails fast'). In some cases, however, you may want to collect all errors that may exist in the template before failing. For example, this is useful when you are letting your users create templates interactively. You can disable fast-failing by providing the `failFast: false` parameter as shown below. This will make `createReport` throw an array of errors instead of a single error so you can get a more complete picture of what is wrong with the template.
+By default, the Promise returned by `createReport` will reject with an error immediately when a problem is encountered in the template, such as a bad command (i.e. it 'fails fast'). In some cases, however, you may want to collect all errors that may exist in the template before failing. For example, this is useful when you are letting your users create templates interactively. You can disable fast-failing by providing the `failFast: false` parameter as shown below. This will make `createReport` reject with an array of errors instead of a single error so you can get a more complete picture of what is wrong with the template.
 
 ```typescript
 try {
-  createReport({
+  const report = await createReport({
     template,
     data: {
       name: 'John',
