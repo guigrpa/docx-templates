@@ -980,6 +980,47 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         // Render to an object and compare with snapshot.
         expect(await createReport(opts, 'JS')).toMatchSnapshot();
       });
+
+      it('107a non-alphanumeric INS commands (e.g. Chinese)', async () => {
+        // Issue #107.
+        const data = {
+          姓名: 'hong',
+          标题: 'junyao',
+        };
+        expect(
+          await createReport(
+            {
+              noSandbox,
+              template: await fs.promises.readFile(
+                path.join(__dirname, 'fixtures', 'nonAlphaCommandNames1.docx')
+              ),
+              data,
+            },
+            'JS'
+          )
+        ).toMatchSnapshot();
+      });
+
+      it('107b non-alphanumeric INS commands (e.g. Chinese) with custom delimiter', async () => {
+        // Issue #107.
+        const data = {
+          姓名: 'hong',
+          标题: 'junyao',
+        };
+        expect(
+          await createReport(
+            {
+              noSandbox,
+              template: await fs.promises.readFile(
+                path.join(__dirname, 'fixtures', 'nonAlphaCommandNames2.docx')
+              ),
+              data,
+              cmdDelimiter: ['{', '}'],
+            },
+            'JS'
+          )
+        ).toMatchSnapshot();
+      });
     });
   });
 });
