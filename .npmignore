@@ -34,3 +34,5 @@ coverage
 # Project-specific
 /src
 /examples
+/.github
+/lib/__tests__
