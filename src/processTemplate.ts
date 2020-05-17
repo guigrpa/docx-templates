@@ -557,7 +557,7 @@ const notBuiltIns = (cmd: string) =>
   !builtInRegexes.some(r => r.test(cmd.toUpperCase()));
 
 const getCommand = (ctx: Context): string => {
-  let { cmd } = ctx;
+  let cmd = ctx.cmd.trim();
   if (cmd[0] === '*') {
     const aliasName = cmd.slice(1).trim();
     if (!ctx.shorthands[aliasName]) throw new Error('Unknown alias');
@@ -567,7 +567,7 @@ const getCommand = (ctx: Context): string => {
     cmd = `INS ${cmd.slice(1).trim()}`;
   } else if (cmd[0] === '!') {
     cmd = `EXEC ${cmd.slice(1).trim()}`;
-  } else if (notBuiltIns(cmd) && /^[a-zA-Z$`'"]/.test(cmd)) {
+  } else if (notBuiltIns(cmd)) {
     cmd = `INS ${cmd.trim()}`;
   }
   ctx.cmd = '';

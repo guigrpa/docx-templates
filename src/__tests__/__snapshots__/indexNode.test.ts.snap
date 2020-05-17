@@ -23938,6 +23938,2237 @@ Object {
 }
 `;
 
+exports[`noSandbox Template processing 107a non-alphanumeric INS commands (e.g. Chinese) 1`] = `
+Object {
+  "_attrs": Object {
+    "mc:Ignorable": "w14 w15 w16se w16cid wp14",
+    "xmlns:aink": "http://schemas.microsoft.com/office/drawing/2016/ink",
+    "xmlns:am3d": "http://schemas.microsoft.com/office/drawing/2017/model3d",
+    "xmlns:cx": "http://schemas.microsoft.com/office/drawing/2014/chartex",
+    "xmlns:cx1": "http://schemas.microsoft.com/office/drawing/2015/9/8/chartex",
+    "xmlns:cx2": "http://schemas.microsoft.com/office/drawing/2015/10/21/chartex",
+    "xmlns:cx3": "http://schemas.microsoft.com/office/drawing/2016/5/9/chartex",
+    "xmlns:cx4": "http://schemas.microsoft.com/office/drawing/2016/5/10/chartex",
+    "xmlns:cx5": "http://schemas.microsoft.com/office/drawing/2016/5/11/chartex",
+    "xmlns:cx6": "http://schemas.microsoft.com/office/drawing/2016/5/12/chartex",
+    "xmlns:cx7": "http://schemas.microsoft.com/office/drawing/2016/5/13/chartex",
+    "xmlns:cx8": "http://schemas.microsoft.com/office/drawing/2016/5/14/chartex",
+    "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
+    "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "xmlns:v": "urn:schemas-microsoft-com:vml",
+    "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+    "xmlns:w10": "urn:schemas-microsoft-com:office:word",
+    "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
+    "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:w16cid": "http://schemas.microsoft.com/office/word/2016/wordml/cid",
+    "xmlns:w16se": "http://schemas.microsoft.com/office/word/2015/wordml/symex",
+    "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
+    "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+    "xmlns:wp14": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+    "xmlns:wpc": "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas",
+    "xmlns:wpg": "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup",
+    "xmlns:wpi": "http://schemas.microsoft.com/office/word/2010/wordprocessingInk",
+    "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
+  },
+  "_children": Array [
+    Object {
+      "_attrs": Object {},
+      "_children": Array [
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "6BF6C63C",
+            "w14:textId": "0BCCC0B7",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "00F35C33",
+            "w:rsidRDefault": "007856C0",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00D85011",
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "60A37F38",
+            "w14:textId": "4190B879",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "297A6708",
+            "w14:textId": "09F8E8D0",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "007856C0",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00D85011",
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "762D637D",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "464E9D08",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "50EB2807",
+            "w14:textId": "5BBC6233",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "686B7280",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "576C70BA",
+            "w14:textId": "651026D3",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "64757D95",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "0A5FB851",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "152EA038",
+            "w14:textId": "264863A8",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "38C53EF0",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "020C58AE",
+            "w14:textId": "4A70A699",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "2EB2B65F",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "33412000",
+            "w14:textId": "77777777",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "005B2341",
+            "w:rsidRPr": "007856C0",
+            "w:rsidSect": "0019199C",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:h": "16840",
+                "w:w": "11900",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgSz",
+            },
+            Object {
+              "_attrs": Object {
+                "w:bottom": "1440",
+                "w:footer": "708",
+                "w:gutter": "0",
+                "w:header": "708",
+                "w:left": "1440",
+                "w:right": "1440",
+                "w:top": "1440",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgMar",
+            },
+            Object {
+              "_attrs": Object {
+                "w:space": "708",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:cols",
+            },
+            Object {
+              "_attrs": Object {
+                "w:linePitch": "360",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:docGrid",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:sectPr",
+        },
+      ],
+      "_fTextNode": false,
+      "_parent": [Circular],
+      "_tag": "w:body",
+    },
+  ],
+  "_fTextNode": false,
+  "_tag": "w:document",
+}
+`;
+
+exports[`noSandbox Template processing 107b non-alphanumeric INS commands (e.g. Chinese) with custom delimiter 1`] = `
+Object {
+  "_attrs": Object {
+    "mc:Ignorable": "w14 w15 w16se w16cid wp14",
+    "xmlns:aink": "http://schemas.microsoft.com/office/drawing/2016/ink",
+    "xmlns:am3d": "http://schemas.microsoft.com/office/drawing/2017/model3d",
+    "xmlns:cx": "http://schemas.microsoft.com/office/drawing/2014/chartex",
+    "xmlns:cx1": "http://schemas.microsoft.com/office/drawing/2015/9/8/chartex",
+    "xmlns:cx2": "http://schemas.microsoft.com/office/drawing/2015/10/21/chartex",
+    "xmlns:cx3": "http://schemas.microsoft.com/office/drawing/2016/5/9/chartex",
+    "xmlns:cx4": "http://schemas.microsoft.com/office/drawing/2016/5/10/chartex",
+    "xmlns:cx5": "http://schemas.microsoft.com/office/drawing/2016/5/11/chartex",
+    "xmlns:cx6": "http://schemas.microsoft.com/office/drawing/2016/5/12/chartex",
+    "xmlns:cx7": "http://schemas.microsoft.com/office/drawing/2016/5/13/chartex",
+    "xmlns:cx8": "http://schemas.microsoft.com/office/drawing/2016/5/14/chartex",
+    "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
+    "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "xmlns:v": "urn:schemas-microsoft-com:vml",
+    "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+    "xmlns:w10": "urn:schemas-microsoft-com:office:word",
+    "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
+    "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:w16cid": "http://schemas.microsoft.com/office/word/2016/wordml/cid",
+    "xmlns:w16se": "http://schemas.microsoft.com/office/word/2015/wordml/symex",
+    "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
+    "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+    "xmlns:wp14": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+    "xmlns:wpc": "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas",
+    "xmlns:wpg": "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup",
+    "xmlns:wpi": "http://schemas.microsoft.com/office/word/2010/wordprocessingInk",
+    "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
+  },
+  "_children": Array [
+    Object {
+      "_attrs": Object {},
+      "_children": Array [
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "6BF6C63C",
+            "w14:textId": "03D60101",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F35C33",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "60A37F38",
+            "w14:textId": "4190B879",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "297A6708",
+            "w14:textId": "0C0851F2",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "6FE1B114",
+            "w14:textId": "315C8C84",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "6742E140",
+            "w14:textId": "43F12D8C",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "0BC84266",
+            "w14:textId": "77777777",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "46877074",
+            "w14:textId": "338B35A6",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "7E960016",
+            "w14:textId": "5B8E4394",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "107BB8B5",
+            "w14:textId": "46BE478F",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "7569C168",
+            "w14:textId": "77777777",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "752DA1D2",
+            "w14:textId": "511C7589",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "7BC35AB4",
+            "w14:textId": "77777777",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+            "w:rsidSect": "0019199C",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:h": "16840",
+                "w:w": "11900",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgSz",
+            },
+            Object {
+              "_attrs": Object {
+                "w:bottom": "1440",
+                "w:footer": "708",
+                "w:gutter": "0",
+                "w:header": "708",
+                "w:left": "1440",
+                "w:right": "1440",
+                "w:top": "1440",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgMar",
+            },
+            Object {
+              "_attrs": Object {
+                "w:space": "708",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:cols",
+            },
+            Object {
+              "_attrs": Object {
+                "w:linePitch": "360",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:docGrid",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:sectPr",
+        },
+      ],
+      "_fTextNode": false,
+      "_parent": [Circular],
+      "_tag": "w:body",
+    },
+  ],
+  "_fTextNode": false,
+  "_tag": "w:document",
+}
+`;
+
 exports[`noSandbox Template processing 112a failFast: false lists all errors in the document before failing. 1`] = `
 Array [
   [Error: Error executing command: INS notavailable notavailable is not defined],
@@ -48694,6 +50925,2237 @@ Object {
         Object {
           "_attrs": Object {
             "w:rsidR": "00255E80",
+            "w:rsidSect": "0019199C",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:h": "16840",
+                "w:w": "11900",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgSz",
+            },
+            Object {
+              "_attrs": Object {
+                "w:bottom": "1440",
+                "w:footer": "708",
+                "w:gutter": "0",
+                "w:header": "708",
+                "w:left": "1440",
+                "w:right": "1440",
+                "w:top": "1440",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgMar",
+            },
+            Object {
+              "_attrs": Object {
+                "w:space": "708",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:cols",
+            },
+            Object {
+              "_attrs": Object {
+                "w:linePitch": "360",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:docGrid",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:sectPr",
+        },
+      ],
+      "_fTextNode": false,
+      "_parent": [Circular],
+      "_tag": "w:body",
+    },
+  ],
+  "_fTextNode": false,
+  "_tag": "w:document",
+}
+`;
+
+exports[`sandbox Template processing 107a non-alphanumeric INS commands (e.g. Chinese) 1`] = `
+Object {
+  "_attrs": Object {
+    "mc:Ignorable": "w14 w15 w16se w16cid wp14",
+    "xmlns:aink": "http://schemas.microsoft.com/office/drawing/2016/ink",
+    "xmlns:am3d": "http://schemas.microsoft.com/office/drawing/2017/model3d",
+    "xmlns:cx": "http://schemas.microsoft.com/office/drawing/2014/chartex",
+    "xmlns:cx1": "http://schemas.microsoft.com/office/drawing/2015/9/8/chartex",
+    "xmlns:cx2": "http://schemas.microsoft.com/office/drawing/2015/10/21/chartex",
+    "xmlns:cx3": "http://schemas.microsoft.com/office/drawing/2016/5/9/chartex",
+    "xmlns:cx4": "http://schemas.microsoft.com/office/drawing/2016/5/10/chartex",
+    "xmlns:cx5": "http://schemas.microsoft.com/office/drawing/2016/5/11/chartex",
+    "xmlns:cx6": "http://schemas.microsoft.com/office/drawing/2016/5/12/chartex",
+    "xmlns:cx7": "http://schemas.microsoft.com/office/drawing/2016/5/13/chartex",
+    "xmlns:cx8": "http://schemas.microsoft.com/office/drawing/2016/5/14/chartex",
+    "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
+    "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "xmlns:v": "urn:schemas-microsoft-com:vml",
+    "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+    "xmlns:w10": "urn:schemas-microsoft-com:office:word",
+    "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
+    "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:w16cid": "http://schemas.microsoft.com/office/word/2016/wordml/cid",
+    "xmlns:w16se": "http://schemas.microsoft.com/office/word/2015/wordml/symex",
+    "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
+    "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+    "xmlns:wp14": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+    "xmlns:wpc": "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas",
+    "xmlns:wpg": "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup",
+    "xmlns:wpi": "http://schemas.microsoft.com/office/word/2010/wordprocessingInk",
+    "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
+  },
+  "_children": Array [
+    Object {
+      "_attrs": Object {},
+      "_children": Array [
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "6BF6C63C",
+            "w14:textId": "0BCCC0B7",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "00F35C33",
+            "w:rsidRDefault": "007856C0",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00D85011",
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "60A37F38",
+            "w14:textId": "4190B879",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "297A6708",
+            "w14:textId": "09F8E8D0",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "007856C0",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidR": "00D85011",
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "762D637D",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "464E9D08",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "50EB2807",
+            "w14:textId": "5BBC6233",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "686B7280",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "576C70BA",
+            "w14:textId": "651026D3",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "64757D95",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "0A5FB851",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "152EA038",
+            "w14:textId": "264863A8",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "38C53EF0",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "020C58AE",
+            "w14:textId": "4A70A699",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "007856C0",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "2EB2B65F",
+            "w14:textId": "77777777",
+            "w:rsidP": "005B2341",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "33412000",
+            "w14:textId": "77777777",
+            "w:rsidP": "007856C0",
+            "w:rsidR": "005B2341",
+            "w:rsidRDefault": "005B2341",
+            "w:rsidRPr": "007856C0",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "005B2341",
+            "w:rsidRPr": "007856C0",
+            "w:rsidSect": "0019199C",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:h": "16840",
+                "w:w": "11900",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgSz",
+            },
+            Object {
+              "_attrs": Object {
+                "w:bottom": "1440",
+                "w:footer": "708",
+                "w:gutter": "0",
+                "w:header": "708",
+                "w:left": "1440",
+                "w:right": "1440",
+                "w:top": "1440",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:pgMar",
+            },
+            Object {
+              "_attrs": Object {
+                "w:space": "708",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:cols",
+            },
+            Object {
+              "_attrs": Object {
+                "w:linePitch": "360",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:docGrid",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:sectPr",
+        },
+      ],
+      "_fTextNode": false,
+      "_parent": [Circular],
+      "_tag": "w:body",
+    },
+  ],
+  "_fTextNode": false,
+  "_tag": "w:document",
+}
+`;
+
+exports[`sandbox Template processing 107b non-alphanumeric INS commands (e.g. Chinese) with custom delimiter 1`] = `
+Object {
+  "_attrs": Object {
+    "mc:Ignorable": "w14 w15 w16se w16cid wp14",
+    "xmlns:aink": "http://schemas.microsoft.com/office/drawing/2016/ink",
+    "xmlns:am3d": "http://schemas.microsoft.com/office/drawing/2017/model3d",
+    "xmlns:cx": "http://schemas.microsoft.com/office/drawing/2014/chartex",
+    "xmlns:cx1": "http://schemas.microsoft.com/office/drawing/2015/9/8/chartex",
+    "xmlns:cx2": "http://schemas.microsoft.com/office/drawing/2015/10/21/chartex",
+    "xmlns:cx3": "http://schemas.microsoft.com/office/drawing/2016/5/9/chartex",
+    "xmlns:cx4": "http://schemas.microsoft.com/office/drawing/2016/5/10/chartex",
+    "xmlns:cx5": "http://schemas.microsoft.com/office/drawing/2016/5/11/chartex",
+    "xmlns:cx6": "http://schemas.microsoft.com/office/drawing/2016/5/12/chartex",
+    "xmlns:cx7": "http://schemas.microsoft.com/office/drawing/2016/5/13/chartex",
+    "xmlns:cx8": "http://schemas.microsoft.com/office/drawing/2016/5/14/chartex",
+    "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
+    "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+    "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+    "xmlns:v": "urn:schemas-microsoft-com:vml",
+    "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+    "xmlns:w10": "urn:schemas-microsoft-com:office:word",
+    "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
+    "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:w16cid": "http://schemas.microsoft.com/office/word/2016/wordml/cid",
+    "xmlns:w16se": "http://schemas.microsoft.com/office/word/2015/wordml/symex",
+    "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
+    "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+    "xmlns:wp14": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+    "xmlns:wpc": "http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas",
+    "xmlns:wpg": "http://schemas.microsoft.com/office/word/2010/wordprocessingGroup",
+    "xmlns:wpi": "http://schemas.microsoft.com/office/word/2010/wordprocessingInk",
+    "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
+  },
+  "_children": Array [
+    Object {
+      "_attrs": Object {},
+      "_children": Array [
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "6BF6C63C",
+            "w14:textId": "03D60101",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F35C33",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+                "w:name": "_GoBack",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkStart",
+            },
+            Object {
+              "_attrs": Object {
+                "w:id": "0",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:bookmarkEnd",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "60A37F38",
+            "w14:textId": "4190B879",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "297A6708",
+            "w14:textId": "0C0851F2",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "6FE1B114",
+            "w14:textId": "315C8C84",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00D85011",
+            "w:rsidRDefault": "00D85011",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "6742E140",
+            "w14:textId": "43F12D8C",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "0BC84266",
+            "w14:textId": "77777777",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "46877074",
+            "w14:textId": "338B35A6",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "7E960016",
+            "w14:textId": "5B8E4394",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "107BB8B5",
+            "w14:textId": "46BE478F",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "hong",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "MS Gothic",
+                        "w:cs": "MS Gothic",
+                        "w:eastAsia": "MS Gothic",
+                        "w:hAnsi": "MS Gothic",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "7569C168",
+            "w14:textId": "77777777",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "752DA1D2",
+            "w14:textId": "511C7589",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "junyao",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {},
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellStart",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {},
+                  "_children": Array [
+                    Object {
+                      "_attrs": Object {
+                        "w:ascii": "Microsoft JhengHei",
+                        "w:cs": "Microsoft JhengHei",
+                        "w:eastAsia": "Microsoft JhengHei",
+                        "w:hAnsi": "Microsoft JhengHei",
+                        "w:hint": "eastAsia",
+                      },
+                      "_children": Array [],
+                      "_fTextNode": false,
+                      "_parent": [Circular],
+                      "_tag": "w:rFonts",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:rPr",
+                },
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+            Object {
+              "_attrs": Object {
+                "w:type": "spellEnd",
+              },
+              "_children": Array [],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:proofErr",
+            },
+            Object {
+              "_attrs": Object {
+                "w:rsidRPr": "00F95E1F",
+              },
+              "_children": Array [
+                Object {
+                  "_attrs": Object {
+                    "xml:space": "preserve",
+                  },
+                  "_children": Array [
+                    Object {
+                      "_children": Array [],
+                      "_fTextNode": true,
+                      "_parent": [Circular],
+                      "_text": "",
+                    },
+                  ],
+                  "_fTextNode": false,
+                  "_parent": [Circular],
+                  "_tag": "w:t",
+                },
+              ],
+              "_fTextNode": false,
+              "_parent": [Circular],
+              "_tag": "w:r",
+            },
+          ],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w14:paraId": "7BC35AB4",
+            "w14:textId": "77777777",
+            "w:rsidP": "00F95E1F",
+            "w:rsidR": "00F95E1F",
+            "w:rsidRDefault": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
+          },
+          "_children": Array [],
+          "_fTextNode": false,
+          "_parent": [Circular],
+          "_tag": "w:p",
+        },
+        Object {
+          "_attrs": Object {
+            "w:rsidR": "00F95E1F",
+            "w:rsidRPr": "00F95E1F",
             "w:rsidSect": "0019199C",
           },
           "_children": Array [
