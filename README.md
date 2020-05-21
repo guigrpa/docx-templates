@@ -127,7 +127,7 @@ const readFileIntoArrayBuffer = fd =>
   });
 ```
 
-You can find an example implementation of `saveDataToFile()` [in the Webpack example](./packages/example-webpack/client/index.js).
+You can find an example implementation of `saveDataToFile()` [in the Webpack example](https://github.com/guigrpa/docx-templates/blob/79119723ff1c009b5bbdd28016558da9b405742f/examples/example-webpack/client/index.js#L82).
 
 With the default configuration, browser usage can become slow with complex templates due to the usage of JS sandboxes for security reasons. _If the templates you'll be using with docx-templates can be trusted 100%, you can disable the security sandboxes by configuring `noSandbox: true`_. **Beware of arbitrary code injection risks**:
 
