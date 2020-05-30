@@ -282,8 +282,8 @@ In this case, we use a function from `additionalJsContext` object passed to `cre
 
 The JS snippet must return an _image object_ or a Promise of an _image object_, containing:
 
-* `width` in cm
-* `height` in cm
+* `width`: desired width of the image on the page _in cm_. Note that the aspect ratio should match that of the input image to avoid stretching.
+* `height` desired height of the image on the page _in cm_.
 * `data`: either an ArrayBuffer or a base64 string with the image data
 * `extension`: e.g. `.png`
 * `thumbnail` _[optional]_: when injecting an SVG image, a fallback non-SVG (png/jpg/gif, etc.) image can be provided. This thumbnail is used when SVG images are not supported (e.g. older versions of Word) or when the document is previewed by e.g. Windows Explorer. See usage example below.
