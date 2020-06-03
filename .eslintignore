@@ -3,5 +3,6 @@ lib
 coverage
 .nyc_output
 .nyc_tmp
+examples/example-node/dtcli.ts
 examples/example-browserify/public/docx-templates.js
 examples/example-webpack/public

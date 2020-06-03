@@ -83,11 +83,17 @@ const report = await createReport({
   literalXmlDelimiter: '||',
   processLineBreaks: true,
   noSandbox: false,
+  postProcessor: (root:Node, f:FilePath) => Node,
 });
 ```
 
-Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node).
 
+Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node).
+
+The `postProcessor` function allows rewriting of the filled template
+XML files. See `examples/example-node/dtcli.ts` for an example
+containing a recursive deepcopy clone that excludes certain XML nodes
+based on user-defined criteria.
 
 ## Browser usage
 
