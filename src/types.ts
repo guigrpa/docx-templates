@@ -93,7 +93,13 @@ export type UserOptions = {
    * Whether to fail on the first error encountered in the template. Defaults to true. Can be used to collect all errors in a template (e.g. misspelled commands) before failing.
    */
   failFast?: boolean;
+  /**
+   * user-defined postProcessor
+   */
+  postProcessor?: PostProcessorFunc;
 };
+
+type PostProcessorFunc = (root: Node, filename: string) => Node;
 
 export type CreateReportOptions = {
   cmdDelimiter: [string, string];
@@ -103,6 +109,7 @@ export type CreateReportOptions = {
   runJs?: RunJSFunc;
   additionalJsContext: Object;
   failFast: boolean;
+  postProcessor: PostProcessorFunc;
 };
 
 export type Context = {
