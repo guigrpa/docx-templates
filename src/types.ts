@@ -21,6 +21,8 @@ export type NonTextNode = BaseNode & {
   // Simplified; only need this property
   _attrs: { [key: string]: QualifiedAttribute | string } & {
     Extension?: string;
+    ContentType?: string;
+    PartName?: string;
   };
 };
 

@@ -1035,6 +1035,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               test2: 'second value!',
             },
             failFast: true,
+            cmdDelimiter: ['{', '}'],
           },
           'JS'
         );

@@ -17,6 +17,7 @@ import {
   Images,
   Links,
   Node,
+  NonTextNode,
 } from './types';
 import { addChild, newNonTextNode } from './reportUtils';
 import log from './debug';
@@ -101,9 +102,9 @@ async function createReport(
   // ---------------------------------------------------------
   DEBUG && log.debug('finding main template file (e.g. document.xml)');
   // See issue #131. Office365 files may name the main template file document2.xml or something else
-  // TODO: so we'll have to parse the content-types 'manifest' file first and retrieve the template file's name first.
+  // So we'll have to parse the content-types 'manifest' file first and retrieve the template file's name first.
   const contentTypes = await readContentTypes(zip);
-  const mainDocument = 'document.xml'; // TODO: for now
+  const mainDocument = getMainDoc(contentTypes);
 
   DEBUG && log.debug('Reading template...');
   const templateXml = await zipGetText(zip, `${templatePath}/${mainDocument}`);
@@ -291,11 +292,31 @@ async function createReport(
   return output;
 }
 
-async function readContentTypes(zip: JSZip): Promise<Node> {
+export async function readContentTypes(zip: JSZip): Promise<NonTextNode> {
   const contentTypesXml = await zipGetText(zip, CONTENT_TYPES_PATH);
   if (contentTypesXml == null)
     throw new Error(`${CONTENT_TYPES_PATH} could not be read`);
-  return await parseXml(contentTypesXml);
+  const node = await parseXml(contentTypesXml);
+  if (node._fTextNode)
+    throw new Error(`${CONTENT_TYPES_PATH} is a text node when parsed`);
+  return node;
+}
+
+export function getMainDoc(contentTypes: NonTextNode): string {
+  const MAIN_DOC_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml' as const;
+  for (const t of contentTypes._children) {
+    if (!t._fTextNode) {
+      if (t._attrs.ContentType === MAIN_DOC_MIME) {
+        const path = t._attrs.PartName;
+        if (path) {
+          return path.replace('/word/', '');
+        }
+      }
+    }
+  }
+  throw new Error(
+    `Could not find main document (e.g. document.xml) in ${CONTENT_TYPES_PATH}`
+  );
 }
 
 // ==========================================
