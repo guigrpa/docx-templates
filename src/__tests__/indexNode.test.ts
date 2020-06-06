@@ -1021,6 +1021,26 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           )
         ).toMatchSnapshot();
       });
+
+      it('131 correctly handles Office 365 .docx files', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'office365.docx')
+        );
+        const result = await createReport(
+          {
+            noSandbox,
+            template,
+            data: {
+              test: 'first value!',
+              test2: 'second value!',
+            },
+            failFast: true,
+            cmdDelimiter: ['{', '}'],
+          },
+          'JS'
+        );
+        expect(result).toMatchSnapshot();
+      });
     });
   });
 });

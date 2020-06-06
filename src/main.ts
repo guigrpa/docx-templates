@@ -17,13 +17,15 @@ import {
   Images,
   Links,
   Node,
+  NonTextNode,
 } from './types';
 import { addChild, newNonTextNode } from './reportUtils';
 import log from './debug';
 import JSZip from 'jszip';
 
-const DEFAULT_CMD_DELIMITER = '+++';
-const DEFAULT_LITERAL_XML_DELIMITER = '||';
+const DEFAULT_CMD_DELIMITER = '+++' as const;
+const DEFAULT_LITERAL_XML_DELIMITER = '||' as const;
+const CONTENT_TYPES_PATH = '[Content_Types].xml' as const;
 
 // TODO: remove
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
@@ -98,9 +100,16 @@ async function createReport(
   // ---------------------------------------------------------
   // Read the 'document.xml' file (the template) and parse it
   // ---------------------------------------------------------
+  DEBUG && log.debug('finding main template file (e.g. document.xml)');
+  // See issue #131. Office365 files may name the main template file document2.xml or something else
+  // So we'll have to parse the content-types 'manifest' file first and retrieve the template file's name first.
+  const contentTypes = await readContentTypes(zip);
+  const mainDocument = getMainDoc(contentTypes);
+
   DEBUG && log.debug('Reading template...');
-  const templateXml = await zipGetText(zip, `${templatePath}/document.xml`);
-  if (templateXml == null) throw new Error('document.xml could not be found');
+  const templateXml = await zipGetText(zip, `${templatePath}/${mainDocument}`);
+  if (templateXml == null)
+    throw new Error(`${mainDocument} could not be found`);
   DEBUG && log.debug(`Template file length: ${templateXml.length}`);
   DEBUG && log.debug('Parsing XML...');
   const tic = new Date().getTime();
@@ -176,13 +185,13 @@ async function createReport(
   const reportXml = buildXml(report1, xmlOptions);
   if (_probe === 'XML') return reportXml;
   DEBUG && log.debug('Writing report...');
-  zipSetText(zip, `${templatePath}/document.xml`, reportXml);
+  zipSetText(zip, `${templatePath}/${mainDocument}`, reportXml);
 
   let numImages = Object.keys(images1).length;
   let numHtmls = Object.keys(htmls1).length;
-  await processImages(images1, 'document.xml', zip, templatePath);
-  await processLinks(links1, 'document.xml', zip, templatePath);
-  await processHtmls(htmls1, 'document.xml', zip, templatePath);
+  await processImages(images1, mainDocument, zip, templatePath);
+  await processLinks(links1, mainDocument, zip, templatePath);
+  await processHtmls(htmls1, mainDocument, zip, templatePath);
 
   // ---------------------------------------------------------
   // Process all other XML files (they may contain headers, etc.)
@@ -192,7 +201,7 @@ async function createReport(
     const regex = new RegExp(`${templatePath}\\/[^\\/]+\\.xml`);
     if (
       regex.test(filePath) &&
-      filePath !== `${templatePath}/document.xml` &&
+      filePath !== `${templatePath}/${mainDocument}` &&
       filePath.indexOf(`${templatePath}/template`) !== 0
     ) {
       files.push(filePath);
@@ -231,8 +240,8 @@ async function createReport(
     const segments = filePath.split('/');
     const documentComponent = segments[segments.length - 1];
     await processImages(images2, documentComponent, zip, templatePath);
-    await processLinks(links2, 'document.xml', zip, templatePath);
-    await processHtmls(htmls2, 'document.xml', zip, templatePath);
+    await processLinks(links2, mainDocument, zip, templatePath);
+    await processHtmls(htmls2, mainDocument, zip, templatePath);
   }
 
   // ---------------------------------------------------------
@@ -240,11 +249,7 @@ async function createReport(
   // ---------------------------------------------------------
   if (numImages || numHtmls) {
     DEBUG && log.debug('Completing [Content_Types].xml...');
-    const contentTypesPath = '[Content_Types].xml';
-    const contentTypesXml = await zipGetText(zip, contentTypesPath);
-    if (contentTypesXml == null)
-      throw new Error(`${contentTypesPath} could not be read`);
-    const contentTypes = await parseXml(contentTypesXml);
+
     // DEBUG && log.debug('Content types', { attach: contentTypes });
     const ensureContentType = (extension: string, contentType: string) => {
       const children = contentTypes._children;
@@ -276,7 +281,7 @@ async function createReport(
       ensureContentType('html', 'text/html');
     }
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
-    zipSetText(zip, contentTypesPath, finalContentTypesXml);
+    zipSetText(zip, CONTENT_TYPES_PATH, finalContentTypesXml);
   }
 
   // ---------------------------------------------------------
@@ -285,6 +290,33 @@ async function createReport(
   DEBUG && log.debug('Zipping...');
   const output = await zipSave(zip);
   return output;
+}
+
+export async function readContentTypes(zip: JSZip): Promise<NonTextNode> {
+  const contentTypesXml = await zipGetText(zip, CONTENT_TYPES_PATH);
+  if (contentTypesXml == null)
+    throw new Error(`${CONTENT_TYPES_PATH} could not be read`);
+  const node = await parseXml(contentTypesXml);
+  if (node._fTextNode)
+    throw new Error(`${CONTENT_TYPES_PATH} is a text node when parsed`);
+  return node;
+}
+
+export function getMainDoc(contentTypes: NonTextNode): string {
+  const MAIN_DOC_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml' as const;
+  for (const t of contentTypes._children) {
+    if (!t._fTextNode) {
+      if (t._attrs.ContentType === MAIN_DOC_MIME) {
+        const path = t._attrs.PartName;
+        if (path) {
+          return path.replace('/word/', '');
+        }
+      }
+    }
+  }
+  throw new Error(
+    `Could not find main document (e.g. document.xml) in ${CONTENT_TYPES_PATH}`
+  );
 }
 
 // ==========================================
