@@ -1,3 +1,8 @@
+## 4.1.1 (2020-06-06)
+* [PR #121](https://github.com/guigrpa/docx-templates/pull/121) Improved detection of built-in commands in templates to avoid confusion with javascript symbols.
+* [#107](https://github.com/guigrpa/docx-templates/issues/107) Library now correctly recognizes user-defined commands with non-alphanumeric names (like Chinese characters).
+* [#131](https://github.com/guigrpa/docx-templates/issues/131): .docx template files originating from Office365 or SharePoint can now be used (PR [#132](https://github.com/guigrpa/docx-templates/pull/121))
+
 ## 4.1.0 (2020-4-25)
 
 * #112 Failing on the first error that is encountered while rendering a template is now optional behaviour (but still the default). Use `failFast: false` to collect all errors in a template before failing. This allows for less cumbersome interactive correction of typos or other mistakes in template commands.
