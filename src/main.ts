@@ -103,10 +103,12 @@ async function createReport(
   // See issue #131. Office365 files may name the main template file document2.xml or something else
   // TODO: so we'll have to parse the content-types 'manifest' file first and retrieve the template file's name first.
   const contentTypes = await readContentTypes(zip);
+  const mainDocument = 'document.xml'; // TODO: for now
 
   DEBUG && log.debug('Reading template...');
-  const templateXml = await zipGetText(zip, `${templatePath}/document.xml`);
-  if (templateXml == null) throw new Error('document.xml could not be found');
+  const templateXml = await zipGetText(zip, `${templatePath}/${mainDocument}`);
+  if (templateXml == null)
+    throw new Error(`${mainDocument} could not be found`);
   DEBUG && log.debug(`Template file length: ${templateXml.length}`);
   DEBUG && log.debug('Parsing XML...');
   const tic = new Date().getTime();
@@ -182,13 +184,13 @@ async function createReport(
   const reportXml = buildXml(report1, xmlOptions);
   if (_probe === 'XML') return reportXml;
   DEBUG && log.debug('Writing report...');
-  zipSetText(zip, `${templatePath}/document.xml`, reportXml);
+  zipSetText(zip, `${templatePath}/${mainDocument}`, reportXml);
 
   let numImages = Object.keys(images1).length;
   let numHtmls = Object.keys(htmls1).length;
-  await processImages(images1, 'document.xml', zip, templatePath);
-  await processLinks(links1, 'document.xml', zip, templatePath);
-  await processHtmls(htmls1, 'document.xml', zip, templatePath);
+  await processImages(images1, mainDocument, zip, templatePath);
+  await processLinks(links1, mainDocument, zip, templatePath);
+  await processHtmls(htmls1, mainDocument, zip, templatePath);
 
   // ---------------------------------------------------------
   // Process all other XML files (they may contain headers, etc.)
@@ -198,7 +200,7 @@ async function createReport(
     const regex = new RegExp(`${templatePath}\\/[^\\/]+\\.xml`);
     if (
       regex.test(filePath) &&
-      filePath !== `${templatePath}/document.xml` &&
+      filePath !== `${templatePath}/${mainDocument}` &&
       filePath.indexOf(`${templatePath}/template`) !== 0
     ) {
       files.push(filePath);
@@ -237,8 +239,8 @@ async function createReport(
     const segments = filePath.split('/');
     const documentComponent = segments[segments.length - 1];
     await processImages(images2, documentComponent, zip, templatePath);
-    await processLinks(links2, 'document.xml', zip, templatePath);
-    await processHtmls(htmls2, 'document.xml', zip, templatePath);
+    await processLinks(links2, mainDocument, zip, templatePath);
+    await processHtmls(htmls2, mainDocument, zip, templatePath);
   }
 
   // ---------------------------------------------------------
