@@ -22,8 +22,9 @@ import { addChild, newNonTextNode } from './reportUtils';
 import log from './debug';
 import JSZip from 'jszip';
 
-const DEFAULT_CMD_DELIMITER = '+++';
-const DEFAULT_LITERAL_XML_DELIMITER = '||';
+const DEFAULT_CMD_DELIMITER = '+++' as const;
+const DEFAULT_LITERAL_XML_DELIMITER = '||' as const;
+const CONTENT_TYPES_PATH = '[Content_Types].xml' as const;
 
 // TODO: remove
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
@@ -98,6 +99,11 @@ async function createReport(
   // ---------------------------------------------------------
   // Read the 'document.xml' file (the template) and parse it
   // ---------------------------------------------------------
+  DEBUG && log.debug('finding main template file (e.g. document.xml)');
+  // See issue #131. Office365 files may name the main template file document2.xml or something else
+  // TODO: so we'll have to parse the content-types 'manifest' file first and retrieve the template file's name first.
+  const contentTypes = await readContentTypes(zip);
+
   DEBUG && log.debug('Reading template...');
   const templateXml = await zipGetText(zip, `${templatePath}/document.xml`);
   if (templateXml == null) throw new Error('document.xml could not be found');
@@ -240,11 +246,7 @@ async function createReport(
   // ---------------------------------------------------------
   if (numImages || numHtmls) {
     DEBUG && log.debug('Completing [Content_Types].xml...');
-    const contentTypesPath = '[Content_Types].xml';
-    const contentTypesXml = await zipGetText(zip, contentTypesPath);
-    if (contentTypesXml == null)
-      throw new Error(`${contentTypesPath} could not be read`);
-    const contentTypes = await parseXml(contentTypesXml);
+
     // DEBUG && log.debug('Content types', { attach: contentTypes });
     const ensureContentType = (extension: string, contentType: string) => {
       const children = contentTypes._children;
@@ -276,7 +278,7 @@ async function createReport(
       ensureContentType('html', 'text/html');
     }
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
-    zipSetText(zip, contentTypesPath, finalContentTypesXml);
+    zipSetText(zip, CONTENT_TYPES_PATH, finalContentTypesXml);
   }
 
   // ---------------------------------------------------------
@@ -285,6 +287,13 @@ async function createReport(
   DEBUG && log.debug('Zipping...');
   const output = await zipSave(zip);
   return output;
+}
+
+async function readContentTypes(zip: JSZip): Promise<Node> {
+  const contentTypesXml = await zipGetText(zip, CONTENT_TYPES_PATH);
+  if (contentTypesXml == null)
+    throw new Error(`${CONTENT_TYPES_PATH} could not be read`);
+  return await parseXml(contentTypesXml);
 }
 
 // ==========================================
