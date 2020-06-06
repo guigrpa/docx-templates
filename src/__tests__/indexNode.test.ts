@@ -691,7 +691,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'imageBase64.docx')
         );
-        let options: UserOptions = {
+        const options: UserOptions = {
           noSandbox,
           template,
           data: {},
@@ -712,7 +712,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'imageBase64.docx')
         );
-        let options = {
+        const options = {
           noSandbox,
           template,
           data: {},
