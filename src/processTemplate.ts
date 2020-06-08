@@ -68,7 +68,7 @@ const extractQuery = async (
       !parent._fTextNode && // Flow, don't complain
       parent._tag === 'w:t'
     ) {
-      await processText(null, nodeIn, ctx, options.failFast);
+      await processText(null, nodeIn, ctx);
     }
     if (ctx.query != null) break;
   }
@@ -332,7 +332,7 @@ const produceJsReport = async (
         !parent._fTextNode && // Flow-prevention
         parent._tag === 'w:t'
       ) {
-        const result = await processText(data, nodeIn, ctx, options.failFast);
+        const result = await processText(data, nodeIn, ctx);
         if (typeof result === 'string') {
           // TODO: use a discriminated union here instead of a type assertion to distinguish TextNodes from NonTextNodes.
           const newNodeAsTextNode: TextNode = newNode as TextNode;
@@ -375,10 +375,9 @@ const produceJsReport = async (
 const processText = async (
   data: ReportData | undefined,
   node: TextNode,
-  ctx: Context,
-  failFast: boolean
+  ctx: Context
 ): Promise<string | Error[]> => {
-  const { cmdDelimiter } = ctx.options;
+  const { cmdDelimiter, failFast } = ctx.options;
   const text = node._text;
   if (text == null || text === '') return '';
   const segments = text
@@ -451,7 +450,7 @@ const processCmd = async (
     }
 
     // Process command
-    let out;
+    let out: string | null = null;
     if (cmdName === 'QUERY' || cmdName === 'CMD_NODE') {
       // DEBUG && log.debug(`Ignoring ${cmdName} command`);
       // ...
@@ -467,12 +466,12 @@ const processCmd = async (
       // FOR <varName> IN <expression>
       // IF <expression>
     } else if (cmdName === 'FOR' || cmdName === 'IF') {
-      out = await processForIf(data, node, ctx, cmd, cmdName, cmdRest);
+      await processForIf(data, node, ctx, cmd, cmdName, cmdRest);
 
       // END-FOR
       // END-IF
     } else if (cmdName === 'END-FOR' || cmdName === 'END-IF') {
-      out = processEndForIf(node, ctx, cmd, cmdName, cmdRest);
+      processEndForIf(node, ctx, cmd, cmdName, cmdRest);
 
       // INS <expression>
     } else if (cmdName === 'INS') {
@@ -572,7 +571,7 @@ const processForIf = async (
   cmd: string,
   cmdName: string,
   cmdRest: string
-): Promise<null | string> => {
+): Promise<void> => {
   const isIf = cmdName === 'IF';
 
   // Identify FOR/IF loop
@@ -618,8 +617,6 @@ const processForIf = async (
     });
   }
   logLoop(ctx.loops);
-
-  return null;
 };
 
 const processEndForIf = (
@@ -628,7 +625,7 @@ const processEndForIf = (
   cmd: string,
   cmdName: string,
   cmdRest: string
-): null | string => {
+): void => {
   const curLoop = getCurLoop(ctx);
   if (!curLoop) throw new Error(`Invalid command: ${cmd}`);
   const isIf = cmdName === 'END-IF';
@@ -649,7 +646,7 @@ const processEndForIf = (
         log.debug(
           `Ignoring ${cmd} (${varName}, but we're expecting ${curLoop.varName})`
         );
-      return null;
+      return;
     }
     throw new Error(`Invalid command: ${cmd}`);
   }
@@ -664,8 +661,6 @@ const processEndForIf = (
     // loop finished
     ctx.loops.pop();
   }
-
-  return null;
 };
 
 const imageToContext = (ctx: Context, img: Image) => {
