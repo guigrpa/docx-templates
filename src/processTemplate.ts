@@ -464,18 +464,6 @@ const processCmd = async (
       ctx.shorthands[aliasName] = fullCmd;
       DEBUG && log.debug(`Defined alias '${aliasName}' for: ${fullCmd}`);
 
-      // VAR <varName> <expression>
-      // } else if (cmdName === 'VAR') {
-      //   if (!isLoopExploring(ctx)) {
-      //     const varMatch = /^(\S+)\s+(.+)/.exec(cmdRest);
-      //     if (!varMatch) throw new Error(`Invalid VAR command: ${cmd}`);
-      //     const varName = varMatch[1];
-      //     const code = varMatch[2];
-      //     const varValue = await runUserJsAndGetString(data, code, ctx);
-      //     ctx.vars[varName] = varValue;
-      //     // DEBUG && log.debug(`${varName} is now: ${JSON.stringify(varValue)}`);
-      //   }
-
       // FOR <varName> IN <expression>
       // IF <expression>
     } else if (cmdName === 'FOR' || cmdName === 'IF') {
