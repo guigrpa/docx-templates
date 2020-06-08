@@ -430,7 +430,7 @@ const processCmd = async (
   data: ReportData | undefined,
   node: Node,
   ctx: Context
-): Promise<null | undefined | string | Error> => {
+): Promise<undefined | string | Error> => {
   const cmd = getCommand(ctx);
   DEBUG && log.debug(`Processing cmd: ${cmd}`);
   try {
@@ -446,11 +446,10 @@ const processCmd = async (
     // Seeking query?
     if (ctx.fSeekQuery) {
       if (cmdName === 'QUERY') ctx.query = cmdRest;
-      return null;
+      return;
     }
 
     // Process command
-    let out: string | null = null;
     if (cmdName === 'QUERY' || cmdName === 'CMD_NODE') {
       // DEBUG && log.debug(`Ignoring ${cmdName} command`);
       // ...
@@ -476,7 +475,7 @@ const processCmd = async (
       // INS <expression>
     } else if (cmdName === 'INS') {
       if (!isLoopExploring(ctx))
-        out = await runUserJsAndGetString(data, cmdRest, ctx);
+        return await runUserJsAndGetString(data, cmdRest, ctx);
 
       // EXEC <code>
     } else if (cmdName === 'EXEC') {
@@ -517,7 +516,7 @@ const processCmd = async (
 
       // Invalid command
     } else throw new Error(`Invalid command syntax: '${cmd}'`);
-    return out;
+    return;
   } catch (err) {
     return new Error(`Error executing command: ${cmd} ${err.message}`);
   }
