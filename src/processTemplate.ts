@@ -7,7 +7,7 @@ import {
   isLoopExploring,
   logLoop,
 } from './reportUtils';
-import { runUserJsAndGetString, runUserJsAndGetRaw } from './jsSandbox';
+import { runUserJsAndGetRaw } from './jsSandbox';
 import {
   Node,
   TextNode,
@@ -474,8 +474,23 @@ const processCmd = async (
 
       // INS <expression>
     } else if (cmdName === 'INS') {
-      if (!isLoopExploring(ctx))
-        return await runUserJsAndGetString(data, cmdRest, ctx);
+      if (!isLoopExploring(ctx)) {
+        const result = await runUserJsAndGetRaw(data, cmdRest, ctx);
+        if (result == null) return '';
+
+        // If the `processLineBreaks` flag is set,
+        // newlines are replaced with a `w:br` tag (protected by
+        // the `literalXmlDelimiter` separators)
+        let str = String(result);
+        if (ctx.options.processLineBreaks) {
+          const { literalXmlDelimiter } = ctx.options;
+          str = str.replace(
+            /\n/g,
+            `${literalXmlDelimiter}<w:br/>${literalXmlDelimiter}`
+          );
+        }
+        return str;
+      }
 
       // EXEC <code>
     } else if (cmdName === 'EXEC') {

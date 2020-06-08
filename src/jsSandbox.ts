@@ -6,39 +6,16 @@ import { ReportData, Context } from './types';
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log = DEBUG ? require('./debug').mainStory : null;
 
-// Runs a user snippet in a sandbox, and returns the result
-// as a string. If the `processLineBreaks` flag is set,
-// newlines are replaced with a `w:br` tag (protected by
-// the `literalXmlDelimiter` separators)
-// See more details in runUserJsAndGetRaw() below.
-const runUserJsAndGetString = async (
-  data: ReportData | undefined,
-  code: string,
-  ctx: Context
-): Promise<string> => {
-  const result = await runUserJsAndGetRaw(data, code, ctx);
-  if (result == null) return '';
-  let str = String(result);
-  if (ctx.options.processLineBreaks) {
-    const { literalXmlDelimiter } = ctx.options;
-    str = str.replace(
-      /\n/g,
-      `${literalXmlDelimiter}<w:br/>${literalXmlDelimiter}`
-    );
-  }
-  return str;
-};
-
 // Runs a user snippet in a sandbox, and returns the result.
 // The snippet can return a Promise, which is then awaited.
 // The sandbox is kept for the execution of snippets later on
 // in the template. Sandboxing can also be disabled via
 // ctx.options.noSandbox.
-const runUserJsAndGetRaw = async (
+export async function runUserJsAndGetRaw(
   data: ReportData | undefined,
   code: string,
   ctx: Context
-): Promise<any> => {
+): Promise<any> {
   // Retrieve the current JS sandbox contents (if any) and add
   // the code to be run, and a placeholder for the result,
   // as well as all data defined by the user
@@ -91,9 +68,4 @@ const runUserJsAndGetRaw = async (
   ctx.jsSandbox = omit(context, ['__code__', '__result__']);
   DEBUG && log.debug('JS result', { attach: result });
   return result;
-};
-
-// ==========================================
-// Public API
-// ==========================================
-export { runUserJsAndGetString, runUserJsAndGetRaw };
+}
