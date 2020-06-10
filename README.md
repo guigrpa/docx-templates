@@ -129,8 +129,6 @@ const readFileIntoArrayBuffer = fd =>
 
 You can find an example implementation of `saveDataToFile()` [in the Webpack example](https://github.com/guigrpa/docx-templates/blob/79119723ff1c009b5bbdd28016558da9b405742f/examples/example-webpack/client/index.js#L82).
 
-With the default configuration, browser usage can become slow with complex templates due to the usage of JS sandboxes for security reasons. _If the templates you'll be using with docx-templates can be trusted 100%, you can disable the security sandboxes by configuring `noSandbox: true`_. **Beware of arbitrary code injection risks**:
-
 ```js
 const report = await createReport({
   // ...
@@ -443,6 +441,11 @@ try {
 }
 ```
 
+# Performance & security
+
+Note that turning off the sandbox (using `noSandbox: true`) is known to give significant performance improvements when working with large templates or datasets. However, before you do this, make sure you are aware of the security implications. **Templates can contain arbitrary javascript code. Beware of code injection risks!** _When turning off sandboxing, ensure the templates you'll be using with docx-templates can be trusted 100%._ Obviously, this is less of an issue when running docx-templates in a browser environment.
+
+Regardless of whether you are using sandboxing or not, be aware that allowing users to upload arbitrary templates to be executed on your server poses a significant security threat. Use at your own risk.
 
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
 
