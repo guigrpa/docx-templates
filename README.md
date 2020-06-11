@@ -129,12 +129,6 @@ const readFileIntoArrayBuffer = fd =>
 
 You can find an example implementation of `saveDataToFile()` [in the Webpack example](https://github.com/guigrpa/docx-templates/blob/79119723ff1c009b5bbdd28016558da9b405742f/examples/example-webpack/client/index.js#L82).
 
-```js
-const report = await createReport({
-  // ...
-  // USE ONLY IN THE BROWSER, AND WITH TRUSTED TEMPLATES
-  noSandbox: true, // WARNING: INSECURE
-});
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify).
 
 ### Browser compatibility caveat
@@ -441,9 +435,15 @@ try {
 
 # Performance & security
 
-Note that turning off the sandbox (using `noSandbox: true`) is known to give significant performance improvements when working with large templates or datasets. However, before you do this, make sure you are aware of the security implications. **Templates can contain arbitrary javascript code. Beware of code injection risks!** _When turning off sandboxing, ensure the templates you'll be using with docx-templates can be trusted 100%._ Obviously, this is less of an issue when running docx-templates in a browser environment.
+**Templates can contain arbitrary javascript code. Beware of code injection risks!**
 
-Regardless of whether you are using sandboxing or not, be aware that allowing users to upload arbitrary templates to be executed on your server poses a significant security threat. Use at your own risk.
+Obviously, this is less of an issue when running docx-templates in a browser environment.
+
+Regardless of whether you are using sandboxing or not (`noSandbox: true`), be aware that allowing users to upload arbitrary templates to be executed on your server poses a significant security threat. Use at your own risk.
+
+The library uses `require('vm')` as its default sandboxing environment. Note that this sandbox is explicitly [_not_ meant to be used as a security mechanism](https://nodejs.org/api/vm.html#vm_vm_executing_javascript). You can provide your own sandboxing environment if you want, as shown in [this example project](https://github.com/guigrpa/docx-templates/tree/master/examples/example-vm2).
+
+Note that turning off the sandbox (`noSandbox: true`) is known to give significant performance improvements when working with large templates or datasets. However, before you do this, make sure you are aware of the security implications.
 
 ## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
 
