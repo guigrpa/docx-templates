@@ -86,7 +86,7 @@ const report = await createReport({
 });
 ```
 
-Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node).
+Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node).
 
 
 ## Browser usage
@@ -135,9 +135,7 @@ const report = await createReport({
   // USE ONLY IN THE BROWSER, AND WITH TRUSTED TEMPLATES
   noSandbox: true, // WARNING: INSECURE
 });
-```
-
-Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/packages/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/packages/example-browserify).
+Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify).
 
 ### Browser compatibility caveat
 Note that the JavaScript code in your docx template will be run as-is by the browser. Transpilers like Babel can't see this code, and won't be able to polyfill it. This means that the JS code in your template needs to be compatible with the browsers you are targeting. In other words: don't use fancy modern syntax and functions in your template if you want older browsers, like IE11, to be able to render it.
@@ -162,9 +160,9 @@ When choosing a delimiter, take care not to introduce conflicts with JS syntax, 
 
 You can find several template examples in this repo:
 
-* [SWAPI](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node), a good example of what you can achieve embedding a template (GraphQL in this case) in your report, including a simple script for report generation. Uses the freak-ish online [Star Wars GraphQL API](https://github.com/graphql/swapi-graphql).
-* [Dynamic images](https://github.com/guigrpa/docx-templates/tree/master/packages/example-node): with examples of images that are dynamically downloaded or created. Check out the _images-many-tiles_ example for a taste of this powerful feature.
-* Browser-based examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/packages/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/packages/example-browserify).
+* [SWAPI](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node), a good example of what you can achieve embedding a template (GraphQL in this case) in your report, including a simple script for report generation. Uses the freak-ish online [Star Wars GraphQL API](https://github.com/graphql/swapi-graphql).
+* [Dynamic images](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node): with examples of images that are dynamically downloaded or created. Check out the _images-many-tiles_ example for a taste of this powerful feature.
+* Browser-based examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify).
 
 Currently supported commands are defined below.
 
