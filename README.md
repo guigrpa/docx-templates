@@ -13,7 +13,7 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
 * Include contents **conditionally**, `IF` a certain JavaScript expression is truthy
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
-* Run all JavaScript in a **separate Node VM for security**
+* Run all JavaScript in a **separate Node VM** or a user-provided sandbox.
 * Include **literal XML**
 * Written in TypeScript, so ships with type definitions.
 * Plenty of **examples** in this repo (with Node, Webpack and Browserify)
