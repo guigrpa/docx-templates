@@ -250,6 +250,20 @@ Usage elsewhere will then look like
 +++= myFun() +++
 ```
 
+**A note on scoping:**
+
+When disabling sandbox mode (noSandbox: true), the scoping behaviour is slightly different. Disabling the sandbox will execute each EXEC snippet's code in a `with(this){...}` context, where this is the 'context' object. This 'context' object is re-used between the code snippets of your template. The critical difference outside of sandbox mode is that you are not declaring functions and variables in the global scope by default. The only way to assign to the global scope is to assign declarations as properties of the context object. This is simplified by the `with(context){}` wrapper: all global declarations are actually added as properties to this context object. Locally scoped declarations are not. _The above examples should work in both `noSandbox: true` and `noSandbox: false`.
+
+This example declares the test function in the context object, making it callable from another snippet.
+```js
+test = () => {};
+```
+
+While the below example only declares test in the local scope of the snippet, meaning it gets garbage collected after the snippet has executed.
+```js
+function test() {};
+```
+
 ### `IMAGE`
 
 Includes an image with the data resulting from evaluating a JavaScript snippet:
