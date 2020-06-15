@@ -1,3 +1,7 @@
+## 4.2.0 (2020-06-15)
+* Feature: added 'rejectNullish' setting. When set to `true`, this setting ensures `createReport` throws a `NullishCommandResultError` when the result of an INS, HTML, IMAGE, or LINK command is `null` or `undefined`. This is useful as nullish return values usually indicate a mistake in the template or the invoking code. Defaults to `false`.
+* Enhancement: typed Errors to facilitate more fine-grained downstream error handling.
+
 ## 4.1.1 (2020-06-06)
 * [PR #121](https://github.com/guigrpa/docx-templates/pull/121) Improved detection of built-in commands in templates to avoid confusion with javascript symbols.
 * [#107](https://github.com/guigrpa/docx-templates/issues/107) Library now correctly recognizes user-defined commands with non-alphanumeric names (like Chinese characters).

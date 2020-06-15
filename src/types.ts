@@ -97,7 +97,7 @@ export type UserOptions = {
   failFast?: boolean;
 
   /**
-   * When set to `true`, this setting ensures `createReport` throws an error when the result of an INS, HTML, IMAGE, or LINK command is `null` or `undefined`. This is useful as nullish return values usually indicate a mistake in the template or the invoking code. Defaults to `false`.
+   * When set to `true`, this setting ensures `createReport` throws a `NullishCommandResultError` when the result of an INS, HTML, IMAGE, or LINK command is `null` or `undefined`. This is useful as nullish return values usually indicate a mistake in the template or the invoking code. Defaults to `false`.
    */
   rejectNullish?: boolean;
 };
