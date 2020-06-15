@@ -22,7 +22,7 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "scripts": {
-    "build": "browserify ../../lib/index.js --s docx-templates -u ../docx-templates/lib/debug.js > public/docx-templates.js",
+    "build": "browserify ./node_modules/docx-templates/lib/index.js --s docxTemplates > public/docx-templates.js",
     "start": "yarn build && node server"
   },
   "dependencies": {

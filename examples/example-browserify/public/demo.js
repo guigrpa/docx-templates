@@ -2,7 +2,7 @@
 
 console.log('Starting swapi demo');
 
-const { createReport } = docxTemplates; // eslint-disable-line
+const { createReport } = docxTemplates;
 
 // callback when a template has been selected
 async function onTemplateChosen(event) {
