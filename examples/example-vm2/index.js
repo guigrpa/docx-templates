@@ -3,7 +3,10 @@ const qrcode = require('yaqrcode');
 const createReport = require('docx-templates').default;
 const { VM, VMScript } = require('vm2');
 const fs = require('fs')
-const template = fs.readFileSync(process.argv[2])
+
+const template_path = process.argv[2]
+console.log('Reading template path from ' + template_path)
+const template = fs.readFileSync(template_path)
 
 createReport({
   template,
@@ -47,11 +50,13 @@ createReport({
     return { modifiedSandbox, result };
   },
 }).then(
-  rendered => fs.writeFileSync(
-    process.argv.length > 3 ? process.argv[3] : null,
+  rendered => {
+    fs.writeFileSync(
+    'report.docx',
     rendered
-  ))
-  .catch(console.log);
+  )
+  console.log('Wrote result to ./report.docx')
+}).catch(console.log);
 
 /*
 {
