@@ -22,29 +22,11 @@ async function onTemplateChosen() {
   console.log('Creating report (can take some time) ...');
   const report = await createReport({
     template,
-    data: async query => {
-      const finalQuery = query || '{ viewer { login }}';
-      const resp = await fetch('/github', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: finalQuery }),
-      });
-      const js = await resp.json();
-      console.log(js);
-      return js;
-    },
     additionalJsContext: {
       tile: async (z, x, y) => {
         const resp = await fetch(
           `http://tile.stamen.com/toner/${z}/${x}/${y}.png`
         );
-        const buffer = resp.arrayBuffer
-          ? await resp.arrayBuffer()
-          : await resp.buffer();
-        return { width: 3, height: 3, data: buffer, extension: '.png' };
-      },
-      avatar: async url => {
-        const resp = await fetch(url);
         const buffer = resp.arrayBuffer
           ? await resp.arrayBuffer()
           : await resp.buffer();

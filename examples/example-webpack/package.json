@@ -38,7 +38,6 @@
     "body-parser": "^1.19.0",
     "docx-templates": "*",
     "express": "^4.17.1",
-    "isomorphic-fetch": "2.2.1",
     "prettier": "^1.18.2",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.11",
