@@ -1023,6 +1023,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
       });
 
       it('131 correctly handles Office 365 .docx files', async () => {
+        // These files tend to contain a differently named document.xml (like document2.xml)
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'office365.docx')
         );
@@ -1040,6 +1041,94 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           'JS'
         );
         expect(result).toMatchSnapshot();
+      });
+
+      describe('rejectNullish setting', () => {
+        it('INS', async () => {
+          const template = await fs.promises.readFile(
+            path.join(__dirname, 'fixtures', 'rejectNullishINS.docx')
+          );
+
+          // When not explicitly set, rejectNullish should be considered 'true' so this case should resolve.
+          await expect(
+            createReport({
+              noSandbox,
+              template,
+              data: {
+                testobj: {}, // accessing a non-existing property will result in `undefined`
+                test2: 'second value!',
+              },
+            })
+          ).resolves.toBeInstanceOf(Uint8Array);
+
+          // The same case should throw when we decide NOT to accept nullish values.
+          await expect(
+            createReport({
+              noSandbox,
+              template,
+              data: {
+                testobj: {}, // accessing a non-existing property will result in `undefined`
+                test2: 'second value!',
+              },
+              rejectNullish: true,
+            })
+          ).rejects.toBeInstanceOf(Error);
+
+          // Should be ok when we actually set the value.
+          await expect(
+            createReport({
+              noSandbox,
+              template,
+              data: {
+                testobj: { value: 'the value is now set' },
+                test2: 'second value!',
+              },
+              rejectNullish: true,
+            })
+          ).resolves.toBeInstanceOf(Uint8Array);
+        });
+
+        it('IMAGE', async () => {
+          const template = await fs.promises.readFile(
+            path.join(__dirname, 'fixtures', 'rejectNullishIMAGE.docx')
+          );
+          await expect(
+            createReport({
+              noSandbox,
+              template,
+              data: {},
+              additionalJsContext: {
+                qr: () => undefined,
+              },
+            })
+          ).resolves.toBeInstanceOf(Uint8Array);
+          await expect(
+            createReport({
+              noSandbox,
+              template,
+              data: {},
+              rejectNullish: true,
+              additionalJsContext: {
+                qr: () => undefined,
+              },
+            })
+          ).rejects.toBeInstanceOf(Error);
+          await expect(
+            createReport({
+              noSandbox,
+              template,
+              data: {},
+              rejectNullish: true,
+              additionalJsContext: {
+                qr: async (contents: string) => {
+                  const dataUrl = await QR.toDataURL(contents, { width: 500 });
+                  const data = dataUrl.slice('data:image/gif;base64,'.length);
+                  return { width: 6, height: 6, data, extension: '.gif' };
+                },
+              },
+            })
+          ).resolves.toBeInstanceOf(Uint8Array);
+        });
       });
     });
   });

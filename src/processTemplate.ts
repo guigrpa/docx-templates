@@ -476,7 +476,14 @@ const processCmd = async (
     } else if (cmdName === 'INS') {
       if (!isLoopExploring(ctx)) {
         const result = await runUserJsAndGetRaw(data, cmdRest, ctx);
-        if (result == null) return '';
+        if (result == null) {
+          if (ctx.options.rejectNullish) {
+            throw new Error(
+              `Result of '${cmdRest}' is null or undefined and rejectNullish is set`
+            );
+          }
+          return '';
+        }
 
         // If the `processLineBreaks` flag is set,
         // newlines are replaced with a `w:br` tag (protected by
@@ -504,6 +511,11 @@ const processCmd = async (
           cmdRest,
           ctx
         );
+        if (ctx.options.rejectNullish && img == null) {
+          throw new Error(
+            `Result of '${cmdRest}' is null or undefined and rejectNullish is set`
+          );
+        }
         if (img != null) await processImage(ctx, img);
       }
 
@@ -515,6 +527,11 @@ const processCmd = async (
           cmdRest,
           ctx
         );
+        if (ctx.options.rejectNullish && pars == null) {
+          throw new Error(
+            `Result of '${cmdRest}' is null or undefined and rejectNullish is set`
+          );
+        }
         if (pars != null) await processLink(ctx, pars);
       }
 
@@ -526,6 +543,11 @@ const processCmd = async (
           cmdRest,
           ctx
         );
+        if (ctx.options.rejectNullish && html == null) {
+          throw new Error(
+            `Result of '${cmdRest}' is null or undefined and rejectNullish is set`
+          );
+        }
         if (html != null) await processHtml(ctx, html);
       }
 

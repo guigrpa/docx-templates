@@ -88,6 +88,8 @@ async function createReport(
     runJs: options.runJs,
     additionalJsContext: options.additionalJsContext || {},
     failFast: options.failFast == null ? true : options.failFast,
+    rejectNullish:
+      options.rejectNullish == null ? false : options.rejectNullish,
   };
   const xmlOptions = { literalXmlDelimiter };
 

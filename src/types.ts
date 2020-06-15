@@ -95,6 +95,11 @@ export type UserOptions = {
    * Whether to fail on the first error encountered in the template. Defaults to true. Can be used to collect all errors in a template (e.g. misspelled commands) before failing.
    */
   failFast?: boolean;
+
+  /**
+   * When set to `true`, this setting ensures `createReport` throws an error when the result of an INS, HTML, IMAGE, or LINK command is `null` or `undefined`. This is useful as nullish return values usually indicate a mistake in the template or the invoking code. Defaults to `false`.
+   */
+  rejectNullish?: boolean;
 };
 
 export type CreateReportOptions = {
@@ -105,6 +110,7 @@ export type CreateReportOptions = {
   runJs?: RunJSFunc;
   additionalJsContext: Object;
   failFast: boolean;
+  rejectNullish: boolean;
 };
 
 export type Context = {

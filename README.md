@@ -83,6 +83,17 @@ const report = await createReport({
   literalXmlDelimiter: '||',
   processLineBreaks: true,
   noSandbox: false,
+
+  /**
+   * Whether to fail on the first error encountered in the template. Defaults to true. Can be used to collect all errors in a template (e.g. misspelled commands) before failing.
+   */
+  failFast: true,
+
+  /**
+   * When set to `true`, this setting ensures createReport throws an error when the result of an INS, HTML, IMAGE, or LINK command turns out to be null or undefined,
+   * as this usually indicates a mistake in the template or the invoking code (defaults to `false`).
+   */
+  rejectNullish: false
 });
 ```
 
