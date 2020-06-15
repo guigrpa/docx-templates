@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
   entry: { app: './client/index.js' },
@@ -9,13 +8,6 @@ module.exports = {
     path: path.resolve(process.cwd(), './public'),
     publicPath: '',
   },
-
-  plugins: [
-    new webpack.NormalModuleReplacementPlugin(
-      /fs/,
-      path.resolve(process.cwd(), 'client/emptyModule.js')
-    ),
-  ],
 
   module: {
     rules: [
