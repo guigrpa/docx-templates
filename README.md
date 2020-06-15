@@ -458,6 +458,18 @@ try {
 }
 ```
 
+The library exposes the following error types. See the `errors.ts` module for details.
+
+```
+NullishCommandResultError // thrown when rejectNullish is set to true and a command returns null or undefined
+CommandSyntaxError
+InvalidCommandError
+CommandExecutionError
+ImageError
+InternalError
+TemplateParseError
+```
+
 # Performance & security
 
 **Templates can contain arbitrary javascript code. Beware of code injection risks!**

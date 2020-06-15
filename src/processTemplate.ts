@@ -21,6 +21,13 @@ import {
   Htmls,
   Image,
 } from './types';
+import {
+  NullishCommandResultError,
+  CommandSyntaxError,
+  InternalError,
+  InvalidCommandError,
+  ImageError,
+} from './errors';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log = DEBUG ? require('./debug').mainStory : null;
@@ -129,7 +136,7 @@ const produceJsReport = async (
     // Move input node pointer
     // =============================================
     if (ctx.fJump) {
-      if (!curLoop) throw new Error('INTERNAL_ERROR');
+      if (!curLoop) throw new InternalError();
       const { refNode, refNodeLevel } = curLoop;
       // DEBUG &&
       //   log.debug(`Jumping to level ${refNodeLevel}...`, {
@@ -211,7 +218,7 @@ const produceJsReport = async (
         //   });
       }
       const nodeOutParent = nodeOut._parent;
-      if (nodeOutParent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
+      if (nodeOutParent == null) throw new InternalError();
 
       // Execute the move in the output tree
       nodeOut = nodeOutParent;
@@ -309,7 +316,7 @@ const produceJsReport = async (
     if (move === 'DOWN' || move === 'SIDE') {
       // Move nodeOut to point to the new node's parent
       if (move === 'SIDE') {
-        if (nodeOut._parent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
+        if (nodeOut._parent == null) throw new InternalError();
         nodeOut = nodeOut._parent;
       }
 
@@ -329,7 +336,7 @@ const produceJsReport = async (
       if (
         nodeIn._fTextNode &&
         parent &&
-        !parent._fTextNode && // Flow-prevention
+        !parent._fTextNode &&
         parent._tag === 'w:t'
       ) {
         const result = await processText(data, nodeIn, ctx);
@@ -350,7 +357,7 @@ const produceJsReport = async (
     // -------------------------------------------
     if (move === 'JUMP') {
       while (deltaJump > 0) {
-        if (nodeOut._parent == null) throw new Error('INTERNAL_ERROR'); // Flow-prevention
+        if (nodeOut._parent == null) throw new InternalError();
         nodeOut = nodeOut._parent;
         deltaJump -= 1;
       }
@@ -404,15 +411,15 @@ const processText = async (
       if (ctx.fCmd) {
         const cmdResultText = await processCmd(data, node, ctx);
         if (cmdResultText != null) {
-          if (cmdResultText instanceof Error) {
-            if (failFast) throw cmdResultText;
-            errors.push(cmdResultText);
-          } else {
+          if (typeof cmdResultText === 'string') {
             outText += cmdResultText;
             appendTextToTagBuffers(cmdResultText, ctx, {
               fCmd: false,
               fInsertedText: true,
             });
+          } else {
+            if (failFast) throw cmdResultText;
+            errors.push(cmdResultText);
           }
         }
       }
@@ -456,7 +463,8 @@ const processCmd = async (
       // ALIAS name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
     } else if (cmdName === 'ALIAS') {
       const aliasMatch = /^(\S+)\s+(.+)/.exec(cmdRest);
-      if (!aliasMatch) throw new Error(`Invalid ALIAS command: ${cmd}`);
+      if (!aliasMatch)
+        throw new InvalidCommandError('Invalid ALIAS command', cmd);
       const aliasName = aliasMatch[1];
       const fullCmd = aliasMatch[2];
       ctx.shorthands[aliasName] = fullCmd;
@@ -478,9 +486,7 @@ const processCmd = async (
         const result = await runUserJsAndGetRaw(data, cmdRest, ctx);
         if (result == null) {
           if (ctx.options.rejectNullish) {
-            throw new Error(
-              `Result of '${cmdRest}' is null or undefined and rejectNullish is set`
-            );
+            throw new NullishCommandResultError(cmdRest);
           }
           return '';
         }
@@ -512,11 +518,15 @@ const processCmd = async (
           ctx
         );
         if (ctx.options.rejectNullish && img == null) {
-          throw new Error(
-            `Result of '${cmdRest}' is null or undefined and rejectNullish is set`
-          );
+          throw new NullishCommandResultError(cmdRest);
         }
-        if (img != null) await processImage(ctx, img);
+        if (img != null) {
+          try {
+            await processImage(ctx, img);
+          } catch (e) {
+            throw new ImageError(e.message, cmd);
+          }
+        }
       }
 
       // LINK <code>
@@ -528,9 +538,7 @@ const processCmd = async (
           ctx
         );
         if (ctx.options.rejectNullish && pars == null) {
-          throw new Error(
-            `Result of '${cmdRest}' is null or undefined and rejectNullish is set`
-          );
+          throw new NullishCommandResultError(cmdRest);
         }
         if (pars != null) await processLink(ctx, pars);
       }
@@ -544,18 +552,16 @@ const processCmd = async (
           ctx
         );
         if (ctx.options.rejectNullish && html == null) {
-          throw new Error(
-            `Result of '${cmdRest}' is null or undefined and rejectNullish is set`
-          );
+          throw new NullishCommandResultError(cmdRest);
         }
         if (html != null) await processHtml(ctx, html);
       }
 
       // Invalid command
-    } else throw new Error(`Invalid command syntax: '${cmd}'`);
+    } else throw new CommandSyntaxError(cmd);
     return;
   } catch (err) {
-    return new Error(`Error executing command: ${cmd} ${err.message}`);
+    return err;
   }
 };
 
@@ -583,7 +589,8 @@ const getCommand = (ctx: Context): string => {
   let cmd = ctx.cmd.trim();
   if (cmd[0] === '*') {
     const aliasName = cmd.slice(1).trim();
-    if (!ctx.shorthands[aliasName]) throw new Error('Unknown alias');
+    if (!ctx.shorthands[aliasName])
+      throw new InvalidCommandError('Unknown alias', cmd);
     cmd = ctx.shorthands[aliasName];
     DEBUG && log.debug(`Alias for: ${cmd}`);
   } else if (cmd[0] === '=') {
@@ -621,7 +628,7 @@ const processForIf = async (
     varName = node._ifName;
   } else {
     forMatch = /^(\S+)\s+IN\s+(.+)/i.exec(cmdRest);
-    if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
+    if (!forMatch) throw new InvalidCommandError('Invalid FOR command', cmd);
     varName = forMatch[1];
   }
 
@@ -638,7 +645,7 @@ const processForIf = async (
       const shouldRun = !!(await runUserJsAndGetRaw(data, cmdRest, ctx));
       loopOver = shouldRun ? [1] : [];
     } else {
-      if (!forMatch) throw new Error(`Invalid FOR command: ${cmd}`);
+      if (!forMatch) throw new InvalidCommandError('Invalid FOR command', cmd);
       loopOver = await runUserJsAndGetRaw(data, forMatch[2], ctx);
     }
     ctx.loops.push({
@@ -663,7 +670,7 @@ const processEndForIf = (
   cmdRest: string
 ): void => {
   const curLoop = getCurLoop(ctx);
-  if (!curLoop) throw new Error(`Invalid command: ${cmd}`);
+  if (!curLoop) throw new InvalidCommandError('Invalid command', cmd);
   const isIf = cmdName === 'END-IF';
 
   // First time we visit an END-IF node, we assign it the arbitrary name
@@ -684,7 +691,7 @@ const processEndForIf = (
         );
       return;
     }
-    throw new Error(`Invalid command: ${cmd}`);
+    throw new InvalidCommandError('Invalid command', cmd);
   }
   const { loopOver, idx } = curLoop;
   const { nextItem, curIdx } = getNextItem(loopOver, idx);

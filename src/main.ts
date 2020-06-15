@@ -22,6 +22,7 @@ import {
 import { addChild, newNonTextNode } from './reportUtils';
 import log from './debug';
 import JSZip from 'jszip';
+import { TemplateParseError } from './errors';
 
 const DEFAULT_CMD_DELIMITER = '+++' as const;
 const DEFAULT_LITERAL_XML_DELIMITER = '||' as const;
@@ -111,7 +112,7 @@ async function createReport(
   DEBUG && log.debug('Reading template...');
   const templateXml = await zipGetText(zip, `${templatePath}/${mainDocument}`);
   if (templateXml == null)
-    throw new Error(`${mainDocument} could not be found`);
+    throw new TemplateParseError(`${mainDocument} could not be found`);
   DEBUG && log.debug(`Template file length: ${templateXml.length}`);
   DEBUG && log.debug('Parsing XML...');
   const tic = new Date().getTime();
@@ -217,7 +218,8 @@ async function createReport(
     const filePath = files[i];
     DEBUG && log.info(`Processing ${filePath}...`);
     const raw = await zipGetText(zip, filePath);
-    if (raw == null) throw new Error(`${filePath} could not be read`);
+    if (raw == null)
+      throw new TemplateParseError(`${filePath} could not be read`);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, createOptions);
     const result = await produceJsReport(queryResult, js, createOptions);
@@ -297,10 +299,12 @@ async function createReport(
 export async function readContentTypes(zip: JSZip): Promise<NonTextNode> {
   const contentTypesXml = await zipGetText(zip, CONTENT_TYPES_PATH);
   if (contentTypesXml == null)
-    throw new Error(`${CONTENT_TYPES_PATH} could not be read`);
+    throw new TemplateParseError(`${CONTENT_TYPES_PATH} could not be read`);
   const node = await parseXml(contentTypesXml);
   if (node._fTextNode)
-    throw new Error(`${CONTENT_TYPES_PATH} is a text node when parsed`);
+    throw new TemplateParseError(
+      `${CONTENT_TYPES_PATH} is a text node when parsed`
+    );
   return node;
 }
 
@@ -316,7 +320,7 @@ export function getMainDoc(contentTypes: NonTextNode): string {
       }
     }
   }
-  throw new Error(
+  throw new TemplateParseError(
     `Could not find main document (e.g. document.xml) in ${CONTENT_TYPES_PATH}`
   );
 }

@@ -2,6 +2,7 @@ import vm from 'vm';
 import { merge, omit } from 'timm';
 import { getCurLoop } from './reportUtils';
 import { ReportData, Context } from './types';
+import { CommandExecutionError } from './errors';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log = DEBUG ? require('./debug').mainStory : null;
@@ -40,24 +41,28 @@ export async function runUserJsAndGetRaw(
   // Run the JS snippet and extract the result
   let context;
   let result;
-  if (ctx.options.runJs) {
-    const temp = ctx.options.runJs({ sandbox, ctx });
-    context = temp.modifiedSandbox;
-    result = temp.result;
-  } else if (ctx.options.noSandbox) {
-    context = sandbox;
-    const wrapper = new Function('with(this) { return eval(__code__); }');
-    result = wrapper.call(context);
-  } else {
-    const script = new vm.Script(
-      `
+  try {
+    if (ctx.options.runJs) {
+      const temp = ctx.options.runJs({ sandbox, ctx });
+      context = temp.modifiedSandbox;
+      result = temp.result;
+    } else if (ctx.options.noSandbox) {
+      context = sandbox;
+      const wrapper = new Function('with(this) { return eval(__code__); }');
+      result = wrapper.call(context);
+    } else {
+      const script = new vm.Script(
+        `
       __result__ = eval(__code__);
       `,
-      {}
-    );
-    context = vm.createContext(sandbox);
-    script.runInContext(context);
-    result = context.__result__;
+        {}
+      );
+      context = vm.createContext(sandbox);
+      script.runInContext(context);
+      result = context.__result__;
+    }
+  } catch (err) {
+    throw new CommandExecutionError(err.toString(), code);
   }
 
   // Wait for promises to resolve

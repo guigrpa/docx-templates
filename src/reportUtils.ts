@@ -1,5 +1,6 @@
 import { omit } from 'timm';
 import { Node, TextNode, NonTextNode, Context, LoopStatus } from './types';
+import { TemplateParseError } from './errors';
 
 const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 const log = DEBUG ? require('./debug').mainStory : null;
@@ -38,13 +39,17 @@ const getNextSibling = (node: Node): Node | null => {
 const insertTextSiblingAfter = (textNode: TextNode): TextNode => {
   const tNode = textNode._parent;
   if (!(tNode && !tNode._fTextNode && tNode._tag === 'w:t')) {
-    throw new Error('Template syntax error: text node not within w:t');
+    throw new TemplateParseError(
+      'Template syntax error: text node not within w:t'
+    );
   }
   const tNodeParent = tNode._parent;
   if (tNodeParent == null)
-    throw new Error('Template syntax error: w:t node has no parent');
+    throw new TemplateParseError(
+      'Template syntax error: w:t node has no parent'
+    );
   const idx = tNodeParent._children.indexOf(tNode);
-  if (idx < 0) throw new Error('Template syntax error');
+  if (idx < 0) throw new TemplateParseError('Template syntax error');
   const newTNode = cloneNodeWithoutChildren(tNode);
   newTNode._parent = tNodeParent;
   const newTextNode: Node = {
