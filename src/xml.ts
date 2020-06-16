@@ -1,8 +1,6 @@
 import sax, { QualifiedAttribute } from 'sax';
 import { Node } from './types';
-
-const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const log = DEBUG ? require('./debug').mainStory : null;
+import { logger } from './debug';
 
 const parseXml = (templateXml: string): Promise<Node> => {
   const parser = sax.parser(true, {
@@ -40,7 +38,7 @@ const parseXml = (templateXml: string): Promise<Node> => {
       });
     };
     parser.onend = () => {
-      DEBUG && log.debug(`Number of XML elements: ${numXmlElements}`);
+      logger.debug(`Number of XML elements: ${numXmlElements}`);
       resolve(template);
     };
     parser.onerror = err => {

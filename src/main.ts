@@ -20,16 +20,13 @@ import {
   NonTextNode,
 } from './types';
 import { addChild, newNonTextNode } from './reportUtils';
-import log from './debug';
 import JSZip from 'jszip';
 import { TemplateParseError } from './errors';
+import { logger } from './debug';
 
 const DEFAULT_CMD_DELIMITER = '+++' as const;
 const DEFAULT_LITERAL_XML_DELIMITER = '||' as const;
 const CONTENT_TYPES_PATH = '[Content_Types].xml' as const;
-
-// TODO: remove
-const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
 
 // ==========================================
 // Main
@@ -75,7 +72,7 @@ async function createReport(
   options: UserOptions,
   _probe?: 'JS' | 'XML'
 ): Promise<Node | string | Uint8Array> {
-  DEBUG && log.debug('Report options:', { attach: options });
+  logger.debug('Report options:', { attach: options });
   const { template, data, queryVars } = options;
   const templatePath = 'word';
   const literalXmlDelimiter =
@@ -97,39 +94,39 @@ async function createReport(
   // ---------------------------------------------------------
   // Unzip
   // ---------------------------------------------------------
-  DEBUG && log.debug('Unzipping...');
+  logger.debug('Unzipping...');
   const zip = await zipLoad(template);
 
   // ---------------------------------------------------------
   // Read the 'document.xml' file (the template) and parse it
   // ---------------------------------------------------------
-  DEBUG && log.debug('finding main template file (e.g. document.xml)');
+  logger.debug('finding main template file (e.g. document.xml)');
   // See issue #131. Office365 files may name the main template file document2.xml or something else
   // So we'll have to parse the content-types 'manifest' file first and retrieve the template file's name first.
   const contentTypes = await readContentTypes(zip);
   const mainDocument = getMainDoc(contentTypes);
 
-  DEBUG && log.debug('Reading template...');
+  logger.debug('Reading template...');
   const templateXml = await zipGetText(zip, `${templatePath}/${mainDocument}`);
   if (templateXml == null)
     throw new TemplateParseError(`${mainDocument} could not be found`);
-  DEBUG && log.debug(`Template file length: ${templateXml.length}`);
-  DEBUG && log.debug('Parsing XML...');
+  logger.debug(`Template file length: ${templateXml.length}`);
+  logger.debug('Parsing XML...');
   const tic = new Date().getTime();
   const parseResult = await parseXml(templateXml);
   const jsTemplate = parseResult;
   const tac = new Date().getTime();
-  DEBUG &&
-    log.debug(`File parsed in ${tac - tic} ms`, {
-      attach: jsTemplate,
-      attachLevel: 'trace',
-    });
+
+  logger.debug(`File parsed in ${tac - tic} ms`, {
+    attach: jsTemplate,
+    attachLevel: 'trace',
+  });
 
   // ---------------------------------------------------------
   // Preprocess template
   // ---------------------------------------------------------
-  DEBUG && log.debug('Preprocessing template...');
-  // DEBUG && log.debug('Preprocessing template...', {
+  logger.debug('Preprocessing template...');
+  // logger.debug('Preprocessing template...', {
   //   attach: jsTemplate,
   //   attachLevel: 'debug',
   //   ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
@@ -141,9 +138,9 @@ async function createReport(
   // ---------------------------------------------------------
   let queryResult = null;
   if (typeof data === 'function') {
-    DEBUG && log.debug('Looking for the query in the template...');
+    logger.debug('Looking for the query in the template...');
     const query = await extractQuery(finalTemplate, createOptions);
-    DEBUG && log.debug(`Query: ${query || 'no query found'}`);
+    logger.debug(`Query: ${query || 'no query found'}`);
     queryResult = await data(query, queryVars);
   } else {
     queryResult = data;
@@ -155,9 +152,9 @@ async function createReport(
   // - Build output XML and write it to disk
   // - Images
   // ---------------------------------------------------------
-  DEBUG && log.debug('Generating report...');
-  // DEBUG &&
-  //   log.debug('Generating report...', {
+  logger.debug('Generating report...');
+  //
+  //   logger.debug('Generating report...', {
   //     attach: finalTemplate,
   //     attachLevel: 'debug',
   //     ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
@@ -178,16 +175,16 @@ async function createReport(
   } = result;
   if (_probe === 'JS') return report1;
 
-  // DEBUG &&
-  //   log.debug('Report', {
+  //
+  //   logger.debug('Report', {
   //     attach: report,
   //     attachLevel: 'debug',
   //     ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
   //   });
-  DEBUG && log.debug('Converting report to XML...');
+  logger.debug('Converting report to XML...');
   const reportXml = buildXml(report1, xmlOptions);
   if (_probe === 'XML') return reportXml;
-  DEBUG && log.debug('Writing report...');
+  logger.debug('Writing report...');
   zipSetText(zip, `${templatePath}/${mainDocument}`, reportXml);
 
   let numImages = Object.keys(images1).length;
@@ -216,7 +213,7 @@ async function createReport(
   let htmls = htmls1;
   for (let i = 0; i < files.length; i++) {
     const filePath = files[i];
-    DEBUG && log.info(`Processing ${filePath}...`);
+    logger.debug(`Processing ${filePath}...`);
     const raw = await zipGetText(zip, filePath);
     if (raw == null)
       throw new TemplateParseError(`${filePath} could not be read`);
@@ -252,9 +249,9 @@ async function createReport(
   // Process [Content_Types].xml
   // ---------------------------------------------------------
   if (numImages || numHtmls) {
-    DEBUG && log.debug('Completing [Content_Types].xml...');
+    logger.debug('Completing [Content_Types].xml...');
 
-    // DEBUG && log.debug('Content types', { attach: contentTypes });
+    // logger.debug('Content types', { attach: contentTypes });
     const ensureContentType = (extension: string, contentType: string) => {
       const children = contentTypes._children;
       if (
@@ -272,7 +269,7 @@ async function createReport(
       );
     };
     if (numImages) {
-      DEBUG && log.debug('Completing [Content_Types].xml for IMAGES...');
+      logger.debug('Completing [Content_Types].xml for IMAGES...');
       ensureContentType('png', 'image/png');
       ensureContentType('jpg', 'image/jpeg');
       ensureContentType('jpeg', 'image/jpeg');
@@ -281,7 +278,7 @@ async function createReport(
       ensureContentType('svg', 'image/svg+xml');
     }
     if (numHtmls) {
-      DEBUG && log.debug('Completing [Content_Types].xml for HTML...');
+      logger.debug('Completing [Content_Types].xml for HTML...');
       ensureContentType('html', 'text/html');
     }
     const finalContentTypesXml = buildXml(contentTypes, xmlOptions);
@@ -291,7 +288,7 @@ async function createReport(
   // ---------------------------------------------------------
   // Zip the results
   // ---------------------------------------------------------
-  DEBUG && log.debug('Zipping...');
+  logger.debug('Zipping...');
   const output = await zipSave(zip);
   return output;
 }
@@ -334,17 +331,17 @@ const processImages = async (
   zip: JSZip,
   templatePath: string
 ) => {
-  DEBUG && log.debug(`Processing images for ${documentComponent}...`);
+  logger.debug(`Processing images for ${documentComponent}...`);
   const imageIds = Object.keys(images);
   if (imageIds.length) {
-    DEBUG && log.debug('Completing document.xml.rels...');
+    logger.debug('Completing document.xml.rels...');
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
     for (let i = 0; i < imageIds.length; i++) {
       const imageId = imageIds[i];
       const { extension, data: imgData } = images[imageId];
       const imgName = `template_${documentComponent}_image${i + 1}${extension}`;
-      DEBUG && log.debug(`Writing image ${imageId} (${imgName})...`);
+      logger.debug(`Writing image ${imageId} (${imgName})...`);
       const imgPath = `${templatePath}/media/${imgName}`;
       if (typeof imgData === 'string') {
         zipSetBase64(zip, imgPath, imgData);
@@ -377,10 +374,10 @@ const processLinks = async (
   zip: JSZip,
   templatePath: string
 ) => {
-  DEBUG && log.debug(`Processing links for ${documentComponent}...`);
+  logger.debug(`Processing links for ${documentComponent}...`);
   const linkIds = Object.keys(links);
   if (linkIds.length) {
-    DEBUG && log.debug('Completing document.xml.rels...');
+    logger.debug('Completing document.xml.rels...');
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
     for (let i = 0; i < linkIds.length; i++) {
@@ -410,11 +407,11 @@ const processHtmls = async (
   zip: JSZip,
   templatePath: string
 ) => {
-  DEBUG && log.debug(`Processing htmls for ${documentComponent}...`);
+  logger.debug(`Processing htmls for ${documentComponent}...`);
   const htmlIds = Object.keys(htmls);
   if (htmlIds.length) {
     // Process rels
-    DEBUG && log.debug(`Completing document.xml.rels...`);
+    logger.debug(`Completing document.xml.rels...`);
     const htmlFiles = [];
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
@@ -422,7 +419,7 @@ const processHtmls = async (
       const htmlId = htmlIds[i];
       const htmlData = htmls[htmlId];
       const htmlName = `template_${documentComponent}_${htmlId}.html`;
-      DEBUG && log.debug(`Writing html ${htmlId} (${htmlName})...`);
+      logger.debug(`Writing html ${htmlId} (${htmlName})...`);
       const htmlPath = `${templatePath}/${htmlName}`;
       htmlFiles.push(`/${htmlPath}`);
       zipSetText(zip, htmlPath, htmlData);

@@ -28,9 +28,7 @@ import {
   InvalidCommandError,
   ImageError,
 } from './errors';
-
-const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const log = DEBUG ? require('./debug').mainStory : null;
+import { logger } from './debug';
 
 let gCntIf = 0;
 
@@ -138,8 +136,8 @@ const produceJsReport = async (
     if (ctx.fJump) {
       if (!curLoop) throw new InternalError();
       const { refNode, refNodeLevel } = curLoop;
-      // DEBUG &&
-      //   log.debug(`Jumping to level ${refNodeLevel}...`, {
+      //
+      //   logger.debug(`Jumping to level ${refNodeLevel}...`, {
       //     attach: cloneNodeForLogging(refNode),
       //   });
       deltaJump = ctx.level - refNodeLevel;
@@ -167,8 +165,8 @@ const produceJsReport = async (
       ctx.level -= 1;
       move = 'UP';
     }
-    // DEBUG &&
-    //   log.debug(
+    //
+    //   logger.debug(
     //     `Next node [${chalk.green.bold(move)}, level ${chalk.dim(ctx.level)}]`,
     //     { attach: cloneNodeForLogging(nodeIn) }
     //   );
@@ -212,8 +210,8 @@ const produceJsReport = async (
       ) {
         curLoop.refNode = nodeIn;
         curLoop.refNodeLevel -= 1;
-        // DEBUG &&
-        //   log.debug(`Updated loop '${curLoop.varName}' refNode:`, {
+        //
+        //   logger.debug(`Updated loop '${curLoop.varName}' refNode:`, {
         //     attach: cloneNodeForLogging(nodeIn),
         //   });
       }
@@ -400,7 +398,7 @@ const processText = async (
     // Append segment either to the `ctx.cmd` buffer (to be executed), if we are in "command mode",
     // or to the output text
     const segment = segments[idx];
-    // DEBUG && log.debug(`Token: '${segment}' (${ctx.fCmd})`);
+    // logger.debug(`Token: '${segment}' (${ctx.fCmd})`);
     if (ctx.fCmd) ctx.cmd += segment;
     else if (!isLoopExploring(ctx)) outText += segment;
     appendTextToTagBuffers(segment, ctx, { fCmd: ctx.fCmd });
@@ -439,7 +437,7 @@ const processCmd = async (
   ctx: Context
 ): Promise<undefined | string | Error> => {
   const cmd = getCommand(ctx);
-  DEBUG && log.debug(`Processing cmd: ${cmd}`);
+  logger.debug(`Processing cmd: ${cmd}`);
   try {
     // Extract command name
     const cmdNameMatch = /^(\S+)\s*/.exec(cmd);
@@ -458,7 +456,7 @@ const processCmd = async (
 
     // Process command
     if (cmdName === 'QUERY' || cmdName === 'CMD_NODE') {
-      // DEBUG && log.debug(`Ignoring ${cmdName} command`);
+      // logger.debug(`Ignoring ${cmdName} command`);
       // ...
       // ALIAS name ANYTHING ELSE THAT MIGHT BE PART OF THE COMMAND...
     } else if (cmdName === 'ALIAS') {
@@ -468,7 +466,7 @@ const processCmd = async (
       const aliasName = aliasMatch[1];
       const fullCmd = aliasMatch[2];
       ctx.shorthands[aliasName] = fullCmd;
-      DEBUG && log.debug(`Defined alias '${aliasName}' for: ${fullCmd}`);
+      logger.debug(`Defined alias '${aliasName}' for: ${fullCmd}`);
 
       // FOR <varName> IN <expression>
       // IF <expression>
@@ -592,7 +590,7 @@ const getCommand = (ctx: Context): string => {
     if (!ctx.shorthands[aliasName])
       throw new InvalidCommandError('Unknown alias', cmd);
     cmd = ctx.shorthands[aliasName];
-    DEBUG && log.debug(`Alias for: ${cmd}`);
+    logger.debug(`Alias for: ${cmd}`);
   } else if (cmd[0] === '=') {
     cmd = `INS ${cmd.slice(1).trim()}`;
   } else if (cmd[0] === '!') {
@@ -685,10 +683,9 @@ const processEndForIf = (
   const varName = isIf ? node._ifName : cmdRest;
   if (curLoop.varName !== varName) {
     if (ctx.loops.find(o => o.varName === varName) == null) {
-      DEBUG &&
-        log.debug(
-          `Ignoring ${cmd} (${varName}, but we're expecting ${curLoop.varName})`
-        );
+      logger.debug(
+        `Ignoring ${cmd} (${varName}, but we're expecting ${curLoop.varName})`
+      );
       return;
     }
     throw new InvalidCommandError('Invalid command', cmd);

@@ -3,9 +3,7 @@ import { merge, omit } from 'timm';
 import { getCurLoop } from './reportUtils';
 import { ReportData, Context } from './types';
 import { CommandExecutionError } from './errors';
-
-const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const log = DEBUG ? require('./debug').mainStory : null;
+import { logger } from './debug';
 
 // Runs a user snippet in a sandbox, and returns the result.
 // The snippet can return a Promise, which is then awaited.
@@ -71,6 +69,6 @@ export async function runUserJsAndGetRaw(
 
   // Save the sandbox for later use
   ctx.jsSandbox = omit(context, ['__code__', '__result__']);
-  DEBUG && log.debug('JS result', { attach: result });
+  logger.debug('JS result', { attach: result });
   return result;
 }

@@ -4,6 +4,9 @@ import path from 'path';
 import fs from 'fs';
 import { createReport } from '../index';
 import { Image } from '../types';
+import { setDebugLogSink } from '../debug';
+
+if (process.env.DEBUG) setDebugLogSink(console.log);
 
 it('001: Issue #61 Correctly renders an SVG image', async () => {
   const template = await fs.promises.readFile(

@@ -1,9 +1,7 @@
 import { omit } from 'timm';
 import { Node, TextNode, NonTextNode, Context, LoopStatus } from './types';
 import { TemplateParseError } from './errors';
-
-const DEBUG = process.env.DEBUG_DOCX_TEMPLATES;
-const log = DEBUG ? require('./debug').mainStory : null;
+import { logger } from './debug';
 
 // ==========================================
 // Nodes and trees
@@ -105,12 +103,11 @@ const isLoopExploring = (ctx: Context) => {
 };
 
 const logLoop = (loops: Array<LoopStatus>) => {
-  if (!DEBUG) return;
   if (!loops.length) return;
   const level = loops.length - 1;
   const { varName, idx, loopOver, isIf } = loops[level];
   const idxStr = idx >= 0 ? idx + 1 : 'EXPLORATION';
-  log.debug(
+  logger.debug(
     `${isIf ? 'IF' : 'FOR'} loop ` +
       `on ${level}:${varName}` +
       `${idxStr}/${loopOver.length}`
