@@ -30,21 +30,41 @@ import {
 } from './errors';
 import { logger } from './debug';
 
-let gCntIf = 0;
+function newContext(options: CreateReportOptions): Context {
+  return {
+    gCntIf: 0,
+    level: 1,
+    fCmd: false,
+    cmd: '',
+    fSeekQuery: false,
+    buffers: {
+      'w:p': { text: '', cmds: '', fInsertedText: false },
+      'w:tr': { text: '', cmds: '', fInsertedText: false },
+    },
+    imageId: 0,
+    images: {},
+    linkId: 0,
+    links: {},
+    htmlId: 0,
+    htmls: {},
+    vars: {},
+    loops: [],
+    fJump: false,
+    shorthands: {},
+    options,
+  };
+}
 
 // Go through the document until the query string is found (normally at the beginning)
 const extractQuery = async (
   template: Node,
   options: CreateReportOptions
 ): Promise<string | undefined> => {
-  const ctx: any = {
-    fCmd: false,
-    cmd: '',
-    fSeekQuery: true, // ensure no command will be processed, except QUERY
-    query: null,
-    loops: [],
-    options,
-  };
+  const ctx: Context = newContext(options);
+
+  // ensure no command will be processed, except QUERY
+  ctx.fSeekQuery = true;
+
   let nodeIn = template;
   while (true) {
     // Move down
@@ -99,27 +119,7 @@ const produceJsReport = async (
   options: CreateReportOptions
 ): Promise<ReportOutput> => {
   const out: Node = cloneNodeWithoutChildren(template);
-  const ctx: Context = {
-    level: 1,
-    fCmd: false,
-    cmd: '',
-    fSeekQuery: false,
-    buffers: {
-      'w:p': { text: '', cmds: '', fInsertedText: false },
-      'w:tr': { text: '', cmds: '', fInsertedText: false },
-    },
-    imageId: 0,
-    images: {},
-    linkId: 0,
-    links: {},
-    htmlId: 0,
-    htmls: {},
-    vars: {},
-    loops: [],
-    fJump: false,
-    shorthands: {},
-    options,
-  };
+  const ctx = newContext(options);
   let nodeIn: Node = template;
   let nodeOut: Node = out;
   let move;
@@ -620,8 +620,8 @@ const processForIf = async (
   let varName;
   if (isIf) {
     if (!node._ifName) {
-      node._ifName = `__if_${gCntIf}`;
-      gCntIf += 1;
+      node._ifName = `__if_${ctx.gCntIf}`;
+      ctx.gCntIf += 1;
     }
     varName = node._ifName;
   } else {

@@ -114,6 +114,7 @@ export type CreateReportOptions = {
 };
 
 export type Context = {
+  gCntIf: number;
   level: number;
   fCmd: boolean;
   cmd: string;
