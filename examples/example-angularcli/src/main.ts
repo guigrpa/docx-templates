@@ -16,5 +16,5 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 
 //TODO: placeholder to see if it compiles
 createReport({
-  template: new Buffer('abcd'),
+  template: new ArrayBuffer(5000),
 })
