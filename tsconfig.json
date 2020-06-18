@@ -7,7 +7,7 @@
         "strict": true,
         "forceConsistentCasingInFileNames": true,
         "noEmit": false,
-        "outDir": "./lib/",
+        "outDir": "./lib/main",
         "declaration": true
     },
     "include": [

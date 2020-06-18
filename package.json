@@ -2,7 +2,8 @@
   "name": "docx-templates",
   "version": "4.2.0",
   "description": "Template-based docx report creation",
-  "main": "lib/index.js",
+  "main": "lib/main/index.js",
+  "browser": "lib/docx-templates.js",
   "types": "lib/index.d.ts",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
@@ -23,7 +24,8 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "scripts": {
-    "compile": "rimraf ./lib && tsc",
+    "compile": "rimraf ./lib && tsc && yarn browserify",
+    "browserify": "browserify ./lib/main/index.js --s docxTemplates > ./lib/docx-templates.js",
     "prepack": "yarn compile",
     "travis": "yarn compile && yarn test",
     "jest": "jest --watch --coverage",
@@ -50,6 +52,7 @@
     "@types/sax": "^1.2.1",
     "@typescript-eslint/eslint-plugin": "^3.1.0",
     "@typescript-eslint/parser": "^3.1.0",
+    "browserify": "^16.5.1",
     "coveralls": "^3.0.13",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
