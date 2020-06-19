@@ -25,7 +25,7 @@
   },
   "scripts": {
     "compile": "rimraf ./lib && tsc && yarn browserify",
-    "browserify": "browserify ./lib/main/index.js --s docxTemplates > ./lib/docx-templates.js",
+    "browserify": "browserify ./lib/main/*.js --s docxTemplates > ./lib/docx-templates.js",
     "prepack": "yarn compile",
     "travis": "yarn compile && yarn test",
     "jest": "jest --watch --coverage",
