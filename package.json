@@ -4,7 +4,7 @@
   "description": "Template-based docx report creation",
   "main": "lib/main/index.js",
   "browser": "lib/docx-templates.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/main/index.d.ts",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
   "keywords": [
@@ -25,7 +25,7 @@
   },
   "scripts": {
     "compile": "rimraf ./lib && tsc && yarn browserify",
-    "browserify": "browserify ./lib/main/*.js --s docxTemplates > ./lib/docx-templates.js",
+    "browserify": "browserify src/index.ts -p [ tsify ] > ./lib/docx-templates.js",
     "prepack": "yarn compile",
     "travis": "yarn compile && yarn test",
     "jest": "jest --watch --coverage",
@@ -67,6 +67,7 @@
     "qrcode": "^1.4.4",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.0",
+    "tsify": "^4.0.2",
     "typescript": "^3.9.5"
   },
   "jest": {
