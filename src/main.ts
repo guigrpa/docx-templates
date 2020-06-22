@@ -126,7 +126,10 @@ async function createReport(
   );
 
   logger.debug('Preprocessing template...');
-  const finalTemplate = preprocessTemplate(jsTemplate, createOptions);
+  const finalTemplate = preprocessTemplate(
+    jsTemplate,
+    createOptions.cmdDelimiter
+  );
 
   // Fetch the data that will fill in the template
   let queryResult = null;
@@ -195,7 +198,7 @@ async function createReport(
     if (raw == null)
       throw new TemplateParseError(`${filePath} could not be read`);
     const js0 = await parseXml(raw);
-    const js = preprocessTemplate(js0, createOptions);
+    const js = preprocessTemplate(js0, createOptions.cmdDelimiter);
     const result = await produceJsReport(queryResult, js, createOptions);
     if (result.status === 'errors') {
       throw result.errors;

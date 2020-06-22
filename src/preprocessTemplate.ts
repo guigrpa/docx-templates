@@ -4,8 +4,7 @@ import { Node, CreateReportOptions } from './types';
 // In-place
 // In case of split commands (or even split delimiters), joins all the pieces
 // at the starting node
-const preprocessTemplate = (template: Node, options: CreateReportOptions) => {
-  const { cmdDelimiter: delimiter } = options;
+const preprocessTemplate = (template: Node, delimiter: [string, string]) => {
   let node: Node | null = template;
   let fCmd = false;
   let openNode = null;
