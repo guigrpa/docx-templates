@@ -14,7 +14,11 @@ async function onTemplateChosen(event) {
   if (event.target.id === 'inputSwapi') {
     data = query => postQuery('/swapi', query); // query to swapi webservice
   } else if (event.target.id === 'inputQuill') {
-    data = { html: `<body>${window.quill.root.innerHTML}</body>` };
+    data = { html: `
+    <meta charset="UTF-8">
+    <body>
+    ${window.quill.root.innerHTML}
+    </body>` };
   }
   // fill the template
   console.log('Creating report (can take some time) ...');
