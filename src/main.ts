@@ -27,6 +27,37 @@ import { logger } from './debug';
 const DEFAULT_CMD_DELIMITER = '+++' as const;
 const DEFAULT_LITERAL_XML_DELIMITER = '||' as const;
 const CONTENT_TYPES_PATH = '[Content_Types].xml' as const;
+const TEMPLATE_PATH = 'word' as const;
+
+async function parseTemplate(template: Buffer) {
+  logger.debug('Unzipping...');
+  const zip = await zipLoad(template);
+
+  // Read the 'document.xml' file (the template) and parse it
+  logger.debug('finding main template file (e.g. document.xml)');
+  // See issue #131. Office365 files may name the main template file document2.xml or something else
+  // So we'll have to parse the content-types 'manifest' file first and retrieve the template file's name first.
+  const contentTypes = await readContentTypes(zip);
+  const mainDocument = getMainDoc(contentTypes);
+
+  logger.debug('Reading template...');
+  const templateXml = await zipGetText(zip, `${TEMPLATE_PATH}/${mainDocument}`);
+  if (templateXml == null)
+    throw new TemplateParseError(`${mainDocument} could not be found`);
+  logger.debug(`Template file length: ${templateXml.length}`);
+  logger.debug('Parsing XML...');
+  const tic = new Date().getTime();
+  const parseResult = await parseXml(templateXml);
+  const jsTemplate = parseResult;
+  const tac = new Date().getTime();
+
+  logger.debug(`File parsed in ${tac - tic} ms`, {
+    attach: jsTemplate,
+    attachLevel: 'trace',
+  });
+
+  return { jsTemplate, mainDocument, zip, contentTypes };
+}
 
 // ==========================================
 // Main
@@ -74,7 +105,6 @@ async function createReport(
 ): Promise<Node | string | Uint8Array> {
   logger.debug('Report options:', { attach: options });
   const { template, data, queryVars } = options;
-  const templatePath = 'word';
   const literalXmlDelimiter =
     options.literalXmlDelimiter || DEFAULT_LITERAL_XML_DELIMITER;
   const createOptions: CreateReportOptions = {
@@ -91,51 +121,14 @@ async function createReport(
   };
   const xmlOptions = { literalXmlDelimiter };
 
-  // ---------------------------------------------------------
-  // Unzip
-  // ---------------------------------------------------------
-  logger.debug('Unzipping...');
-  const zip = await zipLoad(template);
+  const { jsTemplate, mainDocument, zip, contentTypes } = await parseTemplate(
+    template
+  );
 
-  // ---------------------------------------------------------
-  // Read the 'document.xml' file (the template) and parse it
-  // ---------------------------------------------------------
-  logger.debug('finding main template file (e.g. document.xml)');
-  // See issue #131. Office365 files may name the main template file document2.xml or something else
-  // So we'll have to parse the content-types 'manifest' file first and retrieve the template file's name first.
-  const contentTypes = await readContentTypes(zip);
-  const mainDocument = getMainDoc(contentTypes);
-
-  logger.debug('Reading template...');
-  const templateXml = await zipGetText(zip, `${templatePath}/${mainDocument}`);
-  if (templateXml == null)
-    throw new TemplateParseError(`${mainDocument} could not be found`);
-  logger.debug(`Template file length: ${templateXml.length}`);
-  logger.debug('Parsing XML...');
-  const tic = new Date().getTime();
-  const parseResult = await parseXml(templateXml);
-  const jsTemplate = parseResult;
-  const tac = new Date().getTime();
-
-  logger.debug(`File parsed in ${tac - tic} ms`, {
-    attach: jsTemplate,
-    attachLevel: 'trace',
-  });
-
-  // ---------------------------------------------------------
-  // Preprocess template
-  // ---------------------------------------------------------
   logger.debug('Preprocessing template...');
-  // logger.debug('Preprocessing template...', {
-  //   attach: jsTemplate,
-  //   attachLevel: 'debug',
-  //   ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
-  // });
   const finalTemplate = preprocessTemplate(jsTemplate, createOptions);
 
-  // ---------------------------------------------------------
   // Fetch the data that will fill in the template
-  // ---------------------------------------------------------
   let queryResult = null;
   if (typeof data === 'function') {
     logger.debug('Looking for the query in the template...');
@@ -146,19 +139,11 @@ async function createReport(
     queryResult = data;
   }
 
-  // ---------------------------------------------------------
   // Process document.xml:
   // - Generate the report
   // - Build output XML and write it to disk
   // - Images
-  // ---------------------------------------------------------
   logger.debug('Generating report...');
-  //
-  //   logger.debug('Generating report...', {
-  //     attach: finalTemplate,
-  //     attachLevel: 'debug',
-  //     ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
-  //   });
   const result = await produceJsReport(
     queryResult,
     finalTemplate,
@@ -175,34 +160,26 @@ async function createReport(
   } = result;
   if (_probe === 'JS') return report1;
 
-  //
-  //   logger.debug('Report', {
-  //     attach: report,
-  //     attachLevel: 'debug',
-  //     ignoreKeys: ['_parent', '_fTextNode', '_attrs'],
-  //   });
   logger.debug('Converting report to XML...');
   const reportXml = buildXml(report1, xmlOptions);
   if (_probe === 'XML') return reportXml;
   logger.debug('Writing report...');
-  zipSetText(zip, `${templatePath}/${mainDocument}`, reportXml);
+  zipSetText(zip, `${TEMPLATE_PATH}/${mainDocument}`, reportXml);
 
   let numImages = Object.keys(images1).length;
   let numHtmls = Object.keys(htmls1).length;
-  await processImages(images1, mainDocument, zip, templatePath);
-  await processLinks(links1, mainDocument, zip, templatePath);
-  await processHtmls(htmls1, mainDocument, zip, templatePath);
+  await processImages(images1, mainDocument, zip, TEMPLATE_PATH);
+  await processLinks(links1, mainDocument, zip, TEMPLATE_PATH);
+  await processHtmls(htmls1, mainDocument, zip, TEMPLATE_PATH);
 
-  // ---------------------------------------------------------
   // Process all other XML files (they may contain headers, etc.)
-  // ---------------------------------------------------------
   const files: string[] = [];
   zip.forEach(async filePath => {
-    const regex = new RegExp(`${templatePath}\\/[^\\/]+\\.xml`);
+    const regex = new RegExp(`${TEMPLATE_PATH}\\/[^\\/]+\\.xml`);
     if (
       regex.test(filePath) &&
-      filePath !== `${templatePath}/${mainDocument}` &&
-      filePath.indexOf(`${templatePath}/template`) !== 0
+      filePath !== `${TEMPLATE_PATH}/${mainDocument}` &&
+      filePath.indexOf(`${TEMPLATE_PATH}/template`) !== 0
     ) {
       files.push(filePath);
     }
@@ -240,14 +217,12 @@ async function createReport(
 
     const segments = filePath.split('/');
     const documentComponent = segments[segments.length - 1];
-    await processImages(images2, documentComponent, zip, templatePath);
-    await processLinks(links2, mainDocument, zip, templatePath);
-    await processHtmls(htmls2, mainDocument, zip, templatePath);
+    await processImages(images2, documentComponent, zip, TEMPLATE_PATH);
+    await processLinks(links2, mainDocument, zip, TEMPLATE_PATH);
+    await processHtmls(htmls2, mainDocument, zip, TEMPLATE_PATH);
   }
 
-  // ---------------------------------------------------------
   // Process [Content_Types].xml
-  // ---------------------------------------------------------
   if (numImages || numHtmls) {
     logger.debug('Completing [Content_Types].xml...');
 
@@ -285,9 +260,6 @@ async function createReport(
     zipSetText(zip, CONTENT_TYPES_PATH, finalContentTypesXml);
   }
 
-  // ---------------------------------------------------------
-  // Zip the results
-  // ---------------------------------------------------------
   logger.debug('Zipping...');
   const output = await zipSave(zip);
   return output;
