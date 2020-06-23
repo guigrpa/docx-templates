@@ -333,16 +333,74 @@ export async function listCommands(
   return commands;
 }
 
-export async function readContentTypes(zip: JSZip): Promise<NonTextNode> {
-  const contentTypesXml = await zipGetText(zip, CONTENT_TYPES_PATH);
-  if (contentTypesXml == null)
-    throw new TemplateParseError(`${CONTENT_TYPES_PATH} could not be read`);
-  const node = await parseXml(contentTypesXml);
+/**
+ * Extract metadata from a document, such as the number of pages or words.
+ * @param template the docx template as a Buffer-like object
+ */
+export async function getMetadata(template: Buffer) {
+  const app_xml_path = `docProps/app.xml`;
+  const core_xml_path = `docProps/core.xml`;
+  const zip = await zipLoad(template);
+  const appXml = await parsePath(zip, app_xml_path);
+  const coreXml = await parsePath(zip, core_xml_path);
+  // TODO: extract custom.xml as well?
+
+  function getText(t: Node): string | undefined {
+    if (t._children.length === 0) return undefined;
+    const n = t._children[0];
+    if (n._fTextNode) return n._text;
+    throw new Error(`Not a text node`);
+  }
+
+  function findNodeText(m: Node, tag: string): string | undefined {
+    for (const t of m._children) {
+      if (t._fTextNode) continue;
+      if (t._tag === tag) return getText(t);
+    }
+    return;
+  }
+
+  const numberize = (a: any): number | undefined => {
+    const c = Number(a);
+    if (Number.isFinite(c)) return c;
+    return;
+  };
+
+  return {
+    pages: numberize(findNodeText(appXml, 'Pages')),
+    words: numberize(findNodeText(appXml, 'Words')),
+    characters: numberize(findNodeText(appXml, 'Characters')),
+    lines: numberize(findNodeText(appXml, 'Lines')),
+    paragraphs: numberize(findNodeText(appXml, 'Paragraphs')),
+    company: findNodeText(appXml, 'Company'),
+    template: findNodeText(appXml, 'Template'),
+
+    // from CoreXML
+    title: findNodeText(coreXml, 'dc:title'),
+    subject: findNodeText(coreXml, 'dc:subject'),
+    creator: findNodeText(coreXml, 'dc:creator'),
+    description: findNodeText(coreXml, 'dc:description'),
+    lastModifiedBy: findNodeText(coreXml, 'cp:lastModifiedBy'),
+    revision: findNodeText(coreXml, 'cp:revision'),
+    lastPrinted: findNodeText(coreXml, 'cp:lastPrinted'),
+    created: findNodeText(coreXml, 'dcterms:created'),
+    modified: findNodeText(coreXml, 'dcterms:modified'),
+    category: findNodeText(coreXml, 'cp:category'),
+  };
+}
+
+async function parsePath(zip: JSZip, xml_path: string): Promise<NonTextNode> {
+  const xmlFile = await zipGetText(zip, xml_path);
+  if (xmlFile == null)
+    throw new TemplateParseError(`${xml_path} could not be read`);
+  const node = await parseXml(xmlFile);
   if (node._fTextNode)
-    throw new TemplateParseError(
-      `${CONTENT_TYPES_PATH} is a text node when parsed`
-    );
+    throw new TemplateParseError(`${xml_path} is a text node when parsed`);
   return node;
+}
+
+export async function readContentTypes(zip: JSZip): Promise<NonTextNode> {
+  return await parsePath(zip, CONTENT_TYPES_PATH);
 }
 
 export function getMainDoc(contentTypes: NonTextNode): string {

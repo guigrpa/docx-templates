@@ -505,6 +505,32 @@ const commands = await listCommands(template_buffer, ['{', '}']);
 ]
 ```
 
+The `getMetadata` function lets you extract the metadata fields from a document, such as the number of pages or words. Note that not all fields may be available, depending on the document.
+
+```typescript
+    await getMetadata(template)
+    // result:
+      Object {
+        "category": undefined,
+        "characters": 24,
+        "company": undefined,
+        "created": "2015-08-16T18:55:00Z",
+        "creator": "Someone Else",
+        "description": undefined,
+        "lastModifiedBy": "Grau Panea, Guillermo",
+        "lastPrinted": undefined,
+        "lines": 1,
+        "modified": "2016-12-15T11:21:00Z",
+        "pages": 1,
+        "paragraphs": 1,
+        "revision": "32",
+        "subject": undefined,
+        "template": "Normal.dotm",
+        "title": undefined,
+        "words": 4,
+      }
+```
+
 # Performance & security
 
 **Templates can contain arbitrary javascript code. Beware of code injection risks!**
