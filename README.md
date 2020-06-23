@@ -471,6 +471,20 @@ InternalError
 TemplateParseError
 ```
 
+# Inspecting templates
+The `listCommands` function lets you list all the commands in a docx template using the same parser as `createReport`.
+
+```typescript
+const template_buffer = fs.readFileSync('template.docx');
+const commands = await listCommands(template_buffer, ['{', '}']);
+
+// `commands` will contain something like:
+[
+  { raw: 'INS some_variable', code: 'some_variable', type: 'INS' },
+  { raw: 'IMAGE svgImgFile()', code: 'svgImgFile()', type: 'IMAGE' },
+]
+```
+
 # Performance & security
 
 **Templates can contain arbitrary javascript code. Beware of code injection risks!**

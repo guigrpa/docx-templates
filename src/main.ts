@@ -9,7 +9,13 @@ import {
 } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
-import { extractQuery, produceJsReport } from './processTemplate';
+import {
+  extractQuery,
+  produceJsReport,
+  walkTemplate,
+  getCommand,
+  splitCommand,
+} from './processTemplate';
 import {
   UserOptions,
   Htmls,
@@ -18,6 +24,8 @@ import {
   Links,
   Node,
   NonTextNode,
+  CommandSummary,
+  BuiltInCommand,
 } from './types';
 import { addChild, newNonTextNode } from './reportUtils';
 import JSZip from 'jszip';
@@ -59,9 +67,6 @@ async function parseTemplate(template: Buffer) {
   return { jsTemplate, mainDocument, zip, contentTypes };
 }
 
-// ==========================================
-// Main
-// ==========================================
 /**
  * Create Report from docx template
  *
@@ -268,6 +273,63 @@ async function createReport(
   return output;
 }
 
+/**
+ * Lists all the commands in a docx template.
+ *
+ * example:
+ * ```js
+ * const template_buffer = fs.readFileSync('template.docx');
+ * const commands = await listCommands(template_buffer, ['{', '}']);
+ * // `commands` will contain something like:
+ * [
+ *    { raw: 'INS some_variable', code: 'some_variable', type: 'INS' },
+ *    { raw: 'IMAGE svgImgFile()', code: 'svgImgFile()', type: 'IMAGE' },
+ * ]
+ * ```
+ *
+ * @param template the docx template as a Buffer-like object
+ * @param delimiter the command delimiter (defaults to ['+++', '+++'])
+ */
+export async function listCommands(
+  template: Buffer,
+  delimiter?: string | [string, string]
+): Promise<CommandSummary[]> {
+  const opts: CreateReportOptions = {
+    cmdDelimiter: getCmdDelimiter(delimiter),
+
+    // Otherwise unused but mandatory options
+    literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
+    processLineBreaks: true,
+    noSandbox: false,
+    additionalJsContext: {},
+    failFast: false,
+    rejectNullish: false,
+  };
+
+  const { jsTemplate } = await parseTemplate(template);
+
+  logger.debug('Preprocessing template...');
+  const prepped = preprocessTemplate(jsTemplate, opts.cmdDelimiter);
+
+  const commands: CommandSummary[] = [];
+  await walkTemplate(undefined, prepped, opts, async (data, node, ctx) => {
+    const raw = getCommand(ctx.cmd, ctx.shorthands);
+    ctx.cmd = ''; // flush the context
+    const { cmdName, cmdRest: code } = splitCommand(raw);
+    const type = cmdName as BuiltInCommand;
+    if (type != null && type !== 'CMD_NODE') {
+      commands.push({
+        raw,
+        type,
+        code,
+      });
+    }
+    return undefined;
+  });
+
+  return commands;
+}
+
 export async function readContentTypes(zip: JSZip): Promise<NonTextNode> {
   const contentTypesXml = await zipGetText(zip, CONTENT_TYPES_PATH);
   if (contentTypesXml == null)
@@ -436,7 +498,4 @@ const getCmdDelimiter = (
   return delimiter;
 };
 
-// ==========================================
-// Public API
-// ==========================================
 export default createReport;

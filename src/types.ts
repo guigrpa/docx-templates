@@ -180,3 +180,26 @@ export type LinkPars = {
   url: string;
   label?: string;
 };
+
+export type CommandSummary = {
+  raw: string;
+  type: BuiltInCommand;
+  code: string;
+};
+
+export type BuiltInCommand = typeof BUILT_IN_COMMANDS[number];
+
+export const BUILT_IN_COMMANDS = [
+  'QUERY',
+  'CMD_NODE',
+  'ALIAS',
+  'FOR',
+  'END-FOR',
+  'IF',
+  'END-IF',
+  'INS',
+  'EXEC',
+  'IMAGE',
+  'LINK',
+  'HTML',
+] as const;

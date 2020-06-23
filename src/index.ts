@@ -1,3 +1,3 @@
-import createReport from './main';
-export { createReport };
+import createReport, { listCommands } from './main';
+export { createReport, listCommands };
 export default createReport;

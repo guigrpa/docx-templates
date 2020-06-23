@@ -20,6 +20,7 @@ import {
   Links,
   Htmls,
   Image,
+  BUILT_IN_COMMANDS,
 } from './types';
 import {
   NullishCommandResultError,
@@ -93,7 +94,7 @@ export async function extractQuery(
       !parent._fTextNode && // Flow, don't complain
       parent._tag === 'w:t'
     ) {
-      await processText(null, nodeIn, ctx);
+      await processText(null, nodeIn, ctx, processCmd);
     }
     if (ctx.query != null) break;
   }
@@ -117,6 +118,15 @@ export async function produceJsReport(
   data: ReportData | undefined,
   template: Node,
   options: CreateReportOptions
+): Promise<ReportOutput> {
+  return walkTemplate(data, template, options, processCmd);
+}
+
+export async function walkTemplate(
+  data: ReportData | undefined,
+  template: Node,
+  options: CreateReportOptions,
+  processor: CommandProcessor
 ): Promise<ReportOutput> {
   const out: Node = cloneNodeWithoutChildren(template);
   const ctx = newContext(options);
@@ -337,7 +347,7 @@ export async function produceJsReport(
         !parent._fTextNode &&
         parent._tag === 'w:t'
       ) {
-        const result = await processText(data, nodeIn, ctx);
+        const result = await processText(data, nodeIn, ctx, processor);
         if (typeof result === 'string') {
           // TODO: use a discriminated union here instead of a type assertion to distinguish TextNodes from NonTextNodes.
           const newNodeAsTextNode: TextNode = newNode as TextNode;
@@ -377,10 +387,17 @@ export async function produceJsReport(
   };
 }
 
+type CommandProcessor = (
+  data: ReportData | undefined,
+  node: Node,
+  ctx: Context
+) => Promise<undefined | string | Error>;
+
 const processText = async (
   data: ReportData | undefined,
   node: TextNode,
-  ctx: Context
+  ctx: Context,
+  onCommand: CommandProcessor
 ): Promise<string | Error[]> => {
   const { cmdDelimiter, failFast } = ctx.options;
   const text = node._text;
@@ -407,7 +424,7 @@ const processText = async (
     // and toggle "command mode"
     if (idx < segments.length - 1) {
       if (ctx.fCmd) {
-        const cmdResultText = await processCmd(data, node, ctx);
+        const cmdResultText = await onCommand(data, node, ctx);
         if (cmdResultText != null) {
           if (typeof cmdResultText === 'string') {
             outText += cmdResultText;
@@ -431,13 +448,13 @@ const processText = async (
 // ==========================================
 // Command processor
 // ==========================================
-const processCmd = async (
+const processCmd: CommandProcessor = async (
   data: ReportData | undefined,
   node: Node,
   ctx: Context
 ): Promise<undefined | string | Error> => {
   const cmd = getCommand(ctx.cmd, ctx.shorthands);
-  ctx.cmd = '';
+  ctx.cmd = ''; // flush the context
   logger.debug(`Processing cmd: ${cmd}`);
   try {
     const { cmdName, cmdRest } = splitCommand(cmd);
@@ -557,22 +574,7 @@ const processCmd = async (
   }
 };
 
-const builtInCommands = [
-  'QUERY',
-  'CMD_NODE',
-  'ALIAS',
-  'FOR',
-  'END-FOR',
-  'IF',
-  'END-IF',
-  'INS',
-  'EXEC',
-  'IMAGE',
-  'LINK',
-  'HTML',
-] as const;
-
-const builtInRegexes = builtInCommands.map(word => new RegExp(`^${word}\\b`));
+const builtInRegexes = BUILT_IN_COMMANDS.map(word => new RegExp(`^${word}\\b`));
 
 const notBuiltIns = (cmd: string) =>
   !builtInRegexes.some(r => r.test(cmd.toUpperCase()));

@@ -1,5 +1,5 @@
 import { insertTextSiblingAfter, getNextSibling } from './reportUtils';
-import { Node, CreateReportOptions } from './types';
+import { Node } from './types';
 
 // In-place
 // In case of split commands (or even split delimiters), joins all the pieces
