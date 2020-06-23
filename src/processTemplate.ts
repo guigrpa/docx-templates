@@ -436,7 +436,8 @@ const processCmd = async (
   node: Node,
   ctx: Context
 ): Promise<undefined | string | Error> => {
-  const cmd = getCommand(ctx);
+  const cmd = getCommand(ctx.cmd, ctx.shorthands);
+  ctx.cmd = '';
   logger.debug(`Processing cmd: ${cmd}`);
   try {
     // Extract command name
@@ -583,13 +584,16 @@ const builtInRegexes = builtInCommands.map(word => new RegExp(`^${word}\\b`));
 const notBuiltIns = (cmd: string) =>
   !builtInRegexes.some(r => r.test(cmd.toUpperCase()));
 
-const getCommand = (ctx: Context): string => {
-  let cmd = ctx.cmd.trim();
+export function getCommand(
+  command: string,
+  shorthands: Context['shorthands']
+): string {
+  let cmd = command.trim();
   if (cmd[0] === '*') {
     const aliasName = cmd.slice(1).trim();
-    if (!ctx.shorthands[aliasName])
+    if (!shorthands[aliasName])
       throw new InvalidCommandError('Unknown alias', cmd);
-    cmd = ctx.shorthands[aliasName];
+    cmd = shorthands[aliasName];
     logger.debug(`Alias for: ${cmd}`);
   } else if (cmd[0] === '=') {
     cmd = `INS ${cmd.slice(1).trim()}`;
@@ -598,9 +602,8 @@ const getCommand = (ctx: Context): string => {
   } else if (notBuiltIns(cmd)) {
     cmd = `INS ${cmd.trim()}`;
   }
-  ctx.cmd = '';
   return cmd.trim();
-};
+}
 
 // ==========================================
 // Individual commands
