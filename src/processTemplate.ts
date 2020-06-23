@@ -56,10 +56,10 @@ function newContext(options: CreateReportOptions): Context {
 }
 
 // Go through the document until the query string is found (normally at the beginning)
-const extractQuery = async (
+export async function extractQuery(
   template: Node,
   options: CreateReportOptions
-): Promise<string | undefined> => {
+): Promise<string | undefined> {
   const ctx: Context = newContext(options);
 
   // ensure no command will be processed, except QUERY
@@ -98,7 +98,7 @@ const extractQuery = async (
     if (ctx.query != null) break;
   }
   return ctx.query;
-};
+}
 
 type ReportOutput =
   | {
@@ -113,11 +113,11 @@ type ReportOutput =
       errors: Error[];
     };
 
-const produceJsReport = async (
+export async function produceJsReport(
   data: ReportData | undefined,
   template: Node,
   options: CreateReportOptions
-): Promise<ReportOutput> => {
+): Promise<ReportOutput> {
   const out: Node = cloneNodeWithoutChildren(template);
   const ctx = newContext(options);
   let nodeIn: Node = template;
@@ -375,7 +375,7 @@ const produceJsReport = async (
     links: ctx.links,
     htmls: ctx.htmls,
   };
-};
+}
 
 const processText = async (
   data: ReportData | undefined,
@@ -884,8 +884,3 @@ const getNextItem = (items: any[], curIdx0: number) => {
   }
   return { nextItem, curIdx };
 };
-
-// ==========================================
-// Public API
-// ==========================================
-export { extractQuery, produceJsReport };
