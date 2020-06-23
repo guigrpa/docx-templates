@@ -440,14 +440,7 @@ const processCmd = async (
   ctx.cmd = '';
   logger.debug(`Processing cmd: ${cmd}`);
   try {
-    // Extract command name
-    const cmdNameMatch = /^(\S+)\s*/.exec(cmd);
-    let cmdName;
-    let cmdRest = '';
-    if (cmdNameMatch != null) {
-      cmdName = cmdNameMatch[1].toUpperCase();
-      cmdRest = cmd.slice(cmdName.length).trim();
-    }
+    const { cmdName, cmdRest } = splitCommand(cmd);
 
     // Seeking query?
     if (ctx.fSeekQuery) {
@@ -603,6 +596,19 @@ export function getCommand(
     cmd = `INS ${cmd.trim()}`;
   }
   return cmd.trim();
+}
+
+export function splitCommand(cmd: string) {
+  // Extract command name
+  const cmdNameMatch = /^(\S+)\s*/.exec(cmd);
+  let cmdName;
+  let cmdRest = '';
+  if (cmdNameMatch != null) {
+    cmdName = cmdNameMatch[1].toUpperCase();
+    cmdRest = cmd.slice(cmdName.length).trim();
+  }
+
+  return { cmdName, cmdRest };
 }
 
 // ==========================================
