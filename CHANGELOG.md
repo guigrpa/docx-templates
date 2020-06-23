@@ -1,3 +1,8 @@
+## 4.3.0 (2020-06-23)
+* Feature: added `listCommands` function to find and list all commands in a document (see [issue #90](https://github.com/guigrpa/docx-templates/issues/90)).
+* Minor refactoring.
+* Updated jszip dependency.
+
 ## 4.2.0 (2020-06-15)
 * Feature: added 'rejectNullish' setting. When set to `true`, this setting ensures `createReport` throws a `NullishCommandResultError` when the result of an INS, HTML, IMAGE, or LINK command is `null` or `undefined`. This is useful as nullish return values usually indicate a mistake in the template or the invoking code. Defaults to `false`.
 * Enhancement: typed Errors to facilitate more fine-grained downstream error handling.
