@@ -2,7 +2,7 @@ import vm from 'vm';
 import { merge, omit } from 'timm';
 import { getCurLoop } from './reportUtils';
 import { ReportData, Context } from './types';
-import { CommandExecutionError } from './errors';
+import { CommandExecutionError, NullishCommandResultError } from './errors';
 import { logger } from './debug';
 
 // Runs a user snippet in a sandbox, and returns the result.
@@ -65,6 +65,15 @@ export async function runUserJsAndGetRaw(
       result = await ctx.options.errorHandler(err, code);
     } else {
       throw new CommandExecutionError(err, code);
+    }
+  }
+
+  if (ctx.options.rejectNullish && result == null) {
+    const nerr = new NullishCommandResultError(code);
+    if (ctx.options.errorHandler != null) {
+      result = await ctx.options.errorHandler(nerr, code);
+    } else {
+      throw nerr;
     }
   }
 

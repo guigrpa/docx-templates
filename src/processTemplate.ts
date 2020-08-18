@@ -494,9 +494,6 @@ const processCmd: CommandProcessor = async (
       if (!isLoopExploring(ctx)) {
         const result = await runUserJsAndGetRaw(data, cmdRest, ctx);
         if (result == null) {
-          if (ctx.options.rejectNullish) {
-            throw new NullishCommandResultError(cmdRest);
-          }
           return '';
         }
 
@@ -526,9 +523,6 @@ const processCmd: CommandProcessor = async (
           cmdRest,
           ctx
         );
-        if (ctx.options.rejectNullish && img == null) {
-          throw new NullishCommandResultError(cmdRest);
-        }
         if (img != null) {
           try {
             await processImage(ctx, img);
@@ -546,9 +540,6 @@ const processCmd: CommandProcessor = async (
           cmdRest,
           ctx
         );
-        if (ctx.options.rejectNullish && pars == null) {
-          throw new NullishCommandResultError(cmdRest);
-        }
         if (pars != null) await processLink(ctx, pars);
       }
 
@@ -560,9 +551,6 @@ const processCmd: CommandProcessor = async (
           cmdRest,
           ctx
         );
-        if (ctx.options.rejectNullish && html == null) {
-          throw new NullishCommandResultError(cmdRest);
-        }
         if (html != null) await processHtml(ctx, html);
       }
 
