@@ -29,14 +29,12 @@ export class InvalidCommandError extends Error {
 
 export class CommandExecutionError extends Error {
   command: string;
-
-  // note: the name 'message' is used by Error internally. We don't want to override it.
-  msg: string;
-  constructor(msg: string, command: string) {
-    super(`Error executing command '${command}'. ${msg}`);
+  err: Error;
+  constructor(err: Error, command: string) {
+    super(`Error executing command '${command}'. ${err.toString()}`);
     Object.setPrototypeOf(this, CommandExecutionError.prototype);
     this.command = command;
-    this.msg = msg;
+    this.err = err;
   }
 }
 

@@ -60,7 +60,7 @@ export async function runUserJsAndGetRaw(
       result = context.__result__;
     }
   } catch (err) {
-    throw new CommandExecutionError(err.toString(), code);
+    throw new CommandExecutionError(err, code);
   }
 
   // Wait for promises to resolve
