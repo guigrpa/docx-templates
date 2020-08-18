@@ -569,8 +569,15 @@ const processCmd: CommandProcessor = async (
       // Invalid command
     } else throw new CommandSyntaxError(cmd);
     return;
-  } catch (err) {
-    return err;
+  } catch (e) {
+    if (typeof ctx.options.errorHandler === 'function') {
+      const result = ctx.options.errorHandler(e);
+      return result;
+    } else {
+      return e;
+    }
+
+    // return err;
   }
 };
 
