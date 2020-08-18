@@ -61,7 +61,8 @@ export async function runUserJsAndGetRaw(
     }
   } catch (err) {
     if (ctx.options.errorHandler != null) {
-      return ctx.options.errorHandler(err, code);
+      context = sandbox;
+      result = await ctx.options.errorHandler(err, code);
     } else {
       throw new CommandExecutionError(err, code);
     }
