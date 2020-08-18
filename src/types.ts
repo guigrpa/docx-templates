@@ -157,7 +157,7 @@ export type BufferStatus = {
   fInsertedText: boolean;
 };
 
-export type VarValue = any;
+export type VarValue = unknown;
 export type LoopStatus = {
   refNode: Node;
   refNodeLevel: number;
