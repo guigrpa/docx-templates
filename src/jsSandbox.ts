@@ -60,11 +60,9 @@ export async function runUserJsAndGetRaw(
       result = await context.__result__;
     }
   } catch (err) {
-    try {
-      if (typeof ctx.options.errorHandler === 'function') {
-        return ctx.options.errorHandler(err, code);
-      } else throw false;
-    } catch (err2) {
+    if (ctx.options.errorHandler != null) {
+      return ctx.options.errorHandler(err, code);
+    } else {
       throw new CommandExecutionError(err, code);
     }
   }
