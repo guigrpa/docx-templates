@@ -43,11 +43,11 @@ export async function runUserJsAndGetRaw(
     if (ctx.options.runJs) {
       const temp = ctx.options.runJs({ sandbox, ctx });
       context = temp.modifiedSandbox;
-      result = temp.result;
+      result = await temp.result;
     } else if (ctx.options.noSandbox) {
       context = sandbox;
       const wrapper = new Function('with(this) { return eval(__code__); }');
-      result = wrapper.call(context);
+      result = await wrapper.call(context);
     } else {
       const script = new vm.Script(
         `
@@ -57,15 +57,11 @@ export async function runUserJsAndGetRaw(
       );
       context = vm.createContext(sandbox);
       script.runInContext(context);
-      result = context.__result__;
+      result = await context.__result__;
     }
   } catch (err) {
     throw new CommandExecutionError(err, code);
   }
-
-  // Wait for promises to resolve
-  if (typeof result === 'object' && result && result.then)
-    result = await result;
 
   // Save the sandbox for later use
   ctx.jsSandbox = omit(context, ['__code__', '__result__']);
