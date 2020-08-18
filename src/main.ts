@@ -123,6 +123,8 @@ async function createReport(
     failFast: options.failFast == null ? true : options.failFast,
     rejectNullish:
       options.rejectNullish == null ? false : options.rejectNullish,
+    errorHandler:
+      typeof options.errorHandler === 'function' ? options.errorHandler : null,
   };
   const xmlOptions = { literalXmlDelimiter };
 
@@ -304,6 +306,7 @@ export async function listCommands(
     additionalJsContext: {},
     failFast: false,
     rejectNullish: false,
+    errorHandler: null,
   };
 
   const { jsTemplate } = await parseTemplate(template);

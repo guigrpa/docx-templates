@@ -36,6 +36,8 @@ export type QueryResolver = (
   queryVars: any
 ) => ReportData | Promise<ReportData>;
 
+export type errorHandler = (e: Error, rawcode?: Object) => any;
+
 type RunJSFunc = (o: {
   sandbox: Object;
   ctx: Object;
@@ -100,6 +102,10 @@ export type UserOptions = {
    * When set to `true`, this setting ensures `createReport` throws a `NullishCommandResultError` when the result of an INS, HTML, IMAGE, or LINK command is `null` or `undefined`. This is useful as nullish return values usually indicate a mistake in the template or the invoking code. Defaults to `false`.
    */
   rejectNullish?: boolean;
+  /**
+   * Custom error handler
+   */
+  errorHandler?: errorHandler;
 };
 
 export type CreateReportOptions = {
@@ -111,6 +117,7 @@ export type CreateReportOptions = {
   additionalJsContext: Object;
   failFast: boolean;
   rejectNullish: boolean;
+  errorHandler: errorHandler | null;
 };
 
 export type Context = {
