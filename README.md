@@ -21,7 +21,7 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 Contributions are welcome!
 
 
-## Installation
+# Installation
 
 ```
 $ npm install docx-templates
@@ -34,7 +34,7 @@ $ yarn add docx-templates
 ```
 
 
-## Node usage
+# Node usage
 
 Here is a simple example, with report data injected directly as an object:
 
@@ -100,7 +100,7 @@ const report = await createReport({
 Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node).
 
 
-## Browser usage
+# Browser usage
 
 You can use docx-templates in the browser (yay!). Just as when using docx-templates in Node, you need to provide the template contents as a buffer-like object. For example, you can get a `File` object with:
 
@@ -142,8 +142,16 @@ You can find an example implementation of `saveDataToFile()` [in the Webpack exa
 
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify).
 
-### Browser compatibility caveat
+## Browser compatibility caveat
 Note that the JavaScript code in your docx template will be run as-is by the browser. Transpilers like Babel can't see this code, and won't be able to polyfill it. This means that the JS code in your template needs to be compatible with the browsers you are targeting. In other words: don't use fancy modern syntax and functions in your template if you want older browsers, like IE11, to be able to render it.
+
+# Writing templates
+
+You can find several template examples in this repo:
+
+* [SWAPI](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node), a good example of what you can achieve embedding a template (GraphQL in this case) in your report, including a simple script for report generation. Uses the freak-ish online [Star Wars GraphQL API](https://github.com/graphql/swapi-graphql).
+* [Dynamic images](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node): with examples of images that are dynamically downloaded or created. Check out the _images-many-tiles_ example for a taste of this powerful feature.
+* Browser-based examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify).
 
 ## Custom command delimiters
 You can use different **left/right command delimiters** by passing an array to `cmdDelimiter`:
@@ -161,14 +169,8 @@ Then you can add commands and JS snippets in your template like this: `{foo}`, `
 
 When choosing a delimiter, take care not to introduce conflicts with JS syntax, especially if you are planning to use larger JS code snippets in your templates. For example, with `['{', '}']` you may run into conflicts as the brackets in your JS code may be mistaken for command delimiters. As an alternative, consider using multi-character delimiters, like `{#` and `#}` (see issue [#102](https://github.com/guigrpa/docx-templates/issues/102)).
 
-## Writing templates
 
-You can find several template examples in this repo:
-
-* [SWAPI](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node), a good example of what you can achieve embedding a template (GraphQL in this case) in your report, including a simple script for report generation. Uses the freak-ish online [Star Wars GraphQL API](https://github.com/graphql/swapi-graphql).
-* [Dynamic images](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node): with examples of images that are dynamically downloaded or created. Check out the _images-many-tiles_ example for a taste of this powerful feature.
-* Browser-based examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify).
-
+## Supported commands
 Currently supported commands are defined below.
 
 ### `QUERY`
@@ -434,7 +436,7 @@ Define a name for a complete command (especially useful for formatting tables):
 ----------------------------------------------------------
 ```
 
-## Error handling
+# Error handling
 
 By default, the Promise returned by `createReport` will reject with an error immediately when a problem is encountered in the template, such as a bad command (i.e. it 'fails fast'). In some cases, however, you may want to collect all errors that may exist in the template before failing. For example, this is useful when you are letting your users create templates interactively. You can disable fast-failing by providing the `failFast: false` parameter as shown below. This will make `createReport` reject with an array of errors instead of a single error so you can get a more complete picture of what is wrong with the template.
 
@@ -458,7 +460,7 @@ try {
   }
 }
 ```
-
+## Error types
 The library exposes the following error types. See the `errors.ts` module for details.
 
 ```
