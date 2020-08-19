@@ -1,3 +1,8 @@
+## 4.4.0 (2020-08-19)
+* Feature: added `getMetadata` function to extract the metadata fields from a document, such as the number of pages or words (see [issue #94](https://github.com/guigrpa/docx-templates/issues/94)).
+* Feature: user can now provide a custom `errorHandler` callback to handle any errors that may occur when executing commands from a template. The value returned by this callback will be inserted into the rendered document instead (see [issue #138](https://github.com/guigrpa/docx-templates/issues/138)).
+* Restructured `CommandExecutionError` to make it contain the full Error original object that caused it to be thrown.
+
 ## 4.3.0 (2020-06-23)
 * Feature: added `listCommands` function to find and list all commands in a document (see [issue #90](https://github.com/guigrpa/docx-templates/issues/90)).
 * Minor refactoring.
