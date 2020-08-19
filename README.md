@@ -473,6 +473,24 @@ InternalError
 TemplateParseError
 ```
 
+## Custom error handler
+A custom error handler callback can be provided to handle any errors that may occur when executing commands from a template. The value returned by this callback will be inserted into the rendered document instead. The callback is provided with two arguments: the error that was caught and the raw code of the command.
+
+```typescript
+  const report = await createReport({
+    template,
+    data: {
+      name: 'John',
+      surname: 'Appleseed',
+    },
+    errorHandler: (err, command_code) => {
+      return 'command failed!';
+    },
+  });
+```
+
+Using a custom `errorHandler` in combination with `rejectNullish = true` allows users to intelligently replace the result of commands that returned `null` or `undefined` (make sure to check for `NullishCommandResultError`).
+
 # Inspecting templates
 The `listCommands` function lets you list all the commands in a docx template using the same parser as `createReport`.
 
