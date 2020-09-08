@@ -41,7 +41,9 @@ export class CommandExecutionError extends Error {
 export class ImageError extends CommandExecutionError {}
 
 export class InternalError extends Error {
-  message = 'INTERNAL ERROR';
+  constructor(msg: string) {
+    super(`INTERNAL ERROR: ${msg}`);
+  }
 }
 
 export class TemplateParseError extends Error {}

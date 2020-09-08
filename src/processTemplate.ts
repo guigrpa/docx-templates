@@ -145,7 +145,7 @@ export async function walkTemplate(
     // Move input node pointer
     // =============================================
     if (ctx.fJump) {
-      if (!curLoop) throw new InternalError();
+      if (!curLoop) throw new InternalError('jumping while curLoop is null');
       const { refNode, refNodeLevel } = curLoop;
       //
       //   logger.debug(`Jumping to level ${refNodeLevel}...`, {
@@ -227,7 +227,7 @@ export async function walkTemplate(
         //   });
       }
       const nodeOutParent = nodeOut._parent;
-      if (nodeOutParent == null) throw new InternalError();
+      if (nodeOutParent == null) throw new InternalError('node parent is null');
 
       // Execute the move in the output tree
       nodeOut = nodeOutParent;
@@ -325,7 +325,8 @@ export async function walkTemplate(
     if (move === 'DOWN' || move === 'SIDE') {
       // Move nodeOut to point to the new node's parent
       if (move === 'SIDE') {
-        if (nodeOut._parent == null) throw new InternalError();
+        if (nodeOut._parent == null)
+          throw new InternalError('node parent is null');
         nodeOut = nodeOut._parent;
       }
 
@@ -366,7 +367,8 @@ export async function walkTemplate(
     // -------------------------------------------
     if (move === 'JUMP') {
       while (deltaJump > 0) {
-        if (nodeOut._parent == null) throw new InternalError();
+        if (nodeOut._parent == null)
+          throw new InternalError('node parent is null');
         nodeOut = nodeOut._parent;
         deltaJump -= 1;
       }
