@@ -1045,6 +1045,28 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         expect(result).toMatchSnapshot();
       });
+
+      it('iterate over object properties and keys in FOR loop', async () => {
+        // Example to answer question posed in issue #149
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'forOverObject.docx')
+        );
+        const result = await createReport(
+          {
+            noSandbox,
+            template,
+            data: {
+              companies: {
+                one: 'FIRST',
+                two: 'SECOND',
+                three: 'THIRD',
+              },
+            },
+          },
+          'JS'
+        );
+        expect(result).toMatchSnapshot();
+      });
     });
   });
 });
