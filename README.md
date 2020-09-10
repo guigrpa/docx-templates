@@ -495,6 +495,7 @@ Using a custom `errorHandler` in combination with `rejectNullish = true` allows 
 The `listCommands` function lets you list all the commands in a docx template using the same parser as `createReport`.
 
 ```typescript
+import { listCommands } from 'docx-templates';
 const template_buffer = fs.readFileSync('template.docx');
 const commands = await listCommands(template_buffer, ['{', '}']);
 
@@ -508,6 +509,8 @@ const commands = await listCommands(template_buffer, ['{', '}']);
 The `getMetadata` function lets you extract the metadata fields from a document, such as the number of pages or words. Note that not all fields may be available, depending on the document.
 
 ```typescript
+    import { getMetadata } from 'docx-templates';
+    const template = fs.readFileSync('template.docx');
     await getMetadata(template)
     // result:
       Object {
