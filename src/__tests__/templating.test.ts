@@ -17,7 +17,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
 ['noSandbox', 'sandbox'].forEach(sbStatus => {
   const noSandbox = sbStatus === 'sandbox' ? false : true;
 
-  describe(sbStatus, () => {
+  describe(`${sbStatus}`, () => {
     describe('Template processing', () => {
       beforeEach(() => {
         // Set a global fixed Date. Some tests check the zip contents,

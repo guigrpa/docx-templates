@@ -14,7 +14,7 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
 ['noSandbox', 'sandbox'].forEach(sbStatus => {
   const noSandbox = sbStatus === 'sandbox' ? false : true;
 
-  describe(sbStatus, () => {
+  describe(`${sbStatus}`, () => {
     describe('rejectNullish setting', () => {
       it('INS', async () => {
         const template = await fs.promises.readFile(
