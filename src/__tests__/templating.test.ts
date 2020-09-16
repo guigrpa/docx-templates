@@ -1067,6 +1067,36 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         expect(result).toMatchSnapshot();
       });
+
+      it('fixSmartQuotes flag (see PR #152)', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'fixSmartQuotes.docx')
+        );
+
+        // The default behaviour should return an error when smart quotes (curly quotes) are present in the command,
+        // as the command isn't valid javascript.
+        await expect(
+          createReport({
+            noSandbox,
+            template,
+            data: {},
+          })
+        ).rejects.toThrowError(
+          "Error executing command 'reverse(‘aubergine’)'. SyntaxError: Invalid or unexpected token"
+        );
+
+        // Unless we use our superpower: the fixSmartQuotes flag!
+        const result = await createReport(
+          {
+            noSandbox,
+            template,
+            data: {},
+            fixSmartQuotes: true,
+          },
+          'XML'
+        );
+        expect(result.includes('enigrebua')).toBeTruthy(); // the word aubergine in reverse
+      });
     });
   });
 });

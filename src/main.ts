@@ -125,6 +125,8 @@ async function createReport(
       options.rejectNullish == null ? false : options.rejectNullish,
     errorHandler:
       typeof options.errorHandler === 'function' ? options.errorHandler : null,
+    fixSmartQuotes:
+      options.fixSmartQuotes == null ? false : options.fixSmartQuotes,
   };
   const xmlOptions = { literalXmlDelimiter };
 
@@ -307,6 +309,7 @@ export async function listCommands(
     failFast: false,
     rejectNullish: false,
     errorHandler: null,
+    fixSmartQuotes: false,
   };
 
   const { jsTemplate } = await parseTemplate(template);
@@ -316,7 +319,7 @@ export async function listCommands(
 
   const commands: CommandSummary[] = [];
   await walkTemplate(undefined, prepped, opts, async (data, node, ctx) => {
-    const raw = getCommand(ctx.cmd, ctx.shorthands);
+    const raw = getCommand(ctx.cmd, ctx.shorthands, ctx.options.fixSmartQuotes);
     ctx.cmd = ''; // flush the context
     const { cmdName, cmdRest: code } = splitCommand(raw);
     const type = cmdName as BuiltInCommand;

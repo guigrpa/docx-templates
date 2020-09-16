@@ -107,6 +107,14 @@ export type UserOptions = {
    * Custom error handler to catch any errors that may occur evaluating commands in the template. The value returned from this handler will be inserted into the template instead.
    */
   errorHandler?: ErrorHandler;
+
+  /**
+   * MS Word usually replaces string literal quotes with unicode 'smart' quotes ('curly' quotes). E.g. 'aubergine' -> ‘aubergine’.
+   * This causes an error when evaluating commands containing these smart quotes, as they are not valid JavaScript.
+   * If you set fixSmartQuotes to 'true', these smart quotes will automatically get replaced with straight quotes (') before command evaluation.
+   * Defaults to false.
+   */
+  fixSmartQuotes?: boolean;
 };
 
 export type CreateReportOptions = {
@@ -119,6 +127,7 @@ export type CreateReportOptions = {
   failFast: boolean;
   rejectNullish: boolean;
   errorHandler: ErrorHandler | null;
+  fixSmartQuotes: boolean;
 };
 
 export type Context = {

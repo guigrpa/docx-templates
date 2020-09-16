@@ -453,7 +453,7 @@ const processCmd: CommandProcessor = async (
   node: Node,
   ctx: Context
 ): Promise<undefined | string | Error> => {
-  const cmd = getCommand(ctx.cmd, ctx.shorthands);
+  const cmd = getCommand(ctx.cmd, ctx.shorthands, ctx.options.fixSmartQuotes);
   ctx.cmd = ''; // flush the context
   logger.debug(`Processing cmd: ${cmd}`);
   try {
@@ -572,8 +572,11 @@ const notBuiltIns = (cmd: string) =>
 
 export function getCommand(
   command: string,
-  shorthands: Context['shorthands']
+  shorthands: Context['shorthands'],
+  fixSmartQuotes: boolean
 ): string {
+  // Get a cleaned version of the command
+
   let cmd = command.trim();
   if (cmd[0] === '*') {
     const aliasName = cmd.slice(1).trim();
@@ -590,9 +593,11 @@ export function getCommand(
   }
 
   //replace 'smart' quotes with straight quotes
-  cmd = cmd
-    .replace(/[\u201C\u201D\u201E]/g, '"')
-    .replace(/[\u2018\u2019\u201A]/g, "'");
+  if (fixSmartQuotes) {
+    cmd = cmd
+      .replace(/[\u201C\u201D\u201E]/g, '"')
+      .replace(/[\u2018\u2019\u201A]/g, "'");
+  }
 
   return cmd.trim();
 }
