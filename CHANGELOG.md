@@ -1,3 +1,6 @@
+## 4.5.0 (2020-09-16)
+* Feature: added `fixSmartQuotes` flag (see [PR #152](https://github.com/guigrpa/docx-templates/pull/152)). Thanks @speedpro! MS Word usually autocorrects JS string literal quotes with unicode 'smart' quotes ('curly' quotes). E.g. 'aubergine' -> ‘aubergine’. This causes an error when evaluating commands containing these smart quotes, as they are not valid JavaScript. If you set `fixSmartQuotes` to 'true', these smart quotes will automatically get replaced with straight quotes (') before command evaluation. Defaults to false.
+
 ## 4.4.0 (2020-08-19)
 * Feature: added `getMetadata` function to extract the metadata fields from a document, such as the number of pages or words (see [issue #94](https://github.com/guigrpa/docx-templates/issues/94)).
 * Feature: user can now provide a custom `errorHandler` callback to handle any errors that may occur when executing commands from a template. The value returned by this callback will be inserted into the rendered document instead (see [issue #138](https://github.com/guigrpa/docx-templates/issues/138)).
