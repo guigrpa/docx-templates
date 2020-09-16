@@ -588,10 +588,12 @@ export function getCommand(
   } else if (notBuiltIns(cmd)) {
     cmd = `INS ${cmd.trim()}`;
   }
-  
+
   //replace 'smart' quotes with straight quotes
-  cmd = cmd.replace(/[\u201C\u201D\u201E]/g, '"').replace(/[\u2018\u2019\u201A]/g, "'");
-  
+  cmd = cmd
+    .replace(/[\u201C\u201D\u201E]/g, '"')
+    .replace(/[\u2018\u2019\u201A]/g, "'");
+
   return cmd.trim();
 }
 
