@@ -8,6 +8,8 @@ import { createReport } from '../index';
 import { UserOptions } from '../types';
 import { setDebugLogSink } from '../debug';
 
+jest.setTimeout(20000);
+
 if (process.env.DEBUG) setDebugLogSink(console.log);
 
 const LONG_TEXT = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.
@@ -1136,6 +1138,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           path.join(__dirname, 'fixtures', 'ifForOnSameLine.docx')
         );
 
+        // The bug reported in #154 keeps template creation running indefinitely at 100% CPU.
         const result = await createReport({
           noSandbox,
           template,
@@ -1143,7 +1146,6 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
             list: ['a', 'b', 'c'],
           },
         });
-
         expect(result).toBeInstanceOf(Uint8Array);
       });
     });
