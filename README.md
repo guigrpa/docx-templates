@@ -292,7 +292,7 @@ In this case, we use a function from `additionalJsContext` object passed to `cre
     qrCode: url => {
       const dataUrl = createQrImage(url, { size: 500 });
       const data = dataUrl.slice('data:image/gif;base64,'.length);
-      return { width: 6, height: 6, data, extension: '.gif' };
+      return { width: 6, height: 6, data: data, extension: '.gif' };
     },
   }
 ```
