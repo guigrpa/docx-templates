@@ -193,12 +193,35 @@ export type LoopStatus = {
 };
 
 export type ImagePars = {
-  width: number; // cm
-  height: number; // cm
+  /**
+   * Desired width of the image in centimeters.
+   */
+  width: number;
+
+  /**
+   * Desired height of the image in centimeters.
+   */
+  height: number;
+
+  /**
+   * Either an ArrayBuffer or a base64 string with the image data.
+   */
   data: ArrayBuffer | string;
-  thumbnail?: Image; // only useful if image is an SVG
-  extension?: ImageExtension;
-  alt?: string; // optional alt text
+
+  /**
+   * Optional. When injecting an SVG image, a fallback non-SVG (png/jpg/gif, etc.) image can be provided. This thumbnail is used when SVG images are not supported (e.g. older versions of Word) or when the document is previewed by e.g. Windows Explorer. See usage example below.
+   */
+  thumbnail?: Image;
+
+  /**
+   * One of '.png', '.gif', '.jpg', '.jpeg', '.svg'.
+   */
+  extension: ImageExtension;
+
+  /**
+   * Optional alt text.
+   */
+  alt?: string;
 };
 
 export type LinkPars = {
