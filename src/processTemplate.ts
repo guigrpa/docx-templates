@@ -21,6 +21,7 @@ import {
   Htmls,
   Image,
   BUILT_IN_COMMANDS,
+  ImageExtensions,
 } from './types';
 import {
   NullishCommandResultError,
@@ -717,9 +718,9 @@ const processEndForIf = (
 };
 
 const imageToContext = (ctx: Context, img: Image) => {
-  if (!(typeof img.extension === 'string')) {
+  if (!ImageExtensions.includes(img.extension)) {
     throw new Error(
-      'An extension (e.g. `.png`) needs to be provided when providing an image or a thumbnail.'
+      `An extension (one of ${ImageExtensions}) needs to be provided when providing an image or a thumbnail.`
     );
   }
   ctx.imageId += 1;

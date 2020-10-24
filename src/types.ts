@@ -160,8 +160,16 @@ export type Context = {
 };
 
 export type Images = { [id: string]: Image };
+export const ImageExtensions = [
+  '.png',
+  '.gif',
+  '.jpg',
+  '.jpeg',
+  '.svg',
+] as const;
+export type ImageExtension = typeof ImageExtensions[number];
 export type Image = {
-  extension: string;
+  extension: ImageExtension;
   data: ArrayBuffer | string;
 };
 export type Links = { [id: string]: Link };
@@ -189,7 +197,7 @@ export type ImagePars = {
   height: number; // cm
   data: ArrayBuffer | string;
   thumbnail?: Image; // only useful if image is an SVG
-  extension?: string;
+  extension?: ImageExtension;
   alt?: string; // optional alt text
 };
 

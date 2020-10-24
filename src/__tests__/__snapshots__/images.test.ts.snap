@@ -1187,7 +1187,7 @@ Object {
 }
 `;
 
-exports[`002: throws when thumbnail is incorrectly provided when inserting an SVG 1`] = `[Error: Error executing command 'IMAGE svgImgFile()'. An extension (e.g. \`.png\`) needs to be provided when providing an image or a thumbnail.]`;
+exports[`002: throws when thumbnail is incorrectly provided when inserting an SVG 1`] = `[Error: Error executing command 'IMAGE svgImgFile()'. An extension (one of .png,.gif,.jpg,.jpeg,.svg) needs to be provided when providing an image or a thumbnail.]`;
 
 exports[`003: can inject an svg without a thumbnail 1`] = `
 Object {
