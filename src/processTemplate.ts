@@ -718,11 +718,7 @@ const processEndForIf = (
 };
 
 const imageToContext = (ctx: Context, img: Image) => {
-  if (!ImageExtensions.includes(img.extension)) {
-    throw new Error(
-      `An extension (one of ${ImageExtensions}) needs to be provided when providing an image or a thumbnail.`
-    );
-  }
+  validateImage(img);
   ctx.imageId += 1;
   const id = String(ctx.imageId);
   const relId = `img${id}`;
@@ -730,7 +726,30 @@ const imageToContext = (ctx: Context, img: Image) => {
   return relId;
 };
 
+function validateImage(img: Image) {
+  if (!(img.data instanceof Buffer || typeof img.data === 'string')) {
+    throw new Error(
+      'image .data property needs to be provided as an ArrayBuffer-equivalent or as a base64-encoded string'
+    );
+  }
+  if (!ImageExtensions.includes(img.extension)) {
+    throw new Error(
+      `An extension (one of ${ImageExtensions}) needs to be provided when providing an image or a thumbnail.`
+    );
+  }
+}
+
+function validateImagePars(pars: ImagePars) {
+  if (!Number.isFinite(pars.width))
+    throw new Error(`invalid image width: ${pars.width} (in cm)`);
+  if (!Number.isFinite(pars.height))
+    throw new Error(`invalid image height: ${pars.height} (in cm)`);
+  validateImage(pars);
+  if (pars.thumbnail) validateImage(pars.thumbnail);
+}
+
 const processImage = async (ctx: Context, imagePars: ImagePars) => {
+  validateImagePars(imagePars);
   const cx = (imagePars.width * 360e3).toFixed(0);
   const cy = (imagePars.height * 360e3).toFixed(0);
 
