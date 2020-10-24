@@ -1,3 +1,6 @@
+## 4.5.1 (2020-10-24)
+* Enhancement: extensive validation of `IMAGE` command parameters before execution to prevent silent failures caused by user error, particularly in plain javascript and untyped settings. Related to issue [#158](https://github.com/guigrpa/docx-templates/issues/158).
+
 ## 4.5.0 (2020-09-16)
 * Feature: added `fixSmartQuotes` flag (see [PR #152](https://github.com/guigrpa/docx-templates/pull/152)). Thanks @speedpro! MS Word usually autocorrects JS string literal quotes with unicode 'smart' quotes ('curly' quotes). E.g. 'aubergine' -> ‘aubergine’. This causes an error when evaluating commands containing these smart quotes, as they are not valid JavaScript. If you set `fixSmartQuotes` to 'true', these smart quotes will automatically get replaced with straight quotes (') before command evaluation. Defaults to false.
 
