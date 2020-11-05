@@ -709,6 +709,7 @@ const processEndForIf = (
   if (nextItem != null) {
     // next iteration
     ctx.vars[varName] = nextItem;
+    ctx.vars[varName + 'Index'] = curIdx;
     ctx.fJump = true;
     curLoop.idx = curIdx;
   } else {
