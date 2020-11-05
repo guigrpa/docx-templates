@@ -506,7 +506,7 @@ const processCmd: CommandProcessor = async (
           const { literalXmlDelimiter } = ctx.options;
           str = str.replace(
             /\n/g,
-            `${literalXmlDelimiter}<w:br/>${literalXmlDelimiter}`
+            `${literalXmlDelimiter}</w:t></w:r><w:r><w:br/><w:t xml:space="preserve">${literalXmlDelimiter}`
           );
         }
         return str;
