@@ -323,7 +323,7 @@ additionalJsContext: {
         data: fs.readFileSync('sample.png'),
         extension: '.png',
       };
-      return { width: 6, height: 6, data: svg_data, extension: '.svg', thumbnail };                    
+      return { width: 6, height: 6, data: svg_data, extension: '.svg', thumbnail };
     }
   }
 ```
@@ -385,6 +385,15 @@ Since JavaScript expressions are supported, you can for example filter the loop 
 ----------------------------------------------------------
 | +++END-FOR person+++         |                         |
 ----------------------------------------------------------
+```
+
+You can use the index of the loop by adding the suffix "Index" to your variable-name inside the for-loop:
+
+```
++++FOR person IN project.people+++
++++INS $person.name+++ (index: +++INS $personIndex+++)
++++END-FOR person+++
+...
 ```
 
 Finally, you can nest loops (this example assumes a different data set):
