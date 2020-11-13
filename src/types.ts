@@ -170,7 +170,7 @@ export const ImageExtensions = [
 export type ImageExtension = typeof ImageExtensions[number];
 export type Image = {
   extension: ImageExtension;
-  data: ArrayBuffer | string;
+  data: Buffer | ArrayBuffer | string;
 };
 export type Links = { [id: string]: Link };
 export type Link = { url: string };

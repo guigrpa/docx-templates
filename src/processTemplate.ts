@@ -727,9 +727,15 @@ const imageToContext = (ctx: Context, img: Image) => {
 };
 
 function validateImage(img: Image) {
-  if (!(img.data instanceof Buffer || typeof img.data === 'string')) {
+  if (
+    !(
+      img.data instanceof Buffer ||
+      img.data instanceof ArrayBuffer ||
+      typeof img.data === 'string'
+    )
+  ) {
     throw new Error(
-      'image .data property needs to be provided as an ArrayBuffer-equivalent or as a base64-encoded string'
+      'image .data property needs to be provided as Buffer, ArrayBuffer, or as a base64-encoded string'
     );
   }
   if (!ImageExtensions.includes(img.extension)) {
