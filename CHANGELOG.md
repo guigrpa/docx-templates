@@ -1,3 +1,6 @@
+## 4.5.2 (2020-11-13)
+* Corrected check for valid image data. ArrayBuffers are now also valid image data containers, as the type definitions suggest (issue [#166](https://github.com/guigrpa/docx-templates/issues/166)).
+
 ## 4.5.1 (2020-10-24)
 * Enhancement: extensive validation of `IMAGE` command parameters before execution to prevent silent failures caused by user error, particularly in plain javascript and untyped settings. Related to issue [#158](https://github.com/guigrpa/docx-templates/issues/158).
 
