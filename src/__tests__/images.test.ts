@@ -176,3 +176,55 @@ it('004: can inject an image in the document header (regression test for #113)',
   // the main document
   return expect(createReport(opts)).resolves.toBeInstanceOf(Uint8Array);
 });
+
+it('005: can inject PNG files using ArrayBuffers without errors (related to issue #166)', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imageSimple.docx')
+  );
+
+  const buff = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'sample.png')
+  );
+
+  function toArrayBuffer(buf: Buffer): ArrayBuffer {
+    const ab = new ArrayBuffer(buf.length);
+    const view = new Uint8Array(ab);
+    for (let i = 0; i < buf.length; ++i) {
+      view[i] = buf[i];
+    }
+    return ab;
+  }
+
+  const fromAB = await createReport({
+    template,
+    data: {},
+    additionalJsContext: {
+      injectImg: () => {
+        return {
+          width: 6,
+          height: 6,
+          data: toArrayBuffer(buff),
+          extension: '.png',
+        };
+      },
+    },
+  });
+
+  const fromB = await createReport({
+    template,
+    data: {},
+    additionalJsContext: {
+      injectImg: () => {
+        return {
+          width: 6,
+          height: 6,
+          data: buff,
+          extension: '.png',
+        };
+      },
+    },
+  });
+  expect(fromAB).toBeInstanceOf(Uint8Array);
+  expect(fromB).toBeInstanceOf(Uint8Array);
+  expect(fromAB).toStrictEqual(fromB);
+});
