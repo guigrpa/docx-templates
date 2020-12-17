@@ -22,7 +22,7 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "scripts": {
-    "start": "node . swapi-simple.docx"
+    "start": "node . swapi-simple.docx output.docx"
   },
   "dependencies": {
     "docx-templates": "*",

@@ -40,15 +40,3 @@ createReport({
     rendered
   ))
   .catch(console.log);
-
-/*
-{
-  allFilms {
-    edges {
-      node {
-        title
-      }
-    }
-  }
-}
- */
