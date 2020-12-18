@@ -1,3 +1,6 @@
+## 4.5.3 (2020-12-18)
+* Correctly export `getMetadata` function from library index module / entrypoint.
+
 ## 4.5.2 (2020-11-13)
 * Corrected check for valid image data. ArrayBuffers are now also valid image data containers, as the type definitions suggest (issue [#166](https://github.com/guigrpa/docx-templates/issues/166)).
 
