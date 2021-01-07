@@ -93,7 +93,15 @@ const report = await createReport({
    * When set to `true`, this setting ensures createReport throws an error when the result of an INS, HTML, IMAGE, or LINK command turns out to be null or undefined,
    * as this usually indicates a mistake in the template or the invoking code (defaults to `false`).
    */
-  rejectNullish: false
+  rejectNullish: false,
+
+  /**
+   * MS Word usually autocorrects JS string literal quotes with unicode 'smart' quotes ('curly' quotes). E.g. 'aubergine' -> ‘aubergine’.
+   * This causes an error when evaluating commands containing these smart quotes, as they are not valid JavaScript.
+   * If you set fixSmartQuotes to 'true', these smart quotes will automatically get replaced with straight quotes (') before command evaluation.
+   * Defaults to false.
+   */
+  fixSmartQuotes: false;
 });
 ```
 
