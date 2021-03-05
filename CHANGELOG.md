@@ -1,3 +1,8 @@
+## 4.5.4 (2021-03-05)
+* Improve error messages.
+* Export error types at the library level.
+* Update dependencies.
+
 ## 4.5.3 (2020-12-18)
 * Correctly export `getMetadata` function from library index module / entrypoint.
 
