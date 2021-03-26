@@ -407,10 +407,13 @@ export async function readContentTypes(zip: JSZip): Promise<NonTextNode> {
 }
 
 export function getMainDoc(contentTypes: NonTextNode): string {
-  const MAIN_DOC_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml' as const;
+  const MAIN_DOC_MIMES = [
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml',
+    'application/vnd.ms-word.document.macroEnabled.main+xml',
+  ] as const;
   for (const t of contentTypes._children) {
     if (!t._fTextNode) {
-      if (t._attrs.ContentType === MAIN_DOC_MIME) {
+      if (MAIN_DOC_MIMES.indexOf(t._attrs.ContentType) > -1) {
         const path = t._attrs.PartName;
         if (path) {
           return path.replace('/word/', '');
