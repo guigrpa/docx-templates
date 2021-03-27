@@ -1097,6 +1097,21 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         expect(result.includes('enigrebua')).toBeTruthy(); // the word aubergine in reverse
       });
+
+      it('works with macro-enabled (docm) templates', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'macroEnabledTemplate.docm')
+        );
+        const result = await createReport(
+          {
+            noSandbox,
+            template,
+            data: {},
+          },
+          'JS'
+        );
+        expect(result).toMatchSnapshot();
+      });
     });
   });
 });

@@ -17,6 +17,7 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 * Include **literal XML**
 * Written in TypeScript, so ships with type definitions.
 * Plenty of **examples** in this repo (with Node, Webpack and Browserify)
+* Supports `.docm` templates in addition to regular `.docx` files.
 
 Contributions are welcome!
 
