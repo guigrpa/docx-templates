@@ -1,3 +1,6 @@
+## 4.6.0 (2021-03-27)
+* Add support for `.docm` (macro-enabled) templates (issue [#195](https://github.com/guigrpa/docx-templates/issues/195)). Thanks @brockfanning!
+
 ## 4.5.4 (2021-03-05)
 * Improve error messages.
 * Export error types at the library level.
