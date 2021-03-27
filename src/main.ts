@@ -410,10 +410,13 @@ export function getMainDoc(contentTypes: NonTextNode): string {
   const MAIN_DOC_MIMES = [
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml',
     'application/vnd.ms-word.document.macroEnabled.main+xml',
-  ] as const;
+  ];
   for (const t of contentTypes._children) {
     if (!t._fTextNode) {
-      if (MAIN_DOC_MIMES.indexOf(t._attrs.ContentType) > -1) {
+      if (
+        t._attrs.ContentType != null &&
+        MAIN_DOC_MIMES.includes(t._attrs.ContentType)
+      ) {
         const path = t._attrs.PartName;
         if (path) {
           return path.replace('/word/', '');
