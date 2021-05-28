@@ -24,7 +24,6 @@ import {
   ImageExtensions,
 } from './types';
 import {
-  NullishCommandResultError,
   CommandSyntaxError,
   InternalError,
   InvalidCommandError,
