@@ -213,7 +213,6 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
   });
 
   it('throw when user tries to iterate over non-array', async () => {
-    // Example to answer question posed in issue #149
     const template = await fs.promises.readFile(
       path.join(__dirname, 'fixtures', 'forOverObject.docx')
     );
