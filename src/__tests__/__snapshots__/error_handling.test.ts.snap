@@ -358,6 +358,10 @@ exports[`sandbox custom ErrorHandler properly handles InvalidCommandError 1`] = 
 
 exports[`sandbox rejectNullish setting IMAGE 1`] = `"Result of command qr(\`some random string\`) is null or undefined and rejectNullish is set"`;
 
+exports[`throw when result of INS command is an object 1`] = `"Result of command 'companies' is an object"`;
+
+exports[`throw when result of INS command is an object 2`] = `"Result of command 'companies' is an object"`;
+
 exports[`throw when user tries to iterate over non-array 1`] = `"Invalid FOR command (can only iterate over Array): FOR name IN companies"`;
 
 exports[`throw when user tries to iterate over non-array 2`] = `"Invalid FOR command (can only iterate over Array): FOR name IN companies"`;

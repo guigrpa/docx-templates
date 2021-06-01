@@ -8,6 +8,7 @@ export {
   ImageError,
   InternalError,
   TemplateParseError,
+  ObjectCommandResultError,
 } from './errors';
 export { createReport };
 export default createReport;

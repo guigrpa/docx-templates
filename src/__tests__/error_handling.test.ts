@@ -231,4 +231,23 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
+
+  it('throw when result of INS command is an object', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'objectCommandResultError.docx')
+    );
+    await expect(
+      createReport({
+        noSandbox,
+        template,
+        data: {
+          companies: {
+            one: 'FIRST',
+            two: 'SECOND',
+            three: 'THIRD',
+          },
+        },
+      })
+    ).rejects.toThrowErrorMatchingSnapshot();
+  });
 });

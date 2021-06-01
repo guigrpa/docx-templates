@@ -9,6 +9,15 @@ export class NullishCommandResultError extends Error {
   }
 }
 
+export class ObjectCommandResultError extends Error {
+  command: string;
+  constructor(command: string) {
+    super(`Result of command '${command}' is an object`);
+    Object.setPrototypeOf(this, ObjectCommandResultError.prototype);
+    this.command = command;
+  }
+}
+
 export class CommandSyntaxError extends Error {
   command: string;
   constructor(command: string) {

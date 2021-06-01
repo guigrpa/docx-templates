@@ -28,6 +28,7 @@ import {
   InternalError,
   InvalidCommandError,
   ImageError,
+  ObjectCommandResultError,
 } from './errors';
 import { logger } from './debug';
 
@@ -494,9 +495,17 @@ const processCmd: CommandProcessor = async (
       // INS <expression>
     } else if (cmdName === 'INS') {
       if (!isLoopExploring(ctx)) {
-        const result = await runUserJsAndGetRaw(data, cmdRest, ctx);
+        let result = await runUserJsAndGetRaw(data, cmdRest, ctx);
         if (result == null) {
           return '';
+        }
+        if (typeof result === 'object') {
+          const nerr = new ObjectCommandResultError(cmdRest);
+          if (ctx.options.errorHandler != null) {
+            result = await ctx.options.errorHandler(nerr, cmdRest);
+          } else {
+            throw nerr;
+          }
         }
 
         // If the `processLineBreaks` flag is set,

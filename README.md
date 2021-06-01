@@ -474,6 +474,7 @@ The library exposes the following error types. See the `errors.ts` module for de
 
 ```
 NullishCommandResultError // thrown when rejectNullish is set to true and a command returns null or undefined
+ObjectCommandResultError // thrown when the result of an `INS` command is an Object. This ensures you don't accidentally put `'[object Object]'` in your report.
 CommandSyntaxError
 InvalidCommandError
 CommandExecutionError
