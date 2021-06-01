@@ -74,6 +74,7 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
             },
           })
         ).resolves.toBeInstanceOf(Uint8Array);
+
         await expect(
           createReport({
             noSandbox,
@@ -84,7 +85,8 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
               qr: () => undefined,
             },
           })
-        ).rejects.toBeInstanceOf(Error);
+        ).rejects.toThrowErrorMatchingSnapshot();
+
         await expect(
           createReport({
             noSandbox,
