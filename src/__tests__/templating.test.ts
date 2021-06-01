@@ -1049,7 +1049,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
       it('iterate over object properties and keys in FOR loop', async () => {
         // Example to answer question posed in issue #149
         const template = await fs.promises.readFile(
-          path.join(__dirname, 'fixtures', 'forOverObject.docx')
+          path.join(__dirname, 'fixtures', 'forOverObjectKeys.docx')
         );
         const result = await createReport(
           {

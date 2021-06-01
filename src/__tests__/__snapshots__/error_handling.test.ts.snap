@@ -353,3 +353,7 @@ exports[`sandbox custom ErrorHandler properly handles InvalidCommandError 1`] = 
   </w:body>
 </w:document>"
 `;
+
+exports[`throw when user tries to iterate over non-array 1`] = `"Invalid FOR command (can only iterate over Array): FOR name IN companies"`;
+
+exports[`throw when user tries to iterate over non-array 2`] = `"Invalid FOR command (can only iterate over Array): FOR name IN companies"`;

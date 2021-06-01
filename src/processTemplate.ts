@@ -651,7 +651,7 @@ const processForIf = async (
     const parentLoopLevel = ctx.loops.length - 1;
     const fParentIsExploring =
       parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
-    let loopOver;
+    let loopOver: unknown[];
     if (fParentIsExploring) {
       loopOver = [];
     } else if (isIf) {
@@ -660,6 +660,11 @@ const processForIf = async (
     } else {
       if (!forMatch) throw new InvalidCommandError('Invalid FOR command', cmd);
       loopOver = await runUserJsAndGetRaw(data, forMatch[2], ctx);
+      if (!Array.isArray(loopOver))
+        throw new InvalidCommandError(
+          'Invalid FOR command (can only iterate over Array)',
+          cmd
+        );
     }
     ctx.loops.push({
       refNode: node,
