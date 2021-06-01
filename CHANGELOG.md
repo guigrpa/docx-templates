@@ -1,3 +1,7 @@
+## 4.6.1 (2021-06-01)
+* Fix for issue [#213](https://github.com/guigrpa/docx-templates/issues/213): throw an error when user tries to iterate over a non-array in a template with a FOR loop. This used to create an infinite loop.
+* Throw `ObjectCommandResultError` when the result of an `INS` command is an Object. This ensures you don't accidentally put `'[object Object]'` in your report.
+
 ## 4.6.0 (2021-03-27)
 * Add support for `.docm` (macro-enabled) templates (issue [#195](https://github.com/guigrpa/docx-templates/issues/195)). Thanks @brockfanning!
 
