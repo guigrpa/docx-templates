@@ -1,3 +1,6 @@
+/**
+ * Thrown when `rejectNullish` is set to `true` and a command returns `null` or `undefined`.
+ */
 export class NullishCommandResultError extends Error {
   command: string;
   constructor(command: string) {
@@ -9,6 +12,9 @@ export class NullishCommandResultError extends Error {
   }
 }
 
+/**
+ * Thrown when the result of an `INS` command is an `Object`. This ensures you don't accidentally put `'[object Object]'` in your report.
+ */
 export class ObjectCommandResultError extends Error {
   command: string;
   constructor(command: string) {
