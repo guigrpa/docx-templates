@@ -228,3 +228,38 @@ it('005: can inject PNG files using ArrayBuffers without errors (related to issu
   expect(fromB).toBeInstanceOf(Uint8Array);
   expect(fromAB).toStrictEqual(fromB);
 });
+
+it('006: can inject an image from the data instead of the additionalJsContext', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imageSimple.docx')
+  );
+  const buff = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'sample.png')
+  );
+  const reportA = await createReport({
+    template,
+    data: {
+      injectImg: () => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.png',
+      }),
+    },
+  });
+  const reportB = await createReport({
+    template,
+    data: {},
+    additionalJsContext: {
+      injectImg: () => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.png',
+      }),
+    },
+  });
+  expect(reportA).toBeInstanceOf(Uint8Array);
+  expect(reportB).toBeInstanceOf(Uint8Array);
+  expect(reportA).toStrictEqual(reportB);
+});
