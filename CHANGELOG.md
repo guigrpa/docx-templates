@@ -1,3 +1,6 @@
+## 4.6.2 (2021-06-03)
+* Fix for issues [#190](https://github.com/guigrpa/docx-templates/issues/190) and [#144](https://github.com/guigrpa/docx-templates/issues/144). Image IDs in the rendered XML are now ensured to be globally unique to avoid warnings of file corruption in some popular editors (like MS Word).
+
 ## 4.6.1 (2021-06-01)
 * Fix for issue [#213](https://github.com/guigrpa/docx-templates/issues/213): throw an error when user tries to iterate over a non-array in a template with a FOR loop. This used to create an infinite loop.
 * Throw `ObjectCommandResultError` when the result of an `INS` command is an Object. This ensures you don't accidentally put `'[object Object]'` in your report.
