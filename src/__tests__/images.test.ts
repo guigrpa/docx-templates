@@ -263,3 +263,29 @@ it('006: can inject an image from the data instead of the additionalJsContext', 
   expect(reportB).toBeInstanceOf(Uint8Array);
   expect(reportA).toStrictEqual(reportB);
 });
+
+it('007: can inject an image in a document that already contains images (regression test for #144)', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imageExisting.docx')
+  );
+  const buff = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'sample.png')
+  );
+  const report = await createReport({
+    template,
+    data: {
+      cv: { ProfilePicture: { url: 'abc' } },
+    },
+    additionalJsContext: {
+      getImage: () => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.png',
+      }),
+    },
+  });
+  // TODO: can only be tested by loading the result into MS Word. It will show a file corruption warning.
+  fs.writeFileSync('test.docx', report);
+  expect(report).toBeInstanceOf(Uint8Array);
+});
