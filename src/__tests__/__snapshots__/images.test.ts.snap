@@ -2375,3 +2375,261 @@ Object {
   "_tag": "w:document",
 }
 `;
+
+exports[`007: can inject an image in a document that already contains images (regression test for #144) 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:cx=\\"http://schemas.microsoft.com/office/drawing/2014/chartex\\" xmlns:cx1=\\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\\" xmlns:cx2=\\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\\" xmlns:cx3=\\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\\" xmlns:cx4=\\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\\" xmlns:cx5=\\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\\" xmlns:cx6=\\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\\" xmlns:cx7=\\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\\" xmlns:cx8=\\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:aink=\\"http://schemas.microsoft.com/office/drawing/2016/ink\\" xmlns:am3d=\\"http://schemas.microsoft.com/office/drawing/2017/model3d\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:w16cex=\\"http://schemas.microsoft.com/office/word/2018/wordml/cex\\" xmlns:w16cid=\\"http://schemas.microsoft.com/office/word/2016/wordml/cid\\" xmlns:w16=\\"http://schemas.microsoft.com/office/word/2018/wordml\\" xmlns:w16se=\\"http://schemas.microsoft.com/office/word/2015/wordml/symex\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 w16se w16cid w16 w16cex wp14\\">
+  <w:body>
+    <w:p w14:paraId=\\"1903E9CC\\" w14:textId=\\"36A0822C\\" w:rsidR=\\"00816AFF\\" w:rsidRDefault=\\"00DA0F71\\">
+      <w:r w:rsidRPr=\\"007575DC\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Tahoma\\" w:hAnsi=\\"Tahoma\\" w:cs=\\"Tahoma\\"/>
+          <w:b/>
+          <w:bCs/>
+          <w:noProof/>
+          <w:sz w:val=\\"20\\"/>
+          <w:szCs w:val=\\"20\\"/>
+          <w:lang w:val=\\"de-DE\\" w:eastAsia=\\"de-DE\\"/>
+        </w:rPr>
+        <mc:AlternateContent>
+          <mc:Choice Requires=\\"wps\\">
+            <w:drawing>
+              <wp:anchor distT=\\"0\\" distB=\\"0\\" distL=\\"114300\\" distR=\\"114300\\" simplePos=\\"0\\" relativeHeight=\\"251659264\\" behindDoc=\\"1\\" locked=\\"0\\" layoutInCell=\\"1\\" allowOverlap=\\"1\\" wp14:anchorId=\\"46AE926C\\" wp14:editId=\\"32341B2B\\">
+                <wp:simplePos x=\\"0\\" y=\\"0\\"/>
+                <wp:positionH relativeFrom=\\"column\\">
+                  <wp:posOffset>0</wp:posOffset>
+                </wp:positionH>
+                <wp:positionV relativeFrom=\\"paragraph\\">
+                  <wp:posOffset>197485</wp:posOffset>
+                </wp:positionV>
+                <wp:extent cx=\\"1714500\\" cy=\\"1942465\\"/>
+                <wp:effectExtent l=\\"12700\\" t=\\"12700\\" r=\\"12700\\" b=\\"13335\\"/>
+                <wp:wrapThrough wrapText=\\"bothSides\\">
+                  <wp:wrapPolygon edited=\\"0\\">
+                    <wp:start x=\\"-160\\" y=\\"-141\\"/>
+                    <wp:lineTo x=\\"-160\\" y=\\"21607\\"/>
+                    <wp:lineTo x=\\"21600\\" y=\\"21607\\"/>
+                    <wp:lineTo x=\\"21600\\" y=\\"-141\\"/>
+                    <wp:lineTo x=\\"-160\\" y=\\"-141\\"/>
+                  </wp:wrapPolygon>
+                </wp:wrapThrough>
+                <wp:docPr id=\\"1\\" name=\\"Rechteck 1\\"/>
+                <wp:cNvGraphicFramePr/>
+                <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+                  <a:graphicData uri=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\">
+                    <wps:wsp>
+                      <wps:cNvSpPr/>
+                      <wps:spPr>
+                        <a:xfrm>
+                          <a:off x=\\"0\\" y=\\"0\\"/>
+                          <a:ext cx=\\"1714500\\" cy=\\"1942465\\"/>
+                        </a:xfrm>
+                        <a:prstGeom prst=\\"rect\\">
+                          <a:avLst/>
+                        </a:prstGeom>
+                      </wps:spPr>
+                      <wps:style>
+                        <a:lnRef idx=\\"2\\">
+                          <a:schemeClr val=\\"dk1\\"/>
+                        </a:lnRef>
+                        <a:fillRef idx=\\"1\\">
+                          <a:schemeClr val=\\"lt1\\"/>
+                        </a:fillRef>
+                        <a:effectRef idx=\\"0\\">
+                          <a:schemeClr val=\\"dk1\\"/>
+                        </a:effectRef>
+                        <a:fontRef idx=\\"minor\\">
+                          <a:schemeClr val=\\"dk1\\"/>
+                        </a:fontRef>
+                      </wps:style>
+                      <wps:txbx>
+                        <w:txbxContent>
+                          <w:p w14:paraId=\\"3CB353F0\\" w14:textId=\\"77777777\\" w:rsidR=\\"00DA0F71\\" w:rsidRPr=\\"00F07369\\" w:rsidRDefault=\\"00DA0F71\\" w:rsidP=\\"00DA0F71\\">
+                            <w:pPr>
+                              <w:rPr>
+                                <w:lang w:val=\\"en-US\\"/>
+                              </w:rPr>
+                            </w:pPr>
+                            <w:r w:rsidRPr=\\"008C273F\\">
+                              <w:rPr>
+                                <w:lang w:val=\\"en-US\\"/>
+                              </w:rPr>
+                              <w:drawing>
+                                <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+                                  <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+                                  <wp:docPr id=\\"2\\" name=\\"Picture 2\\" descr=\\"desc\\"/>
+                                  <wp:cNvGraphicFramePr>
+                                    <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+                                  </wp:cNvGraphicFramePr>
+                                  <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+                                    <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                                      <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                                        <pic:nvPicPr>
+                                          <pic:cNvPr id=\\"0\\" name=\\"Picture 2\\" descr=\\"desc\\"/>
+                                          <pic:cNvPicPr>
+                                            <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                                          </pic:cNvPicPr>
+                                        </pic:nvPicPr>
+                                        <pic:blipFill>
+                                          <a:blip r:embed=\\"img2\\" cstate=\\"print\\">
+                                            <a:extLst>
+                                              <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                                                <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                                              </a:ext>
+                                            </a:extLst>
+                                          </a:blip>
+                                          <a:srcRect/>
+                                          <a:stretch>
+                                            <a:fillRect/>
+                                          </a:stretch>
+                                        </pic:blipFill>
+                                        <pic:spPr bwMode=\\"auto\\">
+                                          <a:xfrm>
+                                            <a:off x=\\"0\\" y=\\"0\\"/>
+                                            <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                                          </a:xfrm>
+                                          <a:prstGeom prst=\\"rect\\">
+                                            <a:avLst/>
+                                          </a:prstGeom>
+                                          <a:noFill/>
+                                          <a:ln>
+                                            <a:noFill/>
+                                          </a:ln>
+                                        </pic:spPr>
+                                      </pic:pic>
+                                    </a:graphicData>
+                                  </a:graphic>
+                                </wp:inline>
+                              </w:drawing>
+                            </w:r>
+                          </w:p>
+                        </w:txbxContent>
+                      </wps:txbx>
+                      <wps:bodyPr rot=\\"0\\" spcFirstLastPara=\\"0\\" vertOverflow=\\"overflow\\" horzOverflow=\\"overflow\\" vert=\\"horz\\" wrap=\\"square\\" lIns=\\"91440\\" tIns=\\"45720\\" rIns=\\"91440\\" bIns=\\"45720\\" numCol=\\"1\\" spcCol=\\"0\\" rtlCol=\\"0\\" fromWordArt=\\"0\\" anchor=\\"ctr\\" anchorCtr=\\"0\\" forceAA=\\"0\\" compatLnSpc=\\"1\\">
+                        <a:prstTxWarp prst=\\"textNoShape\\">
+                          <a:avLst/>
+                        </a:prstTxWarp>
+                        <a:noAutofit/>
+                      </wps:bodyPr>
+                    </wps:wsp>
+                  </a:graphicData>
+                </a:graphic>
+                <wp14:sizeRelV relativeFrom=\\"margin\\">
+                  <wp14:pctHeight>0</wp14:pctHeight>
+                </wp14:sizeRelV>
+              </wp:anchor>
+            </w:drawing>
+          </mc:Choice>
+          <mc:Fallback>
+            <w:pict>
+              <v:rect w14:anchorId=\\"46AE926C\\" id=\\"Rechteck 1\\" o:spid=\\"_x0000_s1026\\" style=\\"position:absolute;margin-left:0;margin-top:15.55pt;width:135pt;height:152.95pt;z-index:-251657216;visibility:visible;mso-wrap-style:square;mso-height-percent:0;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;mso-position-horizontal-relative:text;mso-position-vertical:absolute;mso-position-vertical-relative:text;mso-height-percent:0;mso-height-relative:margin;v-text-anchor:middle\\" o:gfxdata=\\"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
+\\" fillcolor=\\"white [3201]\\" strokecolor=\\"black [3200]\\" strokeweight=\\"1pt\\">
+                <v:textbox>
+                  <w:txbxContent>
+                    <w:p w14:paraId=\\"3CB353F0\\" w14:textId=\\"77777777\\" w:rsidR=\\"00DA0F71\\" w:rsidRPr=\\"00F07369\\" w:rsidRDefault=\\"00DA0F71\\" w:rsidP=\\"00DA0F71\\">
+                      <w:pPr>
+                        <w:rPr>
+                          <w:lang w:val=\\"en-US\\"/>
+                        </w:rPr>
+                      </w:pPr>
+                      <w:r w:rsidRPr=\\"008C273F\\">
+                        <w:rPr>
+                          <w:lang w:val=\\"en-US\\"/>
+                        </w:rPr>
+                        <w:drawing>
+                          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+                            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+                            <wp:docPr id=\\"3\\" name=\\"Picture 3\\" descr=\\"desc\\"/>
+                            <wp:cNvGraphicFramePr>
+                              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+                            </wp:cNvGraphicFramePr>
+                            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+                              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                                  <pic:nvPicPr>
+                                    <pic:cNvPr id=\\"0\\" name=\\"Picture 3\\" descr=\\"desc\\"/>
+                                    <pic:cNvPicPr>
+                                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                                    </pic:cNvPicPr>
+                                  </pic:nvPicPr>
+                                  <pic:blipFill>
+                                    <a:blip r:embed=\\"img3\\" cstate=\\"print\\">
+                                      <a:extLst>
+                                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                                        </a:ext>
+                                      </a:extLst>
+                                    </a:blip>
+                                    <a:srcRect/>
+                                    <a:stretch>
+                                      <a:fillRect/>
+                                    </a:stretch>
+                                  </pic:blipFill>
+                                  <pic:spPr bwMode=\\"auto\\">
+                                    <a:xfrm>
+                                      <a:off x=\\"0\\" y=\\"0\\"/>
+                                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst=\\"rect\\">
+                                      <a:avLst/>
+                                    </a:prstGeom>
+                                    <a:noFill/>
+                                    <a:ln>
+                                      <a:noFill/>
+                                    </a:ln>
+                                  </pic:spPr>
+                                </pic:pic>
+                              </a:graphicData>
+                            </a:graphic>
+                          </wp:inline>
+                        </w:drawing>
+                      </w:r>
+                    </w:p>
+                  </w:txbxContent>
+                </v:textbox>
+                <w10:wrap type=\\"through\\"/>
+              </v:rect>
+            </w:pict>
+          </mc:Fallback>
+        </mc:AlternateContent>
+      </w:r>
+    </w:p>
+    <w:sectPr w:rsidR=\\"00816AFF\\" w:rsidSect=\\"0088060A\\">
+      <w:pgSz w:w=\\"12240\\" w:h=\\"15840\\"/>
+      <w:pgMar w:top=\\"1440\\" w:right=\\"1440\\" w:bottom=\\"1440\\" w:left=\\"1440\\" w:header=\\"720\\" w:footer=\\"720\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"720\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;

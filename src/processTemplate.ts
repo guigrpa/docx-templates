@@ -32,7 +32,7 @@ import {
 } from './errors';
 import { logger } from './debug';
 
-function newContext(options: CreateReportOptions): Context {
+export function newContext(options: CreateReportOptions, imageId = 0): Context {
   return {
     gCntIf: 0,
     level: 1,
@@ -43,7 +43,7 @@ function newContext(options: CreateReportOptions): Context {
       'w:p': { text: '', cmds: '', fInsertedText: false },
       'w:tr': { text: '', cmds: '', fInsertedText: false },
     },
-    imageId: 0,
+    imageId,
     images: {},
     linkId: 0,
     links: {},
@@ -120,17 +120,39 @@ export async function produceJsReport(
   template: Node,
   options: CreateReportOptions
 ): Promise<ReportOutput> {
-  return walkTemplate(data, template, options, processCmd);
+  const highestImgId = findHighestImgId(template);
+  const ctx = newContext(options, highestImgId);
+  return walkTemplate(data, template, ctx, processCmd);
+}
+
+export function findHighestImgId(mainDoc: Node): number {
+  const doc_ids: number[] = [];
+  const search = (n: Node) => {
+    for (const c of n._children) {
+      const tag = c._fTextNode ? null : c._tag;
+      if (tag == null) continue;
+      if (tag === 'wp:docPr') {
+        if (c._fTextNode) continue;
+        const raw = c._attrs.id;
+        if (typeof raw !== 'string') continue;
+        const id = Number.parseInt(raw, 10);
+        if (Number.isSafeInteger(id)) doc_ids.push(id);
+      }
+      if (c._children.length > 0) search(c);
+    }
+  };
+  search(mainDoc);
+  if (doc_ids.length > 0) return Math.max(...doc_ids);
+  return 0;
 }
 
 export async function walkTemplate(
   data: ReportData | undefined,
   template: Node,
-  options: CreateReportOptions,
+  ctx: Context,
   processor: CommandProcessor
 ): Promise<ReportOutput> {
   const out: Node = cloneNodeWithoutChildren(template);
-  const ctx = newContext(options);
   let nodeIn: Node = template;
   let nodeOut: Node = out;
   let move;

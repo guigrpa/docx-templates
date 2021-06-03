@@ -1,8 +1,14 @@
 import path from 'path';
 import { zipLoad } from '../zip';
-import { readContentTypes, getMainDoc, getMetadata } from '../main';
+import {
+  readContentTypes,
+  getMainDoc,
+  getMetadata,
+  parseTemplate,
+} from '../main';
 import fs from 'fs';
 import { setDebugLogSink } from '../debug';
+import { findHighestImgId } from '../processTemplate';
 
 if (process.env.DEBUG) setDebugLogSink(console.log);
 
@@ -67,5 +73,15 @@ describe('getMetadata', () => {
       const metadata = await getMetadata(t);
       expect(typeof metadata.modified).toBe('string');
     }
+  });
+});
+
+describe('findHighestImgId', () => {
+  it('returns 0 when doc contains no images', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'imageExistingMultiple.docx')
+    );
+    const { jsTemplate } = await parseTemplate(template);
+    expect(findHighestImgId(jsTemplate)).toBe(3);
   });
 });

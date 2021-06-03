@@ -15,6 +15,7 @@ import {
   walkTemplate,
   getCommand,
   splitCommand,
+  newContext,
 } from './processTemplate';
 import {
   UserOptions,
@@ -37,7 +38,7 @@ const DEFAULT_LITERAL_XML_DELIMITER = '||' as const;
 const CONTENT_TYPES_PATH = '[Content_Types].xml' as const;
 const TEMPLATE_PATH = 'word' as const;
 
-async function parseTemplate(template: Buffer) {
+export async function parseTemplate(template: Buffer) {
   logger.debug('Unzipping...');
   const zip = await zipLoad(template);
 
@@ -318,7 +319,8 @@ export async function listCommands(
   const prepped = preprocessTemplate(jsTemplate, opts.cmdDelimiter);
 
   const commands: CommandSummary[] = [];
-  await walkTemplate(undefined, prepped, opts, async (data, node, ctx) => {
+  const ctx = newContext(opts);
+  await walkTemplate(undefined, prepped, ctx, async (data, node, ctx) => {
     const raw = getCommand(ctx.cmd, ctx.shorthands, ctx.options.fixSmartQuotes);
     ctx.cmd = ''; // flush the context
     const { cmdName, cmdRest: code } = splitCommand(raw);
