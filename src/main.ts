@@ -461,8 +461,7 @@ const processImages = async (
         rels,
         newNonTextNode('Relationship', {
           Id: imageId,
-          Type:
-            'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
+          Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
           Target: `media/${imgName}`,
         })
       );
@@ -496,8 +495,7 @@ const processLinks = async (
         rels,
         newNonTextNode('Relationship', {
           Id: linkId,
-          Type:
-            'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
+          Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
           Target: url,
           TargetMode: 'External',
         })
@@ -536,8 +534,7 @@ const processHtmls = async (
         rels,
         newNonTextNode('Relationship', {
           Id: htmlId,
-          Type:
-            'http://schemas.openxmlformats.org/officeDocument/2006/relationships/aFChunk',
+          Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/aFChunk',
           Target: `${htmlName}`,
         })
       );

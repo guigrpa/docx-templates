@@ -38,10 +38,7 @@ export type QueryResolver = (
 
 export type ErrorHandler = (e: Error, raw_code?: string) => any;
 
-type RunJSFunc = (o: {
-  sandbox: Object;
-  ctx: Object;
-}) => {
+type RunJSFunc = (o: { sandbox: Object; ctx: Object }) => {
   modifiedSandbox: Object;
   result: any;
 };
