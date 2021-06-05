@@ -1,3 +1,6 @@
+## 4.6.3 (2021-06-05)
+* Allow arrays as the result of INS commands again ([#214](https://github.com/guigrpa/docx-templates/issues/214)). Thanks @LexAckson for pointing this out.
+
 ## 4.6.2 (2021-06-03)
 * Fix for issues [#190](https://github.com/guigrpa/docx-templates/issues/190) and [#144](https://github.com/guigrpa/docx-templates/issues/144). Image IDs in the rendered XML are now ensured to be globally unique to avoid warnings of file corruption in some popular editors (like MS Word).
 
