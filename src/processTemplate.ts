@@ -521,7 +521,7 @@ const processCmd: CommandProcessor = async (
         if (result == null) {
           return '';
         }
-        if (typeof result === 'object') {
+        if (typeof result === 'object' && !Array.isArray(result)) {
           const nerr = new ObjectCommandResultError(cmdRest);
           if (ctx.options.errorHandler != null) {
             result = await ctx.options.errorHandler(nerr, cmdRest);

@@ -1112,6 +1112,24 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         expect(result).toMatchSnapshot();
       });
+
+      it('INS command is an array (see issue #214)', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'insertArray.docx')
+        );
+        expect(
+          await createReport(
+            {
+              noSandbox,
+              template,
+              data: {
+                companies: ['a', 'b', 'c'],
+              },
+            },
+            'JS'
+          )
+        ).toMatchSnapshot();
+      });
     });
   });
 });
