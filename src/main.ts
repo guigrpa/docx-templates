@@ -201,8 +201,7 @@ async function createReport(
   let images = images1;
   let links = links1;
   let htmls = htmls1;
-  for (let i = 0; i < files.length; i++) {
-    const filePath = files[i];
+  for (const filePath of files) {
     logger.debug(`Processing ${filePath}...`);
     const raw = await zipGetText(zip, filePath);
     if (raw == null)
@@ -488,8 +487,7 @@ const processLinks = async (
     logger.debug('Completing document.xml.rels...');
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
-    for (let i = 0; i < linkIds.length; i++) {
-      const linkId = linkIds[i];
+    for (const linkId of linkIds) {
       const { url } = links[linkId];
       addChild(
         rels,
@@ -522,8 +520,7 @@ const processHtmls = async (
     const htmlFiles = [];
     const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
-    for (let i = 0; i < htmlIds.length; i++) {
-      const htmlId = htmlIds[i];
+    for (const htmlId of htmlIds) {
       const htmlData = htmls[htmlId];
       const htmlName = `template_${documentComponent}_${htmlId}.html`;
       logger.debug(`Writing html ${htmlId} (${htmlName})...`);
