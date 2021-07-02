@@ -1,3 +1,6 @@
+## 4.6.4 (2021-07-02)
+* Fixed bug that caused IMAGE commands in the document body to be ignored when a shape or image was already present in the document's header or footer. ([#217](https://github.com/guigrpa/docx-templates/issues/217)).
+
 ## 4.6.3 (2021-06-05)
 * Allow arrays as the result of INS commands again ([#214](https://github.com/guigrpa/docx-templates/issues/214)). Thanks @LexAckson for pointing this out.
 
