@@ -291,3 +291,40 @@ it('007: can inject an image in a document that already contains images (regress
     )
   ).toMatchSnapshot();
 });
+
+it('008: can inject an image in a shape in the doc footer (regression test for #217)', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imageInShapeInFooter.docx')
+  );
+  const thumbnail_data = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'sample.png')
+  );
+
+  const report = await createReport({
+    template,
+    data: {},
+    additionalJsContext: {
+      injectSvg: () => {
+        const svg_data = Buffer.from(
+          `<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <rect x="10" y="10" height="100" width="100" style="stroke:#ff0000; fill: #0000ff"/>
+                                  </svg>`,
+          'utf-8'
+        );
+        const thumbnail = {
+          data: thumbnail_data,
+          extension: '.png',
+        };
+        return {
+          width: 6,
+          height: 6,
+          data: svg_data,
+          extension: '.svg',
+          thumbnail,
+        };
+      },
+    },
+  });
+  await fs.promises.writeFile('test.docx', report);
+  expect(true).toBeTruthy();
+});
