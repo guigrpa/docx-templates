@@ -2633,3 +2633,396 @@ AABkcnMvZG93bnJldi54bWxQSwUGAAAAAAQABADzAAAAzAUAAAAA
   </w:body>
 </w:document>"
 `;
+
+exports[`008: can inject an image in a shape in the doc footer (regression test for #217) 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:cx=\\"http://schemas.microsoft.com/office/drawing/2014/chartex\\" xmlns:cx1=\\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\\" xmlns:cx2=\\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\\" xmlns:cx3=\\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\\" xmlns:cx4=\\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\\" xmlns:cx5=\\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\\" xmlns:cx6=\\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\\" xmlns:cx7=\\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\\" xmlns:cx8=\\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:aink=\\"http://schemas.microsoft.com/office/drawing/2016/ink\\" xmlns:am3d=\\"http://schemas.microsoft.com/office/drawing/2017/model3d\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:w16cex=\\"http://schemas.microsoft.com/office/word/2018/wordml/cex\\" xmlns:w16cid=\\"http://schemas.microsoft.com/office/word/2016/wordml/cid\\" xmlns:w16=\\"http://schemas.microsoft.com/office/word/2018/wordml\\" xmlns:w16se=\\"http://schemas.microsoft.com/office/word/2015/wordml/symex\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 w16se w16cid w16 w16cex wp14\\">
+  <w:body>
+    <w:p w14:paraId=\\"3A586B85\\" w14:textId=\\"7C7F5585\\" w:rsidR=\\"00212B91\\" w:rsidRDefault=\\"00212B91\\" w:rsidP=\\"00D02AF4\\">
+      <w:pPr>
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\">We</w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"> expect 4 images </w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\">below</w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r>
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\">:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"6A49463E\\" w14:textId=\\"77777777\\" w:rsidR=\\"00212B91\\" w:rsidRDefault=\\"00212B91\\" w:rsidP=\\"00D02AF4\\">
+      <w:pPr>
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId=\\"6DDE1BE0\\" w14:textId=\\"364619CC\\" w:rsidR=\\"14CCD29E\\" w:rsidRDefault=\\"00D02AF4\\" w:rsidP=\\"00D02AF4\\">
+      <w:pPr>
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:drawing>
+          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+            <wp:docPr id=\\"2\\" name=\\"Picture 2\\" descr=\\"desc\\"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id=\\"0\\" name=\\"Picture 2\\" descr=\\"desc\\"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed=\\"img3\\" cstate=\\"print\\">
+                      <a:extLst>
+                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                        </a:ext>
+                        <a:ext uri=\\"{96DAC541-7B7A-43D3-8B79-37D633B846F1}\\">
+                          <asvg:svgBlip xmlns:asvg=\\"http://schemas.microsoft.com/office/drawing/2016/SVG/main\\" r:embed=\\"img2\\"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode=\\"auto\\">
+                    <a:xfrm>
+                      <a:off x=\\"0\\" y=\\"0\\"/>
+                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                    </a:xfrm>
+                    <a:prstGeom prst=\\"rect\\">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:proofErr w:type=\\"gramStart\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"gramEnd\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"7627DC4A\\" w14:textId=\\"723AEE54\\" w:rsidR=\\"00D72E28\\" w:rsidRDefault=\\"00D72E28\\" w:rsidP=\\"00D02AF4\\">
+      <w:pPr>
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId=\\"00B06341\\" w14:textId=\\"77777777\\" w:rsidR=\\"00D72E28\\" w:rsidRPr=\\"00D02AF4\\" w:rsidRDefault=\\"00D72E28\\" w:rsidP=\\"00D72E28\\">
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:drawing>
+          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+            <wp:docPr id=\\"4\\" name=\\"Picture 4\\" descr=\\"desc\\"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id=\\"0\\" name=\\"Picture 4\\" descr=\\"desc\\"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed=\\"img5\\" cstate=\\"print\\">
+                      <a:extLst>
+                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                        </a:ext>
+                        <a:ext uri=\\"{96DAC541-7B7A-43D3-8B79-37D633B846F1}\\">
+                          <asvg:svgBlip xmlns:asvg=\\"http://schemas.microsoft.com/office/drawing/2016/SVG/main\\" r:embed=\\"img4\\"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode=\\"auto\\">
+                    <a:xfrm>
+                      <a:off x=\\"0\\" y=\\"0\\"/>
+                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                    </a:xfrm>
+                    <a:prstGeom prst=\\"rect\\">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:proofErr w:type=\\"gramStart\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"gramEnd\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"59D5F8A3\\" w14:textId=\\"09DC6685\\" w:rsidR=\\"00D72E28\\" w:rsidRDefault=\\"00D72E28\\" w:rsidP=\\"00D02AF4\\"/>
+    <w:p w14:paraId=\\"5D1D9DBB\\" w14:textId=\\"77777777\\" w:rsidR=\\"00D72E28\\" w:rsidRPr=\\"00D02AF4\\" w:rsidRDefault=\\"00D72E28\\" w:rsidP=\\"00D72E28\\">
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:drawing>
+          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+            <wp:docPr id=\\"6\\" name=\\"Picture 6\\" descr=\\"desc\\"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id=\\"0\\" name=\\"Picture 6\\" descr=\\"desc\\"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed=\\"img7\\" cstate=\\"print\\">
+                      <a:extLst>
+                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                        </a:ext>
+                        <a:ext uri=\\"{96DAC541-7B7A-43D3-8B79-37D633B846F1}\\">
+                          <asvg:svgBlip xmlns:asvg=\\"http://schemas.microsoft.com/office/drawing/2016/SVG/main\\" r:embed=\\"img6\\"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode=\\"auto\\">
+                    <a:xfrm>
+                      <a:off x=\\"0\\" y=\\"0\\"/>
+                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                    </a:xfrm>
+                    <a:prstGeom prst=\\"rect\\">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:proofErr w:type=\\"gramStart\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"gramEnd\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"6755AEBE\\" w14:textId=\\"5438E3E7\\" w:rsidR=\\"00D72E28\\" w:rsidRDefault=\\"00D72E28\\" w:rsidP=\\"00D02AF4\\"/>
+    <w:p w14:paraId=\\"04369B72\\" w14:textId=\\"77777777\\" w:rsidR=\\"00D72E28\\" w:rsidRPr=\\"00D02AF4\\" w:rsidRDefault=\\"00D72E28\\" w:rsidP=\\"00D72E28\\">
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:drawing>
+          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+            <wp:docPr id=\\"8\\" name=\\"Picture 8\\" descr=\\"desc\\"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id=\\"0\\" name=\\"Picture 8\\" descr=\\"desc\\"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed=\\"img9\\" cstate=\\"print\\">
+                      <a:extLst>
+                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                        </a:ext>
+                        <a:ext uri=\\"{96DAC541-7B7A-43D3-8B79-37D633B846F1}\\">
+                          <asvg:svgBlip xmlns:asvg=\\"http://schemas.microsoft.com/office/drawing/2016/SVG/main\\" r:embed=\\"img8\\"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode=\\"auto\\">
+                    <a:xfrm>
+                      <a:off x=\\"0\\" y=\\"0\\"/>
+                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                    </a:xfrm>
+                    <a:prstGeom prst=\\"rect\\">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:proofErr w:type=\\"gramStart\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"gramEnd\\"/>
+      <w:r w:rsidRPr=\\"00D02AF4\\">
+        <w:rPr>
+          <w:rFonts w:ascii=\\"Calibri\\" w:eastAsia=\\"Calibri\\" w:hAnsi=\\"Calibri\\" w:cs=\\"Calibri\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"258BEE02\\" w14:textId=\\"77777777\\" w:rsidR=\\"00D72E28\\" w:rsidRPr=\\"00D02AF4\\" w:rsidRDefault=\\"00D72E28\\" w:rsidP=\\"00D02AF4\\"/>
+    <w:sectPr w:rsidR=\\"00D72E28\\" w:rsidRPr=\\"00D02AF4\\">
+      <w:headerReference w:type=\\"even\\" r:id=\\"rId9\\"/>
+      <w:headerReference w:type=\\"default\\" r:id=\\"rId10\\"/>
+      <w:footerReference w:type=\\"even\\" r:id=\\"rId11\\"/>
+      <w:footerReference w:type=\\"default\\" r:id=\\"rId12\\"/>
+      <w:headerReference w:type=\\"first\\" r:id=\\"rId13\\"/>
+      <w:footerReference w:type=\\"first\\" r:id=\\"rId14\\"/>
+      <w:pgSz w:w=\\"11906\\" w:h=\\"16838\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1417\\" w:bottom=\\"1417\\" w:left=\\"1417\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;

@@ -16,6 +16,7 @@ import {
   getCommand,
   splitCommand,
   newContext,
+  findHighestImgId,
 } from './processTemplate';
 import {
   UserOptions,
@@ -37,6 +38,7 @@ const DEFAULT_CMD_DELIMITER = '+++' as const;
 const DEFAULT_LITERAL_XML_DELIMITER = '||' as const;
 const CONTENT_TYPES_PATH = '[Content_Types].xml' as const;
 const TEMPLATE_PATH = 'word' as const;
+const XML_FILE_REGEX = new RegExp(`${TEMPLATE_PATH}\\/[^\\/]+\\.xml`);
 
 export async function parseTemplate(template: Buffer) {
   logger.debug('Unzipping...');
@@ -136,7 +138,7 @@ async function createReport(
   );
 
   logger.debug('Preprocessing template...');
-  const finalTemplate = preprocessTemplate(
+  const prepped_template = preprocessTemplate(
     jsTemplate,
     createOptions.cmdDelimiter
   );
@@ -145,23 +147,47 @@ async function createReport(
   let queryResult = null;
   if (typeof data === 'function') {
     logger.debug('Looking for the query in the template...');
-    const query = await extractQuery(finalTemplate, createOptions);
+    const query = await extractQuery(prepped_template, createOptions);
     logger.debug(`Query: ${query || 'no query found'}`);
     queryResult = await data(query, queryVars);
   } else {
     queryResult = data;
   }
 
+  // Find all other XML files (headers, footers, etc)
+  const secondary_xml_files: string[] = [];
+  zip.forEach(async filePath => {
+    if (
+      XML_FILE_REGEX.test(filePath) &&
+      filePath !== `${TEMPLATE_PATH}/${mainDocument}` &&
+      filePath.indexOf(`${TEMPLATE_PATH}/template`) !== 0
+    ) {
+      secondary_xml_files.push(filePath);
+    }
+  });
+
+  const prepped_secondaries: [Node, string][] = [];
+  for (const f of secondary_xml_files) {
+    const raw = await zipGetText(zip, f);
+    if (raw == null) throw new TemplateParseError(`${f} could not be read`);
+    const js0 = await parseXml(raw);
+    const js = preprocessTemplate(js0, createOptions.cmdDelimiter);
+    prepped_secondaries.push([js, f]);
+  }
+
+  // Find the highest image IDs by scanning the main document and all secondary XMLs.
+  const highest_img_id = Math.max(
+    ...prepped_secondaries.map(([s, _]) => findHighestImgId(s)),
+    findHighestImgId(prepped_template)
+  );
+
   // Process document.xml:
   // - Generate the report
   // - Build output XML and write it to disk
   // - Images
   logger.debug('Generating report...');
-  const result = await produceJsReport(
-    queryResult,
-    finalTemplate,
-    createOptions
-  );
+  const ctx = newContext(createOptions, highest_img_id);
+  const result = await produceJsReport(queryResult, prepped_template, ctx);
   if (result.status === 'errors') {
     throw result.errors;
   }
@@ -185,30 +211,11 @@ async function createReport(
   await processLinks(links1, mainDocument, zip, TEMPLATE_PATH);
   await processHtmls(htmls1, mainDocument, zip, TEMPLATE_PATH);
 
-  // Process all other XML files (they may contain headers, etc.)
-  const files: string[] = [];
-  zip.forEach(async filePath => {
-    const regex = new RegExp(`${TEMPLATE_PATH}\\/[^\\/]+\\.xml`);
-    if (
-      regex.test(filePath) &&
-      filePath !== `${TEMPLATE_PATH}/${mainDocument}` &&
-      filePath.indexOf(`${TEMPLATE_PATH}/template`) !== 0
-    ) {
-      files.push(filePath);
-    }
-  });
-
   let images = images1;
   let links = links1;
   let htmls = htmls1;
-  for (const filePath of files) {
-    logger.debug(`Processing ${filePath}...`);
-    const raw = await zipGetText(zip, filePath);
-    if (raw == null)
-      throw new TemplateParseError(`${filePath} could not be read`);
-    const js0 = await parseXml(raw);
-    const js = preprocessTemplate(js0, createOptions.cmdDelimiter);
-    const result = await produceJsReport(queryResult, js, createOptions);
+  for (const [js, filePath] of prepped_secondaries) {
+    const result = await produceJsReport(queryResult, js, ctx);
     if (result.status === 'errors') {
       throw result.errors;
     }

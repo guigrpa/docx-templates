@@ -118,10 +118,8 @@ type ReportOutput =
 export async function produceJsReport(
   data: ReportData | undefined,
   template: Node,
-  options: CreateReportOptions
+  ctx: Context
 ): Promise<ReportOutput> {
-  const highestImgId = findHighestImgId(template);
-  const ctx = newContext(options, highestImgId);
   return walkTemplate(data, template, ctx, processCmd);
 }
 
