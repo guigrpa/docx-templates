@@ -907,7 +907,7 @@ const processLink = async (ctx: Context, linkPars: LinkPars) => {
   const link = node('w:hyperlink', { 'r:id': relId, 'w:history': '1' }, [
     node('w:r', {}, [
       textRunPropsNode ||
-        node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
+        node('w:rPr', {}, [node('w:rStyle', { 'w:val': 'Hyperlink' })]),
       node('w:t', {}, [newTextNode(label)]),
     ]),
   ]);
