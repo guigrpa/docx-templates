@@ -20,7 +20,7 @@ coverage
 # GIT-specific
 # ------------
 # All projects
-lib
+# lib
 
 # Project-specific
 **/__tests__/fixtures/*_report.docx
