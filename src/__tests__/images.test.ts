@@ -3,7 +3,7 @@
 import path from 'path';
 import fs from 'fs';
 import { createReport } from '../index';
-import { Image } from '../types';
+import { Image, ImagePars } from '../types';
 import { setDebugLogSink } from '../debug';
 
 if (process.env.DEBUG) setDebugLogSink(console.log);
@@ -329,4 +329,40 @@ it('008: can inject an image in a shape in the doc footer (regression test for #
     'XML'
   );
   expect(report).toMatchSnapshot();
+});
+
+it('009 correctly rotate image', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imageRotation.docx')
+  );
+  const buff = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'sample.png')
+  );
+  const opts = {
+    template,
+    data: {},
+    additionalJsContext: {
+      getImage: (): ImagePars => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.png',
+      }),
+      getImage45: (): ImagePars => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.png',
+        rotation: 45,
+      }),
+      getImage180: (): ImagePars => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.png',
+        rotation: 180,
+      }),
+    },
+  };
+  expect(await createReport(opts, 'XML')).toMatchSnapshot();
 });

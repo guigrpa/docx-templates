@@ -314,6 +314,7 @@ The JS snippet must return an _image object_ or a Promise of an _image object_, 
 * `extension`: one of `'.png'`, `'.gif'`, `'.jpg'`, `'.jpeg'`, `'.svg'`.
 * `thumbnail` _[optional]_: when injecting an SVG image, a fallback non-SVG (png/jpg/gif, etc.) image can be provided. This thumbnail is used when SVG images are not supported (e.g. older versions of Word) or when the document is previewed by e.g. Windows Explorer. See usage example below.
 * `alt` _[optional]_: optional alt text.
+* `rotation` _[optional]_: optional rotation in degrees, with positive angles moving clockwise.
 
 In the .docx template:
 ```

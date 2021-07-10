@@ -3026,3 +3026,218 @@ exports[`008: can inject an image in a shape in the doc footer (regression test 
   </w:body>
 </w:document>"
 `;
+
+exports[`009 correctly rotate image 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:cx=\\"http://schemas.microsoft.com/office/drawing/2014/chartex\\" xmlns:cx1=\\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\\" xmlns:cx2=\\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\\" xmlns:cx3=\\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\\" xmlns:cx4=\\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\\" xmlns:cx5=\\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\\" xmlns:cx6=\\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\\" xmlns:cx7=\\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\\" xmlns:cx8=\\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:aink=\\"http://schemas.microsoft.com/office/drawing/2016/ink\\" xmlns:am3d=\\"http://schemas.microsoft.com/office/drawing/2017/model3d\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:w16cex=\\"http://schemas.microsoft.com/office/word/2018/wordml/cex\\" xmlns:w16cid=\\"http://schemas.microsoft.com/office/word/2016/wordml/cid\\" xmlns:w16=\\"http://schemas.microsoft.com/office/word/2018/wordml\\" xmlns:w16se=\\"http://schemas.microsoft.com/office/word/2015/wordml/symex\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 w16se w16cid w16 w16cex wp14\\">
+  <w:body>
+    <w:p w14:paraId=\\"67F5E746\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRDefault=\\"005E44F7\\" w:rsidP=\\"005E44F7\\">
+      <w:r>
+        <w:t xml:space=\\"preserve\\">Original:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"5FB64916\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRDefault=\\"005E44F7\\" w:rsidP=\\"005E44F7\\">
+      <w:r>
+        <w:drawing>
+          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+            <wp:docPr id=\\"1\\" name=\\"Picture 1\\" descr=\\"desc\\"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id=\\"0\\" name=\\"Picture 1\\" descr=\\"desc\\"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed=\\"img1\\" cstate=\\"print\\">
+                      <a:extLst>
+                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode=\\"auto\\">
+                    <a:xfrm>
+                      <a:off x=\\"0\\" y=\\"0\\"/>
+                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                    </a:xfrm>
+                    <a:prstGeom prst=\\"rect\\">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:proofErr w:type=\\"gramStart\\"/>
+      <w:r>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"gramEnd\\"/>
+      <w:r>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"6F1EB6F8\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRDefault=\\"005E44F7\\" w:rsidP=\\"005E44F7\\"/>
+    <w:p w14:paraId=\\"085E2A1B\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRDefault=\\"005E44F7\\" w:rsidP=\\"005E44F7\\">
+      <w:r>
+        <w:t xml:space=\\"preserve\\">45 degrees</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"1F81F167\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRDefault=\\"005E44F7\\" w:rsidP=\\"005E44F7\\">
+      <w:r>
+        <w:drawing>
+          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+            <wp:docPr id=\\"2\\" name=\\"Picture 2\\" descr=\\"desc\\"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id=\\"0\\" name=\\"Picture 2\\" descr=\\"desc\\"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed=\\"img2\\" cstate=\\"print\\">
+                      <a:extLst>
+                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode=\\"auto\\">
+                    <a:xfrm rot=\\"2700000\\">
+                      <a:off x=\\"0\\" y=\\"0\\"/>
+                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                    </a:xfrm>
+                    <a:prstGeom prst=\\"rect\\">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:proofErr w:type=\\"gramStart\\"/>
+      <w:r>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"gramEnd\\"/>
+      <w:r>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"5716BA9B\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRDefault=\\"005E44F7\\" w:rsidP=\\"005E44F7\\"/>
+    <w:p w14:paraId=\\"1E01C35F\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRDefault=\\"005E44F7\\" w:rsidP=\\"005E44F7\\">
+      <w:r>
+        <w:t xml:space=\\"preserve\\">180 degrees</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"44B0DF0A\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRDefault=\\"005E44F7\\" w:rsidP=\\"005E44F7\\">
+      <w:r>
+        <w:drawing>
+          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+            <wp:docPr id=\\"3\\" name=\\"Picture 3\\" descr=\\"desc\\"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id=\\"0\\" name=\\"Picture 3\\" descr=\\"desc\\"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed=\\"img3\\" cstate=\\"print\\">
+                      <a:extLst>
+                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode=\\"auto\\">
+                    <a:xfrm rot=\\"10800000\\">
+                      <a:off x=\\"0\\" y=\\"0\\"/>
+                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                    </a:xfrm>
+                    <a:prstGeom prst=\\"rect\\">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:proofErr w:type=\\"gramStart\\"/>
+      <w:r>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"gramEnd\\"/>
+      <w:r>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"50696011\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRPr=\\"00A3586D\\" w:rsidRDefault=\\"005E44F7\\" w:rsidP=\\"005E44F7\\"/>
+    <w:p w14:paraId=\\"07003838\\" w14:textId=\\"77777777\\" w:rsidR=\\"005E44F7\\" w:rsidRDefault=\\"005E44F7\\"/>
+    <w:sectPr w:rsidR=\\"005E44F7\\" w:rsidSect=\\"00A0490B\\">
+      <w:pgSz w:w=\\"11900\\" w:h=\\"16840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;

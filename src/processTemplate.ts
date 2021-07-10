@@ -809,6 +809,12 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
     ])
   );
 
+  // http://officeopenxml.com/drwSp-rotate.php
+  // Values are in 60,000ths of a degree, with positive angles moving clockwise or towards the positive y-axis.
+  const rot = imagePars.rotation
+    ? (imagePars.rotation * 60e3).toString()
+    : undefined;
+
   if (ctx.images[imgRelId].extension === '.svg') {
     // Default to an empty thumbnail, as it is not critical and just part of the docx standard's scaffolding.
     // Without a thumbnail, the svg won't render (even in newer versions of Word that don't need the thumbnail).
@@ -850,7 +856,7 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
         node('a:stretch', {}, [node('a:fillRect')]),
       ]),
       node('pic:spPr', { bwMode: 'auto' }, [
-        node('a:xfrm', {}, [
+        node('a:xfrm', rot ? { rot } : {}, [
           node('a:off', { x: '0', y: '0' }),
           node('a:ext', { cx, cy }),
         ]),
