@@ -211,9 +211,6 @@ async function createReport(
   await processLinks(links1, mainDocument, zip, TEMPLATE_PATH);
   await processHtmls(htmls1, mainDocument, zip, TEMPLATE_PATH);
 
-  let images = images1;
-  let links = links1;
-  let htmls = htmls1;
   for (const [js, filePath] of prepped_secondaries) {
     const result = await produceJsReport(queryResult, js, ctx);
     if (result.status === 'errors') {
@@ -225,9 +222,6 @@ async function createReport(
       links: links2,
       htmls: htmls2,
     } = result;
-    images = merge(images, images2) as Images;
-    links = merge(links, links2) as Links;
-    htmls = merge(htmls, htmls2) as Htmls;
     const xml = buildXml(report2, xmlOptions);
     zipSetText(zip, filePath, xml);
 
