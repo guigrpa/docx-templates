@@ -431,9 +431,6 @@ export function getMainDoc(contentTypes: NonTextNode): string {
   );
 }
 
-// ==========================================
-// Process images
-// ==========================================
 const processImages = async (
   images: Images,
   documentComponent: string,
@@ -473,9 +470,6 @@ const processImages = async (
   }
 };
 
-// ==========================================
-// Process links
-// ==========================================
 const processLinks = async (
   links: Links,
   documentComponent: string,
@@ -554,9 +548,6 @@ const getRelsFromZip = async (zip: JSZip, relsPath: string) => {
   return parseXml(relsXml);
 };
 
-// ==========================================
-// Miscellaneous
-// ==========================================
 const getCmdDelimiter = (
   delimiter?: string | [string, string]
 ): [string, string] => {
