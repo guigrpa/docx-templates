@@ -5,6 +5,7 @@ import fs from 'fs';
 import { createReport } from '../index';
 import { Image, ImagePars } from '../types';
 import { setDebugLogSink } from '../debug';
+import JSZip from 'jszip';
 
 if (process.env.DEBUG) setDebugLogSink(console.log);
 
@@ -262,6 +263,29 @@ it('006: can inject an image from the data instead of the additionalJsContext', 
   expect(reportA).toBeInstanceOf(Uint8Array);
   expect(reportB).toBeInstanceOf(Uint8Array);
   expect(reportA).toStrictEqual(reportB);
+
+  // Ensure only one 'media' element (the image data as a png file) is added to the final docx file.
+  // Regression test for #218
+  const zip = await JSZip.loadAsync(reportA);
+  expect(Object.keys(zip?.files ?? {})).toMatchInlineSnapshot(`
+    Array [
+      "[Content_Types].xml",
+      "_rels/.rels",
+      "word/_rels/document.xml.rels",
+      "word/document.xml",
+      "word/theme/theme1.xml",
+      "word/settings.xml",
+      "word/fontTable.xml",
+      "word/webSettings.xml",
+      "docProps/app.xml",
+      "docProps/core.xml",
+      "word/styles.xml",
+      "word/",
+      "word/media/",
+      "word/media/template_document.xml_image1.png",
+      "word/_rels/",
+    ]
+  `);
 });
 
 it('007: can inject an image in a document that already contains images (regression test for #144)', async () => {
