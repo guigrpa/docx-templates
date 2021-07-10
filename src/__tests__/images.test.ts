@@ -174,7 +174,7 @@ it('004: can inject an image in the document header (regression test for #113)',
   // as these exit before the headers are parsed.
   // TODO: build a snapshot test once _probe === 'XML' properly includes all document XMLs, not just
   // the main document
-  return expect(createReport(opts)).resolves.toBeInstanceOf(Uint8Array);
+  expect(await createReport(opts)).toBeInstanceOf(Uint8Array);
 });
 
 it('005: can inject PNG files using ArrayBuffers without errors (related to issue #166)', async () => {
