@@ -186,7 +186,7 @@ async function createReport(
   // - Build output XML and write it to disk
   // - Images
   logger.debug('Generating report...');
-  const ctx = newContext(createOptions, highest_img_id);
+  let ctx = newContext(createOptions, highest_img_id);
   const result = await produceJsReport(queryResult, prepped_template, ctx);
   if (result.status === 'errors') {
     throw result.errors;
@@ -212,6 +212,9 @@ async function createReport(
   await processHtmls(htmls1, mainDocument, zip, TEMPLATE_PATH);
 
   for (const [js, filePath] of prepped_secondaries) {
+    // Grab the last used (highest) image id from the main document's context, but create
+    // a fresh one for each secondary XML.
+    ctx = newContext(createOptions, ctx.imageId);
     const result = await produceJsReport(queryResult, js, ctx);
     if (result.status === 'errors') {
       throw result.errors;
