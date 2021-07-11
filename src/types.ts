@@ -154,6 +154,7 @@ export type Context = {
   options: CreateReportOptions;
   jsSandbox?: Object;
   textRunPropsNode?: NonTextNode;
+  pendingXmlNode?: Node;
 };
 
 export type Images = { [id: string]: Image };
@@ -247,4 +248,5 @@ export const BUILT_IN_COMMANDS = [
   'IMAGE',
   'LINK',
   'HTML',
+  'XML',
 ] as const;
