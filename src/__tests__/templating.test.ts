@@ -915,6 +915,26 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         expect(await createReport(opts, 'JS')).toMatchSnapshot();
       });
 
+      it('regression test for issue #133 (and #83): LINK inside FOR loop', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'link-regression-issue-133.docx')
+        );
+
+        const opts = {
+          noSandbox,
+          template,
+          data: {
+            links: [
+              { url: 'https://www.google.com/', name: 'Google' },
+              { url: 'https://www.youtube.com/', name: 'Youtube' },
+            ],
+          },
+        };
+
+        // Render to an object and compare with snapshot.
+        expect(await createReport(opts, 'JS')).toMatchSnapshot();
+      });
+
       it('112a failFast: false lists all errors in the document before failing.', async () => {
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'invalidMultipleErrors.docx')
