@@ -366,6 +366,26 @@ Takes the HTML resulting from evaluating a JavaScript snippet and converts it to
 `+++
 ```
 
+### `XML`
+
+Takes the literal XML resulting from evaluating a JavaScript snippet and insert it to Word directly. It is alternative way of using literalXml delimeter:
+
+```
++++XML `
+<w:p><w:r><w:t>Created by literal XML command</w:t></w:r></w:p>
+`+++
+```
+If literal XML has more than one root, please wrap it under &lt;fragment/> root element:
+```
++++XML `
+<fragment>
+  <w:p><w:r><w:t>First paragraph</w:t></w:r></w:p>
+  <w:p><w:r><w:t>Second paragraph</w:t></w:r></w:p>
+  ...
+</fragment>
+`+++
+```
+
 ### `FOR` and `END-FOR`
 
 Loop over a group of elements (resulting from the evaluation of a JavaScript expression):
