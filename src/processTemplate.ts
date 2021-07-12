@@ -327,8 +327,8 @@ export async function walkTemplate(
           // check for fragment node
           if (!xmlNode._fTextNode && xmlNode._tag === 'fragment') {
             xmlNode._children.forEach(childNode => {
-              parent._children.push(childNode)
-            })
+              parent._children.push(childNode);
+            });
           } else {
             parent._children.push(xmlNode);
           }
@@ -612,7 +612,7 @@ const processCmd: CommandProcessor = async (
         if (html != null) await processHtml(ctx, html);
       }
 
-     // XML <code>
+      // XML <code>
     } else if (cmdName === 'XML') {
       if (!isLoopExploring(ctx)) {
         const xml: string | undefined = await runUserJsAndGetRaw(
