@@ -1,3 +1,9 @@
+## 4.7.0 (2021-07-12)
+* [#221](https://github.com/guigrpa/docx-templates/issues/221) New feature: user can now optionally specify image rotation when using IMAGE commands.
+* [#218](https://github.com/guigrpa/docx-templates/issues/218) Fixed bug that caused redundant copies of images to be inserted into the docx file.
+* [#133](https://github.com/guigrpa/docx-templates/issues/133) Fix for the INTERNAL ERROR thrown when using links inside for loops.
+* [#222](https://github.com/guigrpa/docx-templates/issues/222) Fix for bug that caused HTML commands to produce corrupted docx files.
+
 ## 4.6.4 (2021-07-02)
 * Fixed bug that caused IMAGE commands in the document body to be ignored when a shape or image was already present in the document's header or footer. ([#217](https://github.com/guigrpa/docx-templates/issues/217)).
 
