@@ -520,7 +520,11 @@ const processHtmls = async (
     const rels = await getRelsFromZip(zip, relsPath);
     for (const htmlId of htmlIds) {
       const htmlData = htmls[htmlId];
-      const htmlName = `template_${documentComponent}_${htmlId}.html`;
+      // Replace all period characters in the filename to play nice with more picky parsers (like Docx4j)
+      const htmlName = `template_${documentComponent.replace(
+        '.',
+        '_'
+      )}_${htmlId}.html`;
       logger.debug(`Writing html ${htmlId} (${htmlName})...`);
       const htmlPath = `${templatePath}/${htmlName}`;
       htmlFiles.push(`/${htmlPath}`);

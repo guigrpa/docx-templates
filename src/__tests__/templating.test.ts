@@ -780,8 +780,8 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           'word/styles.xml',
           'docProps/app.xml',
           'word/',
-          'word/template_document.xml_html1.html',
-          'word/template_document.xml_html2.html',
+          'word/template_document_xml_html1.html',
+          'word/template_document_xml_html2.html',
           'word/_rels/',
         ]);
       });
