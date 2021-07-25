@@ -522,7 +522,7 @@ const processHtmls = async (
       const htmlData = htmls[htmlId];
       // Replace all period characters in the filename to play nice with more picky parsers (like Docx4j)
       const htmlName = `template_${documentComponent.replace(
-        '.',
+        /\./g,
         '_'
       )}_${htmlId}.html`;
       logger.debug(`Writing html ${htmlId} (${htmlName})...`);
