@@ -36,3 +36,5 @@ coverage
 /examples
 /.github
 /lib/__tests__
+/rollup.config.js
+/.prettierrc

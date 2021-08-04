@@ -39,3 +39,6 @@ rules:
   linebreak-style:
     - error
     - unix
+ignorePatterns:
+  - "src/browser-polyfill.ts"
+  - "src/browser.ts"

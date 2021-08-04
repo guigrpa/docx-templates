@@ -12,5 +12,9 @@
     },
     "include": [
         "src"
+    ],
+    "exclude": [
+        "src/browser-polyfill.ts",
+        "src/browser.ts",
     ]
 }
