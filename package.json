@@ -23,7 +23,8 @@
     "url": "git+https://github.com/guigrpa/docx-templates.git"
   },
   "scripts": {
-    "compile": "rimraf ./lib && tsc",
+    "compile": "rimraf ./lib && yarn rollup && tsc",
+    "rollup": "rollup -c",
     "prepack": "yarn compile",
     "travis": "yarn compile && yarn test",
     "jest": "jest --watch --coverage",

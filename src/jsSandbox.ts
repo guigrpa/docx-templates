@@ -44,7 +44,7 @@ export async function runUserJsAndGetRaw(
       const temp = ctx.options.runJs({ sandbox, ctx });
       context = temp.modifiedSandbox;
       result = await temp.result;
-    } else if (ctx.options.noSandbox) {
+    } else if (ctx.options.noSandbox || __IS_BROWSER__) {
       context = sandbox;
       const wrapper = new Function('with(this) { return eval(__code__); }');
       result = await wrapper.call(context);

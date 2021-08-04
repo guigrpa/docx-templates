@@ -6,11 +6,14 @@
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "forceConsistentCasingInFileNames": true,
-        "noEmit": false,
+        "emitDeclarationOnly": true,
         "outDir": "./lib/",
         "declaration": true
     },
     "include": [
         "src"
+    ],
+    "exclude": [
+        "rollup.config.js"
     ]
 }

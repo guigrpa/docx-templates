@@ -10,6 +10,9 @@ import fs from 'fs';
 import { setDebugLogSink } from '../debug';
 import { findHighestImgId } from '../processTemplate';
 
+// This is not a browser env
+(<any>globalThis).__IS_BROWSER__ = false;
+
 if (process.env.DEBUG) setDebugLogSink(console.log);
 
 describe('[Content_Types].xml parser', () => {

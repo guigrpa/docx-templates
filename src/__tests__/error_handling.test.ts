@@ -9,6 +9,9 @@ import {
   InvalidCommandError,
 } from '../errors';
 
+// This is not a browser env
+(<any>globalThis).__IS_BROWSER__ = false;
+
 if (process.env.DEBUG) setDebugLogSink(console.log);
 
 ['noSandbox', 'sandbox'].forEach(sbStatus => {

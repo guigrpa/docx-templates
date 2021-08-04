@@ -7,6 +7,9 @@ import { Image, ImagePars } from '../types';
 import { setDebugLogSink } from '../debug';
 import JSZip from 'jszip';
 
+// This is not a browser env
+(<any>globalThis).__IS_BROWSER__ = false;
+
 if (process.env.DEBUG) setDebugLogSink(console.log);
 
 it('001: Issue #61 Correctly renders an SVG image', async () => {
