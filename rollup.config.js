@@ -14,7 +14,7 @@ function defineConfig(inFile, outFile, target, isNode, format) {
         preferBuiltins: false
       }),
       isNode ? null : commonjs(),
-      replace({
+      isNode ? null : replace({
         values: {
           'process.env.NODE_DEBUG': false,
           'process.pid': 42,

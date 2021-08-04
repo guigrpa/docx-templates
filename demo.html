@@ -1,4 +1,31 @@
 <script type="module">
   import { createReport } from './lib/browser.js'
-  console.log(createReport)
+  
+  async function run() {
+    const template = await fetch('./Dokument3.docx').then(res => res.arrayBuffer())
+
+    const buffer = await createReport({
+      template,
+      data: {
+        name: 'John',
+        surname: 'Appleseed',
+      },
+    });
+
+    console.log(buffer)
+
+    saveByteArray('test.docx', buffer)
+  }
+
+  function saveByteArray(reportName, byte) {
+    const blob = new Blob([byte], {
+      type: 'vnd.openxmlformats-officedocument.wordprocessingml.document'
+    });
+    const link = document.createElement('a')
+    link.href = window.URL.createObjectURL(blob);
+    link.download = reportName;
+    link.click();
+  }
+
+  run()
 </script>
