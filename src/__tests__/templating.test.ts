@@ -9,9 +9,6 @@ import { UserOptions } from '../types';
 import { setDebugLogSink } from '../debug';
 import JSZip from 'jszip';
 
-// This is not a browser env
-(<any>globalThis).__IS_BROWSER__ = false;
-
 if (process.env.DEBUG) setDebugLogSink(console.log);
 
 const LONG_TEXT = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo sagittis erat, sed vehicula lorem molestie et. Sed eget nisi orci. Fusce ut scelerisque neque. Donec porta eleifend dolor. Morbi in egestas augue. Nunc non velit at nisl faucibus ultrices. Aenean ac lacinia tortor. Nunc elementum enim ut viverra maximus. Pellentesque et metus posuere, feugiat nulla in, feugiat mauris. Suspendisse eu urna aliquam, molestie ante at, convallis justo.

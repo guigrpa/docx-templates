@@ -2,9 +2,6 @@ import path from 'path';
 import fs from 'fs';
 import { listCommands } from '../main';
 
-// This is not a browser env
-(<any>globalThis).__IS_BROWSER__ = false;
-
 describe('listCommands', () => {
   it('handles simple INS', async () => {
     const template = await fs.promises.readFile(
