@@ -6,11 +6,15 @@
         "allowSyntheticDefaultImports": true,
         "strict": true,
         "forceConsistentCasingInFileNames": true,
-        "emitDeclarationOnly": true,
+        "emitDeclarationOnly": false,
         "outDir": "./lib/",
         "declaration": true
     },
     "include": [
         "src"
+    ],
+    "exclude": [
+        "src/browser-polyfill.ts",
+        "src/browser.ts",
     ]
 }

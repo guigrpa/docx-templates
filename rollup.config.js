@@ -59,9 +59,9 @@ function defineConfig(inFile, outFile, target, isNode, format) {
 
 export default [
   // Browser build.
-  defineConfig('browser.ts', 'browser.js', 'es2017', false, 'es'),
+  defineConfig('browser.ts', 'browser.js', 'es2017', false, 'es')
   // NodeJS build with require
-  defineConfig('index.ts', 'index.js', 'es6', true, 'cjs'),
+  // defineConfig('index.ts', 'index.js', 'es6', true, 'cjs'),
   // NodeJS build with es module syntax wich is better for bundles
-  defineConfig('index.ts', 'index.es.mjs', 'es6', true, 'es'),
+  // defineConfig('index.ts', 'index.es.mjs', 'es6', true, 'es'),
 ]
