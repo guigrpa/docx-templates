@@ -111,7 +111,15 @@ Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/t
 
 # Browser usage
 
-You can use docx-templates in the browser (yay!). Just as when using docx-templates in Node, you need to provide the template contents as a buffer-like object. For example, you can get a `File` object with:
+You can use docx-templates in the browser (yay!). Just as when using docx-templates in Node, you need to provide the template contents as a buffer-like object. 
+
+For example when the template is pn your server you can get it with:
+
+```js
+const template = await fetch('./template.docx').then(res => res.arrayBuffer())
+```
+
+Or if the user provides the template you can get a `File` object with:
 
 ```html
 <input type="file">
@@ -150,6 +158,19 @@ const readFileIntoArrayBuffer = fd =>
 You can find an example implementation of `saveDataToFile()` [in the Webpack example](https://github.com/guigrpa/docx-templates/blob/79119723ff1c009b5bbdd28016558da9b405742f/examples/example-webpack/client/index.js#L82).
 
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify).
+
+## Polyfills
+As this module depends on the internal node modules `vm`, `stream`, `util`, `events` and the `Buffer` global your build tools have to polyfill them. We provide a browser build wich includes the polyfills (because of that the file is in size at about 300K uncompressed or 85K / 70K with gzip / brotli compression ).
+
+In buildtools like rollup, webpack, ... just map the import `docx-templates` to `docx-templates/lib/browser.js`
+
+If you use a CDN you can import it **as a module** with for example
+
+```ts
+import createReport from 'https://unpkg.com/docx-templates/lib/browser.js';
+```
+
+this is good for testing or prototyping but you should keep in mind that the `browser.js` is `es2017` code wich is supported by 95% of users. If you have to support IE or old versions of modern Browser you have to compile it to your target. Also see the supporttable for `es2017` [here](https://caniuse.com/async-functions,object-values,object-entries,mdn-javascript_builtins_object_getownpropertydescriptors,pad-start-end,mdn-javascript_grammar_trailing_commas_trailing_commas_in_functions).
 
 ## Browser compatibility caveat
 Note that the JavaScript code in your docx template will be run as-is by the browser. Transpilers like Babel can't see this code, and won't be able to polyfill it. This means that the JS code in your template needs to be compatible with the browsers you are targeting. In other words: don't use fancy modern syntax and functions in your template if you want older browsers, like IE11, to be able to render it.

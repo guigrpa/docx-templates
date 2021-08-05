@@ -49,4 +49,5 @@ function defineConfig(inFile, outFile, target, isNode, format) {
 export default [
   defineConfig('browser.ts', 'browser.js', 'es2017', false, 'es'),
   defineConfig('index.ts', 'index.js', 'es6', true, 'cjs'),
+  defineConfig('index.ts', 'index.es.mjs', 'es6', true, 'es'),
 ]
