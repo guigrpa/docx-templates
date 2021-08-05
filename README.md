@@ -113,7 +113,7 @@ Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/t
 
 You can use docx-templates in the browser (yay!). Just as when using docx-templates in Node, you need to provide the template contents as a buffer-like object. 
 
-For example when the template is pn your server you can get it with:
+For example when the template is on your server you can get it with:
 
 ```js
 const template = await fetch('./template.docx').then(res => res.arrayBuffer())
@@ -160,9 +160,9 @@ You can find an example implementation of `saveDataToFile()` [in the Webpack exa
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify).
 
 ## Polyfills
-As this module depends on the internal node modules `vm`, `stream`, `util`, `events` and the `Buffer` global your build tools have to polyfill them. We provide a browser build wich includes the polyfills (because of that the file is in size at about 300K uncompressed or 85K / 70K with gzip / brotli compression ).
+As this module depends on the internal node modules `vm`, `stream`, `util`, `events` and the `Buffer` global your build tools have to polyfill them. We provide a browser build wich includes the polyfills (because of that the file is in size at about 300K uncompressed or 85K / 70K with gzip / brotli compression).
 
-In buildtools like rollup, webpack, ... just map the import `docx-templates` to `docx-templates/lib/browser.js`
+In buildtools like rollup, webpack,... just map the import `docx-templates` to `docx-templates/lib/browser.js`
 
 If you use a CDN you can import it **as a module** with for example
 
