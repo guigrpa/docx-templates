@@ -1,4 +1,3 @@
-/* eslint-disable */
 import replace from '@rollup/plugin-replace'
 import esbuild from 'rollup-plugin-esbuild'
 import node from '@rollup/plugin-node-resolve'
