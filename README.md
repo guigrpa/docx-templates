@@ -165,7 +165,7 @@ As this library depends on the internal NodeJS modules `vm`, `stream`, `util`, `
 You can import the library directly **as a module** using e.g. the unpkg.com CDN, like below, or you can host the `/lib/browser.js` bundle yourself.
 
 ```ts
-import createReport from 'https://unpkg.com/docx-templates/lib/browser.js';
+import { createReport } from 'https://unpkg.com/docx-templates/lib/browser.js';
 ```
 
 this is good for testing or prototyping but you should keep in mind that the `browser.js` is `es2017` code wich is supported by only 95% of users. If you have to support IE or old browser versions, you are better off compiling it to your target. Also see the support table for `es2017` [here](https://caniuse.com/sr_es8).
