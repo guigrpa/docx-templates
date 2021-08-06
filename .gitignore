@@ -1,5 +1,3 @@
-# GIT-NPM common
-# --------------
 # All projects
 logs
 *.log
@@ -15,13 +13,5 @@ coverage
 *.sublime-workspace
 
 # Project-specific
-
-
-# GIT-specific
-# ------------
-# All projects
-lib
-
-# Project-specific
-**/__tests__/fixtures/*_report.docx
 **/~$*.docx
+lib
