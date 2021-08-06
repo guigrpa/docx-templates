@@ -1,3 +1,7 @@
+## 4.8.0 (2021-08-06)
+- [#231](https://github.com/guigrpa/docx-templates/issues/231) The library now also comes with a pre-compiled and polyfilled browser build. See [documentation](https://github.com/guigrpa/docx-templates#polyfilled-browser-ready-bundle) in README. Thanks @mathe42!
+- [PR 229](https://github.com/guigrpa/docx-templates/pull/229) Minor change to how filenames of HTML snippets are formatted in the final .docx file so the resulting documents work with picky parsers.
+
 ## 4.7.0 (2021-07-12)
 * [#221](https://github.com/guigrpa/docx-templates/issues/221) New feature: user can now optionally specify image rotation when using IMAGE commands.
 * [#218](https://github.com/guigrpa/docx-templates/issues/218) Fixed bug that caused redundant copies of images to be inserted into the docx file.
