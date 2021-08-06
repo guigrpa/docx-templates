@@ -14,7 +14,7 @@ plugins:
   - "@typescript-eslint"
   - jest
 rules:
-  eqeqeq: ['error', 'allow-null']
+  eqeqeq: ["error", "allow-null"]
   comma-dangle:
     - error
     - arrays: always-multiline
