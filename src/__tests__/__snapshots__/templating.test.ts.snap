@@ -26682,7 +26682,6 @@ exports[`noSandbox Template processing HTML in table (see PR #233) 1`] = `
             <w:tcW w:w=\\"4508\\" w:type=\\"dxa\\"/>
           </w:tcPr>
           <w:altChunk r:id=\\"html1\\"/>
-          <w:p/>
         </w:tc>
       </w:tr>
       <w:tr w:rsidR=\\"008B7E2D\\" w14:paraId=\\"57653FD2\\" w14:textId=\\"77777777\\" w:rsidTr=\\"008B7E2D\\">
@@ -55909,7 +55908,6 @@ exports[`sandbox Template processing HTML in table (see PR #233) 1`] = `
             <w:tcW w:w=\\"4508\\" w:type=\\"dxa\\"/>
           </w:tcPr>
           <w:altChunk r:id=\\"html1\\"/>
-          <w:p/>
         </w:tc>
       </w:tr>
       <w:tr w:rsidR=\\"008B7E2D\\" w14:paraId=\\"57653FD2\\" w14:textId=\\"77777777\\" w:rsidTr=\\"008B7E2D\\">

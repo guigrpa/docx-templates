@@ -312,12 +312,14 @@ export async function walkTemplate(
         delete ctx.pendingHtmlNode;
       }
 
-      // `w:tc` nodes shouldn't be left with no `w:p` children; if that's the
+      // `w:tc` nodes shouldn't be left with no `w:p` or 'w:altChunk' children; if that's the
       // case, add an empty `w:p` inside
       if (
         !nodeOut._fTextNode && // Flow-prevention
         nodeOut._tag === 'w:tc' &&
-        !nodeOut._children.filter(o => !o._fTextNode && o._tag === 'w:p').length
+        !nodeOut._children.filter(
+          o => !o._fTextNode && (o._tag === 'w:p' || o._tag === 'w:altChunk')
+        ).length
       ) {
         nodeOut._children.push({
           _parent: nodeOut,
