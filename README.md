@@ -537,7 +537,9 @@ const commands = await listCommands(template_buffer, ['{', '}']);
 ]
 ```
 
-The `getMetadata` function lets you extract the metadata fields from a document, such as the number of pages or words. Note that not all fields may be available, depending on the document.
+The `getMetadata` function lets you extract the metadata fields from a document, such as the number of pages or words. Note that this feature has a few limitations:
+- Not all fields may be available, depending on the document. 
+- These metadata fields, including the number of pages, are only updated by MS Word (or LibreOffice) when saving the document. Docx-templates does not alter these metadata fields, so the number of pages may not reflect the actual size of your rendered document (see issue [#240](https://github.com/guigrpa/docx-templates/issues/240)). Docx-templates can not reliably determine the number of pages in a document, as this requires a full-fledged docx renderer (e.g. MS Word).
 
 ```typescript
     import { getMetadata } from 'docx-templates';
