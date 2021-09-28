@@ -1,3 +1,6 @@
+## 4.8.1 (2021-09-28)
+- [#239](https://github.com/guigrpa/docx-templates/issues/239) Fixed issue that prevented the `listCommands` function from detecting commands in the template's header and footer.
+
 ## 4.8.0 (2021-08-06)
 - [#231](https://github.com/guigrpa/docx-templates/issues/231) The library now also comes with a pre-compiled and polyfilled browser build. See [documentation](https://github.com/guigrpa/docx-templates#polyfilled-browser-ready-bundle) in README. Thanks @mathe42!
 - [PR 229](https://github.com/guigrpa/docx-templates/pull/229) Minor change to how filenames of HTML snippets are formatted in the final .docx file so the resulting documents work with picky parsers.
