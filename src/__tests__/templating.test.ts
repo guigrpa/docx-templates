@@ -1167,6 +1167,22 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           )
         ).toMatchSnapshot();
       });
+
+      it('HTML in table (see PR #233)', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'tableWithHTML.docx')
+        );
+        expect(
+          await createReport(
+            {
+              noSandbox,
+              template,
+              data: {},
+            },
+            'XML'
+          )
+        ).toMatchSnapshot();
+      });
     });
   });
 });
