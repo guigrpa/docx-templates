@@ -1120,9 +1120,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
             template,
             data: {},
           })
-        ).rejects.toThrowError(
-          "Error executing command 'reverse(‘aubergine’)'. SyntaxError: Invalid or unexpected token"
-        );
+        ).rejects.toThrowErrorMatchingSnapshot();
 
         // Unless we use our superpower: the fixSmartQuotes flag!
         const result = await createReport(

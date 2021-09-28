@@ -558,7 +558,8 @@ const processCmd: CommandProcessor = async (
           try {
             await processImage(ctx, img);
           } catch (e) {
-            throw new ImageError(e.message, cmd);
+            if (!(e instanceof Error)) throw e;
+            throw new ImageError(e, cmd);
           }
         }
       }
@@ -589,6 +590,7 @@ const processCmd: CommandProcessor = async (
     } else throw new CommandSyntaxError(cmd);
     return;
   } catch (err) {
+    if (!(err instanceof Error)) throw err;
     if (ctx.options.errorHandler != null) {
       return ctx.options.errorHandler(err);
     }

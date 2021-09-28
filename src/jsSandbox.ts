@@ -60,11 +60,12 @@ export async function runUserJsAndGetRaw(
       result = await context.__result__;
     }
   } catch (err) {
+    const e = err instanceof Error ? err : new Error(`${err}`);
     if (ctx.options.errorHandler != null) {
       context = sandbox;
-      result = await ctx.options.errorHandler(err, code);
+      result = await ctx.options.errorHandler(e, code);
     } else {
-      throw new CommandExecutionError(err, code);
+      throw new CommandExecutionError(e, code);
     }
   }
 

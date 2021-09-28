@@ -46,7 +46,7 @@ export class CommandExecutionError extends Error {
   command: string;
   err: Error;
   constructor(err: Error, command: string) {
-    super(`Error executing command '${command}'. ${err.toString()}`);
+    super(`Error executing command '${command}': ${err.message}`);
     Object.setPrototypeOf(this, CommandExecutionError.prototype);
     this.command = command;
     this.err = err;
