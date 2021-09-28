@@ -1,3 +1,6 @@
+## 4.8.2 (2021-09-28)
+- [PR 233](https://github.com/guigrpa/docx-templates/pull/233) Prevent adding empty paragraph if cell contains altChunk. Thanks @pkozul!
+
 ## 4.8.1 (2021-09-28)
 - [#239](https://github.com/guigrpa/docx-templates/issues/239) Fixed issue that prevented the `listCommands` function from detecting commands in the template's header and footer.
 
