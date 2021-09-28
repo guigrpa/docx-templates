@@ -70,6 +70,34 @@ export async function parseTemplate(template: Buffer) {
   return { jsTemplate, mainDocument, zip, contentTypes };
 }
 
+async function prepSecondaryXMLs(
+  zip: JSZip,
+  main_doc_path: string,
+  options: CreateReportOptions
+): Promise<[Node, string][]> {
+  // Find all non-main XML files containing the headers, footers, etc.
+  const secondary_xml_files: string[] = [];
+  zip.forEach(async filePath => {
+    if (
+      XML_FILE_REGEX.test(filePath) &&
+      filePath !== `${TEMPLATE_PATH}/${main_doc_path}` &&
+      filePath.indexOf(`${TEMPLATE_PATH}/template`) !== 0
+    ) {
+      secondary_xml_files.push(filePath);
+    }
+  });
+
+  const prepped_secondaries: [Node, string][] = [];
+  for (const f of secondary_xml_files) {
+    const raw = await zipGetText(zip, f);
+    if (raw == null) throw new TemplateParseError(`${f} could not be read`);
+    const js0 = await parseXml(raw);
+    const js = preprocessTemplate(js0, options.cmdDelimiter);
+    prepped_secondaries.push([js, f]);
+  }
+  return prepped_secondaries;
+}
+
 /**
  * Create Report from docx template
  *
@@ -154,26 +182,11 @@ async function createReport(
     queryResult = data;
   }
 
-  // Find all other XML files (headers, footers, etc)
-  const secondary_xml_files: string[] = [];
-  zip.forEach(async filePath => {
-    if (
-      XML_FILE_REGEX.test(filePath) &&
-      filePath !== `${TEMPLATE_PATH}/${mainDocument}` &&
-      filePath.indexOf(`${TEMPLATE_PATH}/template`) !== 0
-    ) {
-      secondary_xml_files.push(filePath);
-    }
-  });
-
-  const prepped_secondaries: [Node, string][] = [];
-  for (const f of secondary_xml_files) {
-    const raw = await zipGetText(zip, f);
-    if (raw == null) throw new TemplateParseError(`${f} could not be read`);
-    const js0 = await parseXml(raw);
-    const js = preprocessTemplate(js0, createOptions.cmdDelimiter);
-    prepped_secondaries.push([js, f]);
-  }
+  const prepped_secondaries = await prepSecondaryXMLs(
+    zip,
+    mainDocument,
+    createOptions
+  );
 
   // Find the highest image IDs by scanning the main document and all secondary XMLs.
   const highest_img_id = Math.max(
@@ -316,27 +329,32 @@ export async function listCommands(
     fixSmartQuotes: false,
   };
 
-  const { jsTemplate } = await parseTemplate(template);
-
-  logger.debug('Preprocessing template...');
-  const prepped = preprocessTemplate(jsTemplate, opts.cmdDelimiter);
-
+  const { jsTemplate, mainDocument, zip } = await parseTemplate(template);
+  const secondaries = await prepSecondaryXMLs(zip, mainDocument, opts);
+  const xmls = [jsTemplate, ...secondaries.map(([js, path]) => js)];
   const commands: CommandSummary[] = [];
-  const ctx = newContext(opts);
-  await walkTemplate(undefined, prepped, ctx, async (data, node, ctx) => {
-    const raw = getCommand(ctx.cmd, ctx.shorthands, ctx.options.fixSmartQuotes);
-    ctx.cmd = ''; // flush the context
-    const { cmdName, cmdRest: code } = splitCommand(raw);
-    const type = cmdName as BuiltInCommand;
-    if (type != null && type !== 'CMD_NODE') {
-      commands.push({
-        raw,
-        type,
-        code,
-      });
-    }
-    return undefined;
-  });
+  for (const js of xmls) {
+    const prepped = preprocessTemplate(js, opts.cmdDelimiter);
+    const ctx = newContext(opts);
+    await walkTemplate(undefined, prepped, ctx, async (data, node, ctx) => {
+      const raw = getCommand(
+        ctx.cmd,
+        ctx.shorthands,
+        ctx.options.fixSmartQuotes
+      );
+      ctx.cmd = ''; // flush the context
+      const { cmdName, cmdRest: code } = splitCommand(raw);
+      const type = cmdName as BuiltInCommand;
+      if (type != null && type !== 'CMD_NODE') {
+        commands.push({
+          raw,
+          type,
+          code,
+        });
+      }
+      return undefined;
+    });
+  }
 
   return commands;
 }

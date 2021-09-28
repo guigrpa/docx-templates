@@ -13,6 +13,31 @@ describe('listCommands', () => {
     ]);
   });
 
+  it('handles INS in header and footer', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'insertInHeaderAndFooter.docx')
+    );
+    expect(await listCommands(template)).toMatchInlineSnapshot(`
+Array [
+  Object {
+    "code": "body_command",
+    "raw": "INS body_command",
+    "type": "INS",
+  },
+  Object {
+    "code": "header_command",
+    "raw": "INS header_command",
+    "type": "INS",
+  },
+  Object {
+    "code": "footer_command",
+    "raw": "INS footer_command",
+    "type": "INS",
+  },
+]
+`);
+  });
+
   it('handles IMAGE', async () => {
     const template = await fs.promises.readFile(
       path.join(__dirname, 'fixtures', 'imagesSVG.docx')
@@ -21,6 +46,26 @@ describe('listCommands', () => {
       { raw: 'IMAGE svgImgFile()', code: 'svgImgFile()', type: 'IMAGE' },
       { raw: 'IMAGE svgImgStr()', code: 'svgImgStr()', type: 'IMAGE' },
     ]);
+  });
+
+  it('handles IMAGE in header', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'imageHeader.docx')
+    );
+    expect(await listCommands(template, '+++')).toMatchInlineSnapshot(`
+Array [
+  Object {
+    "code": "image()",
+    "raw": "IMAGE image()",
+    "type": "IMAGE",
+  },
+  Object {
+    "code": "image()",
+    "raw": "IMAGE image()",
+    "type": "IMAGE",
+  },
+]
+`);
   });
 
   it('handles inline FOR loops', async () => {
