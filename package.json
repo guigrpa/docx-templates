@@ -81,6 +81,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
+    "testTimeout": 10000,
     "testRegex": "src/.*__tests__/.*\\.(test|spec)\\.(ts|tsx)$",
     "coverageDirectory": ".nyc_output",
     "coverageReporters": [
