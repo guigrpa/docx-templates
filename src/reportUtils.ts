@@ -22,9 +22,6 @@ const cloneNodeWithoutChildren = (node: Node): Node => {
   };
 };
 
-const cloneNodeForLogging = (node: Node): Object =>
-  omit(node, ['_parent', '_children']);
-
 const getNextSibling = (node: Node): Node | null => {
   const parent = node._parent;
   if (parent == null) return null;
@@ -119,7 +116,6 @@ const logLoop = (loops: Array<LoopStatus>) => {
 // ==========================================
 export {
   cloneNodeWithoutChildren,
-  cloneNodeForLogging,
   getNextSibling,
   insertTextSiblingAfter,
   newNonTextNode,

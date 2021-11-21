@@ -30,13 +30,12 @@ export type NonTextNode = BaseNode & {
 // Report creator
 // ==========================================
 export type ReportData = any;
-export type Query = string;
-export type QueryResolver = (
-  query: Query | undefined,
+type QueryResolver = (
+  query: string | undefined,
   queryVars: any
 ) => ReportData | Promise<ReportData>;
 
-export type ErrorHandler = (e: Error, raw_code?: string) => any;
+type ErrorHandler = (e: Error, raw_code?: string) => any;
 
 type RunJSFunc = (o: { sandbox: Object; ctx: Object }) => {
   modifiedSandbox: Object;
@@ -133,7 +132,7 @@ export type Context = {
   fCmd: boolean;
   cmd: string;
   fSeekQuery: boolean;
-  query?: Query;
+  query?: string;
   buffers: {
     'w:p': BufferStatus;
     'w:tr': BufferStatus;
@@ -164,22 +163,22 @@ export const ImageExtensions = [
   '.jpeg',
   '.svg',
 ] as const;
-export type ImageExtension = typeof ImageExtensions[number];
+type ImageExtension = typeof ImageExtensions[number];
 export type Image = {
   extension: ImageExtension;
   data: Buffer | ArrayBuffer | string;
 };
 export type Links = { [id: string]: Link };
-export type Link = { url: string };
+type Link = { url: string };
 export type Htmls = { [id: string]: string };
 
-export type BufferStatus = {
+type BufferStatus = {
   text: string;
   cmds: string;
   fInsertedText: boolean;
 };
 
-export type VarValue = unknown;
+type VarValue = unknown;
 export type LoopStatus = {
   refNode: Node;
   refNodeLevel: number;
