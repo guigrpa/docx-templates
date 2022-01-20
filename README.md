@@ -108,6 +108,13 @@ const report = await createReport({
 
 Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/tree/master/examples/example-node).
 
+# Deno usage
+You can use docx-templates in Deno! Just follow the Browser guide and import the polyfilled docx-templates bundle, for example from unpkg:
+
+```ts
+// @deno-types="https://unpkg.com/docx-templates/lib/bundled.d.ts"
+import { createReport } from 'https://unpkg.com/docx-templates/lib/browser.js';
+```
 
 # Browser usage
 
