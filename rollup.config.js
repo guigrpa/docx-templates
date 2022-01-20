@@ -4,7 +4,6 @@ import node from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
 
-
 export default [{
   input: './src/browser.ts',
   output: { file: './lib/browser.js', format: 'es', exports: 'named', sourcemap: true },
@@ -15,6 +14,7 @@ export default [{
     commonjs(),
     // Set some node specific globals
     replace({
+      preventAssignment: true,
       values: {
         'process.env.NODE_DEBUG': false,
         'process.pid': 42,
