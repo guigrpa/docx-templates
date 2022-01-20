@@ -1,3 +1,7 @@
+## 4.9.0 (2022-01-20)
+- Updated dependencies.
+- [PR 253](https://github.com/guigrpa/docx-templates/pull/253) Add support for Deno through the browser bundle. Thanks @mathe42!
+
 ## 4.8.2 (2021-09-28)
 - [PR 233](https://github.com/guigrpa/docx-templates/pull/233) Prevent adding empty paragraph if cell contains altChunk. Thanks @pkozul!
 
