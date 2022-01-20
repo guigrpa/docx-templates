@@ -112,7 +112,7 @@ Check out the [Node examples folder](https://github.com/guigrpa/docx-templates/t
 You can use docx-templates in Deno! Just follow the Browser guide and import the polyfilled docx-templates bundle for example from unpkg!
 
 ```ts
-// @deno-types="https://unpkg.com/docx-templates/lib/index.d.ts"
+// @deno-types="https://unpkg.com/docx-templates/lib/bundled.d.ts"
 import { createReport } from 'https://unpkg.com/docx-templates/lib/browser.js';
 ```
 
