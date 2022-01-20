@@ -9,7 +9,6 @@ extends:
   - plugin:import/typescript
   - plugin:jest/recommended
   - plugin:prettier/recommended
-  - prettier/@typescript-eslint
 plugins:
   - "@typescript-eslint"
   - jest
