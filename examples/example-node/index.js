@@ -8,7 +8,7 @@ const template = fs.readFileSync(process.argv[2])
 createReport({
   template,
   data: query =>
-    fetch('http://swapi.apis.guru', {
+    fetch('https://swapi-graphql.netlify.app/.netlify/functions/index', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

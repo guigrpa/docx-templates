@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/swapi', (req, res) => {
-  fetch('http://swapi.apis.guru', {
+  fetch('https://swapi-graphql.netlify.app/.netlify/functions/index', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
