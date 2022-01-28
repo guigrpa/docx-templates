@@ -30,7 +30,7 @@ export type NonTextNode = BaseNode & {
 // Report creator
 // ==========================================
 export type ReportData = any;
-type QueryResolver = (
+export type QueryResolver = (
   query: string | undefined,
   queryVars: any
 ) => ReportData | Promise<ReportData>;
