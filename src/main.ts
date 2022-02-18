@@ -220,9 +220,9 @@ async function createReport(
 
   let numImages = Object.keys(images1).length;
   let numHtmls = Object.keys(htmls1).length;
-  await processImages(images1, mainDocument, zip, TEMPLATE_PATH);
-  await processLinks(links1, mainDocument, zip, TEMPLATE_PATH);
-  await processHtmls(htmls1, mainDocument, zip, TEMPLATE_PATH);
+  await processImages(images1, mainDocument, zip);
+  await processLinks(links1, mainDocument, zip);
+  await processHtmls(htmls1, mainDocument, zip);
 
   for (const [js, filePath] of prepped_secondaries) {
     // Grab the last used (highest) image id from the main document's context, but create
@@ -246,9 +246,9 @@ async function createReport(
 
     const segments = filePath.split('/');
     const documentComponent = segments[segments.length - 1];
-    await processImages(images2, documentComponent, zip, TEMPLATE_PATH);
-    await processLinks(links2, mainDocument, zip, TEMPLATE_PATH);
-    await processHtmls(htmls2, mainDocument, zip, TEMPLATE_PATH);
+    await processImages(images2, documentComponent, zip);
+    await processLinks(links2, mainDocument, zip);
+    await processHtmls(htmls2, mainDocument, zip);
   }
 
   // Process [Content_Types].xml
@@ -455,21 +455,20 @@ export function getMainDoc(contentTypes: NonTextNode): string {
 const processImages = async (
   images: Images,
   documentComponent: string,
-  zip: JSZip,
-  templatePath: string
+  zip: JSZip
 ) => {
   logger.debug(`Processing images for ${documentComponent}...`);
   const imageIds = Object.keys(images);
   if (imageIds.length) {
     logger.debug('Completing document.xml.rels...');
-    const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
+    const relsPath = `${TEMPLATE_PATH}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
     for (let i = 0; i < imageIds.length; i++) {
       const imageId = imageIds[i];
       const { extension, data: imgData } = images[imageId];
       const imgName = `template_${documentComponent}_image${i + 1}${extension}`;
       logger.debug(`Writing image ${imageId} (${imgName})...`);
-      const imgPath = `${templatePath}/media/${imgName}`;
+      const imgPath = `${TEMPLATE_PATH}/media/${imgName}`;
       if (typeof imgData === 'string') {
         zipSetBase64(zip, imgPath, imgData);
       } else {
@@ -494,14 +493,13 @@ const processImages = async (
 const processLinks = async (
   links: Links,
   documentComponent: string,
-  zip: JSZip,
-  templatePath: string
+  zip: JSZip
 ) => {
   logger.debug(`Processing links for ${documentComponent}...`);
   const linkIds = Object.keys(links);
   if (linkIds.length) {
     logger.debug('Completing document.xml.rels...');
-    const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
+    const relsPath = `${TEMPLATE_PATH}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
     for (const linkId of linkIds) {
       const { url } = links[linkId];
@@ -525,8 +523,7 @@ const processLinks = async (
 const processHtmls = async (
   htmls: Htmls,
   documentComponent: string,
-  zip: JSZip,
-  templatePath: string
+  zip: JSZip
 ) => {
   logger.debug(`Processing htmls for ${documentComponent}...`);
   const htmlIds = Object.keys(htmls);
@@ -534,7 +531,7 @@ const processHtmls = async (
     // Process rels
     logger.debug(`Completing document.xml.rels...`);
     const htmlFiles = [];
-    const relsPath = `${templatePath}/_rels/${documentComponent}.rels`;
+    const relsPath = `${TEMPLATE_PATH}/_rels/${documentComponent}.rels`;
     const rels = await getRelsFromZip(zip, relsPath);
     for (const htmlId of htmlIds) {
       const htmlData = htmls[htmlId];
@@ -544,7 +541,7 @@ const processHtmls = async (
         '_'
       )}_${htmlId}.html`;
       logger.debug(`Writing html ${htmlId} (${htmlName})...`);
-      const htmlPath = `${templatePath}/${htmlName}`;
+      const htmlPath = `${TEMPLATE_PATH}/${htmlName}`;
       htmlFiles.push(`/${htmlPath}`);
       zipSetText(zip, htmlPath, htmlData);
       addChild(
