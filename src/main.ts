@@ -459,35 +459,34 @@ const processImages = async (
 ) => {
   logger.debug(`Processing images for ${documentComponent}...`);
   const imageIds = Object.keys(images);
-  if (imageIds.length) {
-    logger.debug('Completing document.xml.rels...');
-    const relsPath = `${TEMPLATE_PATH}/_rels/${documentComponent}.rels`;
-    const rels = await getRelsFromZip(zip, relsPath);
-    for (let i = 0; i < imageIds.length; i++) {
-      const imageId = imageIds[i];
-      const { extension, data: imgData } = images[imageId];
-      const imgName = `template_${documentComponent}_image${i + 1}${extension}`;
-      logger.debug(`Writing image ${imageId} (${imgName})...`);
-      const imgPath = `${TEMPLATE_PATH}/media/${imgName}`;
-      if (typeof imgData === 'string') {
-        zipSetBase64(zip, imgPath, imgData);
-      } else {
-        zipSetBinary(zip, imgPath, imgData);
-      }
-      addChild(
-        rels,
-        newNonTextNode('Relationship', {
-          Id: imageId,
-          Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
-          Target: `media/${imgName}`,
-        })
-      );
+  if (!imageIds.length) return;
+  logger.debug('Completing document.xml.rels...');
+  const relsPath = `${TEMPLATE_PATH}/_rels/${documentComponent}.rels`;
+  const rels = await getRelsFromZip(zip, relsPath);
+  for (let i = 0; i < imageIds.length; i++) {
+    const imageId = imageIds[i];
+    const { extension, data: imgData } = images[imageId];
+    const imgName = `template_${documentComponent}_image${i + 1}${extension}`;
+    logger.debug(`Writing image ${imageId} (${imgName})...`);
+    const imgPath = `${TEMPLATE_PATH}/media/${imgName}`;
+    if (typeof imgData === 'string') {
+      zipSetBase64(zip, imgPath, imgData);
+    } else {
+      zipSetBinary(zip, imgPath, imgData);
     }
-    const finalRelsXml = buildXml(rels, {
-      literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
-    });
-    zipSetText(zip, relsPath, finalRelsXml);
+    addChild(
+      rels,
+      newNonTextNode('Relationship', {
+        Id: imageId,
+        Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image',
+        Target: `media/${imgName}`,
+      })
+    );
   }
+  const finalRelsXml = buildXml(rels, {
+    literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
+  });
+  zipSetText(zip, relsPath, finalRelsXml);
 };
 
 const processLinks = async (
