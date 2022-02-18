@@ -10,6 +10,6 @@ export {
   TemplateParseError,
   ObjectCommandResultError,
 } from './errors';
-export { QueryResolver } from './types';
-export { createReport };
+import type { QueryResolver } from './types';
+export { createReport, QueryResolver };
 export default createReport;
