@@ -153,22 +153,22 @@ it('004: can inject an image in the document header (regression test for #113)',
     path.join(__dirname, 'fixtures', 'imageHeader.docx')
   );
 
+  const image = jest.fn(async () => {
+    const data = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'sample.png')
+    );
+    return {
+      width: 6,
+      height: 6,
+      data,
+      extension: '.png',
+    };
+  });
+
   const opts = {
     template,
     data: {},
-    additionalJsContext: {
-      image: async () => {
-        const data = await fs.promises.readFile(
-          path.join(__dirname, 'fixtures', 'sample.png')
-        );
-        return {
-          width: 6,
-          height: 6,
-          data,
-          extension: '.png',
-        };
-      },
-    },
+    additionalJsContext: { image },
   };
 
   // NOTE: bug does not happen when using debug probe arguments ('JS' or 'XML'),
@@ -176,6 +176,37 @@ it('004: can inject an image in the document header (regression test for #113)',
   // TODO: build a snapshot test once _probe === 'XML' properly includes all document XMLs, not just
   // the main document
   expect(await createReport(opts)).toBeInstanceOf(Uint8Array);
+
+  // Ensure the function to insert the image is only invoked once (related to #218)
+  // expect(image).toBeCalledTimes(1);
+
+  // Ensure only one 'media' element (the image data as a png file) is added to the final docx file.
+  // Regression test for #218
+  const zip = await JSZip.loadAsync(await createReport(opts));
+  expect(Object.keys(zip?.files ?? {})).toMatchInlineSnapshot(`
+    Array [
+      "[Content_Types].xml",
+      "_rels/.rels",
+      "word/_rels/document.xml.rels",
+      "word/document.xml",
+      "word/footnotes.xml",
+      "word/endnotes.xml",
+      "word/header1.xml",
+      "word/theme/theme1.xml",
+      "word/settings.xml",
+      "word/styles.xml",
+      "word/webSettings.xml",
+      "docProps/app.xml",
+      "docProps/core.xml",
+      "word/fontTable.xml",
+      "word/",
+      "word/media/",
+      "word/media/template_document.xml_img1.png",
+      "word/_rels/",
+      "word/media/template_header1.xml_img2.png",
+      "word/_rels/header1.xml.rels",
+    ]
+  `);
 });
 
 it('005: can inject PNG files using ArrayBuffers without errors (related to issue #166)', async () => {
@@ -295,25 +326,45 @@ it('007: can inject an image in a document that already contains images (regress
   const buff = await fs.promises.readFile(
     path.join(__dirname, 'fixtures', 'sample.png')
   );
-  expect(
-    await createReport(
-      {
-        template,
-        data: {
-          cv: { ProfilePicture: { url: 'abc' } },
-        },
-        additionalJsContext: {
-          getImage: () => ({
-            width: 6,
-            height: 6,
-            data: buff,
-            extension: '.png',
-          }),
-        },
-      },
-      'XML'
-    )
-  ).toMatchSnapshot();
+  const opts = {
+    template,
+    data: {
+      cv: { ProfilePicture: { url: 'abc' } },
+    },
+    additionalJsContext: {
+      getImage: () => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.png',
+      }),
+    },
+  };
+  expect(await createReport(opts, 'XML')).toMatchSnapshot();
+
+  // Ensure only one 'media' element (the image data as a png file) is added to the final docx file.
+  // Regression test for #218
+  const zip = await JSZip.loadAsync(await createReport(opts));
+  expect(Object.keys(zip?.files ?? {})).toMatchInlineSnapshot(`
+    Array [
+      "[Content_Types].xml",
+      "_rels/.rels",
+      "word/_rels/document.xml.rels",
+      "word/document.xml",
+      "word/theme/theme1.xml",
+      "word/settings.xml",
+      "docProps/core.xml",
+      "word/fontTable.xml",
+      "word/webSettings.xml",
+      "word/styles.xml",
+      "docProps/app.xml",
+      "word/",
+      "word/media/",
+      "word/media/template_document.xml_img2.png",
+      "word/media/template_document.xml_img3.png",
+      "word/_rels/",
+    ]
+  `);
 });
 
 it('008: can inject an image in a shape in the doc footer (regression test for #217)', async () => {
