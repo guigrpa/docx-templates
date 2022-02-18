@@ -282,7 +282,7 @@ it('006: can inject an image from the data instead of the additionalJsContext', 
       "word/styles.xml",
       "word/",
       "word/media/",
-      "word/media/template_document.xml_image1.png",
+      "word/media/template_document.xml_img1.png",
       "word/_rels/",
     ]
   `);
