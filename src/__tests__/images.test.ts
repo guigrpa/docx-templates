@@ -390,3 +390,60 @@ it('009 correctly rotate image', async () => {
   };
   expect(await createReport(opts, 'XML')).toMatchSnapshot();
 });
+
+it('010: can inject an image in a document that already contains images inserted during an earlier run by createReport (regression test for #259)', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imageMultiDelimiter.docx')
+  );
+  const buff = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'sample.png')
+  );
+  const reportA = await createReport({
+    template,
+    cmdDelimiter: '+++',
+    data: {
+      injectImg: () => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.png',
+      }),
+    },
+  });
+
+  expect(
+    Object.keys((await JSZip.loadAsync(reportA))?.files ?? {}).filter(f =>
+      f.includes('word/media')
+    )
+  ).toMatchInlineSnapshot(`
+    Array [
+      "word/media/",
+      "word/media/template_document.xml_img1.png",
+    ]
+  `);
+
+  const reportB = await createReport({
+    template: Buffer.from(reportA),
+    cmdDelimiter: '---',
+    data: {
+      injectImg: () => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.png',
+      }),
+    },
+  });
+
+  expect(
+    Object.keys((await JSZip.loadAsync(reportB))?.files ?? {}).filter(f =>
+      f.includes('word/media')
+    )
+  ).toMatchInlineSnapshot(`
+    Array [
+      "word/media/",
+      "word/media/template_document.xml_img1.png",
+      "word/media/template_document.xml_img2.png",
+    ]
+  `);
+});
