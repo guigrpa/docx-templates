@@ -1,3 +1,6 @@
+## 4.9.1 (2022-02-18)
+- [Issue #259](https://github.com/guigrpa/docx-templates/issues/259) Fix issue that caused inserted images to be overwritten when `createReport()` was invoked a second time on the resulting template.
+
 ## 4.9.0 (2022-01-20)
 - Updated dependencies.
 - [PR 253](https://github.com/guigrpa/docx-templates/pull/253) Add support for Deno through the browser bundle. Thanks @mathe42!
