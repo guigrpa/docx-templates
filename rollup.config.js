@@ -47,5 +47,7 @@ export default [{
 }, {
   input: './lib/index.d.ts',
   output: { file: './lib/bundled.d.ts', format: 'es' },
-  plugins: [dts()]
+  plugins: [
+    dts({ respectExternal: true })
+  ]
 }]
