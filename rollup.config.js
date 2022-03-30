@@ -3,8 +3,9 @@ import esbuild from 'rollup-plugin-esbuild'
 import node from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
+import { defineConfig } from 'rollup'
 
-export default [{
+export default defineConfig([{
   input: './src/browser.ts',
   output: { file: './lib/browser.js', format: 'es', exports: 'named', sourcemap: true },
   plugins: [
@@ -48,6 +49,11 @@ export default [{
   input: './lib/index.d.ts',
   output: { file: './lib/bundled.d.ts', format: 'es' },
   plugins: [
-    dts({ respectExternal: true })
+    dts({ respectExternal: true }),
+    {
+      renderChunk(code) {
+        return 'type Buffer = ArrayBufferLike;\n'+ code.split('\n').slice(1).join('\n')
+      }
+    }
   ]
-}]
+}])
