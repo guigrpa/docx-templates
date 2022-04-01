@@ -55,5 +55,9 @@ export default defineConfig([{
         return 'type Buffer = ArrayBufferLike;\n'+ code.split('\n').slice(1).join('\n')
       }
     }
+  ],
+  external: [
+    // To prevent warning. If `import ... from 'stream'` exists in bundled.d.ts this build has to be changed to remove it.
+    'stream'
   ]
 }])
