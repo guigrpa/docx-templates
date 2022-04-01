@@ -116,6 +116,8 @@ You can use docx-templates in Deno! Just follow the Browser guide and import the
 import { createReport } from 'https://unpkg.com/docx-templates/lib/browser.js';
 ```
 
+> Note that you have to set `noSandbox: true` or bring your own sandbox with the `runJs` option.
+
 # Browser usage
 
 You can use docx-templates in the browser (yay!). Just as when using docx-templates in Node, you need to provide the template contents as a `Buffer`-like object. 
