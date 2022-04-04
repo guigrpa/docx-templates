@@ -1,3 +1,6 @@
+## 4.9.2 (2022-04-04)
+- [PR 266](https://github.com/guigrpa/docx-templates/pull/266) Fix types for Deno bundle (by @mathe42).
+
 ## 4.9.1 (2022-02-18)
 - [Issue #259](https://github.com/guigrpa/docx-templates/issues/259) Fix issue that caused inserted images to be overwritten when `createReport()` was invoked a second time on the resulting template.
 
