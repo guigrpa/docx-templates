@@ -349,6 +349,8 @@ In the .docx template:
 +++IMAGE injectSvg()+++
 ```
 
+Note that you can center the image by centering the IMAGE command in the template.
+
 In the `createReport` call:
 ```js
 additionalJsContext: {
