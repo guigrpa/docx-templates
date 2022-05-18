@@ -406,6 +406,8 @@ Loop over a group of elements (resulting from the evaluation of a JavaScript exp
 +++END-FOR person+++
 ```
 
+Note that inside the loop, the variable relative to the current element being processed must be prefixed with `$`.
+
 Since JavaScript expressions are supported, you can for example filter the loop domain:
 
 ```
