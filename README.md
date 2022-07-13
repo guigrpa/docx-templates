@@ -21,6 +21,34 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 
 Contributions are welcome!
 
+# Table of contents
+
+- [Installation](#installation)
+- [Node usage](#node-usage)
+- [Deno usage](#deno-usage)
+- [Browser usage](#browser-usage)
+  - [Polyfilled browser-ready bundle](#polyfilled-browser-ready-bundle)
+  - [Browser template compatibility caveat](#browser-template-compatibility-caveat)
+  - [Running within a Web Worker](#running-within-a-web-worker)
+- [Writing templates](#writing-templates)
+  - [Custom command delimiters](#custom-command-delimiters)
+  - [Supported commands](#supported-commands)
+    - [`QUERY`](#query)
+    - [`INS` (`=`, or nothing at all)](#ins--or-nothing-at-all)
+    - [`EXEC` (`!`)](#exec-)
+    - [`IMAGE`](#image)
+    - [`LINK`](#link)
+    - [`HTML`](#html)
+    - [`FOR` and `END-FOR`](#for-and-end-for)
+    - [`IF` and `END-IF`](#if-and-end-if)
+    - [`ALIAS` (and alias resolution with `*`)](#alias-and-alias-resolution-with-)
+- [Error handling](#error-handling)
+  - [Error types](#error-types)
+  - [Custom error handler](#custom-error-handler)
+- [Inspecting templates](#inspecting-templates)
+- [Performance & security](#performance--security)
+- [Similar projects](#similar-projects)
+- [License (MIT)](#license-mit)
 
 # Installation
 
@@ -595,17 +623,14 @@ The library uses `require('vm')` as its default sandboxing environment. Note tha
 
 Note that turning off the sandbox (`noSandbox: true`) is known to give significant performance improvements when working with large templates or datasets. However, before you do this, make sure you are aware of the security implications.
 
-## [Changelog](https://github.com/guigrpa/docx-templates/blob/master/CHANGELOG.md)
-
-
-## Similar projects
+# Similar projects
 
 * [docxtemplater](https://github.com/open-xml-templating/docxtemplater) (believe it or not, I just discovered this very similarly-named project after brushing up my old CS code for `docx-templates` and publishing it for the first time!). It provides lots of goodies, but doesn't allow (AFAIK) embedding queries or JS snippets.
 
 * [docx](https://github.com/dolanmiu/docx) and similar ones - generate docx files from scratch, programmatically. Drawbacks of this approach: they typically do not support all Word features, and producing a complex document can be challenging.
 
 
-## License (MIT)
+# License (MIT)
 
 Copyright (c) [Guillermo Grau Panea](https://github.com/guigrpa) 2016-now
 
