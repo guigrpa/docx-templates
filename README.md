@@ -182,6 +182,9 @@ this is good for testing or prototyping but you should keep in mind that the `br
 ## Browser template compatibility caveat
 Note that the JavaScript code in your .docx template will be run as-is by the browser. Transpilers like Babel can't see this code, and won't be able to polyfill it. This means that the JS code in your template needs to be compatible with the browsers you are targeting. In other words: don't use fancy modern syntax and functions in your template if you want older browsers, like IE11, to be able to render it.
 
+## Running within a Web Worker
+Note that you need to disable the sandbox mode using the `noSandbox: true` option to be able to run `createReport` from within a web worker. This is because the default sandbox mode browser polyfills require access to the `iframe` API, which is not available from a web worker context. Make sure you are aware of the security implications of disabling the sandbox.
+
 # Writing templates
 
 You can find several template examples in this repo:
