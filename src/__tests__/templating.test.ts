@@ -1183,6 +1183,26 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           )
         ).toMatchSnapshot();
       });
+
+      it('INS in header and footer', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'insertInHeaderAndFooter.docx')
+        );
+        expect(
+          await createReport(
+            {
+              noSandbox,
+              template,
+              data: {
+                body_command: 'this goes into the body',
+                header_command: 'this goes into the header',
+                footer_command: 'this goes into the footer',
+              },
+            },
+            'XML'
+          )
+        ).toMatchSnapshot();
+      });
     });
   });
 });
