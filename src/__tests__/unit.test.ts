@@ -68,7 +68,7 @@ describe('getMetadata', () => {
       'utf-8'
     );
     for (const f of files) {
-      if (!f.endsWith('.docx')) continue;
+      if (f.startsWith('~$') || !f.endsWith('.docx')) continue;
       const t = await fs.promises.readFile(path.join(__dirname, 'fixtures', f));
       const metadata = await getMetadata(t);
       expect(typeof metadata.modified).toBe('string');
