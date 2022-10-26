@@ -11,6 +11,7 @@ coverage
 .nyc_tmp
 *.sublime-project
 *.sublime-workspace
+.DS_Store
 
 # Project-specific
 **/~$*.docx
