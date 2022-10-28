@@ -743,13 +743,16 @@ const processEndForIf = (
     }
     throw new InvalidCommandError('Invalid command', cmd);
   }
-  const { loopOver, idx } = curLoop;
-  const { nextItem, curIdx } = getNextItem(loopOver, idx);
+
+  // Get the next item in the loop
+  const nextIdx = curLoop.idx + 1;
+  const nextItem = curLoop.loopOver[nextIdx];
+
   if (nextItem != null) {
     // next iteration
     ctx.vars[varName] = nextItem;
     ctx.fJump = true;
-    curLoop.idx = curIdx;
+    curLoop.idx = nextIdx;
   } else {
     // loop finished
     ctx.loops.pop();
@@ -954,16 +957,4 @@ const appendTextToTagBuffers = (
     buf[type] += text;
     if (fInsertedText) buf.fInsertedText = true;
   });
-};
-
-const getNextItem = (items: unknown[], curIdx0: number) => {
-  let nextItem = null;
-  let curIdx = curIdx0;
-  while (nextItem == null) {
-    curIdx += 1;
-    if (curIdx >= items.length) break;
-    const tempItem = items[curIdx];
-    nextItem = tempItem;
-  }
-  return { nextItem, curIdx };
 };
