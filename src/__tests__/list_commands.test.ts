@@ -18,24 +18,24 @@ describe('listCommands', () => {
       path.join(__dirname, 'fixtures', 'insertInHeaderAndFooter.docx')
     );
     expect(await listCommands(template)).toMatchInlineSnapshot(`
-Array [
-  Object {
-    "code": "body_command",
-    "raw": "INS body_command",
-    "type": "INS",
-  },
-  Object {
-    "code": "header_command",
-    "raw": "INS header_command",
-    "type": "INS",
-  },
-  Object {
-    "code": "footer_command",
-    "raw": "INS footer_command",
-    "type": "INS",
-  },
-]
-`);
+      Array [
+        Object {
+          "code": "body_command",
+          "raw": "INS body_command",
+          "type": "INS",
+        },
+        Object {
+          "code": "footer_command",
+          "raw": "INS footer_command",
+          "type": "INS",
+        },
+        Object {
+          "code": "header_command",
+          "raw": "INS header_command",
+          "type": "INS",
+        },
+      ]
+    `);
   });
 
   it('handles IMAGE', async () => {
@@ -53,19 +53,19 @@ Array [
       path.join(__dirname, 'fixtures', 'imageHeader.docx')
     );
     expect(await listCommands(template, '+++')).toMatchInlineSnapshot(`
-Array [
-  Object {
-    "code": "image()",
-    "raw": "IMAGE image()",
-    "type": "IMAGE",
-  },
-  Object {
-    "code": "image()",
-    "raw": "IMAGE image()",
-    "type": "IMAGE",
-  },
-]
-`);
+      Array [
+        Object {
+          "code": "image()",
+          "raw": "IMAGE image()",
+          "type": "IMAGE",
+        },
+        Object {
+          "code": "image()",
+          "raw": "IMAGE image()",
+          "type": "IMAGE",
+        },
+      ]
+    `);
   });
 
   it('handles inline FOR loops', async () => {

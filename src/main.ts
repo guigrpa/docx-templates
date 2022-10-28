@@ -87,6 +87,9 @@ async function prepSecondaryXMLs(
     }
   });
 
+  // Sort to ensure deterministic processing.
+  secondary_xml_files.sort();
+
   const prepped_secondaries: [Node, string][] = [];
   for (const f of secondary_xml_files) {
     const raw = await zipGetText(zip, f);
