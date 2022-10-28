@@ -166,14 +166,12 @@ export async function walkTemplate(
     // =============================================
     if (ctx.fJump) {
       if (!curLoop) throw new InternalError('jumping while curLoop is null');
-      const { refNode, refNodeLevel } = curLoop;
-      //
       //   logger.debug(`Jumping to level ${refNodeLevel}...`, {
       //     attach: cloneNodeForLogging(refNode),
       //   });
-      deltaJump = ctx.level - refNodeLevel;
-      nodeIn = refNode;
-      ctx.level = refNodeLevel;
+      deltaJump = ctx.level - curLoop.refNodeLevel;
+      nodeIn = curLoop.refNode;
+      ctx.level = curLoop.refNodeLevel;
       ctx.fJump = false;
       move = 'JUMP';
 
