@@ -159,7 +159,7 @@ export async function walkTemplate(
 
   while (true) {
     const curLoop = getCurLoop(ctx);
-    let nextSibling;
+    let nextSibling: Node | null = null;
 
     // =============================================
     // Move input node pointer
