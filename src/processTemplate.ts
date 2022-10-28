@@ -92,7 +92,7 @@ export async function extractQuery(
     if (
       nodeIn._fTextNode &&
       parent &&
-      !parent._fTextNode && // Flow, don't complain
+      !parent._fTextNode &&
       parent._tag === 'w:t'
     ) {
       await processText(null, nodeIn, ctx, processCmd);
@@ -236,7 +236,7 @@ export async function walkTemplate(
       // Loop exploring? Update the reference node for the current loop
       if (
         isLoopExploring(ctx) &&
-        curLoop && // Flow, don't complain
+        curLoop &&
         nodeIn === curLoop.refNode._parent
       ) {
         curLoop.refNode = nodeIn;
@@ -256,7 +256,7 @@ export async function walkTemplate(
       // the image node
       if (
         ctx.pendingImageNode &&
-        !nodeOut._fTextNode && // Flow-prevention
+        !nodeOut._fTextNode &&
         nodeOut._tag === 'w:t'
       ) {
         const imgNode = ctx.pendingImageNode;
@@ -276,7 +276,7 @@ export async function walkTemplate(
       // the link node
       if (
         ctx.pendingLinkNode &&
-        !nodeOut._fTextNode && // Flow-prevention
+        !nodeOut._fTextNode &&
         nodeOut._tag === 'w:r'
       ) {
         const linkNode = ctx.pendingLinkNode;
@@ -296,7 +296,7 @@ export async function walkTemplate(
       // the html node
       if (
         ctx.pendingHtmlNode &&
-        !nodeOut._fTextNode && // Flow-prevention
+        !nodeOut._fTextNode &&
         nodeOut._tag === 'w:p'
       ) {
         const htmlNode = ctx.pendingHtmlNode;
@@ -315,7 +315,7 @@ export async function walkTemplate(
       // `w:tc` nodes shouldn't be left with no `w:p` or 'w:altChunk' children; if that's the
       // case, add an empty `w:p` inside
       if (
-        !nodeOut._fTextNode && // Flow-prevention
+        !nodeOut._fTextNode &&
         nodeOut._tag === 'w:tc' &&
         !nodeOut._children.filter(
           o => !o._fTextNode && (o._tag === 'w:p' || o._tag === 'w:altChunk')

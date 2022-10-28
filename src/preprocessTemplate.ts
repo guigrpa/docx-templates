@@ -26,7 +26,7 @@ const preprocessTemplate = (template: Node, delimiter: [string, string]) => {
     if (
       node._fTextNode &&
       node._parent &&
-      !node._parent._fTextNode && // Flow, don't complain
+      !node._parent._fTextNode &&
       node._parent._tag === 'w:t'
     ) {
       if (openNode == null) openNode = node;
