@@ -956,14 +956,13 @@ const appendTextToTagBuffers = (
   });
 };
 
-const getNextItem = (items: any[], curIdx0: number) => {
+const getNextItem = (items: unknown[], curIdx0: number) => {
   let nextItem = null;
-  let curIdx = curIdx0 != null ? curIdx0 : -1;
+  let curIdx = curIdx0;
   while (nextItem == null) {
     curIdx += 1;
     if (curIdx >= items.length) break;
     const tempItem = items[curIdx];
-    if (typeof tempItem === 'object' && tempItem.isDeleted) continue;
     nextItem = tempItem;
   }
   return { nextItem, curIdx };
