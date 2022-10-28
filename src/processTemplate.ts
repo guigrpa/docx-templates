@@ -678,7 +678,7 @@ const processForIf = async (
     varName = forMatch[1];
   }
 
-  // New FOR? If not, discard
+  // Have we already seen this node or is it the start of a new FOR loop?
   const curLoop = getCurLoop(ctx);
   if (!(curLoop && curLoop.varName === varName)) {
     const parentLoopLevel = ctx.loops.length - 1;
