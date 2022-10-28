@@ -385,7 +385,7 @@ export async function walkTemplate(
       nodeOut = newNode;
     }
 
-    // Correct output tree level in case of a JUMP
+    // JUMP to the target level of the tree.
     // -------------------------------------------
     if (move === 'JUMP') {
       while (deltaJump > 0) {
