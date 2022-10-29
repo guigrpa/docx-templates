@@ -1,4 +1,4 @@
-type LogSink = (message?: any, ...optionalParams: any[]) => void;
+type LogSink = (message?: string, ...optionalParams: unknown[]) => void;
 
 export const logger: {
   debug: LogSink;

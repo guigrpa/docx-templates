@@ -144,6 +144,22 @@ export function findHighestImgId(mainDoc: Node): number {
   return 0;
 }
 
+const debugPrintNode = (node: Node) =>
+  JSON.stringify(
+    node._fTextNode
+      ? {
+          _ifName: node._ifName,
+          _fTextNode: node._fTextNode,
+          _text: node?._text,
+        }
+      : {
+          _ifName: node._ifName,
+          _fTextNode: node._fTextNode,
+          _tag: node?._tag,
+          _attrs: node?._attrs,
+        }
+  );
+
 export async function walkTemplate(
   data: ReportData | undefined,
   template: Node,
@@ -166,9 +182,11 @@ export async function walkTemplate(
     // =============================================
     if (ctx.fJump) {
       if (!curLoop) throw new InternalError('jumping while curLoop is null');
-      //   logger.debug(`Jumping to level ${refNodeLevel}...`, {
-      //     attach: cloneNodeForLogging(refNode),
-      //   });
+      // TODO: comment debug statements back out, as creating the debug string creates overhead.
+      logger.debug(
+        `Jumping to level ${curLoop.refNodeLevel}...`,
+        debugPrintNode(curLoop.refNode)
+      );
       deltaJump = ctx.level - curLoop.refNodeLevel;
       nodeIn = curLoop.refNode;
       ctx.level = curLoop.refNodeLevel;
@@ -194,11 +212,11 @@ export async function walkTemplate(
       ctx.level -= 1;
       move = 'UP';
     }
-    //
-    //   logger.debug(
-    //     `Next node [${chalk.green.bold(move)}, level ${chalk.dim(ctx.level)}]`,
-    //     { attach: cloneNodeForLogging(nodeIn) }
-    //   );
+
+    logger.debug(
+      `Next node [${move}, level ${ctx.level}]`,
+      debugPrintNode(nodeIn)
+    );
 
     // =============================================
     // Process input node
@@ -239,10 +257,9 @@ export async function walkTemplate(
       ) {
         curLoop.refNode = nodeIn;
         curLoop.refNodeLevel -= 1;
-        //
-        //   logger.debug(`Updated loop '${curLoop.varName}' refNode:`, {
-        //     attach: cloneNodeForLogging(nodeIn),
-        //   });
+        logger.debug(
+          `Updated loop '${curLoop.varName}' refNode: ` + debugPrintNode(nodeIn)
+        );
       }
       const nodeOutParent = nodeOut._parent;
       if (nodeOutParent == null) throw new InternalError('node parent is null');
@@ -371,9 +388,12 @@ export async function walkTemplate(
       ) {
         const result = await processText(data, nodeIn, ctx, processor);
         if (typeof result === 'string') {
-          // TODO: use a discriminated union here instead of a type assertion to distinguish TextNodes from NonTextNodes.
-          const newNodeAsTextNode: TextNode = newNode as TextNode;
-          newNodeAsTextNode._text = result;
+          // TODO: improve typesafety of conversion Node to TextNode.
+          (newNode as TextNode)._text = result;
+          logger.debug(
+            `Inserted command result string into node. Updated node: ` +
+              debugPrintNode(newNode)
+          );
         } else {
           errors.push(...result);
         }
@@ -478,10 +498,9 @@ const processCmd: CommandProcessor = async (
 ): Promise<undefined | string | Error> => {
   const cmd = getCommand(ctx.cmd, ctx.shorthands, ctx.options.fixSmartQuotes);
   ctx.cmd = ''; // flush the context
-  logger.debug(`Processing cmd: ${cmd}`);
   try {
     const { cmdName, cmdRest } = splitCommand(cmd);
-
+    if (cmdName !== 'CMD_NODE') logger.debug(`Processing cmd: ${cmd}`);
     // Seeking query?
     if (ctx.fSeekQuery) {
       if (cmdName === 'QUERY') ctx.query = cmdRest;

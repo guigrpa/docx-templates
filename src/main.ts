@@ -51,21 +51,19 @@ export async function parseTemplate(template: Buffer) {
   const contentTypes = await readContentTypes(zip);
   const mainDocument = getMainDoc(contentTypes);
 
-  logger.debug('Reading template...');
-  const templateXml = await zipGetText(zip, `${TEMPLATE_PATH}/${mainDocument}`);
+  const main_template_path = `${TEMPLATE_PATH}/${mainDocument}`;
+  logger.debug(`Reading ${main_template_path}...`);
+  const templateXml = await zipGetText(zip, main_template_path);
   if (templateXml == null)
     throw new TemplateParseError(`${mainDocument} could not be found`);
-  logger.debug(`Template file length: ${templateXml.length}`);
-  logger.debug('Parsing XML...');
+  logger.debug(`${main_template_path} file length: ${templateXml.length}`);
+  logger.debug(`Parsing ${main_template_path} XML...`);
   const tic = new Date().getTime();
   const parseResult = await parseXml(templateXml);
   const jsTemplate = parseResult;
   const tac = new Date().getTime();
 
-  logger.debug(`File parsed in ${tac - tic} ms`, {
-    attach: jsTemplate,
-    attachLevel: 'trace',
-  });
+  logger.debug(`${main_template_path} parsed in ${tac - tic} ms`);
 
   return { jsTemplate, mainDocument, zip, contentTypes };
 }
@@ -92,8 +90,11 @@ async function prepSecondaryXMLs(
 
   const prepped_secondaries: [Node, string][] = [];
   for (const f of secondary_xml_files) {
+    logger.debug(`Reading ${f}...`);
     const raw = await zipGetText(zip, f);
     if (raw == null) throw new TemplateParseError(`${f} could not be read`);
+    logger.debug(`${f} file length: ${raw.length}`);
+    logger.debug(`Parsing ${f} XML...`);
     const js0 = await parseXml(raw);
     const js = preprocessTemplate(js0, options.cmdDelimiter);
     prepped_secondaries.push([js, f]);
@@ -258,7 +259,7 @@ async function createReport(
   if (numImages || numHtmls) {
     logger.debug('Completing [Content_Types].xml...');
 
-    // logger.debug('Content types', { attach: contentTypes });
+    logger.debug('Content types', { attach: contentTypes });
     const ensureContentType = (extension: string, contentType: string) => {
       const children = contentTypes._children;
       if (

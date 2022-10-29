@@ -80,6 +80,6 @@ export async function runUserJsAndGetRaw(
 
   // Save the sandbox for later use
   ctx.jsSandbox = omit(context, ['__code__', '__result__']);
-  logger.debug('JS result', { attach: result });
+  logger.debug('Command returned: ', result);
   return result;
 }
