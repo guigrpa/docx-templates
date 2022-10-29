@@ -1203,6 +1203,26 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           )
         ).toMatchSnapshot();
       });
+
+      it('treats existing text near nested FOR loops correctly', async () => {
+        const template = await fs.promises.readFile(
+          path.join(
+            __dirname,
+            'fixtures',
+            'nestedInlineForLoopWithSurroundingText.docx'
+          )
+        );
+        const opts: UserOptions = {
+          noSandbox,
+          template,
+          cmdDelimiter: '+++',
+          data: {
+            companies: [{ name: 'company_A' }, { name: 'company_B' }],
+            products: [{ name: 'product1' }, { name: 'product2' }],
+          },
+        };
+        expect(await createReport(opts, 'XML')).toMatchSnapshot();
+      });
     });
   });
 });
