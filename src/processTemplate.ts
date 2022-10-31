@@ -681,8 +681,8 @@ const processForIf = async (
   const isIf = cmdName === 'IF';
 
   // Identify FOR/IF loop
-  let forMatch;
-  let varName;
+  let forMatch: RegExpExecArray | null = null;
+  let varName: string | undefined = undefined;
   if (isIf) {
     if (!node._ifName) {
       node._ifName = `__if_${ctx.gCntIf}`;
