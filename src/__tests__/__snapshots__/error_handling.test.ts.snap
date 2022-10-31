@@ -14,7 +14,7 @@ exports[`noSandbox custom ErrorHandler allows graceful handling of NullishComman
         <w:rPr>
           <w:lang w:val=\\"nl-NL\\"/>
         </w:rPr>
-        <w:t xml:space=\\"preserve\\">its ok buddy</w:t>
+        <w:t xml:space=\\"preserve\\">Error: Result of command testobj.value is null or undefined and rejectNullish is set</w:t>
       </w:r>
       <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
       <w:bookmarkEnd w:id=\\"0\\"/>
@@ -106,7 +106,7 @@ exports[`noSandbox custom ErrorHandler properly handles InvalidCommandError 1`] 
     </w:p>
     <w:p w14:paraId=\\"60A04E47\\" w14:textId=\\"2D4C8860\\" w:rsidR=\\"00257AA2\\" w:rsidRDefault=\\"00257AA2\\" w:rsidP=\\"00257AA2\\">
       <w:r>
-        <w:t xml:space=\\"preserve\\">its ok buddy</w:t>
+        <w:t xml:space=\\"preserve\\">ReferenceError: notavailable is not defined</w:t>
       </w:r>
       <w:proofErr w:type=\\"spellStart\\"/>
       <w:r>
@@ -125,7 +125,7 @@ exports[`noSandbox custom ErrorHandler properly handles InvalidCommandError 1`] 
     </w:p>
     <w:p w14:paraId=\\"20A8246E\\" w14:textId=\\"77777777\\" w:rsidR=\\"000F3664\\" w:rsidRDefault=\\"000F3664\\" w:rsidP=\\"000F3664\\">
       <w:r>
-        <w:t xml:space=\\"preserve\\">its ok buddy</w:t>
+        <w:t xml:space=\\"preserve\\">ReferenceError: something is not defined</w:t>
       </w:r>
     </w:p>
     <w:p w14:paraId=\\"1584BF35\\" w14:textId=\\"52D65C7B\\" w:rsidR=\\"000F3664\\" w:rsidRDefault=\\"000F3664\\" w:rsidP=\\"00257AA2\\"/>
@@ -193,7 +193,7 @@ exports[`sandbox custom ErrorHandler allows graceful handling of NullishCommandR
         <w:rPr>
           <w:lang w:val=\\"nl-NL\\"/>
         </w:rPr>
-        <w:t xml:space=\\"preserve\\">its ok buddy</w:t>
+        <w:t xml:space=\\"preserve\\">Error: Result of command testobj.value is null or undefined and rejectNullish is set</w:t>
       </w:r>
       <w:bookmarkStart w:id=\\"0\\" w:name=\\"_GoBack\\"/>
       <w:bookmarkEnd w:id=\\"0\\"/>
@@ -285,7 +285,7 @@ exports[`sandbox custom ErrorHandler properly handles InvalidCommandError 1`] = 
     </w:p>
     <w:p w14:paraId=\\"60A04E47\\" w14:textId=\\"2D4C8860\\" w:rsidR=\\"00257AA2\\" w:rsidRDefault=\\"00257AA2\\" w:rsidP=\\"00257AA2\\">
       <w:r>
-        <w:t xml:space=\\"preserve\\">its ok buddy</w:t>
+        <w:t xml:space=\\"preserve\\">Error: ReferenceError: notavailable is not defined</w:t>
       </w:r>
       <w:proofErr w:type=\\"spellStart\\"/>
       <w:r>
@@ -304,7 +304,7 @@ exports[`sandbox custom ErrorHandler properly handles InvalidCommandError 1`] = 
     </w:p>
     <w:p w14:paraId=\\"20A8246E\\" w14:textId=\\"77777777\\" w:rsidR=\\"000F3664\\" w:rsidRDefault=\\"000F3664\\" w:rsidP=\\"000F3664\\">
       <w:r>
-        <w:t xml:space=\\"preserve\\">its ok buddy</w:t>
+        <w:t xml:space=\\"preserve\\">Error: ReferenceError: something is not defined</w:t>
       </w:r>
     </w:p>
     <w:p w14:paraId=\\"1584BF35\\" w14:textId=\\"52D65C7B\\" w:rsidR=\\"000F3664\\" w:rsidRDefault=\\"000F3664\\" w:rsidP=\\"00257AA2\\"/>

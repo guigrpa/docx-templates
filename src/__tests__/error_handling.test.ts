@@ -125,7 +125,7 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
             errorHandler: (err, code) => {
               expect(err).toBeInstanceOf(NullishCommandResultError);
               expect(code).toStrictEqual('testobj.value');
-              return 'its ok buddy';
+              return `${err}`;
             },
           },
           'XML'
@@ -177,7 +177,7 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
               },
               errorHandler: (err, code) => {
                 errs.push(err);
-                return 'its ok buddy';
+                return `${err}`;
               },
             },
             'XML'
