@@ -1223,6 +1223,25 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         };
         expect(await createReport(opts, 'XML')).toMatchSnapshot();
       });
+
+      it('Regression test for Issue #279: unwanted duplication of text in a table near a FOR loop', async () => {
+        const template = await fs.promises.readFile(
+          path.join(
+            __dirname,
+            'fixtures',
+            'iteration-duplication-issue-279.docx'
+          )
+        );
+        const opts: UserOptions = {
+          noSandbox,
+          template,
+          data: {},
+        };
+        expect(await createReport(opts, 'XML')).toMatchSnapshot();
+
+        // TODO: removeme
+        await fs.promises.writeFile('result.docx', await createReport(opts));
+      });
     });
   });
 });
