@@ -6832,12 +6832,6 @@ Object {
                       "_parent": [Circular],
                       "_text": "",
                     },
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                   ],
                   "_fTextNode": false,
                   "_parent": [Circular],
@@ -6902,12 +6896,6 @@ Object {
                       "_parent": [Circular],
                       "_text": "",
                     },
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                   ],
                   "_fTextNode": false,
                   "_parent": [Circular],
@@ -6966,12 +6954,6 @@ Object {
                     "xml:space": "preserve",
                   },
                   "_children": Array [
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                     Object {
                       "_children": Array [],
                       "_fTextNode": true,
@@ -7282,12 +7264,6 @@ Object {
                       "_parent": [Circular],
                       "_text": "",
                     },
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                   ],
                   "_fTextNode": false,
                   "_parent": [Circular],
@@ -7352,12 +7328,6 @@ Object {
                       "_parent": [Circular],
                       "_text": "",
                     },
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                   ],
                   "_fTextNode": false,
                   "_parent": [Circular],
@@ -7416,12 +7386,6 @@ Object {
                     "xml:space": "preserve",
                   },
                   "_children": Array [
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                     Object {
                       "_children": Array [],
                       "_fTextNode": true,
@@ -8041,12 +8005,6 @@ Object {
                     "xml:space": "preserve",
                   },
                   "_children": Array [
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                     Object {
                       "_children": Array [],
                       "_fTextNode": true,
@@ -8772,12 +8730,6 @@ Object {
                     "xml:space": "preserve",
                   },
                   "_children": Array [
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                     Object {
                       "_children": Array [],
                       "_fTextNode": true,
@@ -27019,38 +26971,6 @@ exports[`noSandbox Template processing Regression test for Issue #279: unwanted 
         <w:t xml:space=\\"preserve\\">:</w:t>
       </w:r>
     </w:p>
-    <w:p w14:paraId=\\"15148AEC\\" w14:textId=\\"4E06BA36\\" w:rsidR=\\"008F10E1\\" w:rsidRDefault=\\"008F58FF\\" w:rsidP=\\"008F10E1\\">
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:ind w:left=\\"1068\\"/>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:numPr>
-          <w:ilvl w:val=\\"0\\"/>
-          <w:numId w:val=\\"8\\"/>
-        </w:numPr>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\">FIRST</w:t>
-      </w:r>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellStart\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellEnd\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-    </w:p>
     <w:tbl>
       <w:tblPr>
         <w:tblStyle w:val=\\"TableGrid\\"/>
@@ -27126,38 +27046,6 @@ exports[`noSandbox Template processing Regression test for Issue #279: unwanted 
         </w:tc>
       </w:tr>
     </w:tbl>
-    <w:p w14:paraId=\\"15148AEC\\" w14:textId=\\"4E06BA36\\" w:rsidR=\\"008F10E1\\" w:rsidRDefault=\\"008F58FF\\" w:rsidP=\\"008F10E1\\">
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:ind w:left=\\"1068\\"/>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:numPr>
-          <w:ilvl w:val=\\"0\\"/>
-          <w:numId w:val=\\"8\\"/>
-        </w:numPr>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\">FIRST</w:t>
-      </w:r>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellStart\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellEnd\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-    </w:p>
     <w:tbl>
       <w:tblPr>
         <w:tblStyle w:val=\\"TableGrid\\"/>
@@ -27233,38 +27121,6 @@ exports[`noSandbox Template processing Regression test for Issue #279: unwanted 
         </w:tc>
       </w:tr>
     </w:tbl>
-    <w:p w14:paraId=\\"15148AEC\\" w14:textId=\\"4E06BA36\\" w:rsidR=\\"008F10E1\\" w:rsidRDefault=\\"008F58FF\\" w:rsidP=\\"008F10E1\\">
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:ind w:left=\\"1068\\"/>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:numPr>
-          <w:ilvl w:val=\\"0\\"/>
-          <w:numId w:val=\\"8\\"/>
-        </w:numPr>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\">FIRST</w:t>
-      </w:r>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellStart\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellEnd\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-    </w:p>
     <w:tbl>
       <w:tblPr>
         <w:tblStyle w:val=\\"TableGrid\\"/>
@@ -27340,38 +27196,6 @@ exports[`noSandbox Template processing Regression test for Issue #279: unwanted 
         </w:tc>
       </w:tr>
     </w:tbl>
-    <w:p w14:paraId=\\"15148AEC\\" w14:textId=\\"4E06BA36\\" w:rsidR=\\"008F10E1\\" w:rsidRDefault=\\"008F58FF\\" w:rsidP=\\"008F10E1\\">
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:ind w:left=\\"1068\\"/>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:numPr>
-          <w:ilvl w:val=\\"0\\"/>
-          <w:numId w:val=\\"8\\"/>
-        </w:numPr>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\">FIRST</w:t>
-      </w:r>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellStart\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellEnd\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-    </w:p>
     <w:tbl>
       <w:tblPr>
         <w:tblStyle w:val=\\"TableGrid\\"/>
@@ -29660,8 +29484,6 @@ exports[`noSandbox Template processing treats existing text near nested FOR loop
       </w:r>
       <w:r w:rsidR=\\"0003395A\\" w:rsidRPr=\\"0003395A\\">
         <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:proofErr w:type=\\"gramEnd\\"/>
       <w:r w:rsidR=\\"0003395A\\" w:rsidRPr=\\"0003395A\\">
@@ -29708,7 +29530,6 @@ exports[`noSandbox Template processing treats existing text near nested FOR loop
       </w:r>
       <w:r w:rsidR=\\"007A7A6F\\">
         <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:r>
         <w:t xml:space=\\"preserve\\"></w:t>
@@ -29740,7 +29561,6 @@ exports[`noSandbox Template processing treats existing text near nested FOR loop
         <w:t xml:space=\\"preserve\\"> </w:t>
       </w:r>
       <w:r w:rsidR=\\"007A7A6F\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
         <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:r>
@@ -29789,8 +29609,6 @@ exports[`noSandbox Template processing treats existing text near nested FOR loop
       </w:r>
       <w:r w:rsidR=\\"0003395A\\" w:rsidRPr=\\"0003395A\\">
         <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:proofErr w:type=\\"gramEnd\\"/>
       <w:r w:rsidR=\\"0003395A\\" w:rsidRPr=\\"0003395A\\">
@@ -29837,7 +29655,6 @@ exports[`noSandbox Template processing treats existing text near nested FOR loop
       </w:r>
       <w:r w:rsidR=\\"007A7A6F\\">
         <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:r>
         <w:t xml:space=\\"preserve\\"></w:t>
@@ -29869,7 +29686,6 @@ exports[`noSandbox Template processing treats existing text near nested FOR loop
         <w:t xml:space=\\"preserve\\"> </w:t>
       </w:r>
       <w:r w:rsidR=\\"007A7A6F\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
         <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:r>
@@ -36969,12 +36785,6 @@ Object {
                       "_parent": [Circular],
                       "_text": "",
                     },
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                   ],
                   "_fTextNode": false,
                   "_parent": [Circular],
@@ -37039,12 +36849,6 @@ Object {
                       "_parent": [Circular],
                       "_text": "",
                     },
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                   ],
                   "_fTextNode": false,
                   "_parent": [Circular],
@@ -37103,12 +36907,6 @@ Object {
                     "xml:space": "preserve",
                   },
                   "_children": Array [
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                     Object {
                       "_children": Array [],
                       "_fTextNode": true,
@@ -37419,12 +37217,6 @@ Object {
                       "_parent": [Circular],
                       "_text": "",
                     },
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                   ],
                   "_fTextNode": false,
                   "_parent": [Circular],
@@ -37489,12 +37281,6 @@ Object {
                       "_parent": [Circular],
                       "_text": "",
                     },
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                   ],
                   "_fTextNode": false,
                   "_parent": [Circular],
@@ -37553,12 +37339,6 @@ Object {
                     "xml:space": "preserve",
                   },
                   "_children": Array [
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                     Object {
                       "_children": Array [],
                       "_fTextNode": true,
@@ -38178,12 +37958,6 @@ Object {
                     "xml:space": "preserve",
                   },
                   "_children": Array [
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                     Object {
                       "_children": Array [],
                       "_fTextNode": true,
@@ -38909,12 +38683,6 @@ Object {
                     "xml:space": "preserve",
                   },
                   "_children": Array [
-                    Object {
-                      "_children": Array [],
-                      "_fTextNode": true,
-                      "_parent": [Circular],
-                      "_text": "",
-                    },
                     Object {
                       "_children": Array [],
                       "_fTextNode": true,
@@ -57156,38 +56924,6 @@ exports[`sandbox Template processing Regression test for Issue #279: unwanted du
         <w:t xml:space=\\"preserve\\">:</w:t>
       </w:r>
     </w:p>
-    <w:p w14:paraId=\\"15148AEC\\" w14:textId=\\"4E06BA36\\" w:rsidR=\\"008F10E1\\" w:rsidRDefault=\\"008F58FF\\" w:rsidP=\\"008F10E1\\">
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:ind w:left=\\"1068\\"/>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:numPr>
-          <w:ilvl w:val=\\"0\\"/>
-          <w:numId w:val=\\"8\\"/>
-        </w:numPr>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\">FIRST</w:t>
-      </w:r>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellStart\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellEnd\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-    </w:p>
     <w:tbl>
       <w:tblPr>
         <w:tblStyle w:val=\\"TableGrid\\"/>
@@ -57263,38 +56999,6 @@ exports[`sandbox Template processing Regression test for Issue #279: unwanted du
         </w:tc>
       </w:tr>
     </w:tbl>
-    <w:p w14:paraId=\\"15148AEC\\" w14:textId=\\"4E06BA36\\" w:rsidR=\\"008F10E1\\" w:rsidRDefault=\\"008F58FF\\" w:rsidP=\\"008F10E1\\">
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:ind w:left=\\"1068\\"/>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:numPr>
-          <w:ilvl w:val=\\"0\\"/>
-          <w:numId w:val=\\"8\\"/>
-        </w:numPr>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\">FIRST</w:t>
-      </w:r>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellStart\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellEnd\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-    </w:p>
     <w:tbl>
       <w:tblPr>
         <w:tblStyle w:val=\\"TableGrid\\"/>
@@ -57370,38 +57074,6 @@ exports[`sandbox Template processing Regression test for Issue #279: unwanted du
         </w:tc>
       </w:tr>
     </w:tbl>
-    <w:p w14:paraId=\\"15148AEC\\" w14:textId=\\"4E06BA36\\" w:rsidR=\\"008F10E1\\" w:rsidRDefault=\\"008F58FF\\" w:rsidP=\\"008F10E1\\">
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:ind w:left=\\"1068\\"/>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:numPr>
-          <w:ilvl w:val=\\"0\\"/>
-          <w:numId w:val=\\"8\\"/>
-        </w:numPr>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\">FIRST</w:t>
-      </w:r>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellStart\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellEnd\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-    </w:p>
     <w:tbl>
       <w:tblPr>
         <w:tblStyle w:val=\\"TableGrid\\"/>
@@ -57477,38 +57149,6 @@ exports[`sandbox Template processing Regression test for Issue #279: unwanted du
         </w:tc>
       </w:tr>
     </w:tbl>
-    <w:p w14:paraId=\\"15148AEC\\" w14:textId=\\"4E06BA36\\" w:rsidR=\\"008F10E1\\" w:rsidRDefault=\\"008F58FF\\" w:rsidP=\\"008F10E1\\">
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:ind w:left=\\"1068\\"/>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:pPr>
-        <w:pStyle w:val=\\"ListParagraph\\"/>
-        <w:numPr>
-          <w:ilvl w:val=\\"0\\"/>
-          <w:numId w:val=\\"8\\"/>
-        </w:numPr>
-        <w:jc w:val=\\"both\\"/>
-      </w:pPr>
-      <w:r>
-        <w:t xml:space=\\"preserve\\">FIRST</w:t>
-      </w:r>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellStart\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-      <w:proofErr w:type=\\"spellEnd\\"/>
-      <w:r w:rsidR=\\"008F58FF\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
-      </w:r>
-    </w:p>
     <w:tbl>
       <w:tblPr>
         <w:tblStyle w:val=\\"TableGrid\\"/>
@@ -59797,8 +59437,6 @@ exports[`sandbox Template processing treats existing text near nested FOR loops 
       </w:r>
       <w:r w:rsidR=\\"0003395A\\" w:rsidRPr=\\"0003395A\\">
         <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:proofErr w:type=\\"gramEnd\\"/>
       <w:r w:rsidR=\\"0003395A\\" w:rsidRPr=\\"0003395A\\">
@@ -59845,7 +59483,6 @@ exports[`sandbox Template processing treats existing text near nested FOR loops 
       </w:r>
       <w:r w:rsidR=\\"007A7A6F\\">
         <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:r>
         <w:t xml:space=\\"preserve\\"></w:t>
@@ -59877,7 +59514,6 @@ exports[`sandbox Template processing treats existing text near nested FOR loops 
         <w:t xml:space=\\"preserve\\"> </w:t>
       </w:r>
       <w:r w:rsidR=\\"007A7A6F\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
         <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:r>
@@ -59926,8 +59562,6 @@ exports[`sandbox Template processing treats existing text near nested FOR loops 
       </w:r>
       <w:r w:rsidR=\\"0003395A\\" w:rsidRPr=\\"0003395A\\">
         <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:proofErr w:type=\\"gramEnd\\"/>
       <w:r w:rsidR=\\"0003395A\\" w:rsidRPr=\\"0003395A\\">
@@ -59974,7 +59608,6 @@ exports[`sandbox Template processing treats existing text near nested FOR loops 
       </w:r>
       <w:r w:rsidR=\\"007A7A6F\\">
         <w:t xml:space=\\"preserve\\"></w:t>
-        <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:r>
         <w:t xml:space=\\"preserve\\"></w:t>
@@ -60006,7 +59639,6 @@ exports[`sandbox Template processing treats existing text near nested FOR loops 
         <w:t xml:space=\\"preserve\\"> </w:t>
       </w:r>
       <w:r w:rsidR=\\"007A7A6F\\">
-        <w:t xml:space=\\"preserve\\"></w:t>
         <w:t xml:space=\\"preserve\\"></w:t>
       </w:r>
       <w:r>

@@ -249,18 +249,6 @@ export async function walkTemplate(
     // Handle an UP movement
     // ---------------------
     if (move === 'UP') {
-      // Loop exploring? Update the reference node for the current loop
-      if (
-        isLoopExploring(ctx) &&
-        curLoop &&
-        nodeIn === curLoop.refNode._parent
-      ) {
-        curLoop.refNode = nodeIn;
-        curLoop.refNodeLevel -= 1;
-        logger.debug(
-          `Updated loop '${curLoop.varName}' refNode: ` + debugPrintNode(nodeIn)
-        );
-      }
       const nodeOutParent = nodeOut._parent;
       if (nodeOutParent == null) throw new InternalError('node parent is null');
 
