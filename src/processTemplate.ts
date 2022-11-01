@@ -182,11 +182,10 @@ export async function walkTemplate(
     // =============================================
     if (ctx.fJump) {
       if (!curLoop) throw new InternalError('jumping while curLoop is null');
-      // TODO: comment debug statements back out, as creating the debug string creates overhead.
-      logger.debug(
-        `Jumping to level ${curLoop.refNodeLevel}...`,
-        debugPrintNode(curLoop.refNode)
-      );
+      // logger.debug(
+      //   `Jumping to level ${curLoop.refNodeLevel}...`,
+      //   debugPrintNode(curLoop.refNode)
+      // );
       deltaJump = ctx.level - curLoop.refNodeLevel;
       nodeIn = curLoop.refNode;
       ctx.level = curLoop.refNodeLevel;
@@ -213,10 +212,10 @@ export async function walkTemplate(
       move = 'UP';
     }
 
-    logger.debug(
-      `Next node [${move}, level ${ctx.level}]`,
-      debugPrintNode(nodeIn)
-    );
+    // logger.debug(
+    //   `Next node [${move}, level ${ctx.level}]`,
+    //   debugPrintNode(nodeIn)
+    // );
 
     // =============================================
     // Process input node
@@ -378,10 +377,10 @@ export async function walkTemplate(
         if (typeof result === 'string') {
           // TODO: improve typesafety of conversion Node to TextNode.
           (newNode as TextNode)._text = result;
-          logger.debug(
-            `Inserted command result string into node. Updated node: ` +
-              debugPrintNode(newNode)
-          );
+          // logger.debug(
+          //   `Inserted command result string into node. Updated node: ` +
+          //     debugPrintNode(newNode)
+          // );
         } else {
           errors.push(...result);
         }
@@ -488,7 +487,7 @@ const processCmd: CommandProcessor = async (
   ctx.cmd = ''; // flush the context
   try {
     const { cmdName, cmdRest } = splitCommand(cmd);
-    if (cmdName !== 'CMD_NODE') logger.debug(`Processing cmd: ${cmd}`);
+    // if (cmdName !== 'CMD_NODE') logger.debug(`Processing cmd: ${cmd}`);
     // Seeking query?
     if (ctx.fSeekQuery) {
       if (cmdName === 'QUERY') ctx.query = cmdRest;
@@ -507,7 +506,7 @@ const processCmd: CommandProcessor = async (
       const aliasName = aliasMatch[1];
       const fullCmd = aliasMatch[2];
       ctx.shorthands[aliasName] = fullCmd;
-      logger.debug(`Defined alias '${aliasName}' for: ${fullCmd}`);
+      // logger.debug(`Defined alias '${aliasName}' for: ${fullCmd}`);
 
       // FOR <varName> IN <expression>
       // IF <expression>
@@ -741,9 +740,9 @@ const processEndForIf = (
   const varName = isIf ? node._ifName : cmdRest;
   if (curLoop.varName !== varName) {
     if (ctx.loops.find(o => o.varName === varName) == null) {
-      logger.debug(
-        `Ignoring ${cmd} (${varName}, but we're expecting ${curLoop.varName})`
-      );
+      // logger.debug(
+      //   `Ignoring ${cmd} (${varName}, but we're expecting ${curLoop.varName})`
+      // );
       return;
     }
     throw new InvalidCommandError('Invalid command', cmd);
