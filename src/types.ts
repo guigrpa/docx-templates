@@ -137,7 +137,7 @@ export type Context = {
     'w:p': BufferStatus;
     'w:tr': BufferStatus;
   };
-  pendingImageNode?: NonTextNode;
+  pendingImageNode?: { image: NonTextNode; caption?: NonTextNode[] };
   imageId: number;
   images: Images;
   pendingLinkNode?: NonTextNode;
@@ -223,6 +223,11 @@ export type ImagePars = {
    * Optional rotation in degrees, with positive angles moving clockwise.
    */
   rotation?: number;
+
+  /**
+   * Optional caption
+   */
+  caption?: string;
 };
 
 export type LinkPars = {

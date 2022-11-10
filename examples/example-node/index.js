@@ -31,7 +31,7 @@ createReport({
     qr: contents => {
       const dataUrl = qrcode(contents, { size: 500 });
       const data = dataUrl.slice('data:image/gif;base64,'.length);
-      return { width: 6, height: 6, data, extension: '.gif' };
+      return { width: 6, height: 6, data, extension: '.gif', caption: 'QR Code caption' };
     },
   },
 }).then(
