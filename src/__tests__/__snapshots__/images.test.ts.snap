@@ -3241,3 +3241,289 @@ exports[`009 correctly rotate image 1`] = `
   </w:body>
 </w:document>"
 `;
+
+exports[`011 correctly inserts the optional image caption 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\" standalone=\\"yes\\"?>
+<w:document xmlns:wpc=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas\\" xmlns:cx=\\"http://schemas.microsoft.com/office/drawing/2014/chartex\\" xmlns:cx1=\\"http://schemas.microsoft.com/office/drawing/2015/9/8/chartex\\" xmlns:cx2=\\"http://schemas.microsoft.com/office/drawing/2015/10/21/chartex\\" xmlns:cx3=\\"http://schemas.microsoft.com/office/drawing/2016/5/9/chartex\\" xmlns:cx4=\\"http://schemas.microsoft.com/office/drawing/2016/5/10/chartex\\" xmlns:cx5=\\"http://schemas.microsoft.com/office/drawing/2016/5/11/chartex\\" xmlns:cx6=\\"http://schemas.microsoft.com/office/drawing/2016/5/12/chartex\\" xmlns:cx7=\\"http://schemas.microsoft.com/office/drawing/2016/5/13/chartex\\" xmlns:cx8=\\"http://schemas.microsoft.com/office/drawing/2016/5/14/chartex\\" xmlns:mc=\\"http://schemas.openxmlformats.org/markup-compatibility/2006\\" xmlns:aink=\\"http://schemas.microsoft.com/office/drawing/2016/ink\\" xmlns:am3d=\\"http://schemas.microsoft.com/office/drawing/2017/model3d\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\" xmlns:oel=\\"http://schemas.microsoft.com/office/2019/extlst\\" xmlns:r=\\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\\" xmlns:m=\\"http://schemas.openxmlformats.org/officeDocument/2006/math\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:wp14=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing\\" xmlns:wp=\\"http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing\\" xmlns:w10=\\"urn:schemas-microsoft-com:office:word\\" xmlns:w=\\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\\" xmlns:w14=\\"http://schemas.microsoft.com/office/word/2010/wordml\\" xmlns:w15=\\"http://schemas.microsoft.com/office/word/2012/wordml\\" xmlns:w16cex=\\"http://schemas.microsoft.com/office/word/2018/wordml/cex\\" xmlns:w16cid=\\"http://schemas.microsoft.com/office/word/2016/wordml/cid\\" xmlns:w16=\\"http://schemas.microsoft.com/office/word/2018/wordml\\" xmlns:w16sdtdh=\\"http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash\\" xmlns:w16se=\\"http://schemas.microsoft.com/office/word/2015/wordml/symex\\" xmlns:wpg=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingGroup\\" xmlns:wpi=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingInk\\" xmlns:wne=\\"http://schemas.microsoft.com/office/word/2006/wordml\\" xmlns:wps=\\"http://schemas.microsoft.com/office/word/2010/wordprocessingShape\\" mc:Ignorable=\\"w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14\\">
+  <w:body>
+    <w:p w14:paraId=\\"62292445\\" w14:textId=\\"61F53776\\" w:rsidR=\\"00067695\\" w:rsidRDefault=\\"00067695\\" w:rsidP=\\"00067695\\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\">With</w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"> </w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\">caption</w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\">:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"3177EBA3\\" w14:textId=\\"77777777\\" w:rsidR=\\"00067695\\" w:rsidRDefault=\\"00067695\\" w:rsidP=\\"00067695\\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId=\\"72FB4F0D\\" w14:textId=\\"725BAE2C\\" w:rsidR=\\"00067695\\" w:rsidRDefault=\\"00EC4C65\\" w:rsidP=\\"00067695\\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:drawing>
+          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+            <wp:docPr id=\\"1\\" name=\\"Picture 1\\" descr=\\"desc\\"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id=\\"0\\" name=\\"Picture 1\\" descr=\\"desc\\"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed=\\"img1\\" cstate=\\"print\\">
+                      <a:extLst>
+                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode=\\"auto\\">
+                    <a:xfrm>
+                      <a:off x=\\"0\\" y=\\"0\\"/>
+                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                    </a:xfrm>
+                    <a:prstGeom prst=\\"rect\\">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+        <w:br/>
+        <w:t>The image caption!</w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:r w:rsidR=\\"00A87B0B\\">
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r w:rsidR=\\"00A87B0B\\">
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:r w:rsidR=\\"00067695\\">
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:r w:rsidR=\\"00A87B0B\\">
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"536B843F\\" w14:textId=\\"5EBD513B\\" w:rsidR=\\"00067695\\" w:rsidRDefault=\\"00067695\\" w:rsidP=\\"00067695\\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId=\\"1FE2374D\\" w14:textId=\\"447049E8\\" w:rsidR=\\"00067695\\" w:rsidRDefault=\\"00067695\\" w:rsidP=\\"00067695\\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId=\\"22D02752\\" w14:textId=\\"18F190AC\\" w:rsidR=\\"00067695\\" w:rsidRDefault=\\"00067695\\" w:rsidP=\\"00067695\\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId=\\"0647DF78\\" w14:textId=\\"73B34074\\" w:rsidR=\\"00067695\\" w:rsidRDefault=\\"00067695\\" w:rsidP=\\"00067695\\">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+      </w:pPr>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\">Without</w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"> </w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\">caption</w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\">:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"3EECAE90\\" w14:textId=\\"4876545D\\" w:rsidR=\\"00067695\\" w:rsidRPr=\\"00067695\\" w:rsidRDefault=\\"00067695\\" w:rsidP=\\"00067695\\">
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:drawing>
+          <wp:inline distT=\\"0\\" distB=\\"0\\" distL=\\"0\\" distR=\\"0\\">
+            <wp:extent cx=\\"2160000\\" cy=\\"2160000\\"/>
+            <wp:docPr id=\\"2\\" name=\\"Picture 2\\" descr=\\"desc\\"/>
+            <wp:cNvGraphicFramePr>
+              <a:graphicFrameLocks xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\" noChangeAspect=\\"1\\"/>
+            </wp:cNvGraphicFramePr>
+            <a:graphic xmlns:a=\\"http://schemas.openxmlformats.org/drawingml/2006/main\\">
+              <a:graphicData uri=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                <pic:pic xmlns:pic=\\"http://schemas.openxmlformats.org/drawingml/2006/picture\\">
+                  <pic:nvPicPr>
+                    <pic:cNvPr id=\\"0\\" name=\\"Picture 2\\" descr=\\"desc\\"/>
+                    <pic:cNvPicPr>
+                      <a:picLocks noChangeAspect=\\"1\\" noChangeArrowheads=\\"1\\"/>
+                    </pic:cNvPicPr>
+                  </pic:nvPicPr>
+                  <pic:blipFill>
+                    <a:blip r:embed=\\"img2\\" cstate=\\"print\\">
+                      <a:extLst>
+                        <a:ext uri=\\"{28A0092B-C50C-407E-A947-70E740481C1C}\\">
+                          <a14:useLocalDpi xmlns:a14=\\"http://schemas.microsoft.com/office/drawing/2010/main\\" val=\\"0\\"/>
+                        </a:ext>
+                      </a:extLst>
+                    </a:blip>
+                    <a:srcRect/>
+                    <a:stretch>
+                      <a:fillRect/>
+                    </a:stretch>
+                  </pic:blipFill>
+                  <pic:spPr bwMode=\\"auto\\">
+                    <a:xfrm>
+                      <a:off x=\\"0\\" y=\\"0\\"/>
+                      <a:ext cx=\\"2160000\\" cy=\\"2160000\\"/>
+                    </a:xfrm>
+                    <a:prstGeom prst=\\"rect\\">
+                      <a:avLst/>
+                    </a:prstGeom>
+                    <a:noFill/>
+                    <a:ln>
+                      <a:noFill/>
+                    </a:ln>
+                  </pic:spPr>
+                </pic:pic>
+              </a:graphicData>
+            </a:graphic>
+          </wp:inline>
+        </w:drawing>
+      </w:r>
+      <w:proofErr w:type=\\"spellStart\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:proofErr w:type=\\"spellEnd\\"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val=\\"es-ES\\"/>
+        </w:rPr>
+        <w:t xml:space=\\"preserve\\"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId=\\"43B62D17\\" w14:textId=\\"77777777\\" w:rsidR=\\"00067695\\" w:rsidRPr=\\"00067695\\" w:rsidRDefault=\\"00067695\\" w:rsidP=\\"00067695\\"/>
+    <w:sectPr w:rsidR=\\"00067695\\" w:rsidRPr=\\"00067695\\" w:rsidSect=\\"00A0490B\\">
+      <w:pgSz w:w=\\"11900\\" w:h=\\"16840\\"/>
+      <w:pgMar w:top=\\"1417\\" w:right=\\"1701\\" w:bottom=\\"1417\\" w:left=\\"1701\\" w:header=\\"708\\" w:footer=\\"708\\" w:gutter=\\"0\\"/>
+      <w:cols w:space=\\"708\\"/>
+      <w:docGrid w:linePitch=\\"360\\"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;

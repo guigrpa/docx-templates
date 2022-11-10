@@ -447,3 +447,28 @@ it('010: can inject an image in a document that already contains images inserted
     ]
   `);
 });
+
+it('011 correctly inserts the optional image caption', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'imageCaption.docx')
+  );
+  const buff = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'sample.png')
+  );
+  const opts = {
+    template,
+    data: {},
+    additionalJsContext: {
+      injectImg: (caption: boolean) => {
+        return {
+          width: 6,
+          height: 6,
+          data: buff,
+          extension: '.png',
+          caption: caption ? 'The image caption!' : undefined,
+        };
+      },
+    },
+  };
+  expect(await createReport(opts, 'XML')).toMatchSnapshot();
+});
