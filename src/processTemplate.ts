@@ -274,12 +274,16 @@ export async function walkTemplate(
         !nodeOut._fTextNode &&
         nodeOut._tag === 'w:t'
       ) {
-        const imgNode = ctx.pendingImageNode;
+        const imgNode = ctx.pendingImageNode.image;
+        const captionNodes = ctx.pendingImageNode.caption;
         const parent = nodeOut._parent;
         if (parent) {
           imgNode._parent = parent;
           parent._children.pop();
           parent._children.push(imgNode);
+          if (captionNodes) {
+            parent._children.push(...captionNodes);
+          }
           // Prevent containing paragraph or table row from being removed
           ctx.buffers['w:p'].fInsertedText = true;
           ctx.buffers['w:tr'].fInsertedText = true;
@@ -575,7 +579,7 @@ const processCmd: CommandProcessor = async (
         );
         if (img != null) {
           try {
-            await processImage(ctx, img);
+            processImage(ctx, img);
           } catch (e) {
             if (!(e instanceof Error)) throw e;
             throw new ImageError(e, cmd);
@@ -813,7 +817,7 @@ function validateImagePars(pars: ImagePars) {
   if (pars.thumbnail) validateImage(pars.thumbnail);
 }
 
-const processImage = async (ctx: Context, imagePars: ImagePars) => {
+const processImage = (ctx: Context, imagePars: ImagePars) => {
   validateImagePars(imagePars);
   const cx = (imagePars.width * 360e3).toFixed(0);
   const cy = (imagePars.height * 360e3).toFixed(0);
@@ -913,7 +917,13 @@ const processImage = async (ctx: Context, imagePars: ImagePars) => {
       ),
     ]),
   ]);
-  ctx.pendingImageNode = drawing;
+  ctx.pendingImageNode = { image: drawing };
+  if (imagePars.caption) {
+    ctx.pendingImageNode.caption = [
+      node('w:br'),
+      node('w:t', {}, [newTextNode(imagePars.caption)]),
+    ];
+  }
 };
 
 function getImageData(imagePars: ImagePars): Image {
