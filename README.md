@@ -413,7 +413,9 @@ If the `label` is not specified, the URL is used as a label.
 
 ### `HTML`
 
-Takes the HTML resulting from evaluating a JavaScript snippet and converts it to Word contents (using [altchunk](https://blogs.msdn.microsoft.com/ericwhite/2008/10/26/how-to-use-altchunk-for-document-assembly/)):
+Takes the HTML resulting from evaluating a JavaScript snippet and converts it to Word contents.
+
+**Important:** This uses [altchunk](https://blogs.msdn.microsoft.com/ericwhite/2008/10/26/how-to-use-altchunk-for-document-assembly/), which is only supported in Microsoft Word, and not in e.g. LibreOffice or Google Docs.
 
 ```
 +++HTML `
