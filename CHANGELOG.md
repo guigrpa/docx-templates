@@ -1,3 +1,9 @@
+## 4.10.0 (2023-02-03)
+- [Issue #194](https://github.com/guigrpa/docx-templates/issues/194): add ability to provide captions for images ([MR #286](https://github.com/guigrpa/docx-templates/pull/286)).
+- Ensure XMLs are processed in a deterministic order (mainly relevant for `listCommands()`), see commit 8b2ba5526df78da675eaf59f88cb76035ffac5bd.
+- Various minor code quality and typing improvements.
+- Bumped dependencies.
+
 ## 4.9.2 (2022-04-04)
 - [PR 266](https://github.com/guigrpa/docx-templates/pull/266) Fix types for Deno bundle (by @mathe42).
 
