@@ -42,6 +42,7 @@ Contributions are welcome!
     - [`FOR` and `END-FOR`](#for-and-end-for)
     - [`IF` and `END-IF`](#if-and-end-if)
     - [`ALIAS` (and alias resolution with `*`)](#alias-and-alias-resolution-with-)
+  - [Inserting literal XML](#inserting-literal-xml)
 - [Error handling](#error-handling)
   - [Error types](#error-types)
   - [Custom error handler](#custom-error-handler)
@@ -512,6 +513,24 @@ Define a name for a complete command (especially useful for formatting tables):
 | +++END-FOR person+++         |                         |
 ----------------------------------------------------------
 ```
+
+## Inserting literal XML
+You can also directly insert Office Open XML markup into the document using the `literalXmlDelimiter`, which is by default set to `||`.
+
+E.g. if you have a template like this:
+
+```
++++INS text+++
+```
+
+```js
+await createReport({
+  template,
+  data: { text: 'foo||<w:br/>||bar' },
+}
+```
+
+See http://officeopenxml.com/anatomyofOOXML.php for a good reference of the internal XML structure of a docx file.
 
 # Error handling
 

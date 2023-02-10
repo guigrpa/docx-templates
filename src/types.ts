@@ -60,7 +60,7 @@ export type UserOptions = {
    */
   cmdDelimiter?: string | [string, string];
   /**
-   * Can be used to change the delimiter in generated XML.
+   * The delimiter that's used to indicate literal XML that should be inserted into the docx XML tree as-is. Defaults to `||`.
    */
   literalXmlDelimiter?: string;
   /**
