@@ -557,10 +557,20 @@ const processCmd: CommandProcessor = async (
         let str = String(result);
         if (ctx.options.processLineBreaks) {
           const { literalXmlDelimiter } = ctx.options;
-          str = str.replace(
-            /\n/g,
-            `${literalXmlDelimiter}<w:br/>${literalXmlDelimiter}`
-          );
+          if (ctx.options.processLineBreaksAsNewText) {
+            const splitByLineBreak = str.split('\n');
+            const LINE_BREAK = `${literalXmlDelimiter}<w:br/>${literalXmlDelimiter}`;
+            const END_OF_TEXT = `${literalXmlDelimiter}</w:t>${literalXmlDelimiter}`;
+            const START_OF_TEXT = `${literalXmlDelimiter}<w:t xml:space="preserve">${literalXmlDelimiter}`;
+            str = splitByLineBreak.join(
+              `${END_OF_TEXT}${LINE_BREAK}${START_OF_TEXT}`
+            );
+          } else {
+            str = str.replace(
+              /\n/g,
+              `${literalXmlDelimiter}<w:br/>${literalXmlDelimiter}`
+            );
+          }
         }
         return str;
       }
