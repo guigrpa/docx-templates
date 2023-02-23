@@ -162,10 +162,6 @@ async function createReport(
       typeof options.errorHandler === 'function' ? options.errorHandler : null,
     fixSmartQuotes:
       options.fixSmartQuotes == null ? false : options.fixSmartQuotes,
-    processLineBreaksAsNewText:
-      options.processLineBreaksAsNewText == null
-        ? false
-        : options.processLineBreaksAsNewText,
   };
   const xmlOptions = { literalXmlDelimiter };
 
@@ -335,7 +331,6 @@ export async function listCommands(
     rejectNullish: false,
     errorHandler: null,
     fixSmartQuotes: false,
-    processLineBreaksAsNewText: false,
   };
 
   const { jsTemplate, mainDocument, zip } = await parseTemplate(template);
