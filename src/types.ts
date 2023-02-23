@@ -112,6 +112,11 @@ export type UserOptions = {
    */
   fixSmartQuotes?: boolean;
 
+  /**
+   * Use the new way of injecting line breaks from command results (only applies when `processLineBreaks` is `true`)
+   * which has better results in LibreOffice and Google Drive.
+   * (Default: false)
+   */
   processLineBreaksAsNewText?: boolean;
 };
 
