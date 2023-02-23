@@ -1224,19 +1224,19 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         expect(await createReport(opts, 'XML')).toMatchSnapshot();
       });
 
-      it('newline character inside variable issue #143', async () => {
+      it('newline character inside variable issue #143 not rendered properly in LibreOffice/GDrive', async () => {
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'newlineInVariableIssue143.docx')
         );
         const headline = 'I am a line\n\nAnd so am I!';
-        const result = await createReport({
+        const opts = {
           template,
           data: {
             headline: headline,
           },
-        });
-        expect(result).toBeInstanceOf(Uint8Array);
-        await fs.promises.writeFile('test.docx', result);
+          processLineBreaksAsNewText: true,
+        };
+        expect(await createReport(opts, 'XML')).toMatchSnapshot();
       });
     });
   });
