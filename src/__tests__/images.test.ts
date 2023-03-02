@@ -268,7 +268,7 @@ it('006: can inject an image from the data instead of the additionalJsContext', 
   // Regression test for #218
   const zip = await JSZip.loadAsync(reportA);
   expect(Object.keys(zip?.files ?? {})).toMatchInlineSnapshot(`
-    Array [
+    [
       "[Content_Types].xml",
       "_rels/.rels",
       "word/_rels/document.xml.rels",
@@ -416,7 +416,7 @@ it('010: can inject an image in a document that already contains images inserted
       f.includes('word/media')
     )
   ).toMatchInlineSnapshot(`
-    Array [
+    [
       "word/media/",
       "word/media/template_document.xml_img1.png",
     ]
@@ -440,7 +440,7 @@ it('010: can inject an image in a document that already contains images inserted
       f.includes('word/media')
     )
   ).toMatchInlineSnapshot(`
-    Array [
+    [
       "word/media/",
       "word/media/template_document.xml_img1.png",
       "word/media/template_document.xml_img2.png",

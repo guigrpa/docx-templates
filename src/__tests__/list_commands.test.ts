@@ -18,18 +18,18 @@ describe('listCommands', () => {
       path.join(__dirname, 'fixtures', 'insertInHeaderAndFooter.docx')
     );
     expect(await listCommands(template)).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "code": "body_command",
           "raw": "INS body_command",
           "type": "INS",
         },
-        Object {
+        {
           "code": "footer_command",
           "raw": "INS footer_command",
           "type": "INS",
         },
-        Object {
+        {
           "code": "header_command",
           "raw": "INS header_command",
           "type": "INS",
@@ -53,13 +53,13 @@ describe('listCommands', () => {
       path.join(__dirname, 'fixtures', 'imageHeader.docx')
     );
     expect(await listCommands(template, '+++')).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "code": "image()",
           "raw": "IMAGE image()",
           "type": "IMAGE",
         },
-        Object {
+        {
           "code": "image()",
           "raw": "IMAGE image()",
           "type": "IMAGE",
@@ -73,18 +73,18 @@ describe('listCommands', () => {
       path.join(__dirname, 'fixtures', 'for1inline.docx')
     );
     expect(await listCommands(template)).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "code": "company IN companies",
           "raw": "FOR company IN companies",
           "type": "FOR",
         },
-        Object {
+        {
           "code": "$company.name",
           "raw": "INS $company.name",
           "type": "INS",
         },
-        Object {
+        {
           "code": "company",
           "raw": "END-FOR company",
           "type": "END-FOR",
@@ -98,63 +98,63 @@ describe('listCommands', () => {
       path.join(__dirname, 'fixtures', 'if2.docx')
     );
     expect(await listCommands(template)).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "code": "4 > 3",
           "raw": "IF 4 > 3",
           "type": "IF",
         },
-        Object {
+        {
           "code": "true",
           "raw": "IF true",
           "type": "IF",
         },
-        Object {
+        {
           "code": "",
           "raw": "END-IF",
           "type": "END-IF",
         },
-        Object {
+        {
           "code": "",
           "raw": "END-IF",
           "type": "END-IF",
         },
-        Object {
+        {
           "code": "4 > 3",
           "raw": "IF 4 > 3",
           "type": "IF",
         },
-        Object {
+        {
           "code": "false",
           "raw": "IF false",
           "type": "IF",
         },
-        Object {
+        {
           "code": "",
           "raw": "END-IF",
           "type": "END-IF",
         },
-        Object {
+        {
           "code": "",
           "raw": "END-IF",
           "type": "END-IF",
         },
-        Object {
+        {
           "code": "4 < 3",
           "raw": "IF 4 < 3",
           "type": "IF",
         },
-        Object {
+        {
           "code": "true",
           "raw": "IF true",
           "type": "IF",
         },
-        Object {
+        {
           "code": "",
           "raw": "END-IF",
           "type": "END-IF",
         },
-        Object {
+        {
           "code": "",
           "raw": "END-IF",
           "type": "END-IF",
@@ -168,18 +168,18 @@ describe('listCommands', () => {
       path.join(__dirname, 'fixtures', 'for1customDelimiter.docx')
     );
     expect(await listCommands(template, '***')).toMatchInlineSnapshot(`
-      Array [
-        Object {
+      [
+        {
           "code": "company IN companies",
           "raw": "FOR company IN companies",
           "type": "FOR",
         },
-        Object {
+        {
           "code": "$company.name",
           "raw": "INS $company.name",
           "type": "INS",
         },
-        Object {
+        {
           "code": "company",
           "raw": "END-FOR company",
           "type": "END-FOR",

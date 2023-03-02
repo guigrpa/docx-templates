@@ -39,7 +39,7 @@ describe('getMetadata', () => {
       path.join(__dirname, 'fixtures', 'simpleQuery.docx')
     );
     expect(await getMetadata(template)).toMatchInlineSnapshot(`
-      Object {
+      {
         "category": undefined,
         "characters": 24,
         "company": undefined,
