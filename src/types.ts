@@ -171,7 +171,7 @@ export const ImageExtensions = [
   '.jpeg',
   '.svg',
 ] as const;
-type ImageExtension = typeof ImageExtensions[number];
+type ImageExtension = (typeof ImageExtensions)[number];
 export type Image = {
   extension: ImageExtension;
   data: Buffer | ArrayBuffer | string;
@@ -249,7 +249,7 @@ export type CommandSummary = {
   code: string;
 };
 
-export type BuiltInCommand = typeof BUILT_IN_COMMANDS[number];
+export type BuiltInCommand = (typeof BUILT_IN_COMMANDS)[number];
 
 export const BUILT_IN_COMMANDS = [
   'QUERY',

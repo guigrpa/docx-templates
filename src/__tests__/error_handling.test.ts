@@ -141,7 +141,7 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
         // First check whether the CommandExecutionError is triggered correctly
         await expect(
           createReport({ noSandbox, template, data: {} })
-        ).rejects.toThrowError(CommandExecutionError);
+        ).rejects.toThrow(CommandExecutionError);
 
         // Now try with an errorHandler
         expect(
@@ -207,7 +207,7 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
               throw new Error('yeah, no!');
             },
           })
-        ).rejects.toThrowError('yeah, no!');
+        ).rejects.toThrow('yeah, no!');
       });
     });
   });
