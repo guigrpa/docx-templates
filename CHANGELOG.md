@@ -1,3 +1,7 @@
+## 4.11.0 (2023-03-02)
+- [Issue #143](https://github.com/guigrpa/docx-templates/issues/143): Add optional `processLineBreaksAsNewText` toggle which provides an alternative way of inserting line breaks from commands into the docx XML. This should improve rendering of newlines in a few docx readers, like LibreOffice. ([MR #182](https://github.com/guigrpa/docx-templates/pull/182)). Thanks @khaled-iva-docs !
+- Updated dependencies.
+
 ## 4.10.0 (2023-02-03)
 - [Issue #194](https://github.com/guigrpa/docx-templates/issues/194): add ability to provide captions for images ([MR #286](https://github.com/guigrpa/docx-templates/pull/286)).
 - Ensure XMLs are processed in a deterministic order (mainly relevant for `listCommands()`), see commit 8b2ba5526df78da675eaf59f88cb76035ffac5bd.
