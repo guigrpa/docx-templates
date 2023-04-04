@@ -62,3 +62,9 @@ export class InternalError extends Error {
 }
 
 export class TemplateParseError extends Error {}
+
+export class MissingIfTagError extends Error {
+  constructor() {
+    super(`Missing open/close if tag`);
+  }
+}

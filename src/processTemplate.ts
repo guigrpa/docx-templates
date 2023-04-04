@@ -29,12 +29,14 @@ import {
   InvalidCommandError,
   ImageError,
   ObjectCommandResultError,
+  MissingIfTagError,
 } from './errors';
 import { logger } from './debug';
 
 export function newContext(options: CreateReportOptions, imageId = 0): Context {
   return {
     gCntIf: 0,
+    gCntEndIf: 0,
     level: 1,
     fCmd: false,
     cmd: '',
@@ -419,6 +421,14 @@ export async function walkTemplate(
     }
   }
 
+  if (ctx.gCntIf !== ctx.gCntEndIf) {
+    if (ctx.options?.failFast) {
+      throw new MissingIfTagError();
+    } else {
+      errors.push(new MissingIfTagError());
+    }
+  }
+
   if (errors.length > 0)
     return {
       status: 'errors',
@@ -757,7 +767,10 @@ const processEndForIf = (
 
   // First time we visit an END-IF node, we assign it the arbitrary name
   // generated when the IF was processed
-  if (isIf && !node._ifName) node._ifName = curLoop.varName;
+  if (isIf && !node._ifName) {
+    node._ifName = curLoop.varName;
+    ctx.gCntEndIf += 1;
+  }
 
   // Check if this is the expected END-IF/END-FOR. If not:
   // - If it's one of the nested varNames, throw

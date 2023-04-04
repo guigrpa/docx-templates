@@ -249,4 +249,22 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
+
+  it('mismatch open/close if tags', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'missingEndIf.docx')
+    );
+
+    await expect(
+      createReport(
+        {
+          noSandbox,
+          template,
+          data: {},
+          rejectNullish: true,
+        },
+        'XML'
+      )
+    ).rejects.toThrow('Missing open/close if tag');
+  });
 });
