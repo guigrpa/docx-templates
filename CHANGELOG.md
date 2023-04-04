@@ -1,3 +1,6 @@
+## 4.11.1 (2023-04-04)
+-  ([MR #305](https://github.com/guigrpa/docx-templates/pull/305)) the `IncompleteConditionalStatementError` is now thrown when an 'IF' statement lacks a corresponding 'END-IF' command. Thanks @RoXuS !
+
 ## 4.11.0 (2023-03-02)
 - [Issue #143](https://github.com/guigrpa/docx-templates/issues/143): Add optional `processLineBreaksAsNewText` toggle which provides an alternative way of inserting line breaks from commands into the docx XML. This should improve rendering of newlines in a few docx readers, like LibreOffice. ([MR #182](https://github.com/guigrpa/docx-templates/pull/182)). Thanks @khaled-iva-docs !
 - Updated dependencies.
