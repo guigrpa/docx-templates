@@ -63,8 +63,10 @@ export class InternalError extends Error {
 
 export class TemplateParseError extends Error {}
 
-export class MissingIfTagError extends Error {
+export class IncompleteConditionalStatementError extends Error {
   constructor() {
-    super(`Missing open/close if tag`);
+    super(
+      'Incomplete IF/END-IF statement. Make sure each IF-statement has a corresponding END-IF command.'
+    );
   }
 }

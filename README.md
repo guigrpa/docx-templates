@@ -568,6 +568,7 @@ CommandExecutionError
 ImageError
 InternalError
 TemplateParseError
+IncompleteConditionalStatementError // thrown when an IF-statement has no corresponding END-IF command
 ```
 
 ## Custom error handler

@@ -29,7 +29,7 @@ import {
   InvalidCommandError,
   ImageError,
   ObjectCommandResultError,
-  MissingIfTagError,
+  IncompleteConditionalStatementError,
 } from './errors';
 import { logger } from './debug';
 
@@ -423,9 +423,9 @@ export async function walkTemplate(
 
   if (ctx.gCntIf !== ctx.gCntEndIf) {
     if (ctx.options?.failFast) {
-      throw new MissingIfTagError();
+      throw new IncompleteConditionalStatementError();
     } else {
-      errors.push(new MissingIfTagError());
+      errors.push(new IncompleteConditionalStatementError());
     }
   }
 
@@ -762,7 +762,11 @@ const processEndForIf = (
   cmdRest: string
 ): void => {
   const curLoop = getCurLoop(ctx);
-  if (!curLoop) throw new InvalidCommandError('Invalid command', cmd);
+  if (!curLoop)
+    throw new InvalidCommandError(
+      'Unexpected END-IF outside of IF statement context',
+      cmd
+    );
   const isIf = cmdName === 'END-IF';
 
   // First time we visit an END-IF node, we assign it the arbitrary name
