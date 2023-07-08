@@ -443,7 +443,7 @@ it('010: can inject an image in a document that already contains images inserted
     [
       "word/media/",
       "word/media/template_document.xml_img1.png",
-      "word/media/template_document.xml_img2.png",
+      "word/media/template_document.xml_img3.png",
     ]
   `);
 });
