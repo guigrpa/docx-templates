@@ -2413,7 +2413,7 @@ exports[`007: can inject an image in a document that already contains images (re
                     <wp:lineTo x="-160" y="-141"/>
                   </wp:wrapPolygon>
                 </wp:wrapThrough>
-                <wp:docPr id="1" name="Rechteck 1"/>
+                <wp:docPr id="2" name="Rechteck 1"/>
                 <wp:cNvGraphicFramePr/>
                 <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
                   <a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
@@ -2457,7 +2457,7 @@ exports[`007: can inject an image in a document that already contains images (re
                               <w:drawing>
                                 <wp:inline distT="0" distB="0" distL="0" distR="0">
                                   <wp:extent cx="2160000" cy="2160000"/>
-                                  <wp:docPr id="2" name="Picture 2" descr="desc"/>
+                                  <wp:docPr id="3" name="Picture 3" descr="desc"/>
                                   <wp:cNvGraphicFramePr>
                                     <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
                                   </wp:cNvGraphicFramePr>
@@ -2465,13 +2465,13 @@ exports[`007: can inject an image in a document that already contains images (re
                                     <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                       <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                         <pic:nvPicPr>
-                                          <pic:cNvPr id="0" name="Picture 2" descr="desc"/>
+                                          <pic:cNvPr id="0" name="Picture 3" descr="desc"/>
                                           <pic:cNvPicPr>
                                             <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                                           </pic:cNvPicPr>
                                         </pic:nvPicPr>
                                         <pic:blipFill>
-                                          <a:blip r:embed="img2" cstate="print">
+                                          <a:blip r:embed="img3" cstate="print">
                                             <a:extLst>
                                               <a:ext uri="{28A0092B-C50C-407E-A947-70E740481C1C}">
                                                 <a14:useLocalDpi xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" val="0"/>
@@ -2569,7 +2569,7 @@ AABkcnMvZG93bnJldi54bWxQSwUGAAAAAAQABADzAAAAzAUAAAAA
                         <w:drawing>
                           <wp:inline distT="0" distB="0" distL="0" distR="0">
                             <wp:extent cx="2160000" cy="2160000"/>
-                            <wp:docPr id="3" name="Picture 3" descr="desc"/>
+                            <wp:docPr id="4" name="Picture 4" descr="desc"/>
                             <wp:cNvGraphicFramePr>
                               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
                             </wp:cNvGraphicFramePr>
@@ -2577,13 +2577,13 @@ AABkcnMvZG93bnJldi54bWxQSwUGAAAAAAQABADzAAAAzAUAAAAA
                               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                   <pic:nvPicPr>
-                                    <pic:cNvPr id="0" name="Picture 3" descr="desc"/>
+                                    <pic:cNvPr id="0" name="Picture 4" descr="desc"/>
                                     <pic:cNvPicPr>
                                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                                     </pic:cNvPicPr>
                                   </pic:nvPicPr>
                                   <pic:blipFill>
-                                    <a:blip r:embed="img3" cstate="print">
+                                    <a:blip r:embed="img4" cstate="print">
                                       <a:extLst>
                                         <a:ext uri="{28A0092B-C50C-407E-A947-70E740481C1C}">
                                           <a14:useLocalDpi xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" val="0"/>

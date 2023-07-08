@@ -22,6 +22,7 @@ import {
   Image,
   BUILT_IN_COMMANDS,
   ImageExtensions,
+  NonTextNode,
 } from './types';
 import {
   CommandSyntaxError,
@@ -383,6 +384,17 @@ export async function walkTemplate(
       const newNode: Node = cloneNodeWithoutChildren(nodeIn);
       newNode._parent = nodeOut;
       nodeOut._children.push(newNode);
+
+      // Update shape IDs in mc:AlternateContent
+      const newNodeTag = (newNode as NonTextNode)._tag;
+      if (
+        !isLoopExploring(ctx) &&
+        (newNodeTag === 'wp:docPr' || newNodeTag === 'v:shape')
+      ) {
+        logger.debug('detected a - ', debugPrintNode(newNode));
+        updateID(newNode as NonTextNode, ctx);
+      }
+
       const parent = nodeIn._parent;
 
       // If it's a text node inside a w:t, process it
@@ -1012,3 +1024,12 @@ const appendTextToTagBuffers = (
     if (fInsertedText) buf.fInsertedText = true;
   });
 };
+
+function updateID(newNode: NonTextNode, ctx: Context) {
+  ctx.imageId += 1;
+  const id = String(ctx.imageId);
+  newNode._attrs = {
+    ...newNode._attrs,
+    id: `${id}`,
+  };
+}
