@@ -151,6 +151,7 @@ export type Context = {
   buffers: {
     'w:p': BufferStatus;
     'w:tr': BufferStatus;
+    'w:tc': BufferStatus;
   };
   pendingImageNode?: { image: NonTextNode; caption?: NonTextNode[] };
   imageAndShapeIdIncrement: number;

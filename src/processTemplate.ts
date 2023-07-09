@@ -49,6 +49,7 @@ export function newContext(
     buffers: {
       'w:p': { text: '', cmds: '', fInsertedText: false },
       'w:tr': { text: '', cmds: '', fInsertedText: false },
+      'w:tc': { text: '', cmds: '', fInsertedText: false },
     },
     imageAndShapeIdIncrement,
     images: {},
@@ -235,13 +236,16 @@ export async function walkTemplate(
       let fRemoveNode = false;
       // Delete last generated output node if we're skipping nodes due to an empty FOR loop
       if (
-        (tag === 'w:p' || tag === 'w:tbl' || tag === 'w:tr') &&
+        (tag === 'w:p' ||
+          tag === 'w:tbl' ||
+          tag === 'w:tr' ||
+          tag === 'w:tc') &&
         isLoopExploring(ctx)
       ) {
         fRemoveNode = true;
         // Delete last generated output node if the user inserted a paragraph
         // (or table row) with just a command
-      } else if (tag === 'w:p' || tag === 'w:tr') {
+      } else if (tag === 'w:p' || tag === 'w:tr' || tag === 'w:tc') {
         const buffers = ctx.buffers[tag];
         fRemoveNode =
           buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
@@ -291,9 +295,11 @@ export async function walkTemplate(
           if (captionNodes) {
             parent._children.push(...captionNodes);
           }
+
           // Prevent containing paragraph or table row from being removed
           ctx.buffers['w:p'].fInsertedText = true;
           ctx.buffers['w:tr'].fInsertedText = true;
+          ctx.buffers['w:tc'].fInsertedText = true;
         }
         delete ctx.pendingImageNode;
       }
@@ -311,9 +317,11 @@ export async function walkTemplate(
           linkNode._parent = parent;
           parent._children.pop();
           parent._children.push(linkNode);
+
           // Prevent containing paragraph or table row from being removed
           ctx.buffers['w:p'].fInsertedText = true;
           ctx.buffers['w:tr'].fInsertedText = true;
+          ctx.buffers['w:tc'].fInsertedText = true;
         }
         delete ctx.pendingLinkNode;
       }
@@ -331,9 +339,11 @@ export async function walkTemplate(
           htmlNode._parent = parent;
           parent._children.pop();
           parent._children.push(htmlNode);
+
           // Prevent containing paragraph or table row from being removed
           ctx.buffers['w:p'].fInsertedText = true;
           ctx.buffers['w:tr'].fInsertedText = true;
+          ctx.buffers['w:tc'].fInsertedText = true;
         }
         delete ctx.pendingHtmlNode;
       }
@@ -380,7 +390,7 @@ export async function walkTemplate(
 
       // Reset node buffers as needed if a `w:p` or `w:tr` is encountered
       const tag = nodeIn._fTextNode ? null : nodeIn._tag;
-      if (tag === 'w:p' || tag === 'w:tr') {
+      if (tag === 'w:p' || tag === 'w:tr' || tag === 'w:tc') {
         ctx.buffers[tag] = { text: '', cmds: '', fInsertedText: false };
       }
 
@@ -1023,7 +1033,7 @@ const processHtml = async (ctx: Context, data: string) => {
 // ==========================================
 // Helpers
 // ==========================================
-const BufferKeys = ['w:p', 'w:tr'] as const;
+const BufferKeys = ['w:p', 'w:tr', 'w:tc'] as const;
 const appendTextToTagBuffers = (
   text: string,
   ctx: Context,
