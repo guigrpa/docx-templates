@@ -1331,6 +1331,45 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         return expect(result).rejects.toMatchSnapshot();
       });
+
+      it('Dynamic table columns', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'dynamic-columns.docx')
+        );
+        const result = await createReport(
+          {
+            noSandbox,
+            template,
+            data: {
+              columns: ['Column 1', 'Column 2', 'Column 3'],
+            },
+          },
+          'JS'
+        );
+        expect(result).toMatchSnapshot();
+      });
+
+      it('Dynamic table columns with dynamic rows', async () => {
+        const template = await fs.promises.readFile(
+          path.join(
+            __dirname,
+            'fixtures',
+            'dynamic-columns-with-dynamic-rows.docx'
+          )
+        );
+        const result = await createReport(
+          {
+            noSandbox,
+            template,
+            data: {
+              rows: ['Row 1', 'Row 2', 'Row 3'],
+              columns: ['Column 1', 'Column 2', 'Column 3'],
+            },
+          },
+          'JS'
+        );
+        expect(result).toMatchSnapshot();
+      });
     });
   });
 });
