@@ -1239,7 +1239,6 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         expect(await createReport(opts, 'XML')).toMatchSnapshot();
       });
 
-
       it('Processes FOR loops with Text Box', async () => {
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'forLoopWithTextBox.docx')
