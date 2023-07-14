@@ -235,7 +235,7 @@ async function createReport(
   for (const [js, filePath] of prepped_secondaries) {
     // Grab the last used (highest) image id from the main document's context, but create
     // a fresh one for each secondary XML.
-    ctx = newContext(createOptions, ctx.imageId);
+    ctx = newContext(createOptions, ctx.imageAndShapeIdIncrement);
     const result = await produceJsReport(queryResult, js, ctx);
     if (result.status === 'errors') {
       throw result.errors;

@@ -147,7 +147,7 @@ export type Context = {
     'w:tr': BufferStatus;
   };
   pendingImageNode?: { image: NonTextNode; caption?: NonTextNode[] };
-  imageId: number;
+  imageAndShapeIdIncrement: number;
   images: Images;
   pendingLinkNode?: NonTextNode;
   linkId: number;

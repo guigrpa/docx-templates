@@ -34,7 +34,10 @@ import {
 } from './errors';
 import { logger } from './debug';
 
-export function newContext(options: CreateReportOptions, imageId = 0): Context {
+export function newContext(
+  options: CreateReportOptions,
+  imageAndShapeIdIncrement = 0
+): Context {
   return {
     gCntIf: 0,
     gCntEndIf: 0,
@@ -46,7 +49,7 @@ export function newContext(options: CreateReportOptions, imageId = 0): Context {
       'w:p': { text: '', cmds: '', fInsertedText: false },
       'w:tr': { text: '', cmds: '', fInsertedText: false },
     },
-    imageId,
+    imageAndShapeIdIncrement,
     images: {},
     linkId: 0,
     links: {},
@@ -821,8 +824,8 @@ const processEndForIf = (
 
 const imageToContext = (ctx: Context, img: Image) => {
   validateImage(img);
-  ctx.imageId += 1;
-  const id = String(ctx.imageId);
+  ctx.imageAndShapeIdIncrement += 1;
+  const id = String(ctx.imageAndShapeIdIncrement);
   const relId = `img${id}`;
   ctx.images[relId] = img;
   return relId;
@@ -862,7 +865,7 @@ const processImage = (ctx: Context, imagePars: ImagePars) => {
   const cy = (imagePars.height * 360e3).toFixed(0);
 
   let imgRelId = imageToContext(ctx, getImageData(imagePars));
-  const id = String(ctx.imageId);
+  const id = String(ctx.imageAndShapeIdIncrement);
   const alt = imagePars.alt || 'desc';
   const node = newNonTextNode;
 
@@ -1026,8 +1029,8 @@ const appendTextToTagBuffers = (
 };
 
 function updateID(newNode: NonTextNode, ctx: Context) {
-  ctx.imageId += 1;
-  const id = String(ctx.imageId);
+  ctx.imageAndShapeIdIncrement += 1;
+  const id = String(ctx.imageAndShapeIdIncrement);
   newNode._attrs = {
     ...newNode._attrs,
     id: `${id}`,
