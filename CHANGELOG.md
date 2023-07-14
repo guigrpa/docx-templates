@@ -1,3 +1,7 @@
+## 4.11.2 (2023-07-14)
+- Issue [#296](https://github.com/guigrpa/docx-templates/issues/296): Fix bug caused by Shapes having the same ID they are generated from a FOR loop. ([MR #315](https://github.com/guigrpa/docx-templates/pull/315)) Thanks @SuchiraD!
+- Issue [#314](https://github.com/guigrpa/docx-templates/issues/314): Ensure all custom error types are exported.
+
 ## 4.11.1 (2023-04-04)
 -  ([MR #305](https://github.com/guigrpa/docx-templates/pull/305)) the `IncompleteConditionalStatementError` is now thrown when an 'IF' statement lacks a corresponding 'END-IF' command. Thanks @RoXuS !
 
