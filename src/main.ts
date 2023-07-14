@@ -472,8 +472,7 @@ const processImages = async (
   logger.debug('Completing document.xml.rels...');
   const relsPath = `${TEMPLATE_PATH}/_rels/${documentComponent}.rels`;
   const rels = await getRelsFromZip(zip, relsPath);
-  for (let i = 0; i < imageIds.length; i++) {
-    const imageId = imageIds[i];
+  for (const imageId of imageIds) {
     const { extension, data: imgData } = images[imageId];
     const imgName = `template_${documentComponent}_${imageId}${extension}`;
     logger.debug(`Writing image ${imageId} (${imgName})...`);
