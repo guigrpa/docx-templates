@@ -776,13 +776,15 @@ const processEndForIf = (
   cmdName: string,
   cmdRest: string
 ): void => {
+  const isIf = cmdName === 'END-IF';
   const curLoop = getCurLoop(ctx);
   if (!curLoop)
     throw new InvalidCommandError(
-      'Unexpected END-IF outside of IF statement context',
+      `Unexpected ${cmdName} outside of ${
+        isIf ? 'IF statement' : 'FOR loop'
+      } context`,
       cmd
     );
-  const isIf = cmdName === 'END-IF';
 
   // First time we visit an END-IF node, we assign it the arbitrary name
   // generated when the IF was processed
