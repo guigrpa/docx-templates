@@ -26,7 +26,6 @@
     "prepare": "yarn compile",
     "compile": "rimraf ./lib && tsc && yarn rollup",
     "rollup": "rollup -c",
-    "travis": "yarn compile && yarn test",
     "jest": "jest --watch --coverage",
     "test": "yarn lint && yarn testCovFull",
     "testCovFull": "yarn testCovPrepare && yarn testDev && yarn testCovReport",
