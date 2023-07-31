@@ -159,7 +159,7 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
 
       it('properly handles InvalidCommandError', async () => {
         const template = await fs.promises.readFile(
-          path.join(__dirname, 'fixtures', 'invalidMultipleErrors.docx')
+          path.join(__dirname, 'fixtures', 'invalidCommand.docx')
         );
 
         const errs: Error[] = [];
@@ -168,13 +168,7 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
             {
               noSandbox,
               template,
-              data: {
-                companies: [
-                  { name: 'FIRST' },
-                  { name: 'SECOND' },
-                  { name: 'THIRD' },
-                ],
-              },
+              data: {},
               errorHandler: (err, code) => {
                 errs.push(err);
                 return `${err}`;
@@ -184,25 +178,19 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
           )
         ).toMatchSnapshot();
 
-        expect(errs.some(e => e instanceof InvalidCommandError)).toBeTruthy();
+        expect(errs).toMatchSnapshot();
       });
 
       it('handler can decide to re-throw the error, crashing the render', async () => {
         const template = await fs.promises.readFile(
-          path.join(__dirname, 'fixtures', 'invalidMultipleErrors.docx')
+          path.join(__dirname, 'fixtures', 'invalidCommand.docx')
         );
 
         await expect(
           createReport({
             noSandbox,
             template,
-            data: {
-              companies: [
-                { name: 'FIRST' },
-                { name: 'SECOND' },
-                { name: 'THIRD' },
-              ],
-            },
+            data: {},
             errorHandler: (err, code) => {
               throw new Error('yeah, no!');
             },
