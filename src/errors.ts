@@ -1,3 +1,5 @@
+import { LoopStatus } from './types';
+
 /**
  * Thrown when `rejectNullish` is set to `true` and a command returns `null` or `undefined`.
  */
@@ -67,6 +69,14 @@ export class IncompleteConditionalStatementError extends Error {
   constructor() {
     super(
       'Incomplete IF/END-IF statement. Make sure each IF-statement has a corresponding END-IF command.'
+    );
+  }
+}
+
+export class UnterminatedForLoopError extends Error {
+  constructor(loop: LoopStatus) {
+    super(
+      `Unterminated FOR-loop ('FOR ${loop.varName}'). Make sure each FOR loop has a corresponding END-FOR command.`
     );
   }
 }

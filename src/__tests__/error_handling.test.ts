@@ -296,4 +296,19 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
       `Unexpected END-FOR outside of FOR loop context: END-FOR`
     );
   });
+
+  it('Incomplete loop statement: missing END-FOR', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'missingEndFor.docx')
+    );
+    await expect(
+      createReport({
+        noSandbox,
+        template,
+        data: {},
+      })
+    ).rejects.toThrow(
+      `Unterminated FOR-loop ('FOR c'). Make sure each FOR loop has a corresponding END-FOR command.`
+    );
+  });
 });

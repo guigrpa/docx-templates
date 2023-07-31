@@ -26175,6 +26175,7 @@ exports[`noSandbox Template processing 112a failFast: false lists all errors in 
   [Error: Error executing command 'notavailable': notavailable is not defined],
   [Error: Error executing command 'something': something is not defined],
   [Error: Invalid command: END-FOR company],
+  [Error: Unterminated FOR-loop ('FOR company'). Make sure each FOR loop has a corresponding END-FOR command.],
 ]
 `;
 
@@ -57927,6 +57928,7 @@ exports[`sandbox Template processing 112a failFast: false lists all errors in th
   [Error: Error executing command 'notavailable': ReferenceError: notavailable is not defined],
   [Error: Error executing command 'something': ReferenceError: something is not defined],
   [Error: Invalid command: END-FOR company],
+  [Error: Unterminated FOR-loop ('FOR company'). Make sure each FOR loop has a corresponding END-FOR command.],
 ]
 `;
 
