@@ -437,10 +437,11 @@ export async function walkTemplate(
   }
 
   if (ctx.gCntIf !== ctx.gCntEndIf) {
+    const err = new IncompleteConditionalStatementError();
     if (ctx.options?.failFast) {
-      throw new IncompleteConditionalStatementError();
+      throw err;
     } else {
-      errors.push(new IncompleteConditionalStatementError());
+      errors.push(err);
     }
   }
 
