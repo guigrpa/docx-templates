@@ -281,4 +281,19 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
       `Unexpected END-IF outside of IF statement context: END-IF`
     );
   });
+
+  it('Incomplete loop statement: unmatched END-FOR', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'unmatchedEndFor.docx')
+    );
+    await expect(
+      createReport({
+        noSandbox,
+        template,
+        data: {},
+      })
+    ).rejects.toThrow(
+      `Unexpected END-FOR outside of FOR loop context: END-FOR`
+    );
+  });
 });
