@@ -439,7 +439,7 @@ export async function walkTemplate(
 
   if (ctx.gCntIf !== ctx.gCntEndIf) {
     const err = new IncompleteConditionalStatementError();
-    if (ctx.options?.failFast) {
+    if (ctx.options.failFast) {
       throw err;
     } else {
       errors.push(err);
@@ -449,7 +449,7 @@ export async function walkTemplate(
   if (ctx.loops.length > 0) {
     const innermost_loop = ctx.loops[ctx.loops.length - 1];
     const err = new UnterminatedForLoopError(innermost_loop);
-    if (ctx.options?.failFast) {
+    if (ctx.options.failFast) {
       throw err;
     } else {
       errors.push(err);
