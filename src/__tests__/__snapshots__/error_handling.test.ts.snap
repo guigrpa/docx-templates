@@ -3,14 +3,12 @@
 exports[`Incomplete conditional statement: missing END-IF 1`] = `
 [
   [Error: Incomplete IF/END-IF statement. Make sure each IF-statement has a corresponding END-IF command.],
-  [Error: Unterminated FOR-loop ('FOR __if_0'). Make sure each FOR loop has a corresponding END-FOR command.],
 ]
 `;
 
 exports[`Incomplete conditional statement: missing END-IF 2`] = `
 [
   [Error: Incomplete IF/END-IF statement. Make sure each IF-statement has a corresponding END-IF command.],
-  [Error: Unterminated FOR-loop ('FOR __if_0'). Make sure each FOR loop has a corresponding END-FOR command.],
 ]
 `;
 
