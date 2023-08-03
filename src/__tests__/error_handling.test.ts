@@ -248,10 +248,11 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
         template,
         data: {},
         rejectNullish: true,
+
+        // We use failFast:false to ensure the error handling of a missing END-IF and missing END-FOR are not accidentally mixed, see Github issue #322.
+        failFast: false,
       })
-    ).rejects.toThrow(
-      'Incomplete IF/END-IF statement. Make sure each IF-statement has a corresponding END-IF command.'
-    );
+    ).rejects.toMatchSnapshot();
   });
 
   it('Incomplete conditional statement: missing IF statement', async () => {
