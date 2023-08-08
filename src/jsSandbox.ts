@@ -1,5 +1,4 @@
 import vm from 'vm';
-import { merge, omit } from 'timm';
 import { getCurLoop } from './reportUtils';
 import { ReportData, Context } from './types';
 import { CommandExecutionError, NullishCommandResultError } from './errors';
@@ -18,15 +17,13 @@ export async function runUserJsAndGetRaw(
   // Retrieve the current JS sandbox contents (if any) and add
   // the code to be run, and a placeholder for the result,
   // as well as all data defined by the user
-  const sandbox: { [ind: string]: any } = merge(
-    ctx.jsSandbox || {},
-    {
-      __code__: code,
-      __result__: undefined,
-    },
-    data,
-    ctx.options.additionalJsContext
-  );
+  const sandbox: { [ind: string]: any } = {
+    ...(ctx.jsSandbox || {}),
+    __code__: code,
+    __result__: undefined,
+    ...data,
+    ...ctx.options.additionalJsContext,
+  };
 
   // Add currently defined vars, including loop vars and the index
   // of the innermost loop
@@ -78,8 +75,12 @@ export async function runUserJsAndGetRaw(
     }
   }
 
-  // Save the sandbox for later use
-  ctx.jsSandbox = omit(context, ['__code__', '__result__']);
+  // Save the sandbox for later use, omitting the __code__ and __result__ properties.
+  ctx.jsSandbox = {
+    ...context,
+    __code__: undefined,
+    __result__: undefined,
+  };
   logger.debug('Command returned: ', result);
   return result;
 }

@@ -40,8 +40,7 @@
   },
   "dependencies": {
     "jszip": "^3.5.0",
-    "sax": "1.2.4",
-    "timm": "^1.6.2"
+    "sax": "1.2.4"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.1",
