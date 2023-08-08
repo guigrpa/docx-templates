@@ -1,4 +1,3 @@
-import { omit } from 'timm';
 import { Node, TextNode, NonTextNode, Context, LoopStatus } from './types';
 import { TemplateParseError } from './errors';
 import { logger } from './debug';
