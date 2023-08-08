@@ -1,3 +1,9 @@
+## 4.11.3 (2023-08-08)
+-  ([PR #321](https://github.com/guigrpa/docx-templates/pull/321)) Fix `InvalidCommandError` referring to `'Unexpected END-IF outside of IF statement context:'` when the problem was actually an unexpected `END-FOR`. Thanks @davidjb
+- Issue [#322](https://github.com/guigrpa/docx-templates/issues/322): Fix silent failure caused by unterminated for-loop in template, leading to a (partially) empty report. Throw new `UnterminatedForLoopError` when `FOR` loop is not properly terminated with an `END-FOR`.
+- Remove unnecessary runtime dependency (`timm`).
+- Upgrade `jszip` dependency to latest version.
+
 ## 4.11.2 (2023-07-14)
 - Issue [#296](https://github.com/guigrpa/docx-templates/issues/296): Fix bug caused by Shapes having the same ID they are generated from a FOR loop. ([PR #315](https://github.com/guigrpa/docx-templates/pull/315)) Thanks @SuchiraD!
 - Issue [#314](https://github.com/guigrpa/docx-templates/issues/314): Ensure all custom error types are exported.
