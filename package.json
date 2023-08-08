@@ -39,7 +39,7 @@
     "node": ">=6"
   },
   "dependencies": {
-    "jszip": "^3.5.0",
+    "jszip": "^3.10.1",
     "sax": "1.2.4"
   },
   "devDependencies": {
