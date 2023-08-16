@@ -443,6 +443,8 @@ Loop over a group of elements (resulting from the evaluation of a JavaScript exp
 
 Note that inside the loop, the variable relative to the current element being processed must be prefixed with `$`.
 
+It is possible to get the current, inner-most loop's index with the variable `$idx`, starting from `0`.
+
 Since JavaScript expressions are supported, you can for example filter the loop domain:
 
 ```
