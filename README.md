@@ -443,7 +443,16 @@ Loop over a group of elements (resulting from the evaluation of a JavaScript exp
 
 Note that inside the loop, the variable relative to the current element being processed must be prefixed with `$`.
 
-It is possible to get the current, inner-most loop's index with the variable `$idx`, starting from `0`.
+It is possible to get the current element index of the inner-most loop with the variable `$idx`, starting from `0`. For example:
+```
++++FOR company IN companies+++
+Company (+++$idx+++): +++INS $company.name+++
+Executives:
++++FOR executive IN $company.executives+++
+-	+++$idx+++ +++$executive+++
++++END-FOR executive+++
++++END-FOR company+++
+```
 
 Since JavaScript expressions are supported, you can for example filter the loop domain:
 

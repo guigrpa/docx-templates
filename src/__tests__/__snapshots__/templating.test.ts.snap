@@ -26645,6 +26645,339 @@ exports[`noSandbox Template processing 131 correctly handles Office 365 .docx fi
 }
 `;
 
+exports[`noSandbox Template processing Access current element index from FOR loop 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14">
+  <w:body>
+    <w:p w:rsidR="00BE3B8D" w:rsidRDefault="002E288F" w:rsidP="00BE3B8D">
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Company</w:t>
+      </w:r>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"> (</w:t>
+        <w:t xml:space="preserve">0</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">)</w:t>
+      </w:r>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">: </w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve">MEGACORP</w:t>
+      </w:r>
+      <w:r w:rsidR="00160A38">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRPr="002E288F" w:rsidRDefault="005D1226" w:rsidP="00BE3B8D">
+      <w:pPr>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+      </w:pPr>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Executives:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">0</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">Excellent CEO</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">1</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">Someone</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="002C7ED6" w:rsidRDefault="002C7ED6" w:rsidP="00BE3B8D"/>
+    <w:p w:rsidR="00BE3B8D" w:rsidRDefault="002E288F" w:rsidP="00BE3B8D">
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Company</w:t>
+      </w:r>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"> (</w:t>
+        <w:t xml:space="preserve">1</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">)</w:t>
+      </w:r>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">: </w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve">SUPERCORP</w:t>
+      </w:r>
+      <w:r w:rsidR="00160A38">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRPr="002E288F" w:rsidRDefault="005D1226" w:rsidP="00BE3B8D">
+      <w:pPr>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+      </w:pPr>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Executives:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">0</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">John Smith</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="002C7ED6" w:rsidRDefault="002C7ED6" w:rsidP="00BE3B8D"/>
+    <w:p w:rsidR="00BE3B8D" w:rsidRDefault="002E288F" w:rsidP="00BE3B8D">
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Company</w:t>
+      </w:r>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"> (</w:t>
+        <w:t xml:space="preserve">2</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">)</w:t>
+      </w:r>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">: </w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve">ULTRACORP</w:t>
+      </w:r>
+      <w:r w:rsidR="00160A38">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRPr="002E288F" w:rsidRDefault="005D1226" w:rsidP="00BE3B8D">
+      <w:pPr>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+      </w:pPr>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Executives:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">0</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">Who else</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">1</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">Can't be me</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="002C7ED6" w:rsidRDefault="002C7ED6" w:rsidP="00BE3B8D"/>
+    <w:p w:rsidR="00426180" w:rsidRDefault="00426180"/>
+    <w:sectPr w:rsidR="00426180">
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1417" w:right="1701" w:bottom="1417" w:left="1701" w:header="708" w:footer="708" w:gutter="0"/>
+      <w:cols w:space="708"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
 exports[`noSandbox Template processing HTML in table (see PR #233) 1`] = `
 "<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14">
@@ -58396,6 +58729,339 @@ exports[`sandbox Template processing 131 correctly handles Office 365 .docx file
   "_fTextNode": false,
   "_tag": "w:document",
 }
+`;
+
+exports[`sandbox Template processing Access current element index from FOR loop 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14">
+  <w:body>
+    <w:p w:rsidR="00BE3B8D" w:rsidRDefault="002E288F" w:rsidP="00BE3B8D">
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Company</w:t>
+      </w:r>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"> (</w:t>
+        <w:t xml:space="preserve">0</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">)</w:t>
+      </w:r>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">: </w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve">MEGACORP</w:t>
+      </w:r>
+      <w:r w:rsidR="00160A38">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRPr="002E288F" w:rsidRDefault="005D1226" w:rsidP="00BE3B8D">
+      <w:pPr>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+      </w:pPr>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Executives:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">0</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">Excellent CEO</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">1</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">Someone</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="002C7ED6" w:rsidRDefault="002C7ED6" w:rsidP="00BE3B8D"/>
+    <w:p w:rsidR="00BE3B8D" w:rsidRDefault="002E288F" w:rsidP="00BE3B8D">
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Company</w:t>
+      </w:r>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"> (</w:t>
+        <w:t xml:space="preserve">1</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">)</w:t>
+      </w:r>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">: </w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve">SUPERCORP</w:t>
+      </w:r>
+      <w:r w:rsidR="00160A38">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRPr="002E288F" w:rsidRDefault="005D1226" w:rsidP="00BE3B8D">
+      <w:pPr>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+      </w:pPr>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Executives:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">0</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">John Smith</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="002C7ED6" w:rsidRDefault="002C7ED6" w:rsidP="00BE3B8D"/>
+    <w:p w:rsidR="00BE3B8D" w:rsidRDefault="002E288F" w:rsidP="00BE3B8D">
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Company</w:t>
+      </w:r>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"> (</w:t>
+        <w:t xml:space="preserve">2</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r w:rsidR="00C22EF6">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">)</w:t>
+      </w:r>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">: </w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve">ULTRACORP</w:t>
+      </w:r>
+      <w:r w:rsidR="00160A38">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidR="00BE3B8D">
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRPr="002E288F" w:rsidRDefault="005D1226" w:rsidP="00BE3B8D">
+      <w:pPr>
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+      </w:pPr>
+      <w:r w:rsidRPr="002E288F">
+        <w:rPr>
+          <w:b/>
+          <w:bCs/>
+        </w:rPr>
+        <w:t xml:space="preserve">Executives:</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">0</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">Who else</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="005D1226" w:rsidRDefault="00C22EF6" w:rsidP="005D1226">
+      <w:pPr>
+        <w:pStyle w:val="ListParagraph"/>
+        <w:numPr>
+          <w:ilvl w:val="0"/>
+          <w:numId w:val="1"/>
+        </w:numPr>
+      </w:pPr>
+      <w:r>
+        <w:t xml:space="preserve">1</w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r w:rsidR="005D1226">
+        <w:t xml:space="preserve">Can't be me</w:t>
+      </w:r>
+    </w:p>
+    <w:p w:rsidR="002C7ED6" w:rsidRDefault="002C7ED6" w:rsidP="00BE3B8D"/>
+    <w:p w:rsidR="00426180" w:rsidRDefault="00426180"/>
+    <w:sectPr w:rsidR="00426180">
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1417" w:right="1701" w:bottom="1417" w:left="1701" w:header="708" w:footer="708" w:gutter="0"/>
+      <w:cols w:space="708"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
 `;
 
 exports[`sandbox Template processing HTML in table (see PR #233) 1`] = `

@@ -1259,6 +1259,27 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         expect(result).toMatchSnapshot();
       });
+
+      it('Access current element index from FOR loop', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'forWithIdx.docx')
+        );
+        const opts: UserOptions = {
+          noSandbox,
+          template,
+          failFast: true,
+          rejectNullish: true,
+          data: {
+            companies: [
+              { name: 'MEGACORP', executives: ['Excellent CEO', 'Someone'] },
+              { name: 'SUPERCORP', executives: ['John Smith'] },
+              { name: 'ULTRACORP', executives: ['Who else', "Can't be me"] },
+            ],
+          },
+        };
+        const result = await createReport(opts, 'XML');
+        expect(result).toMatchSnapshot();
+      });
     });
   });
 });
