@@ -1280,6 +1280,27 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const result = await createReport(opts, 'XML');
         expect(result).toMatchSnapshot();
       });
+
+      it('Correctly processes FOR loops that contain comments (GH issue #324)', async () => {
+        // Comments in a FOR loop lead to 'unreadable content' error when opening generated doc in MS Word.
+        // https://github.com/guigrpa/docx-templates/issues/324
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'for1WithNotes.docx')
+        );
+        const result = await createReport({
+          noSandbox,
+          template,
+          data: {
+            companies: [
+              { name: 'FIRST' },
+              { name: 'SECOND' },
+              { name: 'THIRD' },
+            ],
+          },
+        });
+        expect(result).toBeTruthy();
+        await fs.promises.writeFile('test.docx', result);
+      });
     });
   });
 });
