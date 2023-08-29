@@ -5763,7 +5763,7 @@ exports[`noSandbox Template processing 09 Allows scalar arrays in FOR loops 1`] 
 exports[`noSandbox Template processing 3A Processes HTML commands 1`] = `
 {
   "_attrs": {
-    "mc:Ignorable": "w14 w15 w16se w16cid wp14",
+    "mc:Ignorable": "w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14",
     "xmlns:aink": "http://schemas.microsoft.com/office/drawing/2016/ink",
     "xmlns:am3d": "http://schemas.microsoft.com/office/drawing/2017/model3d",
     "xmlns:cx": "http://schemas.microsoft.com/office/drawing/2014/chartex",
@@ -5778,13 +5778,17 @@ exports[`noSandbox Template processing 3A Processes HTML commands 1`] = `
     "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
     "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
     "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:oel": "http://schemas.microsoft.com/office/2019/extlst",
     "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
     "xmlns:v": "urn:schemas-microsoft-com:vml",
     "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
     "xmlns:w10": "urn:schemas-microsoft-com:office:word",
     "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
     "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:w16": "http://schemas.microsoft.com/office/word/2018/wordml",
+    "xmlns:w16cex": "http://schemas.microsoft.com/office/word/2018/wordml/cex",
     "xmlns:w16cid": "http://schemas.microsoft.com/office/word/2016/wordml/cid",
+    "xmlns:w16sdtdh": "http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash",
     "xmlns:w16se": "http://schemas.microsoft.com/office/word/2015/wordml/symex",
     "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
     "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
@@ -37849,7 +37853,7 @@ exports[`sandbox Template processing 09 Allows scalar arrays in FOR loops 1`] = 
 exports[`sandbox Template processing 3A Processes HTML commands 1`] = `
 {
   "_attrs": {
-    "mc:Ignorable": "w14 w15 w16se w16cid wp14",
+    "mc:Ignorable": "w14 w15 w16se w16cid w16 w16cex w16sdtdh wp14",
     "xmlns:aink": "http://schemas.microsoft.com/office/drawing/2016/ink",
     "xmlns:am3d": "http://schemas.microsoft.com/office/drawing/2017/model3d",
     "xmlns:cx": "http://schemas.microsoft.com/office/drawing/2014/chartex",
@@ -37864,13 +37868,17 @@ exports[`sandbox Template processing 3A Processes HTML commands 1`] = `
     "xmlns:m": "http://schemas.openxmlformats.org/officeDocument/2006/math",
     "xmlns:mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
     "xmlns:o": "urn:schemas-microsoft-com:office:office",
+    "xmlns:oel": "http://schemas.microsoft.com/office/2019/extlst",
     "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
     "xmlns:v": "urn:schemas-microsoft-com:vml",
     "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
     "xmlns:w10": "urn:schemas-microsoft-com:office:word",
     "xmlns:w14": "http://schemas.microsoft.com/office/word/2010/wordml",
     "xmlns:w15": "http://schemas.microsoft.com/office/word/2012/wordml",
+    "xmlns:w16": "http://schemas.microsoft.com/office/word/2018/wordml",
+    "xmlns:w16cex": "http://schemas.microsoft.com/office/word/2018/wordml/cex",
     "xmlns:w16cid": "http://schemas.microsoft.com/office/word/2016/wordml/cid",
+    "xmlns:w16sdtdh": "http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash",
     "xmlns:w16se": "http://schemas.microsoft.com/office/word/2015/wordml/symex",
     "xmlns:wne": "http://schemas.microsoft.com/office/word/2006/wordml",
     "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",

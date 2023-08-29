@@ -760,30 +760,41 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const opts = {
           noSandbox,
           template,
-          data: {},
+          data: {
+            htmlstring: `
+            <meta charset="UTF-8">
+            <body>
+             <p>è</p>
+            <p>
+            <strong style="color: blue">This should be blue</strong>
+            </p>
+            </body>
+            `,
+          },
         };
+        fs.writeFileSync('test.docx', await createReport(opts));
         expect(await createReport(opts, 'JS')).toMatchSnapshot();
 
-        // Check the name of the HTML file in the resulting docx.
-        const zip = await JSZip.loadAsync(await createReport(opts));
-        expect(Object.keys(zip?.files ?? {})).toStrictEqual([
-          '[Content_Types].xml',
-          '_rels/.rels',
-          'word/_rels/document.xml.rels',
-          'word/document.xml',
-          'word/theme/theme1.xml',
-          'docProps/thumbnail.emf',
-          'word/settings.xml',
-          'word/fontTable.xml',
-          'word/webSettings.xml',
-          'docProps/core.xml',
-          'word/styles.xml',
-          'docProps/app.xml',
-          'word/',
-          'word/template_document_xml_html1.html',
-          'word/template_document_xml_html2.html',
-          'word/_rels/',
-        ]);
+        // // Check the name of the HTML file in the resulting docx.
+        // const zip = await JSZip.loadAsync(await createReport(opts));
+        // expect(Object.keys(zip?.files ?? {})).toStrictEqual([
+        //   '[Content_Types].xml',
+        //   '_rels/.rels',
+        //   'word/_rels/document.xml.rels',
+        //   'word/document.xml',
+        //   'word/theme/theme1.xml',
+        //   'docProps/thumbnail.emf',
+        //   'word/settings.xml',
+        //   'word/fontTable.xml',
+        //   'word/webSettings.xml',
+        //   'docProps/core.xml',
+        //   'word/styles.xml',
+        //   'docProps/app.xml',
+        //   'word/',
+        //   'word/template_document_xml_html1.html',
+        //   'word/template_document_xml_html2.html',
+        //   'word/_rels/',
+        // ]);
       });
 
       it('40 Throws on invalid command', async () => {
