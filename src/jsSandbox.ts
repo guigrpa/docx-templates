@@ -46,15 +46,9 @@ export async function runUserJsAndGetRaw(
       const wrapper = new Function('with(this) { return eval(__code__); }');
       result = await wrapper.call(context);
     } else {
-      const script = new vm.Script(
-        `
-      __result__ = eval(__code__);
-      `,
-        {}
-      );
+      const script = new vm.Script(sandbox.__code__ ?? '');
       context = vm.createContext(sandbox);
-      script.runInContext(context);
-      result = await context.__result__;
+      result = await script.runInContext(context);
     }
   } catch (err) {
     const e = err instanceof Error ? err : new Error(`${err}`);
