@@ -1,6 +1,6 @@
 import vm from 'vm';
 import { getCurLoop } from './reportUtils';
-import { ReportData, Context } from './types';
+import { ReportData, Context, SandBox } from './types';
 import { CommandExecutionError, NullishCommandResultError } from './errors';
 import { logger } from './debug';
 
@@ -17,7 +17,7 @@ export async function runUserJsAndGetRaw(
   // Retrieve the current JS sandbox contents (if any) and add
   // the code to be run, and a placeholder for the result,
   // as well as all data defined by the user
-  const sandbox: { [ind: string]: any } = {
+  const sandbox: SandBox = {
     ...(ctx.jsSandbox || {}),
     __code__: code,
     __result__: undefined,
