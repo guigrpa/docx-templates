@@ -19868,7 +19868,7 @@ exports[`noSandbox Template processing 39 Processes LINK commands 1`] = `
 }
 `;
 
-exports[`noSandbox Template processing 40 Throws on invalid command 1`] = `[Error: Error executing command 'TTT foo': Unexpected identifier]`;
+exports[`noSandbox Template processing 40 Throws on invalid command 1`] = `[Error: Error executing command 'TTT foo': Unexpected identifier 'foo']`;
 
 exports[`noSandbox Template processing 41 Throws on invalid for logic 1`] = `[Error: Invalid command: END-FOR company]`;
 
@@ -51954,7 +51954,7 @@ exports[`sandbox Template processing 39 Processes LINK commands 1`] = `
 }
 `;
 
-exports[`sandbox Template processing 40 Throws on invalid command 1`] = `[Error: Error executing command 'TTT foo': SyntaxError: Unexpected identifier]`;
+exports[`sandbox Template processing 40 Throws on invalid command 1`] = `[Error: Error executing command 'TTT foo': SyntaxError: Unexpected identifier 'foo']`;
 
 exports[`sandbox Template processing 41 Throws on invalid for logic 1`] = `[Error: Invalid command: END-FOR company]`;
 
