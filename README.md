@@ -198,7 +198,7 @@ You can find an example implementation of `saveDataToFile()` [in the Webpack exa
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify) or you can use the browserified bundle directly as discussed below.
 
 ## Polyfilled browser-ready bundle
-As this library depends on the internal NodeJS modules `vm`, `stream`, `util`, `events` and the `Buffer` global, your build tools have to polyfill these modules when using the library in the browser. We provide a browser build wich includes the required polyfills. Its file size is about 300K uncompressed or 85K / 70K with gzip / brotli compression).
+As this library depends on the internal NodeJS modules `vm`, `stream`, `util`, `events` and the `Buffer` global, your build tools have to polyfill these modules when using the library in the browser. We provide a browser build which includes the required polyfills. Its file size is about 300K uncompressed or 85K / 70K with gzip / brotli compression).
 
 You can import the library directly **as a module** using e.g. the unpkg.com CDN, like below, or you can host the `/lib/browser.js` bundle yourself.
 
@@ -206,7 +206,7 @@ You can import the library directly **as a module** using e.g. the unpkg.com CDN
 import { createReport } from 'https://unpkg.com/docx-templates/lib/browser.js';
 ```
 
-this is good for testing or prototyping but you should keep in mind that the `browser.js` is `es2017` code wich is supported by only 95% of users. If you have to support IE or old browser versions, you are better off compiling it to your target. Also see the support table for `es2017` [here](https://caniuse.com/sr_es8).
+this is good for testing or prototyping but you should keep in mind that the `browser.js` is `es2017` code which is supported by only 95% of users. If you have to support IE or old browser versions, you are better off compiling it to your target. Also see the support table for `es2017` [here](https://caniuse.com/sr_es8).
 
 ## Browser template compatibility caveat
 Note that the JavaScript code in your .docx template will be run as-is by the browser. Transpilers like Babel can't see this code, and won't be able to polyfill it. This means that the JS code in your template needs to be compatible with the browsers you are targeting. In other words: don't use fancy modern syntax and functions in your template if you want older browsers, like IE11, to be able to render it.
