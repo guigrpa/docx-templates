@@ -580,7 +580,7 @@ const processCmd: CommandProcessor = async (
           return '';
         }
         if (typeof result === 'object' && !Array.isArray(result)) {
-          const nerr = new ObjectCommandResultError(cmdRest);
+          const nerr = new ObjectCommandResultError(cmdRest, result);
           if (ctx.options.errorHandler != null) {
             result = await ctx.options.errorHandler(nerr, cmdRest);
           } else {
