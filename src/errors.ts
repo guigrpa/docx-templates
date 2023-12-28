@@ -19,10 +19,12 @@ export class NullishCommandResultError extends Error {
  */
 export class ObjectCommandResultError extends Error {
   command: string;
-  constructor(command: string) {
+  result: any;
+  constructor(command: string, result: any) {
     super(`Result of command '${command}' is an object`);
     Object.setPrototypeOf(this, ObjectCommandResultError.prototype);
     this.command = command;
+    this.result = result;
   }
 }
 

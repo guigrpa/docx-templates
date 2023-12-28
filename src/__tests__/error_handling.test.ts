@@ -238,6 +238,30 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
     ).rejects.toThrowErrorMatchingSnapshot();
   });
 
+  it('attaches the result to ObjectCommandResultError', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'objectCommandResultError.docx')
+    );
+
+    await expect(
+      createReport({
+        noSandbox,
+        template,
+        data: {
+          companies: {
+            one: 'FIRST',
+            two: 'SECOND',
+            three: 'THIRD',
+          },
+        },
+      })
+    ).rejects.toHaveProperty('result', {
+      one: 'FIRST',
+      two: 'SECOND',
+      three: 'THIRD',
+    });
+  });
+
   it('Incomplete conditional statement: missing END-IF', async () => {
     const template = await fs.promises.readFile(
       path.join(__dirname, 'fixtures', 'missingEndIf.docx')
