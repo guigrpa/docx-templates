@@ -394,7 +394,7 @@ export async function getMetadata(template: Buffer) {
     return;
   }
 
-  const numberize = (a: any): number | undefined => {
+  const numberize = (a: unknown): number | undefined => {
     const c = Number(a);
     if (Number.isFinite(c)) return c;
     return;
