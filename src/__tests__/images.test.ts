@@ -423,7 +423,7 @@ it('010: can inject an image in a document that already contains images inserted
   `);
 
   const reportB = await createReport({
-    template: Buffer.from(reportA),
+    template: reportA,
     cmdDelimiter: '---',
     data: {
       injectImg: () => ({

@@ -44,9 +44,9 @@ type RunJSFunc = (o: { sandbox: SandBox; ctx: Context }) => {
 
 export type UserOptions = {
   /**
-   * Docx file template as a NodeJS Buffer or Buffer-like object in Browsers.
+   * Docx file template as a Uint8Array (or e.g. ArrayBuffer or NodeJS Buffer).
    */
-  template: Buffer;
+  template: Uint8Array;
   /**
    * Object of data to be injected or a (async) function that resolves to the data. The function gets as an argument the contents of the QUERY command as a string.
    */
@@ -181,7 +181,7 @@ export const ImageExtensions = [
 type ImageExtension = (typeof ImageExtensions)[number];
 export type Image = {
   extension: ImageExtension;
-  data: Buffer | ArrayBuffer | string;
+  data: ArrayBuffer | string;
 };
 export type Links = { [id: string]: Link };
 type Link = { url: string };

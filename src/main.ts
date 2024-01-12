@@ -39,7 +39,7 @@ const CONTENT_TYPES_PATH = '[Content_Types].xml' as const;
 const TEMPLATE_PATH = 'word' as const;
 const XML_FILE_REGEX = new RegExp(`${TEMPLATE_PATH}\\/[^\\/]+\\.xml`);
 
-export async function parseTemplate(template: Buffer) {
+export async function parseTemplate(template: ArrayBuffer) {
   logger.debug('Unzipping...');
   const zip = await zipLoad(template);
 
@@ -319,7 +319,7 @@ async function createReport(
  * @param delimiter the command delimiter (defaults to ['+++', '+++'])
  */
 export async function listCommands(
-  template: Buffer,
+  template: ArrayBuffer,
   delimiter?: string | [string, string]
 ): Promise<CommandSummary[]> {
   const opts: CreateReportOptions = {
@@ -371,7 +371,7 @@ export async function listCommands(
  * Extract metadata from a document, such as the number of pages or words.
  * @param template the docx template as a Buffer-like object
  */
-export async function getMetadata(template: Buffer) {
+export async function getMetadata(template: ArrayBuffer) {
   const app_xml_path = `docProps/app.xml`;
   const core_xml_path = `docProps/core.xml`;
   const zip = await zipLoad(template);
