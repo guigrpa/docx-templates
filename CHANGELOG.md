@@ -1,3 +1,9 @@
+## 4.11.4 (2024-01-12)
+- Replace weak `Object` types of `runJs` arguments.
+- Remove unnecessary use of `eval()` internally.
+- [#341](https://github.com/guigrpa/docx-templates/issues/341) Add result to `ObjectCommandResultError`. When a `ObjectCommandResultError` is thrown, this change attaches the computed result to the error in case a custom error handler wants to use it for some reason. (thanks @emilong!)
+- [#345](https://github.com/guigrpa/docx-templates/issues/345): Make types for template more liberal. What works with Buffer should work with ArrayBuffer, with the benefit that browsers don't need a `Buffer` polyfill.
+
 ## 4.11.3 (2023-08-08)
 -  ([PR #321](https://github.com/guigrpa/docx-templates/pull/321)) Fix `InvalidCommandError` referring to `'Unexpected END-IF outside of IF statement context:'` when the problem was actually an unexpected `END-FOR`. Thanks @davidjb
 - Issue [#322](https://github.com/guigrpa/docx-templates/issues/322): Fix silent failure caused by unterminated for-loop in template, leading to a (partially) empty report. Throw new `UnterminatedForLoopError` when `FOR` loop is not properly terminated with an `END-FOR`.
