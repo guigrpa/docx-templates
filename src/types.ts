@@ -118,6 +118,14 @@ export type UserOptions = {
    * (Default: false)
    */
   processLineBreaksAsNewText?: boolean;
+    
+  /**
+   * A function that can be used to process the xml nodes before they are sanitized and converted to string.
+   * This can be used to modify the xml nodes before they are inserted into the docx.
+   * @param node The xml node before being sanitized and converted to string
+   * @returns Node The modified node
+   */
+  preProcessXML?: (node: Node, documentComponent: string) => Node;
 };
 
 export type CreateReportOptions = {

@@ -220,7 +220,7 @@ async function createReport(
   if (_probe === 'JS') return report1;
 
   logger.debug('Converting report to XML...');
-  const reportXml = buildXml(report1, xmlOptions);
+  const reportXml = buildXml(options.preProcessXML? options.preProcessXML(report1, "main") : report1 , xmlOptions);
   if (_probe === 'XML') return reportXml;
   logger.debug('Writing report...');
   zipSetText(zip, `${TEMPLATE_PATH}/${mainDocument}`, reportXml);
@@ -245,14 +245,15 @@ async function createReport(
       links: links2,
       htmls: htmls2,
     } = result;
-    const xml = buildXml(report2, xmlOptions);
+    const segments = filePath.split('/');
+    const documentComponent = segments[segments.length - 1];
+
+    const xml = buildXml(options.preProcessXML? options.preProcessXML(report2, documentComponent) : report2, xmlOptions);
     zipSetText(zip, filePath, xml);
 
     numImages += Object.keys(images2).length;
     numHtmls += Object.keys(htmls2).length;
 
-    const segments = filePath.split('/');
-    const documentComponent = segments[segments.length - 1];
     await processImages(images2, documentComponent, zip);
     await processLinks(links2, mainDocument, zip);
     await processHtmls(htmls2, mainDocument, zip);
