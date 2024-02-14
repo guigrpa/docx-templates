@@ -220,7 +220,7 @@ async function createReport(
   if (_probe === 'JS') return report1;
 
   logger.debug('Converting report to XML...');
-  const reportXml = buildXml(options.preProcessXML? options.preProcessXML(report1, "main") : report1 , xmlOptions);
+  const reportXml = buildXml(options.preProcessXML? options.preProcessXML(report1, "main.xml") : report1 , xmlOptions);
   if (_probe === 'XML') return reportXml;
   logger.debug('Writing report...');
   zipSetText(zip, `${TEMPLATE_PATH}/${mainDocument}`, reportXml);
