@@ -42,6 +42,19 @@ type RunJSFunc = (o: { sandbox: SandBox; ctx: Context }) => {
   result: unknown;
 };
 
+type ResultOutput =  {
+  status: 'success';
+  report: Node;
+  images: Images;
+  links: Links;
+  htmls: Htmls;
+}
+| {
+  status: 'errors';
+  errors: Error[];
+};
+
+
 export type UserOptions = {
   /**
    * Docx file template as a Uint8Array (or e.g. ArrayBuffer or NodeJS Buffer).
@@ -126,7 +139,7 @@ export type UserOptions = {
    * @param documentComponent The document component main.xml, header1.xml, footer1.xml etc.
    * @returns Node The modified node
    */
-  preProcessXML?: (node: Node, documentComponent: string) => Node;
+  preProcessXML?: (node: Node, documentComponent: string, result: ResultOutput) => Node;
 };
 
 export type CreateReportOptions = {
