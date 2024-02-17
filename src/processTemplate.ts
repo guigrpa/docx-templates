@@ -62,6 +62,9 @@ export function newContext(
     fJump: false,
     shorthands: {},
     options,
+    // To verfiy we don't have a nested if within the same p or tr tag
+    pIfCheckMap: new Map(),
+    trIfCheckMap: new Map(),
   };
 }
 
@@ -168,6 +171,30 @@ const debugPrintNode = (node: Node) =>
         }
   );
 
+const findParentPorTrNode = (node: Node) => {
+  let parentNode = node._parent;
+  let resultNode = null;
+  while (parentNode != null && resultNode == null) {
+    const parentNodeTag = parentNode._fTextNode ? null : parentNode._tag;
+    if (parentNodeTag === 'w:p') {
+      // check also for w:tr tag
+      const grandParentNode =
+        parentNode._parent != null ? parentNode._parent._parent : null;
+      if (
+        grandParentNode != null &&
+        !grandParentNode._fTextNode &&
+        grandParentNode._tag === 'w:tr'
+      ) {
+        resultNode = grandParentNode;
+      } else {
+        resultNode = parentNode;
+      }
+    }
+    parentNode = parentNode._parent;
+  }
+  return resultNode;
+};
+
 export async function walkTemplate(
   data: ReportData | undefined,
   template: Node,
@@ -181,6 +208,7 @@ export async function walkTemplate(
   let deltaJump = 0;
   const errors: Error[] = [];
 
+  let loopCount = 0;
   while (true) {
     const curLoop = getCurLoop(ctx);
     let nextSibling: Node | null = null;
@@ -215,7 +243,21 @@ export async function walkTemplate(
       // Up
     } else {
       const parent = nodeIn._parent;
-      if (parent == null) break;
+      if (parent == null) {
+        logger.debug(
+          `=== parent is null, breaking after ${loopCount} loops...`
+        );
+        break;
+      } else if (loopCount > 1000000) {
+        // adding a emergency exit to avoid infit loops
+        logger.debug(
+          `=== parent is still not null after ${loopCount} loops, something must be wrong ...`,
+          debugPrintNode(parent)
+        );
+        throw new InternalError(
+          'something went wrong with the document. Please review and try again'
+        );
+      }
       nodeIn = parent;
       ctx.level -= 1;
       move = 'UP';
@@ -387,6 +429,7 @@ export async function walkTemplate(
 
       // Clone input node and append to output tree
       const newNode: Node = cloneNodeWithoutChildren(nodeIn);
+
       newNode._parent = nodeOut;
       nodeOut._children.push(newNode);
 
@@ -436,6 +479,8 @@ export async function walkTemplate(
         deltaJump -= 1;
       }
     }
+
+    loopCount++;
   }
 
   if (ctx.gCntIf !== ctx.gCntEndIf) {
@@ -750,6 +795,40 @@ const processForIf = async (
   // Have we already seen this node or is it the start of a new FOR loop?
   const curLoop = getCurLoop(ctx);
   if (!(curLoop && curLoop.varName === varName)) {
+    // Check whether we already started a nested IF without and END-IF for this p or tr tag
+    if (isIf) {
+      const parentPorTrNode = findParentPorTrNode(node);
+      const parentPorTrNodeTag =
+        parentPorTrNode != null
+          ? parentPorTrNode._fTextNode
+            ? null
+            : parentPorTrNode._tag
+          : null;
+      if (parentPorTrNode != null) {
+        if (parentPorTrNodeTag === 'w:p') {
+          if (
+            ctx.pIfCheckMap.has(parentPorTrNode) &&
+            ctx.pIfCheckMap.get(parentPorTrNode) !== cmd
+          )
+            throw new InvalidCommandError(
+              'Invalid IF command nested into another IF command on the same line',
+              cmd
+            );
+          else ctx.pIfCheckMap.set(parentPorTrNode, cmd);
+        } else if (parentPorTrNodeTag === 'w:tr') {
+          if (
+            ctx.trIfCheckMap.has(parentPorTrNode) &&
+            ctx.trIfCheckMap.get(parentPorTrNode) !== cmd
+          )
+            throw new InvalidCommandError(
+              'Invalid IF command nested into another IF command on the same table row',
+              cmd
+            );
+          else ctx.trIfCheckMap.set(parentPorTrNode, cmd);
+        }
+      }
+    }
+
     const parentLoopLevel = ctx.loops.length - 1;
     const fParentIsExploring =
       parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
@@ -798,6 +877,20 @@ const processEndForIf = (
       } context`,
       cmd
     );
+
+  // Reset the if check flag for the corresponding p or tr parent node
+  const parentPorTrNode = findParentPorTrNode(node);
+  const parentPorTrNodeTag =
+    parentPorTrNode != null
+      ? parentPorTrNode._fTextNode
+        ? null
+        : parentPorTrNode._tag
+      : null;
+  if (parentPorTrNodeTag === 'w:p') {
+    ctx.pIfCheckMap.delete(<Node>parentPorTrNode);
+  } else if (parentPorTrNodeTag === 'w:tr') {
+    ctx.trIfCheckMap.delete(<Node>parentPorTrNode);
+  }
 
   // First time we visit an END-IF node, we assign it the arbitrary name
   // generated when the IF was processed

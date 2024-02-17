@@ -168,6 +168,10 @@ export type Context = {
   options: CreateReportOptions;
   jsSandbox?: SandBox;
   textRunPropsNode?: NonTextNode;
+
+  // To verfiy we don't have a nested if within the same p or tr tag
+  pIfCheckMap: Map<Node, string>;
+  trIfCheckMap: Map<Node, string>;
 };
 
 export type Images = { [id: string]: Image };
