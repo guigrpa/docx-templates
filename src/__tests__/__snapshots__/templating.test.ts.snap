@@ -27328,6 +27328,12 @@ exports[`noSandbox Template processing INS in header and footer 1`] = `
 </w:document>"
 `;
 
+exports[`noSandbox Template processing Nested IF statements on same line 1`] = `[Error: Invalid IF command nested into another IF command on the same line: IF b]`;
+
+exports[`noSandbox Template processing Nested IF statements on same row1 1`] = `[Error: Invalid IF command nested into another IF command on the same table row: IF b]`;
+
+exports[`noSandbox Template processing Nested IF statements on same row2 1`] = `[Error: Invalid IF command nested into another IF command on the same table row: IF b]`;
+
 exports[`noSandbox Template processing Processes FOR loops with Text Box 1`] = `
 {
   "_attrs": {
@@ -59413,6 +59419,12 @@ exports[`sandbox Template processing INS in header and footer 1`] = `
   </w:body>
 </w:document>"
 `;
+
+exports[`sandbox Template processing Nested IF statements on same line 1`] = `[Error: Invalid IF command nested into another IF command on the same line: IF b]`;
+
+exports[`sandbox Template processing Nested IF statements on same row1 1`] = `[Error: Invalid IF command nested into another IF command on the same table row: IF b]`;
+
+exports[`sandbox Template processing Nested IF statements on same row2 1`] = `[Error: Invalid IF command nested into another IF command on the same table row: IF b]`;
 
 exports[`sandbox Template processing Processes FOR loops with Text Box 1`] = `
 {

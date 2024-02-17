@@ -1280,6 +1280,57 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         const result = await createReport(opts, 'XML');
         expect(result).toMatchSnapshot();
       });
+
+      it('Nested IF statements on same line', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'ifStatementsOnSameLine.docx')
+        );
+
+        const result = createReport(
+          {
+            noSandbox,
+            template,
+            data: { a: true, b: true, counts: ['a', 'b', 'c'] },
+            cmdDelimiter: ['{{', '}}'],
+          },
+          'JS'
+        );
+        return expect(result).rejects.toMatchSnapshot();
+      });
+
+      it('Nested IF statements on same row1', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'ifStatementsOnSameRow1.docx')
+        );
+
+        const result = createReport(
+          {
+            noSandbox,
+            template,
+            data: { a: true, b: true, counts: ['a', 'b', 'c'] },
+            cmdDelimiter: ['{{', '}}'],
+          },
+          'JS'
+        );
+        return expect(result).rejects.toMatchSnapshot();
+      });
+
+      it('Nested IF statements on same row2', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'ifStatementsOnSameRow2.docx')
+        );
+
+        const result = createReport(
+          {
+            noSandbox,
+            template,
+            data: { a: true, b: true, counts: ['a', 'b', 'c'] },
+            cmdDelimiter: ['{{', '}}'],
+          },
+          'JS'
+        );
+        return expect(result).rejects.toMatchSnapshot();
+      });
     });
   });
 });

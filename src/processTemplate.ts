@@ -61,6 +61,9 @@ export function newContext(
     fJump: false,
     shorthands: {},
     options,
+    // NEW DSE
+    pIfCheckMap: new Map(),
+    trIfCheckMap: new Map(),
   };
 }
 
@@ -166,6 +169,45 @@ const debugPrintNode = (node: Node) =>
           _attrs: node?._attrs,
         }
   );
+
+// NEW DSE
+/*
+const findParentPorTrNode = (node: Node) => {
+  let parentNode = node._parent;
+  let resultNode = null;
+  while (parentNode != null && resultNode == null) {
+    const parentNodeTag = parentNode._fTextNode ? null : parentNode._tag;
+    if (parentNodeTag === 'w:p' || parentNodeTag === 'w:tr') {
+      resultNode = parentNode;
+    }
+    parentNode = parentNode._parent;
+  }
+  return resultNode;
+};
+*/
+const findParentPorTrNode = (node: Node) => {
+  let parentNode = node._parent;
+  let resultNode = null;
+  while (parentNode != null && resultNode == null) {
+    const parentNodeTag = parentNode._fTextNode ? null : parentNode._tag;
+    if (parentNodeTag === 'w:p') {
+      // check also for w:tr tag
+      const grandParentNode =
+        parentNode._parent != null ? parentNode._parent._parent : null;
+      if (
+        grandParentNode != null &&
+        !grandParentNode._fTextNode &&
+        grandParentNode._tag === 'w:tr'
+      ) {
+        resultNode = grandParentNode;
+      } else {
+        resultNode = parentNode;
+      }
+    }
+    parentNode = parentNode._parent;
+  }
+  return resultNode;
+};
 
 export async function walkTemplate(
   data: ReportData | undefined,
@@ -386,6 +428,22 @@ export async function walkTemplate(
 
       // Clone input node and append to output tree
       const newNode: Node = cloneNodeWithoutChildren(nodeIn);
+
+      // NEW DSE if the new node is p or tr node, add it to the map to check whether two for/ifs are nested on the same line
+      /*
+      if (tag === 'w:p' && ctx.pForIfCheckMap.has(nodeIn)) {
+        ctx.pForIfCheckMap.set(
+          newNode,
+          <boolean>ctx.pForIfCheckMap.get(nodeIn)
+        );
+      } else if (tag === 'w:tr' && ctx.trForIfCheckMap.has(nodeIn)) {
+        ctx.trForIfCheckMap.set(
+          newNode,
+          <boolean>ctx.trForIfCheckMap.get(nodeIn)
+        );
+      }
+      */
+
       newNode._parent = nodeOut;
       nodeOut._children.push(newNode);
 
@@ -749,6 +807,40 @@ const processForIf = async (
   // Have we already seen this node or is it the start of a new FOR loop?
   const curLoop = getCurLoop(ctx);
   if (!(curLoop && curLoop.varName === varName)) {
+    // Check whether we already started a nested IF without and END-IF for this p or tr tag
+    if (isIf) {
+      const parentPorTrNode = findParentPorTrNode(node);
+      const parentPorTrNodeTag =
+        parentPorTrNode != null
+          ? parentPorTrNode._fTextNode
+            ? null
+            : parentPorTrNode._tag
+          : null;
+      if (parentPorTrNode != null) {
+        if (parentPorTrNodeTag === 'w:p') {
+          if (
+            ctx.pIfCheckMap.has(parentPorTrNode) &&
+            ctx.pIfCheckMap.get(parentPorTrNode) !== cmd
+          )
+            throw new InvalidCommandError(
+              'Invalid IF command nested into another IF command on the same line',
+              cmd
+            );
+          else ctx.pIfCheckMap.set(parentPorTrNode, cmd);
+        } else if (parentPorTrNodeTag === 'w:tr') {
+          if (
+            ctx.trIfCheckMap.has(parentPorTrNode) &&
+            ctx.trIfCheckMap.get(parentPorTrNode) !== cmd
+          )
+            throw new InvalidCommandError(
+              'Invalid IF command nested into another IF command on the same table row',
+              cmd
+            );
+          else ctx.trIfCheckMap.set(parentPorTrNode, cmd);
+        }
+      }
+    }
+
     const parentLoopLevel = ctx.loops.length - 1;
     const fParentIsExploring =
       parentLoopLevel >= 0 && ctx.loops[parentLoopLevel].idx === -1;
@@ -797,6 +889,20 @@ const processEndForIf = (
       } context`,
       cmd
     );
+
+  // Reset the if check flag for the corresponding p or tr parent node
+  const parentPorTrNode = findParentPorTrNode(node);
+  const parentPorTrNodeTag =
+    parentPorTrNode != null
+      ? parentPorTrNode._fTextNode
+        ? null
+        : parentPorTrNode._tag
+      : null;
+  if (parentPorTrNodeTag === 'w:p') {
+    ctx.pIfCheckMap.delete(<Node>parentPorTrNode);
+  } else if (parentPorTrNodeTag === 'w:tr') {
+    ctx.trIfCheckMap.delete(<Node>parentPorTrNode);
+  }
 
   // First time we visit an END-IF node, we assign it the arbitrary name
   // generated when the IF was processed

@@ -168,6 +168,10 @@ export type Context = {
   options: CreateReportOptions;
   jsSandbox?: SandBox;
   textRunPropsNode?: NonTextNode;
+
+  // NEW DSE
+  pIfCheckMap: Map<Node, string>;
+  trIfCheckMap: Map<Node, string>;
 };
 
 export type Images = { [id: string]: Image };
