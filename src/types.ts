@@ -135,11 +135,11 @@ export type UserOptions = {
   /**
    * A function that can be used to process the xml nodes before they are sanitized and converted to string.
    * This can be used to modify the xml nodes before they are inserted into the docx.
-   * @param node The xml node before being sanitized and converted to string
+   * @param xml The xml node before being sanitized and converted to string
    * @param documentComponent The document component main.xml, header1.xml, footer1.xml etc.
-   * @returns Node The modified node
+   * @returns Node | Promise<Node> The modified node
    */
-  preProcessXML?: (node: Node, documentComponent: string, result: ResultOutput) => Node;
+  preBuildXML?: (xml: Node, documentComponent: string, result: ResultOutput, relationXML: Node) => Node | Promise<Node>;
 };
 
 export type CreateReportOptions = {
