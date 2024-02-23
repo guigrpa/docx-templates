@@ -50,7 +50,7 @@
     "@types/node": "^20",
     "@types/qrcode": "1.5.0",
     "@types/sax": "^1.2.4",
-    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
     "buffer": "^6.0.3",
     "coveralls": "^3.0.13",

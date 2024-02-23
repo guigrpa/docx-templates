@@ -61,7 +61,7 @@ export function newContext(
     fJump: false,
     shorthands: {},
     options,
-    // NEW DSE
+    // To verfiy we don't have a nested if within the same p or tr tag
     pIfCheckMap: new Map(),
     trIfCheckMap: new Map(),
   };
@@ -170,21 +170,6 @@ const debugPrintNode = (node: Node) =>
         }
   );
 
-// NEW DSE
-/*
-const findParentPorTrNode = (node: Node) => {
-  let parentNode = node._parent;
-  let resultNode = null;
-  while (parentNode != null && resultNode == null) {
-    const parentNodeTag = parentNode._fTextNode ? null : parentNode._tag;
-    if (parentNodeTag === 'w:p' || parentNodeTag === 'w:tr') {
-      resultNode = parentNode;
-    }
-    parentNode = parentNode._parent;
-  }
-  return resultNode;
-};
-*/
 const findParentPorTrNode = (node: Node) => {
   let parentNode = node._parent;
   let resultNode = null;
@@ -222,6 +207,7 @@ export async function walkTemplate(
   let deltaJump = 0;
   const errors: Error[] = [];
 
+  let loopCount = 0;
   while (true) {
     const curLoop = getCurLoop(ctx);
     let nextSibling: Node | null = null;
@@ -256,7 +242,21 @@ export async function walkTemplate(
       // Up
     } else {
       const parent = nodeIn._parent;
-      if (parent == null) break;
+      if (parent == null) {
+        logger.debug(
+          `=== parent is null, breaking after ${loopCount} loops...`
+        );
+        break;
+      } else if (loopCount > 1000000) {
+        // adding a emergency exit to avoid infit loops
+        logger.debug(
+          `=== parent is still not null after ${loopCount} loops, something must be wrong ...`,
+          debugPrintNode(parent)
+        );
+        throw new InternalError(
+          'something went wrong with the document. Please review and try again'
+        );
+      }
       nodeIn = parent;
       ctx.level -= 1;
       move = 'UP';
@@ -429,21 +429,6 @@ export async function walkTemplate(
       // Clone input node and append to output tree
       const newNode: Node = cloneNodeWithoutChildren(nodeIn);
 
-      // NEW DSE if the new node is p or tr node, add it to the map to check whether two for/ifs are nested on the same line
-      /*
-      if (tag === 'w:p' && ctx.pForIfCheckMap.has(nodeIn)) {
-        ctx.pForIfCheckMap.set(
-          newNode,
-          <boolean>ctx.pForIfCheckMap.get(nodeIn)
-        );
-      } else if (tag === 'w:tr' && ctx.trForIfCheckMap.has(nodeIn)) {
-        ctx.trForIfCheckMap.set(
-          newNode,
-          <boolean>ctx.trForIfCheckMap.get(nodeIn)
-        );
-      }
-      */
-
       newNode._parent = nodeOut;
       nodeOut._children.push(newNode);
 
@@ -493,6 +478,8 @@ export async function walkTemplate(
         deltaJump -= 1;
       }
     }
+
+    loopCount++;
   }
 
   if (ctx.gCntIf !== ctx.gCntEndIf) {

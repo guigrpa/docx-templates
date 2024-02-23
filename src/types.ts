@@ -169,7 +169,7 @@ export type Context = {
   jsSandbox?: SandBox;
   textRunPropsNode?: NonTextNode;
 
-  // NEW DSE
+  // To verfiy we don't have a nested if within the same p or tr tag
   pIfCheckMap: Map<Node, string>;
   trIfCheckMap: Map<Node, string>;
 };
