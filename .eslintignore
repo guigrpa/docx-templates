@@ -7,3 +7,4 @@ examples/example-browserify/public/docx-templates.js
 examples/example-webpack/public
 src/browser-polyfill.ts
 src/browser.ts
+rollup.config.js
