@@ -1,11 +1,13 @@
+import dts from 'rollup-plugin-dts'
+import { defineConfig } from 'rollup'
+/*
 import replace from '@rollup/plugin-replace'
 import esbuild from 'rollup-plugin-esbuild'
 import node from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import dts from 'rollup-plugin-dts'
-import { defineConfig } from 'rollup'
-
-export default defineConfig([{
+*/
+export default defineConfig([
+  /*{
   input: './src/browser.ts',
   output: { file: './lib/browser.js', format: 'es', exports: 'named', sourcemap: true },
   plugins: [
@@ -45,7 +47,7 @@ export default defineConfig([{
       }
     }
   ]
-}, {
+},*/ {
   input: './lib/index.d.ts',
   output: { file: './lib/bundled.d.ts', format: 'es' },
   plugins: [
