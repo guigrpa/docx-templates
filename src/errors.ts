@@ -1,5 +1,12 @@
 import { LoopStatus } from './types';
 
+export function isError(err: unknown): err is Error {
+  return (
+    err instanceof Error ||
+    (typeof err === 'object' && !!err && 'name' in err && 'message' in err)
+  );
+}
+
 /**
  * Thrown when `rejectNullish` is set to `true` and a command returns `null` or `undefined`.
  */
@@ -50,7 +57,7 @@ export class CommandExecutionError extends Error {
   command: string;
   err: Error;
   constructor(err: Error, command: string) {
-    super(`Error executing command '${command}': ${err.message}`);
+    super(`Error executing command '${command}': ${err.name}: ${err.message}`);
     Object.setPrototypeOf(this, CommandExecutionError.prototype);
     this.command = command;
     this.err = err;

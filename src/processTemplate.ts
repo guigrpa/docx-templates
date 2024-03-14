@@ -25,6 +25,7 @@ import {
   NonTextNode,
 } from './types';
 import {
+  isError,
   CommandSyntaxError,
   InternalError,
   InvalidCommandError,
@@ -628,7 +629,7 @@ const processCmd: CommandProcessor = async (
           try {
             processImage(ctx, img);
           } catch (e) {
-            if (!(e instanceof Error)) throw e;
+            if (!isError(e)) throw e;
             throw new ImageError(e, cmd);
           }
         }
@@ -660,7 +661,7 @@ const processCmd: CommandProcessor = async (
     } else throw new CommandSyntaxError(cmd);
     return;
   } catch (err) {
-    if (!(err instanceof Error)) throw err;
+    if (!isError(err)) throw err;
     if (ctx.options.errorHandler != null) {
       return ctx.options.errorHandler(err);
     }
