@@ -242,6 +242,65 @@ When choosing a delimiter, take care not to introduce conflicts with JS syntax, 
 ## Supported commands
 Currently supported commands are defined below.
 
+### Insert data with the `INS` command ( or using `=`, or nothing at all)
+
+Inserts the result of a given JavaScript snippet as follows.
+
+Using code like this:
+```js
+ const report = await createReport({
+    template,
+    data: { name: 'John', surname: 'Appleseed' },
+    cmdDelimiter: ['+++', '+++'],
+  });
+```
+And a template like this:
+
+```
++++name+++ +++surname+++
+```
+
+Will produce a result docx file that looks like this:
+
+```
+John Appleseed
+```
+
+Alternatively, you can use the more explicit `INS` (insert) command syntax.
+```
++++INS name+++ +++INS surname+++
+```
+
+Note that the last evaluated expression is inserted into the document, so you can include more complex code if you wish:
+
+```
++++INS
+const a = Math.random();
+const b = Math.round((a - 0.5) * 20);
+`A number between -10 and 10: ${b}.`
++++
+```
+
+You can also use `=` as shorthand notation instead of `INS`:
+
+```
++++= name+++ +++= surname+++
+```
+
+Even shorter (and with custom `cmdDelimiter: ['{', '}']`):
+
+```
+{name} {surname}
+```
+
+You can also access functions in the `additionalJsContext` parameter to `createReport()`, which may even return a Promise. The resolved value of the Promise will be inserted in the document.
+
+Use JavaScript's ternary operator to implement an _if-else_ structure:
+
+```
++++= $details.year != null ? `(${$details.year})` : ''+++
+```
+
 ### `QUERY`
 
 You can use GraphQL, SQL, whatever you want: the query will be passed unchanged to your `data` query resolver.
@@ -268,47 +327,6 @@ const data = {
     people: [{ name: 'John', since: 2015 }, { name: 'Robert', since: 2010 }],
   },
 };
-```
-
-### `INS` (`=`, or nothing at all)
-
-Inserts the result of a given JavaScript snippet:
-
-```
-+++INS project.name+++ (+++INS project.details.year+++)
-or...
-+++INS `${project.name} (${$details.year})`+++
-```
-
-Note that the last evaluated expression is inserted into the document, so you can include more complex code if you wish:
-
-```
-+++INS
-const a = Math.random();
-const b = Math.round((a - 0.5) * 20);
-`A number between -10 and 10: ${b}.`
-+++
-```
-
-You can also use this shorthand notation:
-
-```
-+++= project.name+++ (+++= project.details.year+++)
-+++= `${project.name} (${$details.year})`+++
-```
-
-Even shorter (and with custom `cmdDelimiter: ['{', '}']`):
-
-```
-{project.name} ({project.details.year})
-```
-
-You can also access functions in the `additionalJsContext` parameter to `createReport()`, which may even return a Promise. The resolved value of the Promise will be inserted in the document.
-
-Use JavaScript's ternary operator to implement an _if-else_ structure:
-
-```
-+++= $details.year != null ? `(${$details.year})` : ''+++
 ```
 
 ### `EXEC` (`!`)
