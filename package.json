@@ -27,6 +27,7 @@
     "compile": "rimraf ./lib && tsc && yarn rollup",
     "rollup": "rollup -c",
     "jest": "jest --watch --coverage",
+    "jest:update": "jest --updateSnapshot",
     "test": "yarn lint && yarn testCovFull",
     "testCovFull": "yarn testCovPrepare && yarn testDev && yarn testCovReport",
     "testCovPrepare": "rm -rf ./coverage .nyc_output .nyc_tmp && mkdir .nyc_tmp",
