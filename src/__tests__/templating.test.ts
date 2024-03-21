@@ -1234,7 +1234,6 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
           data: {
             headline: headline,
           },
-          processLineBreaksAsNewText: true,
         };
         expect(await createReport(opts, 'XML')).toMatchSnapshot();
       });

@@ -111,13 +111,6 @@ export type UserOptions = {
    * Defaults to false.
    */
   fixSmartQuotes?: boolean;
-
-  /**
-   * Use the new way of injecting line breaks from command results (only applies when `processLineBreaks` is `true`)
-   * which has better results in LibreOffice and Google Drive.
-   * (Default: false)
-   */
-  processLineBreaksAsNewText?: boolean;
 };
 
 export type CreateReportOptions = {
@@ -131,7 +124,6 @@ export type CreateReportOptions = {
   rejectNullish: boolean;
   errorHandler: ErrorHandler | null;
   fixSmartQuotes: boolean;
-  processLineBreaksAsNewText: boolean;
 };
 
 export type SandBox = {
