@@ -19868,7 +19868,7 @@ exports[`noSandbox Template processing 39 Processes LINK commands 1`] = `
 }
 `;
 
-exports[`noSandbox Template processing 40 Throws on invalid command 1`] = `[Error: Error executing command 'TTT foo': Unexpected identifier 'foo']`;
+exports[`noSandbox Template processing 40 Throws on invalid command 1`] = `[Error: Error executing command 'TTT foo': SyntaxError: Unexpected identifier 'foo']`;
 
 exports[`noSandbox Template processing 41 Throws on invalid for logic 1`] = `[Error: Invalid command: END-FOR company]`;
 
@@ -26172,14 +26172,14 @@ exports[`noSandbox Template processing 107b non-alphanumeric INS commands (e.g. 
 
 exports[`noSandbox Template processing 112a failFast: false lists all errors in the document before failing. 1`] = `
 [
-  [Error: Error executing command 'notavailable': notavailable is not defined],
-  [Error: Error executing command 'something': something is not defined],
+  [Error: Error executing command 'notavailable': ReferenceError: notavailable is not defined],
+  [Error: Error executing command 'something': ReferenceError: something is not defined],
   [Error: Invalid command: END-FOR company],
   [Error: Unterminated FOR-loop ('FOR company'). Make sure each FOR loop has a corresponding END-FOR command.],
 ]
 `;
 
-exports[`noSandbox Template processing 112b failFast: true has the same behaviour as when failFast is undefined 1`] = `[Error: Error executing command 'notavailable': notavailable is not defined]`;
+exports[`noSandbox Template processing 112b failFast: true has the same behaviour as when failFast is undefined 1`] = `[Error: Error executing command 'notavailable': ReferenceError: notavailable is not defined]`;
 
 exports[`noSandbox Template processing 131 correctly handles Office 365 .docx files 1`] = `
 {
@@ -30290,7 +30290,7 @@ exports[`noSandbox Template processing avoids confusion between variable name an
 }
 `;
 
-exports[`noSandbox Template processing fixSmartQuotes flag (see PR #152) 1`] = `"Error executing command 'reverse(‘aubergine’)': Invalid or unexpected token"`;
+exports[`noSandbox Template processing fixSmartQuotes flag (see PR #152) 1`] = `"Error executing command 'reverse(‘aubergine’)': SyntaxError: Invalid or unexpected token"`;
 
 exports[`noSandbox Template processing iterate over object properties and keys in FOR loop 1`] = `
 {

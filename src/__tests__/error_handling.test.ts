@@ -4,12 +4,24 @@ import QR from 'qrcode';
 import { createReport } from '../index';
 import { setDebugLogSink } from '../debug';
 import {
+  isError,
   NullishCommandResultError,
   CommandExecutionError,
   InvalidCommandError,
 } from '../errors';
 
 if (process.env.DEBUG) setDebugLogSink(console.log);
+
+class NoErrorThrownError extends Error {}
+
+const getError = async <TError>(call: () => unknown): Promise<TError> => {
+  try {
+    await call();
+    throw new NoErrorThrownError();
+  } catch (error: unknown) {
+    return error as TError;
+  }
+};
 
 ['noSandbox', 'sandbox'].forEach(sbStatus => {
   const noSandbox = sbStatus === 'sandbox' ? false : true;
@@ -323,5 +335,66 @@ if (process.env.DEBUG) setDebugLogSink(console.log);
     ).rejects.toThrow(
       `Unterminated FOR-loop ('FOR c'). Make sure each FOR loop has a corresponding END-FOR command.`
     );
+  });
+});
+
+describe('errors from different realms', () => {
+  it('sandbox', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'referenceError.docx')
+    );
+
+    const error = await getError(() =>
+      createReport({ noSandbox: false, template, data: {} })
+    );
+    expect(error).toBeInstanceOf(CommandExecutionError);
+
+    // We cannot check with instanceof as this Error is from another realm despite still being an error
+    const commandExecutionError = error as CommandExecutionError;
+    expect(commandExecutionError.err).not.toBeInstanceOf(ReferenceError);
+    expect(commandExecutionError.err).not.toBeInstanceOf(Error);
+    expect(commandExecutionError.err.name).toBe('ReferenceError');
+    expect(commandExecutionError.err.message).toBe(
+      'nonExistentVariable is not defined'
+    );
+  });
+
+  it('noSandbox', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'referenceError.docx')
+    );
+
+    const error = await getError(() =>
+      createReport({ noSandbox: true, template, data: {} })
+    );
+    expect(error).toBeInstanceOf(CommandExecutionError);
+
+    // Without sandboxing, the error is from the same realm
+    const commandExecutionError = error as CommandExecutionError;
+    expect(commandExecutionError.err).toBeInstanceOf(ReferenceError);
+    expect(commandExecutionError.err).toBeInstanceOf(Error);
+    expect(commandExecutionError.err.name).toBe('ReferenceError');
+    expect(commandExecutionError.err.message).toBe(
+      'nonExistentVariable is not defined'
+    );
+  });
+});
+
+describe('isError', () => {
+  it('Error is an error', () => {
+    expect(isError(new Error())).toBeTruthy();
+  });
+
+  it('error-like object is an error', () => {
+    expect(
+      isError({
+        name: 'ReferenceError',
+        message: 'nonExistentVariable is not defined',
+      })
+    ).toBeTruthy();
+  });
+
+  it('primitive is not an error', () => {
+    expect(isError(1)).toBeFalsy();
   });
 });

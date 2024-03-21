@@ -1,7 +1,11 @@
 import vm from 'vm';
 import { getCurLoop } from './reportUtils';
 import { ReportData, Context, SandBox } from './types';
-import { CommandExecutionError, NullishCommandResultError } from './errors';
+import {
+  isError,
+  CommandExecutionError,
+  NullishCommandResultError,
+} from './errors';
 import { logger } from './debug';
 
 // Runs a user snippet in a sandbox, and returns the result.
@@ -51,7 +55,7 @@ export async function runUserJsAndGetRaw(
       result = await script.runInContext(context);
     }
   } catch (err) {
-    const e = err instanceof Error ? err : new Error(`${err}`);
+    const e = isError(err) ? err : new Error(`${err}`);
     if (ctx.options.errorHandler != null) {
       context = sandbox;
       result = await ctx.options.errorHandler(e, code);
