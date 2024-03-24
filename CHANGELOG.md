@@ -1,3 +1,8 @@
+## 4.11.5 (2024-03-24)
+- [#340](https://github.com/guigrpa/docx-templates/issues/340) Fix for infinite loop bug: don't allow nested IFs on same `w:p` or `w:tr` tag.
+- [#356](https://github.com/guigrpa/docx-templates/issues/356) Simplify documentation of INS commands.
+- [#355](https://github.com/guigrpa/docx-templates/issues/355) Retain original sandbox errors (from different JavaScript realms) without coercion.
+
 ## 4.11.4 (2024-01-12)
 - Replace weak `Object` types of `runJs` arguments.
 - Remove unnecessary use of `eval()` internally.
