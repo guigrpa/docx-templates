@@ -42,6 +42,19 @@ type RunJSFunc = (o: { sandbox: SandBox; ctx: Context }) => {
   result: unknown;
 };
 
+type ResultOutput =
+  | {
+      status: 'success';
+      report: Node;
+      images: Images;
+      links: Links;
+      htmls: Htmls;
+    }
+  | {
+      status: 'errors';
+      errors: Error[];
+    };
+
 export type UserOptions = {
   /**
    * Docx file template as a Uint8Array (or e.g. ArrayBuffer or NodeJS Buffer).
@@ -118,6 +131,20 @@ export type UserOptions = {
    * (Default: false)
    */
   processLineBreaksAsNewText?: boolean;
+
+  /**
+   * A function that can be used to process the xml nodes before they are sanitized and converted to string.
+   * This can be used to modify the xml nodes before they are inserted into the docx.
+   * @param xml The xml node before being sanitized and converted to string
+   * @param documentComponent The document component main.xml, header1.xml, footer1.xml etc.
+   * @returns Node | Promise<Node> The modified node
+   */
+  preBuildXML?: (
+    xml: Node,
+    documentComponent: string,
+    result: ResultOutput,
+    relationXML: Node
+  ) => Node | Promise<Node>;
 };
 
 export type CreateReportOptions = {
