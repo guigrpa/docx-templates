@@ -494,6 +494,22 @@ Since JavaScript expressions are supported, you can for example filter the loop 
 ----------------------------------------------------------
 ```
 
+And let you dynamically generate columns:
+
+```
++-------------------------------+--------------------+------------------------+
+| +++ FOR row IN rows+++        |                    |                        |
++===============================+====================+========================+
+| +++ FOR column IN columns +++ | +++INS $row+++     | +++ END-FOR column +++ |
+|                               |                    |                        |
+|                               | Some cell content  |                        |
+|                               |                    |                        |
+|                               | +++INS $column+++  |                        |
++-------------------------------+--------------------+------------------------+
+| +++ END-FOR row+++            |                    |                        |
++-------------------------------+--------------------+------------------------+
+```
+
 Finally, you can nest loops (this example assumes a different data set):
 
 ```
