@@ -1344,7 +1344,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               columns: ['Column 1', 'Column 2', 'Column 3'],
             },
           },
-          'JS'
+          'XML'
         );
         expect(result).toMatchSnapshot();
       });
@@ -1366,7 +1366,7 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
               columns: ['Column 1', 'Column 2', 'Column 3'],
             },
           },
-          'JS'
+          'XML'
         );
         expect(result).toMatchSnapshot();
       });
