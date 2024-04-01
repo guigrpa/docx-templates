@@ -1,3 +1,6 @@
+## 4.12.0 (2024-04-01)
+- [#15](https://github.com/guigrpa/docx-templates/issues/15) Generate columns for a table using `FOR` loop.
+
 ## 4.11.5 (2024-03-24)
 - [#340](https://github.com/guigrpa/docx-templates/issues/340) Fix for infinite loop bug: don't allow nested IFs on same `w:p` or `w:tr` tag.
 - [#356](https://github.com/guigrpa/docx-templates/issues/356) Simplify documentation of INS commands.
