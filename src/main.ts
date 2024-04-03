@@ -101,6 +101,11 @@ async function prepSecondaryXMLs(
   return prepped_secondaries;
 }
 
+const getDocumentRels = async (zip: JSZip, mainDocument: string) => {
+  const relsPath = `${TEMPLATE_PATH}/_rels/${mainDocument}.rels`;
+  return await getRelsFromZip(zip, relsPath);
+};
+
 /**
  * Create Report from docx template
  *
@@ -220,7 +225,13 @@ async function createReport(
   if (_probe === 'JS') return report1;
 
   logger.debug('Converting report to XML...');
-  const reportXml = buildXml(report1, xmlOptions);
+  const relationsXML = await getDocumentRels(zip, mainDocument);
+  const reportXml = buildXml(
+    options.preBuildXML
+      ? await options.preBuildXML(report1, 'main.xml', result, relationsXML)
+      : report1,
+    xmlOptions
+  );
   if (_probe === 'XML') return reportXml;
   logger.debug('Writing report...');
   zipSetText(zip, `${TEMPLATE_PATH}/${mainDocument}`, reportXml);
@@ -245,14 +256,25 @@ async function createReport(
       links: links2,
       htmls: htmls2,
     } = result;
-    const xml = buildXml(report2, xmlOptions);
+    const segments = filePath.split('/');
+    const documentComponent = segments[segments.length - 1];
+
+    const xml = buildXml(
+      options.preBuildXML
+        ? await options.preBuildXML(
+            report2,
+            documentComponent,
+            result,
+            relationsXML
+          )
+        : report2,
+      xmlOptions
+    );
     zipSetText(zip, filePath, xml);
 
     numImages += Object.keys(images2).length;
     numHtmls += Object.keys(htmls2).length;
 
-    const segments = filePath.split('/');
-    const documentComponent = segments[segments.length - 1];
     await processImages(images2, documentComponent, zip);
     await processLinks(links2, mainDocument, zip);
     await processHtmls(htmls2, mainDocument, zip);
