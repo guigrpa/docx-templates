@@ -140,7 +140,7 @@ const report = await createReport({
    * This may be useful if you implement a process timeout instead.
    * (Default: 1,000,000)
    */
-  maximumWalkingDepth?: number;
+  maximumWalkingDepth: 1_000_000;
 });
 ```
 
