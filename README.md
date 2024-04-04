@@ -147,20 +147,20 @@ const report = await createReport({
    * Leaving this option to false will result in a smaller file size.
    * (Default: false)
    */
-  indentXml?: boolean;
+  indentXml?: boolean,
   /**
    * Whether to preserve whitespace in the generated XML.*
    * Tip: Set this to true if your template contains significant whitespace that you want to preserve in the output document.
    * Leaving this option to false will result in a smaller file size.
    * (Default: false)
    */
-  preserveSpace?: boolean;
+  preserveSpace?: boolean,
   /**
    * Compression level for the generated docx file.
    * Integer between 0 (no compression, fastest) and 9 (maximum compression, slowest).
    * (Default: 1)
    */
-  compressionLevel?: number;
+  compressionLevel?: number,
 });
 ```
 
