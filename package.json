@@ -1,10 +1,10 @@
 {
-  "name": "docx-templates",
-  "version": "4.15.0",
+  "name": "docx-templates-brandondr",
+  "version": "4.15.1",
   "description": "Template-based docx report creation",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "author": "Guillermo Grau Panea",
+  "author": "Guillermo Grau Panea, revised by Brandon De Rose",
   "license": "MIT",
   "keywords": [
     "docx",
