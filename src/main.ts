@@ -165,6 +165,7 @@ async function createReport(
       options.processLineBreaksAsNewText == null
         ? false
         : options.processLineBreaksAsNewText,
+    maximumWalkingDepth: options.maximumWalkingDepth,
   };
   const xmlOptions = { literalXmlDelimiter };
 
