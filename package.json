@@ -1,5 +1,5 @@
 {
-  "name": "@datanest-earth/docx-templates",
+  "name": "docx-templates-brandondr",
   "version": "4.12.1-alpha",
   "description": "Template-based docx report creation",
   "main": "lib/index.js",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guigrpa/docx-templates.git"
+    "url": "git+https://github.com/brandondr/docx-templates.git"
   },
   "scripts": {
     "prepare": "yarn compile",
