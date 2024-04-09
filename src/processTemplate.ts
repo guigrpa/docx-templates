@@ -826,7 +826,7 @@ const processForIf = async (
   const curLoop = getCurLoop(ctx);
   if (!(curLoop && curLoop.varName === varName)) {
     // Check whether we already started a nested IF without and END-IF for this p or tr tag
-    if (isIf) {
+    if (isIf && !ctx.options.allowNestedIfs) {
       const parentPorTrNode = findParentPorTrNode(node);
       const parentPorTrNodeTag =
         parentPorTrNode != null
