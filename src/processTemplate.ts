@@ -210,6 +210,7 @@ export async function walkTemplate(
   const errors: Error[] = [];
 
   let loopCount = 0;
+  const maximumWalkingDepth = ctx.options?.maximumWalkingDepth || 1_000_000;
   while (true) {
     const curLoop = getCurLoop(ctx);
     let nextSibling: Node | null = null;
@@ -249,14 +250,14 @@ export async function walkTemplate(
           `=== parent is null, breaking after ${loopCount} loops...`
         );
         break;
-      } else if (loopCount > 1000000) {
+      } else if (loopCount > maximumWalkingDepth) {
         // adding a emergency exit to avoid infit loops
         logger.debug(
           `=== parent is still not null after ${loopCount} loops, something must be wrong ...`,
           debugPrintNode(parent)
         );
         throw new InternalError(
-          'something went wrong with the document. Please review and try again'
+          'infinite loop or massive dataset detected. Please review and try again'
         );
       }
       nodeIn = parent;

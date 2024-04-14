@@ -118,6 +118,15 @@ export type UserOptions = {
    * (Default: false)
    */
   processLineBreaksAsNewText?: boolean;
+
+  /**
+   * Maximum loop iterations allowed when walking through the template.
+   * You can increase this to generate reports with large amount of FOR loop elements.
+   * Tip: You can disable infinite loop protection by using the `Infinity` constant.
+   * This may be useful if you implement a process timeout instead.
+   * (Default: 1,000,000)
+   */
+  maximumWalkingDepth?: number;
 };
 
 export type CreateReportOptions = {
@@ -132,6 +141,7 @@ export type CreateReportOptions = {
   errorHandler: ErrorHandler | null;
   fixSmartQuotes: boolean;
   processLineBreaksAsNewText: boolean;
+  maximumWalkingDepth?: number;
 };
 
 export type SandBox = {

@@ -132,6 +132,15 @@ const report = await createReport({
    * Defaults to false.
    */
   fixSmartQuotes: false;
+
+  /**
+   * Maximum loop iterations allowed when walking through the template.
+   * You can increase this to generate reports with large amount of FOR loop elements.
+   * Tip: You can disable infinite loop protection by using the `Infinity` constant.
+   * This may be useful if you implement a process timeout instead.
+   * (Default: 1,000,000)
+   */
+  maximumWalkingDepth: 1_000_000;
 });
 ```
 
