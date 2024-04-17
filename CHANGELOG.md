@@ -1,3 +1,7 @@
+## 4.13.0 (2024-04-17)
+- [MR 360](https://github.com/guigrpa/docx-templates/pull/360) Added `maximumWalkingDepth` option for supporting large documents.
+- Updated dependencies.
+
 ## 4.12.0 (2024-04-01)
 - [#15](https://github.com/guigrpa/docx-templates/issues/15) Generate columns for a table using `FOR` loop.
 
