@@ -72,7 +72,7 @@
     "rollup-plugin-esbuild": "^4.8.2",
     "stream-browserify": "^3.0.0",
     "ts-jest": "^29.1.0",
-    "typescript": "^5.2.2",
+    "typescript": "5.4.5",
     "util": "^0.12.5",
     "vm-browserify": "^1.1.2"
   },
