@@ -13,6 +13,7 @@ coverage
 .nyc_tmp
 *.sublime-project
 *.sublime-workspace
+.vscode
 
 # Project-specific
 
