@@ -212,6 +212,8 @@ async function createReport(
   // - Images
   logger.debug('Generating report...');
   let ctx = newContext(createOptions, highest_img_id);
+  const relationsXML = await getDocumentRels(zip, mainDocument);
+  ctx.linkId = await currentRelCount(relationsXML);
   const result = await produceJsReport(queryResult, prepped_template, ctx);
   if (result.status === 'errors') {
     throw result.errors;
@@ -225,7 +227,6 @@ async function createReport(
   if (_probe === 'JS') return report1;
 
   logger.debug('Converting report to XML...');
-  const relationsXML = await getDocumentRels(zip, mainDocument);
   const reportXml = buildXml(
     options.preBuildXML
       ? await options.preBuildXML(report1, 'main.xml', result, relationsXML)
@@ -516,6 +517,37 @@ const processImages = async (
     literalXmlDelimiter: DEFAULT_LITERAL_XML_DELIMITER,
   });
   zipSetText(zip, relsPath, finalRelsXml);
+};
+
+function maxRelNumber(xml: NonTextNode): number {
+  let maxCount: number = 0;
+  if (xml._attrs && typeof xml._attrs.Id === 'string') {
+    const match = /rId(\d+)/.exec(xml._attrs.Id);
+    if (match && match[1]) {
+      const count = parseInt(match[1], 10);
+      if (count > maxCount) {
+        maxCount = count;
+      }
+    }
+  }
+  if (Array.isArray(xml._children) && xml._children.length) {
+    xml._children.forEach(child => {
+      if (!child._fTextNode) {
+        const childRelNumber = maxRelNumber(child);
+        if (childRelNumber > maxCount) {
+          maxCount = childRelNumber;
+        }
+      }
+    });
+  }
+  return maxCount;
+}
+
+const currentRelCount = async (rels: Node) => {
+  if (!rels._fTextNode) {
+    return maxRelNumber(rels);
+  }
+  return 0;
 };
 
 const processLinks = async (

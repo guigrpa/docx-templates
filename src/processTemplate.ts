@@ -996,7 +996,7 @@ const processLink = async (ctx: Context, linkPars: LinkPars) => {
   const { url, label = url } = linkPars;
   ctx.linkId += 1;
   const id = String(ctx.linkId);
-  const relId = `link${id}`;
+  const relId = `rId${id}`;
   ctx.links[relId] = { url };
   const node = newNonTextNode;
   const { textRunPropsNode } = ctx;
