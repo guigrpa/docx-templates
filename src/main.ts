@@ -248,10 +248,10 @@ async function createReport(
     // a fresh one for each secondary XML.
     const segments = filePath.split('/');
     const documentComponent = segments[segments.length - 1];
-    const currentLinkCount = ctx.linkId;
-    ctx = newContext(createOptions, ctx.imageAndShapeIdIncrement);
-    ctx.linkId = currentLinkCount;
 
+    ctx = newContext(createOptions, ctx.imageAndShapeIdIncrement);
+    const docRelXML = await getDocumentRels(zip, mainDocument);
+    ctx.linkId = await currentRelCount(docRelXML);
     const result = await produceJsReport(queryResult, js, ctx);
     if (result.status === 'errors') {
       throw result.errors;
@@ -280,7 +280,7 @@ async function createReport(
     numHtmls += Object.keys(htmls2).length;
 
     await processImages(images2, documentComponent, zip);
-    await processLinks(links2, mainDocument, zip);
+    await processLinks(links2, documentComponent, zip);
     await processHtmls(htmls2, mainDocument, zip);
   }
 
