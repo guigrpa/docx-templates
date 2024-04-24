@@ -246,7 +246,13 @@ async function createReport(
   for (const [js, filePath] of prepped_secondaries) {
     // Grab the last used (highest) image id from the main document's context, but create
     // a fresh one for each secondary XML.
+    const segments = filePath.split('/');
+    const documentComponent = segments[segments.length - 1];
+
     ctx = newContext(createOptions, ctx.imageAndShapeIdIncrement);
+    const docRelXML = await getDocumentRels(zip, documentComponent);
+    ctx.linkId = await currentRelCount(docRelXML);
+
     const result = await produceJsReport(queryResult, js, ctx);
     if (result.status === 'errors') {
       throw result.errors;
@@ -257,8 +263,6 @@ async function createReport(
       links: links2,
       htmls: htmls2,
     } = result;
-    const segments = filePath.split('/');
-    const documentComponent = segments[segments.length - 1];
 
     const xml = buildXml(
       options.preBuildXML
