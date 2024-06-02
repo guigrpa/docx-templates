@@ -623,6 +623,7 @@ ImageError
 InternalError
 TemplateParseError
 IncompleteConditionalStatementError // thrown when an IF-statement has no corresponding END-IF command
+UnterminatedForLoopError // thrown when a `FOR` loop is not properly terminated with an `END-FOR`
 ```
 
 ## Custom error handler
