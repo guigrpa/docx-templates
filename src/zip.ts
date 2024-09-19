@@ -7,11 +7,11 @@ const zipGetText = (zip: JSZip, filename: string) => {
   return file_in_zip.async('text');
 };
 
-const zipSetText = (zip: JSZip, filename: string, data: string) =>
-  zip.file(filename, data);
+const zipSetText = (zip: JSZip, filename: string, data: Buffer) =>
+  zip.file(filename, data, { binary: false });
 const zipSetBinary = (zip: JSZip, filename: string, data: ArrayBuffer) =>
   zip.file(filename, data, { binary: true });
-const zipSetBase64 = (zip: JSZip, filename: string, data: string) =>
+const zipSetBase64 = (zip: JSZip, filename: string, data: Buffer) =>
   zip.file(filename, data, { base64: true });
 const zipSave = (zip: JSZip) =>
   zip.generateAsync({

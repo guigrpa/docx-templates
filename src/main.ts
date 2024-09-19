@@ -222,7 +222,7 @@ async function createReport(
 
   logger.debug('Converting report to XML...');
   const reportXml = buildXml(report1, xmlOptions);
-  if (_probe === 'XML') return reportXml;
+  if (_probe === 'XML') return reportXml.toString('utf-8');
   logger.debug('Writing report...');
   zipSetText(zip, `${TEMPLATE_PATH}/${mainDocument}`, reportXml);
 
@@ -478,7 +478,7 @@ const processImages = async (
     logger.debug(`Writing image ${imageId} (${imgName})...`);
     const imgPath = `${TEMPLATE_PATH}/media/${imgName}`;
     if (typeof imgData === 'string') {
-      zipSetBase64(zip, imgPath, imgData);
+      zipSetBase64(zip, imgPath, Buffer.from(imgData));
     } else {
       zipSetBinary(zip, imgPath, imgData);
     }
@@ -550,7 +550,7 @@ const processHtmls = async (
       logger.debug(`Writing html ${htmlId} (${htmlName})...`);
       const htmlPath = `${TEMPLATE_PATH}/${htmlName}`;
       htmlFiles.push(`/${htmlPath}`);
-      zipSetText(zip, htmlPath, htmlData);
+      zipSetText(zip, htmlPath, Buffer.from(htmlData));
       addChild(
         rels,
         newNonTextNode('Relationship', {

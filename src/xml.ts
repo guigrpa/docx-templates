@@ -54,10 +54,16 @@ type XmlOptions = {
 };
 
 const buildXml = (node: Node, options: XmlOptions, indent: string = '') => {
-  let xml = indent.length
+  const xml = indent.length
     ? ''
     : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
-  if (node._fTextNode) xml += sanitizeText(node._text, options);
+
+  let xmlBuffer = Buffer.from(xml, 'utf-8');
+  if (node._fTextNode)
+    xmlBuffer = Buffer.concat([
+      xmlBuffer,
+      Buffer.from(sanitizeText(node._text, options)),
+    ]);
   else {
     let attrs = '';
     const nodeAttrs = node._attrs;
@@ -66,18 +72,27 @@ const buildXml = (node: Node, options: XmlOptions, indent: string = '') => {
     });
     const fHasChildren = node._children.length > 0;
     const suffix = fHasChildren ? '' : '/';
-    xml += `\n${indent}<${node._tag}${attrs}${suffix}>`;
+    xmlBuffer = Buffer.concat([
+      xmlBuffer,
+      Buffer.from(`\n${indent}<${node._tag}${attrs}${suffix}>`),
+    ]);
     let fLastChildIsNode = false;
     node._children.forEach(child => {
-      xml += buildXml(child, options, `${indent}  `);
+      xmlBuffer = Buffer.concat([
+        xmlBuffer,
+        buildXml(child, options, `${indent}  `),
+      ]);
       fLastChildIsNode = !child._fTextNode;
     });
     if (fHasChildren) {
       const indent2 = fLastChildIsNode ? `\n${indent}` : '';
-      xml += `${indent2}</${node._tag}>`;
+      xmlBuffer = Buffer.concat([
+        xmlBuffer,
+        Buffer.from(`${indent2}</${node._tag}>`),
+      ]);
     }
   }
-  return xml;
+  return xmlBuffer;
 };
 
 const sanitizeText = (str: string, options: XmlOptions) => {
