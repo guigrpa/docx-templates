@@ -67,7 +67,7 @@
     "prettier": "^2.8.7",
     "qrcode": "1.5.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.64.0",
+    "rollup": "^3.29.5",
     "rollup-plugin-dts": "^4.1.0",
     "rollup-plugin-esbuild": "^4.8.2",
     "stream-browserify": "^3.0.0",
