@@ -1,11 +1,4 @@
-import {
-  zipLoad,
-  zipGetText,
-  zipSetText,
-  zipSetBinary,
-  zipSetBase64,
-  zipSave,
-} from './zip';
+import { zipLoad, zipGetText, zipSetText, zipSave } from './zip';
 import { parseXml, buildXml } from './xml';
 import preprocessTemplate from './preprocessTemplate';
 import {
@@ -478,9 +471,9 @@ const processImages = async (
     logger.debug(`Writing image ${imageId} (${imgName})...`);
     const imgPath = `${TEMPLATE_PATH}/media/${imgName}`;
     if (typeof imgData === 'string') {
-      zipSetBase64(zip, imgPath, Buffer.from(imgData));
+      zip.file(imgPath, imgData, { base64: true });
     } else {
-      zipSetBinary(zip, imgPath, imgData);
+      zip.file(imgPath, imgData, { binary: true });
     }
     addChild(
       rels,

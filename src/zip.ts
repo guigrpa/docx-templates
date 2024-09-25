@@ -7,12 +7,9 @@ const zipGetText = (zip: JSZip, filename: string) => {
   return file_in_zip.async('text');
 };
 
-const zipSetText = (zip: JSZip, filename: string, data: Buffer) =>
+const zipSetText = (zip: JSZip, filename: string, data: ArrayBuffer) =>
   zip.file(filename, data, { binary: false });
-const zipSetBinary = (zip: JSZip, filename: string, data: ArrayBuffer) =>
-  zip.file(filename, data, { binary: true });
-const zipSetBase64 = (zip: JSZip, filename: string, data: Buffer) =>
-  zip.file(filename, data, { base64: true });
+
 const zipSave = (zip: JSZip) =>
   zip.generateAsync({
     type: 'uint8array',
@@ -23,4 +20,4 @@ const zipSave = (zip: JSZip) =>
 // ==========================================
 // Public API
 // ==========================================
-export { zipLoad, zipGetText, zipSetText, zipSetBinary, zipSetBase64, zipSave };
+export { zipLoad, zipGetText, zipSetText, zipSave };
