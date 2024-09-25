@@ -207,7 +207,7 @@ You can find an example implementation of `saveDataToFile()` [in the Webpack exa
 Check out the examples [using Webpack](https://github.com/guigrpa/docx-templates/tree/master/examples/example-webpack) and [using Browserify](https://github.com/guigrpa/docx-templates/tree/master/examples/example-browserify) or you can use the browserified bundle directly as discussed below.
 
 ## Polyfilled browser-ready bundle
-As this library depends on the internal NodeJS modules `vm`, `stream`, `util`, and `events`, your build tools have to polyfill these modules when using the library in the browser. We provide a browser build which includes the required polyfills. Its file size is about 300K uncompressed or 85K / 70K with gzip / brotli compression).
+As this library depends on the internal NodeJS modules `vm`, `stream`, `util`, `events` and the `Buffer` global, your build tools have to polyfill these modules when using the library in the browser. We provide a browser build which includes the required polyfills. Its file size is about 300K uncompressed or 85K / 70K with gzip / brotli compression).
 
 You can import the library directly **as a module** using e.g. the unpkg.com CDN, like below, or you can host the `/lib/browser.js` bundle yourself.
 
