@@ -4,6 +4,7 @@
   "description": "Template-based docx report creation",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "type": "module",
   "author": "Guillermo Grau Panea",
   "license": "MIT",
   "keywords": [
