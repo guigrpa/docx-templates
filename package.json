@@ -3,6 +3,7 @@
   "version": "4.15.1",
   "description": "Template-based docx report creation",
   "main": "lib/index.js",
+  "browser": "lib/browser.js",
   "types": "lib/index.d.ts",
   "author": "Guillermo Grau Panea, revised by Brandon De Rose",
   "license": "MIT",
