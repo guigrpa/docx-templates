@@ -472,3 +472,35 @@ it('011 correctly inserts the optional image caption', async () => {
   };
   expect(await createReport(opts, 'XML')).toMatchSnapshot();
 });
+
+it('can inject image in document that already contained image with same extension but uppercase', async () => {
+  const template = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'existingUppercaseJPEGExtension.docx')
+  );
+  const buff = await fs.promises.readFile(
+    path.join(__dirname, 'fixtures', 'sample.jpg')
+  );
+
+  const report = await createReport({
+    template,
+    cmdDelimiter: '+++',
+    data: {
+      injectImg: () => ({
+        width: 6,
+        height: 6,
+        data: buff,
+        extension: '.jpg',
+      }),
+    },
+  });
+
+  const jsZip = await JSZip.loadAsync(report);
+
+  const contentType = await jsZip.file('[Content_Types].xml')?.async('string');
+
+  console.log('contentType', contentType);
+  expect(contentType).toBeDefined();
+  // expect(contentType).toMatchSnapshot();
+
+  fs.writeFileSync('output.docx', report);
+});
