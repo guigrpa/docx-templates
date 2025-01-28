@@ -260,8 +260,11 @@ async function createReport(
     const ensureContentType = (extension: string, contentType: string) => {
       const children = contentTypes._children;
       if (
-        children.filter(o => !o._fTextNode && o._attrs.Extension === extension)
-          .length
+        children.filter(
+          o =>
+            !o._fTextNode &&
+            o._attrs.Extension?.toLowerCase() === extension?.toLowerCase()
+        ).length
       ) {
         return;
       }

@@ -498,9 +498,9 @@ it('can inject image in document that already contained image with same extensio
 
   const contentType = await jsZip.file('[Content_Types].xml')?.async('string');
 
-  console.log('contentType', contentType);
   expect(contentType).toBeDefined();
-  // expect(contentType).toMatchSnapshot();
+  expect(contentType).toMatchSnapshot();
 
-  fs.writeFileSync('output.docx', report);
+  // For easy testing purpose
+  // fs.writeFileSync('output.docx', report);
 });
