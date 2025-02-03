@@ -293,6 +293,24 @@ export async function walkTemplate(
         const buffers = ctx.buffers[tag];
         fRemoveNode =
           buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
+
+        // If the last generated output node is a table row, and it is set to be deleted,
+        // don't delete if it has exactly one nested row (i.e. within nested table)
+        if (tag === 'w:tr' && fRemoveNode) {
+          fRemoveNode =
+            nodeIn._children.filter(
+              child => !child._fTextNode && child._tag === 'w:tr'
+            ).length !== 1;
+        }
+
+        // If the last generated output node is a table column, and it is set to be deleted,
+        // don't delete if it has a table as a child
+        if (tag === 'w:tc' && fRemoveNode) {
+          fRemoveNode =
+            nodeIn._children.filter(
+              child => !child._fTextNode && child._tag === 'w:tbl'
+            ).length > 0;
+        }
       }
       // Execute removal, if needed. The node will no longer be part of the output, but
       // the parent will be accessible from the child (so that we can still move up the tree)
