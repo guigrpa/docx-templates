@@ -306,10 +306,11 @@ export async function walkTemplate(
         // If the last generated output node is a table column, and it is set to be deleted,
         // don't delete if it has a table as a child
         if (tag === 'w:tc' && fRemoveNode) {
-          fRemoveNode =
-            nodeIn._children.filter(
+          fRemoveNode = !(
+            nodeOut._children.filter(
               child => !child._fTextNode && child._tag === 'w:tbl'
-            ).length > 0;
+            ).length > 0
+          );
         }
       }
       // Execute removal, if needed. The node will no longer be part of the output, but
