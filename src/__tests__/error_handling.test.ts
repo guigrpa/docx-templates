@@ -209,6 +209,33 @@ const getError = async <TError>(call: () => unknown): Promise<TError> => {
           })
         ).rejects.toThrow('yeah, no!');
       });
+
+      it('properly handles nested InvalidCommandError from invalid FOR', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'invalidForCmd.docx')
+        );
+
+        const errs: Error[] = [];
+        const cmds: (string | undefined)[] = [];
+        expect(
+          await createReport(
+            {
+              noSandbox,
+              template,
+              data: {},
+              errorHandler: (err, code) => {
+                errs.push(err);
+                cmds.push(code);
+                return `${err} (${code})`;
+              },
+            },
+            'XML'
+          )
+        ).toMatchSnapshot();
+
+        expect(errs).toMatchSnapshot();
+        expect(cmds).toMatchSnapshot();
+      });
     });
   });
 
@@ -335,6 +362,19 @@ const getError = async <TError>(call: () => unknown): Promise<TError> => {
     ).rejects.toThrow(
       `Unterminated FOR-loop ('FOR c'). Make sure each FOR loop has a corresponding END-FOR command.`
     );
+  });
+
+  it('Incomplete loop statement: invalid FOR', async () => {
+    const template = await fs.promises.readFile(
+      path.join(__dirname, 'fixtures', 'invalidForCmd.docx')
+    );
+    await expect(
+      createReport({
+        noSandbox,
+        template,
+        data: {},
+      })
+    ).rejects.toThrow('Invalid FOR command: FOR person');
   });
 });
 
