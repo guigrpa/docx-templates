@@ -1,3 +1,11 @@
+## 4.14.0 (2025-03-09)
+* Add UnterminatedForLoopError to README by @davidjb in https://github.com/guigrpa/docx-templates/pull/372
+* Fix: corrupted docx issue caused by duplicate extensions in ContentType.xml with different casing by @ACHP in https://github.com/guigrpa/docx-templates/pull/400
+* Feat: improve table row and column deletion logic by @PleBea in https://github.com/guigrpa/docx-templates/pull/402
+* Use `Buffer` instead of string concatenation for huge XML support by @AlexC-ux in https://github.com/guigrpa/docx-templates/pull/386
+* Add `"type": "module"` to `package.json`.
+* Various Dependabot dependency updates.
+
 ## 4.13.0 (2024-04-17)
 - [MR 360](https://github.com/guigrpa/docx-templates/pull/360) Added `maximumWalkingDepth` option for supporting large documents.
 - Updated dependencies.
