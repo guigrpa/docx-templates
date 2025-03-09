@@ -615,8 +615,8 @@ const processCmd: CommandProcessor = async (
 ): Promise<undefined | string | Error> => {
   const cmd = getCommand(ctx.cmd, ctx.shorthands, ctx.options.fixSmartQuotes);
   ctx.cmd = ''; // flush the context
+  const { cmdName, cmdRest } = splitCommand(cmd);
   try {
-    const { cmdName, cmdRest } = splitCommand(cmd);
     if (cmdName !== 'CMD_NODE') logger.debug(`Processing cmd: ${cmd}`);
     // Seeking query?
     if (ctx.fSeekQuery) {
@@ -738,7 +738,7 @@ const processCmd: CommandProcessor = async (
   } catch (err) {
     if (!isError(err)) throw err;
     if (ctx.options.errorHandler != null) {
-      return ctx.options.errorHandler(err);
+      return ctx.options.errorHandler(err, cmdRest);
     }
     return err;
   }
