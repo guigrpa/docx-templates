@@ -1,3 +1,6 @@
+## 4.14.1 (2025-03-10)
+* Issue [#405](https://github.com/guigrpa/docx-templates/issues/405): fix "The requested module 'docx-templates' does not provide an export named 'default'" error by reverting "Add `"type": "module"` to `package.json`.". Rename Rollup config file to `.mjs` extension instead, which fixes the original Rollup problem.
+
 ## 4.14.0 (2025-03-09)
 * Add UnterminatedForLoopError to README by @davidjb in https://github.com/guigrpa/docx-templates/pull/372
 * Fix: corrupted docx issue caused by duplicate extensions in ContentType.xml with different casing by @ACHP in https://github.com/guigrpa/docx-templates/pull/400
