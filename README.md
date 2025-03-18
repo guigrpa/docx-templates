@@ -131,7 +131,7 @@ const report = await createReport({
    * If you set fixSmartQuotes to 'true', these smart quotes will automatically get replaced with straight quotes (') before command evaluation.
    * Defaults to false.
    */
-  fixSmartQuotes: false;
+  fixSmartQuotes: false,
 
   /**
    * Maximum loop iterations allowed when walking through the template.
@@ -140,7 +140,7 @@ const report = await createReport({
    * This may be useful if you implement a process timeout instead.
    * (Default: 1,000,000)
    */
-  maximumWalkingDepth: 1_000_000;
+  maximumWalkingDepth: 1_000_000,
 });
 ```
 
