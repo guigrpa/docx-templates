@@ -36,6 +36,118 @@ import {
 } from './errors';
 import { logger } from './debug';
 
+/*
+ * Processes a raw string (from a text node or an attribute) for template commands.
+ * It splits the string by command delimiters, executes commands via onCommand,
+ * and reconstructs the string with command results.
+ */
+async function processStringContent(
+  rawString: string,
+  data: ReportData | undefined,
+  nodeForCommandContext: Node, // The node to pass to onCommand for contextual information
+  ctx: Context,
+  onCommand: CommandProcessor
+): Promise<string | Error[]> {
+  const { cmdDelimiter, failFast } = ctx.options;
+  if (rawString == null || rawString === '') return '';
+
+  const segments = rawString
+    .split(cmdDelimiter[0])
+    .map(s => s.split(cmdDelimiter[1]))
+    .reduce((x, y) => x.concat(y));
+
+  let outText = '';
+  const errors: Error[] = [];
+
+  const isTextInWT =
+    nodeForCommandContext._fTextNode &&
+    nodeForCommandContext._parent &&
+    !nodeForCommandContext._parent._fTextNode &&
+    nodeForCommandContext._parent._tag === 'w:t';
+
+  // If processing an attribute (not text in w:t), we need to save and restore ctx.cmd and ctx.fCmd
+  // and initialize them for this specific string processing task.
+  // If processing text in w:t, we use ctx.cmd and ctx.fCmd as they are, allowing them to carry state
+  // across multiple calls to processStringContent (e.g. for commands spanning multiple text nodes).
+  const shouldIsolateContext = !isTextInWT;
+  let originalSavedCtxCmd = '';
+  let originalSavedCtxFCmd = false;
+
+  if (shouldIsolateContext) {
+    originalSavedCtxCmd = ctx.cmd;
+    originalSavedCtxFCmd = ctx.fCmd;
+    ctx.cmd = ''; // Clear for isolated processing
+    // Determine initial fCmd for the attribute string.
+    // If it starts with a delimiter, the first segment is empty (processed as text), then command mode.
+    ctx.fCmd = false; // Assume first part is text, unless string starts with {{ and first segment is empty
+    if (
+      segments.length > 0 &&
+      segments[0] === '' &&
+      rawString.startsWith(cmdDelimiter[0])
+    ) {
+      // String like "{{cmd}}...". First segment "" is text (fCmd=false). Next is cmd (fCmd=true).
+      // So, initial ctx.fCmd for the loop should be false to handle the first empty segment as text.
+      // The toggle logic within the loop will then set it to true for the actual command part.
+    } else {
+      // String like "text{{cmd}}..." or just "text". First segment is text.
+    }
+  }
+  // If !shouldIsolateContext (i.e., isTextInWT), ctx.cmd and ctx.fCmd are used as is from the global context.
+
+  for (let idx = 0; idx < segments.length; idx++) {
+    const segment = segments[idx];
+
+    if (ctx.fCmd) {
+      // Current segment is part of a command
+      ctx.cmd += segment;
+      if (isTextInWT) appendTextToTagBuffers(segment, ctx, { fCmd: true });
+    } else {
+      // Current segment is text
+      if (!isLoopExploring(ctx)) outText += segment;
+      if (isTextInWT) appendTextToTagBuffers(segment, ctx, { fCmd: false });
+    }
+
+    if (idx < segments.length - 1) {
+      // If there's another segment, a mode switch occurs
+      if (ctx.fCmd) {
+        // If we just processed a command segment
+        if (isTextInWT)
+          appendTextToTagBuffers(cmdDelimiter[1], ctx, { fCmd: true }); // Closing delimiter
+
+        const cmdResultText = await onCommand(data, nodeForCommandContext, ctx);
+        // onCommand is expected to clear ctx.cmd.
+        if (cmdResultText != null) {
+          if (typeof cmdResultText === 'string') {
+            if (!isLoopExploring(ctx)) outText += cmdResultText;
+            if (isTextInWT) {
+              appendTextToTagBuffers(cmdResultText, ctx, {
+                fCmd: false,
+                fInsertedText: true,
+              });
+            }
+          } else {
+            if (failFast) throw cmdResultText;
+            errors.push(cmdResultText);
+          }
+        }
+      } else {
+        // If we just processed a text segment and a command follows
+        if (isTextInWT)
+          appendTextToTagBuffers(cmdDelimiter[0], ctx, { fCmd: true }); // Opening delimiter
+      }
+      ctx.fCmd = !ctx.fCmd; // Toggle mode for the next segment
+    }
+  }
+
+  if (shouldIsolateContext) {
+    ctx.cmd = originalSavedCtxCmd;
+    ctx.fCmd = originalSavedCtxFCmd;
+  }
+
+  if (errors.length > 0) return errors;
+  return outText;
+}
+
 export function newContext(
   options: CreateReportOptions,
   imageAndShapeIdIncrement = 0
@@ -497,6 +609,45 @@ export async function walkTemplate(
 
       // Execute the move in the output tree
       nodeOut = newNode;
+
+      // Process 'string' attribute of v:textpath for watermarks
+      if (!nodeOut._fTextNode && nodeOut._tag === 'v:textpath') {
+        const textPathNodeOut = nodeOut as NonTextNode; // textPathNodeOut is the node in the output tree
+        // We need to check attributes on nodeIn (original template node) as well,
+        // though processing happens on nodeOut's attribute which is initially a clone of nodeIn's.
+        if (
+          textPathNodeOut._attrs &&
+          typeof textPathNodeOut._attrs.string === 'string'
+        ) {
+          const originalStringAttr = textPathNodeOut._attrs.string as string;
+          const cmdDelimiter = ctx.options.cmdDelimiter;
+
+          // Only process if command delimiters are potentially present to avoid unnecessary processing
+          if (
+            originalStringAttr.includes(cmdDelimiter[0]) ||
+            originalStringAttr.includes(cmdDelimiter[1])
+          ) {
+            // Use nodeIn (original template node) for command context, as commands might depend on original structure.
+            const processedAttribute = await processStringContent(
+              originalStringAttr,
+              data,
+              nodeIn,
+              ctx,
+              processor // processor is the onCommand function passed to walkTemplate
+            );
+
+            if (typeof processedAttribute === 'string') {
+              // Update the attribute on the output node
+              textPathNodeOut._attrs.string = processedAttribute;
+            } else if (Array.isArray(processedAttribute)) {
+              // errors from processStringContent
+              errors.push(...processedAttribute);
+              // Optionally, decide how to handle attribute processing errors, e.g., keep original or clear
+              // For now, if errors occur, the attribute might remain unchanged or partially processed depending on processStringContent behavior
+            }
+          }
+        }
+      }
     }
 
     // JUMP to the target level of the tree.
@@ -559,50 +710,8 @@ const processText = async (
   ctx: Context,
   onCommand: CommandProcessor
 ): Promise<string | Error[]> => {
-  const { cmdDelimiter, failFast } = ctx.options;
-  const text = node._text;
-  if (text == null || text === '') return '';
-  const segments = text
-    .split(cmdDelimiter[0])
-    .map(s => s.split(cmdDelimiter[1]))
-    .reduce((x, y) => x.concat(y));
-  let outText = '';
-  const errors: Error[] = [];
-  for (let idx = 0; idx < segments.length; idx++) {
-    // Include the separators in the `buffers` field (used for deleting paragraphs if appropriate)
-    if (idx > 0) appendTextToTagBuffers(cmdDelimiter[0], ctx, { fCmd: true });
-
-    // Append segment either to the `ctx.cmd` buffer (to be executed), if we are in "command mode",
-    // or to the output text
-    const segment = segments[idx];
-    // logger.debug(`Token: '${segment}' (${ctx.fCmd})`);
-    if (ctx.fCmd) ctx.cmd += segment;
-    else if (!isLoopExploring(ctx)) outText += segment;
-    appendTextToTagBuffers(segment, ctx, { fCmd: ctx.fCmd });
-
-    // If there are more segments, execute the command (if we are in "command mode"),
-    // and toggle "command mode"
-    if (idx < segments.length - 1) {
-      if (ctx.fCmd) {
-        const cmdResultText = await onCommand(data, node, ctx);
-        if (cmdResultText != null) {
-          if (typeof cmdResultText === 'string') {
-            outText += cmdResultText;
-            appendTextToTagBuffers(cmdResultText, ctx, {
-              fCmd: false,
-              fInsertedText: true,
-            });
-          } else {
-            if (failFast) throw cmdResultText;
-            errors.push(cmdResultText);
-          }
-        }
-      }
-      ctx.fCmd = !ctx.fCmd;
-    }
-  }
-  if (errors.length > 0) return errors;
-  return outText;
+  // Delegate to processStringContent. The TextNode itself provides context for commands within its text.
+  return processStringContent(node._text, data, node, ctx, onCommand);
 };
 
 // ==========================================
