@@ -16,4 +16,3 @@ coverage
 # Project-specific
 **/~$*.docx
 lib
-package-lock.json

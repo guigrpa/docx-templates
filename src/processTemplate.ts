@@ -80,17 +80,6 @@ async function processStringContent(
     // Determine initial fCmd for the attribute string.
     // If it starts with a delimiter, the first segment is empty (processed as text), then command mode.
     ctx.fCmd = false; // Assume first part is text, unless string starts with {{ and first segment is empty
-    if (
-      segments.length > 0 &&
-      segments[0] === '' &&
-      rawString.startsWith(cmdDelimiter[0])
-    ) {
-      // String like "{{cmd}}...". First segment "" is text (fCmd=false). Next is cmd (fCmd=true).
-      // So, initial ctx.fCmd for the loop should be false to handle the first empty segment as text.
-      // The toggle logic within the loop will then set it to true for the actual command part.
-    } else {
-      // String like "text{{cmd}}..." or just "text". First segment is text.
-    }
   }
   // If !shouldIsolateContext (i.e., isTextInWT), ctx.cmd and ctx.fCmd are used as is from the global context.
 
