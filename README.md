@@ -23,6 +23,9 @@ Contributions are welcome!
 
 # Table of contents
 
+- [Docx-templates  ](#docx-templates--)
+  - [Why?](#why)
+- [Table of contents](#table-of-contents)
 - [Installation](#installation)
 - [Node usage](#node-usage)
 - [Deno usage](#deno-usage)
@@ -33,8 +36,8 @@ Contributions are welcome!
 - [Writing templates](#writing-templates)
   - [Custom command delimiters](#custom-command-delimiters)
   - [Supported commands](#supported-commands)
+    - [Insert data with the `INS` command ( or using `=`, or nothing at all)](#insert-data-with-the-ins-command--or-using--or-nothing-at-all)
     - [`QUERY`](#query)
-    - [`INS` (`=`, or nothing at all)](#ins--or-nothing-at-all)
     - [`EXEC` (`!`)](#exec-)
     - [`IMAGE`](#image)
     - [`LINK`](#link)
@@ -47,7 +50,7 @@ Contributions are welcome!
   - [Error types](#error-types)
   - [Custom error handler](#custom-error-handler)
 - [Inspecting templates](#inspecting-templates)
-- [Performance & security](#performance--security)
+- [Performance \& security](#performance--security)
 - [Similar projects](#similar-projects)
 - [License (MIT)](#license-mit)
 
@@ -126,6 +129,11 @@ const report = await createReport({
   rejectNullish: false,
 
   /**
+   * When set to `true`, variables that resolve to an object will use the object's toString() method to get the result for an INS command. This allows overriding the Object.prototype.toString() method for an object to display a value, while allowing the object to have other properties and methods. Defaults to false, which will cause an error to be thrown if result is an object.
+   */
+  objectToString: false,
+
+  /**
    * MS Word usually autocorrects JS string literal quotes with unicode 'smart' quotes ('curly' quotes). E.g. 'aubergine' -> ‘aubergine’.
    * This causes an error when evaluating commands containing these smart quotes, as they are not valid JavaScript.
    * If you set fixSmartQuotes to 'true', these smart quotes will automatically get replaced with straight quotes (') before command evaluation.
@@ -158,7 +166,7 @@ import { createReport } from 'https://unpkg.com/docx-templates/lib/browser.js';
 
 # Browser usage
 
-You can use docx-templates in the browser (yay!). Just as when using docx-templates in Node, you need to provide the template contents as a `Buffer`-like object. 
+You can use docx-templates in the browser (yay!). Just as when using docx-templates in Node, you need to provide the template contents as a `Buffer`-like object.
 
 For example when the template is on your server you can get it with something like:
 
@@ -424,7 +432,7 @@ additionalJsContext: {
         data: fs.readFileSync('sample.png'),
         extension: '.png',
       };
-      return { width: 6, height: 6, data: svg_data, extension: '.svg', thumbnail };                    
+      return { width: 6, height: 6, data: svg_data, extension: '.svg', thumbnail };
     }
   }
 ```
@@ -660,7 +668,7 @@ const commands = await listCommands(template_buffer, ['{', '}']);
 ```
 
 The `getMetadata` function lets you extract the metadata fields from a document, such as the number of pages or words. Note that this feature has a few limitations:
-- Not all fields may be available, depending on the document. 
+- Not all fields may be available, depending on the document.
 - These metadata fields, including the number of pages, are only updated by MS Word (or LibreOffice) when saving the document. Docx-templates does not alter these metadata fields, so the number of pages may not reflect the actual size of your rendered document (see issue [#240](https://github.com/guigrpa/docx-templates/issues/240)). Docx-templates can not reliably determine the number of pages in a document, as this requires a full-fledged docx renderer (e.g. MS Word).
 
 ```typescript

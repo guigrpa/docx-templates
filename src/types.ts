@@ -100,6 +100,11 @@ export type UserOptions = {
   rejectNullish?: boolean;
 
   /**
+   * When set to `true`, this setting will use the `Object.prototype.toString` method to convert objects to strings in the template. This is useful when you want to override toString() to provide a default display value, while also allowing usage of the object's properties and methods. Defaults to `false`.
+   */
+  objectToString?: boolean;
+
+  /**
    * Custom error handler to catch any errors that may occur evaluating commands in the template. The value returned from this handler will be inserted into the template instead.
    */
   errorHandler?: ErrorHandler;
@@ -138,6 +143,7 @@ export type CreateReportOptions = {
   additionalJsContext: Object;
   failFast: boolean;
   rejectNullish: boolean;
+  objectToString: boolean;
   errorHandler: ErrorHandler | null;
   fixSmartQuotes: boolean;
   processLineBreaksAsNewText: boolean;
