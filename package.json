@@ -74,7 +74,8 @@
     "ts-jest": "^29.1.0",
     "typescript": "^5.2.2",
     "util": "^0.12.5",
-    "vm-browserify": "^1.1.2"
+    "vm-browserify": "^1.1.2",
+    "yarn": "^1.22.22"
   },
   "jest": {
     "transform": {

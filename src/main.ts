@@ -174,7 +174,7 @@ async function createReport(
   const xmlOptions = { literalXmlDelimiter };
 
   const { jsTemplate, mainDocument, zip, contentTypes } = await parseTemplate(
-    template
+    template.buffer as ArrayBuffer
   );
 
   logger.debug('Preprocessing template...');

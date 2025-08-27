@@ -16,9 +16,9 @@ it('001: Issue #61 Correctly renders an SVG image', async () => {
 
   // Use a random png file as a thumbnail
   const thumbnail: Image = {
-    data: await fs.promises.readFile(
+    data: (await fs.promises.readFile(
       path.join(__dirname, 'fixtures', 'sample.png')
-    ),
+    )).buffer as ArrayBuffer,
     extension: '.png',
   };
 
@@ -369,20 +369,20 @@ it('009 correctly rotate image', async () => {
       getImage: (): ImagePars => ({
         width: 6,
         height: 6,
-        data: buff,
+        data: buff.buffer as ArrayBuffer,
         extension: '.png',
       }),
       getImage45: (): ImagePars => ({
         width: 6,
         height: 6,
-        data: buff,
+        data: buff.buffer as ArrayBuffer,
         extension: '.png',
         rotation: 45,
       }),
       getImage180: (): ImagePars => ({
         width: 6,
         height: 6,
-        data: buff,
+        data: buff.buffer as ArrayBuffer,
         extension: '.png',
         rotation: 180,
       }),

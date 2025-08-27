@@ -17,7 +17,7 @@ describe('[Content_Types].xml parser', () => {
     const template = await fs.promises.readFile(
       path.join(__dirname, 'fixtures', 'simpleQuery.docx')
     );
-    const zip = await zipLoad(template);
+    const zip = await zipLoad(template.buffer as ArrayBuffer);
     const content_types = await readContentTypes(zip);
     const main_doc = getMainDoc(content_types);
     expect(main_doc).toStrictEqual('document.xml');
@@ -26,7 +26,7 @@ describe('[Content_Types].xml parser', () => {
     const template = await fs.promises.readFile(
       path.join(__dirname, 'fixtures', 'office365.docx')
     );
-    const zip = await zipLoad(template);
+    const zip = await zipLoad(template.buffer as ArrayBuffer);
     const content_types = await readContentTypes(zip);
     const main_doc = getMainDoc(content_types);
     expect(main_doc).toStrictEqual('document2.xml');
@@ -38,7 +38,7 @@ describe('getMetadata', () => {
     const template = await fs.promises.readFile(
       path.join(__dirname, 'fixtures', 'simpleQuery.docx')
     );
-    expect(await getMetadata(template)).toMatchInlineSnapshot(`
+    expect(await getMetadata(template.buffer as ArrayBuffer)).toMatchInlineSnapshot(`
       {
         "category": undefined,
         "characters": 24,
@@ -70,7 +70,7 @@ describe('getMetadata', () => {
     for (const f of files) {
       if (f.startsWith('~$') || !f.endsWith('.docx')) continue;
       const t = await fs.promises.readFile(path.join(__dirname, 'fixtures', f));
-      const metadata = await getMetadata(t);
+      const metadata = await getMetadata(t.buffer as ArrayBuffer);
       expect(typeof metadata.modified).toBe('string');
     }
   });
@@ -81,7 +81,7 @@ describe('findHighestImgId', () => {
     const template = await fs.promises.readFile(
       path.join(__dirname, 'fixtures', 'imageExistingMultiple.docx')
     );
-    const { jsTemplate } = await parseTemplate(template);
+    const { jsTemplate } = await parseTemplate(template.buffer as ArrayBuffer);
     expect(findHighestImgId(jsTemplate)).toBe(3);
   });
 });
