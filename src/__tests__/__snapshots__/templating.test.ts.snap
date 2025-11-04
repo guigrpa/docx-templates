@@ -18394,7 +18394,7 @@ exports[`noSandbox Template processing 38b Processes IMAGE commands with base64 
                         },
                         {
                           "_attrs": {
-                            "descr": "desc",
+                            "descr": "",
                             "id": "1",
                             "name": "Picture 1",
                           },
@@ -18441,7 +18441,7 @@ exports[`noSandbox Template processing 38b Processes IMAGE commands with base64 
                                       "_children": [
                                         {
                                           "_attrs": {
-                                            "descr": "desc",
+                                            "descr": "",
                                             "id": "0",
                                             "name": "Picture 1",
                                           },
@@ -51050,7 +51050,7 @@ exports[`sandbox Template processing 38b Processes IMAGE commands with base64 da
                         },
                         {
                           "_attrs": {
-                            "descr": "desc",
+                            "descr": "",
                             "id": "1",
                             "name": "Picture 1",
                           },
@@ -51097,7 +51097,7 @@ exports[`sandbox Template processing 38b Processes IMAGE commands with base64 da
                                       "_children": [
                                         {
                                           "_attrs": {
-                                            "descr": "desc",
+                                            "descr": "",
                                             "id": "0",
                                             "name": "Picture 1",
                                           },

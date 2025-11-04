@@ -115,7 +115,7 @@ exports[`001: Issue #61 Correctly renders an SVG image 1`] = `
                         },
                         {
                           "_attrs": {
-                            "descr": "desc",
+                            "descr": "",
                             "id": "1",
                             "name": "Picture 1",
                           },
@@ -162,7 +162,7 @@ exports[`001: Issue #61 Correctly renders an SVG image 1`] = `
                                       "_children": [
                                         {
                                           "_attrs": {
-                                            "descr": "desc",
+                                            "descr": "",
                                             "id": "0",
                                             "name": "Picture 1",
                                           },
@@ -651,7 +651,7 @@ exports[`001: Issue #61 Correctly renders an SVG image 1`] = `
                         },
                         {
                           "_attrs": {
-                            "descr": "desc",
+                            "descr": "",
                             "id": "3",
                             "name": "Picture 3",
                           },
@@ -698,7 +698,7 @@ exports[`001: Issue #61 Correctly renders an SVG image 1`] = `
                                       "_children": [
                                         {
                                           "_attrs": {
-                                            "descr": "desc",
+                                            "descr": "",
                                             "id": "0",
                                             "name": "Picture 3",
                                           },
@@ -1304,7 +1304,7 @@ exports[`003: can inject an svg without a thumbnail 1`] = `
                         },
                         {
                           "_attrs": {
-                            "descr": "desc",
+                            "descr": "",
                             "id": "1",
                             "name": "Picture 1",
                           },
@@ -1351,7 +1351,7 @@ exports[`003: can inject an svg without a thumbnail 1`] = `
                                       "_children": [
                                         {
                                           "_attrs": {
-                                            "descr": "desc",
+                                            "descr": "",
                                             "id": "0",
                                             "name": "Picture 1",
                                           },
@@ -1840,7 +1840,7 @@ exports[`003: can inject an svg without a thumbnail 1`] = `
                         },
                         {
                           "_attrs": {
-                            "descr": "desc",
+                            "descr": "",
                             "id": "3",
                             "name": "Picture 3",
                           },
@@ -1887,7 +1887,7 @@ exports[`003: can inject an svg without a thumbnail 1`] = `
                                       "_children": [
                                         {
                                           "_attrs": {
-                                            "descr": "desc",
+                                            "descr": "",
                                             "id": "0",
                                             "name": "Picture 3",
                                           },
@@ -2457,7 +2457,7 @@ exports[`007: can inject an image in a document that already contains images (re
                               <w:drawing>
                                 <wp:inline distT="0" distB="0" distL="0" distR="0">
                                   <wp:extent cx="2160000" cy="2160000"/>
-                                  <wp:docPr id="3" name="Picture 3" descr="desc"/>
+                                  <wp:docPr id="3" name="Picture 3" descr=""/>
                                   <wp:cNvGraphicFramePr>
                                     <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
                                   </wp:cNvGraphicFramePr>
@@ -2465,7 +2465,7 @@ exports[`007: can inject an image in a document that already contains images (re
                                     <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                       <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                         <pic:nvPicPr>
-                                          <pic:cNvPr id="0" name="Picture 3" descr="desc"/>
+                                          <pic:cNvPr id="0" name="Picture 3" descr=""/>
                                           <pic:cNvPicPr>
                                             <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                                           </pic:cNvPicPr>
@@ -2569,7 +2569,7 @@ AABkcnMvZG93bnJldi54bWxQSwUGAAAAAAQABADzAAAAzAUAAAAA
                         <w:drawing>
                           <wp:inline distT="0" distB="0" distL="0" distR="0">
                             <wp:extent cx="2160000" cy="2160000"/>
-                            <wp:docPr id="4" name="Picture 4" descr="desc"/>
+                            <wp:docPr id="4" name="Picture 4" descr=""/>
                             <wp:cNvGraphicFramePr>
                               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
                             </wp:cNvGraphicFramePr>
@@ -2577,7 +2577,7 @@ AABkcnMvZG93bnJldi54bWxQSwUGAAAAAAQABADzAAAAzAUAAAAA
                               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                                   <pic:nvPicPr>
-                                    <pic:cNvPr id="0" name="Picture 4" descr="desc"/>
+                                    <pic:cNvPr id="0" name="Picture 4" descr=""/>
                                     <pic:cNvPicPr>
                                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                                     </pic:cNvPicPr>
@@ -2693,7 +2693,7 @@ exports[`008: can inject an image in a shape in the doc footer (regression test 
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="2160000" cy="2160000"/>
-            <wp:docPr id="2" name="Picture 2" descr="desc"/>
+            <wp:docPr id="2" name="Picture 2" descr=""/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -2701,7 +2701,7 @@ exports[`008: can inject an image in a shape in the doc footer (regression test 
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 2" descr="desc"/>
+                    <pic:cNvPr id="0" name="Picture 2" descr=""/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
@@ -2779,7 +2779,7 @@ exports[`008: can inject an image in a shape in the doc footer (regression test 
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="2160000" cy="2160000"/>
-            <wp:docPr id="4" name="Picture 4" descr="desc"/>
+            <wp:docPr id="4" name="Picture 4" descr=""/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -2787,7 +2787,7 @@ exports[`008: can inject an image in a shape in the doc footer (regression test 
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 4" descr="desc"/>
+                    <pic:cNvPr id="0" name="Picture 4" descr=""/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
@@ -2859,7 +2859,7 @@ exports[`008: can inject an image in a shape in the doc footer (regression test 
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="2160000" cy="2160000"/>
-            <wp:docPr id="6" name="Picture 6" descr="desc"/>
+            <wp:docPr id="6" name="Picture 6" descr=""/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -2867,7 +2867,7 @@ exports[`008: can inject an image in a shape in the doc footer (regression test 
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 6" descr="desc"/>
+                    <pic:cNvPr id="0" name="Picture 6" descr=""/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
@@ -2939,7 +2939,7 @@ exports[`008: can inject an image in a shape in the doc footer (regression test 
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="2160000" cy="2160000"/>
-            <wp:docPr id="8" name="Picture 8" descr="desc"/>
+            <wp:docPr id="8" name="Picture 8" descr=""/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -2947,7 +2947,7 @@ exports[`008: can inject an image in a shape in the doc footer (regression test 
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 8" descr="desc"/>
+                    <pic:cNvPr id="0" name="Picture 8" descr=""/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
@@ -3041,7 +3041,7 @@ exports[`009 correctly rotate image 1`] = `
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="2160000" cy="2160000"/>
-            <wp:docPr id="1" name="Picture 1" descr="desc"/>
+            <wp:docPr id="1" name="Picture 1" descr=""/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -3049,7 +3049,7 @@ exports[`009 correctly rotate image 1`] = `
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 1" descr="desc"/>
+                    <pic:cNvPr id="0" name="Picture 1" descr=""/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
@@ -3111,7 +3111,7 @@ exports[`009 correctly rotate image 1`] = `
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="2160000" cy="2160000"/>
-            <wp:docPr id="2" name="Picture 2" descr="desc"/>
+            <wp:docPr id="2" name="Picture 2" descr=""/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -3119,7 +3119,7 @@ exports[`009 correctly rotate image 1`] = `
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 2" descr="desc"/>
+                    <pic:cNvPr id="0" name="Picture 2" descr=""/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
@@ -3176,7 +3176,7 @@ exports[`009 correctly rotate image 1`] = `
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="2160000" cy="2160000"/>
-            <wp:docPr id="3" name="Picture 3" descr="desc"/>
+            <wp:docPr id="3" name="Picture 3" descr=""/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -3184,7 +3184,7 @@ exports[`009 correctly rotate image 1`] = `
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 3" descr="desc"/>
+                    <pic:cNvPr id="0" name="Picture 3" descr=""/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
@@ -3301,7 +3301,7 @@ exports[`011 correctly inserts the optional image caption 1`] = `
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="2160000" cy="2160000"/>
-            <wp:docPr id="1" name="Picture 1" descr="desc"/>
+            <wp:docPr id="1" name="Picture 1" descr=""/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -3309,7 +3309,7 @@ exports[`011 correctly inserts the optional image caption 1`] = `
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 1" descr="desc"/>
+                    <pic:cNvPr id="0" name="Picture 1" descr=""/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
@@ -3445,7 +3445,7 @@ exports[`011 correctly inserts the optional image caption 1`] = `
         <w:drawing>
           <wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="2160000" cy="2160000"/>
-            <wp:docPr id="2" name="Picture 2" descr="desc"/>
+            <wp:docPr id="2" name="Picture 2" descr=""/>
             <wp:cNvGraphicFramePr>
               <a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/>
             </wp:cNvGraphicFramePr>
@@ -3453,7 +3453,7 @@ exports[`011 correctly inserts the optional image caption 1`] = `
               <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
                 <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
                   <pic:nvPicPr>
-                    <pic:cNvPr id="0" name="Picture 2" descr="desc"/>
+                    <pic:cNvPr id="0" name="Picture 2" descr=""/>
                     <pic:cNvPicPr>
                       <a:picLocks noChangeAspect="1" noChangeArrowheads="1"/>
                     </pic:cNvPicPr>
