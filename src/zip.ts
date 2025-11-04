@@ -10,11 +10,11 @@ const zipGetText = (zip: JSZip, filename: string) => {
 const zipSetText = (zip: JSZip, filename: string, data: ArrayBuffer) =>
   zip.file(filename, data, { binary: false });
 
-const zipSave = (zip: JSZip) =>
+const zipSave = (zip: JSZip, compressionLevel: number) =>
   zip.generateAsync({
     type: 'uint8array',
     compression: 'DEFLATE',
-    compressionOptions: { level: 1 },
+    compressionOptions: { level: compressionLevel },
   });
 
 // ==========================================

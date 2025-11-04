@@ -51,16 +51,19 @@ const parseXml = (templateXml: string): Promise<Node> => {
 
 type XmlOptions = {
   literalXmlDelimiter: string;
+  indentXml: boolean;
 };
 
 function buildXml(
   node: Node,
   options: XmlOptions,
-  indent: string = ''
+  indent: string = '',
+  firstRun: boolean = true
 ): Buffer {
-  const xml = indent.length
-    ? ''
-    : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+  const xml =
+    indent.length || !firstRun
+      ? ''
+      : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
 
   const xmlBuffers = [Buffer.from(xml, 'utf-8')];
   if (node._fTextNode)
@@ -73,14 +76,22 @@ function buildXml(
     });
     const fHasChildren = node._children.length > 0;
     const suffix = fHasChildren ? '' : '/';
-    xmlBuffers.push(Buffer.from(`\n${indent}<${node._tag}${attrs}${suffix}>`));
+
+    // Conditionally add newlines and indentation based on indentXml option
+    const newline = options.indentXml ? `\n${indent}` : '';
+    xmlBuffers.push(Buffer.from(`${newline}<${node._tag}${attrs}${suffix}>`));
+
     let fLastChildIsNode = false;
     node._children.forEach(child => {
-      xmlBuffers.push(buildXml(child, options, `${indent}  `));
+      xmlBuffers.push(
+        buildXml(child, options, options.indentXml ? `${indent}  ` : '', false)
+      );
       fLastChildIsNode = !child._fTextNode;
     });
     if (fHasChildren) {
-      const indent2 = fLastChildIsNode ? `\n${indent}` : '';
+      // Only add indentation if indentXml is true and last child is a node
+      const indent2 =
+        options.indentXml && fLastChildIsNode ? `\n${indent}` : '';
       xmlBuffers.push(Buffer.from(`${indent2}</${node._tag}>`));
     }
   }

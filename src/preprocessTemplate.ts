@@ -4,7 +4,11 @@ import { Node } from './types';
 // In-place
 // In case of split commands (or even split delimiters), joins all the pieces
 // at the starting node
-const preprocessTemplate = (template: Node, delimiter: [string, string]) => {
+const preprocessTemplate = (
+  template: Node,
+  delimiter: [string, string],
+  preserveSpace: boolean
+) => {
   let node: Node | null = template;
   let fCmd = false;
   let openNode = null;
@@ -13,7 +17,7 @@ const preprocessTemplate = (template: Node, delimiter: [string, string]) => {
 
   while (node != null) {
     // Add `xml:space` attr `preserve` to `w:t` tags
-    if (!node._fTextNode && node._tag === 'w:t') {
+    if (preserveSpace && !node._fTextNode && node._tag === 'w:t') {
       node._attrs['xml:space'] = 'preserve';
     }
 
