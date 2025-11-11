@@ -154,6 +154,7 @@ async function createReport(
     failFast: options.failFast == null ? true : options.failFast,
     rejectNullish:
       options.rejectNullish == null ? false : options.rejectNullish,
+    objectToString: options.objectToString || false,
     errorHandler:
       typeof options.errorHandler === 'function' ? options.errorHandler : null,
     fixSmartQuotes:
@@ -345,6 +346,7 @@ export async function listCommands(
     additionalJsContext: {},
     failFast: false,
     rejectNullish: false,
+    objectToString: false,
     errorHandler: null,
     fixSmartQuotes: false,
     processLineBreaksAsNewText: false,

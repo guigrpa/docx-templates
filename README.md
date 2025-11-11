@@ -126,6 +126,11 @@ const report = await createReport({
   rejectNullish: false,
 
   /**
+   * When set to `true`, variables that resolve to an object will use the object's toString() method to get the result for an INS command. This allows overriding the Object.prototype.toString() method for an object to display a value, while allowing the object to have other properties and methods. Defaults to false, which will cause an error to be thrown if INS result is an object.
+   */
+  objectToString: false,
+
+  /**
    * MS Word usually autocorrects JS string literal quotes with unicode 'smart' quotes ('curly' quotes). E.g. 'aubergine' -> ‘aubergine’.
    * This causes an error when evaluating commands containing these smart quotes, as they are not valid JavaScript.
    * If you set fixSmartQuotes to 'true', these smart quotes will automatically get replaced with straight quotes (') before command evaluation.
