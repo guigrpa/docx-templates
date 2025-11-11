@@ -127,6 +127,24 @@ export type UserOptions = {
    * (Default: 1,000,000)
    */
   maximumWalkingDepth?: number;
+  /**
+   * Whether to indent the generated XML to make it more human-readable.
+   * Tip: Set this to false if you want to minimize the size of the generated docx file.
+   * (Default: true)
+   */
+  indentXml?: boolean;
+  /**
+   * Whether to preserve whitespace in the generated XML.*
+   * Tip: Set this to false if you want to minimize the size of the generated docx file.
+   * (Default: true)
+   */
+  preserveSpace?: boolean;
+  /**
+   * Compression level for the generated docx file.
+   * Integer between 0 (no compression, fastest) and 9 (maximum compression, slowest).
+   * (Default: 1)
+   */
+  compressionLevel?: number;
 };
 
 export type CreateReportOptions = {
@@ -142,6 +160,9 @@ export type CreateReportOptions = {
   fixSmartQuotes: boolean;
   processLineBreaksAsNewText: boolean;
   maximumWalkingDepth?: number;
+  indentXml: boolean;
+  preserveSpace: boolean;
+  compressionLevel: number;
 };
 
 export type SandBox = {
