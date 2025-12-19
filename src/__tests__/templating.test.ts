@@ -109,6 +109,82 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         expect(result).toMatchSnapshot();
       });
 
+      it('Processes INS command in watermark', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'watermarked.docx')
+        );
+        const data = { companyName: 'Windsurf Inc.' };
+        const report = await createReport({
+          noSandbox,
+          template,
+          data,
+          cmdDelimiter: ['+++', '+++'],
+        });
+
+        const zip = await JSZip.loadAsync(report);
+
+        // --- Debug Snapshot Start ---
+        // Snapshot a common header file to see its content post-processing.
+        let actualDebugContentForSnapshot =
+          'Neither word/headerdefault.xml nor word/header1.xml found for debug snapshot.';
+        let snapshotNameForDebug = 'debug_header_not_found';
+
+        const defaultHeaderFile = zip.file('word/headerdefault.xml');
+        if (defaultHeaderFile) {
+          actualDebugContentForSnapshot = await defaultHeaderFile.async(
+            'string'
+          );
+          snapshotNameForDebug = 'debug_raw_word_headerdefault_xml';
+        } else {
+          const header1File = zip.file('word/header1.xml');
+          if (header1File) {
+            actualDebugContentForSnapshot = await header1File.async('string');
+            snapshotNameForDebug = 'debug_raw_word_header1_xml';
+          }
+        }
+        expect(actualDebugContentForSnapshot).toMatchSnapshot(
+          snapshotNameForDebug
+        );
+        // --- Debug Snapshot End ---
+
+        const headerFilesToCheck = [
+          'word/header1.xml', // Common/default
+          'word/header2.xml',
+          'word/header3.xml',
+          'word/headerdefault.xml', // Explicit default header
+          'word/headerfirst.xml', // First page header
+          'word/headereven.xml', // Even page header
+        ];
+
+        let foundHeaderContent: string | undefined;
+        let foundHeaderName: string | undefined;
+
+        for (const headerFile of headerFilesToCheck) {
+          const file = zip.file(headerFile);
+          if (file) {
+            const currentHeaderContent = await file.async('string');
+            if (currentHeaderContent.includes('Windsurf Inc.')) {
+              foundHeaderContent = currentHeaderContent;
+              foundHeaderName = headerFile;
+              break; // Found the relevant header
+            }
+          }
+        }
+
+        // Assert that a header containing the watermark was found
+        expect(foundHeaderContent).toBeDefined();
+        // Assert that the found content indeed contains the processed text
+        // Note: TypeScript might complain foundHeaderContent could be undefined here if expect above wasn't enough.
+        // We can add a check or use a non-null assertion operator if needed, but expect should fail first.
+        expect(foundHeaderContent).toContain('Windsurf Inc.');
+
+        // Take a snapshot of the found header content
+        // The foundHeaderName will be undefined if the loop didn't find anything, but expect(foundHeaderContent).toBeDefined() should catch that.
+        expect(foundHeaderContent).toMatchSnapshot(
+          `watermark in ${foundHeaderName?.replace(/\//g, '_')}`
+        );
+      });
+
       it('05 Processes 1-level FOR loops', async () => {
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'for1.docx')
