@@ -655,6 +655,19 @@ const processCmd: CommandProcessor = async (
         if (result == null) {
           return '';
         }
+        // Check if the result is an object and if we should convert it to a string
+        if (
+          ctx.options.objectToString &&
+          typeof result === 'object' &&
+          !Array.isArray(result)
+        ) {
+          if (typeof result.toString === 'function') {
+            result = result.toString();
+            if (result == null) {
+              return '';
+            }
+          }
+        }
         if (typeof result === 'object' && !Array.isArray(result)) {
           const nerr = new ObjectCommandResultError(cmdRest, result);
           if (ctx.options.errorHandler != null) {

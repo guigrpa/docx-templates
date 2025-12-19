@@ -1370,6 +1370,54 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         );
         expect(result).toMatchSnapshot();
       });
+
+      it('objectToString option INS', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'objectToString.docx')
+        );
+
+        const displayObject = {
+          name: 'Object Name',
+          description: 'This is a description of the object.',
+          details: {
+            created: '2025-01-01',
+          },
+        };
+
+        Object.defineProperty(displayObject, 'toString', {
+          value: function () {
+            return `Name: ${this.name}, Description: ${this.description}, Created: ${this.details.created}`;
+          },
+          writable: false,
+          configurable: false,
+          enumerable: false,
+        });
+
+        // The default behaviour should return an error when object is the result if an INS command
+        await expect(
+          createReport({
+            noSandbox,
+            template,
+            data: {
+              displayObject,
+            },
+          })
+        ).rejects.toThrowErrorMatchingSnapshot();
+
+        // Unless we use the objectToString option
+        const result = await createReport(
+          {
+            noSandbox,
+            objectToString: true,
+            template,
+            data: {
+              displayObject,
+            },
+          },
+          'JS'
+        );
+        expect(result).toMatchSnapshot();
+      });
     });
   });
 });
