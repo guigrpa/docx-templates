@@ -196,6 +196,30 @@ const findParentPorTrNode = (node: Node) => {
   return resultNode;
 };
 
+/**
+ * Check if a node is inside a table cell (w:tc).
+ * Returns true if a w:tc element is found in the parent chain.
+ */
+const isNodeInsideTableCell = (node: Node): boolean => {
+  let parentNode = node._parent;
+  while (parentNode != null) {
+    if (!parentNode._fTextNode && parentNode._tag === 'w:tc') {
+      return true;
+    }
+    parentNode = parentNode._parent;
+  }
+  return false;
+};
+
+/**
+ * Check if any active loop is a FOR loop that is generating dynamic table columns.
+ * This is used to determine whether empty w:tc elements should be removed.
+ * Only FOR loops that started inside a table cell can generate dynamic columns.
+ */
+const isInTableCellLoop = (ctx: Context): boolean => {
+  return ctx.loops.some(loop => loop.isTableCellLoop === true);
+};
+
 export async function walkTemplate(
   data: ReportData | undefined,
   template: Node,
@@ -283,13 +307,13 @@ export async function walkTemplate(
         (tag === 'w:p' ||
           tag === 'w:tbl' ||
           tag === 'w:tr' ||
-          tag === 'w:tc') &&
+          (tag === 'w:tc' && isInTableCellLoop(ctx))) &&
         isLoopExploring(ctx)
       ) {
         fRemoveNode = true;
         // Delete last generated output node if the user inserted a paragraph
         // (or table row) with just a command
-      } else if (tag === 'w:p' || tag === 'w:tr' || tag === 'w:tc') {
+      } else if (tag === 'w:p' || tag === 'w:tr') {
         const buffers = ctx.buffers[tag];
         fRemoveNode =
           buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
@@ -302,15 +326,31 @@ export async function walkTemplate(
               child => !child._fTextNode && child._tag === 'w:tr'
             ).length !== 1;
         }
+      } else if (tag === 'w:tc') {
+        // Only remove table cells that contain only commands (no text output)
+        // when we're inside a FOR loop that is generating dynamic columns,
+        // or when such a loop just ended (to clean up the END-FOR cell).
+        // This prevents IF statements inside cells from incorrectly removing
+        // the cell when the condition is false, while still supporting
+        // dynamic column generation with FOR loops.
+        if (isInTableCellLoop(ctx) || ctx.tableCellLoopJustEnded) {
+          const buffers = ctx.buffers[tag];
+          fRemoveNode =
+            buffers.text === '' &&
+            buffers.cmds !== '' &&
+            !buffers.fInsertedText;
 
-        // If the last generated output node is a table column, and it is set to be deleted,
-        // don't delete if it has a table as a child
-        if (tag === 'w:tc' && fRemoveNode) {
-          fRemoveNode = !(
-            nodeOut._children.filter(
-              child => !child._fTextNode && child._tag === 'w:tbl'
-            ).length > 0
-          );
+          // If the cell has a table as a child, don't delete it
+          if (fRemoveNode) {
+            fRemoveNode = !(
+              nodeOut._children.filter(
+                child => !child._fTextNode && child._tag === 'w:tbl'
+              ).length > 0
+            );
+          }
+
+          // Clear the flag after checking (only needs one cleanup cycle)
+          ctx.tableCellLoopJustEnded = false;
         }
       }
       // Execute removal, if needed. The node will no longer be part of the output, but
@@ -826,7 +866,7 @@ const processForIf = async (
   const curLoop = getCurLoop(ctx);
   if (!(curLoop && curLoop.varName === varName)) {
     // Check whether we already started a nested IF without and END-IF for this p or tr tag
-    if (isIf) {
+    if (isIf && !ctx.options.allowNestedIf) {
       const parentPorTrNode = findParentPorTrNode(node);
       const parentPorTrNodeTag =
         parentPorTrNode != null
@@ -886,6 +926,10 @@ const processForIf = async (
       // run through the loop once first, without outputting anything
       // (if we don't do it like this, we could not run empty loops!)
       idx: -1,
+      // Mark FOR loops that start inside a table cell as potential
+      // dynamic column generators. This allows empty cells to be removed
+      // during column generation while preserving cells for IF statements.
+      isTableCellLoop: !isIf && isNodeInsideTableCell(node),
     });
   }
   logLoop(ctx.loops);
@@ -956,6 +1000,11 @@ const processEndForIf = (
     curLoop.idx = nextIdx;
   } else {
     // loop finished
+    // If this was a table cell loop, set flag to allow cleanup of empty cells
+    // even after the loop is popped from the stack
+    if (curLoop.isTableCellLoop) {
+      ctx.tableCellLoopJustEnded = true;
+    }
     ctx.loops.pop();
   }
 };

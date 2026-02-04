@@ -145,6 +145,14 @@ export type UserOptions = {
    * (Default: 1)
    */
   compressionLevel?: number;
+  /**
+   * Whether to allow nested IF commands within the same paragraph or table row.
+   * By default (false), the library throws an error when it detects an IF command
+   * nested within another IF command on the same line or table row.
+   * Set to true to skip this validation check.
+   * (Default: false)
+   */
+  allowNestedIf?: boolean;
 };
 
 export type CreateReportOptions = {
@@ -163,6 +171,7 @@ export type CreateReportOptions = {
   indentXml: boolean;
   preserveSpace: boolean;
   compressionLevel: number;
+  allowNestedIf: boolean;
 };
 
 export type SandBox = {
@@ -204,6 +213,10 @@ export type Context = {
   // To verfiy we don't have a nested if within the same p or tr tag
   pIfCheckMap: Map<Node, string>;
   trIfCheckMap: Map<Node, string>;
+
+  // Flag set when a table cell loop just ended, allowing cleanup of empty cells
+  // even after the loop has been popped from the stack
+  tableCellLoopJustEnded?: boolean;
 };
 
 export type Images = { [id: string]: Image };
@@ -237,6 +250,12 @@ export type LoopStatus = {
   loopOver: Array<VarValue>;
   idx: number;
   isIf?: boolean;
+  /**
+   * True if this FOR loop started inside a table cell (w:tc),
+   * meaning it may be generating dynamic columns.
+   * When true, empty table cells can be removed after the loop.
+   */
+  isTableCellLoop?: boolean;
 };
 
 export type ImagePars = {

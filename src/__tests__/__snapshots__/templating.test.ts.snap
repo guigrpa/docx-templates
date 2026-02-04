@@ -27894,9 +27894,1563 @@ exports[`noSandbox Template processing INS in header and footer 1`] = `
 
 exports[`noSandbox Template processing Nested IF statements on same line 1`] = `[Error: Invalid IF command nested into another IF command on the same line: IF b]`;
 
+exports[`noSandbox Template processing Nested IF statements on same line with allowNestedIf: true 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh w16sdtfl w16du wp14">
+  <w:body>
+    <w:p w14:paraId="24C2A345" w14:textId="12E5EC42" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="1CCB3D9C" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="7DE6DF48" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="28D1121A" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="3DD08B88" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="003BF64E" w14:textId="6EFCC938" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">text</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> should be visible</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">, </w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> This should also be visible in the same line </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="56601F47" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="59AACC1B" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="29DFA23B" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="02665A01" w14:textId="155DB9DE" w:rsidR="00894E14" w:rsidRPr="00DF247D" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="6001A12A" w14:textId="27F24B0B" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="1A4988EC" w14:textId="77777777" w:rsidR="00894E14" w:rsidRPr="00DF247D" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:sectPr w:rsidR="00894E14" w:rsidRPr="00DF247D">
+      <w:pgSz w:w="11906" w:h="16838"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0"/>
+      <w:cols w:space="708"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
 exports[`noSandbox Template processing Nested IF statements on same row1 1`] = `[Error: Invalid IF command nested into another IF command on the same table row: IF b]`;
 
 exports[`noSandbox Template processing Nested IF statements on same row2 1`] = `[Error: Invalid IF command nested into another IF command on the same table row: IF b]`;
+
+exports[`noSandbox Template processing Preserve cells when IF evaluates to false inside a column (and the whole column contains just commands) - 1 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh w16sdtfl w16du wp14">
+  <w:body>
+    <w:p w14:paraId="46DDACA4" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4680"/>
+        <w:gridCol w:w="4680"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0063783A" w:rsidRPr="00E4673A" w14:paraId="76DF27E3" w14:textId="77777777" w:rsidTr="00A82CDD">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p/>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p w14:paraId="44E1617C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRPr="00E4673A" w:rsidRDefault="0063783A" w:rsidP="00A82CDD">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">Right Column Enabled</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="39CFCEA6" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4656"/>
+        <w:gridCol w:w="4704"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0097110C" w:rsidRPr="00E4673A" w14:paraId="764B87D6" w14:textId="77777777" w:rsidTr="006765D9">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p/>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p w14:paraId="35466393" w14:textId="77777777" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0097110C" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="TopicFieldName"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00E4673A">
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">ReportTotalSpotsInView</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="6866C37C" w14:textId="7024D021" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="008953E0" w:rsidP="008953E0">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellStart"/>
+            <w:proofErr w:type="gramStart"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellEnd"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="035A1C10" w14:textId="77777777" w:rsidR="0097110C" w:rsidRDefault="0097110C">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="61F2766C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:sectPr w:rsidR="0063783A" w:rsidRPr="0063783A">
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>
+      <w:cols w:space="720"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
+exports[`noSandbox Template processing Preserve cells when IF evaluates to false inside a column (and the whole column contains just commands) - 2 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh w16sdtfl w16du wp14">
+  <w:body>
+    <w:p w14:paraId="46DDACA4" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4680"/>
+        <w:gridCol w:w="4680"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0063783A" w:rsidRPr="00E4673A" w14:paraId="76DF27E3" w14:textId="77777777" w:rsidTr="00A82CDD">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p w14:paraId="79B6BE82" w14:textId="72B77896" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0063783A" w:rsidP="00A82CDD">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">Left Column Enabled</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p/>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="39CFCEA6" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4656"/>
+        <w:gridCol w:w="4704"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0097110C" w:rsidRPr="00E4673A" w14:paraId="764B87D6" w14:textId="77777777" w:rsidTr="006765D9">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p w14:paraId="3B624649" w14:textId="77777777" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0097110C" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="TopicFieldName"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00E4673A">
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">ReportFileName</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="442F37AF" w14:textId="5F50309E" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="008953E0" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellStart"/>
+            <w:proofErr w:type="gramStart"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellEnd"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p/>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="035A1C10" w14:textId="77777777" w:rsidR="0097110C" w:rsidRDefault="0097110C">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="61F2766C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:sectPr w:rsidR="0063783A" w:rsidRPr="0063783A">
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>
+      <w:cols w:space="720"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
+exports[`noSandbox Template processing Preserve cells when IF evaluates to true inside a column 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh w16sdtfl w16du wp14">
+  <w:body>
+    <w:p w14:paraId="46DDACA4" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4680"/>
+        <w:gridCol w:w="4680"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0063783A" w:rsidRPr="00E4673A" w14:paraId="76DF27E3" w14:textId="77777777" w:rsidTr="00A82CDD">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p w14:paraId="79B6BE82" w14:textId="72B77896" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0063783A" w:rsidP="00A82CDD">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">Left Column Enabled</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p w14:paraId="44E1617C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRPr="00E4673A" w:rsidRDefault="0063783A" w:rsidP="00A82CDD">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">Right Column Enabled</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="39CFCEA6" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4656"/>
+        <w:gridCol w:w="4704"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0097110C" w:rsidRPr="00E4673A" w14:paraId="764B87D6" w14:textId="77777777" w:rsidTr="006765D9">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p w14:paraId="3B624649" w14:textId="77777777" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0097110C" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="TopicFieldName"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00E4673A">
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">ReportFileName</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="442F37AF" w14:textId="5F50309E" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="008953E0" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellStart"/>
+            <w:proofErr w:type="gramStart"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellEnd"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p w14:paraId="35466393" w14:textId="77777777" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0097110C" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="TopicFieldName"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00E4673A">
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">ReportTotalSpotsInView</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="6866C37C" w14:textId="7024D021" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="008953E0" w:rsidP="008953E0">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellStart"/>
+            <w:proofErr w:type="gramStart"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellEnd"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="035A1C10" w14:textId="77777777" w:rsidR="0097110C" w:rsidRDefault="0097110C">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="61F2766C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:sectPr w:rsidR="0063783A" w:rsidRPr="0063783A">
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>
+      <w:cols w:space="720"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
 
 exports[`noSandbox Template processing Processes FOR loops with Text Box 1`] = `
 {
@@ -60550,9 +62104,1563 @@ exports[`sandbox Template processing INS in header and footer 1`] = `
 
 exports[`sandbox Template processing Nested IF statements on same line 1`] = `[Error: Invalid IF command nested into another IF command on the same line: IF b]`;
 
+exports[`sandbox Template processing Nested IF statements on same line with allowNestedIf: true 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh w16sdtfl w16du wp14">
+  <w:body>
+    <w:p w14:paraId="24C2A345" w14:textId="12E5EC42" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="1CCB3D9C" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="7DE6DF48" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="28D1121A" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="3DD08B88" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="003BF64E" w14:textId="6EFCC938" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">text</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> should be visible</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">, </w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> This should also be visible in the same line </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="56601F47" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="59AACC1B" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="38B41908" w14:textId="7CB66C57" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This line should be displayed</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in a loop</w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="29DFA23B" w14:textId="77777777" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="02665A01" w14:textId="155DB9DE" w:rsidR="00894E14" w:rsidRPr="00DF247D" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="6001A12A" w14:textId="27F24B0B" w:rsidR="00894E14" w:rsidRDefault="00894E14" w:rsidP="00894E14">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r w:rsidRPr="00894E14">
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve">This</w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> line should be displayed in a loop</w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"> in same line, </w:t>
+      </w:r>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="spellEnd"/>
+      <w:proofErr w:type="gramStart"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+      <w:proofErr w:type="gramEnd"/>
+      <w:r>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+        <w:t xml:space="preserve"></w:t>
+      </w:r>
+    </w:p>
+    <w:p w14:paraId="1A4988EC" w14:textId="77777777" w:rsidR="00894E14" w:rsidRPr="00DF247D" w:rsidRDefault="00894E14" w:rsidP="002C36B2">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:sectPr w:rsidR="00894E14" w:rsidRPr="00DF247D">
+      <w:pgSz w:w="11906" w:h="16838"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0"/>
+      <w:cols w:space="708"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
 exports[`sandbox Template processing Nested IF statements on same row1 1`] = `[Error: Invalid IF command nested into another IF command on the same table row: IF b]`;
 
 exports[`sandbox Template processing Nested IF statements on same row2 1`] = `[Error: Invalid IF command nested into another IF command on the same table row: IF b]`;
+
+exports[`sandbox Template processing Preserve cells when IF evaluates to false inside a column (and the whole column contains just commands) - 1 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh w16sdtfl w16du wp14">
+  <w:body>
+    <w:p w14:paraId="46DDACA4" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4680"/>
+        <w:gridCol w:w="4680"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0063783A" w:rsidRPr="00E4673A" w14:paraId="76DF27E3" w14:textId="77777777" w:rsidTr="00A82CDD">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p/>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p w14:paraId="44E1617C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRPr="00E4673A" w:rsidRDefault="0063783A" w:rsidP="00A82CDD">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">Right Column Enabled</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="39CFCEA6" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4656"/>
+        <w:gridCol w:w="4704"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0097110C" w:rsidRPr="00E4673A" w14:paraId="764B87D6" w14:textId="77777777" w:rsidTr="006765D9">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p/>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p w14:paraId="35466393" w14:textId="77777777" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0097110C" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="TopicFieldName"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00E4673A">
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">ReportTotalSpotsInView</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="6866C37C" w14:textId="7024D021" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="008953E0" w:rsidP="008953E0">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellStart"/>
+            <w:proofErr w:type="gramStart"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellEnd"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="035A1C10" w14:textId="77777777" w:rsidR="0097110C" w:rsidRDefault="0097110C">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="61F2766C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:sectPr w:rsidR="0063783A" w:rsidRPr="0063783A">
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>
+      <w:cols w:space="720"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
+exports[`sandbox Template processing Preserve cells when IF evaluates to false inside a column (and the whole column contains just commands) - 2 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh w16sdtfl w16du wp14">
+  <w:body>
+    <w:p w14:paraId="46DDACA4" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4680"/>
+        <w:gridCol w:w="4680"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0063783A" w:rsidRPr="00E4673A" w14:paraId="76DF27E3" w14:textId="77777777" w:rsidTr="00A82CDD">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p w14:paraId="79B6BE82" w14:textId="72B77896" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0063783A" w:rsidP="00A82CDD">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">Left Column Enabled</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p/>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="39CFCEA6" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4656"/>
+        <w:gridCol w:w="4704"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0097110C" w:rsidRPr="00E4673A" w14:paraId="764B87D6" w14:textId="77777777" w:rsidTr="006765D9">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p w14:paraId="3B624649" w14:textId="77777777" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0097110C" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="TopicFieldName"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00E4673A">
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">ReportFileName</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="442F37AF" w14:textId="5F50309E" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="008953E0" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellStart"/>
+            <w:proofErr w:type="gramStart"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellEnd"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p/>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="035A1C10" w14:textId="77777777" w:rsidR="0097110C" w:rsidRDefault="0097110C">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="61F2766C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:sectPr w:rsidR="0063783A" w:rsidRPr="0063783A">
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>
+      <w:cols w:space="720"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
+
+exports[`sandbox Template processing Preserve cells when IF evaluates to true inside a column 1`] = `
+"<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16sdtfl="http://schemas.microsoft.com/office/word/2024/wordml/sdtformatlock" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh w16sdtfl w16du wp14">
+  <w:body>
+    <w:p w14:paraId="46DDACA4" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4680"/>
+        <w:gridCol w:w="4680"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0063783A" w:rsidRPr="00E4673A" w14:paraId="76DF27E3" w14:textId="77777777" w:rsidTr="00A82CDD">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p w14:paraId="79B6BE82" w14:textId="72B77896" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0063783A" w:rsidP="00A82CDD">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">Left Column Enabled</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p w14:paraId="44E1617C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRPr="00E4673A" w:rsidRDefault="0063783A" w:rsidP="00A82CDD">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">Right Column Enabled</w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="39CFCEA6" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:tbl>
+      <w:tblPr>
+        <w:tblStyle w:val="TableGrid"/>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="4656"/>
+        <w:gridCol w:w="4704"/>
+      </w:tblGrid>
+      <w:tr w:rsidR="0097110C" w:rsidRPr="00E4673A" w14:paraId="764B87D6" w14:textId="77777777" w:rsidTr="006765D9">
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+          </w:tcPr>
+          <w:p w14:paraId="3B624649" w14:textId="77777777" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0097110C" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="TopicFieldName"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00E4673A">
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">ReportFileName</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="442F37AF" w14:textId="5F50309E" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="008953E0" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellStart"/>
+            <w:proofErr w:type="gramStart"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellEnd"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+        <w:tc>
+          <w:tcPr>
+            <w:tcW w:w="4814" w:type="dxa"/>
+            <w:tcBorders>
+              <w:top w:val="nil"/>
+              <w:left w:val="nil"/>
+              <w:bottom w:val="nil"/>
+              <w:right w:val="nil"/>
+            </w:tcBorders>
+            <w:vAlign w:val="center"/>
+          </w:tcPr>
+          <w:p w14:paraId="35466393" w14:textId="77777777" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="0097110C" w:rsidP="006765D9">
+            <w:pPr>
+              <w:pStyle w:val="TopicFieldName"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r w:rsidRPr="00E4673A">
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve">ReportTotalSpotsInView</w:t>
+            </w:r>
+          </w:p>
+          <w:p w14:paraId="6866C37C" w14:textId="7024D021" w:rsidR="0097110C" w:rsidRPr="00E4673A" w:rsidRDefault="008953E0" w:rsidP="008953E0">
+            <w:pPr>
+              <w:pStyle w:val="FieldValue"/>
+              <w:jc w:val="right"/>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+            </w:pPr>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellStart"/>
+            <w:proofErr w:type="gramStart"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+            <w:proofErr w:type="spellEnd"/>
+            <w:proofErr w:type="gramEnd"/>
+            <w:r>
+              <w:rPr>
+                <w:rFonts w:cs="Arial"/>
+              </w:rPr>
+              <w:t xml:space="preserve"></w:t>
+            </w:r>
+          </w:p>
+        </w:tc>
+      </w:tr>
+    </w:tbl>
+    <w:p w14:paraId="035A1C10" w14:textId="77777777" w:rsidR="0097110C" w:rsidRDefault="0097110C">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:p w14:paraId="61F2766C" w14:textId="77777777" w:rsidR="0063783A" w:rsidRDefault="0063783A">
+      <w:pPr>
+        <w:rPr>
+          <w:lang w:val="en-US"/>
+        </w:rPr>
+      </w:pPr>
+    </w:p>
+    <w:sectPr w:rsidR="0063783A" w:rsidRPr="0063783A">
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>
+      <w:cols w:space="720"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>"
+`;
 
 exports[`sandbox Template processing Processes FOR loops with Text Box 1`] = `
 {
