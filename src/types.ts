@@ -145,6 +145,14 @@ export type UserOptions = {
    * (Default: 1)
    */
   compressionLevel?: number;
+  /**
+   * Whether to allow nested IF commands within the same paragraph or table row.
+   * By default (false), the library throws an error when it detects an IF command
+   * nested within another IF command on the same line or table row.
+   * Set to true to skip this validation check.
+   * (Default: false)
+   */
+  allowNestedIf?: boolean;
 };
 
 export type CreateReportOptions = {
@@ -163,6 +171,7 @@ export type CreateReportOptions = {
   indentXml: boolean;
   preserveSpace: boolean;
   compressionLevel: number;
+  allowNestedIf: boolean;
 };
 
 export type SandBox = {

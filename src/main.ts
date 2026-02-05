@@ -166,6 +166,7 @@ async function createReport(
     indentXml: options.indentXml ?? true,
     preserveSpace: options.preserveSpace ?? true,
     compressionLevel: options.compressionLevel ?? 1,
+    allowNestedIf: options.allowNestedIf ?? false,
   };
   const xmlOptions = {
     literalXmlDelimiter,
@@ -351,6 +352,7 @@ export async function listCommands(
     indentXml: true,
     preserveSpace: true,
     compressionLevel: 1,
+    allowNestedIf: false,
   };
 
   const { jsTemplate, mainDocument, zip } = await parseTemplate(template);

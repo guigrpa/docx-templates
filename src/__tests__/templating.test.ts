@@ -1332,6 +1332,28 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         return expect(result).rejects.toMatchSnapshot();
       });
 
+      it('Nested IF statements on same line with allowNestedIf: true', async () => {
+        const template = await fs.promises.readFile(
+          path.join(
+            __dirname,
+            'fixtures',
+            'ifStatementsOnSameLineSkipValidation.docx'
+          )
+        );
+
+        const result = await createReport(
+          {
+            noSandbox,
+            template,
+            data: { ranges: [1, 2, 3, 4, 5] },
+            cmdDelimiter: ['{{', '}}'],
+            allowNestedIf: true,
+          },
+          'XML'
+        );
+        expect(result).toMatchSnapshot();
+      });
+
       it('Dynamic table columns', async () => {
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'dynamic-columns.docx')
