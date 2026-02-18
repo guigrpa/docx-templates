@@ -30,9 +30,11 @@ export async function runUserJsAndGetRaw(
   };
 
   // Add currently defined vars, including loop vars and the index
-  // of the innermost loop
+  // of the innermost FOR loop
   const curLoop = getCurLoop(ctx);
-  if (curLoop) sandbox.$idx = curLoop.idx;
+  if (curLoop && !curLoop.isIf) {
+    sandbox.$idx = curLoop.idx;
+  }
   Object.keys(ctx.vars).forEach(varName => {
     sandbox[`$${varName}`] = ctx.vars[varName];
   });
