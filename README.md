@@ -9,7 +9,7 @@ Template-based docx report creation for both Node and the browser. ([See the blo
 * **Express your data needs (queries) in the template itself** (`QUERY` command), in whatever query language you want (e.g. in GraphQL). This is similar to _the Relay way™_: in [Relay](https://facebook.github.io/relay/), data requirements are declared alongside the React components that need the data
 * **Execute JavaScript snippets** (`EXEC` command, or `!` for short)
 * **Insert the result of JavaScript snippets** in your document (`INS`, `=` or just *nothing*)
-* **Embed images, hyperlinks and even HTML dynamically** (`IMAGE`, `LINK`, `HTML`). Dynamic images can be great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
+* **Embed images, hyperlinks, bookmarks and even HTML dynamically** (`IMAGE`, `LINK`, `BOOKMARK`, `HTML`). Dynamic images can be great for on-the-fly QR codes, downloading photos straight to your reports, charts… even maps!
 * Add **loops** with `FOR`/`END-FOR` commands, with support for table rows, nested loops, and JavaScript processing of elements (filter, sort, etc)
 * Include contents **conditionally**, `IF` a certain JavaScript expression is truthy
 * Define custom **aliases** for some commands (`ALIAS`) — useful for writing table templates!
@@ -38,6 +38,7 @@ Contributions are welcome!
     - [`EXEC` (`!`)](#exec-)
     - [`IMAGE`](#image)
     - [`LINK`](#link)
+    - [`BOOKMARK`](#bookmark)
     - [`HTML`](#html)
     - [`FOR` and `END-FOR`](#for-and-end-for)
     - [`IF` and `END-IF`](#if-and-end-if)
@@ -458,6 +459,26 @@ Includes a hyperlink with the data resulting from evaluating a JavaScript snippe
 ```
 
 If the `label` is not specified, the URL is used as a label.
+
+To link to an internal bookmark (see [`BOOKMARK`](#bookmark) below), use the `bookmark` field instead of `url`:
+
+```
++++LINK ({ bookmark: 'mySection', label: 'Go to My Section' })+++
+```
+
+### `BOOKMARK`
+
+Inserts a bookmark anchor at the current position, which can be targeted by internal `LINK` commands:
+
+```
++++BOOKMARK 'mySection'+++
+```
+
+Place this command inside a paragraph (e.g. a heading styled paragraph in your template). The argument is a JavaScript expression that evaluates to the bookmark name string. An internal link pointing to this bookmark can then be created with:
+
+```
++++LINK ({ bookmark: 'mySection', label: 'Go to My Section' })+++
+```
 
 ### `HTML`
 
