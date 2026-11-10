@@ -1,3 +1,10 @@
+## 4.15.1 (2026-11-10)
+
+* Fix a code injection vulnerability that allowed untrusted report data to replace a template command and potentially execute JavaScript in the Node.js host process. The default sandbox, `noSandbox`, and custom `runJs` callbacks now all receive the template command in `__code__` and an initial `__result__` of `undefined`. Thanks to Sherzod Rajabov ([@Hacktivistuz](https://github.com/Hacktivistuz)) for reporting the issue.
+* Preserve anchored and inline drawings when a template command leaves a paragraph without text. [#442](https://github.com/guigrpa/docx-templates/pull/442)
+* Use Jest directly for coverage reporting and remove unused development dependencies (`coveralls`, `nyc`, `events`, and `util`). Removing `coveralls` also drops its dependency on `request`.
+* Restrict the test workflow to read-only repository access and add instructions for reporting vulnerabilities. [Security policy](SECURITY.md)
+
 ## 4.15.0 (2025-12-03)
 * [#432](https://github.com/guigrpa/docx-templates/pull/432): add `indentXml`, `preserveSpace` and `compressionLevel` options to let users trade readability for smaller file size when generating reports.
 * [#426](https://github.com/guigrpa/docx-templates/pull/426): allow `IMAGE` commands to emit empty Alt Text values instead of forcing the placeholder `"desc"`.
