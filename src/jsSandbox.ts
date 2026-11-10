@@ -54,8 +54,8 @@ export async function runUserJsAndGetRaw(
       result = await temp.result;
     } else if (ctx.options.noSandbox) {
       context = sandbox;
-      const wrapper = new Function('code', 'with(this) { return eval(code); }');
-      result = await wrapper.call(context, code);
+      const wrapper = new Function('with(this) { return eval(__code__); }');
+      result = await wrapper.call(context);
     } else {
       const script = new vm.Script(code ?? '');
       context = vm.createContext(sandbox);

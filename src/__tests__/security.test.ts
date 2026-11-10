@@ -30,6 +30,8 @@ describe('sandbox internal keys cannot be overridden by report data', () => {
         data: {
           __code__: ATTACK_CODE,
           __result__: 'attacker-controlled result',
+          // `code` must not shadow the noSandbox wrapper's internal lookup.
+          code: ATTACK_CODE,
         },
       });
 
@@ -60,6 +62,7 @@ describe('sandbox internal keys cannot be overridden by report data', () => {
       data: {
         __code__: ATTACK_CODE,
         __result__: 'attacker-controlled result',
+        code: ATTACK_CODE,
       },
       runJs,
     });
