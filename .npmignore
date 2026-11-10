@@ -9,8 +9,6 @@ pids
 *.seed
 node_modules
 coverage
-.nyc_output
-.nyc_tmp
 *.sublime-project
 *.sublime-workspace
 .vscode

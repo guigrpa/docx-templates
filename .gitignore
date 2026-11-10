@@ -7,8 +7,6 @@ pids
 *.seed
 node_modules
 coverage
-.nyc_output
-.nyc_tmp
 *.sublime-project
 *.sublime-workspace
 .DS_Store
@@ -16,3 +14,6 @@ coverage
 # Project-specific
 **/~$*.docx
 lib
+
+# This project uses Yarn; npm lockfiles are not welcome
+package-lock.json
