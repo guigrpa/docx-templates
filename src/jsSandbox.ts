@@ -18,15 +18,22 @@ export async function runUserJsAndGetRaw(
   code: string,
   ctx: Context
 ): Promise<any> {
+  // Strip internal sandbox keys from user-provided data so untrusted data
+  // cannot override the code that is about to be executed (or the result
+  // slot). The internal keys are then set last, after all user data.
+  const userData = data ? { ...data } : {};
+  delete userData.__code__;
+  delete userData.__result__;
+
   // Retrieve the current JS sandbox contents (if any) and add
   // the code to be run, and a placeholder for the result,
   // as well as all data defined by the user
   const sandbox: SandBox = {
     ...(ctx.jsSandbox || {}),
+    ...userData,
+    ...ctx.options.additionalJsContext,
     __code__: code,
     __result__: undefined,
-    ...data,
-    ...ctx.options.additionalJsContext,
   };
 
   // Add currently defined vars, including loop vars and the index
@@ -47,10 +54,10 @@ export async function runUserJsAndGetRaw(
       result = await temp.result;
     } else if (ctx.options.noSandbox) {
       context = sandbox;
-      const wrapper = new Function('with(this) { return eval(__code__); }');
-      result = await wrapper.call(context);
+      const wrapper = new Function('code', 'with(this) { return eval(code); }');
+      result = await wrapper.call(context, code);
     } else {
-      const script = new vm.Script(sandbox.__code__ ?? '');
+      const script = new vm.Script(code ?? '');
       context = vm.createContext(sandbox);
       result = await script.runInContext(context);
     }
