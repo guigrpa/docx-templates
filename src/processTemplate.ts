@@ -278,12 +278,14 @@ export async function walkTemplate(
     if (move !== 'DOWN') {
       const tag = nodeOut._fTextNode ? null : nodeOut._tag;
       let fRemoveNode = false;
-      // Delete last generated output node if we're skipping nodes due to an empty FOR loop
+      // Delete skipped content, including drawings before an inline END-IF/FOR
+      // can end exploration and leave them in an otherwise empty paragraph.
       if (
         (tag === 'w:p' ||
           tag === 'w:tbl' ||
           tag === 'w:tr' ||
-          tag === 'w:tc') &&
+          tag === 'w:tc' ||
+          tag === 'w:drawing') &&
         isLoopExploring(ctx)
       ) {
         fRemoveNode = true;
@@ -294,9 +296,9 @@ export async function walkTemplate(
         fRemoveNode =
           buffers.text === '' && buffers.cmds !== '' && !buffers.fInsertedText;
 
-        // If the last generated output node is a paragraph, and it is set to be deleted,
-        // don't delete if it contains drawing elements (wp:anchor, wp:inline, w:drawing)
-        if (tag === 'w:p' && fRemoveNode) {
+        // Keep paragraphs, rows and cells containing drawings, even without text.
+        // Empty/false loops are still removed by the branch above.
+        if (fRemoveNode) {
           const hasDrawingElements = (node: Node): boolean => {
             if (node._fTextNode) return false;
             if (

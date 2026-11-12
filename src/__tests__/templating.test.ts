@@ -1371,6 +1371,29 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         expect(result).toMatchSnapshot();
       });
 
+      it.each([true, false])(
+        'Renders static table pictures with their conditions set to %s',
+        async show => {
+          // Covers commands around a picture in separate paragraphs and inline,
+          // an inline FOR loop, and a cell with a space before its picture.
+          const template = await fs.promises.readFile(
+            path.join(__dirname, 'fixtures', 'conditional-table-image.docx')
+          );
+          const zip = await JSZip.loadAsync(
+            await createReport({
+              noSandbox,
+              template,
+              data: { show, items: show ? [1, 2] : [] },
+            })
+          );
+          const xml = await zip.file('word/document.xml')!.async('string');
+
+          expect(xml.match(/<w:drawing\b/g) || []).toHaveLength(show ? 5 : 0);
+          expect(xml.match(/<w:tc\b/g) || []).toHaveLength(show ? 4 : 1);
+          expect(xml).not.toContain('+++');
+        }
+      );
+
       it('Preserves anchored elements on empty paragraph', async () => {
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'anchor-empty.docx')
