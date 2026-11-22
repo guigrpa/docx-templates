@@ -664,7 +664,10 @@ const processCmd: CommandProcessor = async (
       // END-FOR
       // END-IF
     } else if (cmdName === 'END-FOR' || cmdName === 'END-IF') {
-      processEndForIf(node, ctx, cmd, cmdName, cmdRest);
+      const result = processEndForIf(node, ctx, cmd, cmdName, cmdRest);
+      if (typeof result === 'string') {
+        return result;
+      }
 
       // INS <expression>
     } else if (cmdName === 'INS') {
@@ -915,7 +918,7 @@ const processEndForIf = (
   cmd: string,
   cmdName: string,
   cmdRest: string
-): void => {
+): string | undefined => {
   const isIf = cmdName === 'END-IF';
   const curLoop = getCurLoop(ctx);
   if (!curLoop)
@@ -975,6 +978,15 @@ const processEndForIf = (
   } else {
     // loop finished
     ctx.loops.pop();
+    const paragraphPropertiesNode =
+      node._parent?._parent?._parent?._children[0];
+    if (
+      paragraphPropertiesNode &&
+      paragraphPropertiesNode._children[0] &&
+      (paragraphPropertiesNode._children[0] as NonTextNode)._tag === 'w:sectPr'
+    ) {
+      return ''; // If this paragraph has section properties, we don't want to remove it, so we return an empty string
+    }
   }
 };
 
