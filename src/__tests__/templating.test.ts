@@ -954,6 +954,96 @@ Morbi dignissim consequat ex, non finibus est faucibus sodales. Integer sed just
         expect(await createReport(opts, 'JS')).toMatchSnapshot();
       });
 
+      it('BOOKMARK inserts bookmarkStart and bookmarkEnd nodes around the run', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'bookmark-basic.docx')
+        );
+        const opts = { noSandbox, template, data: {} };
+        expect(await createReport(opts, 'JS')).toMatchSnapshot();
+
+        // Verify the generated XML contains bookmarkStart/End with the correct name
+        const zip = await JSZip.loadAsync(await createReport(opts));
+        const docXml = await zip.file('word/document.xml')!.async('string');
+        expect(docXml).toContain('w:bookmarkStart');
+        expect(docXml).toContain('w:bookmarkEnd');
+        expect(docXml).toContain('w:name="mySection"');
+        // bookmarkStart and bookmarkEnd must share the same w:id
+        const startId = docXml.match(/w:bookmarkStart[^>]*w:id="(\d+)"/)?.[1];
+        const endId = docXml.match(/w:bookmarkEnd[^>]*w:id="(\d+)"/)?.[1];
+        expect(startId).toBeDefined();
+        expect(startId).toEqual(endId);
+      });
+
+      it('LINK with bookmark field creates an internal anchor link (no relationship entry)', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'bookmark-link.docx')
+        );
+        const opts = { noSandbox, template, data: {} };
+        expect(await createReport(opts, 'JS')).toMatchSnapshot();
+
+        const zip = await JSZip.loadAsync(await createReport(opts));
+        const docXml = await zip.file('word/document.xml')!.async('string');
+        // Internal link uses w:anchor, not r:id
+        expect(docXml).toContain('w:anchor="mySection"');
+        expect(docXml).not.toContain('r:id="link');
+        // No hyperlink relationship should be added
+        const relsXml = await zip
+          .file('word/_rels/document.xml.rels')!
+          .async('string');
+        expect(relsXml).not.toContain('hyperlink');
+      });
+
+      it('BOOKMARK and LINK with bookmark inside FOR loop', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'bookmark-loop.docx')
+        );
+        const loopData = {
+          items: [
+            { anchor: 'section1', title: 'Introduction' },
+            { anchor: 'section2', title: 'Details' },
+          ],
+        };
+        const opts = { noSandbox, template, data: loopData };
+        expect(await createReport(opts, 'JS')).toMatchSnapshot();
+
+        const zip = await JSZip.loadAsync(await createReport(opts));
+        const docXml = await zip.file('word/document.xml')!.async('string');
+        // Both bookmarks should be present
+        expect(docXml).toContain('w:name="section1"');
+        expect(docXml).toContain('w:name="section2"');
+        // Both internal links should be present
+        expect(docXml).toContain('w:anchor="section1"');
+        expect(docXml).toContain('w:anchor="section2"');
+        // No external hyperlink relationships should be added
+        const relsXml = await zip
+          .file('word/_rels/document.xml.rels')!
+          .async('string');
+        expect(relsXml).not.toContain('hyperlink');
+      });
+
+      it('BOOKMARK IDs are unique across multiple bookmarks', async () => {
+        const template = await fs.promises.readFile(
+          path.join(__dirname, 'fixtures', 'bookmark-loop.docx')
+        );
+        const opts = {
+          noSandbox,
+          template,
+          data: {
+            items: [
+              { anchor: 'alpha', title: 'Alpha' },
+              { anchor: 'beta', title: 'Beta' },
+            ],
+          },
+        };
+        const zip = await JSZip.loadAsync(await createReport(opts));
+        const docXml = await zip.file('word/document.xml')!.async('string');
+        const ids = Array.from(
+          docXml.matchAll(/w:bookmarkStart[^>]*w:id="(\d+)"/g)
+        ).map(m => m[1]);
+        expect(ids).toHaveLength(2);
+        expect(new Set(ids).size).toBe(2); // all IDs are unique
+      });
+
       it('112a failFast: false lists all errors in the document before failing.', async () => {
         const template = await fs.promises.readFile(
           path.join(__dirname, 'fixtures', 'invalidMultipleErrors.docx')

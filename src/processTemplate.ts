@@ -56,6 +56,7 @@ export function newContext(
     images: {},
     linkId: 0,
     links: {},
+    bookmarkId: 0,
     htmlId: 0,
     htmls: {},
     vars: {},
@@ -407,6 +408,29 @@ export async function walkTemplate(
         delete ctx.pendingLinkNode;
       }
 
+      // If a bookmark was generated, insert bookmarkStart/End around the `w:r` node
+      if (
+        ctx.pendingBookmarkNodes &&
+        !nodeOut._fTextNode &&
+        nodeOut._tag === 'w:r'
+      ) {
+        const [bookmarkStart, bookmarkEnd] = ctx.pendingBookmarkNodes;
+        const parent = nodeOut._parent;
+        if (parent) {
+          const idx = parent._children.indexOf(nodeOut);
+          bookmarkStart._parent = parent;
+          bookmarkEnd._parent = parent;
+          parent._children.splice(idx, 0, bookmarkStart);
+          parent._children.splice(idx + 2, 0, bookmarkEnd);
+
+          // Prevent containing paragraph or table row from being removed
+          ctx.buffers['w:p'].fInsertedText = true;
+          ctx.buffers['w:tr'].fInsertedText = true;
+          ctx.buffers['w:tc'].fInsertedText = true;
+        }
+        delete ctx.pendingBookmarkNodes;
+      }
+
       // If a html page was generated, replace the parent `w:p` node with
       // the html node
       if (
@@ -737,6 +761,17 @@ const processCmd: CommandProcessor = async (
           ctx
         );
         if (pars != null) await processLink(ctx, pars);
+      }
+
+      // BOOKMARK <name>
+    } else if (cmdName === 'BOOKMARK') {
+      if (!isLoopExploring(ctx)) {
+        const bookmarkName: string | undefined = await runUserJsAndGetRaw(
+          data,
+          cmdRest,
+          ctx
+        );
+        if (bookmarkName != null) processBookmark(ctx, bookmarkName);
       }
 
       // HTML <code>
@@ -1135,21 +1170,49 @@ function getImageData(imagePars: ImagePars): Image {
 }
 
 const processLink = async (ctx: Context, linkPars: LinkPars) => {
-  const { url, label = url } = linkPars;
-  ctx.linkId += 1;
-  const id = String(ctx.linkId);
-  const relId = `link${id}`;
-  ctx.links[relId] = { url };
+  const { url, label, bookmark } = linkPars;
   const node = newNonTextNode;
   const { textRunPropsNode } = ctx;
-  const link = node('w:hyperlink', { 'r:id': relId, 'w:history': '1' }, [
-    node('w:r', {}, [
-      textRunPropsNode ||
-        node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]),
-      node('w:t', {}, [newTextNode(label)]),
-    ]),
-  ]);
-  ctx.pendingLinkNode = link;
+  const runProps =
+    textRunPropsNode || node('w:rPr', {}, [node('w:u', { 'w:val': 'single' })]);
+
+  if (bookmark != null) {
+    const displayLabel = label ?? bookmark;
+    const link = node(
+      'w:hyperlink',
+      { 'w:anchor': bookmark, 'w:history': '1' },
+      [
+        node('w:r', {}, [
+          runProps,
+          node('w:t', {}, [newTextNode(displayLabel)]),
+        ]),
+      ]
+    );
+    ctx.pendingLinkNode = link;
+  } else {
+    const displayLabel = label ?? url ?? '';
+    ctx.linkId += 1;
+    const id = String(ctx.linkId);
+    const relId = `link${id}`;
+    ctx.links[relId] = { url: url ?? '' };
+    const link = node('w:hyperlink', { 'r:id': relId, 'w:history': '1' }, [
+      node('w:r', {}, [
+        runProps,
+        node('w:t', {}, [newTextNode(displayLabel)]),
+      ]),
+    ]);
+    ctx.pendingLinkNode = link;
+  }
+};
+
+const processBookmark = (ctx: Context, bookmarkName: string) => {
+  ctx.bookmarkId += 1;
+  const id = String(ctx.bookmarkId);
+  const node = newNonTextNode;
+  ctx.pendingBookmarkNodes = [
+    node('w:bookmarkStart', { 'w:id': id, 'w:name': bookmarkName }),
+    node('w:bookmarkEnd', { 'w:id': id }),
+  ];
 };
 
 const processHtml = async (ctx: Context, data: string) => {

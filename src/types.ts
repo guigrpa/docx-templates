@@ -190,6 +190,8 @@ export type Context = {
   pendingLinkNode?: NonTextNode;
   linkId: number;
   links: Links;
+  pendingBookmarkNodes?: [NonTextNode, NonTextNode];
+  bookmarkId: number;
   pendingHtmlNode?: TextNode | NonTextNode;
   htmlId: number;
   htmls: Htmls;
@@ -282,8 +284,9 @@ export type ImagePars = {
 };
 
 export type LinkPars = {
-  url: string;
+  url?: string;
   label?: string;
+  bookmark?: string;
 };
 
 export type CommandSummary = {
@@ -307,4 +310,5 @@ export const BUILT_IN_COMMANDS = [
   'IMAGE',
   'LINK',
   'HTML',
+  'BOOKMARK',
 ] as const;
