@@ -2,12 +2,19 @@
 
 import path from 'path';
 import fs from 'fs';
+import MockDate from 'mockdate';
 import { createReport } from '../index';
 import { Image, ImagePars } from '../types';
 import { setDebugLogSink } from '../debug';
 import JSZip from 'jszip';
 
 if (process.env.DEBUG) setDebugLogSink(console.log);
+
+// Tests that compare entire archives freeze JSZip's entry timestamps.
+const archiveDate = '2000-01-01T00:00:00Z';
+afterEach(() => {
+  MockDate.reset();
+});
 
 it('001: Issue #61 Correctly renders an SVG image', async () => {
   const template = await fs.promises.readFile(
@@ -196,6 +203,7 @@ it('005: can inject PNG files using ArrayBuffers without errors (related to issu
     return ab;
   }
 
+  MockDate.set(archiveDate);
   const fromAB = await createReport({
     template,
     data: {},
@@ -237,6 +245,8 @@ it('006: can inject an image from the data instead of the additionalJsContext', 
   const buff = await fs.promises.readFile(
     path.join(__dirname, 'fixtures', 'sample.png')
   );
+
+  MockDate.set(archiveDate);
   const reportA = await createReport({
     template,
     data: {
