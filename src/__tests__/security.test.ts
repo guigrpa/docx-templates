@@ -43,10 +43,11 @@ describe('sandbox internal keys cannot be overridden by report data', () => {
     });
   });
 
-  it('passes the template code, not data.__code__, to a custom sandbox', async () => {
+  it('passes the template code and an undefined result to a custom sandbox', async () => {
     const template = await readExecTemplate();
     const seenCodes: string[] = [];
     const runJs = ({ sandbox }: { sandbox: SandBox }) => {
+      expect(sandbox.__result__).toBeUndefined();
       const code = sandbox.__code__ ?? '';
       seenCodes.push(code);
       const script = new vm.Script(code);

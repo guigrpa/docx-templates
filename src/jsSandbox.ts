@@ -18,19 +18,10 @@ export async function runUserJsAndGetRaw(
   code: string,
   ctx: Context
 ): Promise<any> {
-  // Strip internal sandbox keys from user-provided data so untrusted data
-  // cannot override the code that is about to be executed (or the result
-  // slot). The internal keys are then set last, after all user data.
-  const userData = data ? { ...data } : {};
-  delete userData.__code__;
-  delete userData.__result__;
-
-  // Retrieve the current JS sandbox contents (if any) and add
-  // the code to be run, and a placeholder for the result,
-  // as well as all data defined by the user
+  // Set the internal keys last so each command starts with its own code and result slot.
   const sandbox: SandBox = {
     ...(ctx.jsSandbox || {}),
-    ...userData,
+    ...data,
     ...ctx.options.additionalJsContext,
     __code__: code,
     __result__: undefined,
